@@ -27,9 +27,13 @@
 #include "geo_hw.h"
 #include "slave_list.h"
 #include "quad_gl.h"
+#ifndef RR_GLES2
 #include "hud_edges.h"
 #include "tex_bake.h"
 #include "post_gl.h"
+#else
+#include "quad_gles2.h"
+#endif
 #include "rr_mem.h"
 #include "rr_dsp.h"
 #include "rr_scene.h"
@@ -47,6 +51,7 @@ static int32_t pointram_read(uint32_t a) { return rr_dsp_pointram_read(a & 0xfff
 
 bool rr_gl_init(const char *dir)
 {
+#ifndef RR_GLES2
     if (!eng_load_texture_roms(dir, g_rr_game->cg, g_rr_game->ccrl, g_rr_game->ccrh)) return false;
     if (g_rr_game->tex_fixup) eng_texture_tilemap_sys22_fixup();
     const char *const *gp = g_rr_game->gamma;
@@ -56,10 +61,13 @@ bool rr_gl_init(const char *dir)
         if (!f || fread(gamma_prom[i], 1, 256, f) != 256) { if (f) fclose(f); fprintf(stderr, "[GL] no %s\n", p); return false; }
         fclose(f);
     }
+#endif
     g_eng_pointrom   = g_pointrom;           /* rr_dsp_init loaded it */
     g_eng_pointrom_n = g_pointrom_words;
     g_eng_pointram   = pointram_read;
+#ifndef RR_GLES2
     g_tex_opaque = 1;                        /* the polygon path has no transparent pen */
+#endif
     assets_ok = g_eng_pointrom != NULL;
     return assets_ok;
 }
@@ -100,8 +108,18 @@ static void push_quad(const geo_quad *q, void *user)
     if (qn == qcap) {
         int nc = qcap ? qcap * 2 : 8192;
         geo_quad *nb = realloc(qbuf, (size_t)nc * sizeof *qbuf);
-        if (!nb) return;
+        if (!nb) {
+#ifdef RR_GLES2
+            fprintf(stderr, "[GLES2] geometry allocation failed: %zu bytes\n", (size_t)nc * sizeof *qbuf);
+            exit(2);
+#else
+            return;
+#endif
+        }
         qbuf = nb; qcap = nc;
+#ifdef RR_GLES2
+        fprintf(stderr, "[GLES2] CPU geometry allocation: %zu bytes\n", (size_t)nc * sizeof *qbuf);
+#endif
     }
     qbuf[qn] = *q;
     qbuf[qn].order = qorder++;
@@ -149,6 +167,7 @@ static void direct_quad(const uint16_t *src)
     push_quad(&q, NULL);
 }
 
+#ifndef RR_GLES2
 /* ------------------------------------------------------------ text layer
  * namcos22_v.cpp draw_text_layer + namcos22_mix_text_layer: 64x64 tiles of
  * 16x16 4bpp from CG RAM, pen 0xF transparent, scrolled by tilemapattr.
@@ -288,15 +307,23 @@ static int seam_colour(const geo_quad *q, float c[4])  /* RR_SEAMTEST=3 */
     return true;
 }
 
+#else
+static int frame_bg_palbase;
+#endif
+
 void rr_gl_prepare(bool slave_active)
 {
     if (!assets_ok) return;
     g_eng_frame++;
+#ifndef RR_GLES2
     { static int hold; hud_on = eng_hud_marks_up(g_rr.text, hud_marks, (int)(sizeof hud_marks / sizeof *hud_marks), &hold); }
     /* update_mixer (System 22), latched with the frame */
     frame_mixer_flags  = mixer_b(0x00) << 8 | mixer_b(0x01);
+#endif
     frame_bg_palbase   = mixer_b(0x04) << 8 & 0x7f00;
+#ifndef RR_GLES2
     frame_text_palbase = mixer_b(0x07) << 8 & 0x7f00;
+#endif
 
     /* direct polys first (they arrived during the frame), then the list */
     const bool walk = rr_scene_frame(slave_active);
@@ -360,6 +387,7 @@ void rr_gl_prepare(bool slave_active)
 
 int rr_gl_quads(void) { return qn; }
 
+#ifndef RR_GLES2
 void rr_gl_draw(int vw, int vh)
 {
     if (!assets_ok) return;
@@ -508,3 +536,12 @@ void rr_gl_context_attributes(void)
     SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);            /* the prioverchar bit */
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 }
+
+#else
+const geo_quad *rr_gles2_quads(int *count) { *count = qn; return qbuf; }
+void rr_gles2_background(float rgb[3])
+{
+    uint8_t bg[3]; pen_rgb(frame_bg_palbase | 0xff, bg);
+    for (int i = 0; i < 3; i++) rgb[i] = bg[i] / 255.0f;
+}
+#endif

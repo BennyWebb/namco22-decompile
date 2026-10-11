@@ -67,9 +67,18 @@ static bool headless_number(const char *text, uint32_t max, uint32_t *value)
 static int rr_headless_main(int argc, char **argv)
 {
     const char *rom_dir = "extracted";
+#ifdef RR_GLES2
+    if (!rr_gles2_options(&argc, argv)) return 2;
+#endif
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--help")) {
+#ifdef RR_GLES2
+            fprintf(stderr, "Usage: rr_gles2 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
+                            "                [--unpaced] [--capture FILE.ppm --capture-frame N]\n"
+                            "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
+#else
             fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n");
+#endif
             return 0;
         }
         if (!strcmp(argv[i], "--dump") && i + 1 < argc) { dump_dir = argv[++i]; continue; }
@@ -116,6 +125,9 @@ invalid:
     if (!seed_ok) { fprintf(stderr, "[HEADLESS] invalid EEPROM seed: %s\n", seed); return 2; }
     if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) ||
         !rr_sound_init(rom_dir) || !rr_hw_init(rom_dir)) return 2;
+#ifdef RR_GLES2
+    if (!rr_gl_init(rom_dir) || !rr_gles2_open()) return 2;
+#endif
     memset(R, 0, sizeof R);
     RS4(REG_SP, rr_read(0, 4));
     set_sr(0x2700);

@@ -242,6 +242,9 @@ static void debug_boundary(void)
 }
 
 #ifdef RR_HEADLESS
+#ifdef RR_GLES2
+#include "rr_gles2.h"
+#endif
 #include "rr_headless.inc"
 #endif
 
@@ -293,6 +296,16 @@ void rr_tick(void)
                     tex_reallocs, g_bake_texels - perflog_texels, tex_placeholders, tex_refined, tex_tier_fallbacks);
             perflog_texels = g_bake_texels;
         }
+    }
+#elif defined(RR_GLES2)
+    rr_gl_prepare(rr_dsp_slave_active());
+    int count; const geo_quad *quads = rr_gles2_quads(&count);
+    float background[3]; rr_gles2_background(background);
+    if (!rr_gles2_frame(frame, quads, count, background)) {
+        rr_headless_summary();
+        rr_audio_close();
+        rr_gles2_close();
+        exit(rr_gles2_failed() ? 2 : 0);
     }
 #else
     rr_scene_frame(rr_dsp_slave_active());
@@ -389,6 +402,10 @@ void rr_tick(void)
         rr_headless_summary();
 #endif
         rr_audio_close();
+#ifdef RR_GLES2
+        rr_gles2_close();
+        if (rr_gles2_failed()) exit(2);
+#endif
         fprintf(stderr, "[RR] stop at frame %u, %u traps\n", frame, rr_n_traps);
 #ifdef RR_HEADLESS
         exit(rr_n_traps || rr_headless_dsp_fault() || rr_headless_sound_fault() ? 3 : 0);
