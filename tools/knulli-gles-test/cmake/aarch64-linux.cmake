@@ -1,0 +1,23 @@
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+
+# Supply the SDK compiler prefix and its relocated sysroot explicitly.
+set(KNULLI_TOOLCHAIN_PREFIX "$ENV{KNULLI_TOOLCHAIN_PREFIX}" CACHE STRING
+    "Absolute compiler prefix, ending in a dash")
+set(KNULLI_SYSROOT "$ENV{KNULLI_SYSROOT}" CACHE PATH "Knulli-compatible SDK sysroot")
+if(NOT KNULLI_TOOLCHAIN_PREFIX OR NOT IS_DIRECTORY "${KNULLI_SYSROOT}/usr")
+    message(FATAL_ERROR "Set KNULLI_TOOLCHAIN_PREFIX and KNULLI_SYSROOT; see README.md")
+endif()
+set(CMAKE_CXX_COMPILER "${KNULLI_TOOLCHAIN_PREFIX}g++")
+set(CMAKE_SYSROOT "${KNULLI_SYSROOT}")
+set(CMAKE_FIND_ROOT_PATH "${KNULLI_SYSROOT}")
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+# Never discover the host's SDL .pc file while cross compiling.
+set(ENV{PKG_CONFIG_PATH} "")
+set(ENV{PKG_CONFIG_SYSROOT_DIR} "${KNULLI_SYSROOT}")
+set(ENV{PKG_CONFIG_LIBDIR}
+    "${KNULLI_SYSROOT}/usr/lib/pkgconfig:${KNULLI_SYSROOT}/usr/share/pkgconfig:${KNULLI_SYSROOT}/usr/lib/aarch64-linux-gnu/pkgconfig")
