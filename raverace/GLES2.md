@@ -2,8 +2,8 @@
 
 `RR_GLES2=ON` builds `rr_gles2`, a 640×480 fullscreen scene viewer driven by
 the existing deterministic scheduler. It runs the real translated 68K, DSP
-and sound programs and board models. It uses scripted input; handheld controls
-currently provide quit only. Sound emulation advances, but no audio device opens.
+and sound programs and board models. It supports opt-in interactive controls
+and deterministic scripted tests. Sound emulation advances, but no audio device opens.
 Keep the default desktop build and `RR_HEADLESS_ONLY=ON` in separate directories.
 
 ## Integration and limitations
@@ -66,7 +66,7 @@ allocation. No GL_UNPACK_ROW_LENGTH operation is compiled into this path.
 The desktop `rr_host.c`, Nuklear, render targets, HUD/text, fog, gamma/fade,
 framebuffer blits and pixel-map operations remain excluded. Textures and
 palette shading are supported; faithful final composition, translucency
-effects, audio output and playable controller integration remain outside scope.
+effects and audio output remain outside scope.
 No generated game code was changed.
 
 ## Build
@@ -174,24 +174,23 @@ ssh "root@$KNULLI_IP" \
 Refresh EmulationStation's game list, open **Ports**, and launch
 **RaveRacer-GLES2**. Original textures are now the default. The launcher selects `mali` unless `SDL_VIDEODRIVER` is
 already set, changes into the executable's directory, and preserves its exit
-code. It runs 3,600 scripted frames, captures frame 600, and appends stdout and
-stderr to `/userdata/roms/ports/rave-gles2/rave-gles2.log`. The PPM is
-`/userdata/roms/ports/rave-gles2/frame600.ppm` and is replaced each launch.
+code. It now runs `--interactive --vbo-upload frame` until quit, without scripted
+inputs or automatic captures, and appends stdout/stderr to
+`/userdata/roms/ports/rave-gles2/rave-gles2.log`.
 Hold **START + SELECT** on the same controller to quit (SDL START+BACK).
 Escape, SDL quit and the fixed frame limit also exit.
 
 ```sh
 ssh "root@$KNULLI_IP" 'tail -n 100 /userdata/roms/ports/rave-gles2/rave-gles2.log'
-scp "root@$KNULLI_IP:/userdata/roms/ports/rave-gles2/frame600.ppm" /tmp/rg40-frame600.ppm
 scp "root@$KNULLI_IP:/userdata/roms/ports/rave-gles2/rave-gles2.log" /tmp/rg40-gles2.log
 ```
 
-For the identical 600-frame state test, run the launcher from SSH, with
+For the identical 600-frame state test, run the executable directly from SSH, with
 EmulationStation's graphics ownership released using the same procedure as the
 working triangle test. Do not run two framebuffer applications together:
 
 ```sh
-ssh "root@$KNULLI_IP" '/userdata/roms/ports/RaveRacer-GLES2.sh --frames 600 --unpaced'
+ssh "root@$KNULLI_IP" 'cd /userdata/roms/ports/rave-gles2 && SDL_VIDEODRIVER=mali ./rr_gles2 extracted --frames 600 --coin 180 --gas 200 --steer 300:2304 --unpaced'
 ```
 
 The launcher log contains the final headless JSON plus diagnostics. To compare
@@ -215,8 +214,8 @@ shader diagnostics, first-geometry frame and five-second FPS/draw counters in
 the log. The drawable must be 640×480 with a depth buffer of at least 16 bits.
 An unmapped joystick is reported explicitly: supply a known SDL controller
 mapping through `SDL_GAMECONTROLLERCONFIG` if START+SELECT does not work.
-This uses the same mapped-controller quit combination as the working triangle
-test. The frame limit remains a fallback; handheld button mapping is unverified.
+The interactive bridge also imports the saved EmulationStation mapping; see
+the controls section below. Handheld button mapping still needs physical testing.
 
 For startup errors, run `ldd ./rr_gles2` on the device. A `not found` entry
 identifies a missing target library. An apparent missing executable may mean
@@ -513,3 +512,260 @@ builds are checked independently. ARM64 ELF uses the Buildroot compiler,
 AArch64 interpreter and GLESv2/EGL/Mali/SDL2 libraries, with no desktop libGL.
 Hardware performance, driver storage renaming and in-flight memory overhead
 remain unverified on the RG40XX H.
+
+## Heavy city/race baseline: frames 1400–1700
+
+The RG40XX H VBO A/B results supplied after the streaming change measured
+frames 100–300: vertex uploads fell from approximately 101.85 to 0.026 ms/frame,
+and total measured frame time from approximately 125 to 28 ms. This validates
+the menu workload improvement; it is not a city/race performance measurement.
+No further rendering optimization is included in this benchmark.
+
+`RaveRacer-GLES2-City-Benchmark.sh` runs 1,700 frames, rendering warm-up normally,
+and profiles **1400–1700 inclusive (301 frames)**. Its deterministic script is
+coin at 180, gas at 200, steering 2304 at 300 and centered steering 2048 at 700.
+Every rendering mode uses that same simulation and a fresh process/cache.
+Defaults are `--vbo-upload frame`, 64 MiB texture budget, unpaced, no capture.
+The GLES2 host still requests disabled swap interval; actual swap behavior is
+driver dependent and included in the timing. Diagnostic mode intentionally
+skips texture work. Do not change frame/input options between compared runs.
+
+Rebuild with the native/Buildroot CMake commands above. On the host:
+
+```sh
+scp /tmp/rr-gles2-arm64/rr_gles2 root@knulli:/userdata/roms/ports/rave-gles2/rr_gles2
+scp raverace/tools/RaveRacer-GLES2-City-Benchmark.sh root@knulli:/userdata/roms/ports/
+ssh root@knulli 'chmod +x /userdata/roms/ports/rave-gles2/rr_gles2 /userdata/roms/ports/RaveRacer-GLES2-City-Benchmark.sh'
+```
+
+Select **RaveRacer-GLES2-City-Benchmark** in EmulationStation's Ports menu to run
+the default textured benchmark. For comparison, execute these commands on the
+handheld over SSH with the display released as for previous tests:
+
+```sh
+cd /userdata/roms/ports
+./RaveRacer-GLES2-City-Benchmark.sh textured
+./RaveRacer-GLES2-City-Benchmark.sh diagnostic
+```
+
+Repeat with alternating order to check thermal/run variability:
+
+```sh
+for run in 1 2 3; do
+    ./RaveRacer-GLES2-City-Benchmark.sh textured
+    ./RaveRacer-GLES2-City-Benchmark.sh diagnostic
+    ./RaveRacer-GLES2-City-Benchmark.sh diagnostic
+    ./RaveRacer-GLES2-City-Benchmark.sh textured
+done
+```
+
+The existing `white-batches` and `textured-no-rebind` modes also work as the
+first launcher argument. Extra executable arguments are passed through for
+explicit experiments, e.g. `--vbo-upload legacy`; the actual `[PROFILE]` line
+identifies the upload mode. Keep the default settings for this baseline.
+No screenshot is taken during timing. Optionally run a separate textured test
+with `--capture-frame 1700 --capture /userdata/roms/ports/rave-gles2/city-1700.ppm`
+to verify the visible scene; do not mix that run into the primary timing series.
+
+Persistent logs append to:
+
+- `/userdata/roms/ports/rave-gles2/textured-city-benchmark.log`
+- `/userdata/roms/ports/rave-gles2/diagnostic-city-benchmark.log`
+
+Retrieve them from the host:
+
+```sh
+scp 'root@knulli:/userdata/roms/ports/rave-gles2/*-city-benchmark.log' /tmp/
+```
+
+For each run retain its timestamp, exit status, final simulation JSON,
+`[PROFILE] total`, `[PROFILE-CACHE] total`, and final `[TEX]` line. Confirm
+`frames=1400..1700 samples=301`, `vbo=frame`, exit 0, no traps/faults, and
+identical simulation JSON between modes/runs. Early quit is not a full sample.
+
+The timing fields are CPU wall time, including driver waits:
+
+| Field | Meaning |
+| --- | --- |
+| `simulation` | Actual scheduler/game execution |
+| `scene` | Existing scene preparation, decoding/sorting/projection |
+| `lookup_decode` | Texture lookup/bake CPU time, excluding nested uploads/submission |
+| `uploads` | GLES texture uploads |
+| `vertex_upload` | Vertex transfer calls, **included in `submission`** |
+| `draw_call` | GL draw calls, **included in `submission`** |
+| `submission` | Ordered batch recording/submission, vertex uploads and draw calls |
+| `swap` | SDL buffer swap |
+| `render_other` | Remaining host rendering work |
+| `pacing`, `capture` | Reported separately; normally approximately zero here |
+
+Estimate average measured frame milliseconds by adding `simulation + scene +
+lookup_decode + uploads + submission + swap + render_other + pacing + capture`.
+Do not add `vertex_upload` or `draw_call` again. Approximate measured FPS is
+1000 divided by that sum; five-second `[GLES2] fps` logs may include warm-up and
+are not the final range average. These are not GPU timer-query measurements.
+
+`[PROFILE] total` reports average triangles, draws, binds and vertex upload
+counts/bytes. `[PROFILE-CACHE] total` reports **range-only** cache hits, misses,
+evictions and texture uploads; `GPU_end` is resident texture bytes at the last
+sample, and `GPU_frame_end_peak` is the maximum resident allocation observed at
+sampled frame ends. The existing `[TEX]` report supplies allocation budget,
+whole-run high-water bytes (including warm-up and within-frame changes), CPU
+metadata/scratch memory and lifetime totals. GPU texture accounting excludes
+unobservable driver overhead/in-flight retained storage. Reports occur only
+every five seconds and at shutdown, with no new per-frame printing.
+
+Native reproduction of the identical workload:
+
+```sh
+SDL_VIDEODRIVER=offscreen MESA_GLES_VERSION_OVERRIDE=2.0 \
+  /tmp/rr-gles2-native/rr_gles2 raverace/extracted \
+  --frames 1700 --coin 180 --gas 200 --steer 300:2304 --steer 700:2048 \
+  --unpaced --profile-from 1400 --vbo-upload frame --render-mode textured \
+  > /tmp/city-textured.json 2> /tmp/city-textured.log
+```
+
+Use `--render-mode diagnostic` and separate output files for the control.
+Native validation checks both modes against the identical headless run and
+checks the exact 301-frame report range. ARM64 cross-compilation is checked;
+new heavy-scene handheld measurements remain to be collected.
+
+Native structural validation for this range produced 1,927.1 triangles/frame
+in both modes, 803.6 draws/frame textured versus 3.0 diagnostic, and 1.00 vertex
+upload/frame in both. The textured measured range recorded 235 misses/uploads
+and 831 evictions, ending at 67,105,904 resident texture bytes; diagnostic
+recorded zero misses/uploads/evictions and four resident bytes. Both final
+simulation JSON objects matched the headless 1,700-frame run exactly. These
+software-renderer observations validate the benchmark, not handheld speed.
+
+## Interactive handheld controls
+
+The normal **RaveRacer-GLES2** Ports entry now starts `--interactive` with frame
+VBO streaming, no automatic coin/gas/steering, no screenshot and no practical
+frame limit (INT32_MAX). An explicit `--frames N` still limits a test. Scripted
+coin/gas/steer options combined with interactive mode are rejected. Without
+`--interactive`, the executable and both benchmark launchers retain their
+existing deterministic input behavior. No renderer, shader, texture cache,
+audio output or generated game code is changed in this milestone.
+
+| Physical control | Action |
+| --- | --- |
+| Left stick X | Steering, rescaled 12.5% deadzone |
+| D-pad left/right | Full-lock digital steering, overrides the stick |
+| B (south face) or R1 | Accelerator; menu confirmation |
+| A (east face) or L1 | Brake |
+| SELECT | Coin 1; release before inserting another coin |
+| START | Accelerator/menu confirmation |
+| START + SELECT on the same controller | Quit, checked before forwarding actions |
+| D-pad up/down | Shift up/down |
+| Y (west face) | View change |
+
+These face labels follow Knulli's Nintendo layout: SDL `A` means south, SDL `B`
+east, SDL `X` west. USB controllers use SDL's standard spatial layout. Keyboard
+controls for desktop tests: 5 coin, Enter/X/Up accelerator, Z/Down brake,
+Left/Right steering, S/A shift up/down, C view, Escape quit. Pedals ramp by the
+existing game table's 160 units per emulated frame up to 0x610, as on desktop.
+Steering ranges 0x280–0xD80 with center 0x800. Release/disconnect clears controls
+on the next sample; D-pad opposite directions cancel.
+
+### Input investigation and mapping
+
+`rr_host.c` supplies the reference controls. `rr_hw_drive_io()` writes the
+cabinet's active-low bits at shared offset 0x30, steering+32 at 0x32, gas+992
+at 0x34 and brake+3008 at 0x36. Coin 1 is bit 0x1000: a falling edge increments
+the credit counter, which the board exposes at 0x3A. Shift down/up are bits
+0x0001/0x0002, view 0x0040. Cabinet/test/service bits are preserved. There is no
+separate START register in the existing driving host: wheel selects course/menu
+entries and accelerator confirms/starts. START therefore drives that same
+accelerator input rather than inventing a register.
+
+The small input bridge in `rr_gles2_input.inc` samples SDL at the existing frame
+boundary and writes only these board controls before the following vblank,
+the same integration point used by desktop input. Benchmarks never apply
+physical controls; START+SELECT remains available to abort.
+
+For an unmapped joystick, the host reads
+`/userdata/system/configs/emulationstation/es_input.cfg`, matching the SDL GUID
+or exact device name, and converts its button/hat/axis entries to an SDL
+controller mapping. This uses the handheld's configured indices instead of
+assuming a particular GUID. It handles full left-X axes (including inversion),
+D-pad buttons/hats/half-axes, face/shoulder buttons and START/SELECT. This is a
+reader for EmulationStation's attribute-per-line format, not a general XML
+parser. It never writes system files. Configure the controller in EmulationStation
+first, or pass `--es-input /path/to/es_input.cfg`. Other layouts can use
+`--controller-db /path/to/gamecontrollerdb.txt` or SDL_GAMECONTROLLERCONFIG;
+existing SDL-recognized mappings take precedence over the ES importer.
+
+Local Knulli source evidence is
+`package/batocera/emulationstation/batocera-emulationstation/controllers/es_input.cfg`:
+its `Anbernic pad` entry has left-X axis 0, south/east buttons 0/1, L1/R1 4/5,
+SELECT/START 8/9 and D-pad buttons 13–16. That is a source reference, **not proof
+of the live RG40XX H indices**. The saved device mapping is authoritative. Logs
+report the mapping source, complete SDL mapping, GUID, instance ID and device
+capabilities. Unknown joysticks are opened for inspection but arbitrary button
+indices are never guessed. If no usable mapping exists, supply one before
+handheld play/quit testing; Escape and `--frames N` remain desktop fallbacks.
+
+### Scheduler timing
+
+`rr_main.c` already executes fixed instruction/poll budgets in 16 slices per
+emulated frame, with 166,667 DSP steps/frame and vblank at the frame boundary.
+It has no wall-clock delta passed into game logic. The GLES2 host renders each
+emulated frame and its existing software pacing caps execution near 59.906 Hz;
+when rendering is slower it does not skip simulation or accelerate ticks.
+At 33 FPS the simulation therefore advances about 55% of arcade real time.
+Controls remain responsive at the available tick rate, but race timers and
+motion are slowed. No instruction budgets, timestep, pacing or render cadence
+were changed. A future real-time-speed milestone would need fewer rendered
+frames while retaining all fixed simulation ticks; it is deliberately outside
+this control integration. Do not infer full-speed gameplay from the FPS figure.
+
+### Build, deploy and first handheld test
+
+Use the native/Buildroot CMake commands above. From the host:
+
+```sh
+scp /tmp/rr-gles2-arm64/rr_gles2 root@knulli:/userdata/roms/ports/rave-gles2/rr_gles2
+scp raverace/tools/RaveRacer-GLES2.sh root@knulli:/userdata/roms/ports/RaveRacer-GLES2.sh
+ssh root@knulli 'chmod +x /userdata/roms/ports/rave-gles2/rr_gles2 /userdata/roms/ports/RaveRacer-GLES2.sh'
+```
+
+Launch **Ports → RaveRacer-GLES2**. Wait for boot, press/release SELECT for a
+credit, use stick/D-pad to select, press START or B to confirm and use B/R1 for
+gas and A/L1 for brake. Verify steering both ways, return to center, coin
+release, menu confirmation, shifts/view and START+SELECT exit. Use the usual
+SSH log retrieval command above. The seed EEPROM remains the deterministic
+ROM seed; this path does not save operator settings or high scores.
+
+For initial mapping inspection only, from SSH with display ownership released:
+
+```sh
+cd /userdata/roms/ports
+./RaveRacer-GLES2.sh --frames 1800 --input-log
+```
+
+`--input-log` prints raw button changes, hats and stick movement outside a
+threshold. Disable it for normal gameplay/performance measurements. Check
+that `[INPUT] controller=...` and the correct imported mapping appear. If the
+controller remains unmapped, inspect the reported GUID/name and the saved ES
+entry, or provide an explicit mapping database. The 1,800-frame limit ensures
+this diagnostic run terminates even before the quit mapping has been verified.
+
+### Validation
+
+Native virtual-joystick tests exercise the actual input bridge with a saved ES
+mapping, coin press/release, START confirmation, brake ramp, analog full range
+and deadzone, D-pad priority, interactive-off isolation and the quit chord:
+
+```sh
+cc -Iengine -Iraverace/include raverace/tools/test_gles2_input.c \
+  -o /tmp/test-gles2-input $(pkg-config --cflags --libs sdl2)
+SDL_VIDEODRIVER=dummy /tmp/test-gles2-input /tmp/test-gles2-input.xml
+```
+
+Desktop and Buildroot ARM64 builds pass. Existing headless and GLES2 texture/
+eviction/diagnostic regressions pass with unchanged simulation JSON. A neutral
+120-frame interactive run also matches the headless state exactly; interactive
+plus scripted inputs fails explicitly. ARM64 ELF retains SDL2, GLESv2, EGL and
+Mali dependencies with no desktop libGL. Hardware controller detection, actual
+button labels and interactive playability remain unverified until tested on
+the RG40XX H; this milestone claims no new hardware result.

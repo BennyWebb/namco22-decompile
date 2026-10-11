@@ -2,9 +2,12 @@
 #ifndef QUAD_GLES2_H
 #define QUAD_GLES2_H
 #include <stdbool.h>
+#include <stddef.h>
 #include "geo_hw.h"
 typedef struct {
     unsigned triangles, draws, vertex_uploads, texture_barriers;
+    unsigned cache_hits, cache_misses, cache_evictions, texture_uploads;
+    size_t texture_bytes;
     unsigned long long vertex_upload_bytes;
     unsigned flush_texture, flush_scissor, flush_capacity, flush_mutation, flush_end;
     unsigned same_texture, binds, bind_skips;

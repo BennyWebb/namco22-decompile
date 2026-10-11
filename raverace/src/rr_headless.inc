@@ -69,13 +69,14 @@ static int rr_headless_main(int argc, char **argv)
     const char *rom_dir = "extracted";
 #ifdef RR_GLES2
     if (!rr_gles2_options(&argc, argv)) return 2;
+    if (rr_gles2_interactive()) max_frames = INT32_MAX;
 #endif
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--help")) {
 #ifdef RR_GLES2
             fprintf(stderr, "Usage: rr_gles2 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
                             "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
-                            "                [--texture-budget-mib N]\n"
+                            "                [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
                             "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
@@ -107,6 +108,11 @@ invalid:
         fprintf(stderr, "Invalid/missing argument near %s; use --help\n", argv[i]);
         return 2;
     }
+#ifdef RR_GLES2
+    if (rr_gles2_interactive() && (n_test_coins || test_gas >= 0 || n_steer)) {
+        fprintf(stderr,"[INPUT] --interactive cannot be combined with scripted coin/gas/steer\n"); return 2;
+    }
+#endif
     /* Isolate this test from desktop debug/network/config environment. */
     extern char **environ;
     for (char **e = environ; *e; ) {

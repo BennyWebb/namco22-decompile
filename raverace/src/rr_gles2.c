@@ -13,6 +13,8 @@
 static SDL_Window *window;
 static SDL_GLContext context;
 static SDL_GameController *controllers[16];
+static SDL_Joystick *raw_joysticks[16];
+#include "rr_gles2_input.inc"
 static bool failed, unpaced, captured;
 static uint32_t capture_frame;
 static const char *capture_path;
@@ -27,6 +29,8 @@ typedef struct {
     double vertex_upload, draw_call;
     unsigned long long triangles, draws, binds, skips, texture, scissor, capacity, mutation, end, same;
     unsigned long long empty_texture, vertex_uploads, vertex_bytes, texture_barriers;
+    unsigned long long cache_hits, cache_misses, cache_evictions, texture_uploads;
+    size_t texture_bytes, texture_peak;
 } profile;
 static profile window_profile, total_profile;
 
@@ -54,6 +58,10 @@ static void profile_add(profile *p, unsigned frame, const eng_gles2_stats *s,
     p->empty_texture += s->empty_texture_flush;
     p->vertex_uploads += s->vertex_uploads; p->vertex_bytes += s->vertex_upload_bytes;
     p->texture_barriers += s->texture_barriers;
+    p->cache_hits += s->cache_hits; p->cache_misses += s->cache_misses;
+    p->cache_evictions += s->cache_evictions; p->texture_uploads += s->texture_uploads;
+    p->texture_bytes = s->texture_bytes;
+    if (s->texture_bytes > p->texture_peak) p->texture_peak = s->texture_bytes;
 }
 static void profile_report(const char *kind, const profile *p)
 {
@@ -68,6 +76,10 @@ static void profile_report(const char *kind, const profile *p)
             (double)p->binds/p->frames, (double)p->skips/p->frames,
             p->texture, p->scissor, p->capacity, p->mutation, p->end, p->same, p->empty_texture, eng_gles2_vbo_mode_name(),
             (double)p->vertex_uploads/p->frames, (double)p->vertex_bytes/p->frames, p->texture_barriers);
+    fprintf(stderr, "[PROFILE-CACHE] %s mode=%s frames=%u..%u samples=%u hits=%llu misses=%llu evictions=%llu texture_uploads=%llu GPU_end=%zu GPU_frame_end_peak=%zu\n",
+            kind, eng_gles2_mode_name(), p->first, p->last, p->frames,
+            p->cache_hits, p->cache_misses, p->cache_evictions, p->texture_uploads,
+            p->texture_bytes, p->texture_peak);
 }
 static bool sdl_ok(bool ok, const char *stage)
 {
@@ -79,7 +91,11 @@ bool rr_gles2_options(int *argc, char **argv)
 {
     int output = 1;
     for (int i = 1; i < *argc; i++) {
-        if (!strcmp(argv[i], "--unpaced")) unpaced = true;
+        if (!strcmp(argv[i], "--interactive")) interactive = true;
+        else if (!strcmp(argv[i], "--input-log")) input_log = true;
+        else if (!strcmp(argv[i], "--controller-db") && i+1 < *argc) controller_db = argv[++i];
+        else if (!strcmp(argv[i], "--es-input") && i+1 < *argc) es_input = argv[++i];
+        else if (!strcmp(argv[i], "--unpaced")) unpaced = true;
         else if (!strcmp(argv[i], "--diagnostic-colours")) eng_gles2_diagnostic(true);
         else if (!strcmp(argv[i], "--render-mode") && i+1 < *argc) {
             if (!eng_gles2_mode(argv[++i])) {
@@ -129,13 +145,24 @@ bool rr_gles2_options(int *argc, char **argv)
 static void scan_controllers(void)
 {
     for (int i = 0; i < 16; i++) {
+        if (raw_joysticks[i] && !SDL_JoystickGetAttached(raw_joysticks[i])) {
+            SDL_JoystickClose(raw_joysticks[i]); raw_joysticks[i] = NULL;
+        }
         if (controllers[i] && !SDL_GameControllerGetAttached(controllers[i])) {
             SDL_GameControllerClose(controllers[i]); controllers[i] = NULL;
         }
     }
     for (int device = 0; device < SDL_NumJoysticks(); device++) {
+        input_map_device(device);
         if (!SDL_IsGameController(device)) {
             fprintf(stderr, "[GLES2] unmapped joystick: %s (START+SELECT needs an SDL mapping)\n", SDL_JoystickNameForIndex(device));
+            SDL_JoystickID raw_id = SDL_JoystickGetDeviceInstanceID(device);
+            int slot = -1; bool present = false;
+            for (int i=0;i<16;i++) {
+                if (!raw_joysticks[i]) slot=i;
+                else if (SDL_JoystickInstanceID(raw_joysticks[i])==raw_id) present=true;
+            }
+            if (!present && slot>=0) raw_joysticks[slot]=SDL_JoystickOpen(device);
             continue;
         }
         SDL_JoystickID id = SDL_JoystickGetDeviceInstanceID(device);
@@ -146,7 +173,13 @@ static void scan_controllers(void)
         }
         if (!present && slot >= 0) {
             controllers[slot] = SDL_GameControllerOpen(device);
-            if (controllers[slot]) fprintf(stderr, "[GLES2] controller: %s\n", SDL_GameControllerName(controllers[slot]));
+            if (controllers[slot]) {
+                SDL_Joystick *js = SDL_GameControllerGetJoystick(controllers[slot]);
+                char guid[33]; SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(js),guid,sizeof guid);
+                fprintf(stderr,"[INPUT] controller=%s GUID=%s instance=%d axes=%d buttons=%d hats=%d\n",
+                    SDL_GameControllerName(controllers[slot]),guid,SDL_JoystickInstanceID(js),
+                    SDL_JoystickNumAxes(js),SDL_JoystickNumButtons(js),SDL_JoystickNumHats(js));
+            }
             else fprintf(stderr, "[GLES2] controller open: %s\n", SDL_GetError());
         }
     }
@@ -201,7 +234,12 @@ bool rr_gles2_open(void)
     if (SDL_GL_SetSwapInterval(unpaced ? 0 : 1) != 0)
         fprintf(stderr, "[GLES2] swap interval: %s; software pacing available\n", SDL_GetError());
     if (!eng_gles2_init()) { failed = true; return false; }
+    if (controller_db && SDL_GameControllerAddMappingsFromFile(controller_db) < 0) {
+        fprintf(stderr,"[INPUT] controller database: %s\n",SDL_GetError()); failed=true; return false;
+    }
     scan_controllers();
+    fprintf(stderr,"[INPUT] mode=%s; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit\n",
+            interactive ? "interactive" : "scripted");
     fprintf(stderr, "[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames\n");
     next_frame = report_start = seconds();
     simulation_start = profile_report_start = next_frame;
@@ -241,9 +279,17 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     double scene_elapsed = seconds() - prepare_start;
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        if (input_log && (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP))
+            fprintf(stderr,"[INPUT] joystick=%d button=%u pressed=%u\n",event.jbutton.which,event.jbutton.button,event.jbutton.state);
+        if (input_log && event.type == SDL_JOYAXISMOTION && abs(event.jaxis.value)>8192)
+            fprintf(stderr,"[INPUT] joystick=%d axis=%u value=%d\n",event.jaxis.which,event.jaxis.axis,event.jaxis.value);
+        if (input_log && event.type == SDL_JOYHATMOTION)
+            fprintf(stderr,"[INPUT] joystick=%d hat=%u value=%u\n",event.jhat.which,event.jhat.hat,event.jhat.value);
         if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return false;
-        if (event.type == SDL_CONTROLLERDEVICEADDED || event.type == SDL_CONTROLLERDEVICEREMOVED) scan_controllers();
+        if (event.type == SDL_CONTROLLERDEVICEADDED || event.type == SDL_CONTROLLERDEVICEREMOVED ||
+            event.type == SDL_JOYDEVICEADDED || event.type == SDL_JOYDEVICEREMOVED) scan_controllers();
     }
+    if (interactive && !input_poll()) return false;
     for (int i = 0; i < 16; i++) if (controllers[i] &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_START) &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK)) return false;
@@ -297,6 +343,7 @@ void rr_gles2_close(void)
     profile_report("total", &total_profile);
     if (capture_frame && !captured) { fprintf(stderr, "[GLES2] requested geometry capture was not completed\n"); failed = true; }
     for (int i = 0; i < 16; i++) if (controllers[i]) { SDL_GameControllerClose(controllers[i]); controllers[i] = NULL; }
+    for (int i=0;i<16;i++) if (raw_joysticks[i]) { SDL_JoystickClose(raw_joysticks[i]); raw_joysticks[i]=NULL; }
     if (context) { eng_gles2_close(); SDL_GL_DeleteContext(context); context = NULL; }
     SDL_DestroyWindow(window); window = NULL;
     SDL_Quit();

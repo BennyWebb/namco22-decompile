@@ -9,8 +9,7 @@ export SDL_VIDEODRIVER
 {
     printf '\n=== Rave Racer GLES2 original textures: %s ===\n' "$(date)"
     printf 'SDL_VIDEODRIVER=%s\n' "$SDL_VIDEODRIVER"
-    ./rr_gles2 extracted --frames 3600 --coin 180 --gas 200 \
-        --steer 300:2304 --capture-frame 600 --capture frame600.ppm "$@"
+    ./rr_gles2 extracted --interactive --vbo-upload frame "$@"
     result=$?
     printf 'Application exit code: %s\n' "$result"
     exit "$result"

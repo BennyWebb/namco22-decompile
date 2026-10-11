@@ -8,6 +8,7 @@
 void renderer_texture_init(void);
 #ifdef RR_GLES2
 void tex_bake_gles2_report(void);
+size_t tex_bake_gles2_resident_bytes(void);
 void tex_bake_gles2_bind(GLenum target, GLuint texture);
 void tex_bake_gles2_binding_mode(int skip_redundant);
 void tex_bake_gles2_binding_reset(void);

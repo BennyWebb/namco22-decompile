@@ -256,6 +256,8 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
 bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gles2_stats *stats)
 {
     memset(stats, 0, sizeof *stats);
+    int hits_before = tex_frame_hits, misses_before = tex_frame_misses;
+    int evictions_before = tex_cache_evictions, uploads_count_before = tex_reallocs + tex_subimages;
     double uploads_before = tex_gles2_upload_seconds;
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
@@ -381,6 +383,11 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
         }
     }
     bool ok = flush(stats, END) && (!frame_upload || submit_commands(stats)) && check_gl("end frame");
+    stats->cache_hits = (unsigned)(tex_frame_hits - hits_before);
+    stats->cache_misses = (unsigned)(tex_frame_misses - misses_before);
+    stats->cache_evictions = (unsigned)(tex_cache_evictions - evictions_before);
+    stats->texture_uploads = (unsigned)(tex_reallocs + tex_subimages - uploads_count_before);
+    stats->texture_bytes = tex_bake_gles2_resident_bytes();
     stats->upload_seconds = tex_gles2_upload_seconds - uploads_before;
     stats->binds = (unsigned)(tex_gles2_bind_calls - binds_before);
     stats->bind_skips = (unsigned)(tex_gles2_bind_skips - skips_before);

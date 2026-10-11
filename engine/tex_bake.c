@@ -1346,6 +1346,7 @@ GLuint bake_quad_texture(int min_u, int min_v, int range_u, int range_v,
 }
 
 #ifdef RR_GLES2
+size_t tex_bake_gles2_resident_bytes(void) { return tex_cache_bytes + 4; }
 void tex_bake_gles2_report(void)
 {
     fprintf(stderr, "[TEX] decoded=%d uploads=%d GPU=%zu peak=%zu budget=%zu live=%d hits=%d misses=%d evictions=%d CPU_metadata=%zu CPU_aux=%zu scratch=%zu shadow=0 decoded_cache=0\n",

@@ -327,6 +327,10 @@ void rr_tick(void)
               pa[np] = a; ps[np] = s; pv[np] = v; np++; e = q + n; if (*e == ',') e++; else break; } }
       for (int i = 0; i < np; i++) if (frame >= pf[i] && frame <= pt[i]) rr_write(pa[i], ps[i], pv[i]); }
     for (int i = 0; i < n_steer; i++) if (frame >= (uint32_t)test_steer[i].at) g_hw.steer = (uint16_t)test_steer[i].value;
+    /* Interactive input lands at the same frame boundary as desktop controls. */
+#ifdef RR_GLES2
+    rr_gles2_apply_input();
+#endif
     for (int i = 0; i < n_adc; i++) if (frame >= (uint32_t)test_adc[i].at) g_hw.adc[test_adc[i].idx & 3] = (uint8_t)test_adc[i].value;
 #ifndef RR_HEADLESS
     if (windowed) {
