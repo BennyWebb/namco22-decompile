@@ -9,13 +9,19 @@
 #include "quad_gles2.h"
 #include "tex_bake.h"
 #include "rr_gles2.h"
+#include "rr_gles2_timing.h"
 
 static SDL_Window *window;
 static SDL_GLContext context;
 static SDL_GameController *controllers[16];
 static SDL_Joystick *raw_joysticks[16];
 #include "rr_gles2_input.inc"
-static bool failed, unpaced, captured;
+static bool failed, unpaced, captured, independent, timing_explicit;
+static unsigned render_hz;
+static rr_frame_clock frame_clock;
+static double timing_start, timing_window, timing_sim, timing_scene;
+static unsigned timing_steps, timing_renders, timing_skipped, timing_steps_window, timing_renders_window;
+static void timing_report(const char *kind);
 static uint32_t capture_frame;
 static const char *capture_path;
 static double next_frame, report_start;
@@ -91,7 +97,21 @@ bool rr_gles2_options(int *argc, char **argv)
 {
     int output = 1;
     for (int i = 1; i < *argc; i++) {
-        if (!strcmp(argv[i], "--interactive")) interactive = true;
+        if (!strcmp(argv[i], "--timing") && i+1 < *argc) {
+            const char *mode=argv[++i];
+            if (strcmp(mode,"independent") && strcmp(mode,"coupled")) {
+                fprintf(stderr,"[TIMING] use independent or coupled\n"); return false;
+            }
+            independent=!strcmp(mode,"independent"); timing_explicit=true;
+        }
+        else if (!strcmp(argv[i],"--render-hz") && i+1 < *argc) {
+            char *end; const char *n=argv[++i]; errno=0; unsigned long hz=strtoul(n,&end,10);
+            if(errno || n==end || *n<'0' || *n>'9' || *end || !hz || hz>60) {
+                fprintf(stderr,"[TIMING] render-hz must be 1..60\n");return false;
+            }
+            render_hz=(unsigned)hz;
+        }
+        else if (!strcmp(argv[i], "--interactive")) interactive = true;
         else if (!strcmp(argv[i], "--input-log")) input_log = true;
         else if (!strcmp(argv[i], "--controller-db") && i+1 < *argc) controller_db = argv[++i];
         else if (!strcmp(argv[i], "--es-input") && i+1 < *argc) es_input = argv[++i];
@@ -136,6 +156,10 @@ bool rr_gles2_options(int *argc, char **argv)
         } else argv[output++] = argv[i];
     }
     *argc = output; argv[output] = NULL;
+    if (!timing_explicit) independent=interactive;
+    if ((independent && unpaced) || (!independent && render_hz)) {
+        fprintf(stderr,"[TIMING] independent requires paced execution; render-hz requires independent\n");return false;
+    }
     if ((capture_path != NULL) != (capture_frame != 0)) {
         fprintf(stderr, "[GLES2] specify both --capture FILE.ppm and --capture-frame N\n"); return false;
     }
@@ -150,6 +174,7 @@ static void scan_controllers(void)
         }
         if (controllers[i] && !SDL_GameControllerGetAttached(controllers[i])) {
             SDL_GameControllerClose(controllers[i]); controllers[i] = NULL;
+            chord_start[i]=chord_select[i]=false;
         }
     }
     for (int device = 0; device < SDL_NumJoysticks(); device++) {
@@ -231,7 +256,7 @@ bool rr_gles2_open(void)
     if (w != 640 || h != 480 || depth < 16) {
         fprintf(stderr, "[GLES2] Phase 1 requires 640x480 with a depth buffer\n"); failed = true; return false;
     }
-    if (SDL_GL_SetSwapInterval(unpaced ? 0 : 1) != 0)
+    if (SDL_GL_SetSwapInterval((unpaced || independent) ? 0 : 1) != 0)
         fprintf(stderr, "[GLES2] swap interval: %s; software pacing available\n", SDL_GetError());
     if (!eng_gles2_init()) { failed = true; return false; }
     if (controller_db && SDL_GameControllerAddMappingsFromFile(controller_db) < 0) {
@@ -245,6 +270,8 @@ bool rr_gles2_open(void)
     simulation_start = profile_report_start = next_frame;
     fprintf(stderr, "[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=%u mode=%s\n",
             profile_from, eng_gles2_mode_name());
+    fprintf(stderr,"[TIMING] mode=%s target_hz=%.9f render_hz=%u (0=adaptive) catchup_limit=%u\n",
+            independent?"independent":"coupled",1.0/RR_FRAME_SECONDS,render_hz,RR_MAX_CATCHUP);
     return true;
 }
 
@@ -274,11 +301,11 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     return true;
 }
 
-bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
+static bool pump_input(void)
 {
-    double scene_elapsed = seconds() - prepare_start;
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        if (!input_event(&event)) return false;
         if (input_log && (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP))
             fprintf(stderr,"[INPUT] joystick=%d button=%u pressed=%u\n",event.jbutton.which,event.jbutton.button,event.jbutton.state);
         if (input_log && event.type == SDL_JOYAXISMOTION && abs(event.jaxis.value)>8192)
@@ -293,6 +320,44 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     for (int i = 0; i < 16; i++) if (controllers[i] &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_START) &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK)) return false;
+    return true;
+}
+
+static void timing_report(const char *kind)
+{
+    if (!timing_steps) return;
+    double now=seconds(), elapsed=now-timing_start, window_elapsed=now-timing_window;
+    fprintf(stderr,"[TIMING] %s mode=%s steps=%u renders=%u skipped=%u sim_hz=%.2f render_fps=%.2f window_sim_hz=%.2f window_render_fps=%.2f lag_ms=%.3f max_lag_ms=%.3f discarded_lag_ms=%.3f resyncs=%u avg_sim_ms=%.3f avg_scene_ms=%.3f\n",
+        kind,independent?"independent":"coupled",timing_steps,timing_renders,timing_skipped,
+        elapsed>0?timing_steps/elapsed:0,elapsed>0?timing_renders/elapsed:0,
+        window_elapsed>0?timing_steps_window/window_elapsed:0,window_elapsed>0?timing_renders_window/window_elapsed:0,
+        frame_clock.lag*1000,frame_clock.max_lag*1000,frame_clock.discarded*1000,frame_clock.resyncs,
+        timing_sim*1000/timing_steps,timing_scene*1000/timing_steps);
+    timing_window=now; timing_steps_window=timing_renders_window=0;
+}
+
+bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
+{
+    double scene_elapsed = seconds() - prepare_start;
+    if (!pump_input()) return false;
+    bool render=true;
+    if (!timing_steps) timing_start=timing_window=seconds();
+    timing_steps++; timing_steps_window++; timing_sim+=simulation_elapsed; timing_scene+=scene_elapsed;
+    if (independent) {
+        rr_clock_begin(&frame_clock,seconds());
+        while (seconds()<frame_clock.deadline) {
+            SDL_Delay(1); /* poll during waits, without applying extra emulated samples */
+            if (!pump_input()) return false;
+        }
+        render=rr_clock_render(&frame_clock,seconds(),render_hz,capture_frame==frame);
+    }
+    if (!render) {
+        timing_skipped++;
+        if (seconds()-timing_window>=5) timing_report("window");
+        simulation_start=seconds();
+        return true;
+    }
+    timing_renders++; timing_renders_window++;
     eng_gles2_stats stats;
     double draw_start = seconds();
     if (!eng_gles2_draw(quads, count, bg, &stats)) { failed = true; return false; }
@@ -316,12 +381,13 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
         report_start = now; report_frames = 0;
     }
     double pacing_start = seconds();
-    if (!unpaced) {
+    if (!unpaced && !independent) {
         next_frame += 1.0 / 59.906;
         double remaining = next_frame - seconds();
         if (remaining > 0) SDL_Delay((Uint32)(remaining * 1000 + 0.999));
         else if (remaining < -1.0 / 59.906) next_frame = seconds();
     }
+    if (independent && seconds()-timing_window>=5) timing_report("window");
     if (frame >= profile_from) {
         double pacing_elapsed = seconds() - pacing_start;
         profile_add(&window_profile, frame, &stats, scene_elapsed, draw_elapsed, swap_elapsed, pacing_elapsed, capture_elapsed);
@@ -339,6 +405,7 @@ bool rr_gles2_failed(void) { return failed; }
 void rr_gles2_close(void)
 {
     if (!window) return;
+    timing_report("total");
     profile_report("window-final", &window_profile);
     profile_report("total", &total_profile);
     if (capture_frame && !captured) { fprintf(stderr, "[GLES2] requested geometry capture was not completed\n"); failed = true; }

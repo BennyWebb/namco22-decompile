@@ -34,6 +34,18 @@ int main(int argc,char **argv)
     SDL_JoystickSetVirtualButton(js,6,1);tick();assert(g_hw.steer==0x280); /* D-pad overrides stick */
     SDL_JoystickSetVirtualButton(js,6,0);SDL_JoystickSetVirtualAxis(js,0,1024);tick();assert(g_hw.steer==0x800);
     interactive=false;g_hw.steer=123;rr_gles2_apply_input();assert(g_hw.steer==123);
-    interactive=true; SDL_JoystickSetVirtualButton(js,4,1);SDL_JoystickSetVirtualButton(js,5,1);SDL_JoystickUpdate();assert(!input_poll());
+    interactive=true;
+    /* DOWN and UP drained before an emulated sample must still be delivered. */
+    SDL_Event event={0};event.type=SDL_CONTROLLERBUTTONDOWN;
+    event.cbutton.which=SDL_JoystickInstanceID(js);event.cbutton.button=SDL_CONTROLLER_BUTTON_BACK;
+    assert(input_event(&event));event.type=SDL_CONTROLLERBUTTONUP;assert(input_event(&event));
+    input_coin=false;g_hw.inputs|=0x1000;rr_gles2_apply_input();assert(!(g_hw.inputs&0x1000));
+    rr_gles2_apply_input();assert(g_hw.inputs&0x1000);
+    event.type=SDL_CONTROLLERBUTTONDOWN;event.cbutton.button=SDL_CONTROLLER_BUTTON_START;assert(input_event(&event));
+    event.type=SDL_CONTROLLERBUTTONUP;assert(input_event(&event));input_gas=false;g_hw.gas=0;
+    for(int i=0;i<10;i++)rr_gles2_apply_input();assert(g_hw.gas==0x610);
+    rr_gles2_apply_input();assert(g_hw.gas==0x610-160);
+    event.type=SDL_CONTROLLERBUTTONDOWN;assert(input_event(&event));event.cbutton.button=SDL_CONTROLLER_BUTTON_BACK;assert(!input_event(&event));
+    SDL_JoystickSetVirtualButton(js,4,1);SDL_JoystickSetVirtualButton(js,5,1);SDL_JoystickUpdate();assert(!input_poll());
     SDL_GameControllerClose(controllers[0]);SDL_JoystickDetachVirtual(index);SDL_Quit();puts("Mapping, coin release, START confirm, brake, analog/deadzone, D-pad override, script isolation and quit passed");
 }

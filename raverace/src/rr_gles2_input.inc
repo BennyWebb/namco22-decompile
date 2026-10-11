@@ -5,6 +5,32 @@ static bool interactive, input_log;
 static const char *controller_db, *es_input = "/userdata/system/configs/emulationstation/es_input.cfg";
 static bool input_coin, input_gas, input_brake, input_view, input_up, input_down;
 static int input_wheel;
+static unsigned coin_edges, start_ticks;
+static bool chord_start[16], chord_select[16];
+/* Event edges survive DOWN+UP in one queue drain (including a slow swap).
+ * Only consume them when an emulated input sample is applied. */
+static bool input_event(const SDL_Event *event)
+{
+    if (!interactive) return true;
+    if (event->type == SDL_KEYDOWN && !event->key.repeat) {
+        if (event->key.keysym.scancode==SDL_SCANCODE_5 && coin_edges<8) coin_edges++;
+        if (event->key.keysym.scancode==SDL_SCANCODE_RETURN) start_ticks=10;
+    }
+    if (event->type==SDL_CONTROLLERBUTTONDOWN || event->type==SDL_CONTROLLERBUTTONUP) {
+        bool down=event->type==SDL_CONTROLLERBUTTONDOWN;
+        for (int i=0;i<16;i++) if (controllers[i] &&
+            SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i]))==event->cbutton.which) {
+            if (event->cbutton.button==SDL_CONTROLLER_BUTTON_START) {
+                chord_start[i]=down; if(down)start_ticks=10;
+            }
+            if (event->cbutton.button==SDL_CONTROLLER_BUTTON_BACK) {
+                chord_select[i]=down; if(down && coin_edges<8)coin_edges++;
+            }
+            if (chord_start[i] && chord_select[i]) return false;
+        }
+    }
+    return true;
+}
 
 /* Read only the simple attribute-per-line format emitted by EmulationStation.
  * Unsupported/truncated input is ignored; an explicit SDL mapping is available. */
@@ -100,10 +126,14 @@ static void input_ramp(uint16_t *value, int target, int delta)
 void rr_gles2_apply_input(void)
 {
     if (!interactive) return;
-    input_bit(0x1000,input_coin); input_bit(0x0040,input_view);
+    bool coin=input_coin;
+    if (coin_edges && (g_hw.inputs & 0x1000)) { coin=true; coin_edges--; }
+    input_bit(0x1000,coin); input_bit(0x0040,input_view);
     input_bit(0x0001,input_down); input_bit(0x0002,input_up);
     g_hw.steer=(uint16_t)(0x800+input_wheel*((g_rr_game->steer_max-g_rr_game->steer_min)/2)/32767);
-    input_ramp(&g_hw.gas,input_gas?g_rr_game->gas_max:0,g_rr_game->gas_delta);
+    bool gas=input_gas || start_ticks;
+    if(start_ticks)start_ticks--;
+    input_ramp(&g_hw.gas,gas?g_rr_game->gas_max:0,g_rr_game->gas_delta);
     input_ramp(&g_hw.brake,input_brake?g_rr_game->brake_max:0,g_rr_game->brake_delta);
 }
 bool rr_gles2_interactive(void) { return interactive; }

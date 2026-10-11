@@ -174,7 +174,7 @@ ssh "root@$KNULLI_IP" \
 Refresh EmulationStation's game list, open **Ports**, and launch
 **RaveRacer-GLES2**. Original textures are now the default. The launcher selects `mali` unless `SDL_VIDEODRIVER` is
 already set, changes into the executable's directory, and preserves its exit
-code. It now runs `--interactive --vbo-upload frame` until quit, without scripted
+code. It now runs `--interactive --timing independent --vbo-upload frame` until quit, without scripted
 inputs or automatic captures, and appends stdout/stderr to
 `/userdata/roms/ports/rave-gles2/rave-gles2.log`.
 Hold **START + SELECT** on the same controller to quit (SDL START+BACK).
@@ -641,7 +641,9 @@ software-renderer observations validate the benchmark, not handheld speed.
 
 The normal **RaveRacer-GLES2** Ports entry now starts `--interactive` with frame
 VBO streaming, no automatic coin/gas/steering, no screenshot and no practical
-frame limit (INT32_MAX). An explicit `--frames N` still limits a test. Scripted
+frame limit (INT32_MAX). Independent simulation pacing is now the default for
+interactive mode (see the timing section below); `--timing coupled` restores
+the earlier behavior. An explicit `--frames N` still limits a test. Scripted
 coin/gas/steer options combined with interactive mode are rejected. Without
 `--interactive`, the executable and both benchmark launchers retain their
 existing deterministic input behavior. No renderer, shader, texture cache,
@@ -712,12 +714,11 @@ emulated frame, with 166,667 DSP steps/frame and vblank at the frame boundary.
 It has no wall-clock delta passed into game logic. The GLES2 host renders each
 emulated frame and its existing software pacing caps execution near 59.906 Hz;
 when rendering is slower it does not skip simulation or accelerate ticks.
-At 33 FPS the simulation therefore advances about 55% of arcade real time.
+In the original coupled mode, 33 FPS advances simulation about 55% of arcade real time.
 Controls remain responsive at the available tick rate, but race timers and
-motion are slowed. No instruction budgets, timestep, pacing or render cadence
-were changed. A future real-time-speed milestone would need fewer rendered
-frames while retaining all fixed simulation ticks; it is deliberately outside
-this control integration. Do not infer full-speed gameplay from the FPS figure.
+motion are slowed. The control milestone did not change these budgets or cadence. The independent
+timing milestone below retains the fixed instruction budgets while allowing
+fewer rendered frames. Do not infer simulation speed from rendered FPS alone.
 
 ### Build, deploy and first handheld test
 
@@ -769,3 +770,181 @@ plus scripted inputs fails explicitly. ARM64 ELF retains SDL2, GLESv2, EGL and
 Mali dependencies with no desktop libGL. Hardware controller detection, actual
 button labels and interactive playability remain unverified until tested on
 the RG40XX H; this milestone claims no new hardware result.
+
+## Independent simulation timing
+
+Interactive mode now defaults to `--timing independent`. The normal Ports
+launcher selects it explicitly. `--timing coupled` restores the previous
+one-simulation-step-per-render behavior for comparison. Without `--interactive`
+(or explicit `--timing independent`), all scripted/headless/benchmark paths
+retain their existing behavior. `--unpaced` is supported in coupled mode only;
+it is rejected with independent timing. `--render-hz N` optionally caps
+independent presentation to 1..60 pictures/sec; omit it for adaptive rendering.
+This is an upper limit, not a promise of a particular hardware render rate.
+
+### Audit and original frequency
+
+The emulated frame boundary is `rr_tick()` after 16 slices. Every slice runs
+the existing 68K poll budget, DSP instructions, translated sound execution and
+C352 audio generation. Each frame then prepares/consumes the video scene,
+applies the next input sample, starts the two-slice vblank window, asserts the
+DSP/board interrupts and delivers pending CPU IRQs. Serial and sound timing
+remain driven by emulated slices. A GLES draw/swap does not advance an IRQ,
+acknowledge a board operation or execute a sound event.
+
+`rr_scene_frame()` advances the video front-end's frame counter and handles
+PDP-begin/render-refresh latches. `rr_scene_consume()` clears direct polygons
+for that update. These calls **cannot** be omitted on skipped presentations:
+doing so would change the DSP handshake and accumulate stale direct polygons.
+The implementation therefore retains the entire `rr_gl_prepare()` CPU scene
+path every emulated frame, including palette snapshot, direct-poly decoding,
+list walk, sorting and `g_eng_frame` advancement. Only the GLES backend draw,
+texture lookups/uploads and buffer swap are omitted. Skipped pictures are
+intentionally not displayed later; the next draw uses that step's complete
+scene. No geometry is combined across frames, and neither GPU batches nor
+texture/VBO streaming code is changed.
+
+MAME's authoritative Namco S22 timing model defines a 51.2 MHz crystal, a
+25.6 MHz effective pixel clock (interlace doubled), and totals of 814 pixels
+by 525 lines. See [namcos22.cpp](https://github.com/mamedev/mame/blob/master/src/mame/namco/namcos22.cpp)
+(`PIXEL_CLOCK`, `HTOTAL`, `VTOTAL`, `set_raw`). This gives
+**59.904059904 Hz**, or **16.693359375 ms per emulated frame**. The old host's
+59.906 Hz is rounded. Independent wall-clock pacing uses the exact ratio.
+Existing scheduler approximations (e.g. 166,667 DSP steps/frame and the serial
+pulse accumulator based on 60) are retained to preserve deterministic execution;
+this milestone does not claim to improve their cycle-level accuracy.
+
+The game entry does not return once per frame; translated code cooperatively
+calls `rr_tick()`. The fixed-timestep loop therefore lives at that boundary:
+a monotonic SDL performance-counter deadline advances by one exact period per
+simulation step. If ahead, the host waits in 1 ms increments while polling
+input. If late by at least one period, it resumes simulation without rendering.
+That permits multiple complete scheduler frames between displayed images,
+without modifying generated code or passing wall-time deltas to game logic.
+There is no simulation worker thread, interpolation or concurrent GL access.
+
+Catch-up permits at most four consecutive overdue simulation boundaries without
+a presentation. If still overdue afterward, the host rebases its deadline,
+records discarded **wall-clock** lag and renders a picture. Emulated steps,
+interrupts and sound events are never discarded. Sustained CPU overload will
+still slow game time, and `resyncs`/`discarded_lag_ms` expose that limitation
+instead of allowing an uncontrolled backlog or a long catch-up burst.
+
+### Input and profiling
+
+Controller input is pumped every simulation boundary, even on skipped renders,
+and during pacing waits. Coin/START DOWN events survive a subsequent UP in the
+same SDL event drain. Coin edges queue (bounded to eight); each edge produces
+an active-low sample with a released sample separating queued credits.
+The board reads it in `rr_hw_vblank()`, so a short press cannot vanish just
+because no picture is shown. A short START generates ten emulated ticks of
+accelerator confirmation (~167 ms); a held button continues normally. The
+START+SELECT chord is detected from both queued transitions and held state,
+including a short chord wholly inside a slow swap. Hardware movement/buttons
+are otherwise sampled at the existing emulated input boundary. A blocking GL
+call cannot be interrupted for input polling; queued edges are processed when
+it returns. Steering position tracks the latest physical state.
+
+Every five seconds, plus at exit, `[TIMING]` reports:
+
+- `sim_hz` and `render_fps`: whole-run actual steps/pictures per wall-clock second.
+- `window_sim_hz` and `window_render_fps`: rates since the last timing report.
+- `steps`, `renders`, `skipped`: counts; skipped means omitted presentations,
+  not omitted simulation steps.
+- `lag_ms`, `max_lag_ms`: current/maximum lateness at a scheduling decision.
+- `discarded_lag_ms`, `resyncs`: accumulated wall-clock debt discarded under overload.
+- `avg_sim_ms`, `avg_scene_ms`: CPU costs averaged over **all** emulated steps.
+
+Rendering `[PROFILE]`/`[PROFILE-CACHE]` reports remain available but independent
+mode counts only **rendered** samples; the reported frame range can therefore
+contain gaps. Its `simulation`/`scene` averages describe those samples only.
+Use `[TIMING]` for whole-simulation throughput and costs. Coupled benchmark
+profile ranges/counters retain their previous meaning. Do not add vertex/draw
+sub-timings twice, and do not equate rendered FPS with simulation frequency.
+No new per-frame logging or GPU synchronization is introduced.
+
+### Handheld deployment and comparison
+
+Build with the existing native/Buildroot commands above; the binary is still
+`/tmp/rr-gles2-arm64/rr_gles2`. Deploy from the host:
+
+```sh
+scp /tmp/rr-gles2-arm64/rr_gles2 root@knulli:/userdata/roms/ports/rave-gles2/rr_gles2
+scp raverace/tools/RaveRacer-GLES2.sh root@knulli:/userdata/roms/ports/RaveRacer-GLES2.sh
+ssh root@knulli 'chmod +x /userdata/roms/ports/rave-gles2/rr_gles2 /userdata/roms/ports/RaveRacer-GLES2.sh'
+```
+
+Launch **Ports → RaveRacer-GLES2** for independent interactive play. Verify
+coin/START/menu behavior and race speed, including short presses. Quit with
+START+SELECT. Persistent diagnostics append to
+`/userdata/roms/ports/rave-gles2/rave-gles2.log`.
+
+For controlled, frame-limited interactive A/B runs over SSH with the framebuffer
+released as in previous tests:
+
+```sh
+cd /userdata/roms/ports
+./RaveRacer-GLES2.sh --timing independent --frames 1800
+./RaveRacer-GLES2.sh --timing coupled --frames 1800
+```
+
+Use the same course and controls, repeat in opposite order, and compare timing
+windows **during racing** rather than startup/menus. Independent `sim_hz` should
+approach 59.904 while rendered FPS may fall below 33 because more CPU time is
+spent executing the game. Increasing discarded lag/resyncs indicates the
+combined workload cannot sustain real time. Do not treat a lower rendered FPS
+alone as a regression. Optional `--render-hz 30` limits presentations without
+changing simulation tick frequency. Do not use `--unpaced` or `--input-log` for
+these real-time performance tests.
+
+For exactly identical scripted simulation sequences, invoke the executable
+directly (the interactive launcher intentionally rejects scripted inputs):
+
+```sh
+cd /userdata/roms/ports/rave-gles2
+SDL_VIDEODRIVER=mali ./rr_gles2 extracted --frames 1700 \
+  --coin 180 --gas 200 --steer 300:2304 --steer 700:2048 \
+  --timing independent --vbo-upload frame \
+  > timing-independent.json 2> timing-independent.log
+SDL_VIDEODRIVER=mali ./rr_gles2 extracted --frames 1700 \
+  --coin 180 --gas 200 --steer 300:2304 --steer 700:2048 \
+  --timing coupled --vbo-upload frame \
+  > timing-coupled.json 2> timing-coupled.log
+cmp timing-independent.json timing-coupled.json
+```
+
+Compare city/race `[TIMING] window` lines, CPU load and short-press behavior.
+These commands run a fixed simulation count, so wall-clock durations differ.
+The existing city benchmark launcher remains coupled/unpaced and unchanged;
+its measured 301-render sample baseline is not an independent-timing test.
+
+### Repeatable validation
+
+```sh
+cc -Iraverace/include raverace/tools/test_gles2_timing.c -o /tmp/test-gles2-timing
+/tmp/test-gles2-timing
+cc -Iengine -Iraverace/include raverace/tools/test_gles2_input.c \
+  -o /tmp/test-gles2-input $(pkg-config --cflags --libs sdl2)
+SDL_VIDEODRIVER=dummy /tmp/test-gles2-input /tmp/test-gles2-input.xml
+SDL_VIDEODRIVER=offscreen MESA_GLES_VERSION_OVERRIDE=2.0 \
+  python3 raverace/tools/test_gles2_timing.py \
+  /tmp/rr-gles2-native/rr_gles2 /tmp/rr-headless-native/rr_headless raverace/extracted
+```
+
+The clock test uses injected times to exercise exact deadlines, render limits,
+bounded catch-up, overload rebase and forced capture. Virtual controller tests
+include press/release queued before an input sample and a transient quit chord.
+The real-ROM test compares 600-frame final JSON and frame-600 PPM bytes across
+coupled, independent with skipped presentations, and independent with a 4 MiB
+texture cache. Captures force that exact simulation frame to render, without
+changing its emulated state. Existing headless and GLES2 texture/eviction/four-mode
+regressions, desktop build and Buildroot ARM64 build are also checked.
+Hardware independent-timing results are not yet available; the prior physical
+controls and VBO/33-FPS city results do not establish this mode's real-time rate.
+
+Native results: capped 15/30 presentation tests completed 600 simulation steps
+with respectively 449/299 omitted presentations, identical state/pixels and
+zero overload resyncs. A separate adaptive 1,700-frame city sequence also
+matched headless final JSON and coupled frame-1700 PPM bytes exactly; it ran
+near 59.92 measured steps/sec with two omitted presentations and zero resyncs.
+These are native correctness checks, not an ARM64 performance claim.
