@@ -18,6 +18,7 @@
 #include "rr_game.h"
 #include "c352.h"
 #include "rr_sound.h"
+#ifndef RR_HEADLESS
 #include <SDL.h>
 #include <stdatomic.h>
 #include <math.h>
@@ -127,6 +128,11 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
     atomic_store_explicit(&r_head, h, memory_order_release);
 }
 
+#else
+/* Keep the C352 clocks/status, discard only host output. */
+static void push_out(const int16_t *samples, int n) { (void)samples; (void)n; }
+#endif
+
 static c352_t chip;
 static uint8_t *wave;
 static bool ready;
@@ -194,7 +200,9 @@ void rr_audio_slice(void)
 
 void rr_audio_close(void)
 {
+#ifndef RR_HEADLESS
     if (dev) { SDL_CloseAudioDevice(dev); dev = 0; if (underruns) fprintf(stderr, "[AUDIO] %u output underrun samples\n", underruns); }
+#endif
     if (dump) { wav_header(dump, dump_frames); fclose(dump); dump = NULL;
                 fprintf(stderr, "[AUDIO] wrote %u samples (%.1f s)\n", dump_frames, dump_frames / 85333.0); }
 }

@@ -30,6 +30,10 @@ uint32_t  g_pointrom_words;
 static c71_t *m;
 static uint8_t ctrl;          /* last syscon 0x1A value */
 static bool running, irq_on, faulted, slave_on;
+#ifdef RR_HEADLESS
+uint64_t rr_headless_dsp_steps(void) { return m ? m->steps : 0; }
+bool rr_headless_dsp_fault(void) { return faulted; }
+#endif
 static uint16_t rbuf[0x1C];
 static int rbuf_n, upload_state;            /* MAME m_RenderBufSize, m_dsp_upload_state */
 

@@ -14,7 +14,9 @@
  *
  *   rr <rom_dir> [--frames N] [--dump DIR]    headless run
  */
+#ifndef RR_HEADLESS
 #include <SDL.h>
+#endif
 #include "rr_romzip.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,18 +26,27 @@
 #include "rr_dsp.h"
 #include "rr_video.h"
 #include "rr_gl.h"
+#ifndef RR_HEADLESS
 #include <GL/gl.h>
+#endif
 #include "rr_scene.h"
 #include "rr_lift_rt.h"
 #include "lift_cpu.h"
 #include "rr_game.h"
+#ifndef RR_HEADLESS
 #include "rr_ui.h"
+#endif
 #include "rr_lifted.h"
+#ifndef RR_HEADLESS
 #include "rr_input.h"
+#endif
 #include "rr_sound.h"
 #include "rr_link.h"
+#ifndef RR_HEADLESS
 #include "rr_net.h"
+#endif
 
+#ifndef RR_HEADLESS
 bool rr_host_open(int scale);
 bool rr_host_frame(void);
 bool rr_host_paused(void);
@@ -51,11 +62,14 @@ int g_rr_gl = 1;
 static int gl_w = 640, gl_h = 480;             /* headless picture size (RR_RENDER_SIZE) */
 static bool gl_ok;                             /* a GL context and the video ROMs: there is a picture */
 
+#endif
 /* --perf: per-frame emulation time (68K + DSP + render, host sleep excluded) and
  * render time, reported as percentiles at exit. Quote these, never one run's fps. */
 #include <time.h>
+#ifndef RR_HEADLESS
 #include "tex_bake.h"
 #include "win_gpu.h"          /* Windows: run on the discrete GPU of a two-GPU laptop (Optimus / PowerXpress) */
+#endif
 static FILE *perflog;                         /* RR_PERFLOG=<file>: one line per frame -- see the perf block */
 static double perflog_texels;
 static int perf_on;
@@ -212,7 +226,9 @@ static void debug_boundary(void)
     if (debug_pending < 0 || rr_in_irq) return;
     if (!debug_test_at) {
         g_hw.inputs &= (uint16_t)~0x0400;               /* the Test switch ON (headless; a window's host keeps it on) */
+        #ifndef RR_HEADLESS
         if (windowed) rr_host_set_test(true);
+#endif
         debug_test_at = frame;
         debug_slot_was = rr_read(g_rr_game->task_slot, 4);
         return;
@@ -224,6 +240,10 @@ static void debug_boundary(void)
     rr_write(g_rr_game->task_slot, 4, d->entry);
     fprintf(stderr, "[DEBUG] \"%s\" installed in the mode task at frame %u\n", d->name, frame);
 }
+
+#ifdef RR_HEADLESS
+#include "rr_headless.inc"
+#endif
 
 void rr_tick(void)
 {
@@ -249,6 +269,7 @@ void rr_tick(void)
     if (++slice % SLICES) return;
     frame++;
     sweep_tick();
+#ifndef RR_HEADLESS
     double tv0 = perf_on ? now_ms() : 0;
     if (g_rr_gl && gl_ok) {                        /* screen update at the end of the frame */
         rr_gl_prepare(rr_dsp_slave_active());
@@ -273,6 +294,10 @@ void rr_tick(void)
             perflog_texels = g_bake_texels;
         }
     }
+#else
+    rr_scene_frame(rr_dsp_slave_active());
+    rr_scene_consume(); /* discard display output; retain board/DSP handshakes */
+#endif
     for (int c = 0; c < n_test_coins; c++) {       /* scripted inputs for headless captures */
         if (frame == (uint32_t)test_coins[c]) g_hw.inputs &= (uint16_t)~0x1000;
         if (frame == (uint32_t)test_coins[c] + 6) g_hw.inputs |= 0x1000;
@@ -289,6 +314,7 @@ void rr_tick(void)
       for (int i = 0; i < np; i++) if (frame >= pf[i] && frame <= pt[i]) rr_write(pa[i], ps[i], pv[i]); }
     for (int i = 0; i < n_steer; i++) if (frame >= (uint32_t)test_steer[i].at) g_hw.steer = (uint16_t)test_steer[i].value;
     for (int i = 0; i < n_adc; i++) if (frame >= (uint32_t)test_adc[i].at) g_hw.adc[test_adc[i].idx & 3] = (uint8_t)test_adc[i].value;
+#ifndef RR_HEADLESS
     if (windowed) {
         if (frame % 120 == 0) rr_hw_eeprom_save();     /* the test menu's settings and the records, once the game has changed them */
         do {
@@ -320,10 +346,13 @@ void rr_tick(void)
         else if (!g_rr_gl) rr_video_write_ppm(p);
 #endif
     }
+#endif
     vblank_slices = 2;
     rr_dsp_vblank();
     if (!rr_env_active()) rr_hw_vblank();      /* (a trace oracle refreshes at MAME's own vblank interrupt: rr_env.c) */
+#ifndef RR_HEADLESS
     rr_net_poll();                       /* online play: peer FRAMEs into the link queue before the poll injects one */
+#endif
     rr_link_poll();                      /* a received link packet's SCI IRQ lands at this frame edge */
     if (!rr_env_active()) {                  /* a trace oracle lands the interrupts itself */
         rr_deliver_irqs(rr_hw_irq_level);
@@ -337,7 +366,9 @@ void rr_tick(void)
     /* a Debug-menu launch leaves the lifted call stack here (never returns if one is pending): AFTER the vblank interrupt,
      * whose handler rewinds the program's cooperative task list (Ace Driver: the pointer at A6-0x7FD0) -- launched before it,
      * the screen's first yield (0x4C6E) read past the end of the list and jumped to 0 */
+#ifndef RR_HEADLESS
     debug_boundary();
+#endif
     if (dump_dir) {             /* RR_DUMP_EVERY=n (default 60), RR_DUMP_FROM=f: dump cadence */
         static unsigned every, from; static int init;
         if (!init) { const char *e = getenv("RR_DUMP_EVERY"), *f = getenv("RR_DUMP_FROM");
@@ -352,10 +383,18 @@ void rr_tick(void)
     if (frame >= max_frames) {
         dump_state();
         perf_report();
+#ifndef RR_HEADLESS
         rr_input_record_stop();
+#else
+        rr_headless_summary();
+#endif
         rr_audio_close();
         fprintf(stderr, "[RR] stop at frame %u, %u traps\n", frame, rr_n_traps);
+#ifdef RR_HEADLESS
+        exit(rr_n_traps || rr_headless_dsp_fault() || rr_headless_sound_fault() ? 3 : 0);
+#else
         exit(rr_n_traps ? 3 : 0);
+#endif
     }
 }
 
@@ -364,6 +403,9 @@ void rr_win_startup(void);          /* src/rr_win.c */
 #endif
 int main(int argc, char **argv)
 {
+#ifdef RR_HEADLESS
+    return rr_headless_main(argc, argv);
+#else
 #ifdef _WIN32
     rr_win_startup();               /* the program's folder, raveracer.log, DPI */
 #endif
@@ -537,4 +579,5 @@ int main(int argc, char **argv)
     g_rr_game->entry();                         /* entry_reset (this game's reset PC): never returns */
     fprintf(stderr, "[RR] entry_reset returned?!\n");
     return 1;
+#endif
 }

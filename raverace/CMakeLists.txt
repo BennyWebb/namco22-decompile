@@ -56,6 +56,21 @@ set_source_files_properties(gen/rr_lifted.c PROPERTIES COMPILE_OPTIONS "-O1;-w")
 # Readable-C replacements (Phase B): every file in src/rd/ registers itself.
 file(GLOB RD_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rd/*.c)
 
+option(RR_HEADLESS_ONLY "Build only the deterministic scheduler test (no SDL/OpenGL)" OFF)
+if(RR_HEADLESS_ONLY)
+  add_executable(rr_headless src/rr_main.c src/rr_mem.c src/rr_hw.c src/rr_game.c
+    src/rr_env.c src/rr_link.c src/rr_dsp.c src/rr_scene.c src/rr_audio.c
+    src/snd/snd_board.c gen/snd_driver.c gen/rr_lifted.c gen/rr_c25.c
+    ${RD_SRC} ${NAMCO22_ENGINE_LIFT_SRC} ${NAMCO22_ENGINE_C25_SRC}
+    ${NAMCO22_ENGINE_DIR}/c352.c ${NAMCO22_ENGINE_DIR}/snd/m377_periph.c)
+  target_compile_definitions(rr_headless PRIVATE RR_HEADLESS)
+  target_include_directories(rr_headless PRIVATE src/snd)
+  target_compile_options(rr_headless PRIVATE -Wall -Wno-unused-function -Wno-unused-variable)
+  set_source_files_properties(gen/snd_driver.c PROPERTIES COMPILE_OPTIONS "-O1;-w")
+  target_link_libraries(rr_headless PRIVATE m)
+  return()
+endif()
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SDL2 REQUIRED sdl2)
 if(WIN32)

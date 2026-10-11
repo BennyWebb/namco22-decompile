@@ -111,7 +111,12 @@ bool rr_hw_init(const char *rom_dir)
     else fprintf(stderr, "[HW] no %s -- EEPROM blank\n", p);
     rr_set_io_hooks(io_read, io_write);
     rr_link_init();                                     /* the C139 SCI link chip (cabinet network) */
-    if (!rr_dsp_init(rom_dir)) fprintf(stderr, "[HW] master DSP unavailable\n");
+    if (!rr_dsp_init(rom_dir)) {
+        fprintf(stderr, "[HW] master DSP unavailable\n");
+#ifdef RR_HEADLESS
+        return false;
+#endif
+    }
     const char *kf = getenv("RR_KEYCUS_FILE");      /* replay MAME's random keycus reads */
     if (kf && !(keycus_replay = fopen(kf, "r"))) fprintf(stderr, "[HW] cannot open %s\n", kf);
     return true;
