@@ -1,10 +1,24 @@
-/* Phase 1 submission of the engine's existing screen-space geometry. */
+/* GLES2 submission of the engine's existing screen-space geometry. */
 #ifndef QUAD_GLES2_H
 #define QUAD_GLES2_H
 #include <stdbool.h>
 #include "geo_hw.h"
-typedef struct { unsigned triangles, draws; } eng_gles2_stats;
+typedef struct {
+    unsigned triangles, draws, vertex_uploads, texture_barriers;
+    unsigned long long vertex_upload_bytes;
+    unsigned flush_texture, flush_scissor, flush_capacity, flush_mutation, flush_end;
+    unsigned same_texture, binds, bind_skips;
+    unsigned empty_texture_flush;
+    double texture_seconds, upload_seconds, draw_seconds;
+    double vertex_upload_seconds, draw_call_seconds;
+} eng_gles2_stats;
 bool eng_gles2_init(void);
+bool eng_gles2_vbo_mode(const char *name);
+const char *eng_gles2_vbo_mode_name(void);
+void eng_gles2_diagnostic(bool enabled);
+bool eng_gles2_mode(const char *name);
+const char *eng_gles2_mode_name(void);
+bool eng_gles2_texture_budget(unsigned mib);
 bool eng_gles2_draw(const geo_quad *quads, int count, const float background[3],
                    eng_gles2_stats *stats);
 void eng_gles2_close(void);

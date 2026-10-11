@@ -74,7 +74,9 @@ static int rr_headless_main(int argc, char **argv)
         if (!strcmp(argv[i], "--help")) {
 #ifdef RR_GLES2
             fprintf(stderr, "Usage: rr_gles2 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
-                            "                [--unpaced] [--capture FILE.ppm --capture-frame N]\n"
+                            "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
+                            "                [--texture-budget-mib N]\n"
+                            "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
             fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n");

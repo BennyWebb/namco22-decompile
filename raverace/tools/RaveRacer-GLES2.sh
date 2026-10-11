@@ -7,7 +7,7 @@ if [ "${SDL_VIDEODRIVER+x}" != x ]; then
 fi
 export SDL_VIDEODRIVER
 {
-    printf '\n=== Rave Racer GLES2 Phase 1: %s ===\n' "$(date)"
+    printf '\n=== Rave Racer GLES2 original textures: %s ===\n' "$(date)"
     printf 'SDL_VIDEODRIVER=%s\n' "$SDL_VIDEODRIVER"
     ./rr_gles2 extracted --frames 3600 --coin 180 --gas 200 \
         --steer 300:2304 --capture-frame 600 --capture frame600.ppm "$@"

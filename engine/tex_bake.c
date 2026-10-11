@@ -28,6 +28,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#ifdef RR_GLES2
+#include <time.h>
+double tex_gles2_upload_seconds;
+unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
+static GLuint bound_texture;
+static int binding_known, skip_bindings;
+static double gles_seconds(void)
+{
+    struct timespec t; clock_gettime(CLOCK_MONOTONIC, &t);
+    return t.tv_sec + t.tv_nsec * 1e-9;
+}
+void tex_bake_gles2_binding_mode(int skip) { skip_bindings = skip; }
+void tex_bake_gles2_binding_reset(void) { binding_known = 0; }
+void tex_bake_gles2_bind(GLenum target, GLuint texture)
+{
+    if (skip_bindings && binding_known && texture == bound_texture) {
+        tex_gles2_bind_skips++; return;
+    }
+    glBindTexture(target, texture);
+    tex_gles2_bind_calls++;
+    bound_texture = texture; binding_known = 1;
+}
+#define glBindTexture tex_bake_gles2_bind
+#endif
 
 /* ========== Texture Lookup Pipeline ========== */
 
@@ -331,6 +355,9 @@ void tex_bake_set_flush_hook(void (*f)(GLuint)) { atlas_flush_hook = f; }
 
 static int atlas_on(void)
 {
+#ifdef RR_GLES2
+    return 0; /* No atlas shadows or desktop row-stride uploads. */
+#endif
     if (g_tex_atlas < 0) { const char *e = getenv("PROPCYCL_TEXATLAS"); g_tex_atlas = !(e && *e == '0'); }
     return g_tex_atlas && !g_tex_pow2sample && !g_tex_pow2alloc;   /* the A/B legacy paths keep per-quad textures */
 }
@@ -343,6 +370,7 @@ int tex_bake_atlas_active(void) { return atlas_on(); }
  * driver, and 1700 of them were the 30 ms frame at Dirt Dash's race start. */
 void tex_bake_commit(GLuint tex)               /* upload tex's page if bakes dirtied it */
 {
+#ifndef RR_GLES2
     for (int i = 0; i < ap_n; i++) {
         apage *p = &apages[i];
         if (p->tex != tex || !p->ndr) continue;
@@ -362,6 +390,9 @@ void tex_bake_commit(GLuint tex)               /* upload tex's page if bakes dir
         p->ndr = 0; p->dirty_x0 = p->dirty_y0 = ATLAS_DIM; p->dirty_x1 = p->dirty_y1 = 0;
         return;
     }
+#else
+    (void)tex;
+#endif
 }
 
 /* mark a slot's pixels dirty: uploaded as a RECT list, not a full-width row
@@ -471,6 +502,13 @@ static int tex_free_n;
 
 static void tex_free_push(GLuint id, uint16_t w, uint16_t h)
 {
+#ifdef RR_GLES2
+    (void)w; (void)h;
+    if (atlas_flush_hook) atlas_flush_hook(id);
+    tex_bake_gles2_binding_reset(); /* deleting a bound texture changes GL state */
+    glDeleteTextures(1, &id); /* No unaccounted recycled storage. */
+    return;
+#endif
     if (tex_free_n < TEX_CACHE_SIZE) {
         tex_free[tex_free_n].id = id;
         tex_free[tex_free_n].w = w; tex_free[tex_free_n].h = h;
@@ -530,6 +568,9 @@ static GLuint tex_free_pop(int tw, int th, int *had_w, int *had_h)
 size_t tex_cache_budget = (size_t)TEX_CACHE_BUDGET_DEFAULT_MB * 1024 * 1024;
 #define TEX_CACHE_BYTE_BUDGET tex_cache_budget
 size_t tex_cache_bytes = 0;
+#ifdef RR_GLES2
+static size_t tex_gpu_peak;
+#endif
 int tex_cache_live = 0;
 static int    tex_evict_hand  = 0;
 static int tex_cache_total = 0;
@@ -593,7 +634,15 @@ void renderer_texture_init(void) {
     tex_frame_hits   = 0;
     tex_frame_misses = 0;
     tex_cache_bytes  = 0;
+#ifdef RR_GLES2
+    tex_gpu_peak = 0;
+#endif
     tex_evict_hand   = 0;
+#ifdef RR_GLES2
+    g_tex_orphan = 0;
+    fprintf(stderr, "[TEX] CPU metadata=%zu scratch=%zu decoded_cache=0 atlas_shadow=0 bytes\n",
+            sizeof tex_cache + sizeof tex_free, sizeof tex_pixel_buf);
+#endif
     /* Preallocate every atlas page: a scene change used to pay its pages'
      * glTexImage2D storm in ONE frame (a 30+ ms spike at Dirt Dash's race
      * start); at boot it is invisible. the count is capped (see below). */
@@ -638,6 +687,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
                         int force_cap,      /* > 0: at most this cap (a coarse placeholder) */
                         int peek)           /* 1: only look in the cache -- 0 on a miss, nothing baked, no miss counted */ {
     int slot_page = 0, slot_x = 0, slot_y = 0;   /* atlas: the slot this bake lands in (set before the bake loop) */
+#ifdef RR_GLES2
+    double upload_start = 0;
+#endif
     /* Expand degenerate UV ranges to minimum 16 texels */
     if (range_u < 16) { min_u = (min_u * 2 + range_u) / 2 - 8; range_u = 16; }
     if (range_v < 16) { min_v = (min_v * 2 + range_v) / 2 - 8; range_v = 16; }
@@ -959,12 +1011,48 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     if (!slotp) {
         slotp = &tex_cache[h & TEX_CACHE_MASK];
         if (atlas_on()) atlas_free(slotp->a_page, slotp->a_x, slotp->a_y, slotp->alloc_w, slotp->alloc_h);
-        else tex = slotp->gl_texture;         /* reuse, do NOT delete */
+        else {
+#ifdef RR_GLES2
+            tex_free_push(slotp->gl_texture, slotp->alloc_w, slotp->alloc_h);
+            slotp->alloc_w = slotp->alloc_h = 0;
+#else
+            tex = slotp->gl_texture;         /* reuse, do NOT delete */
+#endif
+        }
         tex_cache_bytes -= slotp->bytes;
         tex_cache_total--;
         tex_cache_evictions++;
         slotp->occupied = 0;
     }
+#ifdef RR_GLES2
+    {
+        size_t incoming = atlas_on() ? (size_t)bw * bh * 4 : (size_t)tw * th * 4;
+        if (incoming > TEX_CACHE_BYTE_BUDGET) {
+            fprintf(stderr, "[TEX] texture exceeds budget: required=%zu budget=%zu RGBA %dx%d\n",
+                    incoming, TEX_CACHE_BYTE_BUDGET, tw, th);
+            exit(2);
+        }
+        int guard = 0;
+        while (tex_cache_bytes + incoming > TEX_CACHE_BYTE_BUDGET &&
+               guard++ < 2 * TEX_CACHE_SIZE) {
+            TexCacheEntry *e = &tex_cache[tex_evict_hand];
+            tex_evict_hand = (tex_evict_hand + 1) & TEX_CACHE_MASK;
+            if (!e->occupied || e == slotp) continue;
+            if (e->ref && !g_tex_fifo) { e->ref = 0; continue; }
+            if (atlas_on()) atlas_free(e->a_page, e->a_x, e->a_y, e->alloc_w, e->alloc_h);
+            else tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);
+            tex_cache_bytes -= e->bytes;
+            tex_cache_total--;
+            tex_cache_evictions++;
+            e->occupied = 0;
+        }
+    }
+    if (tex_cache_bytes + (size_t)tw * th * 4 > tex_cache_budget) {
+        fprintf(stderr, "[TEX] budget failure: resident=%zu incoming=%zu budget=%zu bytes\n",
+                tex_cache_bytes, (size_t)tw * th * 4, tex_cache_budget);
+        exit(2);
+    }
+#endif
     if (atlas_on()) {
         /* the bake already wrote the page's shadow (above); the GL texture
          * catches up at tex_bake_commit, one dirty row band per demand */
@@ -984,6 +1072,10 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         tex = tex_free_pop(tw, th, &had_w, &had_h);
         if (!tex) { tex = gen_texture(); had_w = had_h = 0; }
     }
+#ifdef RR_GLES2
+    if (atlas_flush_hook) atlas_flush_hook(tex);
+    upload_start = gles_seconds();
+#endif
     glBindTexture(GL_TEXTURE_2D, tex);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -1014,7 +1106,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
      * profile put 28.8% of the entire run inside __vdso_clock_gettime called
      * from libnvidia-eglcore, which is what a driver spinning on a fence
      * looks like. PROPCYCL_TEXORPHAN=0 restores the old behaviour for A/B. */
+#ifndef RR_GLES2
     if (atlas_flush_hook) atlas_flush_hook(tex);   /* a recycled object's storage is about to be discarded/replaced: buffered quads draw first */
+#endif
     if (!g_tex_orphan && had_w == tw && had_h == th) {
         tex_subimages++;
     } else {
@@ -1026,6 +1120,14 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
                     GL_RGBA, GL_UNSIGNED_BYTE, tex_pixel_buf);
     }
 
+#ifdef RR_GLES2
+    GLenum upload_error = glGetError();
+    tex_gles2_upload_seconds += gles_seconds() - upload_start;
+    if (upload_error != GL_NO_ERROR) {
+        fprintf(stderr, "[TEX] upload/allocation failure %dx%d RGBA8: GL 0x%x\n", tw, th, upload_error);
+        exit(2);
+    }
+#endif
     /* Store in cache, EVICTING if the probe window is full.
      *
      * This used to just give up after 16 failed probes and return the
@@ -1045,6 +1147,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
      * only textures unused for a whole sweep are evicted. Which texture is
      * evicted is the only thing this changes -- every bake is the same.
      * PROPCYCL_TEX_FIFO=1 restores the old hand. Bounded: two sweeps. */
+#ifndef RR_GLES2
     {
         size_t incoming = atlas_on() ? (size_t)bw * bh * 4 : (size_t)tw * th * 4;
         int guard = 0;
@@ -1062,6 +1165,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             e->occupied = 0;
         }
     }
+#endif
     slotp->min_u = (uint16_t)min_u;  slotp->min_v = (uint16_t)min_v;
     slotp->range_u = (uint16_t)range_u; slotp->range_v = (uint16_t)range_v;
     slotp->texbank  = (uint8_t)texbank;
@@ -1081,6 +1185,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     slotp->su = su; slotp->sv = sv;
     slotp->bytes = atlas_on() ? (uint32_t)(bw * bh * 4) : (uint32_t)(tw * th * 4);
     tex_cache_bytes += slotp->bytes;
+#ifdef RR_GLES2
+    if (tex_cache_bytes > tex_gpu_peak) tex_gpu_peak = tex_cache_bytes;
+#endif
     if (!slotp->occupied) tex_cache_total++;
     slotp->occupied = 1;
     slotp->ref = 1;
@@ -1131,6 +1238,9 @@ void tex_bake_window_defaults(void)                          /* an interactive h
 static void budget_env(void)
 {
     budget_env_done = 1;
+#ifdef RR_GLES2
+    return; /* Phase 2 never replaces original textures with coarse placeholders. */
+#endif
     const char *e = getenv("ENG_TEX_BUDGET");
     if (!e) return;
     long d = 0, pu = 0;
@@ -1234,3 +1344,14 @@ GLuint bake_quad_texture(int min_u, int min_v, int range_u, int range_v,
     }
     return t;
 }
+
+#ifdef RR_GLES2
+void tex_bake_gles2_report(void)
+{
+    fprintf(stderr, "[TEX] decoded=%d uploads=%d GPU=%zu peak=%zu budget=%zu live=%d hits=%d misses=%d evictions=%d CPU_metadata=%zu CPU_aux=%zu scratch=%zu shadow=0 decoded_cache=0\n",
+            tex_frame_misses, tex_reallocs + tex_subimages, tex_cache_bytes + 4,
+            tex_gpu_peak + 4, tex_cache_budget + 4, tex_cache_total, tex_frame_hits, tex_frame_misses,
+            tex_cache_evictions, sizeof tex_cache + sizeof tex_free,
+            sizeof apages + sizeof gen_pool + sizeof pend, sizeof tex_pixel_buf);
+}
+#endif

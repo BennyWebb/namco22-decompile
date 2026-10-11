@@ -298,6 +298,7 @@ void rr_tick(void)
         }
     }
 #elif defined(RR_GLES2)
+    rr_gles2_prepare_begin();
     rr_gl_prepare(rr_dsp_slave_active());
     int count; const geo_quad *quads = rr_gles2_quads(&count);
     float background[3]; rr_gles2_background(background);

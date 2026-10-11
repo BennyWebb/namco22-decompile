@@ -7,6 +7,7 @@
 #include <limits.h>
 #include "eng_gl.h"
 #include "quad_gles2.h"
+#include "tex_bake.h"
 #include "rr_gles2.h"
 
 static SDL_Window *window;
@@ -18,8 +19,56 @@ static const char *capture_path;
 static double next_frame, report_start;
 static unsigned report_frames;
 static bool saw_geometry;
+static uint32_t profile_from = 1;
+static double simulation_start, prepare_start, simulation_elapsed, profile_report_start;
+typedef struct {
+    unsigned frames, first, last;
+    double simulation, scene, lookup, upload, submission, swap, other, pacing, capture;
+    double vertex_upload, draw_call;
+    unsigned long long triangles, draws, binds, skips, texture, scissor, capacity, mutation, end, same;
+    unsigned long long empty_texture, vertex_uploads, vertex_bytes, texture_barriers;
+} profile;
+static profile window_profile, total_profile;
 
 static double seconds(void) { return (double)SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency(); }
+void rr_gles2_prepare_begin(void)
+{
+    prepare_start = seconds();
+    simulation_elapsed = prepare_start - simulation_start;
+}
+static void profile_add(profile *p, unsigned frame, const eng_gles2_stats *s,
+                        double scene, double draw_total, double swap, double pacing, double capture_time)
+{
+    if (!p->frames) p->first = frame;
+    p->frames++; p->last = frame;
+    p->simulation += simulation_elapsed; p->scene += scene;
+    p->lookup += s->texture_seconds; p->upload += s->upload_seconds;
+    p->submission += s->draw_seconds; p->swap += swap; p->pacing += pacing; p->capture += capture_time;
+    p->vertex_upload += s->vertex_upload_seconds; p->draw_call += s->draw_call_seconds;
+    p->other += draw_total - s->texture_seconds - s->upload_seconds - s->draw_seconds;
+    p->triangles += s->triangles; p->draws += s->draws;
+    p->binds += s->binds; p->skips += s->bind_skips;
+    p->texture += s->flush_texture; p->scissor += s->flush_scissor;
+    p->capacity += s->flush_capacity; p->mutation += s->flush_mutation;
+    p->end += s->flush_end; p->same += s->same_texture;
+    p->empty_texture += s->empty_texture_flush;
+    p->vertex_uploads += s->vertex_uploads; p->vertex_bytes += s->vertex_upload_bytes;
+    p->texture_barriers += s->texture_barriers;
+}
+static void profile_report(const char *kind, const profile *p)
+{
+    if (!p->frames) return;
+    double ms = 1000.0 / p->frames;
+    fprintf(stderr, "[PROFILE] %s mode=%s frames=%u..%u samples=%u avg_ms simulation=%.3f scene=%.3f lookup_decode=%.3f uploads=%.3f submission=%.3f swap=%.3f render_other=%.3f pacing=%.3f capture=%.3f vertex_upload=%.3f draw_call=%.3f avg_triangles=%.1f avg_draws=%.1f avg_binds=%.1f avg_skipped_binds=%.1f flushes texture=%llu scissor=%llu capacity=%llu mutation=%llu end=%llu same_texture=%llu empty_texture_flush=%llu vbo=%s avg_vertex_uploads=%.2f avg_vertex_bytes=%.1f texture_barriers=%llu\n",
+            kind, eng_gles2_mode_name(), p->first, p->last, p->frames,
+            p->simulation*ms, p->scene*ms, p->lookup*ms, p->upload*ms,
+            p->submission*ms, p->swap*ms, p->other*ms, p->pacing*ms, p->capture*ms,
+            p->vertex_upload*ms, p->draw_call*ms,
+            (double)p->triangles/p->frames, (double)p->draws/p->frames,
+            (double)p->binds/p->frames, (double)p->skips/p->frames,
+            p->texture, p->scissor, p->capacity, p->mutation, p->end, p->same, p->empty_texture, eng_gles2_vbo_mode_name(),
+            (double)p->vertex_uploads/p->frames, (double)p->vertex_bytes/p->frames, p->texture_barriers);
+}
 static bool sdl_ok(bool ok, const char *stage)
 {
     if (!ok) { fprintf(stderr, "[GLES2] %s: %s\n", stage, SDL_GetError()); failed = true; }
@@ -31,6 +80,35 @@ bool rr_gles2_options(int *argc, char **argv)
     int output = 1;
     for (int i = 1; i < *argc; i++) {
         if (!strcmp(argv[i], "--unpaced")) unpaced = true;
+        else if (!strcmp(argv[i], "--diagnostic-colours")) eng_gles2_diagnostic(true);
+        else if (!strcmp(argv[i], "--render-mode") && i+1 < *argc) {
+            if (!eng_gles2_mode(argv[++i])) {
+                fprintf(stderr, "[GLES2] render mode: textured, diagnostic, white-batches or textured-no-rebind\n");
+                return false;
+            }
+        }
+        else if (!strcmp(argv[i], "--vbo-upload") && i+1 < *argc) {
+            if (!eng_gles2_vbo_mode(argv[++i])) {
+                fprintf(stderr, "[GLES2] VBO upload mode: frame or legacy\n"); return false;
+            }
+        }
+        else if (!strcmp(argv[i], "--profile-from") && i+1 < *argc) {
+            char *end; const char *number = argv[++i]; errno = 0;
+            unsigned long n = strtoul(number, &end, 10);
+            if (errno || number == end || *number < '0' || *number > '9' || *end || !n || n > INT32_MAX) {
+                fprintf(stderr, "[GLES2] invalid profile start frame\n"); return false;
+            }
+            profile_from = (uint32_t)n;
+        }
+        else if (!strcmp(argv[i], "--texture-budget-mib") && i+1 < *argc) {
+            char *end; const char *number = argv[++i]; errno = 0;
+            unsigned long n = strtoul(number, &end, 10);
+            if (errno || number == end || *number < '0' || *number > '9' || *end ||
+                n > 64 || !eng_gles2_texture_budget((unsigned)n)) {
+                fprintf(stderr, "[TEX] invalid budget: use 1..64 MiB, no larger than build budget\n");
+                return false;
+            }
+        }
         else if (!strcmp(argv[i], "--capture") && i+1 < *argc) capture_path = argv[++i];
         else if (!strcmp(argv[i], "--capture-frame") && i+1 < *argc) {
             char *end; const char *number = argv[++i]; errno = 0;
@@ -95,7 +173,7 @@ bool rr_gles2_open(void)
         {SDL_GL_RED_SIZE, 8}, {SDL_GL_GREEN_SIZE, 8}, {SDL_GL_BLUE_SIZE, 8}};
     for (size_t i = 0; i < sizeof attrs / sizeof *attrs; i++)
         if (!sdl_ok(SDL_GL_SetAttribute(attrs[i].attr, attrs[i].value) == 0, "context attribute")) { SDL_Quit(); return false; }
-    window = SDL_CreateWindow("Rave Racer GLES2 Phase 1", 0, 0, 640, 480,
+    window = SDL_CreateWindow("Rave Racer GLES2", 0, 0, 640, 480,
                               SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
     if (!sdl_ok(window != NULL, "fullscreen window")) { SDL_Quit(); return false; }
     atexit(rr_gles2_close);
@@ -126,6 +204,9 @@ bool rr_gles2_open(void)
     scan_controllers();
     fprintf(stderr, "[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames\n");
     next_frame = report_start = seconds();
+    simulation_start = profile_report_start = next_frame;
+    fprintf(stderr, "[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=%u mode=%s\n",
+            profile_from, eng_gles2_mode_name());
     return true;
 }
 
@@ -151,11 +232,13 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     fprintf(stderr, "[GLES2] captured frame %u: triangles=%u draws=%u file=%s\n", frame, stats->triangles, stats->draws, capture_path);
     if (!stats->triangles) { fprintf(stderr, "[GLES2] capture contains no submitted geometry; choose a later frame\n"); return false; }
     captured = true;
+    tex_bake_gles2_report();
     return true;
 }
 
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
 {
+    double scene_elapsed = seconds() - prepare_start;
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return false;
@@ -165,26 +248,44 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_START) &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK)) return false;
     eng_gles2_stats stats;
+    double draw_start = seconds();
     if (!eng_gles2_draw(quads, count, bg, &stats)) { failed = true; return false; }
+    double draw_elapsed = seconds() - draw_start;
     if (!saw_geometry && stats.triangles) {
         fprintf(stderr, "[GLES2] first geometry frame=%u quads=%d triangles=%u draws=%u\n", frame, count, stats.triangles, stats.draws);
         saw_geometry = true;
     }
+    double capture_start = seconds();
     if (capture_frame == frame && !capture(frame, &stats)) { failed = true; return false; }
+    double capture_elapsed = seconds() - capture_start;
+    double swap_start = seconds();
     SDL_GL_SwapWindow(window);
+    double swap_elapsed = seconds() - swap_start;
     report_frames++;
     double now = seconds();
     if (now - report_start >= 5) {
-        fprintf(stderr, "[GLES2] frame=%u fps=%.2f quads=%d triangles=%u draws=%u texture_bytes=4\n",
+        fprintf(stderr, "[GLES2] frame=%u fps=%.2f quads=%d triangles=%u draws=%u\n",
                 frame, report_frames / (now-report_start), count, stats.triangles, stats.draws);
+        tex_bake_gles2_report();
         report_start = now; report_frames = 0;
     }
+    double pacing_start = seconds();
     if (!unpaced) {
         next_frame += 1.0 / 59.906;
         double remaining = next_frame - seconds();
         if (remaining > 0) SDL_Delay((Uint32)(remaining * 1000 + 0.999));
         else if (remaining < -1.0 / 59.906) next_frame = seconds();
     }
+    if (frame >= profile_from) {
+        double pacing_elapsed = seconds() - pacing_start;
+        profile_add(&window_profile, frame, &stats, scene_elapsed, draw_elapsed, swap_elapsed, pacing_elapsed, capture_elapsed);
+        profile_add(&total_profile, frame, &stats, scene_elapsed, draw_elapsed, swap_elapsed, pacing_elapsed, capture_elapsed);
+        if (seconds() - profile_report_start >= 5) {
+            profile_report("window", &window_profile);
+            memset(&window_profile, 0, sizeof window_profile); profile_report_start = seconds();
+        }
+    } else profile_report_start = seconds();
+    simulation_start = seconds();
     return true;
 }
 
@@ -192,6 +293,8 @@ bool rr_gles2_failed(void) { return failed; }
 void rr_gles2_close(void)
 {
     if (!window) return;
+    profile_report("window-final", &window_profile);
+    profile_report("total", &total_profile);
     if (capture_frame && !captured) { fprintf(stderr, "[GLES2] requested geometry capture was not completed\n"); failed = true; }
     for (int i = 0; i < 16; i++) if (controllers[i]) { SDL_GameControllerClose(controllers[i]); controllers[i] = NULL; }
     if (context) { eng_gles2_close(); SDL_GL_DeleteContext(context); context = NULL; }

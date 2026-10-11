@@ -33,6 +33,7 @@
 #include "post_gl.h"
 #else
 #include "quad_gles2.h"
+#include "tex_bake.h"
 #endif
 #include "rr_mem.h"
 #include "rr_dsp.h"
@@ -51,9 +52,19 @@ static int32_t pointram_read(uint32_t a) { return rr_dsp_pointram_read(a & 0xfff
 
 bool rr_gl_init(const char *dir)
 {
-#ifndef RR_GLES2
-    if (!eng_load_texture_roms(dir, g_rr_game->cg, g_rr_game->ccrl, g_rr_game->ccrh)) return false;
+    if (!eng_load_texture_roms(dir, g_rr_game->cg, g_rr_game->ccrl, g_rr_game->ccrh)) {
+#ifdef RR_GLES2
+        fprintf(stderr, "[TEX] original ROM load/allocation failed: pixels=%zu map=%zu bytes\n",
+                (size_t)TEXTURE_TOTAL_SIZE, (size_t)TEXTUREMAP_SIZE);
+#endif
+        return false;
+    }
     if (g_rr_game->tex_fixup) eng_texture_tilemap_sys22_fixup();
+#ifdef RR_GLES2
+    fprintf(stderr, "[TEX] ROM CPU bytes=%zu; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque\n",
+            (size_t)TEXTURE_TOTAL_SIZE + TEXTUREMAP_SIZE);
+#endif
+#ifndef RR_GLES2
     const char *const *gp = g_rr_game->gamma;
     for (int i = 0; i < 3; i++) {
         char p[1024]; snprintf(p, sizeof p, "%s/%s", dir, gp[i]);
@@ -65,9 +76,7 @@ bool rr_gl_init(const char *dir)
     g_eng_pointrom   = g_pointrom;           /* rr_dsp_init loaded it */
     g_eng_pointrom_n = g_pointrom_words;
     g_eng_pointram   = pointram_read;
-#ifndef RR_GLES2
     g_tex_opaque = 1;                        /* the polygon path has no transparent pen */
-#endif
     assets_ok = g_eng_pointrom != NULL;
     return assets_ok;
 }
@@ -314,6 +323,9 @@ static int frame_bg_palbase;
 void rr_gl_prepare(bool slave_active)
 {
     if (!assets_ok) return;
+#ifdef RR_GLES2
+    eng_palette_from_planar(g_rr.pal, 0x8000);
+#endif
     g_eng_frame++;
 #ifndef RR_GLES2
     { static int hold; hud_on = eng_hud_marks_up(g_rr.text, hud_marks, (int)(sizeof hud_marks / sizeof *hud_marks), &hold); }

@@ -6,6 +6,14 @@
 #include "eng_gl.h"
 
 void renderer_texture_init(void);
+#ifdef RR_GLES2
+void tex_bake_gles2_report(void);
+void tex_bake_gles2_bind(GLenum target, GLuint texture);
+void tex_bake_gles2_binding_mode(int skip_redundant);
+void tex_bake_gles2_binding_reset(void);
+extern double tex_gles2_upload_seconds;
+extern unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
+#endif
 
 /* Two-stage tilemap texel fetch: returns the 8-bit pen at (u,v). */
 uint8_t texture_pen_lookup(int u, int v, int texbank);

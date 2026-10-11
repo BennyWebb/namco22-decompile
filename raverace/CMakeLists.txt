@@ -57,7 +57,7 @@ set_source_files_properties(gen/rr_lifted.c PROPERTIES COMPILE_OPTIONS "-O1;-w")
 file(GLOB RD_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rd/*.c)
 
 option(RR_HEADLESS_ONLY "Build only the deterministic scheduler test (no SDL/OpenGL)" OFF)
-option(RR_GLES2 "Build the Phase 1 GLES2 scene viewer (no desktop GL/menu)" OFF)
+option(RR_GLES2 "Build the GLES2 scene viewer (no desktop GL/menu)" OFF)
 if(RR_GLES2 AND RR_HEADLESS_ONLY)
   message(FATAL_ERROR "Choose RR_GLES2 or RR_HEADLESS_ONLY in separate build directories")
 endif()
@@ -88,12 +88,12 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
     if(NOT RR_GLES_INCLUDE OR NOT RR_GLES_LIBRARY OR NOT RR_EGL_LIBRARY)
       message(FATAL_ERROR "GLES2/EGL development files are required in the target sysroot")
     endif()
-    set(RR_GLES2_TEXTURE_BUDGET_KB 64 CACHE STRING "Phase 1 texture allocation limit in KiB (white texture only)")
+    set(RR_GLES2_TEXTURE_BUDGET_KB 65536 CACHE STRING "GLES2 texture allocation limit in KiB")
     if(NOT RR_GLES2_TEXTURE_BUDGET_KB MATCHES "^[1-9][0-9]*$" OR RR_GLES2_TEXTURE_BUDGET_KB GREATER 65536)
       message(FATAL_ERROR "RR_GLES2_TEXTURE_BUDGET_KB must be 1..65536")
     endif()
     target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c
-      ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/eng.c
+      ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c ${NAMCO22_ENGINE_DIR}/eng.c
       ${NAMCO22_ENGINE_DIR}/geo_hw.c ${NAMCO22_ENGINE_DIR}/slave_list.c)
     target_compile_definitions(rr_gles2 PRIVATE RR_GLES2
       RR_GLES2_TEXTURE_BUDGET_KB=${RR_GLES2_TEXTURE_BUDGET_KB})
