@@ -11,9 +11,19 @@ typedef struct {
 static stage_cohort stage_total[2], stage_window[2];
 static double stage_start, stage_end, stage_window_start;
 
-double rr_gles2_stage_begin(void) { return profile_stages ? seconds() : 0; }
+double rr_gles2_stage_begin(void) {
+#ifdef RR_PIPELINE_AUDIT
+    if(eng_audit_enabled) stage_cpu_start=eng_audit_cpu_now();
+#endif
+    return profile_stages ? seconds() : 0;
+}
 void rr_gles2_stage_end(rr_gles2_stage stage, double start)
-{ if (profile_stages) stage_frame[stage] += seconds()-start; }
+{
+#ifdef RR_PIPELINE_AUDIT
+    if(eng_audit_enabled) stage_frame_cpu[stage]+=eng_audit_cpu_now()-stage_cpu_start;
+#endif
+    if (profile_stages) stage_frame[stage] += seconds()-start;
+}
 static void stages_report(const char *kind, stage_cohort *cohorts, double start)
 {
     unsigned n=cohorts[0].n+cohorts[1].n;

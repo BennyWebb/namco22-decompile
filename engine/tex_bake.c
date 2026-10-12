@@ -30,6 +30,7 @@
 #include <math.h>
 #ifdef RR_GLES2
 #include <time.h>
+#include "eng_audit.h"
 double tex_gles2_upload_seconds;
 unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
 static GLuint bound_texture;
@@ -689,6 +690,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     int slot_page = 0, slot_x = 0, slot_y = 0;   /* atlas: the slot this bake lands in (set before the bake loop) */
 #ifdef RR_GLES2
     double upload_start = 0;
+    eng_audit_scope audit_upload={0};
 #endif
     /* Expand degenerate UV ranges to minimum 16 texels */
     if (range_u < 16) { min_u = (min_u * 2 + range_u) / 2 - 8; range_u = 16; }
@@ -887,6 +889,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
      * source texel, which is what it should have been. su/sv are unchanged:
      * they still map range_u onto sw, so the guard is only ever reached by
      * the boundary sample itself. */
+#ifdef RR_GLES2
+    eng_audit_scope audit_decode=eng_audit_begin(AUD_DECODE);
+#endif
     int bw = (sw < tw) ? sw + 1 : sw;
     int bh = (sh < th) ? sh + 1 : sh;
     if (atlas_on()) { bw = sw + 1; bh = sh + 1; }   /* atlas slots always have room for the guard texel */
@@ -999,6 +1004,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     }
     }
 
+#ifdef RR_GLES2
+    eng_audit_end(audit_decode);
+#endif
     /* Upload to GL (NEAREST filtering — pixel art, no blurring) */
     /* Find the slot first so an eviction can donate its texture object (per-quad
      * path) or free its atlas rect. */
@@ -1075,6 +1083,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 #ifdef RR_GLES2
     if (atlas_flush_hook) atlas_flush_hook(tex);
     upload_start = gles_seconds();
+    audit_upload=eng_audit_begin(AUD_UPLOAD);
 #endif
     glBindTexture(GL_TEXTURE_2D, tex);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -1123,6 +1132,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 #ifdef RR_GLES2
     GLenum upload_error = glGetError();
     tex_gles2_upload_seconds += gles_seconds() - upload_start;
+    if(upload_start) eng_audit_end(audit_upload);
     if (upload_error != GL_NO_ERROR) {
         fprintf(stderr, "[TEX] upload/allocation failure %dx%d RGBA8: GL 0x%x\n", tw, th, upload_error);
         exit(2);

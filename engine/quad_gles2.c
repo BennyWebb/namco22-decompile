@@ -11,6 +11,7 @@
 #include "quad_gles2.h"
 #include "tex_bake.h"
 #include "eng.h"
+#include "eng_audit.h"
 
 float g_scene_x0 = 0, g_scene_x1 = ENG_SCREEN_W;
 #include "quad_geometry.inc"
@@ -138,7 +139,8 @@ bool eng_gles2_init(void)
         return false;
     }
     GLuint v = compile(GL_VERTEX_SHADER, vs);
-    GLuint f = compile(GL_FRAGMENT_SHADER, fs);
+    static const char *flat_fs="#version 100\nprecision mediump float;\nvarying mediump vec4 v_colour;\nvoid main(){gl_FragColor=v_colour;}\n";
+    GLuint f = compile(GL_FRAGMENT_SHADER, AUDIT_FLAT?flat_fs:fs);
     if (!v || !f) { if (v) glDeleteShader(v); if (f) glDeleteShader(f); return false; }
     program = glCreateProgram();
     glAttachShader(program, v); glAttachShader(program, f);
@@ -157,7 +159,7 @@ bool eng_gles2_init(void)
     if (!ok) { fprintf(stderr, "[GLES2] program link failed\n"); return false; }
     projection = glGetUniformLocation(program, "u_projection");
     sampler = glGetUniformLocation(program, "u_texture");
-    if (projection < 0 || sampler < 0) { fprintf(stderr, "[GLES2] missing shader uniforms\n"); return false; }
+    if (projection < 0 || (sampler < 0 && !AUDIT_FLAT)) { fprintf(stderr, "[GLES2] missing shader uniforms\n"); return false; }
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     if (!frame_upload) glBufferData(GL_ARRAY_BUFFER, sizeof batch, NULL, GL_DYNAMIC_DRAW);
@@ -189,22 +191,28 @@ bool eng_gles2_init(void)
 static bool submit_commands(eng_gles2_stats *stats)
 {
     if (!command_count) return true;
+    eng_audit_scope audit_submit=eng_audit_begin(AUD_SUBMIT);
     double start = seconds(), vertex_start = start;
     size_t bytes = (size_t)batch_first * sizeof(vertex);
     /* GLES2 glBufferData re-specifies the store rather than overwriting the
      * in-flight offset-zero range. Driver storage renaming is implementation
      * dependent; retain legacy mode for measurement on Mali. */
+    eng_audit_scope audit_vertex=eng_audit_begin(AUD_VERTEX);
     glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)bytes, batch, GL_STREAM_DRAW);
+    eng_audit_end(audit_vertex);
     stats->vertex_upload_seconds += seconds() - vertex_start;
     stats->vertex_uploads++; stats->vertex_upload_bytes += bytes;
     if (!check_gl("upload vertex chunk")) return false;
     for (int i = 0; i < command_count; i++) {
         const draw_command *c = &commands[i];
         glEnable(GL_SCISSOR_TEST);
-        glScissor(c->scissor[0], c->scissor[1], c->scissor[2], c->scissor[3]);
+        glScissor(c->scissor[0]/AUDIT_DIVISOR, c->scissor[1]/AUDIT_DIVISOR,
+            (c->scissor[2]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR,(c->scissor[3]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR);
         tex_bake_gles2_bind(GL_TEXTURE_2D, white_batches ? white : c->texture);
         double call_start = seconds();
-        glDrawArrays(GL_TRIANGLES, c->first, c->count);
+        eng_audit_scope audit_draw=eng_audit_begin(AUD_DRAW);
+        if(!AUDIT_NO_DRAW) glDrawArrays(GL_TRIANGLES, c->first, c->count);
+        eng_audit_end(audit_draw);
         stats->draw_call_seconds += seconds() - call_start;
         stats->triangles += (unsigned)c->count / 3; stats->draws++;
     }
@@ -214,6 +222,7 @@ static bool submit_commands(eng_gles2_stats *stats)
     if (used) memmove(batch, batch + batch_first, (size_t)used * sizeof(vertex));
     batch_first = command_count = 0;
     stats->draw_seconds += seconds() - start;
+    eng_audit_end(audit_submit);
     return ok;
 }
 
@@ -262,7 +271,7 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
     used = batch_first = command_count = 0; batch_texture = white; current_stats = stats; flush_failed = false;
-    glViewport(0, 0, ENG_SCREEN_W, ENG_SCREEN_H);
+    glViewport(0, 0, ENG_SCREEN_W/AUDIT_DIVISOR, ENG_SCREEN_H/AUDIT_DIVISOR);
     glDisable(GL_SCISSOR_TEST); glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST); glDepthFunc(GL_LEQUAL); glDepthMask(GL_TRUE);
     glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -329,8 +338,10 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
             g_tex_bake_cap_req = (x1 - x0 > y1 - y0 ? x1 - x0 : y1 - y0) + 1;
             double lookup_start = seconds(), draw_before = stats->draw_seconds;
             double upload_before = tex_gles2_upload_seconds;
+            eng_audit_scope audit_lookup=eng_audit_begin(AUD_LOOKUP);
             texture = bake_quad_texture(min_u, min_v, ru, rv, q->texbank,
                                        (q->color >> 8) & 127, q->cmode, &su, &sv, &ou, &ov);
+            eng_audit_end(audit_lookup);
             stats->texture_seconds += seconds() - lookup_start -
                 (tex_gles2_upload_seconds - upload_before) - (stats->draw_seconds - draw_before);
             if (!texture || flush_failed) return false;

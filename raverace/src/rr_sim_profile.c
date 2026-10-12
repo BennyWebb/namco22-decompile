@@ -3,6 +3,9 @@
 #define _GNU_SOURCE
 #include "rr_sim_profile.h"
 #include "rr_mem.h"
+#include "eng_audit.h"
+#include "rr_gles2.h"
+static eng_audit_scope audit_sim;
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
@@ -106,6 +109,7 @@ rr_sim_stage rr_sim_enter(rr_sim_stage next)
 void rr_sim_leave(rr_sim_stage old) { (void)rr_sim_enter(old); }
 void rr_sim_pause(uint32_t frame)
 {
+    eng_audit_end(audit_sim);
     if(!enabled || !started) return;
     double cpu=now(CLOCK_THREAD_CPUTIME_ID),t=now(CLOCK_MONOTONIC);
     sums[stage]+=t-last;
@@ -119,6 +123,10 @@ void rr_sim_pause(uint32_t frame)
 }
 void rr_sim_resume(uint32_t next_frame)
 {
+#ifdef RR_PIPELINE_AUDIT
+    if(eng_audit_enabled && next_frame==rr_gles2_profile_from()) eng_audit_pmu_start();
+#endif
+    audit_sim=eng_audit_begin(AUD_SIM);
     rr_memory_profile_frame(next_frame);
     if(rate_requested) {
         double t=now(CLOCK_MONOTONIC);

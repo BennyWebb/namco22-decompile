@@ -12,6 +12,11 @@
 #include "rr_sim_profile.h"
 #include "rr_mem.h"
 #include "rr_gles2_timing.h"
+#include "eng_audit.h"
+static const char *audit_path;
+static FILE *audit_file;
+static eng_audit_scope audit_scene;
+static double stage_cpu_start,stage_frame_cpu[RR_STAGE_COUNT];
 
 static SDL_Window *window;
 static SDL_GLContext context;
@@ -56,9 +61,24 @@ typedef struct {
     size_t texture_bytes, texture_peak;
 } profile;
 static profile window_profile, total_profile;
+#include "rr_gles2_gpu_audit.inc"
 
 static double seconds(void) { return (double)SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency(); }
 #include "rr_gles2_profile.inc"
+static void audit_row(uint32_t frame,bool rendered,unsigned quads,const eng_gles2_stats *s)
+{
+    if(!eng_audit_enabled) return;
+    if(frame>=profile_from) {
+        fprintf(audit_file,"%u,%d,%u,%u,%u,%u,%llu,%u,%u,%u,%u,%u,%.9f",frame,rendered,quads,s->triangles,s->draws,s->vertex_uploads,
+            s->vertex_upload_bytes,s->cache_hits,s->cache_misses,s->cache_evictions,s->texture_uploads,s->binds,seconds());
+        for(int i=0;i<AUD_COUNT;i++) fprintf(audit_file,",%.9f,%.9f,%.9f,%.9f",eng_audit_wall[i],eng_audit_cpu[i],eng_audit_inclusive_wall[i],eng_audit_inclusive_cpu[i]);
+        for(int i=0;i<RR_STAGE_COUNT;i++) fprintf(audit_file,",%.9f,%.9f",stage_frame[i],stage_frame_cpu[i]);
+        fputc('\n',audit_file);
+    }
+    memset(stage_frame_cpu,0,sizeof stage_frame_cpu);eng_audit_reset();
+}
+
+
 bool rr_gles2_prepare_begin(uint32_t frame, bool *geometry)
 {
     rr_sim_pause(frame);
@@ -71,12 +91,15 @@ bool rr_gles2_prepare_begin(uint32_t frame, bool *geometry)
     early_host_wait = 0;
     frame_render = true;
     if (independent && (skip_geometry || test_present_every)) {
+        eng_audit_scope audit_wait=eng_audit_begin(AUD_WAIT);
         double start = seconds();
         if (!choose_presentation(frame)) return false;
         early_host_wait = seconds() - start;
+        eng_audit_end(audit_wait);
     }
     *geometry = !independent || !skip_geometry || frame_render;
     prepare_start = seconds();
+    audit_scene=eng_audit_begin(AUD_SCENE);
     return true;
 }
 static void profile_add(profile *p, unsigned frame, const eng_gles2_stats *s,
@@ -162,6 +185,12 @@ bool rr_gles2_options(int *argc, char **argv)
         }
         else if (!strcmp(argv[i], "--profile-memory")) profile_memory = true;
         else if (!strcmp(argv[i], "--profile-stages")) profile_stages = true;
+        else if (!strcmp(argv[i],"--audit-csv") && i+1<*argc) audit_path=argv[++i];
+        else if (!strcmp(argv[i],"--audit-no-draw")) eng_audit_no_draw=true;
+        else if (!strcmp(argv[i],"--audit-gpu-timers")) audit_gpu=true;
+        else if (!strcmp(argv[i],"--audit-detail")) eng_audit_detailed=true;
+        else if (!strcmp(argv[i],"--audit-flat-fragment")) eng_audit_flat_fragment=true;
+        else if (!strcmp(argv[i],"--audit-half-resolution")) eng_audit_divisor=2;
         else if (!strcmp(argv[i], "--interactive")) interactive = true;
         else if (!strcmp(argv[i], "--input-log")) input_log = true;
         else if (!strcmp(argv[i], "--controller-db") && i+1 < *argc) controller_db = argv[++i];
@@ -213,6 +242,15 @@ bool rr_gles2_options(int *argc, char **argv)
     }
     if ((capture_path != NULL) != (capture_frame != 0)) {
         fprintf(stderr, "[GLES2] specify both --capture FILE.ppm and --capture-frame N\n"); return false;
+    }
+    if((audit_path || eng_audit_no_draw || eng_audit_flat_fragment || eng_audit_divisor!=1) && !eng_audit_available()) {
+        fprintf(stderr,"[AUDIT] diagnostics require RR_PIPELINE_AUDIT=ON\n");return false;
+    }
+    if(audit_path && !profile_stages) {fprintf(stderr,"[AUDIT] --audit-csv requires --profile-stages\n");return false;}
+    if(audit_gpu && !audit_path) {fprintf(stderr,"[AUDIT] GPU timers require --audit-csv\n");return false;}
+    if(eng_audit_detailed && !audit_path) {fprintf(stderr,"[AUDIT] detailed timing requires --audit-csv\n");return false;}
+    if((audit_path || eng_audit_no_draw || eng_audit_divisor!=1) && strcmp(eng_gles2_vbo_mode_name(),"frame")) {
+        fprintf(stderr,"[AUDIT] pipeline diagnostics require frame VBO mode\n");return false;
     }
     return true;
 }
@@ -297,6 +335,23 @@ bool rr_gles2_open(void)
         if (!value) { fprintf(stderr, "[GLES2] missing GL %s\n", labels[i]); failed = true; return false; }
         fprintf(stderr, "[GLES2] %s: %s\n", labels[i], value);
     }
+    if(audit_path || eng_audit_no_draw || eng_audit_divisor!=1) {
+        fprintf(stderr,"[AUDIT] no_draw=%d viewport_divisor=%d; draw counters are logical when suppressed\n",eng_audit_no_draw,eng_audit_divisor);
+        fprintf(stderr,"[AUDIT-EXTENSIONS] %s\n",glGetString(GL_EXTENSIONS));
+    }
+    if(audit_path) {
+        fprintf(stderr,"[AUDIT] CPU attribution=%s; coarse mode includes draw in submit and lookup in backend; existing PROFILE wall breakdown remains available\n",eng_audit_detailed?"detailed":"coarse");
+        audit_file=fopen(audit_path,"w");
+        if(!audit_file) {perror("audit CSV");return false;}
+        setvbuf(audit_file,NULL,_IOFBF,65536);
+        fputs("frame,rendered,quads,triangles,draws,vbo_uploads,vbo_bytes,hits,misses,evictions,texture_uploads,binds,time_s",audit_file);
+        const char *names[AUD_COUNT]={"sim","scene","backend","lookup","upload","submit","vertex","draw","swap","wait","decode"};
+        for(int i=0;i<AUD_COUNT;i++) fprintf(audit_file,",%s_wall,%s_cpu,%s_inclusive_wall,%s_inclusive_cpu",names[i],names[i],names[i],names[i]);
+        const char *stages[RR_STAGE_COUNT]={"dsp","sound","c352","serial","io","video","palette","direct","list","sort"};
+        for(int i=0;i<RR_STAGE_COUNT;i++) fprintf(audit_file,",%s_stage_wall,%s_stage_cpu",stages[i],stages[i]);
+        fputc('\n',audit_file);eng_audit_enabled=true;
+    }
+    if(!gpu_open()) return false;
     int profile = 0;
     if (!sdl_ok(SDL_GL_GetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, &profile) == 0, "query context profile") || profile != SDL_GL_CONTEXT_PROFILE_ES) {
         fprintf(stderr, "[GLES2] expected an ES context\n"); failed = true; return false;
@@ -409,6 +464,7 @@ static bool choose_presentation(uint32_t frame)
 
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
 {
+    eng_audit_end(audit_scene);
     double scene_elapsed = seconds() - prepare_start;
     rr_sim_enter(SIM_PRESENT);
     double host_wait_start=rr_gles2_stage_begin();
@@ -419,6 +475,7 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     double host_wait_elapsed=profile_stages ? early_host_wait+seconds()-host_wait_start : 0;
     if (!render) {
         const eng_gles2_stats empty={0};
+        audit_row(frame,false,(unsigned)count,&empty);
         stages_add(frame,false,(unsigned)count,&empty,scene_elapsed,0,0,host_wait_elapsed,0);
         timing_skipped++;
         if (seconds()-timing_window>=5) timing_report("window");
@@ -428,7 +485,11 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     timing_renders++; timing_renders_window++;
     eng_gles2_stats stats;
     double draw_start = seconds();
+    gpu_begin_frame(frame);
+    eng_audit_scope audit_backend=eng_audit_begin(AUD_BACKEND);
     if (!eng_gles2_draw(quads, count, bg, &stats)) { failed = true; return false; }
+    eng_audit_end(audit_backend);
+    gpu_end_frame();
     double draw_elapsed = seconds() - draw_start;
     if (!saw_geometry && stats.triangles) {
         fprintf(stderr, "[GLES2] first geometry frame=%u quads=%d triangles=%u draws=%u\n", frame, count, stats.triangles, stats.draws);
@@ -438,7 +499,9 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     if (capture_frame == frame && !capture(frame, &stats)) { failed = true; return false; }
     double capture_elapsed = seconds() - capture_start;
     double swap_start = seconds();
+    eng_audit_scope audit_swap=eng_audit_begin(AUD_SWAP);
     SDL_GL_SwapWindow(window);
+    eng_audit_end(audit_swap);
     double swap_elapsed = seconds() - swap_start;
     report_frames++;
     double now = seconds();
@@ -455,6 +518,7 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
         if (remaining > 0) SDL_Delay((Uint32)(remaining * 1000 + 0.999));
         else if (remaining < -1.0 / 59.906) next_frame = seconds();
     }
+    audit_row(frame,true,(unsigned)count,&stats);
     stages_add(frame,true,(unsigned)count,&stats,scene_elapsed,draw_elapsed,swap_elapsed,
                host_wait_elapsed+(profile_stages ? seconds()-pacing_start : 0),capture_elapsed);
     if (independent && seconds()-timing_window>=5) timing_report("window");
@@ -514,6 +578,12 @@ static void report_board_state(void)
 void rr_gles2_close(void)
 {
     if (!window) return;
+    gpu_close();
+    if(audit_file) {
+        eng_audit_pmu_report();
+        if(fclose(audit_file)) {perror("audit CSV close");failed=true;}
+        audit_file=NULL;eng_audit_enabled=false;
+    }
     report_board_state();
     rr_memory_profile_report();
     rr_sim_report();
