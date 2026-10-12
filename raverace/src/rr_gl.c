@@ -111,6 +111,11 @@ static int s22_fog_quad(const geo_quad *q, eng_fog *f)
 /* ------------------------------------------------------------ the quads */
 static geo_quad *qbuf;
 static int       qn, qcap, qorder;
+#ifdef RR_GEOMETRY_INDEX_ORDER
+#define FRAME_QUAD(i) qbuf[eng_quad_index(i)]
+#else
+#define FRAME_QUAD(i) qbuf[i]
+#endif
 
 static void push_quad(const geo_quad *q, void *user)
 {
@@ -389,22 +394,22 @@ void rr_gl_prepare(bool slave_active)
           int ap_n[8] = { 0 }, ax0[8], ax1[8], ay0[8], ay1[8];
           for (int b = 0; b < 8; b++) { ax0[b] = 1 << 30; ax1[b] = -(1 << 30); ay0[b] = 1 << 30; ay1[b] = -(1 << 30); }
           for (int i = 0; i < qn; i++) {
-              const int b = (qbuf[i].zsort >> 21) & 7;
+              const int b = (FRAME_QUAD(i).zsort >> 21) & 7;
               ap_n[b]++;
-              for (int k = 0; k < qbuf[i].nrv; k++) {
-                  int x = qbuf[i].rv[k].sx16 >> 4, y = qbuf[i].rv[k].sy16 >> 4;
+              for (int k = 0; k < FRAME_QUAD(i).nrv; k++) {
+                  int x = FRAME_QUAD(i).rv[k].sx16 >> 4, y = FRAME_QUAD(i).rv[k].sy16 >> 4;
                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
               }
           }
           for (int i = 0; i < qn; i++) {
-              if (((qbuf[i].zsort >> 21) & 7) != 0 || qbuf[i].clip[1] < 639) continue;
+              if (((FRAME_QUAD(i).zsort >> 21) & 7) != 0 || FRAME_QUAD(i).clip[1] < 639) continue;
               int x0 = 1 << 30, x1 = -(1 << 30), y0 = 1 << 30, y1 = -(1 << 30);
-              for (int k = 0; k < qbuf[i].nrv; k++) {
-                  int x = qbuf[i].rv[k].sx16 >> 4, y = qbuf[i].rv[k].sy16 >> 4;
+              for (int k = 0; k < FRAME_QUAD(i).nrv; k++) {
+                  int x = FRAME_QUAD(i).rv[k].sx16 >> 4, y = FRAME_QUAD(i).rv[k].sy16 >> 4;
                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
               }
-              fprintf(stderr, "[HUDQ] pick %d  direct %d  x %d..%d  y %d..%d  zsort %06X nrv %d\n", qbuf[i].pick_code, qbuf[i].direct, x0, x1, y0, y1, qbuf[i].zsort & 0xffffff, qbuf[i].nrv);
+              fprintf(stderr, "[HUDQ] pick %d  direct %d  x %d..%d  y %d..%d  zsort %06X nrv %d\n", FRAME_QUAD(i).pick_code, FRAME_QUAD(i).direct, x0, x1, y0, y1, FRAME_QUAD(i).zsort & 0xffffff, FRAME_QUAD(i).nrv);
           }
           for (int b = 0; b < 8; b++) if (ap_n[b]) fprintf(stderr, "[AP] band %d: %d quads  x %d..%d  y %d..%d\n", b, ap_n[b], ax0[b], ax1[b], ay0[b], ay1[b]);
           { int bx0, by0, bx1, by1;                          /* RR_CLIPLOG_BOX=x0,y0,x1,y1: every quad that lies wholly inside that screen box */
@@ -412,21 +417,21 @@ void rr_gl_prepare(bool slave_active)
             if (e && sscanf(e, "%d,%d,%d,%d", &bx0, &by0, &bx1, &by1) == 4)
                 for (int i = 0; i < qn; i++) {
                     int x0 = 1 << 30, x1 = -(1 << 30), y0 = 1 << 30, y1 = -(1 << 30);
-                    for (int k = 0; k < qbuf[i].nrv; k++) {
-                        int x = qbuf[i].rv[k].sx16 >> 4, y = qbuf[i].rv[k].sy16 >> 4;
+                    for (int k = 0; k < FRAME_QUAD(i).nrv; k++) {
+                        int x = FRAME_QUAD(i).rv[k].sx16 >> 4, y = FRAME_QUAD(i).rv[k].sy16 >> 4;
                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
                     }
-                    if (qbuf[i].nrv && x0 >= bx0 && x1 <= bx1 && y0 >= by0 && y1 <= by1)
-                        fprintf(stderr, "[BOXQ] pick %d  direct %d  band %d  clip %d..%d  x %d..%d  y %d..%d  zsort %06X nrv %d\n", qbuf[i].pick_code, qbuf[i].direct,
-                                (qbuf[i].zsort >> 21) & 7, qbuf[i].clip[0], qbuf[i].clip[1], x0, x1, y0, y1, qbuf[i].zsort & 0xffffff, qbuf[i].nrv);
+                    if (FRAME_QUAD(i).nrv && x0 >= bx0 && x1 <= bx1 && y0 >= by0 && y1 <= by1)
+                        fprintf(stderr, "[BOXQ] pick %d  direct %d  band %d  clip %d..%d  x %d..%d  y %d..%d  zsort %06X nrv %d\n", FRAME_QUAD(i).pick_code, FRAME_QUAD(i).direct,
+                                (FRAME_QUAD(i).zsort >> 21) & 7, FRAME_QUAD(i).clip[0], FRAME_QUAD(i).clip[1], x0, x1, y0, y1, FRAME_QUAD(i).zsort & 0xffffff, FRAME_QUAD(i).nrv);
                 } }
       }
       if (want && ++n == want) {
           int32_t seen[64][4]; int cnt[64], ns = 0;
           for (int i = 0; i < qn; i++) {
               int k;
-              for (k = 0; k < ns; k++) if (!memcmp(seen[k], qbuf[i].clip, sizeof seen[k])) break;
-              if (k == ns && ns < 64) { memcpy(seen[ns], qbuf[i].clip, sizeof seen[0]); cnt[ns++] = 0; }
+              for (k = 0; k < ns; k++) if (!memcmp(seen[k], FRAME_QUAD(i).clip, sizeof seen[k])) break;
+              if (k == ns && ns < 64) { memcpy(seen[ns], FRAME_QUAD(i).clip, sizeof seen[0]); cnt[ns++] = 0; }
               if (k < 64) cnt[k]++;
           }
           for (int k = 0; k < ns; k++) fprintf(stderr, "[CLIP] %4d..%4d x %4d..%4d  %d quads\n", seen[k][0], seen[k][1], seen[k][2], seen[k][3], cnt[k]);
@@ -488,18 +493,18 @@ void rr_gl_draw(int vw, int vh)
             if (nsk < 0) { nsk = 0; const char *e = getenv("RR_SEAMSKIP");
                 while (e && *e && nsk < 32) { int lo = atoi(e), hi = lo; const char *d = strpbrk(e, "-,"); if (d && *d == '-') hi = atoi(d + 1);
                     sk[nsk][0] = lo; sk[nsk][1] = hi; nsk++; e = strchr(e, ','); if (e) e++; } }
-            int skip = 0; for (int k = 0; k < nsk; k++) if (qbuf[i].pick_code >= sk[k][0] && qbuf[i].pick_code <= sk[k][1]) skip = 1;
+            int skip = 0; for (int k = 0; k < nsk; k++) if (FRAME_QUAD(i).pick_code >= sk[k][0] && FRAME_QUAD(i).pick_code <= sk[k][1]) skip = 1;
             if (skip) continue;
             if (seamtest == 2) {                          /* RR_SEAMTEST=2: also log every quad bigger than a quarter of the screen */
                 int x0 = 1 << 30, x1 = -(1 << 30), y0 = 1 << 30, y1 = -(1 << 30);
-                for (int k = 0; k < qbuf[i].nrv; k++) { int x = qbuf[i].rv[k].sx16 >> 4, y = qbuf[i].rv[k].sy16 >> 4;
+                for (int k = 0; k < FRAME_QUAD(i).nrv; k++) { int x = FRAME_QUAD(i).rv[k].sx16 >> 4, y = FRAME_QUAD(i).rv[k].sy16 >> 4;
                     if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
                 if ((long)(x1 - x0) * (y1 - y0) > 640L * 480 / 4)
-                    fprintf(stderr, "[SEAMBIG] pick %d direct %d x %d..%d y %d..%d zsort %06X uv %d..%d %d..%d\n", qbuf[i].pick_code, qbuf[i].direct, x0, x1, y0, y1, qbuf[i].zsort & 0xffffff,
-                            qbuf[i].uvbox[0], qbuf[i].uvbox[1], qbuf[i].uvbox[2], qbuf[i].uvbox[3]);
+                    fprintf(stderr, "[SEAMBIG] pick %d direct %d x %d..%d y %d..%d zsort %06X uv %d..%d %d..%d\n", FRAME_QUAD(i).pick_code, FRAME_QUAD(i).direct, x0, x1, y0, y1, FRAME_QUAD(i).zsort & 0xffffff,
+                            FRAME_QUAD(i).uvbox[0], FRAME_QUAD(i).uvbox[1], FRAME_QUAD(i).uvbox[2], FRAME_QUAD(i).uvbox[3]);
             }
         }
-        eng_draw_quad(&qbuf[i], &dc);
+        eng_draw_quad(&FRAME_QUAD(i), &dc);
     }
     eng_draw_end();
 

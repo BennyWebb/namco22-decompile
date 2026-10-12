@@ -1,7 +1,28 @@
 /* CPU-only raster preparation shared by the desktop and GLES backends.
  * Requires geo_quad, g_scene_x0/x1 and ENG_SCREEN_H declarations. */
 static int g_sort_tie_emit;
+static eng_quad_sort_stats sort_stats;
+const eng_quad_sort_stats *eng_quad_sort_statistics(void) { return &sort_stats; }
+#ifdef RR_PIPELINE_AUDIT
+static double sort_clock(clockid_t clock)
+{
+    struct timespec t; clock_gettime(clock, &t);
+    return t.tv_sec + t.tv_nsec * 1e-9;
+}
+#endif
 typedef struct { int32_t zsort; int order; int idx; } quad_key;
+static quad_key *sort_keys;
+#ifdef RR_GEOMETRY_INDEX_ORDER
+static int sort_count;
+#endif
+int eng_quad_index(int position)
+{
+#ifdef RR_GEOMETRY_INDEX_ORDER
+    return sort_count > 1 ? sort_keys[position].idx : position;
+#else
+    return position;
+#endif
+}
 static int zcmp(const void *a, const void *b)
 {
     const quad_key *qa = (const quad_key *)a, *qb = (const quad_key *)b;
@@ -21,8 +42,16 @@ static int zcmp(const void *a, const void *b)
  * `order` is unique per quad, so the order is total and the result is the same whatever the sort. */
 void eng_quad_sort(geo_quad *buf, int n, int tie_emit)
 {
-    static quad_key *keys;
+    quad_key *keys = sort_keys;
     static int cap;
+#ifdef RR_GEOMETRY_INDEX_ORDER
+    sort_count=n;
+#endif
+#ifdef RR_PIPELINE_AUDIT
+    memset(&sort_stats,0,sizeof sort_stats);
+    double wall=0,cpu=0;
+    if (eng_audit_enabled) { wall=sort_clock(CLOCK_MONOTONIC);cpu=eng_audit_cpu_now(); }
+#endif
     if (n < 2) return;
     if (n > cap) {
         quad_key *k = realloc(keys, (size_t)n * sizeof *k);
@@ -34,24 +63,51 @@ void eng_quad_sort(geo_quad *buf, int n, int tie_emit)
             return;
 #endif
         }
-        keys = k; cap = n;
+        sort_keys = keys = k; cap = n;
+#ifdef RR_PIPELINE_AUDIT
+        sort_stats.allocations++;
+#endif
     }
     for (int i = 0; i < n; i++) { keys[i].zsort = buf[i].zsort; keys[i].order = buf[i].order; keys[i].idx = i; }
     g_sort_tie_emit = tie_emit;
     qsort(keys, (size_t)n, sizeof keys[0], zcmp);
+#ifdef RR_PIPELINE_AUDIT
+    if (eng_audit_enabled) {
+        sort_stats.keys_wall=sort_clock(CLOCK_MONOTONIC)-wall;
+        sort_stats.keys_cpu=eng_audit_cpu_now()-cpu;
+        wall=sort_clock(CLOCK_MONOTONIC);cpu=eng_audit_cpu_now();
+    }
+#endif
+#ifdef RR_GEOMETRY_INDEX_ORDER
+    /* Same total ordering, but keep the 1 KiB records in emission order.
+     * Consumers use the already allocated 12-byte keys; no second index arena. */
+    return;
+#endif
     /* apply the permutation in place, one cycle at a time: slot j takes the quad from keys[j].idx */
     for (int i = 0; i < n; i++) {
         if (keys[i].idx == i) continue;
         geo_quad held = buf[i];
+#ifdef RR_PIPELINE_AUDIT
+        sort_stats.moved_bytes+=sizeof held;
+#endif
         int j = i;
         for (;;) {
             const int k = keys[j].idx;
+#ifdef RR_PIPELINE_AUDIT
+            sort_stats.moved_bytes+=sizeof held;
+#endif
             keys[j].idx = j;
             if (k == i) { buf[j] = held; break; }
             buf[j] = buf[k];
             j = k;
         }
     }
+#ifdef RR_PIPELINE_AUDIT
+    if (eng_audit_enabled) {
+        sort_stats.permutation_wall=sort_clock(CLOCK_MONOTONIC)-wall;
+        sort_stats.permutation_cpu=eng_audit_cpu_now()-cpu;
+    }
+#endif
 }
 
 /* ---- screen-space polygon clip -----------------------------------------

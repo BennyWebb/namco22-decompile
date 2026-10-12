@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "geo_hw.h"
+/* Backing records; GLES2 consumes the last sort's eng_quad_index mapping.
+ * Storage remains in emission order under RR_GEOMETRY_INDEX_ORDER. */
 const geo_quad *rr_gles2_quads(int *count);
 void rr_gles2_background(float rgb[3]);
 bool rr_gles2_options(int *argc, char **argv);

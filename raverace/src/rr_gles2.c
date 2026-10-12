@@ -7,6 +7,7 @@
 #include <limits.h>
 #include "eng_gl.h"
 #include "quad_gles2.h"
+#include "quad_gl.h"
 #include "tex_bake.h"
 #include "rr_gles2.h"
 #include "rr_sim_profile.h"
@@ -73,6 +74,11 @@ static void audit_row(uint32_t frame,bool rendered,unsigned quads,const eng_gles
             s->vertex_upload_bytes,s->cache_hits,s->cache_misses,s->cache_evictions,s->texture_uploads,s->binds,seconds());
         for(int i=0;i<AUD_COUNT;i++) fprintf(audit_file,",%.9f,%.9f,%.9f,%.9f",eng_audit_wall[i],eng_audit_cpu[i],eng_audit_inclusive_wall[i],eng_audit_inclusive_cpu[i]);
         for(int i=0;i<RR_STAGE_COUNT;i++) fprintf(audit_file,",%.9f,%.9f",stage_frame[i],stage_frame_cpu[i]);
+        const eng_quad_sort_stats *sort=eng_quad_sort_statistics();
+        fprintf(audit_file,",%.9f,%.9f,%.9f,%.9f,%llu,%u",
+            rendered?sort->keys_wall:0,rendered?sort->keys_cpu:0,
+            rendered?sort->permutation_wall:0,rendered?sort->permutation_cpu:0,
+            rendered?sort->moved_bytes:0,rendered?sort->allocations:0);
         fputc('\n',audit_file);
     }
     memset(stage_frame_cpu,0,sizeof stage_frame_cpu);eng_audit_reset();
@@ -349,6 +355,7 @@ bool rr_gles2_open(void)
         for(int i=0;i<AUD_COUNT;i++) fprintf(audit_file,",%s_wall,%s_cpu,%s_inclusive_wall,%s_inclusive_cpu",names[i],names[i],names[i],names[i]);
         const char *stages[RR_STAGE_COUNT]={"dsp","sound","c352","serial","io","video","palette","direct","list","sort"};
         for(int i=0;i<RR_STAGE_COUNT;i++) fprintf(audit_file,",%s_stage_wall,%s_stage_cpu",stages[i],stages[i]);
+        fputs(",sort_keys_wall,sort_keys_cpu,sort_permutation_wall,sort_permutation_cpu,sort_moved_bytes,sort_allocations",audit_file);
         fputc('\n',audit_file);eng_audit_enabled=true;
     }
     if(!gpu_open()) return false;

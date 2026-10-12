@@ -320,7 +320,7 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     for (int i = 0; i < 3; i++) glEnableVertexAttribArray((GLuint)i);
     int previous[4] = {-1,-1,-1,-1};
     for (int qi = 0; qi < count; qi++) {
-        const geo_quad *q = &quads[qi];
+        const geo_quad *q = &quads[eng_quad_index(qi)];
         if (q->nrv < 3 || q->nrv > 10) continue;
         int left = q->clip[0] < 0 ? 0 : q->clip[0];
         int right = q->clip[1] > 639 ? 639 : q->clip[1];
