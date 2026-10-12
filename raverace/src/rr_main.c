@@ -244,6 +244,9 @@ static void debug_boundary(void)
 #ifdef RR_HEADLESS
 #ifdef RR_GLES2
 #include "rr_gles2.h"
+#ifdef RR_THREADED_PRESENTATION
+#include "rr_presentation.h"
+#endif
 #include "rr_sim_profile.h"
 #endif
 #include "rr_headless.inc"
@@ -335,6 +338,15 @@ void rr_tick(void)
         }
     }
 #elif defined(RR_GLES2)
+#ifdef RR_THREADED_PRESENTATION
+    if(rr_presentation_enabled()) {
+        rr_sim_pause(frame);
+        if(!rr_presentation_video(frame,rr_dsp_slave_active())) {
+            rr_headless_summary();rr_audio_close();rr_gles2_close();
+            exit(rr_gles2_failed()?2:0);
+        }
+    } else {
+#endif
     bool geometry;
     if (!rr_gles2_prepare_begin(frame, &geometry)) {
         rr_headless_summary(); rr_audio_close(); rr_gles2_close();
@@ -349,6 +361,9 @@ void rr_tick(void)
         rr_gles2_close();
         exit(rr_gles2_failed() ? 2 : 0);
     }
+#ifdef RR_THREADED_PRESENTATION
+    }
+#endif
     rr_sim_resume(frame+1);
 #else
     rr_scene_frame(rr_dsp_slave_active());

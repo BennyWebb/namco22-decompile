@@ -15,6 +15,7 @@ option(RR_MEMORY_READ_COUNTERS "Instrument read counts (not performance baseline
 option(RR_C352_VOICE_COUNTERS "Instrument C352 voice activity (not performance baseline)" OFF)
 option(RR_C352_INACTIVE_FASTPATH "Experiment: skip mixing for C352 voices inactive at sample entry" OFF)
 option(RR_PIPELINE_AUDIT "Diagnostic-only wall/thread-CPU pipeline attribution and draw/viewport controls" OFF)
+option(RR_THREADED_PRESENTATION "Experiment: bounded immutable snapshot presentation worker" OFF)
 option(RR_GLES_SUBMISSION_PROFILE "Diagnostic-only sparse GLES call CPU/wall timing" OFF)
 option(RR_ORDERED_SUBMISSION "Experiment: coalesce adjacent GLES commands and suppress redundant scissor state" OFF)
 option(RR_GEOMETRY_PROJECTION_PROFILE "Diagnostic-only geometry phase CPU timers (environment gated)" OFF)
@@ -149,6 +150,15 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
        RR_GLES2_TEXTURE_MAX_BUDGET_KB GREATER 131072 OR
        RR_GLES2_TEXTURE_MAX_BUDGET_KB LESS RR_GLES2_TEXTURE_BUDGET_KB)
       message(FATAL_ERROR "RR_GLES2_TEXTURE_MAX_BUDGET_KB must be >= default and <= 131072")
+    endif()
+    if(RR_THREADED_PRESENTATION)
+      if(RR_PIPELINE_AUDIT)
+        message(FATAL_ERROR "Threaded presentation uses its own two-thread profiler; RR_PIPELINE_AUDIT must be OFF")
+      endif()
+      find_package(Threads REQUIRED)
+      target_sources(rr_gles2 PRIVATE src/rr_presentation.c)
+      target_compile_definitions(rr_gles2 PRIVATE RR_THREADED_PRESENTATION)
+      target_link_libraries(rr_gles2 PRIVATE Threads::Threads)
     endif()
     target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c
       ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c ${NAMCO22_ENGINE_DIR}/eng.c

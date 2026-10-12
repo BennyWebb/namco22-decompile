@@ -12,6 +12,9 @@
 #include "rr_gles2.h"
 #include "rr_sim_profile.h"
 #include "rr_mem.h"
+#ifdef RR_THREADED_PRESENTATION
+#include "rr_presentation.h"
+#endif
 #include "rr_gles2_timing.h"
 #include "eng_audit.h"
 static const char *audit_path;
@@ -31,6 +34,11 @@ static double early_host_wait;
 static bool range_clock_started;
 static unsigned range_resync_start;
 static double range_discard_start;
+#ifdef RR_THREADED_PRESENTATION
+static bool thread_mode=true,snapshot_reference;
+static const char *thread_csv;
+static bool thread_sampler_requested, thread_sync_profile;
+#endif
 static bool pump_input(void);
 static bool choose_presentation(uint32_t frame);
 static unsigned scene_ticks, scene_walks, scene_direct;
@@ -157,9 +165,16 @@ static bool sdl_ok(bool ok, const char *stage)
 
 bool rr_gles2_options(int *argc, char **argv)
 {
+#ifdef RR_THREADED_PRESENTATION
+    /* SIGPROF's legacy global sampler predates the presentation worker. */
+    for(int i=1;i<*argc;i++) if(!strcmp(argv[i],"--sample-simulation")) thread_sampler_requested=true;
+#endif
     if (!rr_sim_options(argc,argv)) return false;
     int output = 1;
     for (int i = 1; i < *argc; i++) {
+#ifdef RR_THREADED_PRESENTATION
+        if(!strcmp(argv[i],"--thread-sync-profile")) {thread_sync_profile=true;continue;}
+#endif
         if (!strcmp(argv[i], "--timing") && i+1 < *argc) {
             const char *mode=argv[++i];
             if (strcmp(mode,"independent") && strcmp(mode,"coupled")) {
@@ -189,6 +204,15 @@ bool rr_gles2_options(int *argc, char **argv)
             }
             test_present_every=(unsigned)n;
         }
+#ifdef RR_THREADED_PRESENTATION
+        else if (!strcmp(argv[i],"--presentation-thread") && i+1<*argc) {
+            const char *mode=argv[++i];
+            if(strcmp(mode,"on") && strcmp(mode,"off"))return false;
+            thread_mode=!strcmp(mode,"on");
+        }
+        else if (!strcmp(argv[i],"--snapshot-reference")) {snapshot_reference=true;thread_mode=true;}
+        else if (!strcmp(argv[i],"--thread-profile") && i+1<*argc)thread_csv=argv[++i];
+#endif
         else if (!strcmp(argv[i], "--profile-memory")) profile_memory = true;
         else if (!strcmp(argv[i], "--profile-stages")) profile_stages = true;
         else if (!strcmp(argv[i],"--audit-csv") && i+1<*argc) audit_path=argv[++i];
@@ -242,7 +266,18 @@ bool rr_gles2_options(int *argc, char **argv)
         } else argv[output++] = argv[i];
     }
     *argc = output; argv[output] = NULL;
+#ifdef RR_THREADED_PRESENTATION
+    rr_presentation_configure(thread_mode,snapshot_reference,thread_csv,thread_sync_profile);
+    if(thread_mode && (profile_stages || audit_path || audit_gpu || thread_sampler_requested)) {
+        fprintf(stderr,"[THREAD] legacy shared pipeline/signal profiler unavailable; use --thread-profile FILE\n");return false;
+    }
+    if(!timing_explicit && thread_mode)independent=true;
+    else
+#endif
     if (!timing_explicit) independent=interactive;
+#ifdef RR_THREADED_PRESENTATION
+    if(thread_mode && !independent){fprintf(stderr,"[THREAD] requires independent timing\n");return false;}
+#endif
     if ((independent && unpaced) || (!independent && (render_hz || test_present_every))) {
         fprintf(stderr,"[TIMING] independent requires paced execution; render-hz requires independent\n");return false;
     }
@@ -385,6 +420,11 @@ bool rr_gles2_open(void)
             profile_from, eng_gles2_mode_name());
     fprintf(stderr,"[TIMING] mode=%s target_hz=%.9f render_hz=%u (0=adaptive) catchup_limit=%u\n",
             independent?"independent":"coupled",1.0/RR_FRAME_SECONDS,render_hz,RR_MAX_CATCHUP);
+#ifdef RR_THREADED_PRESENTATION
+    if(thread_mode && !rr_presentation_start(window,context,test_present_every,capture_frame,render_hz,profile_from)) {
+        fprintf(stderr,"[THREAD] startup failed\n");failed=true;return false;
+    }
+#endif
     return true;
 }
 
@@ -409,6 +449,17 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     if (!ok) { fprintf(stderr, "[GLES2] capture write failed\n"); return false; }
     fprintf(stderr, "[GLES2] captured frame %u: triangles=%u draws=%u file=%s\n", frame, stats->triangles, stats->draws, capture_path);
     if (!stats->triangles) { fprintf(stderr, "[GLES2] capture contains no submitted geometry; choose a later frame\n"); return false; }
+#ifdef RR_THREADED_PRESENTATION
+    /* Capture-only ordered record check; no hot-loop profiling overhead. */
+    int quad_count; const geo_quad *quads=rr_gles2_quads(&quad_count);
+    uint64_t digest=UINT64_C(14695981039346656037);
+    for(int i=0;i<quad_count;i++) {
+        const unsigned char *p=(const unsigned char *)&quads[eng_quad_index(i)];
+        for(size_t j=0;j<sizeof *quads;j++) digest=(digest^p[j])*UINT64_C(1099511628211);
+    }
+    fprintf(stderr,"[PRESENTATION-GEOMETRY] frame=%u quads=%d record_bytes=%zu ordered_digest=%016llx\n",
+            frame,quad_count,sizeof *quads,(unsigned long long)digest);
+#endif
     captured = true;
     tex_bake_gles2_report();
     return true;
@@ -542,6 +593,23 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     return true;
 }
 
+#ifdef RR_THREADED_PRESENTATION
+bool rr_gles2_pump(void) {return pump_input();}
+bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float bg[3],double scene)
+{
+    eng_gles2_stats stats;double start=seconds();
+    if(!eng_gles2_draw(quads,count,bg,&stats)){failed=true;return false;}
+    double draw=seconds()-start;
+    if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
+    double swap_start=seconds();SDL_GL_SwapWindow(window);double swap=seconds()-swap_start;
+    if(frame>=profile_from)profile_add(&total_profile,frame,&stats,scene,draw,swap,0,0);
+    if(seconds()-report_start>=5){
+        fprintf(stderr,"[THREAD-FRAME] frame=%u quads=%d triangles=%u draws=%u binds=%u\n",frame,count,stats.triangles,stats.draws,stats.binds);
+        report_start=seconds();
+    }
+    return true;
+}
+#endif
 bool rr_gles2_failed(void) { return failed; }
 /* Linux process peak survives between sampler polls; log before freeing GPU
  * cache storage. -1 means unavailable, not zero memory use. */
@@ -585,6 +653,9 @@ static void report_board_state(void)
 void rr_gles2_close(void)
 {
     if (!window) return;
+#ifdef RR_THREADED_PRESENTATION
+    if(thread_mode && !rr_presentation_finish())failed=true;
+#endif
     gpu_close();
     if(audit_file) {
         eng_audit_pmu_report();

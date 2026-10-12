@@ -49,7 +49,23 @@ static uint8_t gamma_prom[3][256];
 static bool    assets_ok, gl_ready;
 
 /* ---------------------------------------------------------------- assets */
-static int32_t pointram_read(uint32_t a) { return rr_dsp_pointram_read(a & 0xffffff); }
+#ifdef RR_THREADED_PRESENTATION
+#include "rr_presentation.h"
+static const rr_presentation *render_snapshot;
+#define VIDEO_ARRAY(field) (render_snapshot ? render_snapshot->field : g_rr.field)
+#else
+#define VIDEO_ARRAY(field) (g_rr.field)
+#endif
+static int32_t pointram_read(uint32_t a) {
+#ifdef RR_THREADED_PRESENTATION
+    if (render_snapshot) {
+        a &= 0xffffff;
+        return render_snapshot->point_valid && a >= 0xf00000 && a < 0xf20000
+            ? (int32_t)(render_snapshot->point[a-0xf00000]<<8)>>8 : -1;
+    }
+#endif
+    return rr_dsp_pointram_read(a & 0xffffff);
+}
 
 bool rr_gl_init(const char *dir)
 {
@@ -83,11 +99,11 @@ bool rr_gl_init(const char *dir)
 }
 
 /* -------------------------------------------------------- board helpers */
-static inline uint8_t mixer_b(int n) { return g_rr.mixer[n & (RR_MIXER_SIZE - 1)]; }
+static inline uint8_t mixer_b(int n) { return VIDEO_ARRAY(mixer)[n & (RR_MIXER_SIZE - 1)]; }
 static inline void pen_rgb(int pen, uint8_t o[3])
 {
     pen &= 0x7fff;
-    o[0] = g_rr.pal[pen]; o[1] = g_rr.pal[pen + 0x8000]; o[2] = g_rr.pal[pen + 0x10000];
+    o[0] = VIDEO_ARRAY(pal)[pen]; o[1] = VIDEO_ARRAY(pal)[pen + 0x8000]; o[2] = VIDEO_ARRAY(pal)[pen + 0x10000];
 }
 
 /* System 22 poly fog (namcos22_v.cpp poly3d_drawquad, !m_is_ss22):
@@ -98,7 +114,7 @@ static int s22_fog_quad(const geo_quad *q, eng_fog *f)
     if (color & 0x80) return 0;
     const int cz_type = q->cz_type & 3;
     const int cz_color = cz_type & mixer_b(0x84 + cz_type);
-    const int ff = g_rr.czram[((cz_type << 13) | (q->cz_value & 0x1fff)) & (RR_CZRAM_SIZE - 1)];
+    const int ff = VIDEO_ARRAY(czram)[((cz_type << 13) | (q->cz_value & 0x1fff)) & (RR_CZRAM_SIZE - 1)];
     if (!ff) return 0;
     f->rgb[0] = mixer_b(0x100 + cz_color);
     f->rgb[1] = mixer_b(0x180 + cz_color);
@@ -142,7 +158,7 @@ static void push_quad(const geo_quad *q, void *user)
     qn++;
 }
 
-static uint32_t poly_word(int i) { return g_rr.poly[i & 0x7fff]; }
+static uint32_t poly_word(int i) { return VIDEO_ARRAY(poly)[i & 0x7fff]; }
 
 /* A direct poly (namcos22_v.cpp draw_direct_poly): four screen-space vertices
  * with a per-vertex 1/z already worked out by the master. */
@@ -335,7 +351,7 @@ void rr_gl_prepare(bool slave_active)
     if (!assets_ok) return;
 #ifdef RR_GLES2
     double stage_start=rr_gles2_stage_begin();
-    eng_palette_from_planar(g_rr.pal, 0x8000);
+    eng_palette_from_planar(VIDEO_ARRAY(pal), 0x8000);
     rr_gles2_stage_end(RR_STAGE_PALETTE,stage_start);
 #endif
     g_eng_frame++;
@@ -453,7 +469,7 @@ void rr_gl_draw(int vw, int vh)
         g_scene_x0 = -E; g_scene_x1 = NW + E;
     } else { g_scene_x0 = 0.0f; g_scene_x1 = NW; }
 
-    eng_palette_from_planar(g_rr.pal, 0x8000);
+    eng_palette_from_planar(VIDEO_ARRAY(pal), 0x8000);
 
     eng_hud_begin(hud_on);                              /* widescreen: how far the HUD goes out (0 = it stays) */
     g_eng_quad_dx = eng_hud_quad_dx;
@@ -591,6 +607,25 @@ void rr_gl_context_attributes(void)
 }
 
 #else
+#ifdef RR_THREADED_PRESENTATION
+void rr_gl_presentation(const rr_presentation *snapshot)
+{
+    render_snapshot=snapshot;
+    eng_palette_from_planar(snapshot->pal,0x8000);
+    /* Generations include all skipped simulation ticks, not just pictures. */
+    memcpy(g_eng_pal_gen,snapshot->generation,sizeof snapshot->generation);
+    g_eng_frame=snapshot->frame;
+    frame_bg_palbase=mixer_b(0x04)<<8 & 0x7f00;
+    qn=qorder=0;
+    for(unsigned i=0;i<snapshot->direct_count;i++) direct_quad(snapshot->direct[i]);
+    if(snapshot->walk) {
+        eng_list_cfg cfg={ENG_LIST_HEAD_S22,1,NULL,NULL,NULL,NULL};
+        eng_walk_list(poly_word,&cfg,push_quad,NULL);
+    }
+    eng_quad_sort(qbuf,qn,0);
+}
+void rr_gl_presentation_release(void) {render_snapshot=NULL;}
+#endif
 const geo_quad *rr_gles2_quads(int *count) { *count = qn; return qbuf; }
 void rr_gles2_background(float rgb[3])
 {

@@ -51,6 +51,9 @@ static void headless_fatal(const char *why)
 {
     fprintf(stderr, "[HEADLESS] fatal before requested frame limit: %s\n", why);
     rr_headless_summary();
+#ifdef RR_THREADED_PRESENTATION
+    if(rr_presentation_enabled()) { rr_audio_close(); rr_gles2_close(); }
+#endif
 }
 
 static bool headless_number(const char *text, uint32_t max, uint32_t *value)
@@ -80,6 +83,9 @@ static int rr_headless_main(int argc, char **argv)
                             "                [--profile-simulation] [--sample-simulation FILE] [--simulation-profile-from N] [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
                             "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
                             "                [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n"
+#ifdef RR_THREADED_PRESENTATION
+                            "                [--presentation-thread on|off] [--snapshot-reference] [--thread-profile FILE] [--thread-sync-profile]\n"
+#endif
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
             fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
