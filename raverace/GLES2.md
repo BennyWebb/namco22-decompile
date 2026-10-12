@@ -984,3 +984,16 @@ See [SKIPPED_GEOMETRY_OPTIMISATION.md](SKIPPED_GEOMETRY_OPTIMISATION.md) for
 `--skip-geometry-on-dropped-frames on|off`, deterministic A/B captures and
 independent-timing handheld benchmarks. The default remains `off`; coupled
 timing, texture caching and frame VBO streaming are unchanged.
+
+## Optional native simulation profiling
+
+See [SIMULATION_PROFILE.md](SIMULATION_PROFILE.md) for exclusive simulation
+stages, bounded native-PC sampling, measured RG40XX H overhead and ranked
+next experiments. `--profile-simulation` and `--sample-simulation FILE.tsv`
+are disabled by default and make no emulated clock, scheduler or renderer changes.
+
+## Controlled WRAM read experiment
+
+See [MEMORY_ACCESS_OPTIMISATION.md](MEMORY_ACCESS_OPTIMISATION.md) for the
+opt-in `RR_FAST_MEMORY_READS` build flag, correctness tests, separate counter
+builds and measured handheld A/B results. Both memory switches default OFF.

@@ -38,6 +38,7 @@ static void stages_report(const char *kind, stage_cohort *cohorts, double start)
 static void stages_add(uint32_t frame, bool rendered, unsigned quads, const eng_gles2_stats *s,
                        double scene, double draw_total, double swap, double wait, double capture_time)
 {
+    rr_sim_present_tick(frame,rendered);
     if (!profile_stages) return;
     if (frame>=profile_from) {
         if (!stage_start) stage_start=stage_window_start=simulation_start;

@@ -244,17 +244,28 @@ static void debug_boundary(void)
 #ifdef RR_HEADLESS
 #ifdef RR_GLES2
 #include "rr_gles2.h"
+#include "rr_sim_profile.h"
 #endif
 #include "rr_headless.inc"
 #endif
 
 void rr_tick(void)
 {
+#ifdef RR_GLES2
+    rr_sim_stage sim_parent=rr_sim_enter(SIM_SCHEDULER);
+#endif
     rd_budget_out();
     rr_budget = polls_per_frame / SLICES;
-    if (rr_in_irq) { rr_budget = 1000; return; }      /* finish the handler first */
+    if (rr_in_irq) { rr_budget = 1000;
+#ifdef RR_GLES2
+        rr_sim_leave(sim_parent);
+#endif
+        return; }      /* finish the handler first */
 #ifdef RR_GLES2
     double stage_start=rr_gles2_stage_begin();
+#endif
+#ifdef RR_GLES2
+    rr_sim_enter(SIM_DSP);
 #endif
     g_rr_in_vblank = vblank_slices > 0;
     if (vblank_slices > 0) {                       /* split the vblank slice at VBEND */
@@ -270,21 +281,32 @@ void rr_tick(void)
         rr_dsp_run(DSP_STEPS_PER_FRAME / SLICES);
 #ifdef RR_GLES2
     rr_gles2_stage_end(RR_STAGE_DSP,stage_start); stage_start=rr_gles2_stage_begin();
+    rr_sim_enter(SIM_SOUND);
 #endif
     rr_sound_slice();                              /* the sound program's share of this slice */
 #ifdef RR_GLES2
     rr_gles2_stage_end(RR_STAGE_SOUND,stage_start); stage_start=rr_gles2_stage_begin();
+    rr_sim_enter(SIM_AUDIO);
 #endif
     rr_audio_slice();                              /* and the mixer's samples */
 #ifdef RR_GLES2
     rr_gles2_stage_end(RR_STAGE_AUDIO,stage_start); stage_start=rr_gles2_stage_begin();
+    rr_sim_enter(SIM_SERIAL);
 #endif
     serial_acc += 100;                             /* 100 Hz serial pulse */
     if (serial_acc >= 60 * SLICES) { serial_acc -= 60 * SLICES; rr_dsp_serial(); }
 #ifdef RR_GLES2
     rr_gles2_stage_end(RR_STAGE_SERIAL,stage_start);
 #endif
-    if (++slice % SLICES) return;
+#ifdef RR_GLES2
+    rr_sim_enter(SIM_SCHEDULER);
+#endif
+    if (++slice % SLICES) {
+#ifdef RR_GLES2
+        rr_sim_leave(sim_parent);
+#endif
+        return;
+    }
     frame++;
     sweep_tick();
 #ifndef RR_HEADLESS
@@ -327,6 +349,7 @@ void rr_tick(void)
         rr_gles2_close();
         exit(rr_gles2_failed() ? 2 : 0);
     }
+    rr_sim_resume(frame+1);
 #else
     rr_scene_frame(rr_dsp_slave_active());
     rr_scene_consume(); /* discard display output; retain board/DSP handshakes */
@@ -387,6 +410,9 @@ void rr_tick(void)
 #ifdef RR_GLES2
     stage_start=rr_gles2_stage_begin();
 #endif
+#ifdef RR_GLES2
+    rr_sim_enter(SIM_BOARD);
+#endif
     vblank_slices = 2;
     rr_dsp_vblank();
     if (!rr_env_active()) rr_hw_vblank();      /* (a trace oracle refreshes at MAME's own vblank interrupt: rr_env.c) */
@@ -396,6 +422,7 @@ void rr_tick(void)
     rr_link_poll();                      /* a received link packet's SCI IRQ lands at this frame edge */
 #ifdef RR_GLES2
     rr_gles2_stage_end(RR_STAGE_IO,stage_start);
+    rr_sim_enter(SIM_IRQ);
 #endif
     if (!rr_env_active()) {                  /* a trace oracle lands the interrupts itself */
         rr_deliver_irqs(rr_hw_irq_level);
@@ -406,6 +433,9 @@ void rr_tick(void)
             rr_deliver_irqs(rr_hw_irq_level);
         }
     }
+#ifdef RR_GLES2
+    rr_sim_enter(SIM_SCHEDULER);
+#endif
     /* a Debug-menu launch leaves the lifted call stack here (never returns if one is pending): AFTER the vblank interrupt,
      * whose handler rewinds the program's cooperative task list (Ace Driver: the pointer at A6-0x7FD0) -- launched before it,
      * the screen's first yield (0x4C6E) read past the end of the list and jumped to 0 */
@@ -443,6 +473,9 @@ void rr_tick(void)
         exit(rr_n_traps ? 3 : 0);
 #endif
     }
+#ifdef RR_GLES2
+    rr_sim_leave(sim_parent);
+#endif
 }
 
 #ifdef _WIN32

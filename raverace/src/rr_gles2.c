@@ -9,6 +9,8 @@
 #include "quad_gles2.h"
 #include "tex_bake.h"
 #include "rr_gles2.h"
+#include "rr_sim_profile.h"
+#include "rr_mem.h"
 #include "rr_gles2_timing.h"
 
 static SDL_Window *window;
@@ -42,6 +44,7 @@ static double next_frame, report_start;
 static unsigned report_frames;
 static bool saw_geometry;
 static uint32_t profile_from = 1;
+uint32_t rr_gles2_profile_from(void) { return profile_from; }
 static double simulation_start, prepare_start, simulation_elapsed, profile_report_start;
 typedef struct {
     unsigned frames, first, last;
@@ -58,6 +61,7 @@ static double seconds(void) { return (double)SDL_GetPerformanceCounter() / SDL_G
 #include "rr_gles2_profile.inc"
 bool rr_gles2_prepare_begin(uint32_t frame, bool *geometry)
 {
+    rr_sim_pause(frame);
     simulation_elapsed = seconds() - simulation_start;
     if (!range_clock_started && frame >= profile_from) {
         range_clock_started=true;
@@ -124,6 +128,7 @@ static bool sdl_ok(bool ok, const char *stage)
 
 bool rr_gles2_options(int *argc, char **argv)
 {
+    if (!rr_sim_options(argc,argv)) return false;
     int output = 1;
     for (int i = 1; i < *argc; i++) {
         if (!strcmp(argv[i], "--timing") && i+1 < *argc) {
@@ -405,6 +410,7 @@ static bool choose_presentation(uint32_t frame)
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
 {
     double scene_elapsed = seconds() - prepare_start;
+    rr_sim_enter(SIM_PRESENT);
     double host_wait_start=rr_gles2_stage_begin();
     if (!(independent && (skip_geometry || test_present_every)) && !choose_presentation(frame)) return false;
     bool render=frame_render;
@@ -489,9 +495,28 @@ static void report_memory(void)
     }
     fprintf(stderr,"[MEMORY] RSS_kib=%ld RSS_peak_kib=%ld MemAvailable_kib=%ld CmaFree_kib=%ld\n",rss,peak,available,cma);
 }
+/* Read-only, byte-defined board snapshot at exit; no register callbacks.
+ * Complements the existing RAM/CPU JSON and ordered video-tick digest. */
+static void report_board_state(void)
+{
+    const uint32_t fields[]={g_hw.irq_enabled,g_hw.irq_state,g_hw.mcu_run,g_hw.dsp_ctrl,
+        g_hw.dsw,g_hw.cpuleds,g_hw.portbits[0],g_hw.portbits[1],g_hw.keycus_rng,g_hw.lcg,
+        g_hw.inputs,g_hw.steer,g_hw.gas,g_hw.brake,g_hw.adc[0],g_hw.adc[1],g_hw.adc[2],g_hw.adc[3],
+        (uint32_t)g_hw.old_coin,(uint32_t)g_hw.credits1,(uint32_t)g_hw.credits2};
+    uint32_t h=2166136261u;
+    for(unsigned i=0;i<sizeof fields/sizeof fields[0];i++)
+        for(int b=24;b>=0;b-=8) h=(h^(uint8_t)(fields[i]>>b))*16777619u;
+    for(unsigned i=0;i<sizeof g_rr.syscon;i++) h=(h^g_rr.syscon[i])*16777619u;
+    for(unsigned i=0;i<sizeof g_rr.sci_reg;i++) h=(h^g_rr.sci_reg[i])*16777619u;
+    for(unsigned i=0;i<sizeof g_rr.sci;i++) h=(h^g_rr.sci[i])*16777619u;
+    fprintf(stderr,"[BOARD-STATE] fnv1a32=%08x\n",h);
+}
 void rr_gles2_close(void)
 {
     if (!window) return;
+    report_board_state();
+    rr_memory_profile_report();
+    rr_sim_report();
     if(profile_memory) report_memory();
     stages_report("window-final",stage_window,stage_window_start);
     stages_report("total",stage_total,stage_start);

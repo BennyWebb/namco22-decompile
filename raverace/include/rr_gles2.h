@@ -8,6 +8,7 @@ void rr_gles2_background(float rgb[3]);
 bool rr_gles2_options(int *argc, char **argv);
 bool rr_gles2_open(void);
 bool rr_gles2_interactive(void);
+uint32_t rr_gles2_profile_from(void);
 void rr_gles2_apply_input(void);
 typedef enum {
     RR_STAGE_DSP, RR_STAGE_SOUND, RR_STAGE_AUDIO, RR_STAGE_SERIAL, RR_STAGE_IO,

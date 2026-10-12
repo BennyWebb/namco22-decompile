@@ -76,7 +76,7 @@ static int rr_headless_main(int argc, char **argv)
 #ifdef RR_GLES2
             fprintf(stderr, "Usage: rr_gles2 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
                             "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
-                            "                [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
+                            "                [--profile-simulation] [--sample-simulation FILE] [--simulation-profile-from N] [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
                             "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
@@ -145,6 +145,10 @@ invalid:
     rd_init();
     rr_fatal_hook = headless_fatal;
     fprintf(stderr, "[HEADLESS] translated baseline; stop after %u frames\n", max_frames);
+#ifdef RR_GLES2
+    rr_memory_profile_range(rr_gles2_profile_from(),max_frames);
+    if (!rr_sim_start()) return 2;
+#endif
     g_rr_game->entry();
     fprintf(stderr, "[HEADLESS] reset entry unexpectedly returned\n");
     return 1;
