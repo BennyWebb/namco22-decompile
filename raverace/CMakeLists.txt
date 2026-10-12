@@ -12,6 +12,8 @@ set(CMAKE_C_EXTENSIONS ON)
 option(RR_FAST_MEMORY_READS "Experiment: proven-safe WRAM/mirror reads" OFF)
 option(RR_SPLIT_MEMORY_READER "Experiment: isolate WRAM reader fallback (requires RR_FAST_MEMORY_READS)" OFF)
 option(RR_MEMORY_READ_COUNTERS "Instrument read counts (not performance baseline)" OFF)
+option(RR_C352_VOICE_COUNTERS "Instrument C352 voice activity (not performance baseline)" OFF)
+option(RR_C352_INACTIVE_FASTPATH "Experiment: skip mixing for C352 voices inactive at sample entry" OFF)
 if(RR_SPLIT_MEMORY_READER AND NOT RR_FAST_MEMORY_READS)
   message(FATAL_ERROR "RR_SPLIT_MEMORY_READER requires RR_FAST_MEMORY_READS=ON")
 endif()
@@ -39,6 +41,12 @@ include_directories(include gen)
 # THE SHARED ENGINE (../engine): the same renderer, texture bake, C352 and
 # sound-MCU peripheral model Prop Cycle uses (HARD RULE 3 in ../CLAUDE.md).
 include(${CMAKE_CURRENT_SOURCE_DIR}/../engine/engine.cmake)
+if(RR_C352_VOICE_COUNTERS)
+  set_property(SOURCE ${NAMCO22_ENGINE_DIR}/c352.c APPEND PROPERTY COMPILE_DEFINITIONS C352_VOICE_COUNTERS)
+endif()
+if(RR_C352_INACTIVE_FASTPATH)
+  set_property(SOURCE ${NAMCO22_ENGINE_DIR}/c352.c APPEND PROPERTY COMPILE_DEFINITIONS C352_INACTIVE_FASTPATH)
+endif()
 
 # The sound program, translated to C from the ROM files (tools/gen/snd_translate.py).
 # Input: tools/gen/snd.cov -- the (address, M/X, length) of every instruction the

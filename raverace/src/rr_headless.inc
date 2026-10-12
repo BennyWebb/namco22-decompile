@@ -67,6 +67,7 @@ static bool headless_number(const char *text, uint32_t max, uint32_t *value)
 static int rr_headless_main(int argc, char **argv)
 {
     const char *rom_dir = "extracted";
+    uint32_t audio_check_first=0,activity_first=0;
 #ifdef RR_GLES2
     if (!rr_gles2_options(&argc, argv)) return 2;
     if (rr_gles2_interactive()) max_frames = INT32_MAX;
@@ -78,14 +79,23 @@ static int rr_headless_main(int argc, char **argv)
                             "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
                             "                [--profile-simulation] [--sample-simulation FILE] [--simulation-profile-from N] [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
                             "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
+                            "                [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
-            fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n");
+            fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
+                            "                   [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n");
 #endif
             return 0;
         }
         if (!strcmp(argv[i], "--dump") && i + 1 < argc) { dump_dir = argv[++i]; continue; }
         uint32_t v;
+        if ((!strcmp(argv[i],"--audio-checksum-from") || !strcmp(argv[i],"--c352-activity-from")) && i+1<argc) {
+            const char *option=argv[i++];
+            if (!headless_number(argv[i],INT32_MAX,&v) || !v) goto invalid;
+            if (!strcmp(option,"--audio-checksum-from")) audio_check_first=v;
+            else activity_first=v;
+            continue;
+        }
         if ((!strcmp(argv[i], "--frames") || !strcmp(argv[i], "--coin") || !strcmp(argv[i], "--gas")) && i + 1 < argc) {
             const char *option = argv[i++];
             if (!headless_number(argv[i], INT32_MAX, &v) || v == 0) goto invalid;
@@ -133,6 +143,7 @@ invalid:
     if (!seed_ok) { fprintf(stderr, "[HEADLESS] invalid EEPROM seed: %s\n", seed); return 2; }
     if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) ||
         !rr_sound_init(rom_dir) || !rr_hw_init(rom_dir)) return 2;
+    if (!rr_audio_diagnostics(audio_check_first,activity_first)) return 2;
 #ifdef RR_GLES2
     if (!rr_gl_init(rom_dir) || !rr_gles2_open()) return 2;
 #endif

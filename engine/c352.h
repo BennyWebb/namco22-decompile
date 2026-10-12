@@ -19,6 +19,7 @@
 #define PROPCYCL_C352_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define C352_NUM_VOICES 32
 #define C352_CLOCK       24576000u
@@ -89,5 +90,20 @@ void     c352_write(c352_t *c, uint32_t offset, uint16_t data, uint16_t mem_mask
  * writes exactly like the real audio stream update does between MCU
  * writes. */
 void c352_generate(c352_t *c, int16_t *out, int n);
+
+/* Optional aggregated diagnostics, stored outside emulated chip state.
+ * Disabled builds contain no sample/voice counters. A profile is process-wide;
+ * Rave Racer has one chip. Callers select the interval outside the mixer. */
+typedef struct {
+    uint64_t intervals, samples, active_iterations, active_zero_source;
+    uint64_t activations, deactivations, keyon, keyoff, natural_ends;
+    uint64_t entry_active[33], sample_active[33];
+} c352_profile_t;
+bool c352_profile_available(void);
+bool c352_inactive_fastpath_enabled(void);
+void c352_profile_enable(bool enabled);
+void c352_profile_reset(void);
+void c352_profile_get(c352_profile_t *out);
+
 
 #endif /* PROPCYCL_C352_H */

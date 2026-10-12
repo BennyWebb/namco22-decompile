@@ -1001,3 +1001,7 @@ builds and measured handheld A/B results. Both memory switches default OFF.
 See [MEMORY_READER_REFACTOR.md](MEMORY_READER_REFACTOR.md) for the optional
 `RR_SPLIT_MEMORY_READER` experiment, three-reader correctness checks, actual
 ARM64 assembly and repeated physical handheld A/B measurements.
+
+See [C352_OPTIMISATION.md](C352_OPTIMISATION.md) for the optional
+`RR_C352_INACTIVE_FASTPATH`, exact PCM/voice-state tests, activity distributions
+and controlled handheld performance measurements. Host audio output remains disabled.

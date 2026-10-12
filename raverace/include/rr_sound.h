@@ -20,6 +20,8 @@ void rr_sound_slice(void);                    /* 1/16 of a video frame of sound-
 
 /* audio (engine) */
 bool rr_audio_init(const char *rom_dir);
+/* Explicit test diagnostics: zero disables each one. No device output needed. */
+bool rr_audio_diagnostics(uint32_t checksum_from, uint32_t activity_from);
 void rr_audio_c352_write(unsigned word, uint16_t v);
 uint16_t rr_audio_c352_read(unsigned word);
 void rr_audio_slice(void);                    /* mix this slice's samples */
