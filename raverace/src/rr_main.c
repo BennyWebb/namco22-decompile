@@ -253,6 +253,9 @@ void rr_tick(void)
     rd_budget_out();
     rr_budget = polls_per_frame / SLICES;
     if (rr_in_irq) { rr_budget = 1000; return; }      /* finish the handler first */
+#ifdef RR_GLES2
+    double stage_start=rr_gles2_stage_begin();
+#endif
     g_rr_in_vblank = vblank_slices > 0;
     if (vblank_slices > 0) {                       /* split the vblank slice at VBEND */
         long vb = DSP_STEPS_PER_FRAME * 45 / 525 - (long)(2 - vblank_slices) * (DSP_STEPS_PER_FRAME / SLICES);
@@ -265,10 +268,22 @@ void rr_tick(void)
         vblank_slices--;
     } else
         rr_dsp_run(DSP_STEPS_PER_FRAME / SLICES);
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_DSP,stage_start); stage_start=rr_gles2_stage_begin();
+#endif
     rr_sound_slice();                              /* the sound program's share of this slice */
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_SOUND,stage_start); stage_start=rr_gles2_stage_begin();
+#endif
     rr_audio_slice();                              /* and the mixer's samples */
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_AUDIO,stage_start); stage_start=rr_gles2_stage_begin();
+#endif
     serial_acc += 100;                             /* 100 Hz serial pulse */
     if (serial_acc >= 60 * SLICES) { serial_acc -= 60 * SLICES; rr_dsp_serial(); }
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_SERIAL,stage_start);
+#endif
     if (++slice % SLICES) return;
     frame++;
     sweep_tick();
@@ -298,8 +313,12 @@ void rr_tick(void)
         }
     }
 #elif defined(RR_GLES2)
-    rr_gles2_prepare_begin();
-    rr_gl_prepare(rr_dsp_slave_active());
+    bool geometry;
+    if (!rr_gles2_prepare_begin(frame, &geometry)) {
+        rr_headless_summary(); rr_audio_close(); rr_gles2_close();
+        exit(rr_gles2_failed() ? 2 : 0);
+    }
+    rr_gl_prepare_gles2(rr_dsp_slave_active(), geometry);
     int count; const geo_quad *quads = rr_gles2_quads(&count);
     float background[3]; rr_gles2_background(background);
     if (!rr_gles2_frame(frame, quads, count, background)) {
@@ -365,6 +384,9 @@ void rr_tick(void)
 #endif
     }
 #endif
+#ifdef RR_GLES2
+    stage_start=rr_gles2_stage_begin();
+#endif
     vblank_slices = 2;
     rr_dsp_vblank();
     if (!rr_env_active()) rr_hw_vblank();      /* (a trace oracle refreshes at MAME's own vblank interrupt: rr_env.c) */
@@ -372,6 +394,9 @@ void rr_tick(void)
     rr_net_poll();                       /* online play: peer FRAMEs into the link queue before the poll injects one */
 #endif
     rr_link_poll();                      /* a received link packet's SCI IRQ lands at this frame edge */
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_IO,stage_start);
+#endif
     if (!rr_env_active()) {                  /* a trace oracle lands the interrupts itself */
         rr_deliver_irqs(rr_hw_irq_level);
         /* online: the other pending rivals' packets, each through the game's own SCI handler (offline nothing is pending) */

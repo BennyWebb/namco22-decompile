@@ -33,6 +33,7 @@
 #include "post_gl.h"
 #else
 #include "quad_gles2.h"
+#include "rr_gles2.h"
 #include "tex_bake.h"
 #endif
 #include "rr_mem.h"
@@ -320,11 +321,17 @@ static int seam_colour(const geo_quad *q, float c[4])  /* RR_SEAMTEST=3 */
 static int frame_bg_palbase;
 #endif
 
+#ifdef RR_GLES2
+void rr_gl_prepare_gles2(bool slave_active, bool geometry)
+#else
 void rr_gl_prepare(bool slave_active)
+#endif
 {
     if (!assets_ok) return;
 #ifdef RR_GLES2
+    double stage_start=rr_gles2_stage_begin();
     eng_palette_from_planar(g_rr.pal, 0x8000);
+    rr_gles2_stage_end(RR_STAGE_PALETTE,stage_start);
 #endif
     g_eng_frame++;
 #ifndef RR_GLES2
@@ -338,15 +345,44 @@ void rr_gl_prepare(bool slave_active)
 #endif
 
     /* direct polys first (they arrived during the frame), then the list */
+#ifdef RR_GLES2
+    stage_start=rr_gles2_stage_begin();
+#endif
     const bool walk = rr_scene_frame(slave_active);
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_VIDEO,stage_start);stage_start=rr_gles2_stage_begin();
+#endif
     qn = 0; qorder = 0;
+#ifdef RR_GLES2
+    rr_gles2_scene_tick(walk, (unsigned)rr_scene_direct_count());
+    if (!geometry) {
+        /* Frame latch, palette and cache clock have advanced. Consume commands
+         * now; never carry discarded direct polygons into the next picture. */
+        stage_start=rr_gles2_stage_begin();
+        rr_scene_consume();
+        rr_gles2_stage_end(RR_STAGE_VIDEO,stage_start);
+        return;
+    }
+#endif
     for (int i = 0; i < rr_scene_direct_count(); i++) direct_quad(rr_scene_direct(i));
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_DIRECT,stage_start);stage_start=rr_gles2_stage_begin();
+#endif
     rr_scene_consume();
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_VIDEO,stage_start);stage_start=rr_gles2_stage_begin();
+#endif
     if (walk) {
         eng_list_cfg cfg = { ENG_LIST_HEAD_S22, 1, NULL, NULL, NULL, NULL };
         eng_walk_list(poly_word, &cfg, push_quad, NULL);
     }
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_LIST,stage_start);stage_start=rr_gles2_stage_begin();
+#endif
     eng_quad_sort(qbuf, qn, 0);
+#ifdef RR_GLES2
+    rr_gles2_stage_end(RR_STAGE_SORT,stage_start);
+#endif
     { static int want = -1, n;                          /* RR_CLIPLOG=<n>: the distinct viewport clip windows of screen update n */
       if (want < 0) { const char *e = getenv("RR_CLIPLOG"); want = e ? atoi(e) : 0; }
       if (want && n + 1 == want) {                       /* per priority band: how many quads and where (the HUD's polygons are the small bands) */

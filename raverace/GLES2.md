@@ -36,9 +36,11 @@ changes invalidate bakes on demand. `--diagnostic-colours` explicitly restores
 the Phase 1 debug colours instead of sampling original textures.
 
 The GLES2 path forces the existing per-texture cache rather than an atlas.
-It allocates on demand up to `RR_GLES2_TEXTURE_BUDGET_KB` (default 65536 KiB,
-64 MiB), including the four-byte white solid/debug texture. Runtime
-`--texture-budget-mib N` selects 1..64 MiB, no larger than the build limit.
+It allocates on demand within a runtime budget, including the four-byte white
+solid/debug texture. `RR_GLES2_TEXTURE_BUDGET_KB` sets the default (65536 KiB,
+64 MiB). `RR_GLES2_TEXTURE_MAX_BUDGET_KB` sets the selectable ceiling (131072 KiB,
+128 MiB); this ceiling allocates nothing upfront. Runtime
+`--texture-budget-mib N` selects 1..128 MiB, no larger than the build ceiling.
 Eviction occurs
 before allocating, deletes storage instead of retaining a recycled-object
 pool, and flushes pending draws before referenced storage changes. Cold bakes
@@ -77,11 +79,11 @@ development files. Nothing is downloaded or installed automatically.
 
 ```sh
 cmake -S raverace -B /tmp/rr-gles2-native \
-  -DRR_GLES2=ON -DRR_GLES2_TEXTURE_BUDGET_KB=65536 -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
+  -DRR_GLES2=ON -DRR_GLES2_TEXTURE_BUDGET_KB=65536 -DRR_GLES2_TEXTURE_MAX_BUDGET_KB=131072 -DCMAKE_C_COMPILER=gcc -DCMAKE_BUILD_TYPE=Release
 cmake --build /tmp/rr-gles2-native --target rr_gles2 -j2
 
 cmake -S raverace -B /tmp/rr-gles2-arm64 \
-  -DRR_GLES2=ON -DRR_GLES2_TEXTURE_BUDGET_KB=65536 -DCMAKE_BUILD_TYPE=Release \
+  -DRR_GLES2=ON -DRR_GLES2_TEXTURE_BUDGET_KB=65536 -DRR_GLES2_TEXTURE_MAX_BUDGET_KB=131072 -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_TOOLCHAIN_FILE=cmake/knulli-aarch64.cmake \
   -DKNULLI_HOST="$HOME/dev/knulli-scarab/output/h700/host"
 cmake --build /tmp/rr-gles2-arm64 --target rr_gles2 -j2
@@ -948,3 +950,37 @@ zero overload resyncs. A separate adaptive 1,700-frame city sequence also
 matched headless final JSON and coupled frame-1700 PPM bytes exactly; it ran
 near 59.92 measured steps/sec with two omitted presentations and zero resyncs.
 These are native correctness checks, not an ARM64 performance claim.
+
+## Independent-mode stage profiling
+
+Use `--profile-stages` with either timing mode to separate core/device execution,
+mandatory video latch work, host geometry, texture processing, submission and
+swap. Rendered and skipped ticks have separate aggregated rows; `--profile-from`
+also restricts the detailed wall-clock-rate totals. This is opt-in instrumentation
+only: no target-frequency, catch-up, rendering or cache optimization is included.
+See [INDEPENDENT_PROFILE.md](INDEPENDENT_PROFILE.md) for the audit, timing-field
+interpretation, exact H700 comparison commands and ranked proposed next steps.
+
+
+## Four-budget cache comparison
+
+The runtime option now supports 32/64/96/128 MiB in one executable, retaining
+64 MiB as the default. No decoder, eviction, key, tier, batching or atlas change
+is included. `--profile-memory` logs Linux RSS/high-water RSS and system available
+memory at shutdown before cache release. The comparison runner additionally
+samples `/proc` once a second and reports actual selected-range throughput,
+timings, cache activity, GPU/RSS peaks, available memory and state hashes.
+
+See [TEXTURE_CACHE_BENCHMARK.md](TEXTURE_CACHE_BENCHMARK.md) for the implementation
+audit, exact build/deployment/SSH commands, automation, results and recommendation.
+The runner uses coupled **unpaced scripted throughput** with 301 measured city
+frames; these FPS numbers are not independent-timing interactive performance.
+The existing sticky bake tiers can change sampling detail at small budgets;
+state hashes remain identical, and pixel comparisons are reported separately.
+
+## Opt-in skipped-presentation geometry experiment
+
+See [SKIPPED_GEOMETRY_OPTIMISATION.md](SKIPPED_GEOMETRY_OPTIMISATION.md) for
+`--skip-geometry-on-dropped-frames on|off`, deterministic A/B captures and
+independent-timing handheld benchmarks. The default remains `off`; coupled
+timing, texture caching and frame VBO streaming are unchanged.

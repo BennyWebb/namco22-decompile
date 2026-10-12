@@ -16,8 +16,22 @@ static SDL_GLContext context;
 static SDL_GameController *controllers[16];
 static SDL_Joystick *raw_joysticks[16];
 #include "rr_gles2_input.inc"
-static bool failed, unpaced, captured, independent, timing_explicit;
-static unsigned render_hz;
+static bool failed, unpaced, captured, independent, timing_explicit, profile_memory;
+static unsigned render_hz, test_present_every;
+static bool skip_geometry, frame_render = true;
+static double early_host_wait;
+static bool range_clock_started;
+static unsigned range_resync_start;
+static double range_discard_start;
+static bool pump_input(void);
+static bool choose_presentation(uint32_t frame);
+static unsigned scene_ticks, scene_walks, scene_direct;
+static uint64_t scene_digest = UINT64_C(14695981039346656037);
+void rr_gles2_scene_tick(bool walk, unsigned direct)
+{
+    scene_ticks++; scene_walks += walk; scene_direct += direct;
+    scene_digest = (scene_digest ^ ((uint64_t)direct << 1 | walk)) * UINT64_C(1099511628211);
+}
 static rr_frame_clock frame_clock;
 static double timing_start, timing_window, timing_sim, timing_scene;
 static unsigned timing_steps, timing_renders, timing_skipped, timing_steps_window, timing_renders_window;
@@ -41,10 +55,25 @@ typedef struct {
 static profile window_profile, total_profile;
 
 static double seconds(void) { return (double)SDL_GetPerformanceCounter() / SDL_GetPerformanceFrequency(); }
-void rr_gles2_prepare_begin(void)
+#include "rr_gles2_profile.inc"
+bool rr_gles2_prepare_begin(uint32_t frame, bool *geometry)
 {
+    simulation_elapsed = seconds() - simulation_start;
+    if (!range_clock_started && frame >= profile_from) {
+        range_clock_started=true;
+        range_resync_start=frame_clock.resyncs;
+        range_discard_start=frame_clock.discarded;
+    }
+    early_host_wait = 0;
+    frame_render = true;
+    if (independent && (skip_geometry || test_present_every)) {
+        double start = seconds();
+        if (!choose_presentation(frame)) return false;
+        early_host_wait = seconds() - start;
+    }
+    *geometry = !independent || !skip_geometry || frame_render;
     prepare_start = seconds();
-    simulation_elapsed = prepare_start - simulation_start;
+    return true;
 }
 static void profile_add(profile *p, unsigned frame, const eng_gles2_stats *s,
                         double scene, double draw_total, double swap, double pacing, double capture_time)
@@ -111,6 +140,23 @@ bool rr_gles2_options(int *argc, char **argv)
             }
             render_hz=(unsigned)hz;
         }
+        else if (!strcmp(argv[i], "--skip-geometry-on-dropped-frames") && i+1 < *argc) {
+            const char *value=argv[++i];
+            if (strcmp(value,"on") && strcmp(value,"off")) {
+                fprintf(stderr,"[GLES2] skip-geometry-on-dropped-frames requires on or off\n"); return false;
+            }
+            skip_geometry=!strcmp(value,"on");
+        }
+        else if (!strcmp(argv[i], "--test-present-every") && i+1 < *argc) {
+            char *end; const char *value=argv[++i]; errno=0;
+            unsigned long n=strtoul(value,&end,10);
+            if (errno || value==end || *value<'0' || *value>'9' || *end || n<2 || n>60) {
+                fprintf(stderr,"[GLES2] test-present-every requires 2..60\n"); return false;
+            }
+            test_present_every=(unsigned)n;
+        }
+        else if (!strcmp(argv[i], "--profile-memory")) profile_memory = true;
+        else if (!strcmp(argv[i], "--profile-stages")) profile_stages = true;
         else if (!strcmp(argv[i], "--interactive")) interactive = true;
         else if (!strcmp(argv[i], "--input-log")) input_log = true;
         else if (!strcmp(argv[i], "--controller-db") && i+1 < *argc) controller_db = argv[++i];
@@ -140,8 +186,8 @@ bool rr_gles2_options(int *argc, char **argv)
             char *end; const char *number = argv[++i]; errno = 0;
             unsigned long n = strtoul(number, &end, 10);
             if (errno || number == end || *number < '0' || *number > '9' || *end ||
-                n > 64 || !eng_gles2_texture_budget((unsigned)n)) {
-                fprintf(stderr, "[TEX] invalid budget: use 1..64 MiB, no larger than build budget\n");
+                n > 128 || !eng_gles2_texture_budget((unsigned)n)) {
+                fprintf(stderr, "[TEX] invalid budget: use 1..128 MiB, no larger than build maximum\n");
                 return false;
             }
         }
@@ -157,7 +203,7 @@ bool rr_gles2_options(int *argc, char **argv)
     }
     *argc = output; argv[output] = NULL;
     if (!timing_explicit) independent=interactive;
-    if ((independent && unpaced) || (!independent && render_hz)) {
+    if ((independent && unpaced) || (!independent && (render_hz || test_present_every))) {
         fprintf(stderr,"[TIMING] independent requires paced execution; render-hz requires independent\n");return false;
     }
     if ((capture_path != NULL) != (capture_frame != 0)) {
@@ -336,22 +382,38 @@ static void timing_report(const char *kind)
     timing_window=now; timing_steps_window=timing_renders_window=0;
 }
 
-bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
+/* Choose before geometry only for the opt-in path. The original clock/catch-up
+ * algorithm is unchanged; baseline retains its post-preparation decision. */
+static bool choose_presentation(uint32_t frame)
 {
-    double scene_elapsed = seconds() - prepare_start;
     if (!pump_input()) return false;
-    bool render=true;
-    if (!timing_steps) timing_start=timing_window=seconds();
-    timing_steps++; timing_steps_window++; timing_sim+=simulation_elapsed; timing_scene+=scene_elapsed;
+    frame_render=true;
     if (independent) {
         rr_clock_begin(&frame_clock,seconds());
         while (seconds()<frame_clock.deadline) {
-            SDL_Delay(1); /* poll during waits, without applying extra emulated samples */
+            SDL_Delay(1);
             if (!pump_input()) return false;
         }
-        render=rr_clock_render(&frame_clock,seconds(),render_hz,capture_frame==frame);
+        frame_render=rr_clock_render(&frame_clock,seconds(),render_hz,capture_frame==frame);
+        /* Correctness harness only: identical presented ticks for A/B captures.
+         * Never use this override for performance measurements. */
+        if (test_present_every) frame_render=frame%test_present_every==0 || capture_frame==frame;
     }
+    return true;
+}
+
+bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
+{
+    double scene_elapsed = seconds() - prepare_start;
+    double host_wait_start=rr_gles2_stage_begin();
+    if (!(independent && (skip_geometry || test_present_every)) && !choose_presentation(frame)) return false;
+    bool render=frame_render;
+    if (!timing_steps) timing_start=timing_window=seconds();
+    timing_steps++; timing_steps_window++; timing_sim+=simulation_elapsed; timing_scene+=scene_elapsed;
+    double host_wait_elapsed=profile_stages ? early_host_wait+seconds()-host_wait_start : 0;
     if (!render) {
+        const eng_gles2_stats empty={0};
+        stages_add(frame,false,(unsigned)count,&empty,scene_elapsed,0,0,host_wait_elapsed,0);
         timing_skipped++;
         if (seconds()-timing_window>=5) timing_report("window");
         simulation_start=seconds();
@@ -387,6 +449,8 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
         if (remaining > 0) SDL_Delay((Uint32)(remaining * 1000 + 0.999));
         else if (remaining < -1.0 / 59.906) next_frame = seconds();
     }
+    stages_add(frame,true,(unsigned)count,&stats,scene_elapsed,draw_elapsed,swap_elapsed,
+               host_wait_elapsed+(profile_stages ? seconds()-pacing_start : 0),capture_elapsed);
     if (independent && seconds()-timing_window>=5) timing_report("window");
     if (frame >= profile_from) {
         double pacing_elapsed = seconds() - pacing_start;
@@ -402,10 +466,42 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
 }
 
 bool rr_gles2_failed(void) { return failed; }
+/* Linux process peak survives between sampler polls; log before freeing GPU
+ * cache storage. -1 means unavailable, not zero memory use. */
+static void report_memory(void)
+{
+    long rss=-1, peak=-1, available=-1, cma=-1; char line[256];
+    FILE *f=fopen("/proc/self/status","r");
+    if(f) {
+        while(fgets(line,sizeof line,f)) {
+            if(!strncmp(line,"VmRSS:",6)) sscanf(line+6,"%ld",&rss);
+            if(!strncmp(line,"VmHWM:",6)) sscanf(line+6,"%ld",&peak);
+        }
+        fclose(f);
+    }
+    f=fopen("/proc/meminfo","r");
+    if(f) {
+        while(fgets(line,sizeof line,f)) {
+            if(!strncmp(line,"MemAvailable:",13)) sscanf(line+13,"%ld",&available);
+            if(!strncmp(line,"CmaFree:",8)) sscanf(line+8,"%ld",&cma);
+        }
+        fclose(f);
+    }
+    fprintf(stderr,"[MEMORY] RSS_kib=%ld RSS_peak_kib=%ld MemAvailable_kib=%ld CmaFree_kib=%ld\n",rss,peak,available,cma);
+}
 void rr_gles2_close(void)
 {
     if (!window) return;
+    if(profile_memory) report_memory();
+    stages_report("window-final",stage_window,stage_window_start);
+    stages_report("total",stage_total,stage_start);
     timing_report("total");
+    fprintf(stderr,"[GEOMETRY] skip=%s effective=%s test_present_every=%u ticks=%u walks=%u direct_consumed=%u digest=%016llx\n",
+        skip_geometry?"on":"off",independent&&skip_geometry?"on":"off",test_present_every,
+        scene_ticks,scene_walks,scene_direct,(unsigned long long)scene_digest);
+    if (range_clock_started)
+        fprintf(stderr,"[GEOMETRY-RATE] from=%u resyncs=%u discarded_lag_ms=%.3f\n",
+            profile_from,frame_clock.resyncs-range_resync_start,(frame_clock.discarded-range_discard_start)*1000);
     profile_report("window-final", &window_profile);
     profile_report("total", &total_profile);
     if (capture_frame && !captured) { fprintf(stderr, "[GLES2] requested geometry capture was not completed\n"); failed = true; }

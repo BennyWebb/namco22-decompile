@@ -61,7 +61,7 @@ bool eng_gles2_mode(const char *name)
 void eng_gles2_diagnostic(bool enabled) { eng_gles2_mode(enabled ? "diagnostic" : "textured"); }
 bool eng_gles2_texture_budget(unsigned mib)
 {
-    if (!mib || mib > 64 || (size_t)mib * 1024 > RR_GLES2_TEXTURE_BUDGET_KB) return false;
+    if (!mib || mib > 128 || (size_t)mib * 1024 > RR_GLES2_TEXTURE_MAX_BUDGET_KB) return false;
     texture_budget = (size_t)mib * 1024 * 1024;
     return true;
 }

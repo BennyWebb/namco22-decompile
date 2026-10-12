@@ -88,15 +88,22 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
     if(NOT RR_GLES_INCLUDE OR NOT RR_GLES_LIBRARY OR NOT RR_EGL_LIBRARY)
       message(FATAL_ERROR "GLES2/EGL development files are required in the target sysroot")
     endif()
-    set(RR_GLES2_TEXTURE_BUDGET_KB 65536 CACHE STRING "GLES2 texture allocation limit in KiB")
-    if(NOT RR_GLES2_TEXTURE_BUDGET_KB MATCHES "^[1-9][0-9]*$" OR RR_GLES2_TEXTURE_BUDGET_KB GREATER 65536)
-      message(FATAL_ERROR "RR_GLES2_TEXTURE_BUDGET_KB must be 1..65536")
+    set(RR_GLES2_TEXTURE_BUDGET_KB 65536 CACHE STRING "Default GLES2 texture allocation budget in KiB")
+    set(RR_GLES2_TEXTURE_MAX_BUDGET_KB 131072 CACHE STRING "Maximum runtime GLES2 texture budget in KiB")
+    if(NOT RR_GLES2_TEXTURE_BUDGET_KB MATCHES "^[1-9][0-9]*$" OR RR_GLES2_TEXTURE_BUDGET_KB GREATER 131072)
+      message(FATAL_ERROR "RR_GLES2_TEXTURE_BUDGET_KB must be 1..131072")
+    endif()
+    if(NOT RR_GLES2_TEXTURE_MAX_BUDGET_KB MATCHES "^[1-9][0-9]*$" OR
+       RR_GLES2_TEXTURE_MAX_BUDGET_KB GREATER 131072 OR
+       RR_GLES2_TEXTURE_MAX_BUDGET_KB LESS RR_GLES2_TEXTURE_BUDGET_KB)
+      message(FATAL_ERROR "RR_GLES2_TEXTURE_MAX_BUDGET_KB must be >= default and <= 131072")
     endif()
     target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c
       ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c ${NAMCO22_ENGINE_DIR}/eng.c
       ${NAMCO22_ENGINE_DIR}/geo_hw.c ${NAMCO22_ENGINE_DIR}/slave_list.c)
     target_compile_definitions(rr_gles2 PRIVATE RR_GLES2
-      RR_GLES2_TEXTURE_BUDGET_KB=${RR_GLES2_TEXTURE_BUDGET_KB})
+      RR_GLES2_TEXTURE_BUDGET_KB=${RR_GLES2_TEXTURE_BUDGET_KB}
+      RR_GLES2_TEXTURE_MAX_BUDGET_KB=${RR_GLES2_TEXTURE_MAX_BUDGET_KB})
     target_include_directories(rr_gles2 PRIVATE ${RR_GLES_INCLUDE})
     target_link_libraries(rr_gles2 PRIVATE PkgConfig::RR_SDL ${RR_GLES_LIBRARY} ${RR_EGL_LIBRARY})
     if(RR_MALI_LIBRARY)

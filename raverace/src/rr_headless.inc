@@ -76,7 +76,7 @@ static int rr_headless_main(int argc, char **argv)
 #ifdef RR_GLES2
             fprintf(stderr, "Usage: rr_gles2 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
                             "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
-                            "                [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
+                            "                [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
                             "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
