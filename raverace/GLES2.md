@@ -997,3 +997,7 @@ are disabled by default and make no emulated clock, scheduler or renderer change
 See [MEMORY_ACCESS_OPTIMISATION.md](MEMORY_ACCESS_OPTIMISATION.md) for the
 opt-in `RR_FAST_MEMORY_READS` build flag, correctness tests, separate counter
 builds and measured handheld A/B results. Both memory switches default OFF.
+
+See [MEMORY_READER_REFACTOR.md](MEMORY_READER_REFACTOR.md) for the optional
+`RR_SPLIT_MEMORY_READER` experiment, three-reader correctness checks, actual
+ARM64 assembly and repeated physical handheld A/B measurements.

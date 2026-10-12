@@ -58,6 +58,13 @@ void rr_memory_profile_frame(uint32_t frame)
 }
 void rr_memory_profile_report(void)
 {
+#ifdef RR_SPLIT_MEMORY_READER
+    fprintf(stderr,"[MEM-READER] implementation=split\n");
+#elif defined(RR_FAST_MEMORY_READS)
+    fprintf(stderr,"[MEM-READER] implementation=existing\n");
+#else
+    fprintf(stderr,"[MEM-READER] implementation=original\n");
+#endif
 #ifdef RR_FAST_MEMORY_READS
     const char *fast="on";
 #else
@@ -144,6 +151,11 @@ void rd_dict_byte(uint8_t v);
 #ifdef RR_TRACE
 void (*rr_read_probe)(vaddr_t, int);                  /* the trace oracle (engine/lift_env.c): sees every read */
 #endif
+#if defined(RR_SPLIT_MEMORY_READER) && defined(RR_FAST_MEMORY_READS)
+/* GCC 13.3 at -O3 inlines the plain split and recreates the 112-byte frame.
+ * Preserve this boundary, without marking ordinary ROM/device reads cold. */
+static uint32_t rr_read_fallback(vaddr_t a, int size) __attribute__((noinline));
+#endif
 uint32_t rr_read(vaddr_t a, int size)
 {
 #ifdef RR_MEMORY_READ_COUNTERS
@@ -176,6 +188,15 @@ uint32_t rr_read(vaddr_t a, int size)
 #endif
         return value;
     }
+#endif
+#if defined(RR_SPLIT_MEMORY_READER) && defined(RR_FAST_MEMORY_READS)
+    return rr_read_fallback(a, size);
+}
+
+/* Keep the original callback/checker/mapping sequence in one place. The common
+ * WRAM entry needs none of its address-taken locals or callback saved state. */
+static uint32_t rr_read_fallback(vaddr_t a, int size)
+{
 #endif
     READ_COUNT(fallbacks);
     uint32_t v = 0;
