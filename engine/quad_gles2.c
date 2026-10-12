@@ -203,11 +203,25 @@ static bool submit_commands(eng_gles2_stats *stats)
     stats->vertex_upload_seconds += seconds() - vertex_start;
     stats->vertex_uploads++; stats->vertex_upload_bytes += bytes;
     if (!check_gl("upload vertex chunk")) return false;
+#ifdef RR_ORDERED_SUBMISSION
+    /* Geometry construction and texture barriers can change GL state. Establish
+     * ownership afresh for each submitted chunk, never cache across chunks. */
+    int submitted_scissor[4] = {-1,-1,-1,-1};
+    glEnable(GL_SCISSOR_TEST);
+#endif
     for (int i = 0; i < command_count; i++) {
         const draw_command *c = &commands[i];
+#ifdef RR_ORDERED_SUBMISSION
+        if (memcmp(submitted_scissor,c->scissor,sizeof submitted_scissor)) {
+#else
         glEnable(GL_SCISSOR_TEST);
+#endif
         glScissor(c->scissor[0]/AUDIT_DIVISOR, c->scissor[1]/AUDIT_DIVISOR,
             (c->scissor[2]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR,(c->scissor[3]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR);
+#ifdef RR_ORDERED_SUBMISSION
+            memcpy(submitted_scissor,c->scissor,sizeof submitted_scissor);
+        }
+#endif
         tex_bake_gles2_bind(GL_TEXTURE_2D, white_batches ? white : c->texture);
         double call_start = seconds();
         eng_audit_scope audit_draw=eng_audit_begin(AUD_DRAW);
@@ -233,9 +247,22 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
     double start = seconds();
     bool ok = true;
     if (frame_upload) {
+#ifdef RR_ORDERED_SUBMISSION
+        draw_command *last = command_count ? &commands[command_count-1] : NULL;
+        /* Only adjoining vertex ranges with identical effective state. Never
+         * cross a cache-mutation drain or change primitive/depth ordering. */
+        if (last && last->texture == batch_texture &&
+            last->first + last->count == batch_first &&
+            !memcmp(last->scissor,batch_scissor,sizeof batch_scissor)) {
+            last->count += used;
+        } else {
+#endif
         draw_command *c = &commands[command_count++];
         c->texture = batch_texture; c->first = batch_first; c->count = used;
         memcpy(c->scissor, batch_scissor, sizeof batch_scissor);
+#ifdef RR_ORDERED_SUBMISSION
+        }
+#endif
         batch_first += used;
     } else {
         tex_bake_gles2_bind(GL_TEXTURE_2D, white_batches ? white : batch_texture);
@@ -303,7 +330,15 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
         const int box[4] = {left, 479-bottom, right-left+1, bottom-top+1};
         if (memcmp(box, previous, sizeof box)) {
             if (!flush(stats, SCISSOR)) return false;
+#ifdef RR_ORDERED_SUBMISSION
+            /* Frame commands carry scissor state; GL needs it only at draw.
+             * Legacy immediate submission still requires the original update. */
+            if (!frame_upload) {
+#endif
             glEnable(GL_SCISSOR_TEST); glScissor(box[0], box[1], box[2], box[3]);
+#ifdef RR_ORDERED_SUBMISSION
+            }
+#endif
             memcpy(previous, box, sizeof box);
             memcpy(batch_scissor, box, sizeof box);
         }
