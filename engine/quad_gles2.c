@@ -15,6 +15,7 @@
 
 float g_scene_x0 = 0, g_scene_x1 = ENG_SCREEN_W;
 #include "quad_geometry.inc"
+#include "gles_submission_profile.inc"
 
 #define MAX_VERTICES 60000
 typedef struct { float position[3], colour[4], uvq[3]; } vertex;
@@ -82,7 +83,9 @@ static void before_texture_change(GLuint texture)
 
 static bool check_gl(const char *stage)
 {
+    SP_BEGIN(sp_query,5,1);
     GLenum error = glGetError();
+    SP_END(sp_query);
     if (error == GL_NO_ERROR) return true;
     fprintf(stderr, "[GLES2] %s failed: GL error 0x%x\n", stage, error);
     return false;
@@ -198,7 +201,9 @@ static bool submit_commands(eng_gles2_stats *stats)
      * in-flight offset-zero range. Driver storage renaming is implementation
      * dependent; retain legacy mode for measurement on Mali. */
     eng_audit_scope audit_vertex=eng_audit_begin(AUD_VERTEX);
+    SP_BEGIN(sp_vertex,4,1);
     glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)bytes, batch, GL_STREAM_DRAW);
+    SP_END(sp_vertex);
     eng_audit_end(audit_vertex);
     stats->vertex_upload_seconds += seconds() - vertex_start;
     stats->vertex_uploads++; stats->vertex_upload_bytes += bytes;
@@ -211,6 +216,8 @@ static bool submit_commands(eng_gles2_stats *stats)
 #endif
     for (int i = 0; i < command_count; i++) {
         const draw_command *c = &commands[i];
+        int sampled=SP_SAMPLE;
+        SP_BEGIN(sp_state,2,sampled);
 #ifdef RR_ORDERED_SUBMISSION
         if (memcmp(submitted_scissor,c->scissor,sizeof submitted_scissor)) {
 #else
@@ -223,9 +230,12 @@ static bool submit_commands(eng_gles2_stats *stats)
         }
 #endif
         tex_bake_gles2_bind(GL_TEXTURE_2D, white_batches ? white : c->texture);
+        SP_END(sp_state);
         double call_start = seconds();
         eng_audit_scope audit_draw=eng_audit_begin(AUD_DRAW);
+        SP_BEGIN(sp_draw,3,sampled);
         if(!AUDIT_NO_DRAW) glDrawArrays(GL_TRIANGLES, c->first, c->count);
+        SP_END(sp_draw);
         eng_audit_end(audit_draw);
         stats->draw_call_seconds += seconds() - call_start;
         stats->triangles += (unsigned)c->count / 3; stats->draws++;
@@ -285,7 +295,9 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
         case END: stats->flush_end++; break;
     }
     used = 0;
-    stats->draw_seconds += seconds() - start;
+    double elapsed = seconds() - start;
+    stats->draw_seconds += elapsed;
+    if (frame_upload) { SP_PREP(elapsed); }
     return ok;
 }
 
@@ -298,6 +310,7 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
     used = batch_first = command_count = 0; batch_texture = white; current_stats = stats; flush_failed = false;
+    SP_BEGIN(sp_setup,0,1);
     glViewport(0, 0, ENG_SCREEN_W/AUDIT_DIVISOR, ENG_SCREEN_H/AUDIT_DIVISOR);
     glDisable(GL_SCISSOR_TEST); glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST); glDepthFunc(GL_LEQUAL); glDepthMask(GL_TRUE);
@@ -314,10 +327,13 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     glUniform1i(sampler, 0);
     glActiveTexture(GL_TEXTURE0); tex_bake_gles2_bind(GL_TEXTURE_2D, white);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    SP_END(sp_setup);
+    SP_BEGIN(sp_attributes,1,1);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, position));
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, colour));
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, uvq));
     for (int i = 0; i < 3; i++) glEnableVertexAttribArray((GLuint)i);
+    SP_END(sp_attributes);
     int previous[4] = {-1,-1,-1,-1};
     for (int qi = 0; qi < count; qi++) {
         const geo_quad *q = &quads[eng_quad_index(qi)];

@@ -31,6 +31,7 @@
 #ifdef RR_GLES2
 #include <time.h>
 #include "eng_audit.h"
+#include "gles_texture_trace.inc"
 double tex_gles2_upload_seconds;
 unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
 static GLuint bound_texture;
@@ -44,9 +45,11 @@ void tex_bake_gles2_binding_mode(int skip) { skip_bindings = skip; }
 void tex_bake_gles2_binding_reset(void) { binding_known = 0; }
 void tex_bake_gles2_bind(GLenum target, GLuint texture)
 {
+    tt_event(1,target,texture,0,0);
     if (skip_bindings && binding_known && texture == bound_texture) {
         tex_gles2_bind_skips++; return;
     }
+    tt_event(2,target,texture,0,0);
     glBindTexture(target, texture);
     tex_gles2_bind_calls++;
     bound_texture = texture; binding_known = 1;
@@ -507,6 +510,7 @@ static void tex_free_push(GLuint id, uint16_t w, uint16_t h)
     (void)w; (void)h;
     if (atlas_flush_hook) atlas_flush_hook(id);
     tex_bake_gles2_binding_reset(); /* deleting a bound texture changes GL state */
+    tt_event(3,id,w,h,0);
     glDeleteTextures(1, &id); /* No unaccounted recycled storage. */
     return;
 #endif
@@ -712,6 +716,11 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     if (force_cap > 0 && force_cap < cap) cap = force_cap;
     uint32_t h = tex_cache_hash(min_u, min_v, range_u, range_v, texbank, pal_group, cmode);
     h ^= (uint32_t)cap; h *= 16777619u;
+#ifdef RR_GLES2
+    tt_event(4,min_u,min_v,range_u,range_v);
+    tt_event(5,texbank,pal_group,cmode,g_eng_pal_gen[pal_group & 0x7f]);
+    tt_event(6,cap,peek,h,g_tex_opaque);
+#endif
     for (int probe = 0; probe < TEX_CACHE_PROBES; probe++) {
         int slot = (h + probe) & TEX_CACHE_MASK;
         TexCacheEntry *e = &tex_cache[slot];
@@ -721,6 +730,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             e->texbank == texbank && e->pal_group == pal_group &&
             e->cmode == cmode && e->cap == cap &&
             e->pal_gen == g_eng_pal_gen[pal_group & 0x7F]) {
+#ifdef RR_GLES2
+            tt_event(7,slot,e->gl_texture,e->pal_gen,0);
+#endif
             tex_frame_hits++;
             e->ref = 1;
             if (g_caplog && cap != TEX_BAKE_MAX) fprintf(g_caplog, "%d %d %d %d %d %d %d\n", min_u, min_v, range_u, range_v, texbank, pal_group, cap);
@@ -732,6 +744,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         }
     }
     if (peek) return 0;
+#ifdef RR_GLES2
+    tt_event(8,h,0,0,0);
+#endif
     tex_frame_misses++;
     if (g_caplog && cap != TEX_BAKE_MAX) fprintf(g_caplog, "%d %d %d %d %d %d %d\n", min_u, min_v, range_u, range_v, texbank, pal_group, cap);
 
@@ -1121,10 +1136,16 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     if (!g_tex_orphan && had_w == tw && had_h == th) {
         tex_subimages++;
     } else {
+#ifdef RR_GLES2
+        tt_event(9,tex,tw,th,0);
+#endif
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, NULL);
         tex_reallocs++;
     }
+#ifdef RR_GLES2
+    tt_event(10,tex,bw,bh,0);
+#endif
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, bw, bh,
                     GL_RGBA, GL_UNSIGNED_BYTE, tex_pixel_buf);
     }

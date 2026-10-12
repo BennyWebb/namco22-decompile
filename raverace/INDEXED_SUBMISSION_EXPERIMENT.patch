@@ -1,0 +1,98 @@
+--- a/raverace/CMakeLists.txt
++++ b/raverace/CMakeLists.txt
+@@ -15,6 +15,7 @@
+ option(RR_C352_VOICE_COUNTERS "Instrument C352 voice activity (not performance baseline)" OFF)
+ option(RR_C352_INACTIVE_FASTPATH "Experiment: skip mixing for C352 voices inactive at sample entry" OFF)
+ option(RR_PIPELINE_AUDIT "Diagnostic-only wall/thread-CPU pipeline attribution and draw/viewport controls" OFF)
++option(RR_GLES_INDEXED_SUBMISSION "Experiment: static sequential element buffer for ordered GLES draws" OFF)
+ option(RR_GLES_SUBMISSION_PROFILE "Diagnostic-only sparse GLES call CPU/wall timing" OFF)
+ option(RR_ORDERED_SUBMISSION "Experiment: coalesce adjacent GLES commands and suppress redundant scissor state" OFF)
+ option(RR_GEOMETRY_PROJECTION_PROFILE "Diagnostic-only geometry phase CPU timers (environment gated)" OFF)
+@@ -101,6 +102,9 @@
+     if(RR_GEOMETRY_INDEX_ORDER)
+       set_property(SOURCE src/rr_gl.c ${NAMCO22_ENGINE_DIR}/quad_gles2.c
+         APPEND PROPERTY COMPILE_DEFINITIONS RR_GEOMETRY_INDEX_ORDER)
++    endif()
++    if(RR_GLES_INDEXED_SUBMISSION)
++      set_property(SOURCE ${NAMCO22_ENGINE_DIR}/quad_gles2.c APPEND PROPERTY COMPILE_DEFINITIONS RR_GLES_INDEXED_SUBMISSION)
+     endif()
+     if(RR_GLES_SUBMISSION_PROFILE)
+       set_property(SOURCE ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c APPEND PROPERTY COMPILE_DEFINITIONS RR_GLES_SUBMISSION_PROFILE)
+--- a/engine/quad_gles2.c
++++ b/engine/quad_gles2.c
+@@ -33,6 +33,18 @@
+ }
+ const char *eng_gles2_vbo_mode_name(void) { return frame_upload ? "frame" : "legacy"; }
+ static GLuint program, vbo, white;
++#ifdef RR_GLES_INDEXED_SUBMISSION
++_Static_assert(MAX_VERTICES <= 65536, "sequential GLES2 indices must fit uint16");
++static GLuint ebo;
++#endif
++static void draw_vertices(int first, int count)
++{
++#ifdef RR_GLES_INDEXED_SUBMISSION
++    glDrawElements(GL_TRIANGLES,count,GL_UNSIGNED_SHORT,(const void *)(uintptr_t)((size_t)first*sizeof(GLushort)));
++#else
++    glDrawArrays(GL_TRIANGLES,first,count);
++#endif
++}
+ static GLint projection, sampler;
+ static GLuint batch_texture;
+ static eng_gles2_stats *current_stats;
+@@ -167,6 +179,17 @@
+     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+     if (!frame_upload) glBufferData(GL_ARRAY_BUFFER, sizeof batch, NULL, GL_DYNAMIC_DRAW);
+     if (!check_gl("allocate triangle VBO")) return false;
++#ifdef RR_GLES_INDEXED_SUBMISSION
++    GLushort *indices = malloc(MAX_VERTICES * sizeof *indices);
++    if (!indices) { fprintf(stderr,"[GLES2] sequential index allocation failed\n"); return false; }
++    for (int i=0;i<MAX_VERTICES;i++) indices[i]=(GLushort)i;
++    glGenBuffers(1,&ebo);
++    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
++    glBufferData(GL_ELEMENT_ARRAY_BUFFER,MAX_VERTICES*sizeof *indices,indices,GL_STATIC_DRAW);
++    free(indices);
++    if (!ebo || !check_gl("allocate sequential index buffer")) return false;
++    fprintf(stderr,"[GLES2] sequential EBO=%zu bytes, temporary CPU allocation freed; ordered vertices unchanged\n",(size_t)MAX_VERTICES*sizeof(GLushort));
++#endif
+     fprintf(stderr, "[GLES2] triangle storage: CPU=%zu bytes, GPU store upper bound=%zu bytes\n", sizeof batch, sizeof batch);
+     fprintf(stderr, "[GLES2] VBO mode=%s command storage=%zu bytes; frame mode re-specifies storage per contiguous chunk\n",
+             eng_gles2_vbo_mode_name(), sizeof commands);
+@@ -234,7 +257,7 @@
+         double call_start = seconds();
+         eng_audit_scope audit_draw=eng_audit_begin(AUD_DRAW);
+         SP_BEGIN(sp_draw,3,sampled);
+-        if(!AUDIT_NO_DRAW) glDrawArrays(GL_TRIANGLES, c->first, c->count);
++        if(!AUDIT_NO_DRAW) draw_vertices(c->first, c->count);
+         SP_END(sp_draw);
+         eng_audit_end(audit_draw);
+         stats->draw_call_seconds += seconds() - call_start;
+@@ -282,7 +305,7 @@
+         double call_start = seconds();
+         stats->vertex_upload_seconds += call_start - vertex_start;
+         stats->vertex_uploads++; stats->vertex_upload_bytes += bytes;
+-        glDrawArrays(GL_TRIANGLES, 0, used);
++        draw_vertices(0, used);
+         stats->draw_call_seconds += seconds() - call_start;
+         stats->triangles += (unsigned)used / 3; stats->draws++;
+         ok = check_gl("submit triangles");
+@@ -325,6 +348,9 @@
+     glUniform1i(sampler, 0);
+     glActiveTexture(GL_TEXTURE0); tex_bake_gles2_bind(GL_TEXTURE_2D, white);
+     glBindBuffer(GL_ARRAY_BUFFER, vbo);
++#ifdef RR_GLES_INDEXED_SUBMISSION
++    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ebo);
++#endif
+     SP_END(sp_setup);
+     SP_BEGIN(sp_attributes,1,1);
+     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, position));
+@@ -461,6 +487,10 @@
+     renderer_texture_init(); /* delete cache storage before context destruction */
+     if (white) glDeleteTextures(1, &white);
+     if (vbo) glDeleteBuffers(1, &vbo);
++#ifdef RR_GLES_INDEXED_SUBMISSION
++    if (ebo) glDeleteBuffers(1,&ebo);
++    ebo=0;
++#endif
+     if (program) glDeleteProgram(program);
+     white = vbo = program = 0;
+ }
