@@ -1,9 +1,11 @@
 /* Sparse diagnostic only. No timers/counters in headline builds. */
 #ifdef RR_GLES_SUBMISSION_PROFILE
 #define SP_MAX 8192
-static const char *sp_names[]={"setup","attributes","state","draw","vertex","query"};
-static struct { unsigned calls,n[2]; double value[2][SP_MAX],raw[2],empty[2]; } sp_data[6];
+static const char *sp_names[]={"setup","attributes","state","draw","vertex","query","group"};
+static struct { unsigned calls,n[2]; double value[2][SP_MAX],raw[2],empty[2]; } sp_data[7];
 static unsigned sp_from=~0u,sp_to,sp_rng=0x35268000u,sp_kind_rng=0x12345678u;
+static double sp_full_cpu[SP_MAX],sp_frame_cpu;
+static unsigned sp_full_n;
 static unsigned long long sp_prep_calls;
 static double sp_prep_wall;
 static double sp_now(clockid_t clock) {struct timespec t;clock_gettime(clock,&t);return t.tv_sec+t.tv_nsec*1e-9;}
@@ -39,21 +41,30 @@ static void sp_end(sp_timer t) {
 static int sp_compare(const void *a,const void *b){double x=*(const double*)a,y=*(const double*)b;return (x>y)-(x<y);}
 __attribute__((destructor)) static void sp_report(void) {
  if(sp_from==~0u)return;
+ if(sp_full_n){double total=0;for(unsigned i=0;i<sp_full_n;i++)total+=sp_full_cpu[i];qsort(sp_full_cpu,sp_full_n,sizeof(double),sp_compare);fprintf(stderr,"[SUBMISSION-CPU] presentations=%u mean_ms=%.6f median_ms=%.6f p95_ms=%.6f scope=complete_command_submission_including_group_preparation\n",sp_full_n,total*1000/sp_full_n,sp_full_cpu[sp_full_n/2]*1000,sp_full_cpu[(sp_full_n-1)*95/100]*1000);}
  fprintf(stderr,"[SUBMIT-PREP] commands=%llu wall_total_ms=%.6f scope=frame_command_construction_existing_timers\n",sp_prep_calls,sp_prep_wall*1000);
  fprintf(stderr,"[SUBMIT-TIMER] sampling_probability=1/32 samples_cap=%d calibration=paired_live CPU_and_wall_separate_cohorts; small_negative_estimates_are_below_resolution\n",SP_MAX);
- for(int id=0;id<6;id++)for(int kind=0;kind<2;kind++) {
+ for(int id=0;id<7;id++)for(int kind=0;kind<2;kind++) {
   unsigned n=sp_data[id].n[kind];if(!n)continue;
   qsort(sp_data[id].value[kind],n,sizeof(double),sp_compare);
   double mean=(sp_data[id].raw[kind]-sp_data[id].empty[kind])/n;
   fprintf(stderr,"[SUBMIT-OP] op=%s clock=%s calls=%u samples=%u raw_mean_us=%.6f empty_mean_us=%.6f adjusted_mean_us=%.6f adjusted_median_us=%.6f adjusted_p95_us=%.6f estimated_total_ms=%.6f\n",sp_names[id],kind?"wall":"cpu",sp_data[id].calls,n,sp_data[id].raw[kind]*1e6/n,sp_data[id].empty[kind]*1e6/n,mean*1e6,sp_data[id].value[kind][n/2]*1e6,sp_data[id].value[kind][(n-1)*95/100]*1e6,mean*sp_data[id].calls*1000);
  }
 }
+#define SP_FULL_BEGIN() double sp_full_start=(g_eng_frame>=sp_from && g_eng_frame<=sp_to)?sp_now(CLOCK_THREAD_CPUTIME_ID):-1
+#define SP_FULL_END() do{if(sp_full_start>=0)sp_frame_cpu+=sp_now(CLOCK_THREAD_CPUTIME_ID)-sp_full_start;}while(0)
+#define SP_FULL_FRAME_BEGIN() (sp_frame_cpu=0)
+#define SP_FULL_FRAME_END() do{if(g_eng_frame>=sp_from && g_eng_frame<=sp_to && sp_full_n<SP_MAX)sp_full_cpu[sp_full_n++]=sp_frame_cpu;}while(0)
 #define SP_BEGIN(name,id,selected) sp_timer name=sp_begin(id,selected)
 #define SP_END(name) sp_end(name)
 static int sp_sample(void){sp_rng=sp_rng*1664525u+1013904223u;return (sp_rng>>27)==0;}
 #define SP_SAMPLE sp_sample()
 #define SP_PREP(elapsed) sp_prep(elapsed)
 #else
+#define SP_FULL_BEGIN()
+#define SP_FULL_END()
+#define SP_FULL_FRAME_BEGIN()
+#define SP_FULL_FRAME_END()
 #define SP_BEGIN(name,id,selected)
 #define SP_END(name)
 #define SP_SAMPLE 0

@@ -1,5 +1,10 @@
 # Tick-2500 shader-equivalence resolution (2026-10-13)
 
+The subsequent [ordered batching follow-up](GLES2_MULTITEXTURE_FOLLOWUP.md)
+traced tier creation/eviction, preserved the policy, validated exact live draws
+and measured five A/B pairs. The prototype is now retained disabled by default;
+representative racing FPS improved 2.32%, a modest gain.
+
 The original 91-pixel difference is reproduced exactly by changing the baked
 texture tier and its submitted UV scale, with the **same single-sampler shader**.
 The two captures did not have identical draw resources. The previous attribution

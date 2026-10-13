@@ -8,9 +8,9 @@ reports. Update it when a milestone changes the active build or benchmark.
 ## Current state (2026-10-13)
 
 - Repository: `BennyWebb/namco22-decompile`, branch `feature/knulli-h700`.
-  Latest checked commit: `6ebe29c` (`Frame pacing Latency experiment.`).
-  The current working tree has uncommitted diagnostic and report changes from
-  the ordered-submission investigation; check Git status before new work.
+  Latest checked commit: `31a8a67` (`Multitexture issue investigation`).
+  The current working tree contains the default-off four-texture prototype,
+  validation tools and follow-up report; check Git status before new work.
 - Target: Anbernic RG40XX H, Knulli Scarab, AArch64 H700/Cortex-A53,
   Mali-G31, 640×480, SDL2 `mali` framebuffer driver, GLES2, glibc 2.40.
   Matching Buildroot host toolchain:
@@ -228,9 +228,51 @@ Existing captures were preserved; prior temporary renderer sources were restored
 and rebuilt. The installed playable hash above was reverified and
 EmulationStation restored. No production change, deployment or commit occurred.
 
-**Keep batching disabled.** Any next batching test must hold draw resources
-fixed and validate its own ordering, transparency, HUD and texture mutation
-behaviour. Do not alter the intentional sticky-tier policy as a shader fix.
+### Ordered batching follow-up (2026-10-13, latest)
+
+See [bounded batching follow-up](GLES2_MULTITEXTURE_FOLLOWUP.md). The user chose
+to preserve the intentional cache-history policy and validate exact draws while
+auditing independently selected resources. A trace identified the road key's
+cap-1024 bake at tick 2499 and subsequent budget eviction. Another normal-runtime
+pair differed at 187 pixels, all covered by polygons whose U/V bake resources
+differed; source signatures, positions, colours and depth matched.
+
+The four-explicit-sampler prototype is restored behind
+`RR_GLES2_MULTITEXTURE_BATCH=OFF` and runtime `--gles-multitexture off|shader|batch`.
+It requires ordered submission; batch mode requires frame VBO upload. No cache
+policy, polygon ordering, shader colour correction, extra thread or queue change
+was introduced. Existing texture mutation barriers remain effective.
+
+Correctness passed: the controlled four-unit case; 2,296 exact live-reference
+scenes through replay tick 6006; twelve original-HUD captures and deterministic
+simulation/board/PCM/voice/ordered texture events in off/shader/batch and the actual
+feature-disabled build; and 650 exact constrained-cache scenes with 262 mutation
+barriers, 41,618 uploads and 41,489 evictions. No pixel tolerance was used.
+
+Five alternating first-lap pairs (ticks 1800–5639) measured median **34.476 versus
+35.276 rendered FPS (+2.32%)**, 18.189 versus 19.064 1% low FPS, 43.491 versus
+40.704 ms p99 interval, 105.257 versus 97.376 ms median worst hitch, 59.665 versus
+57.897 ms median image age, and 73.968 versus 71.454 ms p95 age (baseline/batched).
+Draws fell 878.938 → 213.337; submission wall time 11.219 → 7.414 ms. Peak RSS rose
+295.031 → 296.430 MiB. Median simulation Hz was 59.898/59.887; median underruns
+zero in both. Pair 1 had 80,229/3,243 underrun samples and a baseline 1.504-second
+hitch; the other eight runs had zero underruns. No run was discarded.
+
+The separate diagnostic measured complete submission CPU 11.302 → 7.117 ms, but
+the shader alone added 1.645 ms to the median 3D GPU command span. Swap wall time
+in the unprofiled paired test rose 4.081 → 6.834 ms. Three dense-opening pairs
+improved FPS 48.407 → 52.964 (+9.41%) while 1% lows/p99 worsened slightly. These
+results do **not** establish a substantial representative racing FPS increase.
+They are contemporaneous comparisons; do not mix their absolute FPS with the
+older handover benchmark. Instrumented GPU runs are not headline FPS evidence.
+
+**Retain the validated prototype disabled by default; it was not deployed.**
+The improvement is repeatable but modest. The installed playable and backup
+hashes above were verified unchanged, EmulationStation restored, and the single
+active Ports launcher preserved. No commit was created. Artifacts are on the
+handheld under `/userdata/system/rave-racer-multitexture-resume-20261013/` and
+locally under `/tmp/rr-multi-resume/`; summaries and reproduction commands are
+linked from the follow-up report. Existing captures/tools remain preserved.
 
 ## Correctness and next-session guardrails
 

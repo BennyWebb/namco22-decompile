@@ -17,6 +17,9 @@ typedef struct {
     unsigned long long clock_probes, delete_calls;
     double vertex_upload_seconds, draw_call_seconds;
 } eng_gles2_stats;
+bool eng_gles2_multitexture_mode(const char *name);
+bool eng_gles2_multi_gpu_trace(const char *path);
+void eng_gles2_present_tick(unsigned tick);
 bool eng_gles2_init(void);
 void eng_gles2_priority(bool enabled);
 bool eng_gles2_vbo_mode(const char *name);

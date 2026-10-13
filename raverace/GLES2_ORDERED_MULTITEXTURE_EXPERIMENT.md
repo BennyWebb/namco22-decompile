@@ -6,6 +6,12 @@ and submitted UV scales, using the same single-sampler shader. Frozen-resource
 shader-only scene tests passed. The historical fragment-shader attribution below
 is superseded; batching remains disabled and has not passed its own validation.
 
+The subsequent [bounded batching follow-up](GLES2_MULTITEXTURE_FOLLOWUP.md)
+restored a default-off prototype, passed exact draw/resource validation and measured
+five representative A/B pairs. Racing FPS improved 2.32%, versus 9.41% in the dense
+opening. The prototype is retained disabled by default and was not deployed.
+The sections below describe the earlier rejected experiment.
+
 ## Scope and baseline
 
 The primary workload is the recorded first racing lap, simulation ticks

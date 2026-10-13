@@ -296,6 +296,33 @@ typedef struct {
 } TexCacheEntry;
 
 static TexCacheEntry tex_cache[TEX_CACHE_SIZE];
+#ifdef RR_GLES_SUBMISSION_PROFILE
+/* Targeted history trace; never affects resource selection. */
+static FILE *tier_trace;
+static int tier_key[7],tier_ini;
+static bool tier_match(int u,int v,int ru,int rv,int bank,int pal,int cmode){
+    if(!tier_ini){tier_ini=1;const char *path=getenv("GLES_TIER_TRACE"),*key=getenv("GLES_TIER_KEY");
+        if(path && key && sscanf(key,"%d,%d,%d,%d,%d,%d,%d",&tier_key[0],&tier_key[1],&tier_key[2],&tier_key[3],&tier_key[4],&tier_key[5],&tier_key[6])==7){tier_trace=fopen(path,"wx");if(!tier_trace){perror(path);exit(2);}}}
+    return tier_trace && u==tier_key[0] && v==tier_key[1] && ru==tier_key[2] && rv==tier_key[3] && bank==tier_key[4] && pal==tier_key[5] && cmode==tier_key[6];
+}
+static void tier_event(const char *action,const TexCacheEntry *e){
+    if(tier_match(e->min_u,e->min_v,e->range_u,e->range_v,e->texbank,e->pal_group,e->cmode)){
+        fprintf(tier_trace,"%u %s cap=%u generation=%u current_generation=%u texture=%u alloc=%ux%u used=%ux%u su=%a sv=%a\n",g_eng_frame,action,e->cap,e->pal_gen,g_eng_pal_gen[e->pal_group],e->gl_texture,e->alloc_w,e->alloc_h,e->used_w,e->used_h,e->su,e->sv);fflush(tier_trace);
+    }
+}
+
+void tex_bake_gles2_resource_dump(FILE *f,GLuint texture){
+    for(int i=0;i<TEX_CACHE_SIZE;i++){
+        const TexCacheEntry *e=&tex_cache[i];if(!e->occupied || e->gl_texture!=texture)continue;
+        fprintf(f,"T %u %u %u %u %u %u %u %u %u %u %u %u %a %a\n",e->min_u,e->min_v,e->range_u,e->range_v,e->texbank,e->pal_group,e->cmode,e->pal_gen,e->cap,e->alloc_w,e->alloc_h,e->used_w,e->su,e->sv);return;
+    }
+    fputs("T white\n",f);
+}
+#else
+#define tier_event(action,e)
+#define tier_match(u,v,ru,rv,bank,pal,cmode) false
+#endif
+
 
 
 double g_bake_texels;
@@ -766,6 +793,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 #ifdef RR_GLES2
             tt_event(7,slot,e->gl_texture,e->pal_gen,0);
 #endif
+            tier_event(peek?"peek-hit":"hit",e);
             tex_frame_hits++;
             e->ref = 1;
             if (g_caplog && cap != TEX_BAKE_MAX) fprintf(g_caplog, "%d %d %d %d %d %d %d\n", min_u, min_v, range_u, range_v, texbank, pal_group, cap);
@@ -776,6 +804,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             return atlas_on() ? apages[e->a_page].tex : e->gl_texture;
         }
     }
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    if(tier_match(min_u,min_v,range_u,range_v,texbank,pal_group,cmode)){fprintf(tier_trace,"%u %s cap=%d generation=%u request_extent=%d opaque=%d\n",g_eng_frame,peek?"peek-miss":"bake",cap,g_eng_pal_gen[pal_group],g_tex_bake_cap_req,g_tex_opaque);fflush(tier_trace);}
+#endif
     if (peek) return 0;
 #ifdef RR_GLES2
     tt_event(8,h,0,0,0);
@@ -1089,6 +1120,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         if (atlas_on()) atlas_free(slotp->a_page, slotp->a_x, slotp->a_y, slotp->alloc_w, slotp->alloc_h);
         else {
 #ifdef RR_GLES2
+            tier_event("replace",slotp);
             tex_free_push(slotp->gl_texture, slotp->alloc_w, slotp->alloc_h);
             slotp->alloc_w = slotp->alloc_h = 0;
 #else
@@ -1118,7 +1150,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             if (!e->occupied || e == slotp) continue;
             if (e->ref && !g_tex_fifo) { e->ref = 0; continue; }
             if (atlas_on()) atlas_free(e->a_page, e->a_x, e->a_y, e->alloc_w, e->alloc_h);
-            else tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);
+            else {tier_event("budget-evict",e);tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);}
             tex_cache_bytes -= e->bytes;
             tex_cache_total--;
             tex_cache_evictions++;
@@ -1245,7 +1277,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             if (!e->occupied || e == slotp) continue;
             if (e->ref && !g_tex_fifo) { e->ref = 0; continue; }
             if (atlas_on()) atlas_free(e->a_page, e->a_x, e->a_y, e->alloc_w, e->alloc_h);
-            else tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);
+            else {tier_event("budget-evict",e);tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);}
             tex_cache_bytes -= e->bytes;
             tex_cache_total--;
             tex_cache_evictions++;
@@ -1278,6 +1310,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     if (!slotp->occupied) tex_cache_total++;
     slotp->occupied = 1;
     slotp->ref = 1;
+    tier_event("stored",slotp);
     return tex;
 }
 

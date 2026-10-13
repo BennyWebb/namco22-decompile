@@ -268,6 +268,18 @@ bool rr_gles2_options(int *argc, char **argv)
                 fprintf(stderr, "[GLES2] VBO upload mode: frame or legacy\n"); return false;
             }
         }
+        else if (!strcmp(argv[i], "--gles-multitexture") && i+1 < *argc) {
+            if (!eng_gles2_multitexture_mode(argv[++i])) {
+                fprintf(stderr, "[GLES2] four-texture mode: off|shader|batch (experimental build required)\n");
+                return false;
+            }
+        }
+        else if (!strcmp(argv[i], "--gles-multitexture-gpu-trace") && i+1 < *argc) {
+            if (!eng_gles2_multi_gpu_trace(argv[++i])) {
+                fprintf(stderr, "[GLES2] GPU trace requires the experimental build\n");
+                return false;
+            }
+        }
         else if (!strcmp(argv[i], "--profile-from") && i+1 < *argc) {
             char *end; const char *number = argv[++i]; errno = 0;
             unsigned long n = strtoul(number, &end, 10);
@@ -511,6 +523,19 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     tex_bake_gles2_report();
     return true;
 }
+/* Diagnostic-only collection at selected normally presented ticks. */
+static bool capture_requested_ticks(uint32_t frame,const eng_gles2_stats *stats)
+{
+    static bool init;static const char *dir,*ticks;
+    if(!init){init=true;dir=getenv("GLES_CAPTURE_DIRECTORY");ticks=getenv("GLES_CAPTURE_TICKS");}
+    if(!dir || !ticks)return true;
+    const char *p=ticks;bool selected=false;
+    while(*p){char *end;unsigned long n=strtoul(p,&end,10);if(end==p)return false;if(n==frame)selected=true;if(*end && *end!=',')return false;p=*end?end+1:end;}
+    if(!selected)return true;
+    char path[1024];snprintf(path,sizeof path,"%s/%u.ppm",dir,frame);
+    const char *saved=capture_path;capture_path=path;bool ok=capture(frame,stats);capture_path=saved;return ok;
+}
+
 
 static bool deferred_record_exit;
 bool rr_gles2_record_exit_pending(void) {return deferred_record_exit;}
@@ -579,6 +604,7 @@ static bool choose_presentation(uint32_t frame)
 
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3])
 {
+    eng_gles2_present_tick(frame);
     eng_audit_end(audit_scene);
     double scene_elapsed = seconds() - prepare_start;
     rr_sim_enter(SIM_PRESENT);
@@ -615,6 +641,7 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     double capture_start = seconds();
     if(!rr_gl_video_compose()){failed=true;return false;}
     rr_overlay_draw();
+    if(!capture_requested_ticks(frame,&stats)){failed=true;return false;}
     if (capture_frame == frame && !capture(frame, &stats)) { failed = true; return false; }
     double capture_elapsed = seconds() - capture_start;
     double swap_start = seconds();
@@ -664,6 +691,7 @@ static bool rr_gles2_present_impl(uint32_t frame,const geo_quad *quads,int count
                                   const float bg[3],double scene,
                                   const rr_presentation *prepared)
 {
+    eng_gles2_present_tick(frame);
     eng_gles2_stats stats;double start=seconds();
     rr_video_layers_profile_gate(frame>=profile_from);
     rr_video_layers_begin();
@@ -684,6 +712,7 @@ static bool rr_gles2_present_impl(uint32_t frame,const geo_quad *quads,int count
 #endif
     {failed=true;return false;}
     rr_overlay_draw();
+    if(!capture_requested_ticks(frame,&stats)){failed=true;return false;}
     if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
     double swap_start=seconds();SDL_GL_SwapWindow(window);last_presentation=presentation_timestamp();double swap=seconds()-swap_start;rr_overlay_present(frame,last_presentation);
     last_metrics=(rr_presentation_metrics){draw,stats.draw_seconds,swap,stats.draws,stats.triangles,stats.binds,

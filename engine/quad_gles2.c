@@ -18,7 +18,11 @@ float g_scene_x0 = 0, g_scene_x1 = ENG_SCREEN_W;
 #include "gles_submission_profile.inc"
 
 #define MAX_VERTICES 60000
-typedef struct { float position[3], colour[4], uvq[3]; } vertex;
+typedef struct { float position[3], colour[4], uvq[3];
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    float texture_slot;
+#endif
+} vertex;
 static vertex batch[MAX_VERTICES];
 /* Ordered commands share the existing CPU arena; no geometry is reordered. */
 #define MAX_COMMANDS 4096
@@ -34,6 +38,42 @@ bool eng_gles2_vbo_mode(const char *name)
 const char *eng_gles2_vbo_mode_name(void) { return frame_upload ? "frame" : "legacy"; }
 static GLuint program, vbo, white;
 static GLint projection, sampler, priority_uniform;
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+enum { MULTI_UNITS = 4 };
+enum { MULTI_OFF, MULTI_SHADER_PROBE, MULTI_BATCH };
+static int multi_mode;
+static GLint multi_samplers[MULTI_UNITS];
+typedef struct {
+    int first, count, scissor[4];
+    GLuint textures[MULTI_UNITS];
+    unsigned texture_count;
+} multi_group;
+static multi_group multi_groups[MAX_COMMANDS];
+static int multi_group_count;
+#endif
+#include "gles_multi_gpu_trace.inc"
+bool eng_gles2_multitexture_mode(const char *name)
+{
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (!strcmp(name, "off")) multi_mode = MULTI_OFF;
+    else if (!strcmp(name, "shader")) multi_mode = MULTI_SHADER_PROBE;
+    else if (!strcmp(name, "batch")) multi_mode = MULTI_BATCH;
+    else return false;
+    return true;
+#else
+    return !strcmp(name, "off");
+#endif
+}
+bool eng_gles2_multi_gpu_trace(const char *path)
+{
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    multi_gpu_path = path;
+    return true;
+#else
+    (void)path;
+    return false;
+#endif
+}
 static bool priority_enabled;
 void eng_gles2_priority(bool enabled) {priority_enabled=enabled;}
 static GLuint batch_texture;
@@ -41,6 +81,7 @@ static eng_gles2_stats *current_stats;
 static bool diagnostic, flush_failed;
 static bool white_batches;
 static const char *mode_name = "textured";
+#include "gles_multi_validation.inc"
 #ifdef RR_GLES_SUBMISSION_PROFILE
 /* Diagnostic upper bounds: count contiguous draws that could share a shader
  * with N texture units. Scissor and submission/mutation barriers still split
@@ -161,6 +202,14 @@ static GLuint compile(GLenum type, const char *source)
 
 bool eng_gles2_init(void)
 {
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode == MULTI_BATCH && !frame_upload) {
+        fprintf(stderr, "[GLES2] multi-texture batches require --vbo-upload frame\n");
+        return false;
+    }
+    fprintf(stderr, "[GLES2] four-texture experiment=%s\n",
+            multi_mode == MULTI_BATCH ? "batch" : multi_mode == MULTI_SHADER_PROBE ? "shader" : "off");
+#endif
 #ifdef RR_GLES_SUBMISSION_PROFILE
     const char *trace_path = getenv("GLES_BATCH_TRACE");
     if (trace_path) {
@@ -179,6 +228,18 @@ bool eng_gles2_init(void)
         "varying highp vec3 v_uvq;\n"
         "void main() { gl_Position = u_projection * vec4(a_position, 1.0);"
         " v_colour = a_colour; v_uvq = a_uvq; }\n";
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    static const char *vs_multi =
+        "#version 100\n"
+        "attribute vec3 a_position; attribute vec4 a_colour; attribute vec3 a_uvq;"
+        "attribute float a_texture_slot; uniform mat4 u_projection;"
+        "varying mediump vec4 v_colour; varying highp vec3 v_uvq;"
+        "varying mediump float v_texture_slot;"
+        "void main() { gl_Position = u_projection * vec4(a_position, 1.0);"
+        " v_colour = a_colour; v_uvq = a_uvq; v_texture_slot = a_texture_slot; }\n";
+    static const char *fs_multi_priority = "#version 100\nprecision highp float;uniform sampler2D u_tex0;uniform sampler2D u_tex1;uniform sampler2D u_tex2;uniform sampler2D u_tex3;uniform bool u_priority;varying mediump vec4 v_colour;varying highp vec3 v_uvq;varying mediump float v_texture_slot;void main(){vec2 uv=v_uvq.xy/v_uvq.z;vec4 texel;if(v_texture_slot<0.5)texel=texture2D(u_tex0,uv);else if(v_texture_slot<1.5)texel=texture2D(u_tex1,uv);else if(v_texture_slot<2.5)texel=texture2D(u_tex2,uv);else texel=texture2D(u_tex3,uv);if(texel.a==0.0)discard;vec4 c=v_colour*texel;gl_FragColor=u_priority?vec4(c.rgb,v_colour.a):c;}";
+    static const char *fs_multi_legacy = "#version 100\nprecision highp float;uniform sampler2D u_tex0;uniform sampler2D u_tex1;uniform sampler2D u_tex2;uniform sampler2D u_tex3;varying mediump vec4 v_colour;varying highp vec3 v_uvq;varying mediump float v_texture_slot;void main(){vec2 uv=v_uvq.xy/v_uvq.z;vec4 texel;if(v_texture_slot<0.5)texel=texture2D(u_tex0,uv);else if(v_texture_slot<1.5)texel=texture2D(u_tex1,uv);else if(v_texture_slot<2.5)texel=texture2D(u_tex2,uv);else texel=texture2D(u_tex3,uv);if(texel.a==0.0)discard;gl_FragColor=v_colour*texel;}";
+#endif
     static const char *fs_priority =
         "#version 100\nprecision highp float;\n"
         "uniform sampler2D u_texture;uniform bool u_priority;\n"
@@ -198,6 +259,16 @@ bool eng_gles2_init(void)
         " vec4 texel = texture2D(u_texture, uv);"
         " if (texel.a == 0.0) discard; gl_FragColor = v_colour * texel; }\n";
     const char *fs=priority_enabled?fs_priority:fs_legacy;
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    mv_vs=vs;mv_fs=fs;
+#endif
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode) { vs = vs_multi; fs = priority_enabled ? fs_multi_priority : fs_multi_legacy; }
+#endif
+    GLint max_units=0;glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS,&max_units);
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if(multi_mode && max_units<MULTI_UNITS){fprintf(stderr,"[GLES2] four texture units required\n");return false;}
+#endif
     GLint max_texture, precision, range[2];
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture);
     glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, range, &precision);
@@ -224,6 +295,9 @@ bool eng_gles2_init(void)
     glBindAttribLocation(program, 0, "a_position");
     glBindAttribLocation(program, 1, "a_colour");
     glBindAttribLocation(program, 2, "a_uvq");
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode) glBindAttribLocation(program, 3, "a_texture_slot");
+#endif
     glLinkProgram(program);
     glDeleteShader(v); glDeleteShader(f);
     GLint ok, length;
@@ -237,7 +311,22 @@ bool eng_gles2_init(void)
     projection = glGetUniformLocation(program, "u_projection");
     sampler = glGetUniformLocation(program, "u_texture");
     priority_uniform=glGetUniformLocation(program,"u_priority");
-    if (projection < 0 || (sampler < 0 && !AUDIT_FLAT)) { fprintf(stderr, "[GLES2] missing shader uniforms\n"); return false; }
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode) for (int i = 0; i < MULTI_UNITS; i++) {
+        char name[16]; snprintf(name, sizeof name, "u_tex%d", i);
+        multi_samplers[i] = glGetUniformLocation(program, name);
+        if (multi_samplers[i] < 0) { fprintf(stderr, "[GLES2] missing multi-texture sampler %d\n", i); return false; }
+    }
+#endif
+    if (projection < 0 ||
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+        (!multi_mode &&
+#endif
+        (sampler < 0 && !AUDIT_FLAT)
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+        )
+#endif
+        ) { fprintf(stderr, "[GLES2] missing shader uniforms\n"); return false; }
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     if (!frame_upload) glBufferData(GL_ARRAY_BUFFER, sizeof batch, NULL, GL_DYNAMIC_DRAW);
@@ -263,17 +352,56 @@ bool eng_gles2_init(void)
     fprintf(stderr, "[GLES2] GLSL ES 1.00 linked; textures=%s budget=%zu; per-texture cache, atlas disabled\n",
             mode_name, texture_budget);
     fprintf(stderr, "[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets\n");
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (!multi_gpu_open() || !mv_open()) return false;
+#endif
     return true;
 }
 
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+static bool multi_prepare_groups(void)
+{
+    multi_group_count = 0;
+    for (int i = 0; i < command_count; i++) {
+        const draw_command *c = &commands[i];
+        multi_group *g = multi_group_count ? &multi_groups[multi_group_count-1] : NULL;
+        unsigned slot = 0;
+        if (g && !memcmp(g->scissor, c->scissor, sizeof g->scissor) &&
+            g->first + g->count == c->first) {
+            while (slot < g->texture_count && g->textures[slot] != c->texture) slot++;
+            if (slot == MULTI_UNITS) g = NULL;
+        } else g = NULL;
+        if (!g) {
+            if (multi_group_count >= MAX_COMMANDS) return false;
+            g = &multi_groups[multi_group_count++];
+            g->first = c->first; g->count = 0; g->texture_count = 0;
+            memcpy(g->scissor, c->scissor, sizeof g->scissor);
+            slot = 0;
+        }
+        if (slot == g->texture_count) g->textures[g->texture_count++] = c->texture;
+        for (int v = c->first; v < c->first + c->count; v++) batch[v].texture_slot = (float)slot;
+        g->count += c->count;
+    }
+    return true;
+}
+#endif
 static bool submit_commands(eng_gles2_stats *stats)
 {
     if (!command_count) return true;
 #ifdef RR_GLES_SUBMISSION_PROFILE
     batch_trace_chunk();
 #endif
+    SP_FULL_BEGIN();
     eng_audit_scope audit_submit=eng_audit_begin(AUD_SUBMIT);
-    double start = seconds(), vertex_start = start;
+    double start = seconds();
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode == MULTI_BATCH) {
+        SP_BEGIN(sp_group,6,1);
+        if (!multi_prepare_groups()) return false;
+        SP_END(sp_group);
+    }
+#endif
+    double vertex_start = seconds();
     size_t bytes = (size_t)batch_first * sizeof(vertex);
     /* GLES2 glBufferData re-specifies the store rather than overwriting the
      * in-flight offset-zero range. Driver storage renaming is implementation
@@ -291,6 +419,37 @@ static bool submit_commands(eng_gles2_stats *stats)
      * ownership afresh for each submitted chunk, never cache across chunks. */
     int submitted_scissor[4] = {-1,-1,-1,-1};
     glEnable(GL_SCISSOR_TEST);
+#endif
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode == MULTI_BATCH) {
+        for (int i = 0; i < multi_group_count; i++) {
+            const multi_group *g = &multi_groups[i];
+            int sampled=SP_SAMPLE;
+            SP_BEGIN(sp_state,2,sampled);
+            if (memcmp(submitted_scissor, g->scissor, sizeof submitted_scissor)) {
+                glScissor(g->scissor[0]/AUDIT_DIVISOR, g->scissor[1]/AUDIT_DIVISOR,
+                    (g->scissor[2]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR,
+                    (g->scissor[3]+AUDIT_DIVISOR-1)/AUDIT_DIVISOR);
+                memcpy(submitted_scissor, g->scissor, sizeof submitted_scissor);
+            }
+            for (unsigned slot = 0; slot < g->texture_count; slot++) {
+                glActiveTexture(GL_TEXTURE0 + slot);
+                tex_bake_gles2_binding_reset();
+                tex_bake_gles2_bind(GL_TEXTURE_2D, white_batches ? white : g->textures[slot]);
+            }
+            glActiveTexture(GL_TEXTURE0);
+            tex_bake_gles2_binding_reset();
+            SP_END(sp_state);
+            double call_start = seconds();
+            eng_audit_scope audit_draw=eng_audit_begin(AUD_DRAW);
+            SP_BEGIN(sp_draw,3,sampled);
+            if (!AUDIT_NO_DRAW) glDrawArrays(GL_TRIANGLES, g->first, g->count);
+            SP_END(sp_draw);
+            eng_audit_end(audit_draw);
+            stats->draw_call_seconds += seconds() - call_start;
+            stats->triangles += (unsigned)g->count / 3; stats->draws++;
+        }
+    } else
 #endif
     for (int i = 0; i < command_count; i++) {
         const draw_command *c = &commands[i];
@@ -318,6 +477,7 @@ static bool submit_commands(eng_gles2_stats *stats)
         stats->draw_call_seconds += seconds() - call_start;
         stats->triangles += (unsigned)c->count / 3; stats->draws++;
     }
+    if (!mv_chunk()) return false;
     bool ok = check_gl("submit vertex chunk");
     /* A cache barrier may drain earlier commands while another texture's
      * pending vertices remain. Retain those vertices at the arena start. */
@@ -325,6 +485,7 @@ static bool submit_commands(eng_gles2_stats *stats)
     batch_first = command_count = 0;
     stats->draw_seconds += seconds() - start;
     eng_audit_end(audit_submit);
+    SP_FULL_END();
     return ok;
 }
 
@@ -386,6 +547,7 @@ bool eng_gles2_draw_ordered(const geo_quad *quads, const int *order, int count,
 bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gles2_stats *stats)
 #endif
 {
+    SP_FULL_FRAME_BEGIN();
     memset(stats, 0, sizeof *stats);
     int hits_before = tex_frame_hits, misses_before = tex_frame_misses;
     int evictions_before = tex_cache_evictions, uploads_count_before = tex_reallocs + tex_subimages;
@@ -396,6 +558,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
     used = batch_first = command_count = 0; batch_texture = white; current_stats = stats; flush_failed = false;
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    multi_gpu_begin(g_eng_frame);
+#endif
 #ifdef RR_GLES_SUBMISSION_PROFILE
     memset(&batch_bounds, 0, sizeof batch_bounds);
 #endif
@@ -413,16 +578,28 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     const GLfloat matrix[16] = {2.0f/640,0,0,0, 0,-2.0f/480,0,0, 0,0,1,0, -1,1,0,1};
     glUseProgram(program);
     glUniformMatrix4fv(projection, 1, GL_FALSE, matrix);
-    glUniform1i(sampler, 0);
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode) for (int i = 0; i < MULTI_UNITS; i++)
+        glUniform1i(multi_samplers[i], multi_mode == MULTI_BATCH ? i : 0);
+    else
+#endif
+        glUniform1i(sampler, 0);
     if(priority_uniform>=0)glUniform1i(priority_uniform,priority_enabled);
     glActiveTexture(GL_TEXTURE0); tex_bake_gles2_bind(GL_TEXTURE_2D, white);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    if (!mv_begin(bg)) return false;
     SP_END(sp_setup);
     SP_BEGIN(sp_attributes,1,1);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, position));
     glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, colour));
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, uvq));
     for (int i = 0; i < 3; i++) glEnableVertexAttribArray((GLuint)i);
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    if (multi_mode) {
+        glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, texture_slot));
+        glEnableVertexAttribArray(3);
+    }
+#endif
     SP_END(sp_attributes);
     int previous[4] = {-1,-1,-1,-1};
     for (int qi = 0; qi < count; qi++) {
@@ -524,6 +701,18 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
         float colour[4] = {0.25f+(hash>>24&255)/340.0f,
             0.25f+(hash>>16&255)/340.0f, 0.25f+(hash>>8&255)/340.0f, 1};
         float z = 0.9f - 1.8f * (qi+1.0f) / (count+1.0f);
+
+#ifdef RR_GLES_SUBMISSION_PROFILE
+        static FILE *resource_output;FILE *resource_dump=NULL;
+        if(getenv("GLES_RESOURCE_DUMP") && multi_present_tick==(unsigned)strtoul(getenv("GLES_RESOURCE_DUMP_FRAME")?getenv("GLES_RESOURCE_DUMP_FRAME"):"2500",NULL,10)){
+            if(!resource_output){resource_output=fopen(getenv("GLES_RESOURCE_DUMP"),"wx");if(!resource_output)return false;}
+            resource_dump=resource_output;
+        }
+        if(resource_dump){
+            fprintf(resource_dump,"P %d %u %d %d %d %d %d %d %d %d %d %d %a %a %a %a %d %d %d %d\n",qi,texture,q->pick_code,q->texbank,q->color,q->cmode,bu,bv,bru,brv,n,solid,su,sv,ou,ov,box[0],box[1],box[2],box[3]);
+            extern void tex_bake_gles2_resource_dump(FILE *,GLuint);tex_bake_gles2_resource_dump(resource_dump,texture);
+        }
+#endif
         for (int triangle = 1; triangle+1 < n; triangle++) {
             for (int corner = 0; corner < 3; corner++) {
                 const geo_sv *v = &clipped[eng_fan_index(triangle, corner)];
@@ -535,10 +724,25 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
                     out->colour[3] = priority_enabled ? ((q->cmode&7)==1 ? 1 : 0) : 1;
                 }
                 out->uvq[0]=v->s; out->uvq[1]=v->t; out->uvq[2]=v->w;
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+                out->texture_slot=0;
+#endif
+#ifdef RR_GLES_SUBMISSION_PROFILE
+                if(resource_dump)fprintf(resource_dump,"V %a %a %a %a %a %a %a %a %a %a\n",out->position[0],out->position[1],out->position[2],out->colour[0],out->colour[1],out->colour[2],out->colour[3],out->uvq[0],out->uvq[1],out->uvq[2]);
+#endif
             }
         }
     }
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    /* Manifest runs end at the selected capture tick. */
+    if(getenv("GLES_RESOURCE_DUMP"))fflush(NULL);
+#endif
     bool ok = flush(stats, END) && (!frame_upload || submit_commands(stats)) && check_gl("end frame");
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    multi_gpu_end();
+#endif
+    if (!mv_end()) return false;
+    SP_FULL_FRAME_END();
     stats->cache_hits = (unsigned)(tex_frame_hits - hits_before);
     stats->cache_misses = (unsigned)(tex_frame_misses - misses_before);
     stats->cache_evictions = (unsigned)(tex_cache_evictions - evictions_before);
@@ -574,6 +778,10 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
 
 void eng_gles2_close(void)
 {
+#ifdef RR_GLES2_MULTITEXTURE_BATCH
+    mv_close();
+    multi_gpu_close();
+#endif
 #ifdef RR_GLES_SUBMISSION_PROFILE
     if (batch_trace) { fclose(batch_trace); batch_trace = NULL; }
 #endif
