@@ -1,0 +1,47 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "playable-native",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/playable-native",
+      "cacheVariables": {
+        "RR_GLES2": "ON",
+        "RR_THREADED_PRESENTATION": "ON",
+        "RR_ORDERED_SUBMISSION": "ON",
+        "RR_GEOMETRY_INDEX_ORDER": "ON",
+        "RR_GEOMETRY_REUSE_PROJECTION": "ON",
+        "RR_FAST_MEMORY_READS": "ON",
+        "RR_SPLIT_MEMORY_READER": "ON",
+        "RR_C352_INACTIVE_FASTPATH": "ON",
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "RR_PIPELINE_AUDIT": "OFF",
+        "RR_GLES_SUBMISSION_PROFILE": "OFF",
+        "RR_MEMORY_READ_COUNTERS": "OFF",
+        "RR_C352_VOICE_COUNTERS": "OFF",
+        "RR_GEOMETRY_PROJECTION_PROFILE": "OFF"
+      }
+    },
+    {
+      "name": "playable-knulli",
+      "inherits": "playable-native",
+      "binaryDir": "${sourceDir}/build/playable-knulli",
+      "toolchainFile": "${sourceDir}/cmake/knulli-aarch64.cmake",
+      "cacheVariables": {
+        "KNULLI_HOST": "$env{HOME}/dev/knulli-scarab/output/h700/host"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "playable-native",
+      "configurePreset": "playable-native",
+      "jobs": 4
+    },
+    {
+      "name": "playable-knulli",
+      "configurePreset": "playable-knulli",
+      "jobs": 4
+    }
+  ]
+}

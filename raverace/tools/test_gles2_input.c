@@ -7,6 +7,10 @@
 #include <assert.h>
 #include <stdbool.h>
 static SDL_GameController *controllers[16];
+#ifdef RR_GLES2
+static unsigned overlay_toggles;
+void rr_overlay_toggle(void) { overlay_toggles++; }
+#endif
 #include "../src/rr_gles2_input.inc"
 rr_hw_t g_hw;
 static const rr_game_t game={.steer_min=0x280,.steer_max=0xd80,.gas_max=0x610,.brake_max=0x610,.gas_delta=160,.brake_delta=160};
@@ -26,6 +30,11 @@ int main(int argc,char **argv)
     controllers[0]=SDL_GameControllerOpen(index); assert(controllers[0]);
     SDL_Joystick *js=SDL_GameControllerGetJoystick(controllers[0]);
     interactive=true; g_hw.inputs=0xfeff; g_hw.steer=0x800;
+#ifdef RR_GLES2
+    SDL_Event overlay_event={.type=SDL_CONTROLLERBUTTONDOWN};
+    overlay_event.cbutton.button=SDL_CONTROLLER_BUTTON_Y;
+    assert(input_event(&overlay_event));assert(overlay_toggles==1);
+#endif
     tick();assert(g_hw.steer==0x800 && g_hw.gas==0 && (g_hw.inputs&0x1000));
     SDL_JoystickSetVirtualButton(js,4,1);tick();assert(!(g_hw.inputs&0x1000));
     SDL_JoystickSetVirtualButton(js,4,0);SDL_JoystickSetVirtualButton(js,5,1);tick();assert(g_hw.gas==160 && (g_hw.inputs&0x1000));

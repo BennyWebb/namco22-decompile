@@ -43,7 +43,7 @@ static unsigned steps, dropped, queue_peak, range_dropped, range_resyncs;
 static double range_discarded;
 typedef struct {
     uint32_t frame;
-    double begin, end, cpu, scene, age;
+    double begin, end, cpu, scene, age, presented;
     unsigned age_ticks, core;
 } render_record;
 static render_record records[RECORDS];
@@ -116,6 +116,7 @@ static bool render(const rr_presentation *snapshot)
     double scene = now() - start;
     bool ok = rr_gles2_present(snapshot->frame, quads, count, bg, scene);
     double end = now(), cost = stamp(CLOCK_THREAD_CPUTIME_ID) - cpu;
+    double presented=rr_gles2_last_presentation();
     rr_gl_presentation_release();
 
     metadata_lock();
@@ -124,7 +125,7 @@ static bool render(const rr_presentation *snapshot)
     if (snapshot->frame >= first) {
         render_cpu += cost;
         render_scene += scene;
-        render_age += end - snapshot->produced;
+        render_age += presented - snapshot->produced;
         tail_end[render_count % SLOTS] = end;
         render_count++;
         if (core < 4) worker_cores[core]++;
@@ -133,7 +134,7 @@ static bool render(const rr_presentation *snapshot)
     if (snapshot->frame >= first) {
         if (record_count < RECORDS)
             records[record_count++] = (render_record){ snapshot->frame, start, end,
-                cost, scene, end - snapshot->produced, age, core };
+                cost, scene, presented - snapshot->produced, presented, age, core };
         else record_overflow++;
     }
     return ok;
@@ -315,6 +316,9 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         memcpy(snapshot->pal, g_rr.pal, sizeof snapshot->pal);
         memcpy(snapshot->mixer, g_rr.mixer, sizeof snapshot->mixer);
         memcpy(snapshot->czram, g_rr.czram, sizeof snapshot->czram);
+        memcpy(snapshot->cgram,g_rr.cgram,sizeof snapshot->cgram);
+        memcpy(snapshot->text,g_rr.text,sizeof snapshot->text);
+        memcpy(snapshot->tilemapattr,g_rr.tilemapattr,sizeof snapshot->tilemapattr);
         memcpy(snapshot->generation, generation, sizeof generation);
         snapshot->point_valid = rr_dsp_copy_point(snapshot->point);
         for (unsigned i = 0; i < direct; i++)
@@ -380,11 +384,11 @@ bool rr_presentation_finish(void)
     FILE *csv = csv_path ? fopen(csv_path, "w") : NULL;
     if (csv_path && !csv) { perror("thread profile CSV"); ok = false; }
     if (csv) {
-        fprintf(csv, "frame,start,end,cpu,scene_wall,publication_age,age_ticks,core\n");
+        fprintf(csv, "frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented\n");
         for (unsigned i = 0; i < record_count; i++) {
             const render_record *r = &records[i];
-            fprintf(csv, "%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u\n", r->frame,
-                    r->begin, r->end, r->cpu, r->scene, r->age, r->age_ticks, r->core);
+            fprintf(csv, "%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f\n", r->frame,
+                    r->begin, r->end, r->cpu, r->scene, r->age, r->age_ticks, r->core,r->presented);
         }
         if (ferror(csv)) ok = false;
         if (fclose(csv)) { perror("thread profile CSV close"); ok = false; }
@@ -425,4 +429,16 @@ bool rr_presentation_finish(void)
     slots = NULL;
     started = false;
     return ok;
+}
+
+/* Called by the consumer after swapping; metadata lock never covers GL. */
+void rr_presentation_overlay(unsigned *frame,unsigned *drops,unsigned *queued,double *age_ms,double timestamp)
+{
+    metadata_lock();
+    *frame=last_frame; *drops=dropped; *queued=0;
+    for(int i=0;i<SLOTS;i++){
+        if(state[i]==READY)(*queued)++;
+        if(state[i]==READING)*age_ms=(timestamp-slots[i].produced)*1000.;
+    }
+    pthread_mutex_unlock(&mutex);
 }

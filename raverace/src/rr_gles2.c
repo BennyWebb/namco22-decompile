@@ -5,6 +5,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include <time.h>
 #include "eng_gl.h"
 #include "quad_gles2.h"
 #include "quad_gl.h"
@@ -12,6 +13,9 @@
 #include "rr_gles2.h"
 #include "rr_sim_profile.h"
 #include "rr_mem.h"
+#include "rr_video_layers.h"
+#include "rr_overlay.h"
+#include "rr_sound.h"
 #ifdef RR_THREADED_PRESENTATION
 #include "rr_presentation.h"
 #endif
@@ -29,6 +33,7 @@ static SDL_Joystick *raw_joysticks[16];
 #include "rr_gles2_input.inc"
 static bool failed, unpaced, captured, independent, timing_explicit, profile_memory;
 static unsigned render_hz, test_present_every;
+static bool audio_enabled, audio_explicit;
 static bool skip_geometry, frame_render = true;
 static double early_host_wait;
 static bool range_clock_started;
@@ -54,7 +59,13 @@ static unsigned timing_steps, timing_renders, timing_skipped, timing_steps_windo
 static void timing_report(const char *kind);
 static uint32_t capture_frame;
 static const char *capture_path;
-static double next_frame, report_start;
+static double next_frame, report_start, last_presentation;
+double rr_gles2_last_presentation(void){return last_presentation;}
+static double presentation_timestamp(void)
+{
+    struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);
+    return t.tv_sec+t.tv_nsec*1e-9;
+}
 static unsigned report_frames;
 static bool saw_geometry;
 static uint32_t profile_from = 1;
@@ -175,6 +186,8 @@ bool rr_gles2_options(int *argc, char **argv)
 #ifdef RR_THREADED_PRESENTATION
         if(!strcmp(argv[i],"--thread-sync-profile")) {thread_sync_profile=true;continue;}
 #endif
+        if(!strcmp(argv[i],"--profile-video")){rr_video_layers_profile(true);continue;}
+        if(!strcmp(argv[i],"--video-layers") && i+1<*argc) {const char *v=argv[++i];if(strcmp(v,"on")&&strcmp(v,"off"))return false;rr_video_layers_enable(!strcmp(v,"on"));continue;}
         if (!strcmp(argv[i], "--timing") && i+1 < *argc) {
             const char *mode=argv[++i];
             if (strcmp(mode,"independent") && strcmp(mode,"coupled")) {
@@ -221,7 +234,18 @@ bool rr_gles2_options(int *argc, char **argv)
         else if (!strcmp(argv[i],"--audit-detail")) eng_audit_detailed=true;
         else if (!strcmp(argv[i],"--audit-flat-fragment")) eng_audit_flat_fragment=true;
         else if (!strcmp(argv[i],"--audit-half-resolution")) eng_audit_divisor=2;
+        else if (!strcmp(argv[i], "--overlay")) {
+            if (++i >= *argc || !rr_overlay_mode(argv[i])) {
+                fprintf(stderr,"[OVERLAY] expected off|compact|expanded\n"); return false;
+            }
+        }
         else if (!strcmp(argv[i], "--interactive")) interactive = true;
+        else if (!strcmp(argv[i], "--audio")) {
+            if (++i >= *argc || (strcmp(argv[i], "on") && strcmp(argv[i], "off"))) {
+                fprintf(stderr, "[AUDIO] --audio requires on|off\n"); return false;
+            }
+            audio_enabled = !strcmp(argv[i], "on"); audio_explicit = true;
+        }
         else if (!strcmp(argv[i], "--input-log")) input_log = true;
         else if (!strcmp(argv[i], "--controller-db") && i+1 < *argc) controller_db = argv[++i];
         else if (!strcmp(argv[i], "--es-input") && i+1 < *argc) es_input = argv[++i];
@@ -275,6 +299,7 @@ bool rr_gles2_options(int *argc, char **argv)
     else
 #endif
     if (!timing_explicit) independent=interactive;
+    if (!audio_explicit) audio_enabled=interactive;
 #ifdef RR_THREADED_PRESENTATION
     if(thread_mode && !independent){fprintf(stderr,"[THREAD] requires independent timing\n");return false;}
 #endif
@@ -406,10 +431,12 @@ bool rr_gles2_open(void)
     }
     if (SDL_GL_SetSwapInterval((unpaced || independent) ? 0 : 1) != 0)
         fprintf(stderr, "[GLES2] swap interval: %s; software pacing available\n", SDL_GetError());
-    if (!eng_gles2_init()) { failed = true; return false; }
+    eng_gles2_priority(rr_video_layers_enabled());
+    if (!eng_gles2_init() || !rr_video_layers_open()) { failed = true; return false; }
     if (controller_db && SDL_GameControllerAddMappingsFromFile(controller_db) < 0) {
         fprintf(stderr,"[INPUT] controller database: %s\n",SDL_GetError()); failed=true; return false;
     }
+    if (audio_enabled && !rr_audio_output_open()) { failed=true; return false; }
     scan_controllers();
     fprintf(stderr,"[INPUT] mode=%s; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit\n",
             interactive ? "interactive" : "scripted");
@@ -545,6 +572,8 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
     double draw_start = seconds();
     gpu_begin_frame(frame);
     eng_audit_scope audit_backend=eng_audit_begin(AUD_BACKEND);
+    rr_video_layers_profile_gate(frame>=profile_from);
+    rr_video_layers_begin();
     if (!eng_gles2_draw(quads, count, bg, &stats)) { failed = true; return false; }
     eng_audit_end(audit_backend);
     gpu_end_frame();
@@ -554,13 +583,17 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
         saw_geometry = true;
     }
     double capture_start = seconds();
+    if(!rr_gl_video_compose()){failed=true;return false;}
+    rr_overlay_draw();
     if (capture_frame == frame && !capture(frame, &stats)) { failed = true; return false; }
     double capture_elapsed = seconds() - capture_start;
     double swap_start = seconds();
     eng_audit_scope audit_swap=eng_audit_begin(AUD_SWAP);
     SDL_GL_SwapWindow(window);
+    last_presentation=presentation_timestamp();
     eng_audit_end(audit_swap);
     double swap_elapsed = seconds() - swap_start;
+    rr_overlay_present(frame,last_presentation);
     report_frames++;
     double now = seconds();
     if (now - report_start >= 5) {
@@ -598,10 +631,14 @@ bool rr_gles2_pump(void) {return pump_input();}
 bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float bg[3],double scene)
 {
     eng_gles2_stats stats;double start=seconds();
+    rr_video_layers_profile_gate(frame>=profile_from);
+    rr_video_layers_begin();
     if(!eng_gles2_draw(quads,count,bg,&stats)){failed=true;return false;}
     double draw=seconds()-start;
+    if(!rr_gl_video_compose()){failed=true;return false;}
+    rr_overlay_draw();
     if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
-    double swap_start=seconds();SDL_GL_SwapWindow(window);double swap=seconds()-swap_start;
+    double swap_start=seconds();SDL_GL_SwapWindow(window);last_presentation=presentation_timestamp();double swap=seconds()-swap_start;rr_overlay_present(frame,last_presentation);
     if(frame>=profile_from)profile_add(&total_profile,frame,&stats,scene,draw,swap,0,0);
     if(seconds()-report_start>=5){
         fprintf(stderr,"[THREAD-FRAME] frame=%u quads=%d triangles=%u draws=%u binds=%u\n",frame,count,stats.triangles,stats.draws,stats.binds);
@@ -680,7 +717,7 @@ void rr_gles2_close(void)
     if (capture_frame && !captured) { fprintf(stderr, "[GLES2] requested geometry capture was not completed\n"); failed = true; }
     for (int i = 0; i < 16; i++) if (controllers[i]) { SDL_GameControllerClose(controllers[i]); controllers[i] = NULL; }
     for (int i=0;i<16;i++) if (raw_joysticks[i]) { SDL_JoystickClose(raw_joysticks[i]); raw_joysticks[i]=NULL; }
-    if (context) { eng_gles2_close(); SDL_GL_DeleteContext(context); context = NULL; }
+    if (context) { rr_overlay_close();rr_video_layers_close();eng_gles2_close(); SDL_GL_DeleteContext(context); context = NULL; }
     SDL_DestroyWindow(window); window = NULL;
     SDL_Quit();
 }

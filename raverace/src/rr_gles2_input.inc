@@ -11,6 +11,10 @@ static bool chord_start[16], chord_select[16];
  * Only consume them when an emulated input sample is applied. */
 static bool input_event(const SDL_Event *event)
 {
+#ifdef RR_GLES2
+    if ((event->type==SDL_KEYDOWN && !event->key.repeat && event->key.keysym.scancode==SDL_SCANCODE_F3) ||
+        (event->type==SDL_CONTROLLERBUTTONDOWN && event->cbutton.button==SDL_CONTROLLER_BUTTON_Y)) rr_overlay_toggle();
+#endif
     if (!interactive) return true;
     if (event->type == SDL_KEYDOWN && !event->key.repeat) {
         if (event->key.keysym.scancode==SDL_SCANCODE_5 && coin_edges<8) coin_edges++;

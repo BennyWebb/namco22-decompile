@@ -1,5 +1,9 @@
 # Rave Racer GLES2 Phase 2 — original textures
 
+For the consolidated HUD/audio/threaded build, current performance results and
+handheld launcher, see [PLAYABLE_GLES2.md](PLAYABLE_GLES2.md). Historical phase
+limitations below describe the earlier builds.
+
 `RR_GLES2=ON` builds `rr_gles2`, a 640×480 fullscreen scene viewer driven by
 the existing deterministic scheduler. It runs the real translated 68K, DSP
 and sound programs and board models. It supports opt-in interactive controls

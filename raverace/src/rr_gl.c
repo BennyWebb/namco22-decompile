@@ -33,6 +33,7 @@
 #include "post_gl.h"
 #else
 #include "quad_gles2.h"
+#include "rr_video_layers.h"
 #include "rr_gles2.h"
 #include "tex_bake.h"
 #endif
@@ -81,7 +82,6 @@ bool rr_gl_init(const char *dir)
     fprintf(stderr, "[TEX] ROM CPU bytes=%zu; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque\n",
             (size_t)TEXTURE_TOTAL_SIZE + TEXTUREMAP_SIZE);
 #endif
-#ifndef RR_GLES2
     const char *const *gp = g_rr_game->gamma;
     for (int i = 0; i < 3; i++) {
         char p[1024]; snprintf(p, sizeof p, "%s/%s", dir, gp[i]);
@@ -89,7 +89,6 @@ bool rr_gl_init(const char *dir)
         if (!f || fread(gamma_prom[i], 1, 256, f) != 256) { if (f) fclose(f); fprintf(stderr, "[GL] no %s\n", p); return false; }
         fclose(f);
     }
-#endif
     g_eng_pointrom   = g_pointrom;           /* rr_dsp_init loaded it */
     g_eng_pointrom_n = g_pointrom_words;
     g_eng_pointram   = pointram_read;
@@ -198,19 +197,20 @@ static void direct_quad(const uint16_t *src)
     push_quad(&q, NULL);
 }
 
-#ifndef RR_GLES2
 /* ------------------------------------------------------------ text layer
  * namcos22_v.cpp draw_text_layer + namcos22_mix_text_layer: 64x64 tiles of
  * 16x16 4bpp from CG RAM, pen 0xF transparent, scrolled by tilemapattr.
  * Two images: the text's own colours (alpha = drawn), and the SHADOW pens
  * 0xFC-0xFE as per-channel multipliers of what is under them. */
 static uint8_t txt_rgba[NW * NH * 4], shd_rgba[NW * NH * 4];
+#ifndef RR_GLES2
 static GLuint  txt_tex, shd_tex;
+#endif
 
 static bool build_text(int text_palbase, bool shadow_enabled, bool *any_shadow)
 {
-    const uint16_t a0 = (uint16_t)(g_rr.tilemapattr[0] << 8 | g_rr.tilemapattr[1]);
-    const uint16_t a1 = (uint16_t)(g_rr.tilemapattr[2] << 8 | g_rr.tilemapattr[3]);
+    const uint16_t a0 = (uint16_t)(VIDEO_ARRAY(tilemapattr)[0] << 8 | VIDEO_ARRAY(tilemapattr)[1]);
+    const uint16_t a1 = (uint16_t)(VIDEO_ARRAY(tilemapattr)[2] << 8 | VIDEO_ARRAY(tilemapattr)[3]);
     const int sx = (a0 - 0x35c) & 0x3ff, sy = a1 & 0x3ff;
     uint8_t mix[3][3];
     for (int k = 0; k < 3; k++) for (int c = 0; c < 3; c++) mix[k][c] = mixer_b(0x08 + k * 3 + c);
@@ -223,15 +223,18 @@ static bool build_text(int text_palbase, bool shadow_enabled, bool *any_shadow)
         uint8_t *d = txt_rgba + (size_t)y * NW * 4, *sd = shd_rgba + (size_t)y * NW * 4;
         for (int x = 0; x < NW; x++, d += 4, sd += 4) {
             d[3] = 0;
+#ifdef RR_GLES2
+            sd[3]=0; /* distinguish white shadow multiplier from no shadow */
+#endif
             const int tx = (x + sx) & 0x3ff;
             const int ti = (trow * 64 + (tx >> 4)) * 2;
-            const uint16_t w = (uint16_t)(g_rr.text[ti] << 8 | g_rr.text[ti + 1]);
+            const uint16_t w = (uint16_t)(VIDEO_ARRAY(text)[ti] << 8 | VIDEO_ARRAY(text)[ti + 1]);
             const int code = w & 0x3ff;
             int cx = tx & 15;
             if (w & 0x400) cx = 15 - cx;
             const int ccy = (w & 0x800) ? 15 - cy : cy;
             const uint32_t off = (uint32_t)code * 128 + (uint32_t)ccy * 8 + (uint32_t)(cx >> 1);
-            const uint8_t byte = off < 0x1e000 ? g_rr.cgram[off] : g_rr.text[off - 0x1e000];
+            const uint8_t byte = off < 0x1e000 ? VIDEO_ARRAY(cgram)[off] : VIDEO_ARRAY(text)[off - 0x1e000];
             const int pix = (cx & 1) ? (byte & 0xf) : (byte >> 4);
             if (pix == 0xf) continue;
             const uint8_t p8 = (uint8_t)((w >> 12) << 4 | pix);
@@ -247,10 +250,14 @@ static bool build_text(int text_palbase, bool shadow_enabled, bool *any_shadow)
             any = true;
         }
     }
+
+#ifndef RR_GLES2
     if (g_eng_hud_e) eng_hud_text_scan(occ);
+#endif
     return any;
 }
 
+#ifndef RR_GLES2
 /* *last: what the texture holds. A layer that has not changed is not sent again -- 1.2 MB a frame, and ~2 ms of it on Windows */
 static void upload(GLuint *tex, const uint8_t *px, int w, int h, uint8_t **last)
 {
@@ -356,7 +363,7 @@ void rr_gl_prepare(bool slave_active)
 #endif
     g_eng_frame++;
 #ifndef RR_GLES2
-    { static int hold; hud_on = eng_hud_marks_up(g_rr.text, hud_marks, (int)(sizeof hud_marks / sizeof *hud_marks), &hold); }
+    { static int hold; hud_on = eng_hud_marks_up(VIDEO_ARRAY(text), hud_marks, (int)(sizeof hud_marks / sizeof *hud_marks), &hold); }
     /* update_mixer (System 22), latched with the frame */
     frame_mixer_flags  = mixer_b(0x00) << 8 | mixer_b(0x01);
 #endif
@@ -631,5 +638,42 @@ void rr_gles2_background(float rgb[3])
 {
     uint8_t bg[3]; pen_rgb(frame_bg_palbase | 0xff, bg);
     for (int i = 0; i < 3; i++) rgb[i] = bg[i] / 255.0f;
+}
+#endif
+
+#ifdef RR_GLES2
+/* Same CPU glyph decoder as the desktop renderer. Cache only host output;
+ * all source arrays come from the current immutable snapshot (or serial main).
+ */
+bool rr_gl_video_compose(void)
+{
+ if(!rr_video_layers_enabled())return true;
+ double decode_begin=rr_video_layers_cpu_time();
+ static uint8_t cg[RR_CGRAM_SIZE],tx[RR_TEXT_SIZE],attr[16],pal[768],mix[9];
+ static bool valid,any_text,any_shadow;
+ static int last_base,last_shadow;
+ int base=(mixer_b(7)<<8)&0x7f00;
+ int shadow=(mixer_b(0)<<8|mixer_b(1))>>8&1;
+ uint8_t colors[768],multipliers[9];
+ for(int p=0;p<3;p++)memcpy(colors+p*256,VIDEO_ARRAY(pal)+base+p*0x8000,256);
+ for(int i=0;i<9;i++)multipliers[i]=mixer_b(8+i);
+ bool dirty=!valid||base!=last_base||shadow!=last_shadow||memcmp(cg,VIDEO_ARRAY(cgram),sizeof cg)||
+  memcmp(tx,VIDEO_ARRAY(text),sizeof tx)||memcmp(attr,VIDEO_ARRAY(tilemapattr),16)||memcmp(pal,colors,sizeof pal)||memcmp(mix,multipliers,9);
+ if(dirty){
+  any_text=build_text(base,shadow,&any_shadow);
+  memcpy(cg,VIDEO_ARRAY(cgram),sizeof cg);memcpy(tx,VIDEO_ARRAY(text),sizeof tx);memcpy(attr,VIDEO_ARRAY(tilemapattr),16);
+  memcpy(pal,colors,sizeof pal);memcpy(mix,multipliers,9);last_base=base;last_shadow=shadow;valid=true;
+ }
+ uint8_t lut[256][4];
+ for(int v=0;v<256;v++){
+  for(int c=0;c<3;c++){
+   int fade=mixer_b(0x11+c*2)<<8|mixer_b(0x12+c*2);
+   int value=v;if(fade>0x100 && !value)value=1;value=value*fade>>8;if(value>255)value=255;
+   lut[v][c]=gamma_prom[c][value];
+  }
+  lut[v][3]=255;
+ }
+ if(rr_video_layers_profile_enabled())rr_video_layers_decode_time(rr_video_layers_cpu_time()-decode_begin);
+ return rr_video_layers_compose(txt_rgba,shd_rgba,dirty,any_text,any_shadow,lut);
 }
 #endif

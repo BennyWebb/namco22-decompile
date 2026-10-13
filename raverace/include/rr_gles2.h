@@ -22,5 +22,6 @@ bool rr_gles2_prepare_begin(uint32_t frame, bool *geometry);
 void rr_gles2_scene_tick(bool walk, unsigned direct);
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3]);
 bool rr_gles2_failed(void);
+double rr_gles2_last_presentation(void);
 void rr_gles2_close(void);
 #endif

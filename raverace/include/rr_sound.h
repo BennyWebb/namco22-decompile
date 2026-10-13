@@ -28,5 +28,7 @@ void rr_audio_slice(void);                    /* mix this slice's samples */
 void rr_audio_close(void);
 bool rr_audio_output_open(void);               /* windowed runs: SDL audio at 48 kHz */
 void rr_audio_set_volume(int percent);
+typedef struct { unsigned queued, underruns, overruns, resets; bool active; } rr_audio_output_stats;
+void rr_audio_output_status(rr_audio_output_stats *out);
 
 #endif

@@ -16,6 +16,7 @@ typedef struct {
     double vertex_upload_seconds, draw_call_seconds;
 } eng_gles2_stats;
 bool eng_gles2_init(void);
+void eng_gles2_priority(bool enabled);
 bool eng_gles2_vbo_mode(const char *name);
 const char *eng_gles2_vbo_mode_name(void);
 void eng_gles2_diagnostic(bool enabled);

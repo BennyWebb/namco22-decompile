@@ -18,7 +18,7 @@
 #include "rr_game.h"
 #include "c352.h"
 #include "rr_sound.h"
-#ifndef RR_HEADLESS
+#if !defined(RR_HEADLESS) || defined(RR_GLES2)
 #include <SDL.h>
 #include <stdatomic.h>
 #include <math.h>
@@ -53,9 +53,10 @@ static inline double soft_limit(double v)
     a = knee + room * (1.0 - 1.0 / (1.0 + (a - knee) / room));   /* approaches 32767, never passes */
     return v < 0 ? -a : a;
 }
-static uint32_t underruns;
+static atomic_uint underruns, overruns, latency_resets;
+static atomic_bool output_active;
 static atomic_int primed;
-static uint32_t per_sec_ur, cb_samples, latency_resets;           /* RR_AUDIOLOG: underruns per second of output */                     /* 0 until the ring first reaches TARGET: start-up silence is not an underrun */
+static uint32_t per_sec_ur, cb_samples;           /* RR_AUDIOLOG: underruns per second of output */                     /* 0 until the ring first reaches TARGET: start-up silence is not an underrun */
 
 static void audio_cb(void *u, Uint8 *stream, int len)
 {
@@ -93,9 +94,21 @@ bool rr_audio_output_open(void)
     dev = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
     if (!dev) { fprintf(stderr, "[AUDIO] no audio device: %s\n", SDL_GetError()); return false; }
     if (getenv("RR_OUTPUT_GAIN")) { g_out_gain = atof(getenv("RR_OUTPUT_GAIN")); if (g_out_gain < 0) g_out_gain = 0; }
+    atomic_store(&r_head,0); atomic_store(&r_tail,0); atomic_store(&primed,0);
+    atomic_store(&underruns,0); atomic_store(&overruns,0); atomic_store(&latency_resets,0);
+    rs_pos=0; rs_prev[0]=rs_prev[1]=0;
+    atomic_store(&output_active,true);
     SDL_PauseAudioDevice(dev, 0);
-    fprintf(stderr, "[AUDIO] output %d Hz stereo, %d-sample buffer, gain x%.2f\n", have.freq, have.samples, g_out_gain);
+    fprintf(stderr, "[AUDIO] driver=%s output %d Hz stereo, %d-sample buffer, gain x%.2f\n", SDL_GetCurrentAudioDriver(), have.freq, have.samples, g_out_gain);
     return true;
+}
+void rr_audio_output_status(rr_audio_output_stats *out)
+{
+    unsigned t=atomic_load_explicit(&r_tail,memory_order_acquire);
+    unsigned h=atomic_load_explicit(&r_head,memory_order_acquire);
+    unsigned queued=h-t; /* Both counters can advance during this observation. */
+    *out=(rr_audio_output_stats){queued<=RING?queued:0,atomic_load(&underruns),
+        atomic_load(&overruns),atomic_load(&latency_resets),atomic_load(&output_active)};
 }
 void rr_audio_set_volume(int percent) { g_volume = (percent < 0 ? 0 : percent > 100 ? 100 : percent) / 100.0f; }
 
@@ -120,7 +133,7 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
             double v = soft_limit((a + (b - a) * f) * g_volume * g_out_gain);
             if (h - t < RING) ring[(h & (RING - 1)) * 2 + ch] = (int16_t)lrint(v);
         }
-        if (h - t < RING) h++;
+        if (h - t < RING) h++; else atomic_fetch_add(&overruns,1);
         rs_pos += step;
     }
     rs_pos -= n;
@@ -131,6 +144,7 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
 #else
 /* Keep the C352 clocks/status, discard only host output. */
 static void push_out(const int16_t *samples, int n) { (void)samples; (void)n; }
+void rr_audio_output_status(rr_audio_output_stats *out) { memset(out,0,sizeof *out); }
 #endif
 
 static c352_t chip;
@@ -272,8 +286,12 @@ void rr_audio_close(void)
         for (int i=0;i<=32;i++) fprintf(stderr,"%s%llu",i?",":"",(unsigned long long)p.sample_active[i]);
         fprintf(stderr,"\n");
     }
-#ifndef RR_HEADLESS
-    if (dev) { SDL_CloseAudioDevice(dev); dev = 0; if (underruns) fprintf(stderr, "[AUDIO] %u output underrun samples\n", underruns); }
+#if !defined(RR_HEADLESS) || defined(RR_GLES2)
+    if (dev) {
+        SDL_CloseAudioDevice(dev); atomic_store(&output_active,false); dev=0;
+        rr_audio_output_stats out; rr_audio_output_status(&out);
+        fprintf(stderr,"[AUDIO-OUTPUT] underrun_samples=%u overrun_samples=%u latency_resets=%u queued_frames=%u\n",out.underruns,out.overruns,out.resets,out.queued);
+    }
 #endif
     if (dump) { wav_header(dump, dump_frames); fclose(dump); dump = NULL;
                 fprintf(stderr, "[AUDIO] wrote %u samples (%.1f s)\n", dump_frames, dump_frames / 85333.0); }

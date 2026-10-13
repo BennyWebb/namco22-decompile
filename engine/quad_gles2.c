@@ -33,7 +33,9 @@ bool eng_gles2_vbo_mode(const char *name)
 }
 const char *eng_gles2_vbo_mode_name(void) { return frame_upload ? "frame" : "legacy"; }
 static GLuint program, vbo, white;
-static GLint projection, sampler;
+static GLint projection, sampler, priority_uniform;
+static bool priority_enabled;
+void eng_gles2_priority(bool enabled) {priority_enabled=enabled;}
 static GLuint batch_texture;
 static eng_gles2_stats *current_stats;
 static bool diagnostic, flush_failed;
@@ -125,7 +127,17 @@ bool eng_gles2_init(void)
         "varying highp vec3 v_uvq;\n"
         "void main() { gl_Position = u_projection * vec4(a_position, 1.0);"
         " v_colour = a_colour; v_uvq = a_uvq; }\n";
-    static const char *fs =
+    static const char *fs_priority =
+        "#version 100\nprecision highp float;\n"
+        "uniform sampler2D u_texture;uniform bool u_priority;\n"
+        "varying mediump vec4 v_colour;\n"
+        "varying highp vec3 v_uvq;\n"
+        "void main() { vec2 uv = v_uvq.xy / v_uvq.z;"
+        " vec4 texel = texture2D(u_texture, uv);"
+        " if (texel.a == 0.0) discard; vec4 c=v_colour*texel; gl_FragColor=u_priority?vec4(c.rgb,v_colour.a):c; }\n";
+    /* Keep the exact original shader in 3D-only reference mode. Mali's compiler
+     * rounds some colour products differently when a priority branch is added. */
+    static const char *fs_legacy =
         "#version 100\nprecision highp float;\n"
         "uniform sampler2D u_texture;\n"
         "varying mediump vec4 v_colour;\n"
@@ -133,6 +145,7 @@ bool eng_gles2_init(void)
         "void main() { vec2 uv = v_uvq.xy / v_uvq.z;"
         " vec4 texel = texture2D(u_texture, uv);"
         " if (texel.a == 0.0) discard; gl_FragColor = v_colour * texel; }\n";
+    const char *fs=priority_enabled?fs_priority:fs_legacy;
     GLint max_texture, precision, range[2];
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture);
     glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, range, &precision);
@@ -162,6 +175,7 @@ bool eng_gles2_init(void)
     if (!ok) { fprintf(stderr, "[GLES2] program link failed\n"); return false; }
     projection = glGetUniformLocation(program, "u_projection");
     sampler = glGetUniformLocation(program, "u_texture");
+    priority_uniform=glGetUniformLocation(program,"u_priority");
     if (projection < 0 || (sampler < 0 && !AUDIT_FLAT)) { fprintf(stderr, "[GLES2] missing shader uniforms\n"); return false; }
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -187,7 +201,7 @@ bool eng_gles2_init(void)
     tex_bake_set_flush_hook(before_texture_change);
     fprintf(stderr, "[GLES2] GLSL ES 1.00 linked; textures=%s budget=%zu; per-texture cache, atlas disabled\n",
             mode_name, texture_budget);
-    fprintf(stderr, "[GLES2] unsupported/bypassed: HUD/text, fog, gamma/fade, Nuklear, blits, render targets\n");
+    fprintf(stderr, "[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets\n");
     return true;
 }
 
@@ -314,8 +328,8 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     glViewport(0, 0, ENG_SCREEN_W/AUDIT_DIVISOR, ENG_SCREEN_H/AUDIT_DIVISOR);
     glDisable(GL_SCISSOR_TEST); glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST); glDepthFunc(GL_LEQUAL); glDepthMask(GL_TRUE);
-    glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glClearColor(bg[0], bg[1], bg[2], 1);
+    if(priority_enabled)glDisable(GL_BLEND);else {glEnable(GL_BLEND);glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);}
+    glClearColor(bg[0], bg[1], bg[2], priority_enabled?0:1);
     glClearDepthf(1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     /* Game projection already happened in geo_hw; this matrix maps the exact
@@ -325,6 +339,7 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     glUseProgram(program);
     glUniformMatrix4fv(projection, 1, GL_FALSE, matrix);
     glUniform1i(sampler, 0);
+    if(priority_uniform>=0)glUniform1i(priority_uniform,priority_enabled);
     glActiveTexture(GL_TEXTURE0); tex_bake_gles2_bind(GL_TEXTURE_2D, white);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     SP_END(sp_setup);
@@ -435,10 +450,10 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
                 const geo_sv *v = &clipped[eng_fan_index(triangle, corner)];
                 vertex *out = &batch[batch_first + used++];
                 out->position[0]=v->x; out->position[1]=v->y; out->position[2]=z;
-                if (diagnostic) memcpy(out->colour, colour, sizeof colour);
+                if (diagnostic) {memcpy(out->colour, colour, sizeof colour);if(priority_enabled)out->colour[3]=(q->cmode&7)==1;}
                 else {
                     for (int c = 0; c < 3; c++) out->colour[c] = solid_rgb[c] * v->bri;
-                    out->colour[3] = 1; /* shade RGB, preserve decoded alpha */
+                    out->colour[3] = priority_enabled ? ((q->cmode&7)==1 ? 1 : 0) : 1;
                 }
                 out->uvq[0]=v->s; out->uvq[1]=v->t; out->uvq[2]=v->w;
             }

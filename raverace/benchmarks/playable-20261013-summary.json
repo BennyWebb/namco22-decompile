@@ -1,0 +1,46 @@
+{
+  "previous": {
+    "sim_hz": 59.910164,
+    "render_fps": 57.123148,
+    "presentation_cpu_ms": 15.925967108013937,
+    "low1_fps": 16.191864876828266,
+    "p95_interval_ms": 22.365599000295333,
+    "render_fps_range": [
+      56.72557,
+      57.324397
+    ]
+  },
+  "playable": {
+    "sim_hz": 59.871957,
+    "render_fps": 40.972645,
+    "presentation_cpu_ms": 22.674294422330096,
+    "low1_fps": 14.348663169245043,
+    "p95_interval_ms": 32.49894199962,
+    "render_fps_range": [
+      40.383132,
+      40.98075
+    ]
+  },
+  "compact": {
+    "sim_hz": 59.897711,
+    "render_fps": 40.397951,
+    "presentation_cpu_ms": 22.98849460098522,
+    "low1_fps": 14.54333816361532,
+    "p95_interval_ms": 32.97796600054426,
+    "render_fps_range": [
+      40.203122,
+      40.794024
+    ]
+  },
+  "expanded": {
+    "sim_hz": 59.907083,
+    "render_fps": 40.010817,
+    "presentation_cpu_ms": 23.034778950248757,
+    "low1_fps": 12.372857827537224,
+    "p95_interval_ms": 33.33996699984709,
+    "render_fps_range": [
+      39.203732,
+      41.003569
+    ]
+  }
+}

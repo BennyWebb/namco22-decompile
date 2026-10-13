@@ -10,10 +10,12 @@ typedef struct {
     double produced;
     uint32_t poly[RR_POLY_WORDS], point[RR_PRESENT_POINT_WORDS];
     uint8_t pal[RR_PAL_SIZE], mixer[RR_MIXER_SIZE], czram[RR_CZRAM_SIZE];
+    uint8_t cgram[RR_CGRAM_SIZE],text[RR_TEXT_SIZE],tilemapattr[0x10];
     uint16_t generation[128], direct[RR_PRESENT_DIRECT_MAX][0x1c];
 } rr_presentation;
 #ifdef RR_THREADED_PRESENTATION
 bool rr_presentation_enabled(void);
+void rr_presentation_overlay(unsigned *frame,unsigned *drops,unsigned *queued,double *age_ms,double now);
 void rr_presentation_configure(bool enabled, bool serial, const char *csv, bool profile_sync);
 bool rr_presentation_start(void *window, void *context, unsigned every, unsigned capture, unsigned hz, unsigned from);
 bool rr_presentation_video(uint32_t frame, bool slave);

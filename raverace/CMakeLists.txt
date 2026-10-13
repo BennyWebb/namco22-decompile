@@ -160,7 +160,7 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
       target_compile_definitions(rr_gles2 PRIVATE RR_THREADED_PRESENTATION)
       target_link_libraries(rr_gles2 PRIVATE Threads::Threads)
     endif()
-    target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c
+    target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c src/rr_video_layers.c src/rr_overlay.c
       ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c ${NAMCO22_ENGINE_DIR}/eng.c
       ${NAMCO22_ENGINE_DIR}/geo_hw.c ${NAMCO22_ENGINE_DIR}/slave_list.c)
     target_compile_definitions(rr_gles2 PRIVATE RR_GLES2
