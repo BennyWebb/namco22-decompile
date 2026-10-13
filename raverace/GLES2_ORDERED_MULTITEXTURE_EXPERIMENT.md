@@ -1,5 +1,11 @@
 # Ordered GLES2 multi-texture submission on RG40XX H
 
+The later [shader-equivalence resolution](SHADER_EQUIVALENCE_RESOLUTION.md)
+reproduced the original 91-pixel mismatch through different cached bake tiers
+and submitted UV scales, using the same single-sampler shader. Frozen-resource
+shader-only scene tests passed. The historical fragment-shader attribution below
+is superseded; batching remains disabled and has not passed its own validation.
+
 ## Scope and baseline
 
 The primary workload is the recorded first racing lap, simulation ticks

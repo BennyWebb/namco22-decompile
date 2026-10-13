@@ -197,13 +197,40 @@ each completed device run restored EmulationStation. The final device-state
 check was interrupted, so verify the hash and process state next session.
 No credentials were stored in the repository, and no commit was made.
 
-Next: isolate the actual failing road primitive with its exact vertices,
-baked texture and GL state on Mali. Record sampled coordinates/texels and
-compare compiled programs or draw-time resources to identify the cause.
-Only if a precise shader correction passes independently of batching should
-it be tested across HUD, transparency and dynamic-texture frames with exact
-pixel comparison. Then reconsider batching. If exact output proves
-impractical, document the evidence and leave batching disabled.
+### Shader-equivalence resolution (2026-10-13, later follow-up)
+
+See [tick-2500 resolution](SHADER_EQUIVALENCE_RESOLUTION.md). The earlier
+fragment-shader attribution is superseded: polygons **978 and 1351** use a
+history-dependent cached texture bake, either 594×80 / source-column step 1
+or 298×80 / step 2, with different submitted U scales. Changing only these
+resources using the same single-sampler shader reproduces every original
+91-pixel RGBA pair exactly. The isolated four-triangle case changes 102 pixels;
+11 are covered by later scene polygons. Applying captured coverage/order
+reconstructs the original entire candidate scene byte for byte.
+
+The replay's dropped presentations affect texture-cache residency. The sticky
+higher-tier policy can therefore return different texture tiers at the same
+simulation tick, despite an identical geometry digest. An off-mode diagnostic
+run reproduced the original candidate, while another off-mode run reproduced
+the original baseline. Do not treat a fixed replay tick as proof of identical
+draw resources.
+
+A frozen complete tick-2500 scene (**1,280 draws, 7,998 vertices**) passed exact
+RGBA equivalence for original-program replay, conditional four-sampler and
+straight-line four-sampler shaders, all samplers addressing texture unit 0.
+Packed float32 UV/UVQ diagnostics also matched shader variants bit for bit for
+fixed inputs. No Mali shader correction is supported or needed for this case.
+
+The durable [standalone case](tools/shader_equivalence_case/README.md) contains
+exact vertices, texture data, shaders and sample coordinates. Full captures and
+the temporary renderer diagnostic patch are under `/tmp/rr-primitive-results/`.
+Existing captures were preserved; prior temporary renderer sources were restored
+and rebuilt. The installed playable hash above was reverified and
+EmulationStation restored. No production change, deployment or commit occurred.
+
+**Keep batching disabled.** Any next batching test must hold draw resources
+fixed and validate its own ordering, transparency, HUD and texture mutation
+behaviour. Do not alter the intentional sticky-tier policy as a shader fix.
 
 ## Correctness and next-session guardrails
 
