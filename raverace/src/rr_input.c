@@ -251,68 +251,10 @@ bool rr_input_set_option(const char *path, const char *key, const char *val)
     return true;
 }
 
-/* ---------------------------------------------------------- recorder ---- */
-static FILE *rec_f, *rep_f;
-static uint32_t rep_next_frame = UINT32_MAX;
-static unsigned rep_in, rep_st, rep_gas, rep_br;
-static uint16_t last[4];
-static bool rec_first;
-
-static void rep_read(void)
-{
-    char line[160];
-    rep_next_frame = UINT32_MAX;
-    while (rep_f && fgets(line, sizeof line, rep_f))          /* skip '#' comments and blank lines */
-        if (sscanf(line, " F %u %x %x %x %x", &rep_next_frame, &rep_in, &rep_st, &rep_gas, &rep_br) == 5) return;
-        else rep_next_frame = UINT32_MAX;
-}
-
-bool rr_input_replay_open(const char *path)
-{
-    rep_f = fopen(path, "r");
-    if (!rep_f) { fprintf(stderr, "[INPUT] cannot open %s\n", path); return false; }
-    rep_read();
-    if (rep_next_frame == UINT32_MAX) { fprintf(stderr, "[INPUT] %s holds no input events\n", path); return false; }
-    fprintf(stderr, "[INPUT] replaying %s\n", path);
-    return true;
-}
-bool rr_input_replaying(void) { return rep_f != NULL; }
-
-bool rr_input_record_start(const char *path)
-{
-    if (rec_f) return true;
-    rec_f = fopen(path, "w");
-    if (!rec_f) { fprintf(stderr, "[INPUT] cannot write %s\n", path); return false; }
-    fprintf(rec_f, "# %s input recording: F frame inputs steer gas brake (hex), on change\n", g_rr_game->title);
-    rec_first = true;
-    fprintf(stderr, "[INPUT] recording to %s\n", path);
-    return true;
-}
-void rr_input_record_stop(void)
-{
-    if (rec_f) { fclose(rec_f); rec_f = NULL; fprintf(stderr, "[INPUT] recording stopped\n"); }
-}
-bool rr_input_recording(void) { return rec_f != NULL; }
-
-/* once per frame, after the host has polled: replay overrides, recorder logs */
-void rr_input_frame(uint32_t frame)
-{
-    if (rep_f) {
-        while (rep_next_frame <= frame) {
-            g_hw.inputs = (uint16_t)rep_in; g_hw.steer = (uint16_t)rep_st;
-            g_hw.gas = (uint16_t)rep_gas; g_hw.brake = (uint16_t)rep_br;
-            rep_read();
-        }
-    }
-    if (rec_f) {
-        uint16_t cur[4] = { g_hw.inputs, g_hw.steer, g_hw.gas, g_hw.brake };
-        if (rec_first || memcmp(cur, last, sizeof cur)) {
-            fprintf(rec_f, "F %u %04X %03X %03X %03X\n", frame, cur[0], cur[1], cur[2], cur[3]);
-            memcpy(last, cur, sizeof cur);
-            rec_first = false;
-        }
-    }
-}
+/* Compile the same SDL-free stream implementation here for desktop games.
+ * Other System22 games already build rr_input.c; their build lists stay valid. */
+#include <limits.h>
+#include "rr_input_stream.inc"
 
 /* the menu's Controls page: an action's name, and binding one key to it
  * (replaces the action's keys, keeps its pad button, and saves the line) */

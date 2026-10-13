@@ -41,6 +41,7 @@
 #include "rr_input.h"
 #endif
 #include "rr_sound.h"
+#include "rr_input_stream.h"
 #include "rr_link.h"
 #ifndef RR_HEADLESS
 #include "rr_net.h"
@@ -386,7 +387,11 @@ void rr_tick(void)
     for (int i = 0; i < n_steer; i++) if (frame >= (uint32_t)test_steer[i].at) g_hw.steer = (uint16_t)test_steer[i].value;
     /* Interactive input lands at the same frame boundary as desktop controls. */
 #ifdef RR_GLES2
-    rr_gles2_apply_input();
+    if(!rr_gles2_record_exit_pending())rr_gles2_apply_input();
+#endif
+#ifdef RR_HEADLESS
+    if(replay_session)rr_input_frame(frame);
+    if(replay_session && !rr_input_stream_ok()){fprintf(stderr,"[REPLAY] input stream error\n");exit(2);}
 #endif
     for (int i = 0; i < n_adc; i++) if (frame >= (uint32_t)test_adc[i].at) g_hw.adc[test_adc[i].idx & 3] = (uint8_t)test_adc[i].value;
 #ifndef RR_HEADLESS
@@ -468,6 +473,24 @@ void rr_tick(void)
                 frame, rr_n_traps, g_rr.n_unmapped, g_rr.n_romwrite, rr_n_irq[1], rr_n_irq[2], rr_n_irq[3], rr_n_irq[4], rr_n_irq[5], rr_n_irq[6], rr_n_irq[7],
                 g_hw.irq_enabled, (unsigned)get_sr());
     if (frame % 60 == 0) { char b[256]; rr_dsp_debug(b, sizeof b); fprintf(stderr, "     %s\n", b); }
+#ifdef RR_HEADLESS
+#ifdef RR_GLES2
+    /* Finish a recording's last tick instead of terminating inside input polling. */
+    if(rr_gles2_record_exit_pending())max_frames=frame;
+#endif
+    completed_replay_frame=frame;
+    if(replay_timing_file) {
+        struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);
+        fprintf(replay_timing_file,"%u,%.9f\n",frame,t.tv_sec+t.tv_nsec/1e9);
+        if(ferror(replay_timing_file))exit(2);
+    }
+    if(checkpoint_file && (frame%300==0 || frame==max_frames)) {
+        rr_headless_state(checkpoint_file);
+        rr_replay_board_checkpoint(checkpoint_file);
+        rr_audio_checkpoint(checkpoint_file,frame);
+        if(ferror(checkpoint_file)){fprintf(stderr,"[REPLAY] checkpoint write failed\n");exit(2);}
+    }
+#endif
     if (frame >= max_frames) {
         dump_state();
         perf_report();

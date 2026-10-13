@@ -30,6 +30,7 @@ static SDL_Window *window;
 static SDL_GLContext context;
 static SDL_GameController *controllers[16];
 static SDL_Joystick *raw_joysticks[16];
+#include "rr_input_stream.h"
 #include "rr_gles2_input.inc"
 static bool failed, unpaced, captured, independent, timing_explicit, profile_memory;
 static unsigned render_hz, test_present_every;
@@ -492,25 +493,35 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     return true;
 }
 
+static bool deferred_record_exit;
+bool rr_gles2_record_exit_pending(void) {return deferred_record_exit;}
+static bool input_exit(void)
+{
+    if(rr_input_recording()){deferred_record_exit=true;return true;}
+    return false;
+}
 static bool pump_input(void)
 {
+    if(deferred_record_exit)return true;
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (!input_event(&event)) return false;
+        if (!input_event(&event)) return input_exit();
+        if ((event.type==SDL_KEYDOWN && !event.key.repeat && event.key.keysym.scancode==SDL_SCANCODE_F3) ||
+            (event.type==SDL_CONTROLLERBUTTONDOWN && event.cbutton.button==SDL_CONTROLLER_BUTTON_Y))rr_input_record_marker();
         if (input_log && (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP))
             fprintf(stderr,"[INPUT] joystick=%d button=%u pressed=%u\n",event.jbutton.which,event.jbutton.button,event.jbutton.state);
         if (input_log && event.type == SDL_JOYAXISMOTION && abs(event.jaxis.value)>8192)
             fprintf(stderr,"[INPUT] joystick=%d axis=%u value=%d\n",event.jaxis.which,event.jaxis.axis,event.jaxis.value);
         if (input_log && event.type == SDL_JOYHATMOTION)
             fprintf(stderr,"[INPUT] joystick=%d hat=%u value=%u\n",event.jhat.which,event.jhat.hat,event.jhat.value);
-        if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return false;
+        if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) return input_exit();
         if (event.type == SDL_CONTROLLERDEVICEADDED || event.type == SDL_CONTROLLERDEVICEREMOVED ||
             event.type == SDL_JOYDEVICEADDED || event.type == SDL_JOYDEVICEREMOVED) scan_controllers();
     }
-    if (interactive && !input_poll()) return false;
+    if (interactive && !input_poll()) return input_exit();
     for (int i = 0; i < 16; i++) if (controllers[i] &&
         SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_START) &&
-        SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK)) return false;
+        SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK)) return input_exit();
     return true;
 }
 
@@ -628,6 +639,8 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
 
 #ifdef RR_THREADED_PRESENTATION
 bool rr_gles2_pump(void) {return pump_input();}
+static rr_presentation_metrics last_metrics;
+rr_presentation_metrics rr_gles2_last_metrics(void) {return last_metrics;}
 bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float bg[3],double scene)
 {
     eng_gles2_stats stats;double start=seconds();
@@ -639,6 +652,8 @@ bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float
     rr_overlay_draw();
     if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
     double swap_start=seconds();SDL_GL_SwapWindow(window);last_presentation=presentation_timestamp();double swap=seconds()-swap_start;rr_overlay_present(frame,last_presentation);
+    last_metrics=(rr_presentation_metrics){draw,stats.draw_seconds,swap,stats.draws,stats.triangles,stats.binds,
+        stats.texture_uploads,stats.cache_misses,stats.cache_evictions,stats.texture_bytes};
     if(frame>=profile_from)profile_add(&total_profile,frame,&stats,scene,draw,swap,0,0);
     if(seconds()-report_start>=5){
         fprintf(stderr,"[THREAD-FRAME] frame=%u quads=%d triangles=%u draws=%u binds=%u\n",frame,count,stats.triangles,stats.draws,stats.binds);

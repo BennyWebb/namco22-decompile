@@ -48,6 +48,8 @@ typedef struct {
 } render_record;
 static render_record records[RECORDS];
 static unsigned record_count, render_count, record_overflow;
+static FILE *profile_csv;
+static char profile_csv_buffer[65536];
 static double render_cpu, render_scene, render_age, tail_end[SLOTS];
 static double producer_cpu, live_report;
 static unsigned worker_cores[4], sim_cores[4];
@@ -121,6 +123,8 @@ static bool render(const rr_presentation *snapshot)
 
     metadata_lock();
     unsigned age = last_frame - snapshot->frame;
+    unsigned ready_depth=0;for(int i=0;i<SLOTS;i++)ready_depth+=state[i]==READY;
+    unsigned observed_drops=dropped;
     unsigned core = (unsigned)sched_getcpu();
     if (snapshot->frame >= first) {
         render_cpu += cost;
@@ -136,6 +140,13 @@ static bool render(const rr_presentation *snapshot)
             records[record_count++] = (render_record){ snapshot->frame, start, end,
                 cost, scene, presented - snapshot->produced, presented, age, core };
         else record_overflow++;
+        if(profile_csv) {
+            rr_presentation_metrics m=rr_gles2_last_metrics();
+            fprintf(profile_csv,"%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f,%.9f,%.9f,%.9f,%u,%u,%u,%u,%u,%u,%zu,%u,%u\n",
+                snapshot->frame,start,end,cost,scene,presented-snapshot->produced,age,core,presented,
+                m.draw_wall,m.submission_wall,m.swap_wall,m.draws,m.triangles,m.binds,m.uploads,m.misses,m.evictions,m.texture_bytes,ready_depth,observed_drops);
+            if(ferror(profile_csv))ok=false;
+        }
     }
     return ok;
 }
@@ -221,6 +232,12 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
     cpu_sum = copy_sum = producer_cpu = render_cpu = render_scene = render_age = 0;
     sim_start = sim_end = live_report = 0;
     window = w; context = c; every = cadence; capture = shot; limit_hz = hz; first = from;
+    if(csv_path) {
+        profile_csv=fopen(csv_path,"wx");
+        if(!profile_csv){perror("thread profile CSV");return false;}
+        setvbuf(profile_csv,profile_csv_buffer,_IOFBF,sizeof profile_csv_buffer);
+        fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative\n",profile_csv);
+    }
     slots = calloc(SLOTS, sizeof *slots);
     if (!slots) { perror("presentation snapshots"); return false; }
     fprintf(stderr, "[THREAD] simulation_tid=%ld mode=%s slots=%d bytes=%zu "
@@ -381,17 +398,10 @@ bool rr_presentation_finish(void)
         }
     }
     bool ok = !worker_failed;
-    FILE *csv = csv_path ? fopen(csv_path, "w") : NULL;
-    if (csv_path && !csv) { perror("thread profile CSV"); ok = false; }
-    if (csv) {
-        fprintf(csv, "frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented\n");
-        for (unsigned i = 0; i < record_count; i++) {
-            const render_record *r = &records[i];
-            fprintf(csv, "%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f\n", r->frame,
-                    r->begin, r->end, r->cpu, r->scene, r->age, r->age_ticks, r->core,r->presented);
-        }
-        if (ferror(csv)) ok = false;
-        if (fclose(csv)) { perror("thread profile CSV close"); ok = false; }
+    if(profile_csv) {
+        if(ferror(profile_csv))ok=false;
+        if(fclose(profile_csv)){perror("thread profile CSV close");ok=false;}
+        profile_csv=NULL;
     }
     /* At most two READY plus one READING can survive the final producer tick.
      * All later completions are in this bounded tail, independent of CSV overflow. */

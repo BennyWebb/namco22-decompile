@@ -113,7 +113,7 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
   else()
     set(RR_TEST_TARGET rr_headless)
   endif()
-  add_executable(${RR_TEST_TARGET} src/rr_main.c src/rr_mem.c src/rr_hw.c src/rr_game.c
+  add_executable(${RR_TEST_TARGET} src/rr_main.c src/rr_input_stream.c src/rr_mem.c src/rr_hw.c src/rr_game.c
     src/rr_env.c src/rr_link.c src/rr_dsp.c src/rr_scene.c src/rr_audio.c
     src/snd/snd_board.c gen/snd_driver.c gen/rr_lifted.c gen/rr_c25.c
     ${RD_SRC} ${NAMCO22_ENGINE_LIFT_SRC} ${NAMCO22_ENGINE_C25_SRC}

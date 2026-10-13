@@ -296,3 +296,10 @@ void rr_audio_close(void)
     if (dump) { wav_header(dump, dump_frames); fclose(dump); dump = NULL;
                 fprintf(stderr, "[AUDIO] wrote %u samples (%.1f s)\n", dump_frames, dump_frames / 85333.0); }
 }
+
+void rr_audio_checkpoint(FILE *out,unsigned frame)
+{
+    fprintf(out,"{\"audio_frame\":%u,\"samples\":%llu,\"intervals\":%llu,\"pcm\":\"%016llx\",\"voices\":\"%016llx\",\"acc\":%llu}\n",
+        frame,(unsigned long long)checked_samples,(unsigned long long)checked_intervals,
+        (unsigned long long)pcm_hash,(unsigned long long)voice_hash,(unsigned long long)acc);
+}

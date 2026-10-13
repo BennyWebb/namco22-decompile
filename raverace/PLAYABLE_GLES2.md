@@ -386,3 +386,13 @@ SDL_VIDEODRIVER=mali XDG_RUNTIME_DIR=/var/run \
 The preserved old experiment scripts retain their original paths for provenance;
 use the explicit recovery executable path above rather than assuming an archived
 script's relative working directory still points at its former installation.
+
+## Recorded-input benchmarks
+
+Optional boot-to-race input recording and exact-tick playback are documented in
+[INPUT_RECORDING_REPLAY.md](INPUT_RECORDING_REPLAY.md). The normal installed
+playable executable remains the known-good fallback while the separate recording
+candidate is evaluated.
+
+The first real-player lap is validated and measured in
+[RECORDED_RACE_BENCHMARK.md](RECORDED_RACE_BENCHMARK.md).

@@ -31,4 +31,8 @@ void rr_audio_set_volume(int percent);
 typedef struct { unsigned queued, underruns, overruns, resets; bool active; } rr_audio_output_stats;
 void rr_audio_output_status(rr_audio_output_stats *out);
 
+/* Read-only cumulative raw C352 hashes at a completed simulation boundary. */
+#include <stdio.h>
+void rr_audio_checkpoint(FILE *out, unsigned frame);
+
 #endif

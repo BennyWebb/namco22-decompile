@@ -17,20 +17,20 @@ static uint32_t state_hash(const uint8_t *bytes, size_t n)
     return h;
 }
 
-static void rr_headless_summary(void)
+static void rr_headless_state(FILE *out)
 {
     uint8_t poly[RR_POLY_WORDS * 4];
     for (size_t i = 0; i < RR_POLY_WORDS; i++) {
         uint32_t w = g_rr.poly[i];
         for (int b = 0; b < 4; b++) poly[i * 4 + b] = (uint8_t)(w >> (24 - b * 8));
     }
-    printf("{\"schema\":1,\"frames\":%u,\"slices\":%u,\"instructions_68k\":%" PRIu64
+    fprintf(out, "{\"schema\":1,\"frames\":%u,\"slices\":%u,\"instructions_68k\":%" PRIu64
            ",\"last_instruction_pc\":\"%08x\",\"sr\":\"%04x\",\"d\":[",
            frame, slice, rr_headless_instructions, rr_headless_pc, rr_get_sr());
-    for (int i = 0; i < 8; i++) printf("%s\"%08x\"", i ? "," : "", (uint32_t)RG4(i * 4));
-    printf("],\"a\":[");
-    for (int i = 0; i < 8; i++) printf("%s\"%08x\"", i ? "," : "", (uint32_t)RG4(0x20 + i * 4));
-    printf("],\"fnv1a32\":{\"register_bytes\":\"%08x\",\"wram\":\"%08x\","
+    for (int i = 0; i < 8; i++) fprintf(out, "%s\"%08x\"", i ? "," : "", (uint32_t)RG4(i * 4));
+    fprintf(out, "],\"a\":[");
+    for (int i = 0; i < 8; i++) fprintf(out, "%s\"%08x\"", i ? "," : "", (uint32_t)RG4(0x20 + i * 4));
+    fprintf(out, "],\"fnv1a32\":{\"register_bytes\":\"%08x\",\"wram\":\"%08x\","
            "\"shared\":\"%08x\",\"poly_be\":\"%08x\",\"text\":\"%08x\","
            "\"palette\":\"%08x\",\"eeprom\":\"%08x\"},"
            "\"traps\":%u,\"unmapped\":%u,\"romwrites\":%u,\"irqs\":[",
@@ -38,14 +38,32 @@ static void rr_headless_summary(void)
            state_hash(g_rr.shared, sizeof g_rr.shared), state_hash(poly, sizeof poly),
            state_hash(g_rr.text, sizeof g_rr.text), state_hash(g_rr.pal, sizeof g_rr.pal),
            state_hash(g_rr.eeprom, sizeof g_rr.eeprom), rr_n_traps, g_rr.n_unmapped, g_rr.n_romwrite);
-    for (int i = 1; i <= 7; i++) printf("%s%u", i > 1 ? "," : "", rr_n_irq[i]);
-    printf("],\"dsp_steps\":%" PRIu64 ",\"sound_cycles\":%" PRIu64
+    for (int i = 1; i <= 7; i++) fprintf(out, "%s%u", i > 1 ? "," : "", rr_n_irq[i]);
+    fprintf(out, "],\"dsp_steps\":%" PRIu64 ",\"sound_cycles\":%" PRIu64
            ",\"dsp_fault\":%s,\"sound_fault\":%s}\n",
            rr_headless_dsp_steps(), rr_headless_sound_cycles(),
            rr_headless_dsp_fault() ? "true" : "false",
            rr_headless_sound_fault() ? "true" : "false");
-    fflush(stdout);
+    fflush(out);
 }
+
+static void rr_replay_board_checkpoint(FILE *out)
+{
+    const uint32_t v[]={g_hw.irq_enabled,g_hw.irq_state,g_hw.mcu_run,g_hw.dsp_ctrl,g_hw.dsw,
+        g_hw.cpuleds,g_hw.portbits[0],g_hw.portbits[1],g_hw.keycus_rng,g_hw.lcg,
+        g_hw.inputs,g_hw.steer,g_hw.gas,g_hw.brake,g_hw.adc[0],g_hw.adc[1],g_hw.adc[2],g_hw.adc[3],
+        (uint32_t)g_hw.old_coin,(uint32_t)g_hw.credits1,(uint32_t)g_hw.credits2};
+    uint8_t bytes[sizeof v];
+    for(unsigned i=0;i<sizeof v/sizeof v[0];i++)for(int b=0;b<4;b++)bytes[i*4+b]=(uint8_t)(v[i]>>(24-b*8));
+    fprintf(out,"{\"board_frame\":%u,\"board\":\"%08x\",\"syscon\":\"%08x\",\"sci\":\"%08x\",\"sci_reg\":\"%08x\",\"cgram\":\"%08x\",\"mixer\":\"%08x\",\"czram\":\"%08x\",\"tilemapattr\":\"%08x\"}\n",
+        frame,state_hash(bytes,sizeof bytes),state_hash(g_rr.syscon,sizeof g_rr.syscon),
+        state_hash(g_rr.sci,sizeof g_rr.sci),state_hash(g_rr.sci_reg,sizeof g_rr.sci_reg),
+        state_hash(g_rr.cgram,sizeof g_rr.cgram),state_hash(g_rr.mixer,sizeof g_rr.mixer),
+        state_hash(g_rr.czram,sizeof g_rr.czram),state_hash(g_rr.tilemapattr,sizeof g_rr.tilemapattr));
+}
+static void rr_headless_summary(void) { rr_headless_state(stdout); }
+
+#include "rr_replay_session.inc"
 
 static void headless_fatal(const char *why)
 {
@@ -71,6 +89,7 @@ static int rr_headless_main(int argc, char **argv)
 {
     const char *rom_dir = "extracted";
     uint32_t audio_check_first=0,activity_first=0;
+    bool frames_explicit=false;
 #ifdef RR_GLES2
     if (!rr_gles2_options(&argc, argv)) return 2;
     if (rr_gles2_interactive()) max_frames = INT32_MAX;
@@ -86,12 +105,28 @@ static int rr_headless_main(int argc, char **argv)
 #ifdef RR_THREADED_PRESENTATION
                             "                [--presentation-thread on|off] [--snapshot-reference] [--thread-profile FILE] [--thread-sync-profile]\n"
 #endif
+                            "                [--record-input FILE | --replay-input FILE] [--input-checkpoints FILE]\n"
+                            "                [--replay-checks on|off] [--replay-timing FILE]\n"
                             "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
 #else
             fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
-                            "                   [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n");
+                            "                   [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n"
+                            "                   [--record-input FILE | --replay-input FILE] [--input-checkpoints FILE]\n"
+                            "                   [--replay-checks on|off] [--replay-timing FILE]\n");
 #endif
             return 0;
+        }
+        if(!strcmp(argv[i],"--replay-checks") && i+1<argc) {
+            const char *v=argv[++i];if(strcmp(v,"on") && strcmp(v,"off"))goto invalid;
+            replay_checks=!strcmp(v,"on");continue;
+        }
+        if ((!strcmp(argv[i], "--record-input") || !strcmp(argv[i], "--replay-input") || !strcmp(argv[i], "--input-checkpoints") || !strcmp(argv[i], "--replay-timing")) && i+1<argc) {
+            const char *o=argv[i++];
+            if(!strcmp(o,"--record-input"))input_record_path=argv[i];
+            else if(!strcmp(o,"--replay-input"))input_replay_path=argv[i];
+            else if(!strcmp(o,"--input-checkpoints"))checkpoint_path=argv[i];
+            else replay_timing_path=argv[i];
+            continue;
         }
         if (!strcmp(argv[i], "--dump") && i + 1 < argc) { dump_dir = argv[++i]; continue; }
         uint32_t v;
@@ -105,7 +140,7 @@ static int rr_headless_main(int argc, char **argv)
         if ((!strcmp(argv[i], "--frames") || !strcmp(argv[i], "--coin") || !strcmp(argv[i], "--gas")) && i + 1 < argc) {
             const char *option = argv[i++];
             if (!headless_number(argv[i], INT32_MAX, &v) || v == 0) goto invalid;
-            if (!strcmp(option, "--frames")) max_frames = v;
+            if (!strcmp(option, "--frames")) {max_frames = v;frames_explicit=true;}
             else if (!strcmp(option, "--gas")) test_gas = (int32_t)v;
             else {
                 if (n_test_coins == 8) goto invalid;
@@ -129,6 +164,18 @@ invalid:
         fprintf(stderr,"[INPUT] --interactive cannot be combined with scripted coin/gas/steer\n"); return 2;
     }
 #endif
+    if(input_replay_path && !frames_explicit)max_frames=INT32_MAX;
+    if ((input_record_path && input_replay_path) || (input_replay_path && (n_test_coins || test_gas>=0 || n_steer))) {
+        fprintf(stderr,"[REPLAY] recording/replay mutually exclusive; replay cannot combine scripted inputs\n");return 2;
+    }
+#ifdef RR_GLES2
+    if(input_replay_path && rr_gles2_interactive()){fprintf(stderr,"[REPLAY] playback excludes --interactive\n");return 2;}
+#endif
+    if(!replay_checks && (input_record_path || checkpoint_path)){fprintf(stderr,"[REPLAY] recording/checkpoints require checks on\n");return 2;}
+    if(input_record_path || (input_replay_path && replay_checks) || checkpoint_path) {
+        if(audio_check_first && audio_check_first!=1){fprintf(stderr,"[REPLAY] checksum must start at 1\n");return 2;}
+        audio_check_first=1;
+    }
     /* Isolate this test from desktop debug/network/config environment. */
     extern char **environ;
     for (char **e = environ; *e; ) {
@@ -149,7 +196,7 @@ invalid:
     if (!seed_ok) { fprintf(stderr, "[HEADLESS] invalid EEPROM seed: %s\n", seed); return 2; }
     if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) ||
         !rr_sound_init(rom_dir) || !rr_hw_init(rom_dir)) return 2;
-    if (!rr_audio_diagnostics(audio_check_first,activity_first)) return 2;
+    if (!rr_audio_diagnostics(audio_check_first,activity_first) || !replay_session_open(rom_dir)) return 2;
 #ifdef RR_GLES2
     if (!rr_gl_init(rom_dir) || !rr_gles2_open()) return 2;
 #endif

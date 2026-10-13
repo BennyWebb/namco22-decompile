@@ -2,6 +2,7 @@
 #define RR_GLES2_H
 #include <stdbool.h>
 #include <stdint.h>
+#include <stddef.h>
 #include "geo_hw.h"
 /* Backing records; GLES2 consumes the last sort's eng_quad_index mapping.
  * Storage remains in emission order under RR_GEOMETRY_INDEX_ORDER. */
@@ -10,6 +11,7 @@ void rr_gles2_background(float rgb[3]);
 bool rr_gles2_options(int *argc, char **argv);
 bool rr_gles2_open(void);
 bool rr_gles2_interactive(void);
+bool rr_gles2_record_exit_pending(void);
 uint32_t rr_gles2_profile_from(void);
 void rr_gles2_apply_input(void);
 typedef enum {
@@ -23,5 +25,8 @@ void rr_gles2_scene_tick(bool walk, unsigned direct);
 bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const float bg[3]);
 bool rr_gles2_failed(void);
 double rr_gles2_last_presentation(void);
+/* Presentation-owner only; copied after swap for optional buffered CSV. */
+typedef struct {double draw_wall,submission_wall,swap_wall;unsigned draws,triangles,binds,uploads,misses,evictions;size_t texture_bytes;} rr_presentation_metrics;
+rr_presentation_metrics rr_gles2_last_metrics(void);
 void rr_gles2_close(void);
 #endif
