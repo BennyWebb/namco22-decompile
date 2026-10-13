@@ -151,6 +151,60 @@ remains in the working tree. The active device executable and backup were
 preserved; verify their hashes and EmulationStation before the next device
 session. No commit was made.
 
+### Shader-equivalence follow-up (2026-10-13)
+
+The original deterministic tick-2500 pair is
+`/tmp/multi4-ab-20261013-182049-28305/{baseline-2,candidate-2}.ppm`.
+`candidate-2.ppm` is identical to `/tmp/shader-2500.ppm` (multi-sampler
+shader, batching disabled). Pixel-by-pixel comparison finds 91 of 307,200
+changed pixels, in two thin diagonal bands on the brown road-side surface
+(x=299–526, y=218–254). Changed channel samples: R=90, G=78, B=27;
+maximum absolute errors R=44, G=40, B=30; mean absolute error among changed
+samples R=5.36, G=4.68, B=7.22. Whole-frame mean absolute errors are
+R=0.001569, G=0.001188, B=0.000635. Use the untracked
+`tools/compare_multitexture_capture.py` for the full signed histogram.
+
+A temporary diagnostic build captured pre-compositor scene RGBA in
+`/tmp/shader-split-20261013/{scene4_off,scene4_shader}.rgba`. Its 91 changed
+pixels map exactly to the final capture after vertical flip. Scene differences
+are RGB only (R=90, G=78, B=27, A=0); all changed pixels have alpha zero in
+both variants. White-batch rendering is pixel-identical, so the mismatch
+requires the real texture sample path. The original shaders use the same
+`highp` UV precision, perspective division, texture multiplication, alpha
+discard and priority-alpha handling; textures use `GL_NEAREST` and
+`GL_CLAMP_TO_EDGE`. In shader-only mode all sampler uniforms address texture
+unit 0. UV precision or nearest-texel selection remains a hypothesis, not an
+identified cause.
+
+The standalone probe in untracked `tools/mali_sampler_probe.c` ran on the
+actual Mali-G31 (OpenGL ES 3.2, driver v1.r20p0). All 32 combinations of
+conditional versus straight-line sampler selection, shared versus separate
+texture units, slots 0–3 and two alpha priorities were RGBA pixel-identical
+over 156,252 non-clear pixels. This synthetic case does not reproduce the
+scene failure. A straight-line shader-only build with submission profiling
+enabled also matched baseline, while another build without profiling differed;
+same-binary `glFinish` toggles changed the mismatch pattern but never fixed
+it. A fixed color adjustment would be unjustified. No precise shader cause or
+correction has been established, and representative-frame equivalence has not
+been demonstrated. Keep multi-texture batching disabled.
+
+Temporary source/builds are under `/tmp/rr-shader-repro/`; local capture copies
+are under `/tmp/shader-split-20261013/`, with device copies under
+`/userdata/system/rave-racer-multicore/shader-split-20261013/`. They did not
+replace the deployed playable. The installed executable hash verified before
+testing was `77536f56ad17de9cf8772175c73442d9cb246d87aeb6fbf6c8d7f07c3d6ab53e`;
+each completed device run restored EmulationStation. The final device-state
+check was interrupted, so verify the hash and process state next session.
+No credentials were stored in the repository, and no commit was made.
+
+Next: isolate the actual failing road primitive with its exact vertices,
+baked texture and GL state on Mali. Record sampled coordinates/texels and
+compare compiled programs or draw-time resources to identify the cause.
+Only if a precise shader correction passes independently of batching should
+it be tested across HUD, transparency and dynamic-texture frames with exact
+pixel comparison. Then reconsider batching. If exact output proves
+impractical, document the evidence and leave batching disabled.
+
 ## Correctness and next-session guardrails
 
 The multicore build passed native and ARM64 builds; native headless and
