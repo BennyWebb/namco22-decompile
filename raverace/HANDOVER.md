@@ -8,8 +8,9 @@ reports. Update it when a milestone changes the active build or benchmark.
 ## Current state (2026-10-13)
 
 - Repository: `BennyWebb/namco22-decompile`, branch `feature/knulli-h700`.
-  Latest checked commit: `83aaf0d` (`Added multicore rendering pipeline`);
-  working tree was clean when this handover was created. Check both again.
+  Latest checked commit: `6ebe29c` (`Frame pacing Latency experiment.`).
+  The current working tree has uncommitted diagnostic and report changes from
+  the ordered-submission investigation; check Git status before new work.
 - Target: Anbernic RG40XX H, Knulli Scarab, AArch64 H700/Cortex-A53,
   Mali-G31, 640×480, SDL2 `mali` framebuffer driver, GLES2, glibc 2.40.
   Matching Buildroot host toolchain:
@@ -132,6 +133,23 @@ digests and ThreadSanitizer checks passed. The five-pair data is under
 separate scheduler pair under `ab-20261013-174532-8107`. The GLES owner
 remains the throughput limit; first-time texture bursts still dominate the
 worst hitches. No repository commit was made.
+
+## Ordered GLES2 submission investigation (2026-10-13)
+
+See [ordered multi-texture experiment](GLES2_ORDERED_MULTITEXTURE_EXPERIMENT.md).
+The first-lap diagnostic trace found 860.83 draws per presented picture;
+contiguous four-texture groups could reduce this to 207.58 while retaining
+scissor and mutation barriers. Mali-G31 reports 16 fragment texture units.
+A bounded four-sampler prototype cut short-window submission time, but the
+full-lap equivalent tick-2500 capture differed at 91 pixels. Shader-only
+reproduction identified the fragment path; a straight-line sampler variant
+still differed in batched mode. **The experiment failed the pixel-identity
+gate, was removed from source, and was not deployed.** The alternating test
+stopped at pair 2 rather than collecting five performance pairs for an invalid
+candidate. Only the diagnostic trace behind `RR_GLES_SUBMISSION_PROFILE`
+remains in the working tree. The active device executable and backup were
+preserved; verify their hashes and EmulationStation before the next device
+session. No commit was made.
 
 ## Correctness and next-session guardrails
 

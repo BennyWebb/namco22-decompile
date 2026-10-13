@@ -41,6 +41,50 @@ static eng_gles2_stats *current_stats;
 static bool diagnostic, flush_failed;
 static bool white_batches;
 static const char *mode_name = "textured";
+#ifdef RR_GLES_SUBMISSION_PROFILE
+/* Diagnostic upper bounds: count contiguous draws that could share a shader
+ * with N texture units. Scissor and submission/mutation barriers still split
+ * groups. No drawing or texture ownership is changed. */
+static FILE *batch_trace;
+static struct {
+    unsigned chunks, commands, scissor_breaks, texture_breaks;
+    unsigned groups[6], largest_group;
+} batch_bounds;
+static const unsigned batch_unit_caps[6] = {1, 2, 4, 8, 16, 4096};
+static void batch_trace_chunk(void)
+{
+    if (!batch_trace || !command_count) return;
+    batch_bounds.chunks++;
+    batch_bounds.commands += (unsigned)command_count;
+    for (unsigned mode = 0; mode < 6; mode++) {
+        GLuint resident[16];
+        unsigned count = 0, length = 0;
+        int scissor[4] = {-1,-1,-1,-1};
+        for (int i = 0; i < command_count; i++) {
+            const draw_command *c = &commands[i];
+            bool changed = i && memcmp(scissor, c->scissor, sizeof scissor);
+            if (mode == 0 && i) {
+                batch_bounds.scissor_breaks += changed;
+                batch_bounds.texture_breaks += commands[i-1].texture != c->texture;
+            }
+            bool found = false;
+            for (unsigned j = 0; j < count; j++)
+                if (resident[j] == c->texture) { found = true; break; }
+            if (!i || changed || (!found && count == batch_unit_caps[mode])) {
+                if (length > batch_bounds.largest_group) batch_bounds.largest_group = length;
+                batch_bounds.groups[mode]++;
+                count = length = 0;
+                found = false;
+            }
+            if (!found && count < 16) resident[count++] = c->texture;
+            /* The unlimited mode keeps no set: it only splits on scissor. */
+            length++;
+            memcpy(scissor, c->scissor, sizeof scissor);
+        }
+        if (length > batch_bounds.largest_group) batch_bounds.largest_group = length;
+    }
+}
+#endif
 static double seconds(void)
 {
     struct timespec t; clock_gettime(CLOCK_MONOTONIC, &t);
@@ -117,6 +161,14 @@ static GLuint compile(GLenum type, const char *source)
 
 bool eng_gles2_init(void)
 {
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    const char *trace_path = getenv("GLES_BATCH_TRACE");
+    if (trace_path) {
+        batch_trace = fopen(trace_path, "wx");
+        if (!batch_trace) { perror("GLES_BATCH_TRACE"); return false; }
+        fputs("frame,draws,triangles,chunks,scissor_breaks,texture_breaks,groups_1,groups_2,groups_4,groups_8,groups_16,groups_unlimited,largest_group,mutation_barriers,flush_scissor,flush_capacity,empty_texture_flush\n", batch_trace);
+    }
+#endif
     static const char *vs =
         "#version 100\n"
         "attribute vec3 a_position;\n"
@@ -150,6 +202,15 @@ bool eng_gles2_init(void)
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture);
     glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, range, &precision);
     fprintf(stderr, "[TEX] GL max texture=%d fragment highp bits=%d\n", max_texture, precision);
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    GLint texture_units = 0, fragment_uniforms = 0, varyings = 0, attributes = 0;
+    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texture_units);
+    glGetIntegerv(GL_MAX_FRAGMENT_UNIFORM_VECTORS, &fragment_uniforms);
+    glGetIntegerv(GL_MAX_VARYING_VECTORS, &varyings);
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &attributes);
+    fprintf(stderr, "[BATCH-LIMITS] texture_units=%d fragment_uniform_vectors=%d varying_vectors=%d vertex_attributes=%d max_texture=%d highp_bits=%d\n",
+            texture_units, fragment_uniforms, varyings, attributes, max_texture, precision);
+#endif
     if (max_texture < 1024 || precision == 0) {
         fprintf(stderr, "[TEX] unsupported: requires 1024 texture size and fragment highp for original perspective UVs\n");
         return false;
@@ -208,6 +269,9 @@ bool eng_gles2_init(void)
 static bool submit_commands(eng_gles2_stats *stats)
 {
     if (!command_count) return true;
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    batch_trace_chunk();
+#endif
     eng_audit_scope audit_submit=eng_audit_begin(AUD_SUBMIT);
     double start = seconds(), vertex_start = start;
     size_t bytes = (size_t)batch_first * sizeof(vertex);
@@ -332,6 +396,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
     used = batch_first = command_count = 0; batch_texture = white; current_stats = stats; flush_failed = false;
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    memset(&batch_bounds, 0, sizeof batch_bounds);
+#endif
     SP_BEGIN(sp_setup,0,1);
     glViewport(0, 0, ENG_SCREEN_W/AUDIT_DIVISOR, ENG_SCREEN_H/AUDIT_DIVISOR);
     glDisable(GL_SCISSOR_TEST); glDisable(GL_CULL_FACE);
@@ -485,6 +552,17 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     stats->delete_calls = tex_gles2_delete_calls - deletes_before;
     stats->binds = (unsigned)(tex_gles2_bind_calls - binds_before);
     stats->bind_skips = (unsigned)(tex_gles2_bind_skips - skips_before);
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    if (batch_trace && g_eng_frame >= sp_from && g_eng_frame <= sp_to) {
+        fprintf(batch_trace, "%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u,%u\n",
+                g_eng_frame, stats->draws, stats->triangles, batch_bounds.chunks,
+                batch_bounds.scissor_breaks, batch_bounds.texture_breaks,
+                batch_bounds.groups[0], batch_bounds.groups[1], batch_bounds.groups[2],
+                batch_bounds.groups[3], batch_bounds.groups[4], batch_bounds.groups[5],
+                batch_bounds.largest_group, stats->texture_barriers,
+                stats->flush_scissor, stats->flush_capacity, stats->empty_texture_flush);
+    }
+#endif
     return ok;
 }
 #ifdef RR_PARALLEL_FRAME_PREP
@@ -496,6 +574,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
 
 void eng_gles2_close(void)
 {
+#ifdef RR_GLES_SUBMISSION_PROFILE
+    if (batch_trace) { fclose(batch_trace); batch_trace = NULL; }
+#endif
     tex_bake_set_flush_hook(NULL);
     tex_bake_gles2_report();
     renderer_texture_init(); /* delete cache storage before context destruction */
