@@ -17,9 +17,22 @@
 #define SLOTS 3
 #define RECORDS 8192
 
-enum { FREE, WRITING, READY, READING };
+enum { FREE, WRITING, READY, READING, PREPARING, PREPARED };
 static bool enabled = true, serial, started, closing, worker_failed, attached;
 static pthread_t worker;
+#ifdef RR_PARALLEL_FRAME_PREP
+static pthread_t prep_worker;
+static bool parallel, prep_started, prep_done;
+/* Defer preparation briefly after GLES claims its previous frame. This lets
+ * a newer simulation snapshot replace an old READY one without spending the
+ * entire next emulated tick waiting for it. */
+static double consumer_claimed_at;
+static double prep_cpu_sum, hud_cpu_sum, prep_wall_sum;
+static unsigned prepared_count, dropped_prepared;
+#ifdef RR_PARALLEL_PREP_PROFILE
+static double direct_cpu_sum, list_cpu_sum, sort_cpu_sum;
+#endif
+#endif
 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 static pthread_cond_t changed = PTHREAD_COND_INITIALIZER;
 static rr_presentation *slots;
@@ -31,6 +44,9 @@ static const char *csv_path;
 static bool sync_profile;
 typedef struct { double acquire, maximum, idle; unsigned calls; } sync_record;
 static sync_record producer_sync, consumer_sync;
+#ifdef RR_PARALLEL_FRAME_PREP
+static sync_record preparer_sync;
+#endif
 /* TLS selects statistics ownership, not any emulated or rendering state. */
 static _Thread_local sync_record *sync_owner;
 
@@ -53,6 +69,18 @@ static char profile_csv_buffer[65536];
 static double render_cpu, render_scene, render_age, tail_end[SLOTS];
 static double producer_cpu, live_report;
 static unsigned worker_cores[4], sim_cores[4];
+static void free_slots(void)
+{
+    if(!started&&profile_csv){fclose(profile_csv);profile_csv=NULL;}
+    if(!slots)return;
+#ifdef RR_PARALLEL_FRAME_PREP
+    for(int i=0;i<SLOTS;i++){
+        free(slots[i].quads);free(slots[i].order);
+        free(slots[i].video.text);free(slots[i].video.shadow);
+    }
+#endif
+    free(slots);slots=NULL;
+}
 
 static double stamp(clockid_t clock)
 {
@@ -110,20 +138,38 @@ static void palette_tick(void)
 static bool render(const rr_presentation *snapshot)
 {
     double start = now(), cpu = stamp(CLOCK_THREAD_CPUTIME_ID);
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel) rr_gl_presentation_activate(snapshot);
+    else
+#endif
     rr_gl_presentation(snapshot);
     int count;
-    const geo_quad *quads = rr_gles2_quads(&count);
+    const geo_quad *quads;
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel){quads=snapshot->quads;count=snapshot->quad_count;}
+    else
+#endif
+    quads = rr_gles2_quads(&count);
     float bg[3];
-    rr_gles2_background(bg);
-    double scene = now() - start;
-    bool ok = rr_gles2_present(snapshot->frame, quads, count, bg, scene);
+    double scene;
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel){memcpy(bg,snapshot->background,sizeof bg);scene=snapshot->scene_wall;}
+    else
+#endif
+    {rr_gles2_background(bg);scene=now()-start;}
+    bool ok;
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel)ok=rr_gles2_present_prepared(snapshot);
+    else
+#endif
+    ok=rr_gles2_present(snapshot->frame,quads,count,bg,scene);
     double end = now(), cost = stamp(CLOCK_THREAD_CPUTIME_ID) - cpu;
     double presented=rr_gles2_last_presentation();
     rr_gl_presentation_release();
 
     metadata_lock();
     unsigned age = last_frame - snapshot->frame;
-    unsigned ready_depth=0;for(int i=0;i<SLOTS;i++)ready_depth+=state[i]==READY;
+    unsigned ready_depth=0;for(int i=0;i<SLOTS;i++)ready_depth+=state[i]==READY||state[i]==PREPARED;
     unsigned observed_drops=dropped;
     unsigned core = (unsigned)sched_getcpu();
     if (snapshot->frame >= first) {
@@ -142,9 +188,19 @@ static bool render(const rr_presentation *snapshot)
         else record_overflow++;
         if(profile_csv) {
             rr_presentation_metrics m=rr_gles2_last_metrics();
-            fprintf(profile_csv,"%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f,%.9f,%.9f,%.9f,%u,%u,%u,%u,%u,%u,%zu,%u,%u,%.9f,%.9f,%.9f,%.0f,%.9f,%llu,%llu\n",
+            fprintf(profile_csv,"%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f,%.9f,%.9f,%.9f,%u,%u,%u,%u,%u,%u,%zu,%u,%u,%.9f,%.9f,%.9f,%.0f,%.9f,%llu,%llu",
                 snapshot->frame,start,end,cost,scene,presented-snapshot->produced,age,core,presented,
                 m.draw_wall,m.submission_wall,m.swap_wall,m.draws,m.triangles,m.binds,m.uploads,m.misses,m.evictions,m.texture_bytes,ready_depth,observed_drops,m.lookup_wall,m.decode_wall,m.upload_wall,m.decoded_texels,m.eviction_wall,m.clock_probes,m.delete_calls);
+#ifdef RR_PARALLEL_FRAME_PREP
+            fprintf(profile_csv,",%.9f,%.9f,%.9f,%.9f",parallel?snapshot->prep_cpu:0,
+                    parallel?snapshot->hud_cpu:0,parallel?snapshot->prepared_at-snapshot->produced:0,
+                    parallel?start-snapshot->prepared_at:0);
+#ifdef RR_PARALLEL_PREP_PROFILE
+            fprintf(profile_csv,",%.9f,%.9f,%.9f",parallel?snapshot->direct_cpu:0,
+                    parallel?snapshot->list_cpu:0,parallel?snapshot->sort_cpu:0);
+#endif
+#endif
+            fputc('\n',profile_csv);
             if(ferror(profile_csv))ok=false;
         }
     }
@@ -152,19 +208,99 @@ static bool render(const rr_presentation *snapshot)
 }
 
 /* Caller holds mutex. WRITING/READING slots are never candidates. */
-static int newest(void)
+static int newest(int wanted)
 {
     int best = -1;
     for (int i = 0; i < SLOTS; i++)
-        if (state[i] == READY && (best < 0 || slots[i].frame > slots[best].frame)) best = i;
+        if (state[i] == wanted && (best < 0 || slots[i].frame > slots[best].frame)) best = i;
     return best;
 }
 static void discard_ready(int slot)
 {
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(state[slot]==PREPARED&&slots[slot].frame>=first)dropped_prepared++;
+#endif
     state[slot] = FREE;
     dropped++;
     if (slots[slot].frame >= first) range_dropped++;
 }
+
+#ifdef RR_PARALLEL_FRAME_PREP
+static void *prepare(void *unused)
+{
+    (void)unused;
+    sync_owner=&preparer_sync;
+    pthread_setname_np(pthread_self(),"rr-prepare");
+    fprintf(stderr,"[PREP] tid=%ld affinity=OS\n",(long)syscall(SYS_gettid));
+    for(;;) {
+        metadata_lock();
+        int slot;
+        /* Keep at most one completed picture ahead of GL. Without this gate
+         * the preparer decoded nearly every 60 Hz snapshot while GL displayed
+         * only ~40 Hz, wasting a third of its CPU work and bandwidth. READY
+         * holds the latest undecoded state while GL is busy. */
+        for(;;) {
+            int ready=newest(READY);
+            if(worker_failed)break;
+            if(newest(PREPARED)>=0 || (ready<0&&!closing)) {
+                metadata_wait();
+                continue;
+            }
+            /* Physical measurements put mean GLES-thread CPU at ~23 ms and
+             * preparation at ~14.6 ms. Six milliseconds is below their mean
+             * overlap slack; never wait longer for a future simulation tick. */
+            double remain=consumer_claimed_at+0.006-now();
+            if(!closing && ready>=0 && slots[ready].produced<consumer_claimed_at
+               && remain>0) {
+                pthread_mutex_unlock(&mutex);
+                struct timespec delay={0,(long)(remain*1e9)};
+                nanosleep(&delay,NULL);
+                metadata_lock();
+                continue;
+            }
+            break;
+        }
+        slot=worker_failed?-1:newest(READY);
+        if(slot<0){prep_done=true;pthread_cond_broadcast(&changed);pthread_mutex_unlock(&mutex);break;}
+        state[slot]=PREPARING;
+        for(int i=0;i<SLOTS;i++)if(state[i]==READY)discard_ready(i);
+        pthread_mutex_unlock(&mutex);
+
+        rr_presentation *s=&slots[slot];
+        double wall=now(),cpu=stamp(CLOCK_THREAD_CPUTIME_ID);
+        bool ok=rr_gl_presentation_into(s);
+        s->scene_wall=now()-wall;
+        double hud_start=stamp(CLOCK_THREAD_CPUTIME_ID);
+        rr_video_layers_profile_gate(s->frame>=rr_gles2_profile_from());
+        if(ok)ok=rr_gl_video_prepare(&s->video);
+        s->hud_cpu=stamp(CLOCK_THREAD_CPUTIME_ID)-hud_start;
+        s->prep_cpu=stamp(CLOCK_THREAD_CPUTIME_ID)-cpu;
+        s->prepared_at=now();
+        rr_gl_presentation_release();
+        metadata_lock();
+        if(!ok){worker_failed=true;closing=true;state[slot]=FREE;}
+        else {
+            state[slot]=PREPARED;
+            if(s->frame>=first){
+                prep_cpu_sum+=s->prep_cpu;
+                hud_cpu_sum+=s->hud_cpu;
+                prep_wall_sum+=s->scene_wall;
+                prepared_count++;
+#ifdef RR_PARALLEL_PREP_PROFILE
+                direct_cpu_sum+=s->direct_cpu;
+                list_cpu_sum+=s->list_cpu;
+                sort_cpu_sum+=s->sort_cpu;
+#endif
+            }
+        }
+        pthread_cond_broadcast(&changed);
+        pthread_mutex_unlock(&mutex);
+        if(!ok)break;
+    }
+    metadata_lock();prep_done=true;pthread_cond_broadcast(&changed);pthread_mutex_unlock(&mutex);
+    return NULL;
+}
+#endif
 
 static void *consume(void *unused)
 {
@@ -185,14 +321,34 @@ static void *consume(void *unused)
     for (;;) {
         metadata_lock();
         int slot;
-        while ((slot = newest()) < 0 && !closing) metadata_wait();
+        while ((slot = newest(
+#ifdef RR_PARALLEL_FRAME_PREP
+                   parallel ? PREPARED : READY
+#else
+                   READY
+#endif
+                   )) < 0 && (!closing
+#ifdef RR_PARALLEL_FRAME_PREP
+                   || (parallel && !prep_done)
+#endif
+                   )) metadata_wait();
         if (slot < 0) {
             pthread_mutex_unlock(&mutex);
             break;
         }
         state[slot] = READING;
+#ifdef RR_PARALLEL_FRAME_PREP
+        if(parallel)consumer_claimed_at=now();
+#endif
+        pthread_cond_broadcast(&changed);
         for (int i = 0; i < SLOTS; i++)
-            if (state[i] == READY) discard_ready(i);
+            if (state[i] == (
+#ifdef RR_PARALLEL_FRAME_PREP
+                parallel ? PREPARED : READY
+#else
+                READY
+#endif
+                )) discard_ready(i);
         pthread_mutex_unlock(&mutex);
 
         ok = render(&slots[slot]);
@@ -218,6 +374,17 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
     sync_owner=&producer_sync;
     memset(&producer_sync,0,sizeof producer_sync);
     memset(&consumer_sync,0,sizeof consumer_sync);
+#ifdef RR_PARALLEL_FRAME_PREP
+    memset(&preparer_sync,0,sizeof preparer_sync);
+    parallel=!serial;
+    prep_started=prep_done=false;
+    consumer_claimed_at=0;
+    prep_cpu_sum=hud_cpu_sum=prep_wall_sum=0;
+    prepared_count=dropped_prepared=0;
+#ifdef RR_PARALLEL_PREP_PROFILE
+    direct_cpu_sum=list_cpu_sum=sort_cpu_sum=0;
+#endif
+#endif
     memset(state, 0, sizeof state);
     memset(previous_palette, 0, sizeof previous_palette);
     memset(generation, 0, sizeof generation);
@@ -236,24 +403,45 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
         profile_csv=fopen(csv_path,"wx");
         if(!profile_csv){perror("thread profile CSV");return false;}
         setvbuf(profile_csv,profile_csv_buffer,_IOFBF,sizeof profile_csv_buffer);
-        fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative,lookup_decode_wall,decode_wall,upload_wall,decoded_texels,eviction_wall,clock_probes,delete_calls\n",profile_csv);
+        fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative,lookup_decode_wall,decode_wall,upload_wall,decoded_texels,eviction_wall,clock_probes,delete_calls",profile_csv);
+#ifdef RR_PARALLEL_FRAME_PREP
+        fputs(",prep_cpu,hud_cpu,prep_queue_age,prepared_wait",profile_csv);
+#ifdef RR_PARALLEL_PREP_PROFILE
+        fputs(",direct_cpu,list_cpu,sort_cpu",profile_csv);
+#endif
+#endif
+        fputc('\n',profile_csv);
     }
     slots = calloc(SLOTS, sizeof *slots);
-    if (!slots) { perror("presentation snapshots"); return false; }
+    if (!slots) { perror("presentation snapshots"); free_slots(); return false; }
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel)for(int i=0;i<SLOTS;i++) {
+        slots[i].video.text=malloc(640u*480u*4u);
+        slots[i].video.shadow=malloc(640u*480u*4u);
+        if(!slots[i].video.text||!slots[i].video.shadow){
+            fprintf(stderr,"[PREP] HUD buffer allocation failed\n");
+            free_slots();return false;
+        }
+    }
+#endif
     fprintf(stderr, "[THREAD] simulation_tid=%ld mode=%s slots=%d bytes=%zu "
             "point_copy_bytes=%zu target_hz=%.9f\n", (long)syscall(SYS_gettid),
-            serial ? "snapshot-reference" : "concurrent", SLOTS,
+            serial ? "snapshot-reference" :
+#ifdef RR_PARALLEL_FRAME_PREP
+            parallel ? "three-stage" :
+#endif
+            "concurrent", SLOTS,
             SLOTS * sizeof *slots, sizeof slots[0].point, 1.0 / RR_FRAME_SECONDS);
     if (!serial) {
         if (SDL_GL_MakeCurrent(window, NULL) != 0) {
             fprintf(stderr, "[THREAD] main context detach: %s\n", SDL_GetError());
-            free(slots); slots = NULL; return false;
+            free_slots();return false;
         }
         int error = pthread_create(&worker, NULL, consume, NULL);
         if (error) {
             fprintf(stderr, "[THREAD] pthread_create: %s\n", strerror(error));
             SDL_GL_MakeCurrent(window, context);
-            free(slots); slots = NULL; return false;
+            free_slots();return false;
         }
         metadata_lock();
         while (!attached) metadata_wait();
@@ -262,8 +450,23 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
         if (failed) {
             pthread_join(worker, NULL);
             SDL_GL_MakeCurrent(window, context);
-            free(slots); slots = NULL; return false;
+            free_slots();return false;
         }
+#ifdef RR_PARALLEL_FRAME_PREP
+        if(parallel){
+            int error=pthread_create(&prep_worker,NULL,prepare,NULL);
+            if(error){
+                fprintf(stderr,"[PREP] pthread_create: %s\n",strerror(error));
+                metadata_lock();closing=true;pthread_cond_broadcast(&changed);pthread_mutex_unlock(&mutex);
+                pthread_join(worker,NULL);
+                SDL_GL_MakeCurrent(window,context);
+                free_slots();return false;
+            }
+            prep_started=true;
+            fprintf(stderr,"[PREP] slots=%d fixed_hud_bytes=%zu queue=latest\n",SLOTS,
+                    (size_t)SLOTS*2*640*480*4);
+        }
+#endif
     }
     started = true;
     cpu_last = stamp(CLOCK_THREAD_CPUTIME_ID);
@@ -320,6 +523,10 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         if (slot >= 0) {
             if (state[slot] == READY) discard_ready(slot);
             state[slot] = WRITING;
+        } else {
+#ifdef RR_PARALLEL_FRAME_PREP
+            if(parallel){dropped++;if(frame>=first)range_dropped++;}
+#endif
         }
     }
     pthread_mutex_unlock(&mutex);
@@ -345,7 +552,7 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         metadata_lock();
         state[slot] = READY;
         unsigned depth = 0;
-        for (int i = 0; i < SLOTS; i++) depth += state[i] == READY;
+        for (int i = 0; i < SLOTS; i++) depth += state[i] == READY || state[i] == PREPARED;
         if (depth > queue_peak) queue_peak = depth;
         pthread_cond_broadcast(&changed);
         pthread_mutex_unlock(&mutex);
@@ -391,6 +598,9 @@ bool rr_presentation_finish(void)
     pthread_cond_broadcast(&changed);
     pthread_mutex_unlock(&mutex);
     if (!serial) {
+#ifdef RR_PARALLEL_FRAME_PREP
+        if(prep_started){pthread_join(prep_worker,NULL);prep_started=false;}
+#endif
         pthread_join(worker, NULL);
         if (SDL_GL_MakeCurrent(window, context) != 0) {
             fprintf(stderr, "[THREAD] cleanup context: %s\n", SDL_GetError());
@@ -411,7 +621,11 @@ bool rr_presentation_finish(void)
     unsigned completed = render_count - drain;
     double elapsed = sim_end - sim_start;
     if (steps && elapsed > 0) {
-        double overlap = (cpu_sum + producer_cpu + render_cpu) / elapsed;
+        double overlap = (cpu_sum + producer_cpu + render_cpu
+#ifdef RR_PARALLEL_FRAME_PREP
+            + prep_cpu_sum
+#endif
+            ) / elapsed;
         fprintf(stderr, "[THREAD-RATE] from=%u steps=%u rendered=%u drain=%u sim_hz=%.6f "
                 "render_fps=%.6f sim_cpu_ms=%.6f copy_cpu_ms=%.6f presentation_cpu_ms=%.6f "
                 "scene_wall_ms=%.6f publication_age_ms=%.6f cpu_cores_equivalent=%.6f "
@@ -432,11 +646,28 @@ bool rr_presentation_finish(void)
             steps ? producer_cpu * 1000 / steps : 0, record_overflow,
             sim_cores[0], sim_cores[1], sim_cores[2], sim_cores[3],
             worker_cores[0], worker_cores[1], worker_cores[2], worker_cores[3]);
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(parallel)fprintf(stderr,"[PREP-RATE] prepared=%u prep_cpu_ms=%.6f hud_cpu_ms=%.6f scene_wall_ms=%.6f dropped_prepared=%u extra_hud_bytes=%zu\n",
+        prepared_count,prepared_count?prep_cpu_sum*1000/prepared_count:0,
+        prepared_count?hud_cpu_sum*1000/prepared_count:0,
+        prepared_count?prep_wall_sum*1000/prepared_count:0,dropped_prepared,
+        (size_t)SLOTS*2*640*480*4);
+#ifdef RR_PARALLEL_PREP_PROFILE
+    if(parallel)fprintf(stderr,"[PREP-STAGES] prepared=%u direct_cpu_ms=%.6f list_cpu_ms=%.6f sort_cpu_ms=%.6f\n",
+        prepared_count,prepared_count?direct_cpu_sum*1000/prepared_count:0,
+        prepared_count?list_cpu_sum*1000/prepared_count:0,
+        prepared_count?sort_cpu_sum*1000/prepared_count:0);
+#endif
+#endif
     if(sync_profile)fprintf(stderr,"[THREAD-SYNC] scope=whole-run producer_calls=%u producer_acquire_ms=%.6f producer_acquire_max_us=%.6f producer_cond_wait_ms=%.6f consumer_calls=%u consumer_acquire_ms=%.6f consumer_acquire_max_us=%.6f consumer_idle_ms=%.6f\n",
         producer_sync.calls,producer_sync.acquire*1000,producer_sync.maximum*1e6,producer_sync.idle*1000,
         consumer_sync.calls,consumer_sync.acquire*1000,consumer_sync.maximum*1e6,consumer_sync.idle*1000);
-    free(slots);
-    slots = NULL;
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(sync_profile&&parallel)fprintf(stderr,"[PREP-SYNC] calls=%u acquire_ms=%.6f acquire_max_us=%.6f idle_ms=%.6f\n",
+        preparer_sync.calls,preparer_sync.acquire*1000,preparer_sync.maximum*1e6,
+        preparer_sync.idle*1000);
+#endif
+    free_slots();
     started = false;
     return ok;
 }
@@ -447,7 +678,7 @@ void rr_presentation_overlay(unsigned *frame,unsigned *drops,unsigned *queued,do
     metadata_lock();
     *frame=last_frame; *drops=dropped; *queued=0;
     for(int i=0;i<SLOTS;i++){
-        if(state[i]==READY)(*queued)++;
+        if(state[i]==READY||state[i]==PREPARED)(*queued)++;
         if(state[i]==READING)*age_ms=(timestamp-slots[i].produced)*1000.;
     }
     pthread_mutex_unlock(&mutex);

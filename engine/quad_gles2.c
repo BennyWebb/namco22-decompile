@@ -315,7 +315,12 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
     return ok;
 }
 
+#ifdef RR_PARALLEL_FRAME_PREP
+bool eng_gles2_draw_ordered(const geo_quad *quads, const int *order, int count,
+                            const float bg[3], eng_gles2_stats *stats)
+#else
 bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gles2_stats *stats)
+#endif
 {
     memset(stats, 0, sizeof *stats);
     int hits_before = tex_frame_hits, misses_before = tex_frame_misses;
@@ -354,7 +359,11 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     SP_END(sp_attributes);
     int previous[4] = {-1,-1,-1,-1};
     for (int qi = 0; qi < count; qi++) {
+#ifdef RR_PARALLEL_FRAME_PREP
+        const geo_quad *q = &quads[order ? order[qi] : eng_quad_index(qi)];
+#else
         const geo_quad *q = &quads[eng_quad_index(qi)];
+#endif
         if (q->nrv < 3 || q->nrv > 10) continue;
         int left = q->clip[0] < 0 ? 0 : q->clip[0];
         int right = q->clip[1] > 639 ? 639 : q->clip[1];
@@ -478,6 +487,12 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     stats->bind_skips = (unsigned)(tex_gles2_bind_skips - skips_before);
     return ok;
 }
+#ifdef RR_PARALLEL_FRAME_PREP
+bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gles2_stats *stats)
+{
+    return eng_gles2_draw_ordered(quads, NULL, count, bg, stats);
+}
+#endif
 
 void eng_gles2_close(void)
 {

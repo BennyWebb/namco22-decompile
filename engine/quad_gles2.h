@@ -27,5 +27,9 @@ const char *eng_gles2_mode_name(void);
 bool eng_gles2_texture_budget(unsigned mib);
 bool eng_gles2_draw(const geo_quad *quads, int count, const float background[3],
                    eng_gles2_stats *stats);
+#ifdef RR_PARALLEL_FRAME_PREP
+bool eng_gles2_draw_ordered(const geo_quad *quads, const int *order, int count,
+                            const float background[3], eng_gles2_stats *stats);
+#endif
 void eng_gles2_close(void);
 #endif

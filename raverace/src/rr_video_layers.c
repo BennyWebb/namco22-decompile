@@ -10,15 +10,17 @@
 #include <time.h>
 #define W 640
 #define H 480
-static bool enabled=true, profiling, profile_gate=true;
+static bool enabled=true, profiling;
+static _Thread_local bool profile_gate=true;
 static unsigned profile_frames;
+static unsigned decode_frames;
 static double decode_cpu, upload_cpu, upload_wall, compose_cpu, compose_wall;
 static double stamp(clockid_t clock) {struct timespec t;clock_gettime(clock,&t);return t.tv_sec+t.tv_nsec*1e-9;}
 void rr_video_layers_profile(bool on){profiling=on;}
 void rr_video_layers_profile_gate(bool on){profile_gate=on;}
 bool rr_video_layers_profile_enabled(void){return profiling&&profile_gate;}
 double rr_video_layers_cpu_time(void){return rr_video_layers_profile_enabled()?stamp(CLOCK_THREAD_CPUTIME_ID):0;}
-void rr_video_layers_decode_time(double elapsed){decode_cpu+=elapsed;}
+void rr_video_layers_decode_time(double elapsed){decode_cpu+=elapsed;decode_frames++;}
 static GLuint target,depth,scene,text_tex,shadow_tex,lut_tex,program,vbo;
 static uint8_t last_lut[256][4];
 static bool lut_valid;
@@ -119,7 +121,7 @@ void rr_video_layers_close(void)
 {
  if(!program)return;
  fprintf(stderr,"[VIDEO] presentations=%u full_layer_uploads=%u\n",frames,uploads);
- if(profiling&&profile_frames)fprintf(stderr,"[VIDEO-PROFILE] samples=%u avg_ms decode_cpu=%.6f upload_cpu=%.6f upload_wall=%.6f composition_cpu=%.6f composition_wall=%.6f\n",profile_frames,decode_cpu*1000/profile_frames,upload_cpu*1000/profile_frames,upload_wall*1000/profile_frames,compose_cpu*1000/profile_frames,compose_wall*1000/profile_frames);
+ if(profiling&&profile_frames)fprintf(stderr,"[VIDEO-PROFILE] samples=%u decode_samples=%u avg_ms decode_cpu=%.6f upload_cpu=%.6f upload_wall=%.6f composition_cpu=%.6f composition_wall=%.6f\n",profile_frames,decode_frames,decode_frames?decode_cpu*1000/decode_frames:0,upload_cpu*1000/profile_frames,upload_wall*1000/profile_frames,compose_cpu*1000/profile_frames,compose_wall*1000/profile_frames);
  glDeleteFramebuffers(1,&target);glDeleteRenderbuffers(1,&depth);
  GLuint tex[]={scene,text_tex,shadow_tex,lut_tex};glDeleteTextures(4,tex);
  glDeleteBuffers(1,&vbo);glDeleteProgram(program);program=0;

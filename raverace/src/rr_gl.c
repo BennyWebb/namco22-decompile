@@ -20,6 +20,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef RR_PARALLEL_PREP_PROFILE
+#include <time.h>
+#endif
 #include <SDL.h>
 #include "eng_gl.h"
 #include "rr_game.h"
@@ -52,7 +55,11 @@ static bool    assets_ok, gl_ready;
 /* ---------------------------------------------------------------- assets */
 #ifdef RR_THREADED_PRESENTATION
 #include "rr_presentation.h"
+#ifdef RR_PARALLEL_FRAME_PREP
+static _Thread_local const rr_presentation *render_snapshot;
+#else
 static const rr_presentation *render_snapshot;
+#endif
 #define VIDEO_ARRAY(field) (render_snapshot ? render_snapshot->field : g_rr.field)
 #else
 #define VIDEO_ARRAY(field) (g_rr.field)
@@ -126,6 +133,15 @@ static int s22_fog_quad(const geo_quad *q, eng_fog *f)
 /* ------------------------------------------------------------ the quads */
 static geo_quad *qbuf;
 static int       qn, qcap, qorder;
+#ifdef RR_PARALLEL_PREP_PROFILE
+static _Thread_local rr_presentation *profile_snapshot;
+static double prep_cpu_stamp(void)
+{
+    struct timespec t;
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID,&t);
+    return t.tv_sec+t.tv_nsec*1e-9;
+}
+#endif
 #ifdef RR_GEOMETRY_INDEX_ORDER
 #define FRAME_QUAD(i) qbuf[eng_quad_index(i)]
 #else
@@ -136,7 +152,13 @@ static void push_quad(const geo_quad *q, void *user)
 {
     (void)user;
     if (qn == qcap) {
+#ifdef RR_PARALLEL_FRAME_PREP
+        /* Each in-flight snapshot owns an arena. Start near the observed
+         * racing workload and grow only when the geometry actually needs it. */
+        int nc = qcap ? qcap * 2 : 2048;
+#else
         int nc = qcap ? qcap * 2 : 8192;
+#endif
         geo_quad *nb = realloc(qbuf, (size_t)nc * sizeof *qbuf);
         if (!nb) {
 #ifdef RR_GLES2
@@ -615,22 +637,75 @@ void rr_gl_context_attributes(void)
 
 #else
 #ifdef RR_THREADED_PRESENTATION
-void rr_gl_presentation(const rr_presentation *snapshot)
+static void presentation_geometry(const rr_presentation *snapshot, bool update_palette)
 {
     render_snapshot=snapshot;
-    eng_palette_from_planar(snapshot->pal,0x8000);
-    /* Generations include all skipped simulation ticks, not just pictures. */
-    memcpy(g_eng_pal_gen,snapshot->generation,sizeof snapshot->generation);
-    g_eng_frame=snapshot->frame;
+    if(update_palette) {
+        eng_palette_from_planar(snapshot->pal,0x8000);
+        /* Generations include all skipped simulation ticks, not just pictures. */
+        memcpy(g_eng_pal_gen,snapshot->generation,sizeof snapshot->generation);
+        g_eng_frame=snapshot->frame;
+    }
     frame_bg_palbase=mixer_b(0x04)<<8 & 0x7f00;
     qn=qorder=0;
+#ifdef RR_PARALLEL_PREP_PROFILE
+    double stage=profile_snapshot?prep_cpu_stamp():0;
+#endif
     for(unsigned i=0;i<snapshot->direct_count;i++) direct_quad(snapshot->direct[i]);
+#ifdef RR_PARALLEL_PREP_PROFILE
+    if(profile_snapshot){profile_snapshot->direct_cpu=prep_cpu_stamp()-stage;stage=prep_cpu_stamp();}
+#endif
     if(snapshot->walk) {
         eng_list_cfg cfg={ENG_LIST_HEAD_S22,1,NULL,NULL,NULL,NULL};
         eng_walk_list(poly_word,&cfg,push_quad,NULL);
     }
+#ifdef RR_PARALLEL_PREP_PROFILE
+    if(profile_snapshot){profile_snapshot->list_cpu=prep_cpu_stamp()-stage;stage=prep_cpu_stamp();}
+#endif
     eng_quad_sort(qbuf,qn,0);
+#ifdef RR_PARALLEL_PREP_PROFILE
+    if(profile_snapshot)profile_snapshot->sort_cpu=prep_cpu_stamp()-stage;
+#endif
 }
+void rr_gl_presentation(const rr_presentation *snapshot)
+{
+    presentation_geometry(snapshot,true);
+}
+#ifdef RR_PARALLEL_FRAME_PREP
+bool rr_gl_presentation_into(rr_presentation *snapshot)
+{
+    /* Reuse the slot's geometry arena. The GL consumer only reads arenas in
+     * READING state; this producer owns the slot until it publishes PREPARED. */
+    qbuf=snapshot->quads;
+    qcap=snapshot->quad_cap;
+#ifdef RR_PARALLEL_PREP_PROFILE
+    profile_snapshot=snapshot;
+#endif
+    presentation_geometry(snapshot,false);
+#ifdef RR_PARALLEL_PREP_PROFILE
+    profile_snapshot=NULL;
+#endif
+    snapshot->quads=qbuf;
+    snapshot->quad_cap=qcap;
+    snapshot->quad_count=qn;
+    if(qn>snapshot->order_cap) {
+        int *next=realloc(snapshot->order,(size_t)qn*sizeof *next);
+        if(!next) {fprintf(stderr,"[PREP] order allocation failed for %d quads\n",qn);return false;}
+        snapshot->order=next;
+        snapshot->order_cap=qn;
+    }
+    for(int i=0;i<qn;i++)snapshot->order[i]=eng_quad_index(i);
+    rr_gles2_background(snapshot->background);
+    return true;
+}
+void rr_gl_presentation_activate(const rr_presentation *snapshot)
+{
+    render_snapshot=snapshot;
+    eng_palette_from_planar(snapshot->pal,0x8000);
+    memcpy(g_eng_pal_gen,snapshot->generation,sizeof snapshot->generation);
+    g_eng_frame=snapshot->frame;
+}
+#endif
 void rr_gl_presentation_release(void) {render_snapshot=NULL;}
 #endif
 const geo_quad *rr_gles2_quads(int *count) { *count = qn; return qbuf; }
@@ -645,7 +720,8 @@ void rr_gles2_background(float rgb[3])
 /* Same CPU glyph decoder as the desktop renderer. Cache only host output;
  * all source arrays come from the current immutable snapshot (or serial main).
  */
-bool rr_gl_video_compose(void)
+static uint64_t video_generation=1, submitted_video_generation;
+static bool rr_gl_video_cpu(rr_video_cpu_frame *out)
 {
  if(!rr_video_layers_enabled())return true;
  double decode_begin=rr_video_layers_cpu_time();
@@ -663,17 +739,46 @@ bool rr_gl_video_compose(void)
   any_text=build_text(base,shadow,&any_shadow);
   memcpy(cg,VIDEO_ARRAY(cgram),sizeof cg);memcpy(tx,VIDEO_ARRAY(text),sizeof tx);memcpy(attr,VIDEO_ARRAY(tilemapattr),16);
   memcpy(pal,colors,sizeof pal);memcpy(mix,multipliers,9);last_base=base;last_shadow=shadow;valid=true;
+  video_generation++;
  }
- uint8_t lut[256][4];
  for(int v=0;v<256;v++){
   for(int c=0;c<3;c++){
    int fade=mixer_b(0x11+c*2)<<8|mixer_b(0x12+c*2);
    int value=v;if(fade>0x100 && !value)value=1;value=value*fade>>8;if(value>255)value=255;
-   lut[v][c]=gamma_prom[c][value];
+   out->lut[v][c]=gamma_prom[c][value];
   }
-  lut[v][3]=255;
+  out->lut[v][3]=255;
  }
  if(rr_video_layers_profile_enabled())rr_video_layers_decode_time(rr_video_layers_cpu_time()-decode_begin);
- return rr_video_layers_compose(txt_rgba,shd_rgba,dirty,any_text,any_shadow,lut);
+ out->generation=video_generation;
+ out->any_text=any_text;
+ out->any_shadow=any_shadow;
+ return true;
 }
+bool rr_gl_video_compose(void)
+{
+ rr_video_cpu_frame frame={.text=txt_rgba,.shadow=shd_rgba};
+ if(!rr_gl_video_cpu(&frame))return false;
+ bool ok=rr_video_layers_compose(frame.text,frame.shadow,
+     frame.generation!=submitted_video_generation,frame.any_text,frame.any_shadow,frame.lut);
+ if(ok)submitted_video_generation=frame.generation;
+ return ok;
+}
+#ifdef RR_PARALLEL_FRAME_PREP
+bool rr_gl_video_prepare(rr_video_cpu_frame *out)
+{
+ if(!out->text||!out->shadow)return false;
+ if(!rr_gl_video_cpu(out))return false;
+ memcpy(out->text,txt_rgba,sizeof txt_rgba);
+ memcpy(out->shadow,shd_rgba,sizeof shd_rgba);
+ return true;
+}
+bool rr_gl_video_submit(const rr_video_cpu_frame *frame)
+{
+ bool ok=rr_video_layers_compose(frame->text,frame->shadow,
+     frame->generation!=submitted_video_generation,frame->any_text,frame->any_shadow,frame->lut);
+ if(ok)submitted_video_generation=frame->generation;
+ return ok;
+}
+#endif
 #endif

@@ -68,6 +68,11 @@ static double presentation_timestamp(void)
     return t.tv_sec+t.tv_nsec*1e-9;
 }
 static unsigned report_frames;
+#ifdef RR_PARALLEL_FRAME_PREP
+static const geo_quad *rr_capture_prepared_quads;
+static const int *rr_capture_prepared_order;
+static int rr_capture_prepared_count;
+#endif
 static bool saw_geometry;
 static uint32_t profile_from = 1;
 uint32_t rr_gles2_profile_from(void) { return profile_from; }
@@ -479,10 +484,24 @@ static bool capture(uint32_t frame, const eng_gles2_stats *stats)
     if (!stats->triangles) { fprintf(stderr, "[GLES2] capture contains no submitted geometry; choose a later frame\n"); return false; }
 #ifdef RR_THREADED_PRESENTATION
     /* Capture-only ordered record check; no hot-loop profiling overhead. */
-    int quad_count; const geo_quad *quads=rr_gles2_quads(&quad_count);
+    int quad_count;
+    const geo_quad *quads;
+#ifdef RR_PARALLEL_FRAME_PREP
+    const int *prepared_order=NULL;
+    if(rr_capture_prepared_quads){
+        quads=rr_capture_prepared_quads;
+        quad_count=rr_capture_prepared_count;
+        prepared_order=rr_capture_prepared_order;
+    } else
+#endif
+    quads=rr_gles2_quads(&quad_count);
     uint64_t digest=UINT64_C(14695981039346656037);
     for(int i=0;i<quad_count;i++) {
+#ifdef RR_PARALLEL_FRAME_PREP
+        const unsigned char *p=(const unsigned char *)&quads[prepared_order?prepared_order[i]:eng_quad_index(i)];
+#else
         const unsigned char *p=(const unsigned char *)&quads[eng_quad_index(i)];
+#endif
         for(size_t j=0;j<sizeof *quads;j++) digest=(digest^p[j])*UINT64_C(1099511628211);
     }
     fprintf(stderr,"[PRESENTATION-GEOMETRY] frame=%u quads=%d record_bytes=%zu ordered_digest=%016llx\n",
@@ -641,14 +660,29 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
 bool rr_gles2_pump(void) {return pump_input();}
 static rr_presentation_metrics last_metrics;
 rr_presentation_metrics rr_gles2_last_metrics(void) {return last_metrics;}
-bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float bg[3],double scene)
+static bool rr_gles2_present_impl(uint32_t frame,const geo_quad *quads,int count,
+                                  const float bg[3],double scene,
+                                  const rr_presentation *prepared)
 {
     eng_gles2_stats stats;double start=seconds();
     rr_video_layers_profile_gate(frame>=profile_from);
     rr_video_layers_begin();
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(prepared){
+        rr_capture_prepared_quads=quads;
+        rr_capture_prepared_order=prepared->order;
+        rr_capture_prepared_count=count;
+        if(!eng_gles2_draw_ordered(quads,prepared->order,count,bg,&stats)){failed=true;return false;}
+    }else
+#endif
     if(!eng_gles2_draw(quads,count,bg,&stats)){failed=true;return false;}
     double draw=seconds()-start;
-    if(!rr_gl_video_compose()){failed=true;return false;}
+#ifdef RR_PARALLEL_FRAME_PREP
+    if(prepared ? !rr_gl_video_submit(&prepared->video) : !rr_gl_video_compose())
+#else
+    if(!rr_gl_video_compose())
+#endif
+    {failed=true;return false;}
     rr_overlay_draw();
     if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
     double swap_start=seconds();SDL_GL_SwapWindow(window);last_presentation=presentation_timestamp();double swap=seconds()-swap_start;rr_overlay_present(frame,last_presentation);
@@ -661,6 +695,17 @@ bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float
     }
     return true;
 }
+bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float bg[3],double scene)
+{
+    return rr_gles2_present_impl(frame,quads,count,bg,scene,NULL);
+}
+#ifdef RR_PARALLEL_FRAME_PREP
+bool rr_gles2_present_prepared(const rr_presentation *snapshot)
+{
+    return rr_gles2_present_impl(snapshot->frame,snapshot->quads,snapshot->quad_count,
+                                 snapshot->background,snapshot->scene_wall,snapshot);
+}
+#endif
 #endif
 bool rr_gles2_failed(void) { return failed; }
 /* Linux process peak survives between sampler polls; log before freeing GPU
