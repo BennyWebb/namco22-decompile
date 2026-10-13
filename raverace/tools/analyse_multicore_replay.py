@@ -114,6 +114,8 @@ def section(rows, ticks, lo, hi):
         raise ValueError(f"No presentation samples in {lo}..{hi}")
     slow = sorted(intervals, reverse=True)[:math.ceil(len(intervals) * .01)]
     mean_ms = lambda key: stats.mean(float(r.get(key, 0)) for r in selected) * 1000
+    median_ms = lambda key: stats.median(float(r.get(key, 0)) for r in selected) * 1000
+    p95_ms = lambda key: percentile([float(r.get(key, 0)) for r in selected], .95) * 1000
     return {
         "frames": f"{lo}-{hi}", "rendered": len(selected), "fps": len(selected) / (end - begin),
         "sim_hz": (hi - lo + 1) / (end - begin),
@@ -129,6 +131,12 @@ def section(rows, ticks, lo, hi):
         "draw_ms": mean_ms("draw_wall"), "submit_ms": mean_ms("submission_wall"),
         "decode_ms": mean_ms("decode_wall"), "upload_ms": mean_ms("upload_wall"),
         "swap_ms": mean_ms("swap_wall"), "age_ms": mean_ms("publication_age"),
+        "age_ms_median": median_ms("publication_age"),
+        "age_ms_p95": p95_ms("publication_age"),
+        "snapshot_copy_ms": mean_ms("snapshot_copy_wall"),
+        "snapshot_queue_ms": mean_ms("snapshot_queue_wait"),
+        "prep_wall_ms": mean_ms("prep_wall"),
+        "prepared_wait_ms": mean_ms("prepared_wait"),
         "draws": stats.mean(float(r["draws"]) for r in selected),
         "triangles": stats.mean(float(r["triangles"]) for r in selected),
         "binds": stats.mean(float(r["binds"]) for r in selected),
@@ -185,7 +193,8 @@ with (root / "sections.csv").open("w", newline="") as out:
         for item in run["sections"]:
             writer.writerow({"variant": run["variant"], "pair": run["pair"], **item})
 for key in ("fps", "low1_fps", "frame_ms_p99", "frame_ms_max", "sim_hz", "presentation_cpu_ms",
-            "prep_cpu_ms", "scene_ms", "hud_cpu_ms", "draw_ms", "submit_ms", "age_ms",
+            "prep_cpu_ms", "scene_ms", "hud_cpu_ms", "draw_ms", "submit_ms", "age_ms_median", "age_ms_p95",
+            "snapshot_queue_ms", "prep_wall_ms", "prepared_wait_ms",
             "snapshot_drops", "dropped_prepared", "peak_rss_mib"):
     print(f"{key}: baseline={medians['baseline'][key]:.3f} candidate={medians['candidate'][key]:.3f}")
 print(f"Detailed report: {root / 'summary.json'}")

@@ -110,6 +110,29 @@ The detailed A/B logs, timestamp CSVs and `/proc` samples remain under
 `raverace/tools/analyse_multicore_replay.py` as documented in the multicore
 report. Preserve equivalent instrumentation when comparing FPS.
 
+## Latest frame pacing experiment (2026-10-13)
+
+See [frame pacing and image age experiment](FRAME_PACING_LATENCY_EXPERIMENT.md).
+The new `RR_PREP_WAKE_ON_SNAPSHOT` CMake flag is OFF by default and requires
+`RR_PARALLEL_FRAME_PREP=ON`. It lets the preparer wake when a fresh snapshot
+arrives within the existing 6 ms grace period. Five alternating handheld
+first-lap A/B pairs measured 41.262 versus 41.544 median rendered FPS, 20.411
+versus 20.655 1% low FPS, 39.296 versus 39.364 ms p99 presentation interval,
+and 49.126 versus 49.338 ms median image age (prior wait versus wake-up).
+Median worst hitch worsened from 96.078 to 100.550 ms. The change moves about
+0.98 ms from READY wait to PREPARED wait, without a meaningful latency or
+pacing benefit. **Do not deploy this experiment based on these results.**
+
+The installed playable executable and prior backup are unchanged. The active
+binary hash above was reverified; EmulationStation was restored and the sole
+Ports launcher remains `Rave Racer.sh`. Same-GPU replay frames 1965 and 3600,
+all recorded checkpoints through tick 6006, native fixed-cadence texture event
+digests and ThreadSanitizer checks passed. The five-pair data is under
+`/userdata/system/rave-racer-multicore/ab-20261013-172218-26240`, and the
+separate scheduler pair under `ab-20261013-174532-8107`. The GLES owner
+remains the throughput limit; first-time texture bursts still dominate the
+worst hitches. No repository commit was made.
+
 ## Correctness and next-session guardrails
 
 The multicore build passed native and ARM64 builds; native headless and

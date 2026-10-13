@@ -7,6 +7,7 @@
 #include "rr_gles2_timing.h"
 #include <SDL.h>
 #include <pthread.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -192,9 +193,12 @@ static bool render(const rr_presentation *snapshot)
                 snapshot->frame,start,end,cost,scene,presented-snapshot->produced,age,core,presented,
                 m.draw_wall,m.submission_wall,m.swap_wall,m.draws,m.triangles,m.binds,m.uploads,m.misses,m.evictions,m.texture_bytes,ready_depth,observed_drops,m.lookup_wall,m.decode_wall,m.upload_wall,m.decoded_texels,m.eviction_wall,m.clock_probes,m.delete_calls);
 #ifdef RR_PARALLEL_FRAME_PREP
-            fprintf(profile_csv,",%.9f,%.9f,%.9f,%.9f",parallel?snapshot->prep_cpu:0,
+            fprintf(profile_csv,",%.9f,%.9f,%.9f,%.9f,%.9f,%.9f,%.9f",parallel?snapshot->prep_cpu:0,
                     parallel?snapshot->hud_cpu:0,parallel?snapshot->prepared_at-snapshot->produced:0,
-                    parallel?start-snapshot->prepared_at:0);
+                    parallel?start-snapshot->prepared_at:0,
+                    parallel?snapshot->ready_at-snapshot->produced:0,
+                    parallel?snapshot->prep_started_at-snapshot->ready_at:0,
+                    parallel?snapshot->prepared_at-snapshot->prep_started_at:0);
 #ifdef RR_PARALLEL_PREP_PROFILE
             fprintf(profile_csv,",%.9f,%.9f,%.9f",parallel?snapshot->direct_cpu:0,
                     parallel?snapshot->list_cpu:0,parallel?snapshot->sort_cpu:0);
@@ -252,11 +256,28 @@ static void *prepare(void *unused)
             double remain=consumer_claimed_at+0.006-now();
             if(!closing && ready>=0 && slots[ready].produced<consumer_claimed_at
                && remain>0) {
+#ifdef RR_PREP_WAKE_ON_SNAPSHOT
+                /* The producer broadcasts after publishing READY. A timed
+                 * condition wait releases the mutex atomically, so a fresh
+                 * snapshot cannot be missed between the check and sleep. */
+                struct timespec deadline;
+                clock_gettime(CLOCK_REALTIME,&deadline);
+                long extra=(long)(remain*1e9);
+                deadline.tv_sec+=extra/1000000000L;
+                deadline.tv_nsec+=extra%1000000000L;
+                if(deadline.tv_nsec>=1000000000L){deadline.tv_sec++;deadline.tv_nsec-=1000000000L;}
+                double idle_start=sync_profile?now():0;
+                int result=pthread_cond_timedwait(&changed,&mutex,&deadline);
+                if(sync_profile)preparer_sync.idle+=now()-idle_start;
+                if(result && result!=ETIMEDOUT){worker_failed=true;closing=true;}
+                continue;
+#else
                 pthread_mutex_unlock(&mutex);
                 struct timespec delay={0,(long)(remain*1e9)};
                 nanosleep(&delay,NULL);
                 metadata_lock();
                 continue;
+#endif
             }
             break;
         }
@@ -268,6 +289,7 @@ static void *prepare(void *unused)
 
         rr_presentation *s=&slots[slot];
         double wall=now(),cpu=stamp(CLOCK_THREAD_CPUTIME_ID);
+        s->prep_started_at=wall;
         bool ok=rr_gl_presentation_into(s);
         s->scene_wall=now()-wall;
         double hud_start=stamp(CLOCK_THREAD_CPUTIME_ID);
@@ -405,7 +427,7 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
         setvbuf(profile_csv,profile_csv_buffer,_IOFBF,sizeof profile_csv_buffer);
         fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative,lookup_decode_wall,decode_wall,upload_wall,decoded_texels,eviction_wall,clock_probes,delete_calls",profile_csv);
 #ifdef RR_PARALLEL_FRAME_PREP
-        fputs(",prep_cpu,hud_cpu,prep_queue_age,prepared_wait",profile_csv);
+        fputs(",prep_cpu,hud_cpu,prep_queue_age,prepared_wait,snapshot_copy_wall,snapshot_queue_wait,prep_wall",profile_csv);
 #ifdef RR_PARALLEL_PREP_PROFILE
         fputs(",direct_cpu,list_cpu,sort_cpu",profile_csv);
 #endif
@@ -550,6 +572,9 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         if (frame >= first) copy_sum += stamp(CLOCK_THREAD_CPUTIME_ID) - copy_cpu;
 
         metadata_lock();
+#ifdef RR_PARALLEL_FRAME_PREP
+        snapshot->ready_at=now();
+#endif
         state[slot] = READY;
         unsigned depth = 0;
         for (int i = 0; i < SLOTS; i++) depth += state[i] == READY || state[i] == PREPARED;

@@ -22,7 +22,7 @@ typedef struct {
     int order_cap;
     float background[3];
     rr_video_cpu_frame video;
-    double scene_wall, prep_cpu, hud_cpu, prepared_at;
+    double scene_wall, prep_cpu, hud_cpu, ready_at, prep_started_at, prepared_at;
 #ifdef RR_PARALLEL_PREP_PROFILE
     double direct_cpu, list_cpu, sort_cpu;
 #endif
