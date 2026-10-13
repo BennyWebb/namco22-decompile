@@ -28,7 +28,8 @@
       "binaryDir": "${sourceDir}/build/playable-knulli",
       "toolchainFile": "${sourceDir}/cmake/knulli-aarch64.cmake",
       "cacheVariables": {
-        "KNULLI_HOST": "$env{HOME}/dev/knulli-scarab/output/h700/host"
+        "KNULLI_HOST": "$env{HOME}/dev/knulli-scarab/output/h700/host",
+        "RR_TEXTURE_TILE_RUNS": "ON"
       }
     }
   ],

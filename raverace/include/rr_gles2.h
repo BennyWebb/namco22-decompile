@@ -26,7 +26,7 @@ bool rr_gles2_frame(uint32_t frame, const geo_quad *quads, int count, const floa
 bool rr_gles2_failed(void);
 double rr_gles2_last_presentation(void);
 /* Presentation-owner only; copied after swap for optional buffered CSV. */
-typedef struct {double draw_wall,submission_wall,swap_wall;unsigned draws,triangles,binds,uploads,misses,evictions;size_t texture_bytes;} rr_presentation_metrics;
+typedef struct {double draw_wall,submission_wall,swap_wall;unsigned draws,triangles,binds,uploads,misses,evictions;size_t texture_bytes;double lookup_wall,decode_wall,upload_wall,decoded_texels,eviction_wall;unsigned long long clock_probes,delete_calls;} rr_presentation_metrics;
 rr_presentation_metrics rr_gles2_last_metrics(void);
 void rr_gles2_close(void);
 #endif

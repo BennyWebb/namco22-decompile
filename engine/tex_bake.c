@@ -32,7 +32,21 @@
 #include <time.h>
 #include "eng_audit.h"
 #include "gles_texture_trace.inc"
-double tex_gles2_upload_seconds;
+double tex_gles2_upload_seconds, tex_gles2_decode_seconds, tex_gles2_eviction_seconds;
+/* Explicit diagnostic only; no trace file or output in normal gameplay.
+ * Records misses, not every polygon/sample. Buffered and exclusive creation. */
+static FILE *texture_miss_log;
+static int texture_miss_log_initialized;
+static char texture_miss_log_buffer[65536];
+static uint64_t texture_palette_digest(const uint8_t lut[256][4])
+{
+    uint64_t h=UINT64_C(14695981039346656037);
+    const uint8_t *bytes=&lut[0][0];
+    for(unsigned i=0;i<1024;i++){h^=bytes[i];h*=UINT64_C(1099511628211);}
+    return h;
+}
+
+unsigned long long tex_gles2_clock_probes, tex_gles2_delete_calls;
 unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
 static GLuint bound_texture;
 static int binding_known, skip_bindings;
@@ -116,6 +130,10 @@ uint8_t texture_pen_lookup(int u, int v, int texbank) {
     if (pixel_offset >= TEXTURE_TOTAL_SIZE) return 0;
     return g_texture_data[pixel_offset];
 }
+
+#ifdef RR_TEXTURE_TILE_RUNS
+#include "texture_tile_runs.inc"
+#endif
 
 /* When set, every texel is opaque and pen 0 resolves through the palette
  * like any other pen. This is what the hardware polygon path does: the
@@ -512,6 +530,7 @@ static void tex_free_push(GLuint id, uint16_t w, uint16_t h)
     tex_bake_gles2_binding_reset(); /* deleting a bound texture changes GL state */
     tt_event(3,id,w,h,0);
     glDeleteTextures(1, &id); /* No unaccounted recycled storage. */
+    tex_gles2_delete_calls++;
     return;
 #endif
     if (tex_free_n < TEX_CACHE_SIZE) {
@@ -622,6 +641,20 @@ static GLuint gen_texture(void)
 }
 
 void renderer_texture_init(void) {
+#ifdef RR_GLES2
+    if (!texture_miss_log_initialized) {
+        /* Replay startup deliberately removes RR_* environment overrides. */
+        const char *path=getenv("ENG_TEXTURE_MISS_TRACE");
+        texture_miss_log_initialized=1;
+        if(path && *path) {
+            texture_miss_log=fopen(path,"wx");
+            if(!texture_miss_log) {perror("[TEX-MISS] exclusive trace creation");exit(2);}
+            setvbuf(texture_miss_log,texture_miss_log_buffer,_IOFBF,sizeof texture_miss_log_buffer);
+            fputs("frame,min_u,min_v,range_u,range_v,texbank,palette,cmode,opaque,cap,pal_gen,palette_hash,used_w,used_h,alloc_w,alloc_h,decoded_w,decoded_h\n",texture_miss_log);
+        }
+    }
+#endif
+
     if (gen_n) { glDeleteTextures(gen_n, gen_pool); gen_n = 0; }
     for (int i = 0; i < ap_n; i++) { glDeleteTextures(1, &apages[i].tex); free(apages[i].shadow); apages[i].shadow = NULL; }
     ap_n = 0; ap_reset_hand = 0;
@@ -905,6 +938,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
      * they still map range_u onto sw, so the guard is only ever reached by
      * the boundary sample itself. */
 #ifdef RR_GLES2
+    double decode_start = gles_seconds();
     eng_audit_scope audit_decode=eng_audit_begin(AUD_DECODE);
 #endif
     int bw = (sw < tw) ? sw + 1 : sw;
@@ -957,6 +991,15 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
                lut[p][2]=rgb&0xFF;       lut[p][3]=255; }
     }
 
+
+#ifdef RR_GLES2
+    if(texture_miss_log) {
+        fprintf(texture_miss_log,"%u,%d,%d,%d,%d,%d,%d,%d,%d,%d,%u,%016llx,%d,%d,%d,%d,%d,%d\n",
+            g_eng_frame,min_u,min_v,range_u,range_v,texbank,pal_group,cmode,g_tex_opaque,cap,
+            g_eng_pal_gen[pal_group&127],(unsigned long long)texture_palette_digest(lut),sw,sh,tw,th,bw,bh);
+        if(ferror(texture_miss_log)){fprintf(stderr,"[TEX-MISS] trace write failure\n");exit(2);}
+    }
+#endif
     const uint8_t *tmap = g_texture_tilemap, *tdata = g_texture_data;
     uint8_t *bake_dst = tex_pixel_buf; long bake_stride = (long)bw * 4;
     if (atlas_on()) {
@@ -979,6 +1022,15 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         int vrow = (v & 0xFFF0) << 4;            /* tilemap row base */
         int local_y0 = v & 0xF;
         uint8_t *dst = bake_dst + (size_t)py * bake_stride;
+#ifdef RR_TEXTURE_TILE_RUNS
+        /* The alternative ratio sampler and atlas guard-clamp retain their
+         * original path. All GLES integer-step samples use the same positions. */
+        if (!g_tex_pow2sample && !atlas_on() && tmap && tdata) {
+            texture_decode_tile_runs(dst, bw, min_u, step_u, vrow, local_y0,
+                lut, cm_offset, cm_shift, cm_mask);
+            continue;
+        }
+#endif
         int last_idx = -1; uint32_t tile = 0; int attr = 0;
         for (int px = 0; px < bw; px++) {
             uint8_t fetch = 0;
@@ -1021,6 +1073,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 
 #ifdef RR_GLES2
     eng_audit_end(audit_decode);
+    tex_gles2_decode_seconds += gles_seconds() - decode_start;
 #endif
     /* Upload to GL (NEAREST filtering — pixel art, no blurring) */
     /* Find the slot first so an eviction can donate its texture object (per-quad
@@ -1048,6 +1101,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         slotp->occupied = 0;
     }
 #ifdef RR_GLES2
+    double eviction_start = gles_seconds();
     {
         size_t incoming = atlas_on() ? (size_t)bw * bh * 4 : (size_t)tw * th * 4;
         if (incoming > TEX_CACHE_BYTE_BUDGET) {
@@ -1058,6 +1112,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         int guard = 0;
         while (tex_cache_bytes + incoming > TEX_CACHE_BYTE_BUDGET &&
                guard++ < 2 * TEX_CACHE_SIZE) {
+            tex_gles2_clock_probes++;
             TexCacheEntry *e = &tex_cache[tex_evict_hand];
             tex_evict_hand = (tex_evict_hand + 1) & TEX_CACHE_MASK;
             if (!e->occupied || e == slotp) continue;
@@ -1070,6 +1125,7 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             e->occupied = 0;
         }
     }
+    tex_gles2_eviction_seconds += gles_seconds() - eviction_start;
     if (tex_cache_bytes + (size_t)tw * th * 4 > tex_cache_budget) {
         fprintf(stderr, "[TEX] budget failure: resident=%zu incoming=%zu budget=%zu bytes\n",
                 tex_cache_bytes, (size_t)tw * th * 4, tex_cache_budget);

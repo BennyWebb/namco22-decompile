@@ -653,7 +653,7 @@ bool rr_gles2_present(uint32_t frame,const geo_quad *quads,int count,const float
     if(capture_frame==frame && !capture(frame,&stats)){failed=true;return false;}
     double swap_start=seconds();SDL_GL_SwapWindow(window);last_presentation=presentation_timestamp();double swap=seconds()-swap_start;rr_overlay_present(frame,last_presentation);
     last_metrics=(rr_presentation_metrics){draw,stats.draw_seconds,swap,stats.draws,stats.triangles,stats.binds,
-        stats.texture_uploads,stats.cache_misses,stats.cache_evictions,stats.texture_bytes};
+        stats.texture_uploads,stats.cache_misses,stats.cache_evictions,stats.texture_bytes,stats.texture_seconds,stats.decode_seconds,stats.upload_seconds,stats.decoded_texels,stats.eviction_seconds,stats.clock_probes,stats.delete_calls};
     if(frame>=profile_from)profile_add(&total_profile,frame,&stats,scene,draw,swap,0,0);
     if(seconds()-report_start>=5){
         fprintf(stderr,"[THREAD-FRAME] frame=%u quads=%d triangles=%u draws=%u binds=%u\n",frame,count,stats.triangles,stats.draws,stats.binds);

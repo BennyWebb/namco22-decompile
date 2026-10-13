@@ -12,7 +12,9 @@ typedef struct {
     unsigned flush_texture, flush_scissor, flush_capacity, flush_mutation, flush_end;
     unsigned same_texture, binds, bind_skips;
     unsigned empty_texture_flush;
-    double texture_seconds, upload_seconds, draw_seconds;
+    double texture_seconds, upload_seconds, draw_seconds, decode_seconds;
+    double decoded_texels, eviction_seconds;
+    unsigned long long clock_probes, delete_calls;
     double vertex_upload_seconds, draw_call_seconds;
 } eng_gles2_stats;
 bool eng_gles2_init(void);

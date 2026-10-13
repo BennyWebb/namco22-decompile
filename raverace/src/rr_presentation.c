@@ -142,9 +142,9 @@ static bool render(const rr_presentation *snapshot)
         else record_overflow++;
         if(profile_csv) {
             rr_presentation_metrics m=rr_gles2_last_metrics();
-            fprintf(profile_csv,"%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f,%.9f,%.9f,%.9f,%u,%u,%u,%u,%u,%u,%zu,%u,%u\n",
+            fprintf(profile_csv,"%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u,%.9f,%.9f,%.9f,%.9f,%u,%u,%u,%u,%u,%u,%zu,%u,%u,%.9f,%.9f,%.9f,%.0f,%.9f,%llu,%llu\n",
                 snapshot->frame,start,end,cost,scene,presented-snapshot->produced,age,core,presented,
-                m.draw_wall,m.submission_wall,m.swap_wall,m.draws,m.triangles,m.binds,m.uploads,m.misses,m.evictions,m.texture_bytes,ready_depth,observed_drops);
+                m.draw_wall,m.submission_wall,m.swap_wall,m.draws,m.triangles,m.binds,m.uploads,m.misses,m.evictions,m.texture_bytes,ready_depth,observed_drops,m.lookup_wall,m.decode_wall,m.upload_wall,m.decoded_texels,m.eviction_wall,m.clock_probes,m.delete_calls);
             if(ferror(profile_csv))ok=false;
         }
     }
@@ -236,7 +236,7 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
         profile_csv=fopen(csv_path,"wx");
         if(!profile_csv){perror("thread profile CSV");return false;}
         setvbuf(profile_csv,profile_csv_buffer,_IOFBF,sizeof profile_csv_buffer);
-        fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative\n",profile_csv);
+        fputs("frame,start,end,cpu,scene_wall,publication_age,age_ticks,core,presented,draw_wall,submission_wall,swap_wall,draws,triangles,binds,uploads,misses,evictions,texture_bytes,queue_ready,drops_cumulative,lookup_decode_wall,decode_wall,upload_wall,decoded_texels,eviction_wall,clock_probes,delete_calls\n",profile_csv);
     }
     slots = calloc(SLOTS, sizeof *slots);
     if (!slots) { perror("presentation snapshots"); return false; }

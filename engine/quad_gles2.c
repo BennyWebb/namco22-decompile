@@ -321,6 +321,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     int hits_before = tex_frame_hits, misses_before = tex_frame_misses;
     int evictions_before = tex_cache_evictions, uploads_count_before = tex_reallocs + tex_subimages;
     double uploads_before = tex_gles2_upload_seconds;
+    double decode_before = tex_gles2_decode_seconds, texels_before = g_bake_texels;
+    double eviction_before = tex_gles2_eviction_seconds;
+    unsigned long long probes_before = tex_gles2_clock_probes, deletes_before = tex_gles2_delete_calls;
     unsigned long long binds_before = tex_gles2_bind_calls, skips_before = tex_gles2_bind_skips;
     tex_bake_gles2_binding_reset(); /* SDL/other code may have changed GL state */
     used = batch_first = command_count = 0; batch_texture = white; current_stats = stats; flush_failed = false;
@@ -466,6 +469,11 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     stats->texture_uploads = (unsigned)(tex_reallocs + tex_subimages - uploads_count_before);
     stats->texture_bytes = tex_bake_gles2_resident_bytes();
     stats->upload_seconds = tex_gles2_upload_seconds - uploads_before;
+    stats->decode_seconds = tex_gles2_decode_seconds - decode_before;
+    stats->decoded_texels = g_bake_texels - texels_before;
+    stats->eviction_seconds = tex_gles2_eviction_seconds - eviction_before;
+    stats->clock_probes = tex_gles2_clock_probes - probes_before;
+    stats->delete_calls = tex_gles2_delete_calls - deletes_before;
     stats->binds = (unsigned)(tex_gles2_bind_calls - binds_before);
     stats->bind_skips = (unsigned)(tex_gles2_bind_skips - skips_before);
     return ok;

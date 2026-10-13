@@ -12,7 +12,8 @@ size_t tex_bake_gles2_resident_bytes(void);
 void tex_bake_gles2_bind(GLenum target, GLuint texture);
 void tex_bake_gles2_binding_mode(int skip_redundant);
 void tex_bake_gles2_binding_reset(void);
-extern double tex_gles2_upload_seconds;
+extern double tex_gles2_upload_seconds, tex_gles2_decode_seconds, tex_gles2_eviction_seconds;
+extern unsigned long long tex_gles2_clock_probes, tex_gles2_delete_calls;
 extern unsigned long long tex_gles2_bind_calls, tex_gles2_bind_skips;
 #endif
 
