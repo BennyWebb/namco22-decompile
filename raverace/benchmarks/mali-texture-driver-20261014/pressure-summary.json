@@ -1,0 +1,1098 @@
+{
+  "64": {
+    "B_fresh_immutable2/66x97": {
+      "alloc_us": 48.039500000000004,
+      "upload_us": 87.413,
+      "delete_us": 21.52,
+      "maxrss_kib": 105428.0
+    },
+    "E_unrelated_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 104.74549999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_immutable_same_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 106.87049999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_persistent8/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 100.267,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "D_same_completed/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 102.767,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "C_persistent_idle2/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 88.7255,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "B_fresh_mutable2/66x97": {
+      "alloc_us": 43.4985,
+      "upload_us": 85.83,
+      "delete_us": 23.707,
+      "maxrss_kib": 105428.0
+    },
+    "E_other_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 107.7045,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_orphan2/66x97": {
+      "alloc_us": 17.4785,
+      "upload_us": 104.0995,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_rotate3/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 108.89150000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "A_fresh2d/66x97": {
+      "alloc_us": 36.519000000000005,
+      "upload_us": 91.559,
+      "delete_us": 25.228,
+      "maxrss_kib": 105428.0
+    },
+    "F_immutable_idle2/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 91.434,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "E_same_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 104.49549999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "B_fresh_immutable2/210x250": {
+      "alloc_us": 37.436,
+      "upload_us": 331.049,
+      "delete_us": 16.853499999999997,
+      "maxrss_kib": 109696.0
+    },
+    "E_unrelated_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 402.9,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "F_immutable_same_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 401.8165,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "F_persistent8/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 387.90049999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "D_same_completed/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 396.88,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "C_persistent_idle2/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 325.4655,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "B_fresh_mutable2/210x250": {
+      "alloc_us": 38.832,
+      "upload_us": 335.2365,
+      "delete_us": 20.124499999999998,
+      "maxrss_kib": 109696.0
+    },
+    "E_other_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 434.41949999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "F_orphan2/210x250": {
+      "alloc_us": 21.374,
+      "upload_us": 447.7315,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "F_rotate3/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 437.4195,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "A_fresh2d/210x250": {
+      "alloc_us": 41.915,
+      "upload_us": 376.8805,
+      "delete_us": 27.978,
+      "maxrss_kib": 109696.0
+    },
+    "F_immutable_idle2/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 352.777,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "E_same_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 406.317,
+      "delete_us": 0.0,
+      "maxrss_kib": 109696.0
+    },
+    "B_fresh_immutable2/16x16": {
+      "alloc_us": 47.164500000000004,
+      "upload_us": 30.561500000000002,
+      "delete_us": 19.978499999999997,
+      "maxrss_kib": 105428.0
+    },
+    "E_unrelated_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 35.728,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_immutable_same_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 47.477000000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_persistent8/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 43.477000000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "D_same_completed/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 41.6655,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "C_persistent_idle2/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 32.415,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "B_fresh_mutable2/16x16": {
+      "alloc_us": 42.769000000000005,
+      "upload_us": 30.8735,
+      "delete_us": 21.7075,
+      "maxrss_kib": 105428.0
+    },
+    "E_other_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 47.123000000000005,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_orphan2/16x16": {
+      "alloc_us": 16.062,
+      "upload_us": 45.956,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "F_rotate3/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 49.3525,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "A_fresh2d/16x16": {
+      "alloc_us": 32.0405,
+      "upload_us": 34.4985,
+      "delete_us": 21.374000000000002,
+      "maxrss_kib": 105428.0
+    },
+    "F_immutable_idle2/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 34.144,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "E_same_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 46.582,
+      "delete_us": 0.0,
+      "maxrss_kib": 105428.0
+    },
+    "B_fresh_immutable2/130x256": {
+      "alloc_us": 53.664500000000004,
+      "upload_us": 330.2365,
+      "delete_us": 25.436,
+      "maxrss_kib": 109616.0
+    },
+    "E_unrelated_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 383.1925,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "F_immutable_same_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 380.131,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "F_persistent8/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 369.3595,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "D_same_completed/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 382.7345,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "C_persistent_idle2/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 333.424,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "B_fresh_mutable2/130x256": {
+      "alloc_us": 55.081,
+      "upload_us": 326.0905,
+      "delete_us": 27.6655,
+      "maxrss_kib": 109616.0
+    },
+    "E_other_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 399.151,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "F_orphan2/130x256": {
+      "alloc_us": 25.228499999999997,
+      "upload_us": 399.692,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "F_rotate3/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 393.13,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "A_fresh2d/130x256": {
+      "alloc_us": 49.56,
+      "upload_us": 345.403,
+      "delete_us": 34.3315,
+      "maxrss_kib": 109616.0
+    },
+    "F_immutable_idle2/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 347.777,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "E_same_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 379.08849999999995,
+      "delete_us": 0.0,
+      "maxrss_kib": 109616.0
+    },
+    "B_fresh_immutable2/173x255": {
+      "alloc_us": 36.915,
+      "upload_us": 317.19550000000004,
+      "delete_us": 16.666,
+      "maxrss_kib": 109664.0
+    },
+    "E_unrelated_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 389.318,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "F_immutable_same_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 387.776,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "F_persistent8/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 375.8185,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "D_same_completed/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 373.0685,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "C_persistent_idle2/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 315.67449999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "B_fresh_mutable2/173x255": {
+      "alloc_us": 38.686,
+      "upload_us": 308.217,
+      "delete_us": 19.8945,
+      "maxrss_kib": 109664.0
+    },
+    "E_other_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 384.2135,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "F_orphan2/173x255": {
+      "alloc_us": 21.561500000000002,
+      "upload_us": 417.50350000000003,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "F_rotate3/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 402.77549999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "A_fresh2d/173x255": {
+      "alloc_us": 41.4775,
+      "upload_us": 351.09000000000003,
+      "delete_us": 27.353,
+      "maxrss_kib": 109664.0
+    },
+    "F_immutable_idle2/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 340.40250000000003,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "E_same_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 388.526,
+      "delete_us": 0.0,
+      "maxrss_kib": 109664.0
+    },
+    "B_fresh_immutable2/258x512": {
+      "alloc_us": 51.311,
+      "upload_us": 978.1685,
+      "delete_us": 34.4155,
+      "maxrss_kib": 123280.0
+    },
+    "E_unrelated_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1214.0545000000002,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "F_immutable_same_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1192.8685,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "F_persistent8/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1113.288,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "D_same_completed/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1212.0135,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "C_persistent_idle2/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 966.252,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "B_fresh_mutable2/258x512": {
+      "alloc_us": 57.081,
+      "upload_us": 997.3344999999999,
+      "delete_us": 35.7485,
+      "maxrss_kib": 123280.0
+    },
+    "E_other_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1233.5955,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "F_orphan2/258x512": {
+      "alloc_us": 24.708,
+      "upload_us": 1234.1585,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "F_rotate3/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1225.0125,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "A_fresh2d/258x512": {
+      "alloc_us": 48.581,
+      "upload_us": 1150.0149999999999,
+      "delete_us": 41.1445,
+      "maxrss_kib": 123280.0
+    },
+    "F_immutable_idle2/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1005.376,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "E_same_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1206.284,
+      "delete_us": 0.0,
+      "maxrss_kib": 123280.0
+    },
+    "B_fresh_immutable2/594x258": {
+      "alloc_us": 62.185,
+      "upload_us": 1386.8809999999999,
+      "delete_us": 38.1235,
+      "maxrss_kib": 139732.0
+    },
+    "E_unrelated_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1656.786,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "F_immutable_same_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1625.038,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "F_persistent8/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1543.0205,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "D_same_completed/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1632.0375,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "C_persistent_idle2/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1369.4025000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "B_fresh_mutable2/594x258": {
+      "alloc_us": 67.3095,
+      "upload_us": 1369.027,
+      "delete_us": 40.936,
+      "maxrss_kib": 139732.0
+    },
+    "E_other_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1680.0149999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "F_orphan2/594x258": {
+      "alloc_us": 28.561,
+      "upload_us": 1707.951,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "F_rotate3/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1706.5135,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "A_fresh2d/594x258": {
+      "alloc_us": 61.7685,
+      "upload_us": 1517.2295,
+      "delete_us": 48.2065,
+      "maxrss_kib": 139732.0
+    },
+    "F_immutable_idle2/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1411.7545,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    },
+    "E_same_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1629.8915000000002,
+      "delete_us": 0.0,
+      "maxrss_kib": 139732.0
+    }
+  },
+  "112": {
+    "B_fresh_immutable2/66x97": {
+      "alloc_us": 48.748000000000005,
+      "upload_us": 85.476,
+      "delete_us": 21.6655,
+      "maxrss_kib": 154928.0
+    },
+    "E_unrelated_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 98.6835,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_immutable_same_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 106.05799999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_persistent8/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 96.746,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "D_same_completed/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 96.51650000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "C_persistent_idle2/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 87.892,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "B_fresh_mutable2/66x97": {
+      "alloc_us": 45.269000000000005,
+      "upload_us": 83.371,
+      "delete_us": 24.332,
+      "maxrss_kib": 154928.0
+    },
+    "E_other_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 104.1625,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_orphan2/66x97": {
+      "alloc_us": 18.249000000000002,
+      "upload_us": 102.07900000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_rotate3/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 106.76650000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "A_fresh2d/66x97": {
+      "alloc_us": 34.228,
+      "upload_us": 89.288,
+      "delete_us": 24.395,
+      "maxrss_kib": 154928.0
+    },
+    "F_immutable_idle2/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 90.663,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "E_same_inflight/66x97": {
+      "alloc_us": 0.0,
+      "upload_us": 105.32900000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "B_fresh_immutable2/210x250": {
+      "alloc_us": 37.3735,
+      "upload_us": 313.654,
+      "delete_us": 16.333,
+      "maxrss_kib": 159912.0
+    },
+    "E_unrelated_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 353.194,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "F_immutable_same_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 366.944,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "F_persistent8/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 348.5485,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "D_same_completed/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 356.0065,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "C_persistent_idle2/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 317.7165,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "B_fresh_mutable2/210x250": {
+      "alloc_us": 39.186,
+      "upload_us": 299.654,
+      "delete_us": 19.124499999999998,
+      "maxrss_kib": 159912.0
+    },
+    "E_other_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 387.08799999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "F_orphan2/210x250": {
+      "alloc_us": 21.374,
+      "upload_us": 391.04650000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "F_rotate3/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 405.275,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "A_fresh2d/210x250": {
+      "alloc_us": 41.331,
+      "upload_us": 333.528,
+      "delete_us": 27.415999999999997,
+      "maxrss_kib": 159912.0
+    },
+    "F_immutable_idle2/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 328.2575,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "E_same_inflight/210x250": {
+      "alloc_us": 0.0,
+      "upload_us": 386.67150000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 159912.0
+    },
+    "B_fresh_immutable2/16x16": {
+      "alloc_us": 46.394,
+      "upload_us": 31.5405,
+      "delete_us": 20.249499999999998,
+      "maxrss_kib": 154928.0
+    },
+    "E_unrelated_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 35.0195,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_immutable_same_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 46.2485,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_persistent8/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 42.998,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "D_same_completed/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 41.539500000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "C_persistent_idle2/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 34.1655,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "B_fresh_mutable2/16x16": {
+      "alloc_us": 41.5195,
+      "upload_us": 34.561,
+      "delete_us": 22.311500000000002,
+      "maxrss_kib": 154928.0
+    },
+    "E_other_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 48.186,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_orphan2/16x16": {
+      "alloc_us": 16.353499999999997,
+      "upload_us": 48.477000000000004,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "F_rotate3/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 47.644,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "A_fresh2d/16x16": {
+      "alloc_us": 29.103,
+      "upload_us": 36.6235,
+      "delete_us": 20.645,
+      "maxrss_kib": 154928.0
+    },
+    "F_immutable_idle2/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 33.6655,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "E_same_inflight/16x16": {
+      "alloc_us": 0.0,
+      "upload_us": 49.019,
+      "delete_us": 0.0,
+      "maxrss_kib": 154928.0
+    },
+    "B_fresh_immutable2/130x256": {
+      "alloc_us": 54.0805,
+      "upload_us": 327.091,
+      "delete_us": 25.3325,
+      "maxrss_kib": 159836.0
+    },
+    "E_unrelated_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 370.5265,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "F_immutable_same_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 369.96349999999995,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "F_persistent8/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 351.81899999999996,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "D_same_completed/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 375.7555,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "C_persistent_idle2/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 332.903,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "B_fresh_mutable2/130x256": {
+      "alloc_us": 55.123000000000005,
+      "upload_us": 318.591,
+      "delete_us": 28.207,
+      "maxrss_kib": 159836.0
+    },
+    "E_other_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 419.0665,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "F_orphan2/130x256": {
+      "alloc_us": 25.5825,
+      "upload_us": 408.5035,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "F_rotate3/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 385.5885,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "A_fresh2d/130x256": {
+      "alloc_us": 49.457,
+      "upload_us": 337.903,
+      "delete_us": 33.436,
+      "maxrss_kib": 159836.0
+    },
+    "F_immutable_idle2/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 346.34000000000003,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "E_same_inflight/130x256": {
+      "alloc_us": 0.0,
+      "upload_us": 367.1935,
+      "delete_us": 0.0,
+      "maxrss_kib": 159836.0
+    },
+    "B_fresh_immutable2/173x255": {
+      "alloc_us": 37.144999999999996,
+      "upload_us": 309.4245,
+      "delete_us": 16.624499999999998,
+      "maxrss_kib": 159880.0
+    },
+    "E_unrelated_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 347.111,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "F_immutable_same_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 358.7145,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "F_persistent8/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 346.27750000000003,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "D_same_completed/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 348.298,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "C_persistent_idle2/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 313.7795,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "B_fresh_mutable2/173x255": {
+      "alloc_us": 38.706500000000005,
+      "upload_us": 295.5925,
+      "delete_us": 18.8325,
+      "maxrss_kib": 159880.0
+    },
+    "E_other_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 386.71299999999997,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "F_orphan2/173x255": {
+      "alloc_us": 21.415999999999997,
+      "upload_us": 382.693,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "F_rotate3/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 393.568,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "A_fresh2d/173x255": {
+      "alloc_us": 41.186,
+      "upload_us": 331.028,
+      "delete_us": 27.2695,
+      "maxrss_kib": 159880.0
+    },
+    "F_immutable_idle2/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 335.3615,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "E_same_inflight/173x255": {
+      "alloc_us": 0.0,
+      "upload_us": 355.798,
+      "delete_us": 0.0,
+      "maxrss_kib": 159880.0
+    },
+    "B_fresh_immutable2/258x512": {
+      "alloc_us": 43.665000000000006,
+      "upload_us": 786.905,
+      "delete_us": 31.894999999999996,
+      "maxrss_kib": 173496.0
+    },
+    "E_unrelated_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1065.2485000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "F_immutable_same_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1014.8545,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "F_persistent8/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 971.1485,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "D_same_completed/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1038.1245,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "C_persistent_idle2/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 746.5740000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "B_fresh_mutable2/258x512": {
+      "alloc_us": 50.5815,
+      "upload_us": 862.486,
+      "delete_us": 32.248999999999995,
+      "maxrss_kib": 173496.0
+    },
+    "E_other_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1105.33,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "F_orphan2/258x512": {
+      "alloc_us": 22.895,
+      "upload_us": 1086.0595,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "F_rotate3/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1087.3519999999999,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "A_fresh2d/258x512": {
+      "alloc_us": 44.581,
+      "upload_us": 946.3985,
+      "delete_us": 39.4775,
+      "maxrss_kib": 173496.0
+    },
+    "F_immutable_idle2/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 800.8635,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "E_same_inflight/258x512": {
+      "alloc_us": 0.0,
+      "upload_us": 1041.0825,
+      "delete_us": 0.0,
+      "maxrss_kib": 173496.0
+    },
+    "B_fresh_immutable2/594x258": {
+      "alloc_us": 48.644,
+      "upload_us": 980.8765000000001,
+      "delete_us": 33.686,
+      "maxrss_kib": 189356.0
+    },
+    "E_unrelated_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1205.493,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "F_immutable_same_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1153.8905,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "F_persistent8/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1135.599,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "D_same_completed/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1195.972,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "C_persistent_idle2/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 952.211,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "B_fresh_mutable2/594x258": {
+      "alloc_us": 52.915,
+      "upload_us": 998.8555,
+      "delete_us": 37.061,
+      "maxrss_kib": 189356.0
+    },
+    "E_other_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1227.4705,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "F_orphan2/594x258": {
+      "alloc_us": 23.749499999999998,
+      "upload_us": 1253.407,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "F_rotate3/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1245.5745000000002,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "A_fresh2d/594x258": {
+      "alloc_us": 53.602000000000004,
+      "upload_us": 1176.0145,
+      "delete_us": 44.894,
+      "maxrss_kib": 189356.0
+    },
+    "F_immutable_idle2/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1008.8965000000001,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    },
+    "E_same_inflight/594x258": {
+      "alloc_us": 0.0,
+      "upload_us": 1216.7005,
+      "delete_us": 0.0,
+      "maxrss_kib": 189356.0
+    }
+  }
+}

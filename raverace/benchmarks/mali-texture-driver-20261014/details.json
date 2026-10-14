@@ -1,0 +1,849 @@
+{
+  "runs": [
+    {
+      "name": "baseline-1",
+      "variant": "baseline",
+      "pair": 1,
+      "burst": {
+        "upload_wall": 14.919476,
+        "eviction_wall": 25.059396,
+        "decode_wall": 23.432588,
+        "submission_wall": 9.130385,
+        "cpu": 78.686999,
+        "publication_age": 92.87058400000001,
+        "tick": 1965,
+        "misses": 76,
+        "interval_ms": 78.83999000114272
+      },
+      "lifetime": {},
+      "memory_near_burst": [
+        {
+          "time": 20702.2,
+          "MemFree": 106260,
+          "MemAvailable": 609096,
+          "Shmem": 6456,
+          "CmaFree": 50936
+        },
+        {
+          "time": 20703.64,
+          "MemFree": 106732,
+          "MemAvailable": 609588,
+          "Shmem": 6456,
+          "CmaFree": 50936
+        },
+        {
+          "time": 20705.07,
+          "MemFree": 106580,
+          "MemAvailable": 609424,
+          "Shmem": 6456,
+          "CmaFree": 50936
+        },
+        {
+          "time": 20706.51,
+          "MemFree": 101720,
+          "MemAvailable": 604636,
+          "Shmem": 6456,
+          "CmaFree": 50936
+        }
+      ]
+    },
+    {
+      "name": "baseline-3",
+      "variant": "baseline",
+      "pair": 3,
+      "burst": {
+        "upload_wall": 15.861408,
+        "eviction_wall": 25.179999000000002,
+        "decode_wall": 24.271319,
+        "submission_wall": 9.067107,
+        "cpu": 78.680209,
+        "publication_age": 95.38711099999999,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 80.6630730003235
+      },
+      "lifetime": {},
+      "memory_near_burst": [
+        {
+          "time": 21283.47,
+          "MemFree": 147828,
+          "MemAvailable": 604404,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21284.9,
+          "MemFree": 144964,
+          "MemAvailable": 601548,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21286.35,
+          "MemFree": 143956,
+          "MemAvailable": 600576,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21287.8,
+          "MemFree": 136872,
+          "MemAvailable": 593544,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        }
+      ]
+    },
+    {
+      "name": "baseline-4",
+      "variant": "baseline",
+      "pair": 4,
+      "burst": {
+        "upload_wall": 15.663210000000001,
+        "eviction_wall": 25.462385,
+        "decode_wall": 23.782178000000002,
+        "submission_wall": 9.184121999999999,
+        "cpu": 78.366417,
+        "publication_age": 95.03278800000001,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 80.34916000178782
+      },
+      "lifetime": {},
+      "memory_near_burst": [
+        {
+          "time": 21761.63,
+          "MemFree": 172128,
+          "MemAvailable": 604316,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21763.05,
+          "MemFree": 169756,
+          "MemAvailable": 601968,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21764.48,
+          "MemFree": 169688,
+          "MemAvailable": 601900,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21765.91,
+          "MemFree": 161464,
+          "MemAvailable": 593816,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        }
+      ]
+    },
+    {
+      "name": "baseline-5",
+      "variant": "baseline",
+      "pair": 5,
+      "burst": {
+        "upload_wall": 14.729354,
+        "eviction_wall": 25.727159,
+        "decode_wall": 23.582548,
+        "submission_wall": 8.839155,
+        "cpu": 78.947666,
+        "publication_age": 110.282118,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 79.03407299818355
+      },
+      "lifetime": {},
+      "memory_near_burst": [
+        {
+          "time": 21857.27,
+          "MemFree": 165988,
+          "MemAvailable": 603508,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21858.72,
+          "MemFree": 163708,
+          "MemAvailable": 601228,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21860.16,
+          "MemFree": 162888,
+          "MemAvailable": 600416,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21861.63,
+          "MemFree": 154612,
+          "MemAvailable": 592248,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        }
+      ]
+    },
+    {
+      "name": "baseline-6",
+      "variant": "baseline",
+      "pair": 6,
+      "burst": {
+        "upload_wall": 14.947099999999999,
+        "eviction_wall": 24.816194,
+        "decode_wall": 23.624826000000002,
+        "submission_wall": 9.27622,
+        "cpu": 78.58854099999999,
+        "publication_age": 93.021488,
+        "tick": 1966,
+        "misses": 77,
+        "interval_ms": 78.84823399945162
+      },
+      "lifetime": {},
+      "memory_near_burst": [
+        {
+          "time": 22939.4,
+          "MemFree": 169556,
+          "MemAvailable": 614288,
+          "Shmem": 6456,
+          "CmaFree": 53440
+        },
+        {
+          "time": 22940.83,
+          "MemFree": 168072,
+          "MemAvailable": 612808,
+          "Shmem": 6456,
+          "CmaFree": 53440
+        },
+        {
+          "time": 22942.27,
+          "MemFree": 165868,
+          "MemAvailable": 610604,
+          "Shmem": 6456,
+          "CmaFree": 53440
+        },
+        {
+          "time": 22943.72,
+          "MemFree": 159408,
+          "MemAvailable": 604292,
+          "Shmem": 6456,
+          "CmaFree": 53440
+        }
+      ]
+    },
+    {
+      "name": "candidate-1",
+      "variant": "candidate",
+      "pair": 1,
+      "burst": {
+        "upload_wall": 44.359793,
+        "eviction_wall": 9.858410999999998,
+        "decode_wall": 24.731090000000002,
+        "submission_wall": 9.213835999999999,
+        "cpu": 92.430328,
+        "publication_age": 122.167916,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 93.96058700076537
+      },
+      "lifetime": {
+        "physical_bytes": 134067592,
+        "peak_bytes": 134217680,
+        "allocations": 6320,
+        "uploads": 14206,
+        "hole_reuses": 7886,
+        "idle_reclaims": 4794,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 49.93187018679354
+      },
+      "memory_near_burst": [
+        {
+          "time": 20893.85,
+          "MemFree": 60828,
+          "MemAvailable": 529364,
+          "Shmem": 6456,
+          "CmaFree": 51044
+        },
+        {
+          "time": 20895.35,
+          "MemFree": 60320,
+          "MemAvailable": 525244,
+          "Shmem": 6456,
+          "CmaFree": 51044
+        },
+        {
+          "time": 20896.83,
+          "MemFree": 61376,
+          "MemAvailable": 521488,
+          "Shmem": 6456,
+          "CmaFree": 51156
+        },
+        {
+          "time": 20898.32,
+          "MemFree": 61708,
+          "MemAvailable": 511956,
+          "Shmem": 6456,
+          "CmaFree": 51332
+        }
+      ]
+    },
+    {
+      "name": "candidate-3",
+      "variant": "candidate",
+      "pair": 3,
+      "burst": {
+        "upload_wall": 52.157962000000005,
+        "eviction_wall": 10.276675000000001,
+        "decode_wall": 25.365899000000002,
+        "submission_wall": 10.136453,
+        "cpu": 101.434039,
+        "publication_age": 122.69860100000001,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 104.03984600270633
+      },
+      "lifetime": {
+        "physical_bytes": 134176936,
+        "peak_bytes": 134217720,
+        "allocations": 6315,
+        "uploads": 14207,
+        "hole_reuses": 7892,
+        "idle_reclaims": 4823,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 49.94164421819857
+      },
+      "memory_near_burst": [
+        {
+          "time": 21474.95,
+          "MemFree": 63472,
+          "MemAvailable": 530264,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21476.45,
+          "MemFree": 57040,
+          "MemAvailable": 523832,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21477.91,
+          "MemFree": 58344,
+          "MemAvailable": 521704,
+          "Shmem": 6456,
+          "CmaFree": 46784
+        },
+        {
+          "time": 21479.37,
+          "MemFree": 59560,
+          "MemAvailable": 510612,
+          "Shmem": 6456,
+          "CmaFree": 48528
+        }
+      ]
+    },
+    {
+      "name": "candidate-4",
+      "variant": "candidate",
+      "pair": 4,
+      "burst": {
+        "upload_wall": 45.2437,
+        "eviction_wall": 10.558368,
+        "decode_wall": 26.163249999999998,
+        "submission_wall": 9.604313,
+        "cpu": 95.660835,
+        "publication_age": 110.035064,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 97.4231090003741
+      },
+      "lifetime": {
+        "physical_bytes": 134182872,
+        "peak_bytes": 134217720,
+        "allocations": 6324,
+        "uploads": 14205,
+        "hole_reuses": 7881,
+        "idle_reclaims": 4831,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 49.888972416688176
+      },
+      "memory_near_burst": [
+        {
+          "time": 21570.54,
+          "MemFree": 103540,
+          "MemAvailable": 529016,
+          "Shmem": 6456,
+          "CmaFree": 48880
+        },
+        {
+          "time": 21572.02,
+          "MemFree": 98960,
+          "MemAvailable": 524420,
+          "Shmem": 6456,
+          "CmaFree": 48880
+        },
+        {
+          "time": 21573.5,
+          "MemFree": 93700,
+          "MemAvailable": 519148,
+          "Shmem": 6456,
+          "CmaFree": 48880
+        },
+        {
+          "time": 21574.96,
+          "MemFree": 82928,
+          "MemAvailable": 508512,
+          "Shmem": 6456,
+          "CmaFree": 48880
+        }
+      ]
+    },
+    {
+      "name": "candidate-5",
+      "variant": "candidate",
+      "pair": 5,
+      "burst": {
+        "upload_wall": 52.397193,
+        "eviction_wall": 12.130650999999999,
+        "decode_wall": 24.981726,
+        "submission_wall": 10.569377,
+        "cpu": 103.93516699999999,
+        "publication_age": 111.57822900000001,
+        "tick": 1965,
+        "misses": 75,
+        "interval_ms": 104.68277200197917
+      },
+      "lifetime": {
+        "physical_bytes": 133862960,
+        "peak_bytes": 134217528,
+        "allocations": 6323,
+        "uploads": 14187,
+        "hole_reuses": 7864,
+        "idle_reclaims": 4848,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 50.008199430223264
+      },
+      "memory_near_burst": [
+        {
+          "time": 22048.64,
+          "MemFree": 80416,
+          "MemAvailable": 527716,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 22050.11,
+          "MemFree": 74108,
+          "MemAvailable": 521408,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 22051.57,
+          "MemFree": 70620,
+          "MemAvailable": 517992,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 22053.05,
+          "MemFree": 60332,
+          "MemAvailable": 507764,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        }
+      ]
+    },
+    {
+      "name": "candidate-6",
+      "variant": "candidate",
+      "pair": 6,
+      "burst": {
+        "upload_wall": 49.771542000000004,
+        "eviction_wall": 10.401206,
+        "decode_wall": 24.996062,
+        "submission_wall": 9.633184,
+        "cpu": 100.050789,
+        "publication_age": 114.398038,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 101.1326209991239
+      },
+      "lifetime": {
+        "physical_bytes": 134083496,
+        "peak_bytes": 134217712,
+        "allocations": 6299,
+        "uploads": 14208,
+        "hole_reuses": 7909,
+        "idle_reclaims": 4775,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 50.000447482365765
+      },
+      "memory_near_burst": [
+        {
+          "time": 22748.47,
+          "MemFree": 54700,
+          "MemAvailable": 539624,
+          "Shmem": 6456,
+          "CmaFree": 44712
+        },
+        {
+          "time": 22749.95,
+          "MemFree": 56168,
+          "MemAvailable": 532336,
+          "Shmem": 6456,
+          "CmaFree": 45248
+        },
+        {
+          "time": 22751.41,
+          "MemFree": 54216,
+          "MemAvailable": 527076,
+          "Shmem": 6456,
+          "CmaFree": 45284
+        },
+        {
+          "time": 22752.87,
+          "MemFree": 55144,
+          "MemAvailable": 519140,
+          "Shmem": 6456,
+          "CmaFree": 45284
+        }
+      ]
+    },
+    {
+      "name": "original-1",
+      "variant": "original",
+      "pair": 1,
+      "burst": {
+        "upload_wall": 54.531162,
+        "eviction_wall": 12.95426,
+        "decode_wall": 24.727781,
+        "submission_wall": 10.897392,
+        "cpu": 107.302499,
+        "publication_age": 124.365521,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 109.03197399966302
+      },
+      "lifetime": {
+        "physical_bytes": 94467240,
+        "peak_bytes": 119625968,
+        "allocations": 7494,
+        "uploads": 14203,
+        "hole_reuses": 6709,
+        "logical_payload_occupancy_percent": 70.72439503895743
+      },
+      "memory_near_burst": [
+        {
+          "time": 20798.69,
+          "MemFree": 65832,
+          "MemAvailable": 573456,
+          "Shmem": 6456,
+          "CmaFree": 51076
+        },
+        {
+          "time": 20800.18,
+          "MemFree": 64844,
+          "MemAvailable": 572464,
+          "Shmem": 6456,
+          "CmaFree": 51076
+        },
+        {
+          "time": 20801.63,
+          "MemFree": 61204,
+          "MemAvailable": 568928,
+          "Shmem": 6456,
+          "CmaFree": 51076
+        },
+        {
+          "time": 20803.1,
+          "MemFree": 61748,
+          "MemAvailable": 563032,
+          "Shmem": 6456,
+          "CmaFree": 51408
+        }
+      ]
+    },
+    {
+      "name": "original-3",
+      "variant": "original",
+      "pair": 3,
+      "burst": {
+        "upload_wall": 48.637428,
+        "eviction_wall": 10.434251999999999,
+        "decode_wall": 25.03358,
+        "submission_wall": 10.159317,
+        "cpu": 97.188832,
+        "publication_age": 121.87880299999999,
+        "tick": 1965,
+        "misses": 75,
+        "interval_ms": 100.0877139995282
+      },
+      "lifetime": {
+        "physical_bytes": 93274504,
+        "peak_bytes": 119726408,
+        "allocations": 7499,
+        "uploads": 14215,
+        "hole_reuses": 6716,
+        "logical_payload_occupancy_percent": 71.84189154198022
+      },
+      "memory_near_burst": [
+        {
+          "time": 21379.29,
+          "MemFree": 111108,
+          "MemAvailable": 572568,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21380.76,
+          "MemFree": 110720,
+          "MemAvailable": 572196,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21382.24,
+          "MemFree": 110784,
+          "MemAvailable": 572388,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        },
+        {
+          "time": 21383.71,
+          "MemFree": 101140,
+          "MemAvailable": 562756,
+          "Shmem": 6456,
+          "CmaFree": 46216
+        }
+      ]
+    },
+    {
+      "name": "original-4",
+      "variant": "original",
+      "pair": 4,
+      "burst": {
+        "upload_wall": 51.526729,
+        "eviction_wall": 12.008193,
+        "decode_wall": 24.606970999999998,
+        "submission_wall": 10.408847,
+        "cpu": 103.44758399999999,
+        "publication_age": 125.68568799999998,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 103.97059699971578
+      },
+      "lifetime": {
+        "physical_bytes": 94035976,
+        "peak_bytes": 119583432,
+        "allocations": 7497,
+        "uploads": 14209,
+        "hole_reuses": 6712,
+        "logical_payload_occupancy_percent": 71.18813335866264
+      },
+      "memory_near_burst": [
+        {
+          "time": 21666.26,
+          "MemFree": 143604,
+          "MemAvailable": 570884,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21667.72,
+          "MemFree": 143048,
+          "MemAvailable": 570332,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21669.18,
+          "MemFree": 141860,
+          "MemAvailable": 569272,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21670.65,
+          "MemFree": 133860,
+          "MemAvailable": 561268,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        }
+      ]
+    },
+    {
+      "name": "original-5",
+      "variant": "original",
+      "pair": 5,
+      "burst": {
+        "upload_wall": 41.919654,
+        "eviction_wall": 10.185395999999999,
+        "decode_wall": 27.739426,
+        "submission_wall": 9.973119,
+        "cpu": 90.617665,
+        "publication_age": 113.998015,
+        "tick": 1965,
+        "misses": 75,
+        "interval_ms": 94.37152499958756
+      },
+      "lifetime": {
+        "physical_bytes": 94918680,
+        "peak_bytes": 119726408,
+        "allocations": 7493,
+        "uploads": 14213,
+        "hole_reuses": 6720,
+        "logical_payload_occupancy_percent": 70.50440229468003
+      },
+      "memory_near_burst": [
+        {
+          "time": 21952.81,
+          "MemFree": 128488,
+          "MemAvailable": 570904,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21954.26,
+          "MemFree": 127432,
+          "MemAvailable": 569844,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21955.73,
+          "MemFree": 125824,
+          "MemAvailable": 568384,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        },
+        {
+          "time": 21957.22,
+          "MemFree": 116372,
+          "MemAvailable": 558928,
+          "Shmem": 6456,
+          "CmaFree": 48884
+        }
+      ]
+    },
+    {
+      "name": "original-6",
+      "variant": "original",
+      "pair": 6,
+      "burst": {
+        "upload_wall": 48.731353,
+        "eviction_wall": 11.078256999999999,
+        "decode_wall": 25.412631,
+        "submission_wall": 10.225398,
+        "cpu": 98.72512499999999,
+        "publication_age": 118.68711,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 101.65126499850885
+      },
+      "lifetime": {
+        "physical_bytes": 94089240,
+        "peak_bytes": 119580104,
+        "allocations": 7493,
+        "uploads": 14207,
+        "hole_reuses": 6714,
+        "logical_payload_occupancy_percent": 71.14783369490496
+      },
+      "memory_near_burst": [
+        {
+          "time": 22843.88,
+          "MemFree": 140956,
+          "MemAvailable": 580828,
+          "Shmem": 6456,
+          "CmaFree": 53052
+        },
+        {
+          "time": 22845.35,
+          "MemFree": 140812,
+          "MemAvailable": 580684,
+          "Shmem": 6456,
+          "CmaFree": 53052
+        },
+        {
+          "time": 22846.81,
+          "MemFree": 140016,
+          "MemAvailable": 579996,
+          "Shmem": 6456,
+          "CmaFree": 53052
+        },
+        {
+          "time": 22848.28,
+          "MemFree": 130384,
+          "MemAvailable": 570392,
+          "Shmem": 6456,
+          "CmaFree": 53052
+        }
+      ]
+    }
+  ],
+  "medians": {
+    "baseline": {
+      "burst": {
+        "upload_wall": 14.947099999999999,
+        "eviction_wall": 25.179999000000002,
+        "decode_wall": 23.624826000000002,
+        "submission_wall": 9.130385,
+        "cpu": 78.680209,
+        "publication_age": 95.03278800000001,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 79.03407299818355
+      },
+      "lifetime": {}
+    },
+    "original": {
+      "burst": {
+        "upload_wall": 48.731353,
+        "eviction_wall": 11.078256999999999,
+        "decode_wall": 25.03358,
+        "submission_wall": 10.225398,
+        "cpu": 98.72512499999999,
+        "publication_age": 121.87880299999999,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 101.65126499850885
+      },
+      "lifetime": {
+        "physical_bytes": 94089240,
+        "peak_bytes": 119625968,
+        "allocations": 7494,
+        "uploads": 14209,
+        "hole_reuses": 6714,
+        "logical_payload_occupancy_percent": 71.14783369490496
+      }
+    },
+    "candidate": {
+      "burst": {
+        "upload_wall": 49.771542000000004,
+        "eviction_wall": 10.401206,
+        "decode_wall": 24.996062,
+        "submission_wall": 9.633184,
+        "cpu": 100.050789,
+        "publication_age": 114.398038,
+        "tick": 1965,
+        "misses": 77,
+        "interval_ms": 101.1326209991239
+      },
+      "lifetime": {
+        "physical_bytes": 134083496,
+        "peak_bytes": 134217712,
+        "allocations": 6320,
+        "uploads": 14206,
+        "hole_reuses": 7886,
+        "idle_reclaims": 4823,
+        "blocking_fence_polls": 0,
+        "logical_payload_occupancy_percent": 49.94164421819857
+      }
+    }
+  }
+}

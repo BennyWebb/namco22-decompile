@@ -1,0 +1,34 @@
+{
+  "synthetic": {
+    "peak_rss_mib_per_process": [
+      57.72265625,
+      57.69140625,
+      57.71875
+    ],
+    "median_peak_rss_mib": 57.71875
+  },
+  "actual": {
+    "peak_rss_mib_per_process": [
+      57.7265625,
+      57.91796875,
+      57.7421875
+    ],
+    "median_peak_rss_mib": 57.7421875
+  },
+  "pressure64": {
+    "peak_rss_mib_per_process": [
+      122.18359375,
+      122.39453125,
+      122.15625
+    ],
+    "median_peak_rss_mib": 122.18359375
+  },
+  "pressure112": {
+    "peak_rss_mib_per_process": [
+      170.45703125,
+      170.48828125,
+      170.578125
+    ],
+    "median_peak_rss_mib": 170.48828125
+  }
+}

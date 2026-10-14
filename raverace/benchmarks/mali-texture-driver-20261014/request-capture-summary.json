@@ -1,0 +1,28 @@
+{
+  "tick": 1965,
+  "history": "native controlled every 3 ticks",
+  "tag_counts": {
+    "1": 592,
+    "2": 592,
+    "4": 2103,
+    "5": 2103,
+    "6": 2103,
+    "7": 1223,
+    "8": 78
+  },
+  "payloads": 78,
+  "upload_bytes": 7630592,
+  "allocation_dimensions_equal_upload": true,
+  "tags": {
+    "1": "bind request",
+    "2": "GL bind",
+    "3": "delete",
+    "4": "source rectangle request",
+    "5": "bank palette cmode generation",
+    "6": "cap peek hash opacity",
+    "7": "cache hit slot object generation",
+    "8": "cache miss hash",
+    "9": "2D storage allocation",
+    "10": "2D subimage"
+  }
+}

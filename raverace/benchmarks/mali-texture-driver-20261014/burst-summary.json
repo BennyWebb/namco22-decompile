@@ -1,0 +1,18 @@
+{
+  "fresh_retire": {
+    "n": 120,
+    "allocation_us": 2375.9295,
+    "upload_us": 15427.0185,
+    "retirement_us": 1830.222,
+    "complete_us": 7.833,
+    "total_us": 19650.9895
+  },
+  "retain_idle": {
+    "n": 120,
+    "allocation_us": 0.0,
+    "upload_us": 15475.889500000001,
+    "retirement_us": 0.0,
+    "complete_us": 7.729,
+    "total_us": 15483.6185
+  }
+}

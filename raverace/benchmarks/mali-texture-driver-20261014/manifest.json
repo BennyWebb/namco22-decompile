@@ -1,0 +1,23 @@
+{
+  "source_head": "41fb382b64e987e8211212b6d5f2849351217ff7",
+  "production_reference": "00d2b73",
+  "production_sha256": "6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e",
+  "accepted_rounds": [
+    1,
+    3,
+    4,
+    5,
+    6
+  ],
+  "excluded_rounds": {
+    "2": "diagnostic binary transfer / racing resyncs; all three partners excluded"
+  },
+  "round1_audio_limitation": "production whole-process underruns with observed tick gaps 120/1740 before racing window; no per-tick underrun attribution",
+  "original_matrix": "driver-threeway-20261014-204109-29202",
+  "replacement": "driver-threeway-20261014-211526-23325",
+  "final_probes": "driver-final-probe-20261014-210529",
+  "original_identity_trace": "driver-trace-20261014-210852",
+  "retained_identity_trace": "driver-retain-trace-20261014-212016",
+  "final_mali_correctness": "driver-retain-final-proof-20261014-203521-29077",
+  "final_emulationstation_pid": 3015
+}

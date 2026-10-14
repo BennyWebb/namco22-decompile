@@ -1,0 +1,11 @@
+{
+  "native_world_hud_pictures": 1880,
+  "mali_world_hud_pictures": 1880,
+  "tsan_world_hud_pictures": 566,
+  "native_ordered_misses_exact": 12036,
+  "native_checkpoint_records_exact": true,
+  "native_final_pixels_exact": true,
+  "state_pcm_voices_exact": true,
+  "tsan_suppression": "race:libgallium",
+  "final_native_blocking_fence_polls": 0
+}

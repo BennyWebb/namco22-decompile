@@ -5,6 +5,47 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Mali-G31 texture-array driver investigation completed (2026-10-14)
+
+Read [MALI_TEXTURE_ARRAY_DRIVER_INVESTIGATION.md](MALI_TEXTURE_ARRAY_DRIVER_INVESTIGATION.md)
+and [archived measurements](benchmarks/mali-texture-driver-20261014/README.md).
+**Retain production; reject bounded cohort retention.** No production changes.
+
+- Source baseline HEAD `41fb382`; production reference `00d2b73`, executable
+  SHA256 `6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`
+  unchanged. Original atlas/source remains an independent OFF-default fallback.
+- The larger upload bucket includes reaping/deletion that production charges
+  to eviction. Tick-1965 diagnostic: reaping 22.22 ms, search/create 5.23 ms,
+  texel upload 14.46 ms; storage API only 2.46 ms. Expensive deletions occur
+  after retirement fences signal, so earlier reads of those allocations do
+  not explain their cost. Controlled actual-payload same/other/unrelated
+  in-flight updates do not show mandatory whole-prefix waits; internal driver
+  copies/renaming/bookkeeping remain unproven.
+- One private OFF-default retention flag keeps completed empty two-layer
+  storage within the same 128 MiB physical cap. Native + Mali 1,880-picture
+  gates, exact state/PCM/voices, all 12,036 ordered misses and TSan 566-picture
+  gate pass. Idle storage is searched before pending retirements; accepted
+  normal runs have zero blocking fence polls.
+- Five accepted alternating three-way racing windows: production/original/
+  retained FPS 52.900 / 55.957 / 55.801; 1% lows 24.899 / 22.151 / 21.486;
+  p99 32.685 / 33.807 / 35.648 ms; median worst 79.034 / 101.651 / 101.133 ms;
+  peak RSS 286.961 / 334.145 / 393.242 MiB. Retention reduces cohort births
+  7494 → 6320 but worsens lows/p99 in every pair and leaves the burst intact.
+- Accepted rounds 1/3/4/5/6 replace the entire transfer-confounded round 2.
+  Round-one production has whole-process audio underruns and pre-window
+  gaps at 120/1740; report discloses this, rather than claiming all processes
+  have zero audio. All accepted racing windows have zero resyncs; all retained
+  processes have zero audio underruns. Do not transfer artifacts during tests.
+- Stop after this one remedy; no larger pool/new allocator or renderer redesign.
+  Driver API durations are CPU wall, not exclusive GPU execution. Cap/RSS
+  estimates overlap on shared memory; private driver allocations are unknown.
+- Device artifacts remain under existing
+  `/userdata/system/rave-racer-world-atlas-20261014/driver-*`; host
+  `/tmp/rr-mali-array/`. Archives and standard-library tools are preserved.
+  Final checks: no test/game processes, one Ports launcher, backup hashes
+  unchanged, frontend restored with diagnostic environment cleared (PID 3015).
+  No commits, deployment or rollback needed.
+
 ## H700 production GPU HUD integrated and deployed (2026-10-14)
 
 Read [GPU_HUD_PRODUCTION.md](GPU_HUD_PRODUCTION.md) for final configuration,

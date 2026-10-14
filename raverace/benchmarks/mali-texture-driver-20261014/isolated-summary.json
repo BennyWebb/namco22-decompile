@@ -1,0 +1,4006 @@
+[
+  {
+    "case": "A_fresh2d",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 3.041,
+      "p95": 3.416,
+      "p99": 3.666,
+      "maximum": 3.833
+    },
+    "bind_us": {
+      "median": 24.5405,
+      "p95": 27.915,
+      "p99": 29.498,
+      "maximum": 32.832
+    },
+    "alloc_us": {
+      "median": 27.7695,
+      "p95": 33.79,
+      "p99": 35.915,
+      "maximum": 41.457
+    },
+    "upload_us": {
+      "median": 33.749,
+      "p95": 35.957,
+      "p99": 39.707,
+      "maximum": 100.788
+    },
+    "delete_us": {
+      "median": 19.7075,
+      "p95": 23.457,
+      "p99": 23.958,
+      "maximum": 39.374
+    },
+    "complete_us": {
+      "median": 2.334,
+      "p95": 2.542,
+      "p99": 2.625,
+      "maximum": 2.833
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.041,
+      "p95": 3.083,
+      "p99": 3.25,
+      "maximum": 3.5
+    },
+    "bind_us": {
+      "median": 22.666,
+      "p95": 33.623,
+      "p99": 38.165,
+      "maximum": 885.131
+    },
+    "alloc_us": {
+      "median": 39.4775,
+      "p95": 49.331,
+      "p99": 55.206,
+      "maximum": 187.7
+    },
+    "upload_us": {
+      "median": 30.686500000000002,
+      "p95": 34.916,
+      "p99": 35.999,
+      "maximum": 105.12
+    },
+    "delete_us": {
+      "median": 21.561500000000002,
+      "p95": 25.29,
+      "p99": 29.416,
+      "maximum": 54.706
+    },
+    "complete_us": {
+      "median": 2.292,
+      "p95": 2.583,
+      "p99": 2.667,
+      "maximum": 3.124
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.0,
+      "p95": 2.167,
+      "p99": 2.375,
+      "maximum": 2.666
+    },
+    "bind_us": {
+      "median": 16.228499999999997,
+      "p95": 22.416,
+      "p99": 23.249,
+      "maximum": 23.916
+    },
+    "alloc_us": {
+      "median": 45.29,
+      "p95": 50.539,
+      "p99": 126.662,
+      "maximum": 142.703
+    },
+    "upload_us": {
+      "median": 30.4575,
+      "p95": 32.332,
+      "p99": 33.416,
+      "maximum": 119.787
+    },
+    "delete_us": {
+      "median": 19.832,
+      "p95": 21.374,
+      "p99": 22.166,
+      "maximum": 23.958
+    },
+    "complete_us": {
+      "median": 2.25,
+      "p95": 2.417,
+      "p99": 2.499,
+      "maximum": 2.875
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.1665,
+      "p95": 4.292,
+      "p99": 4.749,
+      "maximum": 5.083
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 30.415,
+      "p95": 32.748,
+      "p99": 36.457,
+      "maximum": 37.415
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.958,
+      "p95": 2.084,
+      "p99": 2.167,
+      "maximum": 2.5
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.625,
+      "p95": 1.875,
+      "p99": 2.041,
+      "maximum": 2.625
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 40.3735,
+      "p95": 55.206,
+      "p99": 111.121,
+      "maximum": 489.813
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.666,
+      "p95": 2.958,
+      "p99": 3.083,
+      "maximum": 3.416
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.208,
+      "p95": 1.292,
+      "p99": 1.333,
+      "maximum": 1.416
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 44.7065,
+      "p95": 68.122,
+      "p99": 107.454,
+      "maximum": 133.786
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5832.5125,
+      "p95": 5986.673,
+      "p99": 6099.543,
+      "maximum": 6551.108
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.167,
+      "p95": 1.292,
+      "p99": 1.375,
+      "maximum": 1.541
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 44.706,
+      "p95": 76.33,
+      "p99": 78.621,
+      "maximum": 107.662
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5801.0555,
+      "p95": 5961.132,
+      "p99": 5971.757,
+      "maximum": 6035.754
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.583,
+      "p95": 3.958,
+      "p99": 4.125,
+      "maximum": 4.791
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 34.415499999999994,
+      "p95": 40.082,
+      "p99": 99.871,
+      "maximum": 126.953
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5816.471,
+      "p95": 6012.588,
+      "p99": 6097.751,
+      "maximum": 6284.202
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.167,
+      "p95": 1.333,
+      "p99": 1.375,
+      "maximum": 1.417
+    },
+    "alloc_us": {
+      "median": 14.3955,
+      "p95": 17.207,
+      "p99": 17.957,
+      "maximum": 37.207
+    },
+    "upload_us": {
+      "median": 44.0195,
+      "p95": 80.539,
+      "p99": 496.271,
+      "maximum": 631.474
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5801.638999999999,
+      "p95": 6016.547,
+      "p99": 6069.961,
+      "maximum": 6273.619
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.833,
+      "p95": 5.333,
+      "p99": 5.375,
+      "maximum": 5.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 44.269,
+      "p95": 58.747,
+      "p99": 119.245,
+      "maximum": 149.786
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5803.971,
+      "p95": 5949.424,
+      "p99": 6019.172,
+      "maximum": 6033.92
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 5.2705,
+      "p95": 11.874,
+      "p99": 12.791,
+      "maximum": 13.0
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 40.248,
+      "p95": 42.29,
+      "p99": 45.373,
+      "maximum": 418.649
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.125,
+      "p95": 2.374,
+      "p99": 2.417,
+      "maximum": 2.875
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.6875,
+      "p95": 4.833,
+      "p99": 5.333,
+      "maximum": 6.208
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 33.9985,
+      "p95": 41.206,
+      "p99": 43.874,
+      "maximum": 46.54
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.959,
+      "p95": 2.208,
+      "p99": 2.25,
+      "maximum": 2.333
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 16,
+    "h": 16,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.167,
+      "p95": 1.333,
+      "p99": 1.375,
+      "maximum": 1.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 46.373,
+      "p95": 50.623,
+      "p99": 51.998,
+      "maximum": 53.165
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5789.076999999999,
+      "p95": 5946.258,
+      "p99": 6076.211,
+      "maximum": 6342.95
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 3.583,
+      "p95": 4.374,
+      "p99": 4.583,
+      "maximum": 4.666
+    },
+    "bind_us": {
+      "median": 27.707,
+      "p95": 31.249,
+      "p99": 31.79,
+      "maximum": 32.79
+    },
+    "alloc_us": {
+      "median": 33.457,
+      "p95": 39.665,
+      "p99": 40.874,
+      "maximum": 45.373
+    },
+    "upload_us": {
+      "median": 90.3505,
+      "p95": 100.413,
+      "p99": 128.828,
+      "maximum": 183.075
+    },
+    "delete_us": {
+      "median": 23.2905,
+      "p95": 26.166,
+      "p99": 28.332,
+      "maximum": 33.04
+    },
+    "complete_us": {
+      "median": 2.5205,
+      "p95": 2.791,
+      "p99": 2.833,
+      "maximum": 2.958
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.25,
+      "p95": 3.625,
+      "p99": 3.875,
+      "maximum": 4.333
+    },
+    "bind_us": {
+      "median": 24.124,
+      "p95": 38.874,
+      "p99": 40.373,
+      "maximum": 116.912
+    },
+    "alloc_us": {
+      "median": 46.665,
+      "p95": 58.123,
+      "p99": 62.789,
+      "maximum": 127.953
+    },
+    "upload_us": {
+      "median": 85.1425,
+      "p95": 90.538,
+      "p99": 102.371,
+      "maximum": 525.187
+    },
+    "delete_us": {
+      "median": 25.832,
+      "p95": 33.665,
+      "p99": 46.665,
+      "maximum": 173.368
+    },
+    "complete_us": {
+      "median": 2.416,
+      "p95": 2.708,
+      "p99": 2.75,
+      "maximum": 3.041
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.249,
+      "p95": 2.542,
+      "p99": 2.833,
+      "maximum": 2.917
+    },
+    "bind_us": {
+      "median": 16.7705,
+      "p95": 23.541,
+      "p99": 24.374,
+      "maximum": 25.124
+    },
+    "alloc_us": {
+      "median": 50.435500000000005,
+      "p95": 79.289,
+      "p99": 132.828,
+      "maximum": 145.119
+    },
+    "upload_us": {
+      "median": 86.2255,
+      "p95": 125.495,
+      "p99": 178.576,
+      "maximum": 185.742
+    },
+    "delete_us": {
+      "median": 23.874,
+      "p95": 26.666,
+      "p99": 107.079,
+      "maximum": 117.162
+    },
+    "complete_us": {
+      "median": 2.333,
+      "p95": 2.625,
+      "p99": 2.833,
+      "maximum": 28.666
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.708,
+      "p95": 4.541,
+      "p99": 4.833,
+      "maximum": 5.25
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 88.371,
+      "p95": 93.871,
+      "p99": 126.12,
+      "maximum": 180.159
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.125,
+      "p95": 2.375,
+      "p99": 2.458,
+      "maximum": 2.542
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.625,
+      "p95": 2.166,
+      "p99": 2.5,
+      "maximum": 4.292
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 97.35,
+      "p95": 115.745,
+      "p99": 173.16,
+      "maximum": 611.6
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.833,
+      "p95": 3.291,
+      "p99": 3.417,
+      "maximum": 5.416
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.208,
+      "p95": 1.333,
+      "p99": 1.334,
+      "maximum": 1.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 103.0165,
+      "p95": 120.703,
+      "p99": 198.159,
+      "maximum": 544.269
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5748.619500000001,
+      "p95": 5944.258,
+      "p99": 6022.88,
+      "maximum": 6149.958
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.208,
+      "p95": 1.375,
+      "p99": 1.417,
+      "maximum": 1.625
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 106.14150000000001,
+      "p95": 171.826,
+      "p99": 206.034,
+      "maximum": 249.573
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5752.5995,
+      "p95": 6024.755,
+      "p99": 6111.876,
+      "maximum": 6616.647
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.5835,
+      "p95": 3.917,
+      "p99": 4.0,
+      "maximum": 4.249
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 102.871,
+      "p95": 157.702,
+      "p99": 200.117,
+      "maximum": 233.199
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5769.0355,
+      "p95": 5960.216,
+      "p99": 6009.005,
+      "maximum": 6301.826
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.1665,
+      "p95": 1.333,
+      "p99": 1.375,
+      "maximum": 60.581
+    },
+    "alloc_us": {
+      "median": 16.353499999999997,
+      "p95": 21.0,
+      "p99": 21.291,
+      "maximum": 25.582
+    },
+    "upload_us": {
+      "median": 102.95400000000001,
+      "p95": 184.743,
+      "p99": 225.658,
+      "maximum": 570.435
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5719.9545,
+      "p95": 5866.511,
+      "p99": 5884.468,
+      "maximum": 5909.509
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.9165,
+      "p95": 5.458,
+      "p99": 5.5,
+      "maximum": 5.916
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 106.8915,
+      "p95": 164.118,
+      "p99": 185.076,
+      "maximum": 438.815
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5736.8915,
+      "p95": 5932.3,
+      "p99": 6063.795,
+      "maximum": 6263.162
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 5.666,
+      "p95": 12.375,
+      "p99": 12.792,
+      "maximum": 17.291
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 98.93299999999999,
+      "p95": 104.329,
+      "p99": 185.909,
+      "maximum": 222.741
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.333,
+      "p95": 2.625,
+      "p99": 2.75,
+      "maximum": 93.205
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.0625,
+      "p95": 5.375,
+      "p99": 6.041,
+      "maximum": 16.041
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 90.434,
+      "p95": 102.162,
+      "p99": 125.12,
+      "maximum": 172.077
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.125,
+      "p95": 2.416,
+      "p99": 2.541,
+      "maximum": 66.664
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 66,
+    "h": 97,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.167,
+      "p95": 1.333,
+      "p99": 1.334,
+      "maximum": 1.375
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 105.6825,
+      "p95": 123.495,
+      "p99": 153.493,
+      "maximum": 163.077
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5740.8495,
+      "p95": 5887.26,
+      "p99": 6013.129,
+      "maximum": 6599.731
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 4.4375,
+      "p95": 5.124,
+      "p99": 5.583,
+      "maximum": 6.334
+    },
+    "bind_us": {
+      "median": 34.769499999999994,
+      "p95": 38.04,
+      "p99": 38.915,
+      "maximum": 131.703
+    },
+    "alloc_us": {
+      "median": 48.914500000000004,
+      "p95": 52.581,
+      "p99": 53.289,
+      "maximum": 163.577
+    },
+    "upload_us": {
+      "median": 345.4235,
+      "p95": 399.193,
+      "p99": 466.939,
+      "maximum": 675.723
+    },
+    "delete_us": {
+      "median": 34.4565,
+      "p95": 36.499,
+      "p99": 39.165,
+      "maximum": 127.578
+    },
+    "complete_us": {
+      "median": 2.709,
+      "p95": 3.042,
+      "p99": 3.125,
+      "maximum": 3.334
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.292,
+      "p95": 4.208,
+      "p99": 4.5,
+      "maximum": 5.208
+    },
+    "bind_us": {
+      "median": 30.4985,
+      "p95": 48.373,
+      "p99": 133.12,
+      "maximum": 158.494
+    },
+    "alloc_us": {
+      "median": 57.4765,
+      "p95": 168.326,
+      "p99": 174.493,
+      "maximum": 307.154
+    },
+    "upload_us": {
+      "median": 326.924,
+      "p95": 388.109,
+      "p99": 456.148,
+      "maximum": 792.259
+    },
+    "delete_us": {
+      "median": 29.686500000000002,
+      "p95": 43.123,
+      "p99": 44.415,
+      "maximum": 49.914
+    },
+    "complete_us": {
+      "median": 2.584,
+      "p95": 2.958,
+      "p99": 3.208,
+      "maximum": 3.458
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.2705,
+      "p95": 2.667,
+      "p99": 2.875,
+      "maximum": 3.333
+    },
+    "bind_us": {
+      "median": 17.458,
+      "p95": 29.623,
+      "p99": 31.624,
+      "maximum": 32.166
+    },
+    "alloc_us": {
+      "median": 55.581,
+      "p95": 63.706,
+      "p99": 130.911,
+      "maximum": 194.367
+    },
+    "upload_us": {
+      "median": 332.50750000000005,
+      "p95": 438.524,
+      "p99": 492.605,
+      "maximum": 845.507
+    },
+    "delete_us": {
+      "median": 27.603,
+      "p95": 31.748,
+      "p99": 32.582,
+      "maximum": 127.828
+    },
+    "complete_us": {
+      "median": 2.583,
+      "p95": 2.959,
+      "p99": 3.333,
+      "maximum": 3.458
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.541,
+      "p95": 5.083,
+      "p99": 5.124,
+      "maximum": 5.875
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 337.507,
+      "p95": 372.277,
+      "p99": 446.149,
+      "maximum": 530.937
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.3335,
+      "p95": 2.667,
+      "p99": 2.875,
+      "maximum": 3.458
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.0,
+      "p95": 2.917,
+      "p99": 3.125,
+      "maximum": 3.25
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 375.255,
+      "p95": 425.441,
+      "p99": 444.607,
+      "maximum": 508.563
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.083,
+      "p95": 3.875,
+      "p99": 4.167,
+      "maximum": 4.708
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.25,
+      "p95": 1.5,
+      "p99": 1.625,
+      "maximum": 1.75
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 392.005,
+      "p95": 535.02,
+      "p99": 578.977,
+      "maximum": 863.465
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5505.1505,
+      "p95": 5779.015,
+      "p99": 5949.425,
+      "maximum": 6634.105
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.25,
+      "p95": 1.459,
+      "p99": 1.624,
+      "maximum": 1.625
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 408.067,
+      "p95": 534.77,
+      "p99": 625.433,
+      "maximum": 987.21
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5511.5885,
+      "p95": 5808.18,
+      "p99": 5911.884,
+      "maximum": 5995.547
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.958,
+      "p95": 4.708,
+      "p99": 5.458,
+      "maximum": 96.038
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 375.589,
+      "p95": 542.603,
+      "p99": 590.267,
+      "maximum": 770.593
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5534.17,
+      "p95": 5784.473,
+      "p99": 5971.965,
+      "maximum": 6095.834
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.209,
+      "p95": 1.417,
+      "p99": 1.5,
+      "maximum": 1.583
+    },
+    "alloc_us": {
+      "median": 25.853,
+      "p95": 29.707,
+      "p99": 89.121,
+      "maximum": 177.909
+    },
+    "upload_us": {
+      "median": 418.94100000000003,
+      "p95": 516.479,
+      "p99": 600.142,
+      "maximum": 861.632
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5465.8814999999995,
+      "p95": 5703.559,
+      "p99": 5849.095,
+      "maximum": 6437.905
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 5.333,
+      "p95": 6.083,
+      "p99": 6.25,
+      "maximum": 95.913
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 416.025,
+      "p95": 525.853,
+      "p99": 557.019,
+      "maximum": 1075.581
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5506.796,
+      "p95": 5833.095,
+      "p99": 5979.756,
+      "maximum": 6071.836
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 6.333,
+      "p95": 16.916,
+      "p99": 18.874,
+      "maximum": 19.457
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 357.027,
+      "p95": 402.358,
+      "p99": 450.981,
+      "maximum": 877.297
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.541,
+      "p95": 2.75,
+      "p99": 2.875,
+      "maximum": 3.125
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.8535,
+      "p95": 6.833,
+      "p99": 7.042,
+      "maximum": 129.994
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 347.44399999999996,
+      "p95": 469.48,
+      "p99": 495.48,
+      "maximum": 592.143
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.4375,
+      "p95": 3.041,
+      "p99": 3.458,
+      "maximum": 3.708
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 130,
+    "h": 256,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.292,
+      "p95": 1.583,
+      "p99": 1.916,
+      "maximum": 2.125
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 384.1305,
+      "p95": 503.729,
+      "p99": 539.687,
+      "maximum": 1327.863
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5554.148499999999,
+      "p95": 5739.516,
+      "p99": 6033.046,
+      "maximum": 6231.621
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 3.709,
+      "p95": 4.75,
+      "p99": 4.958,
+      "maximum": 153.702
+    },
+    "bind_us": {
+      "median": 28.061,
+      "p95": 35.29,
+      "p99": 37.54,
+      "maximum": 203.742
+    },
+    "alloc_us": {
+      "median": 40.456500000000005,
+      "p95": 49.414,
+      "p99": 61.623,
+      "maximum": 114.87
+    },
+    "upload_us": {
+      "median": 339.8405,
+      "p95": 493.147,
+      "p99": 619.308,
+      "maximum": 672.015
+    },
+    "delete_us": {
+      "median": 27.311999999999998,
+      "p95": 36.582,
+      "p99": 36.873,
+      "maximum": 50.581
+    },
+    "complete_us": {
+      "median": 1.667,
+      "p95": 2.0,
+      "p99": 2.75,
+      "maximum": 2.958
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 1.458,
+      "p95": 3.5,
+      "p99": 4.124,
+      "maximum": 5.708
+    },
+    "bind_us": {
+      "median": 21.603499999999997,
+      "p95": 36.957,
+      "p99": 38.498,
+      "maximum": 54.331
+    },
+    "alloc_us": {
+      "median": 40.374,
+      "p95": 65.956,
+      "p99": 83.414,
+      "maximum": 118.745
+    },
+    "upload_us": {
+      "median": 300.5295,
+      "p95": 473.105,
+      "p99": 499.272,
+      "maximum": 600.725
+    },
+    "delete_us": {
+      "median": 19.686500000000002,
+      "p95": 32.999,
+      "p99": 34.748,
+      "maximum": 61.915
+    },
+    "complete_us": {
+      "median": 1.666,
+      "p95": 2.375,
+      "p99": 2.749,
+      "maximum": 9.167
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 1.416,
+      "p95": 2.042,
+      "p99": 2.208,
+      "maximum": 2.666
+    },
+    "bind_us": {
+      "median": 10.833,
+      "p95": 21.999,
+      "p99": 31.54,
+      "maximum": 303.987
+    },
+    "alloc_us": {
+      "median": 37.665,
+      "p95": 55.748,
+      "p99": 62.498,
+      "maximum": 189.617
+    },
+    "upload_us": {
+      "median": 312.612,
+      "p95": 424.858,
+      "p99": 502.355,
+      "maximum": 625.558
+    },
+    "delete_us": {
+      "median": 17.4575,
+      "p95": 22.415,
+      "p99": 29.166,
+      "maximum": 31.457
+    },
+    "complete_us": {
+      "median": 1.625,
+      "p95": 2.125,
+      "p99": 2.834,
+      "maximum": 3.083
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.291,
+      "p95": 4.041,
+      "p99": 4.541,
+      "maximum": 4.833
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 317.3625,
+      "p95": 499.229,
+      "p99": 510.396,
+      "maximum": 695.763
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.4995,
+      "p95": 2.333,
+      "p99": 2.625,
+      "maximum": 2.916
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.4165,
+      "p95": 2.208,
+      "p99": 2.334,
+      "maximum": 2.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 356.5685,
+      "p95": 496.98,
+      "p99": 564.102,
+      "maximum": 677.014
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.1245000000000003,
+      "p95": 3.166,
+      "p99": 3.542,
+      "maximum": 3.749
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.792,
+      "p95": 1.208,
+      "p99": 1.375,
+      "maximum": 255.531
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 379.6095,
+      "p95": 567.769,
+      "p99": 728.72,
+      "maximum": 1471.024
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5373.073,
+      "p95": 5602.23,
+      "p99": 5927.8,
+      "maximum": 6582.69
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.791,
+      "p95": 1.25,
+      "p99": 1.292,
+      "maximum": 1.417
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 386.54650000000004,
+      "p95": 615.474,
+      "p99": 787.967,
+      "maximum": 1014.417
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5295.472,
+      "p95": 5454.527,
+      "p99": 5642.604,
+      "maximum": 5711.475
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.5,
+      "p95": 4.125,
+      "p99": 4.208,
+      "maximum": 4.749
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 356.34000000000003,
+      "p95": 558.935,
+      "p99": 662.348,
+      "maximum": 696.472
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5347.3865000000005,
+      "p95": 5595.397,
+      "p99": 5796.889,
+      "maximum": 6005.797
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.75,
+      "p95": 1.125,
+      "p99": 1.291,
+      "maximum": 1.417
+    },
+    "alloc_us": {
+      "median": 21.978499999999997,
+      "p95": 26.957,
+      "p99": 28.874,
+      "maximum": 44.915
+    },
+    "upload_us": {
+      "median": 394.63,
+      "p95": 599.059,
+      "p99": 649.098,
+      "maximum": 894.255
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5246.244500000001,
+      "p95": 5463.069,
+      "p99": 5531.941,
+      "maximum": 5836.304
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.8745000000000003,
+      "p95": 5.417,
+      "p99": 5.625,
+      "maximum": 5.791
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 399.9835,
+      "p95": 601.684,
+      "p99": 671.473,
+      "maximum": 896.505
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5290.992,
+      "p95": 5465.444,
+      "p99": 5599.731,
+      "maximum": 6420.614
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.833,
+      "p95": 12.791,
+      "p99": 14.291,
+      "maximum": 16.916
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 353.27750000000003,
+      "p95": 539.436,
+      "p99": 594.101,
+      "maximum": 640.14
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.583,
+      "p95": 2.583,
+      "p99": 2.75,
+      "maximum": 2.917
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.625,
+      "p95": 5.208,
+      "p99": 5.999,
+      "maximum": 47.331
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 332.153,
+      "p95": 507.521,
+      "p99": 517.479,
+      "maximum": 529.354
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.542,
+      "p95": 2.333,
+      "p99": 2.416,
+      "maximum": 2.583
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 173,
+    "h": 255,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.875,
+      "p95": 1.375,
+      "p99": 1.75,
+      "maximum": 2.0
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 375.339,
+      "p95": 560.644,
+      "p99": 718.263,
+      "maximum": 1068.831
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5389.5095,
+      "p95": 5548.149,
+      "p99": 5658.019,
+      "maximum": 5906.801
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 3.75,
+      "p95": 5.0,
+      "p99": 5.5,
+      "maximum": 5.667
+    },
+    "bind_us": {
+      "median": 28.582,
+      "p95": 37.665,
+      "p99": 40.415,
+      "maximum": 106.412
+    },
+    "alloc_us": {
+      "median": 40.6235,
+      "p95": 51.04,
+      "p99": 53.29,
+      "maximum": 129.703
+    },
+    "upload_us": {
+      "median": 340.44500000000005,
+      "p95": 540.187,
+      "p99": 581.81,
+      "maximum": 715.18
+    },
+    "delete_us": {
+      "median": 27.791,
+      "p95": 36.249,
+      "p99": 38.081,
+      "maximum": 38.873
+    },
+    "complete_us": {
+      "median": 1.709,
+      "p95": 2.666,
+      "p99": 3.041,
+      "maximum": 3.374
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 1.479,
+      "p95": 3.792,
+      "p99": 4.375,
+      "maximum": 49.748
+    },
+    "bind_us": {
+      "median": 21.603,
+      "p95": 40.54,
+      "p99": 88.205,
+      "maximum": 303.029
+    },
+    "alloc_us": {
+      "median": 40.061,
+      "p95": 62.081,
+      "p99": 89.454,
+      "maximum": 149.035
+    },
+    "upload_us": {
+      "median": 311.216,
+      "p95": 431.649,
+      "p99": 490.438,
+      "maximum": 754.553
+    },
+    "delete_us": {
+      "median": 19.915999999999997,
+      "p95": 33.249,
+      "p99": 36.165,
+      "maximum": 50.748
+    },
+    "complete_us": {
+      "median": 1.667,
+      "p95": 2.417,
+      "p99": 2.75,
+      "maximum": 3.375
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 1.417,
+      "p95": 2.208,
+      "p99": 2.375,
+      "maximum": 2.625
+    },
+    "bind_us": {
+      "median": 10.874500000000001,
+      "p95": 21.75,
+      "p99": 34.041,
+      "maximum": 86.371
+    },
+    "alloc_us": {
+      "median": 38.3315,
+      "p95": 56.372,
+      "p99": 63.705,
+      "maximum": 87.705
+    },
+    "upload_us": {
+      "median": 317.38300000000004,
+      "p95": 501.646,
+      "p99": 505.437,
+      "maximum": 516.771
+    },
+    "delete_us": {
+      "median": 17.749,
+      "p95": 28.249,
+      "p99": 33.582,
+      "maximum": 324.778
+    },
+    "complete_us": {
+      "median": 1.666,
+      "p95": 2.5,
+      "p99": 2.959,
+      "maximum": 3.125
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.2915,
+      "p95": 4.416,
+      "p99": 4.708,
+      "maximum": 5.125
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 321.9655,
+      "p95": 505.854,
+      "p99": 510.229,
+      "maximum": 510.937
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.4995,
+      "p95": 2.25,
+      "p99": 2.5,
+      "maximum": 2.542
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.416,
+      "p95": 2.167,
+      "p99": 2.334,
+      "maximum": 2.916
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 370.964,
+      "p95": 514.52,
+      "p99": 585.309,
+      "maximum": 593.309
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 2.25,
+      "p95": 3.333,
+      "p99": 3.666,
+      "maximum": 3.75
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.833,
+      "p95": 1.25,
+      "p99": 1.458,
+      "maximum": 1.667
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 390.6715,
+      "p95": 584.559,
+      "p99": 762.053,
+      "maximum": 886.505
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5360.9275,
+      "p95": 5678.977,
+      "p99": 5873.553,
+      "maximum": 6063.169
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.791,
+      "p95": 1.208,
+      "p99": 1.292,
+      "maximum": 1.417
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 398.15049999999997,
+      "p95": 618.308,
+      "p99": 716.637,
+      "maximum": 1021.333
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5286.5345,
+      "p95": 5473.652,
+      "p99": 5538.983,
+      "maximum": 5761.349
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.542,
+      "p95": 3.875,
+      "p99": 4.333,
+      "maximum": 4.999
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 370.006,
+      "p95": 543.936,
+      "p99": 580.393,
+      "maximum": 675.722
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5323.95,
+      "p95": 5517.983,
+      "p99": 5657.061,
+      "maximum": 5874.927
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.791,
+      "p95": 1.25,
+      "p99": 1.333,
+      "maximum": 1.375
+    },
+    "alloc_us": {
+      "median": 21.7075,
+      "p95": 27.457,
+      "p99": 28.166,
+      "maximum": 41.498
+    },
+    "upload_us": {
+      "median": 403.9835,
+      "p95": 664.931,
+      "p99": 782.218,
+      "maximum": 1108.122
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5229.516,
+      "p95": 5439.07,
+      "p99": 5513.733,
+      "maximum": 6081.419
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.792,
+      "p95": 5.25,
+      "p99": 5.584,
+      "maximum": 5.791
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 399.71299999999997,
+      "p95": 619.475,
+      "p99": 702.804,
+      "maximum": 1000.168
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5292.2635,
+      "p95": 5478.693,
+      "p99": 5565.857,
+      "maximum": 6723.642
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.999499999999999,
+      "p95": 14.125,
+      "p99": 15.208,
+      "maximum": 313.279
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 356.19399999999996,
+      "p95": 553.686,
+      "p99": 629.308,
+      "maximum": 650.765
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.584,
+      "p95": 2.499,
+      "p99": 2.917,
+      "maximum": 3.542
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.708,
+      "p95": 5.249,
+      "p99": 5.417,
+      "maximum": 5.666
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 331.424,
+      "p95": 520.645,
+      "p99": 553.727,
+      "maximum": 1008.459
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 1.5415,
+      "p95": 2.375,
+      "p99": 2.958,
+      "maximum": 3.125
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 210,
+    "h": 250,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.875,
+      "p95": 1.417,
+      "p99": 1.833,
+      "maximum": 2.166
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 371.631,
+      "p95": 565.269,
+      "p99": 686.68,
+      "maximum": 720.512
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5390.968,
+      "p95": 5627.145,
+      "p99": 5666.102,
+      "maximum": 6117.001
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 4.708,
+      "p95": 6.333,
+      "p99": 6.625,
+      "maximum": 7.042
+    },
+    "bind_us": {
+      "median": 35.1235,
+      "p95": 45.082,
+      "p99": 46.998,
+      "maximum": 48.331
+    },
+    "alloc_us": {
+      "median": 45.227000000000004,
+      "p95": 59.748,
+      "p99": 61.664,
+      "maximum": 136.745
+    },
+    "upload_us": {
+      "median": 973.4815,
+      "p95": 1573.727,
+      "p99": 1680.474,
+      "maximum": 1857.424
+    },
+    "delete_us": {
+      "median": 38.560500000000005,
+      "p95": 49.957,
+      "p99": 56.581,
+      "maximum": 57.956
+    },
+    "complete_us": {
+      "median": 4.0205,
+      "p95": 6.583,
+      "p99": 6.875,
+      "maximum": 8.499
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.604,
+      "p95": 4.458,
+      "p99": 4.708,
+      "maximum": 6.083
+    },
+    "bind_us": {
+      "median": 36.561,
+      "p95": 48.373,
+      "p99": 53.664,
+      "maximum": 123.745
+    },
+    "alloc_us": {
+      "median": 53.7685,
+      "p95": 76.33,
+      "p99": 81.455,
+      "maximum": 165.202
+    },
+    "upload_us": {
+      "median": 858.653,
+      "p95": 1376.944,
+      "p99": 1562.561,
+      "maximum": 1602.434
+    },
+    "delete_us": {
+      "median": 31.582,
+      "p95": 47.707,
+      "p99": 54.456,
+      "maximum": 61.539
+    },
+    "complete_us": {
+      "median": 3.583,
+      "p95": 6.166,
+      "p99": 6.791,
+      "maximum": 6.916
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.0415,
+      "p95": 3.375,
+      "p99": 3.791,
+      "maximum": 4.041
+    },
+    "bind_us": {
+      "median": 18.478,
+      "p95": 33.207,
+      "p99": 35.248,
+      "maximum": 46.707
+    },
+    "alloc_us": {
+      "median": 46.623,
+      "p95": 69.373,
+      "p99": 74.539,
+      "maximum": 77.581
+    },
+    "upload_us": {
+      "median": 838.362,
+      "p95": 1379.86,
+      "p99": 1394.943,
+      "maximum": 1447.691
+    },
+    "delete_us": {
+      "median": 31.228,
+      "p95": 45.915,
+      "p99": 49.04,
+      "maximum": 141.328
+    },
+    "complete_us": {
+      "median": 3.896,
+      "p95": 6.125,
+      "p99": 6.583,
+      "maximum": 6.625
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 5.0415,
+      "p95": 6.792,
+      "p99": 7.833,
+      "maximum": 87.705
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 774.781,
+      "p95": 1363.861,
+      "p99": 1507.48,
+      "maximum": 1595.185
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.4165,
+      "p95": 6.5,
+      "p99": 7.375,
+      "maximum": 8.583
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.1455,
+      "p95": 2.834,
+      "p99": 3.167,
+      "maximum": 3.792
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1082.0805,
+      "p95": 1675.098,
+      "p99": 1703.597,
+      "maximum": 1716.639
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5.313,
+      "p95": 7.458,
+      "p99": 7.833,
+      "maximum": 7.917
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.125,
+      "p95": 1.958,
+      "p99": 2.375,
+      "maximum": 2.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1094.4555,
+      "p95": 1715.264,
+      "p99": 1857.257,
+      "maximum": 2446.983
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4724.058,
+      "p95": 4962.923,
+      "p99": 5348.532,
+      "maximum": 5441.528
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.792,
+      "p95": 1.583,
+      "p99": 1.749,
+      "maximum": 2.084
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1101.913,
+      "p95": 1730.971,
+      "p99": 1757.97,
+      "maximum": 2918.34
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4607.478999999999,
+      "p95": 4811.762,
+      "p99": 4861.677,
+      "maximum": 5380.822
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.6245000000000003,
+      "p95": 5.042,
+      "p99": 5.25,
+      "maximum": 6.041
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1081.1225,
+      "p95": 1714.43,
+      "p99": 1742.179,
+      "maximum": 2066.54
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4608.166,
+      "p95": 4818.512,
+      "p99": 4863.635,
+      "maximum": 5041.419
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.791,
+      "p95": 1.417,
+      "p99": 1.834,
+      "maximum": 2.0
+    },
+    "alloc_us": {
+      "median": 23.582,
+      "p95": 30.832,
+      "p99": 34.207,
+      "maximum": 53.29
+    },
+    "upload_us": {
+      "median": 1107.83,
+      "p95": 1750.137,
+      "p99": 1828.967,
+      "maximum": 1906.506
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4541.336,
+      "p95": 4732.682,
+      "p99": 4763.806,
+      "maximum": 4788.763
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.6035000000000004,
+      "p95": 5.542,
+      "p99": 6.208,
+      "maximum": 6.624
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1090.018,
+      "p95": 1709.722,
+      "p99": 1809.884,
+      "maximum": 2248.491
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4586.7095,
+      "p95": 4769.389,
+      "p99": 4799.846,
+      "maximum": 4961.34
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 8.3115,
+      "p95": 18.291,
+      "p99": 20.041,
+      "maximum": 28.458
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 989.543,
+      "p95": 1648.516,
+      "p99": 1763.844,
+      "maximum": 3829.094
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.8545,
+      "p95": 7.0,
+      "p99": 7.833,
+      "maximum": 8.666
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 7.208,
+      "p95": 10.25,
+      "p99": 10.708,
+      "maximum": 11.208
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 839.7574999999999,
+      "p95": 1495.064,
+      "p99": 1543.895,
+      "maximum": 1591.852
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.667,
+      "p95": 5.875,
+      "p99": 7.125,
+      "maximum": 7.958
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 258,
+    "h": 512,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.5,
+      "p95": 2.25,
+      "p99": 2.334,
+      "maximum": 2.625
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1046.7695,
+      "p95": 1633.767,
+      "p99": 1813.926,
+      "maximum": 2222.743
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4805.220499999999,
+      "p95": 5030.128,
+      "p99": 5054.585,
+      "maximum": 5233.537
+    }
+  },
+  {
+    "case": "A_fresh2d",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 4.666,
+      "p95": 6.125,
+      "p99": 6.583,
+      "maximum": 6.625
+    },
+    "bind_us": {
+      "median": 34.4775,
+      "p95": 45.873,
+      "p99": 48.956,
+      "maximum": 140.62
+    },
+    "alloc_us": {
+      "median": 50.665,
+      "p95": 65.205,
+      "p99": 67.372,
+      "maximum": 69.039
+    },
+    "upload_us": {
+      "median": 1080.3935,
+      "p95": 1724.429,
+      "p99": 1778.886,
+      "maximum": 1816.343
+    },
+    "delete_us": {
+      "median": 41.144,
+      "p95": 53.081,
+      "p99": 55.748,
+      "maximum": 56.497
+    },
+    "complete_us": {
+      "median": 3.854,
+      "p95": 6.458,
+      "p99": 7.417,
+      "maximum": 7.458
+    }
+  },
+  {
+    "case": "B_fresh_mutable2",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 2.3955,
+      "p95": 4.458,
+      "p99": 5.917,
+      "maximum": 6.416
+    },
+    "bind_us": {
+      "median": 35.165,
+      "p95": 50.664,
+      "p99": 62.247,
+      "maximum": 152.786
+    },
+    "alloc_us": {
+      "median": 53.477000000000004,
+      "p95": 78.33,
+      "p99": 94.08,
+      "maximum": 249.49
+    },
+    "upload_us": {
+      "median": 905.6714999999999,
+      "p95": 1493.772,
+      "p99": 1603.976,
+      "maximum": 2267.199
+    },
+    "delete_us": {
+      "median": 30.311500000000002,
+      "p95": 49.414,
+      "p99": 60.748,
+      "maximum": 73.247
+    },
+    "complete_us": {
+      "median": 3.4165,
+      "p95": 5.875,
+      "p99": 6.375,
+      "maximum": 9.291
+    }
+  },
+  {
+    "case": "B_fresh_immutable2",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 1.854,
+      "p95": 3.375,
+      "p99": 3.916,
+      "maximum": 4.667
+    },
+    "bind_us": {
+      "median": 17.958,
+      "p95": 36.207,
+      "p99": 41.873,
+      "maximum": 49.498
+    },
+    "alloc_us": {
+      "median": 46.1855,
+      "p95": 76.039,
+      "p99": 83.288,
+      "maximum": 116.995
+    },
+    "upload_us": {
+      "median": 902.3385000000001,
+      "p95": 1451.649,
+      "p99": 1483.065,
+      "maximum": 1588.477
+    },
+    "delete_us": {
+      "median": 27.415999999999997,
+      "p95": 41.582,
+      "p99": 44.207,
+      "maximum": 47.373
+    },
+    "complete_us": {
+      "median": 3.583,
+      "p95": 5.583,
+      "p99": 6.041,
+      "maximum": 6.291
+    }
+  },
+  {
+    "case": "C_persistent_idle2",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 4.749499999999999,
+      "p95": 6.416,
+      "p99": 7.041,
+      "maximum": 7.749
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 869.3815,
+      "p95": 1552.187,
+      "p99": 1656.807,
+      "maximum": 1914.505
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.0625,
+      "p95": 6.499,
+      "p99": 7.667,
+      "maximum": 8.458
+    }
+  },
+  {
+    "case": "D_same_completed",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.9795,
+      "p95": 2.833,
+      "p99": 3.208,
+      "maximum": 3.333
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1159.286,
+      "p95": 1761.97,
+      "p99": 1791.343,
+      "maximum": 1919.922
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 5.167,
+      "p95": 7.916,
+      "p99": 8.083,
+      "maximum": 10.583
+    }
+  },
+  {
+    "case": "E_same_inflight",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.146,
+      "p95": 1.875,
+      "p99": 2.125,
+      "maximum": 2.333
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1146.8905,
+      "p95": 1861.508,
+      "p99": 1965.378,
+      "maximum": 2016.084
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4628.0825,
+      "p95": 4813.012,
+      "p99": 4854.302,
+      "maximum": 4902.175
+    }
+  },
+  {
+    "case": "E_other_inflight",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.8545,
+      "p95": 1.583,
+      "p99": 1.75,
+      "maximum": 1.875
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1230.4499999999998,
+      "p95": 1801.718,
+      "p99": 1970.253,
+      "maximum": 2548.688
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4484.588,
+      "p95": 4734.89,
+      "p99": 4877.051,
+      "maximum": 5109.542
+    }
+  },
+  {
+    "case": "E_unrelated_inflight",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 2.6245000000000003,
+      "p95": 4.833,
+      "p99": 5.75,
+      "maximum": 52.081
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1232.054,
+      "p95": 1831.592,
+      "p99": 1898.339,
+      "maximum": 1934.129
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4510.6494999999995,
+      "p95": 4714.1,
+      "p99": 4803.845,
+      "maximum": 5330.408
+    }
+  },
+  {
+    "case": "F_orphan2",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 0.833,
+      "p95": 1.5,
+      "p99": 1.666,
+      "maximum": 1.75
+    },
+    "alloc_us": {
+      "median": 24.145,
+      "p95": 30.915,
+      "p99": 62.039,
+      "maximum": 100.996
+    },
+    "upload_us": {
+      "median": 1236.3665,
+      "p95": 1792.552,
+      "p99": 1874.381,
+      "maximum": 1943.754
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4464.339,
+      "p95": 4645.727,
+      "p99": 4745.556,
+      "maximum": 5050.127
+    }
+  },
+  {
+    "case": "F_rotate3",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 3.7085,
+      "p95": 5.708,
+      "p99": 5.959,
+      "maximum": 6.041
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1236.179,
+      "p95": 1847.8,
+      "p99": 1939.629,
+      "maximum": 1975.127
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4496.129,
+      "p95": 4700.517,
+      "p99": 4792.471,
+      "maximum": 5233.204
+    }
+  },
+  {
+    "case": "F_persistent8",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 8.291,
+      "p95": 21.541,
+      "p99": 23.999,
+      "maximum": 96.955
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1074.123,
+      "p95": 1689.181,
+      "p99": 1789.427,
+      "maximum": 2105.081
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.75,
+      "p95": 5.874,
+      "p99": 6.999,
+      "maximum": 7.958
+    }
+  },
+  {
+    "case": "F_immutable_idle2",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 0,
+    "busy_after": 0,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 6.896,
+      "p95": 9.082,
+      "p99": 9.833,
+      "maximum": 10.124
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 939.8995,
+      "p95": 1441.358,
+      "p99": 1558.645,
+      "maximum": 1598.352
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 3.1875,
+      "p95": 5.375,
+      "p99": 5.916,
+      "maximum": 6.0
+    }
+  },
+  {
+    "case": "F_immutable_same_inflight",
+    "w": 594,
+    "h": 258,
+    "n": 120,
+    "busy_before": 120,
+    "busy_after": 120,
+    "gen_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "bind_us": {
+      "median": 1.333,
+      "p95": 2.166,
+      "p99": 2.25,
+      "maximum": 2.459
+    },
+    "alloc_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "upload_us": {
+      "median": 1129.2875,
+      "p95": 1745.97,
+      "p99": 1829.884,
+      "maximum": 1885.465
+    },
+    "delete_us": {
+      "median": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "maximum": 0.0
+    },
+    "complete_us": {
+      "median": 4746.89,
+      "p95": 4939.715,
+      "p99": 4962.006,
+      "maximum": 5044.419
+    }
+  }
+]

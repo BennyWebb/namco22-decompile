@@ -1,0 +1,24 @@
+{
+  "retain_idle": {
+    "n": 120,
+    "requests": 78,
+    "upload_bytes": 7630592,
+    "storage_bytes": 15261184,
+    "allocation_us": 0.0,
+    "upload_us": 15772.0055,
+    "retirement_us": 0.0,
+    "complete_us": 7.792,
+    "total_us": 15779.484
+  },
+  "fresh_retire": {
+    "n": 120,
+    "requests": 78,
+    "upload_bytes": 7630592,
+    "storage_bytes": 15261184,
+    "allocation_us": 2460.319,
+    "upload_us": 15741.7965,
+    "retirement_us": 1909.812,
+    "complete_us": 7.624499999999999,
+    "total_us": 20127.2615
+  }
+}

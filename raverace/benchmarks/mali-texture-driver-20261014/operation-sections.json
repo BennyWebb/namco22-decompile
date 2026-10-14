@@ -1,0 +1,447 @@
+{
+  "off": [
+    {
+      "ticks": "1800-2099",
+      "presentations": 252,
+      "misses": 370,
+      "upload_scope_ms": 174.82944,
+      "eviction_scope_ms": 154.826332,
+      "operations_ms": {
+        "bind_sample": 8.282141000000003,
+        "image2": 36.27603399999998,
+        "sub2": 123.39142500000001,
+        "delete": 136.02007500000002,
+        "gen": 0.29757100000000003
+      }
+    },
+    {
+      "ticks": "2100-2399",
+      "presentations": 281,
+      "misses": 498,
+      "upload_scope_ms": 133.659782,
+      "eviction_scope_ms": 53.841899999999995,
+      "operations_ms": {
+        "delete": 42.70636699999997,
+        "image2": 22.850203000000004,
+        "sub2": 95.55421199999996,
+        "bind_sample": 9.22421,
+        "gen": 0.391901
+      }
+    },
+    {
+      "ticks": "2400-2699",
+      "presentations": 250,
+      "misses": 1101,
+      "upload_scope_ms": 160.923295,
+      "eviction_scope_ms": 55.80181,
+      "operations_ms": {
+        "bind_sample": 9.294858000000001,
+        "delete": 44.621345999999996,
+        "image2": 25.761175999999992,
+        "sub2": 107.91929900000001,
+        "gen": 1.060082
+      }
+    },
+    {
+      "ticks": "2700-2999",
+      "presentations": 259,
+      "misses": 628,
+      "upload_scope_ms": 90.422254,
+      "eviction_scope_ms": 34.166326000000005,
+      "operations_ms": {
+        "delete": 27.33324899999999,
+        "image2": 14.109084000000003,
+        "sub2": 59.61798399999999,
+        "bind_sample": 9.966418999999995,
+        "gen": 0.37011
+      }
+    },
+    {
+      "ticks": "3000-3299",
+      "presentations": 292,
+      "misses": 562,
+      "upload_scope_ms": 65.561699,
+      "eviction_scope_ms": 27.172314999999998,
+      "operations_ms": {
+        "bind_sample": 9.555215999999994,
+        "delete": 23.072341,
+        "image2": 11.856474999999996,
+        "sub2": 40.976949,
+        "gen": 0.458356
+      }
+    },
+    {
+      "ticks": "3300-3599",
+      "presentations": 251,
+      "misses": 734,
+      "upload_scope_ms": 137.122999,
+      "eviction_scope_ms": 74.957193,
+      "operations_ms": {
+        "bind_sample": 8.654380000000002,
+        "image2": 23.40600100000001,
+        "sub2": 89.15351399999994,
+        "delete": 65.13638300000002,
+        "gen": 0.6737219999999999
+      }
+    },
+    {
+      "ticks": "3600-3899",
+      "presentations": 244,
+      "misses": 362,
+      "upload_scope_ms": 76.117427,
+      "eviction_scope_ms": 68.371913,
+      "operations_ms": {
+        "image2": 11.385240999999999,
+        "sub2": 54.15983300000001,
+        "bind_sample": 9.367894,
+        "delete": 60.219733000000005,
+        "gen": 0.341403
+      }
+    },
+    {
+      "ticks": "3900-4199",
+      "presentations": 299,
+      "misses": 634,
+      "upload_scope_ms": 90.132331,
+      "eviction_scope_ms": 45.926248,
+      "operations_ms": {
+        "bind_sample": 6.971741000000001,
+        "delete": 39.96170800000001,
+        "image2": 19.08276100000001,
+        "sub2": 52.50101299999997,
+        "gen": 0.33586099999999997
+      }
+    },
+    {
+      "ticks": "4200-4499",
+      "presentations": 262,
+      "misses": 558,
+      "upload_scope_ms": 83.643483,
+      "eviction_scope_ms": 44.254321,
+      "operations_ms": {
+        "bind_sample": 8.562042999999996,
+        "delete": 37.77141699999999,
+        "image2": 14.094584999999999,
+        "sub2": 55.434262,
+        "gen": 0.30877899999999997
+      }
+    },
+    {
+      "ticks": "4500-4799",
+      "presentations": 274,
+      "misses": 917,
+      "upload_scope_ms": 194.525042,
+      "eviction_scope_ms": 127.224347,
+      "operations_ms": {
+        "image2": 29.774668000000013,
+        "sub2": 136.06206900000004,
+        "bind_sample": 7.527482999999992,
+        "delete": 111.80738900000001,
+        "gen": 0.738928
+      }
+    },
+    {
+      "ticks": "4800-5099",
+      "presentations": 274,
+      "misses": 544,
+      "upload_scope_ms": 169.87381100000002,
+      "eviction_scope_ms": 98.99924899999999,
+      "operations_ms": {
+        "delete": 80.371998,
+        "image2": 23.121915000000012,
+        "sub2": 124.75681299999997,
+        "bind_sample": 7.393034999999998,
+        "gen": 0.568851
+      }
+    },
+    {
+      "ticks": "5100-5399",
+      "presentations": 251,
+      "misses": 206,
+      "upload_scope_ms": 92.947783,
+      "eviction_scope_ms": 46.911452,
+      "operations_ms": {
+        "bind_sample": 9.277442999999998,
+        "delete": 37.458503,
+        "image2": 11.01413,
+        "sub2": 71.48924699999999
+      }
+    },
+    {
+      "ticks": "5400-5639",
+      "presentations": 197,
+      "misses": 551,
+      "upload_scope_ms": 101.709409,
+      "eviction_scope_ms": 30.901504,
+      "operations_ms": {
+        "bind_sample": 7.5323910000000005,
+        "delete": 72.07123199999998,
+        "image2": 12.918807999999993,
+        "sub2": 75.27715899999995,
+        "gen": 0.30373700000000003
+      }
+    }
+  ],
+  "group": [
+    {
+      "ticks": "1800-2099",
+      "presentations": 285,
+      "misses": 367,
+      "upload_scope_ms": 334.133244,
+      "eviction_scope_ms": 240.77041200000002,
+      "operations_ms": {
+        "bind_sample": 5.053608000000002,
+        "reap_scope": 143.06076399999992,
+        "search_scope": 46.48423100000001,
+        "sub3": 141.03671900000003,
+        "fence": 61.445523999999985,
+        "poll_pending": 3.3192089999999923,
+        "poll_signalled": 1.2839969999999992,
+        "delete_sync": 5.1101699999999965,
+        "delete": 101.47149300000001,
+        "gen": 1.0529619999999997,
+        "image3": 28.845193
+      }
+    },
+    {
+      "ticks": "2100-2399",
+      "presentations": 293,
+      "misses": 499,
+      "upload_scope_ms": 222.161275,
+      "eviction_scope_ms": 92.948103,
+      "operations_ms": {
+        "gen": 1.1678370000000002,
+        "delete": 28.805424000000002,
+        "image3": 30.383159000000013,
+        "sub3": 112.40373300000002,
+        "poll_pending": 1.4085380000000003,
+        "poll_signalled": 0.47819599999999995,
+        "fence": 26.133360000000003,
+        "delete_sync": 1.3660339999999997,
+        "reap_scope": 58.351620999999994,
+        "search_scope": 48.63306099999999,
+        "bind_sample": 5.5881919999999985
+      }
+    },
+    {
+      "ticks": "2400-2699",
+      "presentations": 281,
+      "misses": 1102,
+      "upload_scope_ms": 297.232518,
+      "eviction_scope_ms": 72.581459,
+      "operations_ms": {
+        "bind_sample": 6.095291999999999,
+        "gen": 2.810429,
+        "delete": 30.446241000000004,
+        "image3": 33.41517,
+        "sub3": 135.72580399999993,
+        "poll_pending": 2.093248,
+        "poll_signalled": 0.546098,
+        "fence": 38.00630900000001,
+        "delete_sync": 1.7226480000000002,
+        "reap_scope": 80.24445100000005,
+        "search_scope": 76.092228
+      }
+    },
+    {
+      "ticks": "2700-2999",
+      "presentations": 262,
+      "misses": 629,
+      "upload_scope_ms": 201.095405,
+      "eviction_scope_ms": 71.72345700000001,
+      "operations_ms": {
+        "gen": 1.9608750000000001,
+        "image3": 23.687731,
+        "sub3": 85.93408399999994,
+        "poll_pending": 1.4468459999999999,
+        "fence": 26.60562399999999,
+        "reap_scope": 57.213975,
+        "search_scope": 54.18442400000001,
+        "bind_sample": 7.409435999999998,
+        "delete": 22.494942,
+        "poll_signalled": 0.36111099999999996,
+        "delete_sync": 1.41025
+      }
+    },
+    {
+      "ticks": "3000-3299",
+      "presentations": 262,
+      "misses": 561,
+      "upload_scope_ms": 154.611053,
+      "eviction_scope_ms": 25.866695,
+      "operations_ms": {
+        "bind_sample": 6.0489120000000005,
+        "gen": 1.7447409999999997,
+        "image3": 18.134062,
+        "sub3": 63.05992199999998,
+        "poll_pending": 1.5028129999999997,
+        "fence": 21.636132999999997,
+        "reap_scope": 46.367504999999994,
+        "search_scope": 41.40496400000001,
+        "delete": 17.630366999999996,
+        "poll_signalled": 0.3575669999999999,
+        "delete_sync": 1.1304140000000003
+      }
+    },
+    {
+      "ticks": "3300-3599",
+      "presentations": 265,
+      "misses": 733,
+      "upload_scope_ms": 249.290955,
+      "eviction_scope_ms": 88.274221,
+      "operations_ms": {
+        "bind_sample": 5.1385380000000005,
+        "gen": 1.840649,
+        "image3": 28.260459,
+        "sub3": 101.67128300000006,
+        "reap_scope": 84.09841499999999,
+        "search_scope": 58.942082999999975,
+        "poll_pending": 3.4021839999999997,
+        "fence": 37.264209,
+        "delete": 40.454829,
+        "poll_signalled": 0.779918,
+        "delete_sync": 2.3590109999999997
+      }
+    },
+    {
+      "ticks": "3600-3899",
+      "presentations": 263,
+      "misses": 362,
+      "upload_scope_ms": 171.795206,
+      "eviction_scope_ms": 77.252385,
+      "operations_ms": {
+        "bind_sample": 6.032280000000003,
+        "sub3": 66.45191899999999,
+        "reap_scope": 70.90259199999998,
+        "search_scope": 32.54302500000001,
+        "gen": 0.9114639999999996,
+        "image3": 15.927583,
+        "poll_pending": 2.5866820000000006,
+        "fence": 35.684706999999996,
+        "delete": 45.009948,
+        "poll_signalled": 0.766827,
+        "delete_sync": 2.271331
+      }
+    },
+    {
+      "ticks": "3900-4199",
+      "presentations": 299,
+      "misses": 631,
+      "upload_scope_ms": 182.197673,
+      "eviction_scope_ms": 55.110091,
+      "operations_ms": {
+        "bind_sample": 5.332597000000001,
+        "gen": 1.4203280000000003,
+        "delete": 34.077563,
+        "image3": 20.574092000000004,
+        "sub3": 64.372668,
+        "poll_pending": 2.098985,
+        "poll_signalled": 0.526395,
+        "fence": 29.405062999999995,
+        "delete_sync": 1.753395,
+        "reap_scope": 68.59878499999995,
+        "search_scope": 45.643619000000015
+      }
+    },
+    {
+      "ticks": "4200-4499",
+      "presentations": 283,
+      "misses": 558,
+      "upload_scope_ms": 181.344802,
+      "eviction_scope_ms": 75.871615,
+      "operations_ms": {
+        "bind_sample": 5.8910329999999975,
+        "gen": 1.888711,
+        "image3": 22.609425,
+        "sub3": 72.68102999999999,
+        "poll_pending": 2.360079,
+        "fence": 31.227239,
+        "reap_scope": 57.22867,
+        "search_scope": 48.266569000000004,
+        "delete": 24.671353999999997,
+        "poll_signalled": 0.42235099999999987,
+        "delete_sync": 1.4971449999999997
+      }
+    },
+    {
+      "ticks": "4500-4799",
+      "presentations": 285,
+      "misses": 921,
+      "upload_scope_ms": 395.08500000000004,
+      "eviction_scope_ms": 142.50815699999998,
+      "operations_ms": {
+        "gen": 2.1123380000000016,
+        "image3": 34.772355,
+        "sub3": 165.20017599999994,
+        "reap_scope": 153.37113500000004,
+        "search_scope": 71.09434400000002,
+        "bind_sample": 5.469543,
+        "poll_pending": 4.691624999999999,
+        "fence": 75.62820599999999,
+        "delete": 90.86123699999999,
+        "poll_signalled": 1.238649,
+        "delete_sync": 4.179061000000001
+      }
+    },
+    {
+      "ticks": "4800-5099",
+      "presentations": 287,
+      "misses": 539,
+      "upload_scope_ms": 289.789186,
+      "eviction_scope_ms": 200.241525,
+      "operations_ms": {
+        "bind_sample": 4.727383999999999,
+        "gen": 1.5054159999999999,
+        "image3": 21.42134099999999,
+        "sub3": 143.79627900000003,
+        "poll_pending": 2.209166,
+        "fence": 49.71348199999998,
+        "reap_scope": 99.23290500000006,
+        "search_scope": 42.41161800000001,
+        "delete": 56.579514,
+        "poll_signalled": 0.80954,
+        "delete_sync": 2.6421440000000005
+      }
+    },
+    {
+      "ticks": "5100-5399",
+      "presentations": 291,
+      "misses": 206,
+      "upload_scope_ms": 149.834181,
+      "eviction_scope_ms": 92.046417,
+      "operations_ms": {
+        "bind_sample": 5.624853999999998,
+        "gen": 0.5943020000000001,
+        "image3": 8.251819,
+        "sub3": 80.20388899999996,
+        "poll_pending": 0.8266619999999997,
+        "fence": 26.521030000000003,
+        "reap_scope": 50.790969000000025,
+        "search_scope": 16.81267800000001,
+        "delete": 29.026016000000006,
+        "poll_signalled": 0.4679379999999999,
+        "delete_sync": 1.493732
+      }
+    },
+    {
+      "ticks": "5400-5639",
+      "presentations": 223,
+      "misses": 554,
+      "upload_scope_ms": 164.52058399999999,
+      "eviction_scope_ms": 65.573222,
+      "operations_ms": {
+        "bind_sample": 5.170335000000002,
+        "sub3": 90.94781800000004,
+        "poll_pending": 0.885418,
+        "fence": 19.1235,
+        "reap_scope": 38.384466999999994,
+        "search_scope": 32.50171900000001,
+        "gen": 1.0990079999999995,
+        "image3": 14.122565999999999,
+        "delete": 57.99425599999999,
+        "poll_signalled": 0.27698899999999993,
+        "delete_sync": 0.890218
+      }
+    }
+  ]
+}
