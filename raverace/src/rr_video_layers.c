@@ -28,6 +28,20 @@ static GLint sampler_uniform[4], text_uniform, shadow_uniform;
 static unsigned frames,uploads;
 void rr_video_layers_enable(bool on){enabled=on;}
 bool rr_video_layers_enabled(void){return enabled;}
+bool rr_video_layers_gpu(void){
+#ifdef RR_GPU_HUD
+ const char *s=getenv("ENG_GPU_HUD");return enabled&&s&&!strcmp(s,"1");
+#else
+ return false;
+#endif
+}
+bool rr_video_layers_verify(void){
+#ifdef RR_GPU_HUD
+ const char *s=getenv("ENG_GPU_HUD_VERIFY");return rr_video_layers_gpu()&&s&&!strcmp(s,"1");
+#else
+ return false;
+#endif
+}
 static bool error(const char *where)
 {
  GLenum e=glGetError();if(e==GL_NO_ERROR)return true;
@@ -49,6 +63,7 @@ static GLuint texture(int w,int h)
  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
  glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);return t;
 }
+#include "rr_gpu_hud.inc"
 bool rr_video_layers_open(void)
 {
  if(!enabled)return true;
@@ -73,7 +88,7 @@ bool rr_video_layers_open(void)
  for(int i=0;i<4;i++)sampler_uniform[i]=glGetUniformLocation(program,names[i]);
  text_uniform=glGetUniformLocation(program,"has_text");
  shadow_uniform=glGetUniformLocation(program,"has_shadow");
- scene=texture(W,H);text_tex=texture(W,H);shadow_tex=texture(W,H);lut_tex=texture(256,1);
+ scene=texture(W,H);if(!rr_video_layers_gpu()||rr_video_layers_verify()){text_tex=texture(W,H);shadow_tex=texture(W,H);}lut_tex=texture(256,1);
  glGenRenderbuffers(1,&depth);glBindRenderbuffer(GL_RENDERBUFFER,depth);
  glRenderbufferStorage(GL_RENDERBUFFER,GL_DEPTH_COMPONENT16,W,H);
  glGenFramebuffers(1,&target);glBindFramebuffer(GL_FRAMEBUFFER,target);
@@ -83,7 +98,14 @@ bool rr_video_layers_open(void)
  if(status!=GL_FRAMEBUFFER_COMPLETE){fprintf(stderr,"[VIDEO] RGBA/depth framebuffer incomplete 0x%x\n",status);return false;}
  const GLfloat vertices[]={-1,-1,1,-1,1,1,-1,-1,1,1,-1,1};
  glGenBuffers(1,&vbo);glBindBuffer(GL_ARRAY_BUFFER,vbo);glBufferData(GL_ARRAY_BUFFER,sizeof vertices,vertices,GL_STATIC_DRAW);
- fprintf(stderr,"[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=%u\n",W*H*4*3+W*H*2+256*4);
+ unsigned fixed_bytes=W*H*4*(rr_video_layers_gpu()&&!rr_video_layers_verify()?1:3)+W*H*2+256*4;
+#ifdef RR_GPU_HUD
+ if(rr_video_layers_gpu())fixed_bytes+=gpu_geometry()?W*H*4+512*512+1024:131072+1024;
+#endif
+ fprintf(stderr,"[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=%u\n",fixed_bytes);
+#ifdef RR_GPU_HUD
+ if(rr_video_layers_gpu()&&!gpu_open())return false;
+#endif
  return error("initialise compositor");
 }
 void rr_video_layers_begin(void)
@@ -125,4 +147,7 @@ void rr_video_layers_close(void)
  glDeleteFramebuffers(1,&target);glDeleteRenderbuffers(1,&depth);
  GLuint tex[]={scene,text_tex,shadow_tex,lut_tex};glDeleteTextures(4,tex);
  glDeleteBuffers(1,&vbo);glDeleteProgram(program);program=0;
+#ifdef RR_GPU_HUD
+ gpu_close();
+#endif
 }

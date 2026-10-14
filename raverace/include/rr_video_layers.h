@@ -7,7 +7,18 @@ typedef struct {
  uint8_t lut[256][4];
  uint64_t generation;
  bool any_text, any_shadow;
+#ifdef RR_GPU_HUD
+ const uint8_t *characters, *tilemap; /* immutable selected snapshot, or serial state */
+ uint8_t palette[256][4], multipliers[3][3];
+ int scroll_x, scroll_y;
+ bool shadow_enabled;
+#endif
 } rr_video_cpu_frame;
+bool rr_video_layers_gpu(void);
+bool rr_video_layers_verify(void);
+#ifdef RR_GPU_HUD
+bool rr_video_layers_compose_gpu(const rr_video_cpu_frame *frame);
+#endif
 void rr_video_layers_enable(bool enabled);
 void rr_video_layers_profile(bool on);
 void rr_video_layers_profile_gate(bool on);

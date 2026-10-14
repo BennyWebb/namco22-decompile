@@ -733,11 +733,23 @@ static bool rr_gl_video_cpu(rr_video_cpu_frame *out)
  static int last_base,last_shadow;
  int base=(mixer_b(7)<<8)&0x7f00;
  int shadow=(mixer_b(0)<<8|mixer_b(1))>>8&1;
+#ifdef RR_GPU_HUD
+ _Static_assert(RR_CGRAM_SIZE==0x1e000 && RR_TEXT_SIZE==0x2000,"packed HUD layout");
+ if(rr_video_layers_gpu()){
+  out->characters=VIDEO_ARRAY(cgram);out->tilemap=VIDEO_ARRAY(text);
+  out->scroll_x=((VIDEO_ARRAY(tilemapattr)[0]<<8|VIDEO_ARRAY(tilemapattr)[1])-0x35c)&0x3ff;
+  out->scroll_y=(VIDEO_ARRAY(tilemapattr)[2]<<8|VIDEO_ARRAY(tilemapattr)[3])&0x3ff;
+  out->shadow_enabled=shadow;
+  for(int i=0;i<256;i++){for(int c=0;c<3;c++)out->palette[i][c]=VIDEO_ARRAY(pal)[base+i+c*0x8000];out->palette[i][3]=255;}
+  for(int k=0;k<3;k++)for(int c=0;c<3;c++)out->multipliers[k][c]=mixer_b(8+k*3+c);
+ }
+#endif
  uint8_t colors[768],multipliers[9];
  for(int p=0;p<3;p++)memcpy(colors+p*256,VIDEO_ARRAY(pal)+base+p*0x8000,256);
  for(int i=0;i<9;i++)multipliers[i]=mixer_b(8+i);
- bool dirty=!valid||base!=last_base||shadow!=last_shadow||memcmp(cg,VIDEO_ARRAY(cgram),sizeof cg)||
-  memcmp(tx,VIDEO_ARRAY(text),sizeof tx)||memcmp(attr,VIDEO_ARRAY(tilemapattr),16)||memcmp(pal,colors,sizeof pal)||memcmp(mix,multipliers,9);
+ bool cpu_needed=!rr_video_layers_gpu()||rr_video_layers_verify();
+ bool dirty=cpu_needed&&(!valid||base!=last_base||shadow!=last_shadow||memcmp(cg,VIDEO_ARRAY(cgram),sizeof cg)||
+  memcmp(tx,VIDEO_ARRAY(text),sizeof tx)||memcmp(attr,VIDEO_ARRAY(tilemapattr),16)||memcmp(pal,colors,sizeof pal)||memcmp(mix,multipliers,9));
  if(dirty){
   any_text=build_text(base,shadow,&any_shadow);
   memcpy(cg,VIDEO_ARRAY(cgram),sizeof cg);memcpy(tx,VIDEO_ARRAY(text),sizeof tx);memcpy(attr,VIDEO_ARRAY(tilemapattr),16);
@@ -762,6 +774,9 @@ bool rr_gl_video_compose(void)
 {
  rr_video_cpu_frame frame={.text=txt_rgba,.shadow=shd_rgba};
  if(!rr_gl_video_cpu(&frame))return false;
+#ifdef RR_GPU_HUD
+ if(rr_video_layers_gpu())return rr_video_layers_compose_gpu(&frame);
+#endif
  bool ok=rr_video_layers_compose(frame.text,frame.shadow,
      frame.generation!=submitted_video_generation,frame.any_text,frame.any_shadow,frame.lut);
  if(ok)submitted_video_generation=frame.generation;
@@ -770,14 +785,18 @@ bool rr_gl_video_compose(void)
 #ifdef RR_PARALLEL_FRAME_PREP
 bool rr_gl_video_prepare(rr_video_cpu_frame *out)
 {
- if(!out->text||!out->shadow)return false;
+ if((!rr_video_layers_gpu()||rr_video_layers_verify())&&(!out->text||!out->shadow))return false;
  if(!rr_gl_video_cpu(out))return false;
+ if(rr_video_layers_gpu()&&!rr_video_layers_verify())return true;
  memcpy(out->text,txt_rgba,sizeof txt_rgba);
  memcpy(out->shadow,shd_rgba,sizeof shd_rgba);
  return true;
 }
 bool rr_gl_video_submit(const rr_video_cpu_frame *frame)
 {
+#ifdef RR_GPU_HUD
+ if(rr_video_layers_gpu())return rr_video_layers_compose_gpu(frame);
+#endif
  bool ok=rr_video_layers_compose(frame->text,frame->shadow,
      frame->generation!=submitted_video_generation,frame->any_text,frame->any_shadow,frame->lut);
  if(ok)submitted_video_generation=frame->generation;

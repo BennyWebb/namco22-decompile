@@ -107,6 +107,7 @@ file(GLOB RD_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/rd/*.c)
 
 option(RR_HEADLESS_ONLY "Build only the deterministic scheduler test (no SDL/OpenGL)" OFF)
 option(RR_GLES2 "Build the GLES2 scene viewer (no desktop GL/menu)" OFF)
+option(RR_GPU_HUD "Prototype: compose packed System 22 character/tile state on GPU (runtime opt-in)" OFF)
 if(RR_GLES2 AND RR_HEADLESS_ONLY)
   message(FATAL_ERROR "Choose RR_GLES2 or RR_HEADLESS_ONLY in separate build directories")
 endif()
@@ -204,6 +205,9 @@ if(RR_HEADLESS_ONLY OR RR_GLES2)
     target_sources(rr_gles2 PRIVATE src/rr_gles2.c src/rr_gl.c src/rr_video_layers.c src/rr_overlay.c
       ${NAMCO22_ENGINE_DIR}/quad_gles2.c ${NAMCO22_ENGINE_DIR}/tex_bake.c ${NAMCO22_ENGINE_DIR}/eng.c
       ${NAMCO22_ENGINE_DIR}/geo_hw.c ${NAMCO22_ENGINE_DIR}/slave_list.c)
+    if(RR_GPU_HUD)
+      target_compile_definitions(rr_gles2 PRIVATE RR_GPU_HUD)
+    endif()
     target_compile_definitions(rr_gles2 PRIVATE RR_GLES2
       RR_GLES2_TEXTURE_BUDGET_KB=${RR_GLES2_TEXTURE_BUDGET_KB}
       RR_GLES2_TEXTURE_MAX_BUDGET_KB=${RR_GLES2_TEXTURE_MAX_BUDGET_KB})

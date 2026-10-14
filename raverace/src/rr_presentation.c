@@ -437,7 +437,7 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
     slots = calloc(SLOTS, sizeof *slots);
     if (!slots) { perror("presentation snapshots"); free_slots(); return false; }
 #ifdef RR_PARALLEL_FRAME_PREP
-    if(parallel)for(int i=0;i<SLOTS;i++) {
+    if(parallel&&(!rr_video_layers_gpu()||rr_video_layers_verify()))for(int i=0;i<SLOTS;i++) {
         slots[i].video.text=malloc(640u*480u*4u);
         slots[i].video.shadow=malloc(640u*480u*4u);
         if(!slots[i].video.text||!slots[i].video.shadow){
@@ -486,7 +486,7 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot,
             }
             prep_started=true;
             fprintf(stderr,"[PREP] slots=%d fixed_hud_bytes=%zu queue=latest\n",SLOTS,
-                    (size_t)SLOTS*2*640*480*4);
+                    rr_video_layers_gpu()&&!rr_video_layers_verify()?0:(size_t)SLOTS*2*640*480*4);
         }
 #endif
     }

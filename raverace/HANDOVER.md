@@ -5,6 +5,46 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## GPU HUD prototype validated; playable integration pending (2026-10-14)
+
+Read [GPU_HUD_PROTOTYPE.md](GPU_HUD_PROTOTYPE.md) and
+[the five-pair summary](benchmarks/gpu-hud-20261014-summary.json).
+
+- Default-OFF `RR_GPU_HUD` adds compact snapshot metadata, a lazy glyph atlas,
+  one tile-quad batch into an indexed HUD target, and palette/shadow/priority/LUT
+  composition. No world geometry/cache changes. Runtime selectors are
+  `ENG_GPU_HUD=1 ENG_GPU_HUD_GEOMETRY=1`; unset/off retains the original CPU path.
+- Five alternating pairs against the installed multicore binary: median FPS
+  40.420 → 52.714 (+30.4%); 1% low 19.134 → 25.151; p99 41.035 → 33.027 ms;
+  median worst 85.466 → 79.755 ms; image age median/p95
+  50.585/67.119 → 37.945/55.108 ms. Simulation remains ~59.904 Hz.
+- HUD preparation 11.070 → 0.048 ms; HUD upload/update CPU 5.538 → 1.003 ms;
+  GLES-owner CPU 23.265 → 17.013 ms. Peak RSS 293.836 → 288.047 MiB.
+  All ten runs have zero audio underruns and match endpoint JSON.
+- Fixed-through-6006 verification: 2,002 pictures byte-exact, same final capture,
+  geometry, texture miss sequence, board, PCM and voices. Adaptive live-audio
+  verification: 2,078 selected pictures exact through 5639; normal CPU fallback
+  matches PCM `a18439c518e08e3d`, voices `c12e04d613b280fc`, endpoint state.
+- Both architectures passed 14 captures + 32 synthetic cases. Direct packed
+  tilemap shader had ~9.18 ms warmed span versus ~3.30 ms reference; retained
+  glyph-quad final pass is ~2.775 versus ~3.276 ms at racing tick 2502. Dirty
+  elapsed queries were disjoint and rejected; no exclusive GPU time claim.
+- A fake early mismatch was captured as the EmulationStation Ports screen: its
+  asynchronous restart raced the next test. Intermediate pens were correct.
+  The durable benchmark waits for wrapper + child shutdown and rejects a
+  competing frontend. Do not reintroduce the old conditional stop/start race.
+- Device artifacts `/userdata/system/rave-racer-gpu-hud-20261014/`; host
+  `/tmp/rr-hud/`. Headline run `ab-20261014-135149-14295`; guarded fixed run
+  `geometry-validation-20261014-134641-14211`; live
+  `live-verify-20261014-141046-19437`; fallback/audio
+  `final-checks-20261014-141928-20309`. Preserve captures and diagnostics.
+- Candidate `bin/rr_hud_geometry_capture`, SHA256
+  `fef8f66dc7e87c18668a32b5c43f473d14c98b9323cb9236d47380700ce32b52`.
+  Physical controller/menu/audio/START+SELECT spot check is still pending; an
+  async user question was sent. Do not replace the playable executable before
+  that required check. No deployment, launcher modification or commits.
+  Known-good executable/backup hashes unchanged; one Ports launcher retained.
+
 ## Texture preparation investigation completed (2026-10-14)
 
 Read [TEXTURE_PREDECODE_INVESTIGATION.md](TEXTURE_PREDECODE_INVESTIGATION.md)
