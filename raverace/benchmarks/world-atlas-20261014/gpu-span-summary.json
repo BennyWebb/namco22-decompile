@@ -1,0 +1,16 @@
+{
+  "off": {
+    "valid_samples": 3395,
+    "disjoint": 0,
+    "median_gpu_command_span_ms": 9.660308,
+    "p95_gpu_command_span_ms": 12.948693,
+    "maximum_gpu_command_span_ms": 15.095154
+  },
+  "group": {
+    "valid_samples": 3589,
+    "disjoint": 0,
+    "median_gpu_command_span_ms": 8.831576,
+    "p95_gpu_command_span_ms": 11.924805,
+    "maximum_gpu_command_span_ms": 18.612488
+  }
+}

@@ -1,4 +1,5 @@
-/* Original-ROM GLES2 backend. No atlas, fixed-function calls or render targets.
+/* Original-ROM GLES backend with an optional compatible-dimension array atlas.
+ * No fixed-function calls; the presentation layer owns the render target.
  * Sorting, screen clipping and fan indices are shared with quad_gl.c.
  * geo_hw has already applied the game's fixed-point view/object projection. */
 #include <stdio.h>
@@ -7,6 +8,9 @@
 #include <stddef.h>
 #include <time.h>
 #include "eng_gl.h"
+#ifdef RR_GLES_WORLD_ATLAS
+#include <GLES3/gl3.h>
+#endif
 #include "quad_gl.h"
 #include "quad_gles2.h"
 #include "tex_bake.h"
@@ -19,6 +23,9 @@ float g_scene_x0 = 0, g_scene_x1 = ENG_SCREEN_W;
 
 #define MAX_VERTICES 60000
 typedef struct { float position[3], colour[4], uvq[3];
+#ifdef RR_GLES_WORLD_ATLAS
+    float layer;
+#endif
 #ifdef RR_GLES2_MULTITEXTURE_BATCH
     float texture_slot;
 #endif
@@ -26,7 +33,23 @@ typedef struct { float position[3], colour[4], uvq[3];
 static vertex batch[MAX_VERTICES];
 /* Ordered commands share the existing CPU arena; no geometry is reordered. */
 #define MAX_COMMANDS 4096
-typedef struct { GLuint texture; int first, count, scissor[4]; } draw_command;
+typedef struct { GLuint texture; int first, count, scissor[4];
+#ifdef RR_GLES_WORLD_ATLAS
+    GLuint reference;int array,layer,sensitive;
+#endif
+} draw_command;
+#ifdef RR_GLES_WORLD_ATLAS
+static int world_mode,batch_array,batch_layer;
+static GLuint batch_reference;
+#endif
+bool eng_gles2_world_atlas_mode(const char *name)
+{
+#ifdef RR_GLES_WORLD_ATLAS
+    if(!strcmp(name,"off"))world_mode=0;else if(!strcmp(name,"ordered"))world_mode=1;else if(!strcmp(name,"group"))world_mode=2;else return false;return true;
+#else
+    return !strcmp(name,"off");
+#endif
+}
 static draw_command commands[MAX_COMMANDS];
 static int used, batch_first, command_count, batch_scissor[4];
 static bool frame_upload = true;
@@ -160,7 +183,11 @@ static void before_texture_change(GLuint texture)
     /* Cache updates/deletions must not change any queued draw's texels. Drain
      * the ordered prefix before mutation, retaining a different pending batch. */
     if (frame_upload) for (int i = 0; i < command_count; i++) {
-        if (commands[i].texture == texture) {
+        if (commands[i].texture == texture
+#ifdef RR_GLES_WORLD_ATLAS
+            || (world_mode && commands[i].reference==texture)
+#endif
+        ) {
             current_stats->texture_barriers++;
             if (!submit_commands(current_stats)) flush_failed = true;
             break;
@@ -199,6 +226,10 @@ static GLuint compile(GLenum type, const char *source)
     if (!ok) { fprintf(stderr, "[GLES2] shader compilation failed\n"); glDeleteShader(shader); return 0; }
     return shader;
 }
+
+#ifdef RR_GLES_WORLD_ATLAS
+#include "gles_world_array_submit.inc"
+#endif
 
 bool eng_gles2_init(void)
 {
@@ -349,6 +380,9 @@ bool eng_gles2_init(void)
     renderer_texture_init();
     tex_bake_set_budget(0, 0); /* no deferred/coarse placeholders */
     tex_bake_set_flush_hook(before_texture_change);
+#ifdef RR_GLES_WORLD_ATLAS
+    if(!world_open())return false;
+#endif
     fprintf(stderr, "[GLES2] GLSL ES 1.00 linked; textures=%s budget=%zu; per-texture cache, atlas disabled\n",
             mode_name, texture_budget);
     fprintf(stderr, "[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets\n");
@@ -387,6 +421,9 @@ static bool multi_prepare_groups(void)
 #endif
 static bool submit_commands(eng_gles2_stats *stats)
 {
+#ifdef RR_GLES_WORLD_ATLAS
+    if(world_mode)return world_submit(stats);
+#endif
     if (!command_count) return true;
 #ifdef RR_GLES_SUBMISSION_PROFILE
     batch_trace_chunk();
@@ -501,6 +538,9 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
         /* Only adjoining vertex ranges with identical effective state. Never
          * cross a cache-mutation drain or change primitive/depth ordering. */
         if (last && last->texture == batch_texture &&
+#ifdef RR_GLES_WORLD_ATLAS
+            (!world_mode || (last->array==batch_array && last->layer==batch_layer && last->reference==batch_reference)) &&
+#endif
             last->first + last->count == batch_first &&
             !memcmp(last->scissor,batch_scissor,sizeof batch_scissor)) {
             last->count += used;
@@ -508,6 +548,9 @@ static bool flush(eng_gles2_stats *stats, enum flush_reason reason)
 #endif
         draw_command *c = &commands[command_count++];
         c->texture = batch_texture; c->first = batch_first; c->count = used;
+#ifdef RR_GLES_WORLD_ATLAS
+        c->array=batch_array;c->layer=batch_layer;c->reference=batch_reference;
+#endif
         memcpy(c->scissor, batch_scissor, sizeof batch_scissor);
 #ifdef RR_ORDERED_SUBMISSION
         }
@@ -588,6 +631,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     glActiveTexture(GL_TEXTURE0); tex_bake_gles2_bind(GL_TEXTURE_2D, white);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     if (!mv_begin(bg)) return false;
+#ifdef RR_GLES_WORLD_ATLAS
+    world_begin(bg,count);
+#endif
     SP_END(sp_setup);
     SP_BEGIN(sp_attributes,1,1);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void *)offsetof(vertex, position));
@@ -638,6 +684,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
         float su = 1, sv = 1, ou = 0, ov = 0, solid_rgb[3] = {1, 1, 1};
         bool solid = q->objectflags != 0, no_shade = false;
         GLuint texture = white;
+#ifdef RR_GLES_WORLD_ATLAS
+        int array=0,layer=0;GLuint reference=white;
+#endif
         if (!diagnostic && solid) {
             int col = (q->color >> 8) & 255, pen;
             if (q->objectflags & 6) { pen = q->cz_adjust & 0x7fff; no_shade = true; }
@@ -667,12 +716,22 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
             stats->texture_seconds += seconds() - lookup_start -
                 (tex_gles2_upload_seconds - upload_before) - (stats->draw_seconds - draw_before);
             if (!texture || flush_failed) return false;
+#ifdef RR_GLES_WORLD_ATLAS
+            if(world_mode){layer=tex_bake_world_layer();array=layer>=0;reference=array?tex_bake_world_reference():texture;}
+#endif
         }
-        bool texture_break = used && texture != batch_texture;
-        if (texture != batch_texture) {
+        bool different=texture!=batch_texture;
+#ifdef RR_GLES_WORLD_ATLAS
+        if(world_mode)different|=array!=batch_array || layer!=batch_layer || reference!=batch_reference;
+#endif
+        bool texture_break = used && different;
+        if (different) {
             if (!flush(stats, TEXTURE)) return false;
             batch_texture = texture;
         } else stats->same_texture++;
+#ifdef RR_GLES_WORLD_ATLAS
+        batch_array=array;batch_layer=layer;batch_reference=reference;
+#endif
         int bu = min_u, bv = min_v, bru = ru, brv = rv;
         if (bru < 16) { bu = (bu * 2 + bru) / 2 - 8; bru = 16; }
         if (brv < 16) { bv = (bv * 2 + brv) / 2 - 8; brv = 16; }
@@ -724,6 +783,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
                     out->colour[3] = priority_enabled ? ((q->cmode&7)==1 ? 1 : 0) : 1;
                 }
                 out->uvq[0]=v->s; out->uvq[1]=v->t; out->uvq[2]=v->w;
+#ifdef RR_GLES_WORLD_ATLAS
+                out->layer=(float)layer;
+#endif
 #ifdef RR_GLES2_MULTITEXTURE_BATCH
                 out->texture_slot=0;
 #endif
@@ -742,6 +804,9 @@ bool eng_gles2_draw(const geo_quad *quads, int count, const float bg[3], eng_gle
     multi_gpu_end();
 #endif
     if (!mv_end()) return false;
+#ifdef RR_GLES_WORLD_ATLAS
+    if(!world_end())return false;
+#endif
     SP_FULL_FRAME_END();
     stats->cache_hits = (unsigned)(tex_frame_hits - hits_before);
     stats->cache_misses = (unsigned)(tex_frame_misses - misses_before);
@@ -786,6 +851,9 @@ void eng_gles2_close(void)
     if (batch_trace) { fclose(batch_trace); batch_trace = NULL; }
 #endif
     tex_bake_set_flush_hook(NULL);
+#ifdef RR_GLES_WORLD_ATLAS
+    world_close();
+#endif
     tex_bake_gles2_experiment_close();
     tex_bake_gles2_report();
     renderer_texture_init(); /* delete cache storage before context destruction */

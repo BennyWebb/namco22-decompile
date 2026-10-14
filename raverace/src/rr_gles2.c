@@ -268,6 +268,9 @@ bool rr_gles2_options(int *argc, char **argv)
                 fprintf(stderr, "[GLES2] VBO upload mode: frame or legacy\n"); return false;
             }
         }
+        else if (!strcmp(argv[i], "--gles-world-atlas") && i+1 < *argc) {
+            if(!eng_gles2_world_atlas_mode(argv[++i])) {fprintf(stderr,"[WORLD-ARRAY] mode: off|ordered|group (experimental build required)\n");return false;}
+        }
         else if (!strcmp(argv[i], "--gles-multitexture") && i+1 < *argc) {
             if (!eng_gles2_multitexture_mode(argv[++i])) {
                 fprintf(stderr, "[GLES2] four-texture mode: off|shader|batch (experimental build required)\n");

@@ -22,6 +22,9 @@
  */
 #include <string.h>
 #include "eng_gl.h"
+#ifdef RR_GLES_WORLD_ATLAS
+#include <GLES3/gl3.h>
+#endif
 #include "eng.h"
 #include "tex_bake.h"
 #include "geo_hw.h"                       /* g_eng_frame: the per-frame bake budget below is keyed on it */
@@ -661,6 +664,10 @@ static void atlas_page_reset(int p)
 /* Static pixel buffer for baking (TEX_BAKE_MAX^2 RGBA, reused each bake) */
 static uint8_t tex_pixel_buf[(1024 + 1) * (1024 + 1) * 4];   /* up to the 1024 cap + guard texel */
 
+#ifdef RR_GLES_WORLD_ATLAS
+#include "gles_world_array_cache.inc"
+#endif
+
 /* Texture names in batches. glGenTextures returns a value, so a threaded GL driver (NVIDIA on Windows) makes every call wait for its
  * worker thread: one call per new texture was ~30 us each there, 21 ms of a scene change's first frame (637 new textures). */
 #define GEN_BATCH 512
@@ -694,11 +701,19 @@ void renderer_texture_init(void) {
      * calling this a second time would otherwise orphan every texture the
      * cache holds. Safe at startup: occupied is zero, so nothing is freed. */
     for (int i = 0; i < TEX_CACHE_SIZE; i++) {
+        #ifdef RR_GLES_WORLD_ATLAS
+        if (tex_cache[i].occupied && tex_cache[i].a_page==WORLD_ARRAY_NONE) glDeleteTextures(1,&tex_cache[i].gl_texture);
+        tex_cache[i].a_page=WORLD_ARRAY_NONE;
+#else
         if (tex_cache[i].occupied) glDeleteTextures(1, &tex_cache[i].gl_texture);
+#endif
         tex_cache[i].occupied = 0;
         tex_cache[i].alloc_w = tex_cache[i].alloc_h = 0;
     }
     for (int i = 0; i < tex_free_n; i++) glDeleteTextures(1, &tex_free[i].id);
+#ifdef RR_GLES_WORLD_ATLAS
+    world_cache_clear();
+#endif
     tex_free_n = 0;
     tex_cache_total  = 0;
     tex_frame_hits   = 0;
@@ -809,6 +824,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             if (out_sv) *out_sv = e->sv;
             if (out_ou) *out_ou = e->ou;
             if (out_ov) *out_ov = e->ov;
+#ifdef RR_GLES_WORLD_ATLAS
+            world_select(e);
+#endif
             return atlas_on() ? apages[e->a_page].tex : e->gl_texture;
         }
     }
@@ -1170,7 +1188,11 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         else {
 #ifdef RR_GLES2
             tier_event("replace",slotp);
+            #ifdef RR_GLES_WORLD_ATLAS
+            world_release(slotp);
+#else
             tex_free_push(slotp->gl_texture, slotp->alloc_w, slotp->alloc_h);
+#endif
             slotp->alloc_w = slotp->alloc_h = 0;
 #else
             tex = slotp->gl_texture;         /* reuse, do NOT delete */
@@ -1199,7 +1221,13 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             if (!e->occupied || e == slotp) continue;
             if (e->ref && !g_tex_fifo) { e->ref = 0; continue; }
             if (atlas_on()) atlas_free(e->a_page, e->a_x, e->a_y, e->alloc_w, e->alloc_h);
-            else {tier_event("budget-evict",e);tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);}
+            else {tier_event("budget-evict",e);
+#ifdef RR_GLES_WORLD_ATLAS
+                world_release(e);
+#else
+                tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);
+#endif
+            }
             tex_cache_bytes -= e->bytes;
             tex_cache_total--;
             tex_cache_evictions++;
@@ -1212,6 +1240,17 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
                 tex_cache_bytes, (size_t)tw * th * 4, tex_cache_budget);
         exit(2);
     }
+#endif
+    int world_page=-1,world_layer=-1;
+#ifdef RR_GLES_WORLD_ATLAS
+    if(world_arrays_enabled){
+        double barrier_before=world_upload_barrier_seconds;
+        upload_start=gles_seconds();audit_upload=eng_audit_begin(AUD_UPLOAD);
+        tex=world_upload(slotp,tw,th,bw,bh,&world_page,&world_layer);
+        /* Submission drained by mutation is charged to draw time, not twice
+         * to both submission and texture upload/lookup. */
+        upload_start+=world_upload_barrier_seconds-barrier_before;
+    }else
 #endif
     if (atlas_on()) {
         /* the bake already wrote the page's shadow (above); the GL texture
@@ -1340,7 +1379,13 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             if (!e->occupied || e == slotp) continue;
             if (e->ref && !g_tex_fifo) { e->ref = 0; continue; }
             if (atlas_on()) atlas_free(e->a_page, e->a_x, e->a_y, e->alloc_w, e->alloc_h);
-            else {tier_event("budget-evict",e);tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);}
+            else {tier_event("budget-evict",e);
+#ifdef RR_GLES_WORLD_ATLAS
+                world_release(e);
+#else
+                tex_free_push(e->gl_texture, e->alloc_w, e->alloc_h);
+#endif
+            }
             tex_cache_bytes -= e->bytes;
             tex_cache_total--;
             tex_cache_evictions++;
@@ -1363,6 +1408,10 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     } else {
         slotp->alloc_w = (uint16_t)tw; slotp->alloc_h = (uint16_t)th;
     }
+#ifdef RR_GLES_WORLD_ATLAS
+    slotp->a_page=world_page<0?WORLD_ARRAY_NONE:(uint16_t)world_page;
+    slotp->a_x=world_layer<0?0:(uint16_t)world_layer;
+#endif
     slotp->used_w  = (uint16_t)sw; slotp->used_h  = (uint16_t)sh;
     slotp->su = su; slotp->sv = sv;
     slotp->bytes = atlas_on() ? (uint32_t)(bw * bh * 4) : (uint32_t)(tw * th * 4);
@@ -1377,6 +1426,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     slotp->occupied = 1;
     slotp->ref = 1;
     tier_event("stored",slotp);
+#ifdef RR_GLES_WORLD_ATLAS
+    world_select(slotp);
+#endif
     return tex;
 }
 
@@ -1535,6 +1587,9 @@ GLuint bake_quad_texture(int min_u, int min_v, int range_u, int range_v,
 size_t tex_bake_gles2_resident_bytes(void) { return tex_cache_bytes + 4; }
 void tex_bake_gles2_report(void)
 {
+#ifdef RR_GLES_WORLD_ATLAS
+    world_cache_report();
+#endif
     fprintf(stderr, "[TEX] decoded=%d uploads=%d GPU=%zu peak=%zu budget=%zu live=%d hits=%d misses=%d evictions=%d CPU_metadata=%zu CPU_aux=%zu scratch=%zu shadow=0 decoded_cache=0\n",
             tex_frame_misses, tex_reallocs + tex_subimages, tex_cache_bytes + 4,
             tex_gpu_peak + 4, tex_cache_budget + 4, tex_cache_total, tex_frame_hits, tex_frame_misses,

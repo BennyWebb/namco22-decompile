@@ -1,0 +1,90 @@
+GPU=Mali-G31
+resources=670 draws=1280 vertices=7998 arrays=431 payload=26098156 array_bytes=38260592 occupancy=0.682116 cohort=2
+baseline.rgba differing_pixels=0
+array-ordered.rgba differing_pixels=0
+MODE shader=1 mode=1 draws=1280 cpu_ms=15.372375 finish_wall_ms=30.365414
+array-adjacent.rgba differing_pixels=0
+MODE shader=1 mode=2 draws=1248 cpu_ms=10.044875 finish_wall_ms=25.133560
+DEPTH unique=1328 minimum_separation_lsb=35.893984
+opaque-grouped.rgba differing_pixels=0
+TIMING sample=0 mode=0 draws=1280 cpu_ms=14.493293 finish_wall_ms=28.379698
+TIMING sample=0 mode=1 draws=1280 cpu_ms=16.055290 finish_wall_ms=31.757753
+TIMING sample=0 mode=2 draws=1248 cpu_ms=16.414543 finish_wall_ms=32.743007
+TIMING sample=0 mode=3 draws=441 cpu_ms=7.101791 finish_wall_ms=19.228661
+TIMING sample=1 mode=1 draws=1280 cpu_ms=15.875792 finish_wall_ms=31.563419
+TIMING sample=1 mode=2 draws=1248 cpu_ms=17.971916 finish_wall_ms=33.397843
+TIMING sample=1 mode=3 draws=441 cpu_ms=7.063458 finish_wall_ms=19.408328
+TIMING sample=1 mode=0 draws=1280 cpu_ms=15.370791 finish_wall_ms=28.707491
+TIMING sample=2 mode=2 draws=1248 cpu_ms=17.995209 finish_wall_ms=34.214388
+TIMING sample=2 mode=3 draws=441 cpu_ms=7.146000 finish_wall_ms=19.168036
+TIMING sample=2 mode=0 draws=1280 cpu_ms=15.488251 finish_wall_ms=29.223909
+TIMING sample=2 mode=1 draws=1280 cpu_ms=16.180541 finish_wall_ms=32.539923
+TIMING sample=3 mode=3 draws=441 cpu_ms=7.342791 finish_wall_ms=19.363662
+TIMING sample=3 mode=0 draws=1280 cpu_ms=15.456792 finish_wall_ms=28.739574
+TIMING sample=3 mode=1 draws=1280 cpu_ms=12.969666 finish_wall_ms=28.298406
+TIMING sample=3 mode=2 draws=1248 cpu_ms=12.762000 finish_wall_ms=28.220697
+TIMING sample=4 mode=0 draws=1280 cpu_ms=15.361500 finish_wall_ms=28.635366
+TIMING sample=4 mode=1 draws=1280 cpu_ms=13.571750 finish_wall_ms=29.329951
+TIMING sample=4 mode=2 draws=1248 cpu_ms=12.863000 finish_wall_ms=28.929075
+TIMING sample=4 mode=3 draws=441 cpu_ms=9.081039 finish_wall_ms=21.981547
+TIMING sample=5 mode=1 draws=1280 cpu_ms=9.552792 finish_wall_ms=24.765725
+TIMING sample=5 mode=2 draws=1248 cpu_ms=9.385583 finish_wall_ms=24.568016
+TIMING sample=5 mode=3 draws=441 cpu_ms=5.443375 finish_wall_ms=17.252570
+TIMING sample=5 mode=0 draws=1280 cpu_ms=11.025417 finish_wall_ms=24.040222
+TIMING sample=6 mode=2 draws=1248 cpu_ms=13.843083 finish_wall_ms=29.550452
+TIMING sample=6 mode=3 draws=441 cpu_ms=5.545250 finish_wall_ms=17.429945
+TIMING sample=6 mode=0 draws=1280 cpu_ms=11.030917 finish_wall_ms=24.085180
+TIMING sample=6 mode=1 draws=1280 cpu_ms=15.274833 finish_wall_ms=31.458668
+TIMING sample=7 mode=3 draws=441 cpu_ms=5.926458 finish_wall_ms=17.792072
+TIMING sample=7 mode=0 draws=1280 cpu_ms=15.410375 finish_wall_ms=28.943950
+TIMING sample=7 mode=1 draws=1280 cpu_ms=15.809500 finish_wall_ms=31.791629
+TIMING sample=7 mode=2 draws=1248 cpu_ms=15.574624 finish_wall_ms=31.405335
+TIMING sample=8 mode=0 draws=1280 cpu_ms=15.574333 finish_wall_ms=29.515994
+TIMING sample=8 mode=1 draws=1280 cpu_ms=15.960458 finish_wall_ms=31.795670
+TIMING sample=8 mode=2 draws=1248 cpu_ms=15.619417 finish_wall_ms=30.976167
+TIMING sample=8 mode=3 draws=441 cpu_ms=6.372292 finish_wall_ms=18.091573
+TIMING sample=9 mode=1 draws=1280 cpu_ms=13.077458 finish_wall_ms=28.776533
+TIMING sample=9 mode=2 draws=1248 cpu_ms=13.900000 finish_wall_ms=29.956120
+TIMING sample=9 mode=3 draws=441 cpu_ms=6.239625 finish_wall_ms=18.110907
+TIMING sample=9 mode=0 draws=1280 cpu_ms=12.668958 finish_wall_ms=25.966021
+TIMING sample=10 mode=2 draws=1248 cpu_ms=15.842542 finish_wall_ms=31.179126
+TIMING sample=10 mode=3 draws=441 cpu_ms=6.481625 finish_wall_ms=18.370283
+TIMING sample=10 mode=0 draws=1280 cpu_ms=12.623125 finish_wall_ms=25.711521
+TIMING sample=10 mode=1 draws=1280 cpu_ms=14.969373 finish_wall_ms=30.534456
+TIMING sample=11 mode=3 draws=441 cpu_ms=6.108792 finish_wall_ms=17.888447
+TIMING sample=11 mode=0 draws=1280 cpu_ms=12.786917 finish_wall_ms=26.327564
+TIMING sample=11 mode=1 draws=1280 cpu_ms=13.198250 finish_wall_ms=28.684491
+TIMING sample=11 mode=2 draws=1248 cpu_ms=13.065083 finish_wall_ms=28.452615
+TIMING sample=12 mode=0 draws=1280 cpu_ms=12.687708 finish_wall_ms=25.829729
+TIMING sample=12 mode=1 draws=1280 cpu_ms=13.821416 finish_wall_ms=29.253702
+TIMING sample=12 mode=2 draws=1248 cpu_ms=10.876542 finish_wall_ms=26.032521
+TIMING sample=12 mode=3 draws=441 cpu_ms=4.958917 finish_wall_ms=16.779568
+TIMING sample=13 mode=1 draws=1280 cpu_ms=10.372667 finish_wall_ms=25.614854
+TIMING sample=13 mode=2 draws=1248 cpu_ms=11.088417 finish_wall_ms=26.855942
+TIMING sample=13 mode=3 draws=441 cpu_ms=5.547833 finish_wall_ms=17.261861
+TIMING sample=13 mode=0 draws=1280 cpu_ms=13.167167 finish_wall_ms=27.010984
+TIMING sample=14 mode=2 draws=1248 cpu_ms=11.118333 finish_wall_ms=26.250106
+TIMING sample=14 mode=3 draws=441 cpu_ms=6.053708 finish_wall_ms=17.985198
+TIMING sample=14 mode=0 draws=1280 cpu_ms=11.167209 finish_wall_ms=24.290556
+TIMING sample=14 mode=1 draws=1280 cpu_ms=10.792499 finish_wall_ms=26.653566
+TIMING sample=15 mode=3 draws=441 cpu_ms=5.113458 finish_wall_ms=17.001318
+TIMING sample=15 mode=0 draws=1280 cpu_ms=10.533500 finish_wall_ms=23.467511
+TIMING sample=15 mode=1 draws=1280 cpu_ms=11.294124 finish_wall_ms=26.768483
+TIMING sample=15 mode=2 draws=1248 cpu_ms=10.367125 finish_wall_ms=25.547186
+TIMING sample=16 mode=0 draws=1280 cpu_ms=12.678709 finish_wall_ms=27.204276
+TIMING sample=16 mode=1 draws=1280 cpu_ms=10.585583 finish_wall_ms=25.871104
+TIMING sample=16 mode=2 draws=1248 cpu_ms=9.823916 finish_wall_ms=25.248935
+TIMING sample=16 mode=3 draws=441 cpu_ms=4.793875 finish_wall_ms=16.570858
+TIMING sample=17 mode=1 draws=1280 cpu_ms=9.602249 finish_wall_ms=25.044393
+TIMING sample=17 mode=2 draws=1248 cpu_ms=11.672875 finish_wall_ms=26.766566
+TIMING sample=17 mode=3 draws=441 cpu_ms=4.677083 finish_wall_ms=16.315025
+TIMING sample=17 mode=0 draws=1280 cpu_ms=10.227250 finish_wall_ms=22.934093
+TIMING sample=18 mode=2 draws=1248 cpu_ms=10.202958 finish_wall_ms=25.681062
+TIMING sample=18 mode=3 draws=441 cpu_ms=9.961250 finish_wall_ms=21.793879
+TIMING sample=18 mode=0 draws=1280 cpu_ms=15.471125 finish_wall_ms=28.517323
+TIMING sample=18 mode=1 draws=1280 cpu_ms=16.042958 finish_wall_ms=31.866378
+TIMING sample=19 mode=3 draws=441 cpu_ms=7.410458 finish_wall_ms=19.277953
+TIMING sample=19 mode=0 draws=1280 cpu_ms=19.484958 finish_wall_ms=32.591714
+TIMING sample=19 mode=1 draws=1280 cpu_ms=15.995042 finish_wall_ms=31.519127
+TIMING sample=19 mode=2 draws=1248 cpu_ms=20.842833 finish_wall_ms=36.903148
+Result: /userdata/system/rave-racer-world-atlas-20261014/cohort2-20261014-172844-1824

@@ -6,6 +6,12 @@
 #include "eng_gl.h"
 
 void renderer_texture_init(void);
+#ifdef RR_GLES_WORLD_ATLAS
+void tex_bake_world_arrays(int enabled,int proof);
+int tex_bake_world_layer(void);
+GLuint tex_bake_world_reference(void);
+void tex_bake_world_dimensions(GLuint reference,int *w,int *h);
+#endif
 #ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
 void tex_bake_predecode_prepare(void);
 #endif

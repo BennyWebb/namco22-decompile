@@ -435,3 +435,31 @@ for racing performance; and report simulation rate separately from actual
 presentation timestamps. Do not infer GPU saturation from FPS or move CPU
 texture decoding across threads without an immutable, versioned resource
 handoff. The next optimisation has not been selected by this handover.
+
+## World RGBA atlas investigation — 2026-10-14
+
+The committed GPU HUD production executable remains deployed and unchanged
+(SHA256 `6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`).
+The world-atlas prototype is rejected for production deployment and stays OFF.
+See [architecture, correctness and decision](GPU_WORLD_ATLAS_INVESTIGATION.md)
+and [five-pair results](benchmarks/world-atlas-20261014/RESULTS.md). No commits
+or additional permanent launchers were created.
+
+Compatible-dimension two-layer RGBA arrays preserve original UVs, bake tiers,
+cache policy and ordered updates. Native complete recording, Mali controlled
+first lap and TSan pass exact pixels/state/PCM/voices. Ordinary 2D atlas UV
+remapping is not exact at nearest-sampling boundaries. Native zero-area fan
+cases require original draw boundaries when merged after reordering; the
+smallest reproductions are preserved in `tools/world_atlas_case/minimal/`.
+
+Five alternating complete first-lap pairs: median FPS 52.931 -> 56.019,
+world draws 860.7 -> 439.0, but 1% low 25.151 -> 21.699 FPS and worst hitch
+91.9 -> 106.6 ms. Tick-1965 upload/driver time rises about 19 -> 53 ms with
+similar decode time and miss count. RSS adds 44.2 MiB. Simulation remains
+59.904 Hz; all ten runs have zero audio underruns/resyncs and identical state.
+
+The optional source is behind `RR_GLES_WORLD_ATLAS=OFF` in the H700 preset
+and runtime mode `off`. Preserve the captures and tools; these experiments
+are complete evidence, not a request to restart atlas micro-optimisation.
+The existing world renderer, GPU HUD, multicore/geometry optimisations and
+controller configuration remain the playable reference.
