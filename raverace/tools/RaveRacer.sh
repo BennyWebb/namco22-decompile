@@ -5,6 +5,23 @@ cd "$app_dir" || exit 1
 if [ "${SDL_VIDEODRIVER+x}" != x ]; then SDL_VIDEODRIVER=mali; fi
 if [ "${XDG_RUNTIME_DIR+x}" != x ]; then XDG_RUNTIME_DIR=/var/run; fi
 export SDL_VIDEODRIVER XDG_RUNTIME_DIR
+# H700 production build defaults to the validated glyph-quad HUD.
+# gpu-hud-mode=off selects the original CPU HUD without replacing the binary.
+unset ENG_GPU_HUD_VERIFY ENG_GPU_HUD_CAPTURE ENG_GPU_HUD_CAPTURE_TICKS ENG_HUD_GPU_TRACE
+unset ENG_TEXTURE_PREDECODE_MANIFEST ENG_TEXTURE_PREDECODE_ORIENTED ENG_TEXTURE_PREDECODE_VERIFY
+unset ENG_TEXTURE_GPU_PREWARM ENG_TEXTURE_GPU_RECORD ENG_TEXTURE_MISS_TRACE
+gpu_hud_mode=default
+if [ -f "$app_dir/gpu-hud-mode" ]; then IFS= read -r gpu_hud_mode < "$app_dir/gpu-hud-mode" || :; fi
+case "$gpu_hud_mode" in
+ default|'') unset ENG_GPU_HUD ENG_GPU_HUD_GEOMETRY ;;
+ on) export ENG_GPU_HUD=1 ENG_GPU_HUD_GEOMETRY=1 ;;
+ off) export ENG_GPU_HUD=0 ENG_GPU_HUD_GEOMETRY=0 ;;
+ *) echo "Unknown gpu-hud-mode: $gpu_hud_mode" >&2; exit 2 ;;
+esac
+# Use the device-specific saved mapping if supplied by installation.
+if [ -f "$app_dir/controller-input.cfg" ]; then
+ set -- --es-input "$app_dir/controller-input.cfg" "$@"
+fi
 {
  printf '\n=== Rave Racer: %s ===\n' "$(date)"
  # Optional experimental recording; absent/off retains the known-good binary.

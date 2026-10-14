@@ -6,7 +6,7 @@ static bool glyph_valid[1024],mesh_valid;
 static uint8_t mesh_tilemap[8192],needed_glyphs[1024];
 static int mesh_scroll_x,mesh_scroll_y,glyph_vertex_count;
 static float glyph_vertices[41*31*6*5];
-static bool gpu_geometry(void){const char *s=getenv("ENG_GPU_HUD_GEOMETRY");return s&&!strcmp(s,"1");}
+static bool gpu_geometry(void){const char *s=getenv("ENG_GPU_HUD_GEOMETRY");return !s||!strcmp(s,"1");}
 static const char *glyph_final_fs=
  "#version 100\nprecision highp float;varying highp vec2 uv;"
  "uniform sampler2D scene_tex,raw_tex,palette_tex,lut_tex;uniform bool shadow_on;uniform vec3 mix0,mix1,mix2;"

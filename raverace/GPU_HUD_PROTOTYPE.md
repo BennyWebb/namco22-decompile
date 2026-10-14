@@ -1,8 +1,12 @@
 # GPU HUD prototype — RG40XX H
 
-Prototype and five-pair benchmark completed, 2026-10-14. No commits. Production
-executable and launcher remain preserved pending the requested physical
-controller/audio check. World geometry and texture-cache policy are unchanged.
+The validated design is now integrated into the H700 production default. See
+[GPU_HUD_PRODUCTION.md](GPU_HUD_PRODUCTION.md) for final acceptance, fresh
+regressions, consolidation benchmark and rollback. The sections below preserve
+the earlier experimental and interactive-trial findings.
+
+Prototype and five-pair benchmark completed, 2026-10-14. No commits. The validated candidate is deployed for the explicitly authorised physical
+controller/audio trial; the prior executable and configuration are backed up. World geometry and texture-cache policy are unchanged.
 
 ## Original representation and necessary work
 
@@ -259,16 +263,33 @@ forced and no world-resource correction was hidden in the HUD change.
 The glyph-quad prototype meets the substantial performance and automated
 correctness gates. Keep it independently switchable and OFF by default in
 source configuration. Physical controller gameplay, menus, audible sound and
-START+SELECT exit still require the user's requested spot check before playable
-integration. The candidate remains outside Ports:
-`/userdata/system/rave-racer-gpu-hud-20261014/bin/rr_hud_geometry_capture`, SHA-256
+START+SELECT exit still require user validation before permanent default acceptance.
+
+## Authorised interactive deployment (2026-10-14)
+
+The exact validated candidate is installed at
+`/userdata/roms/ports/rave-gles2/rr_gles2`, SHA-256
 `fef8f66dc7e87c18668a32b5c43f473d14c98b9323cb9236d47380700ce32b52`.
+The sole existing Ports → Rave Racer launcher enables GPU glyph-quads and the
+validated three-stage production configuration. Batching and pre-decoding are
+compiled OFF; capture/verification environment settings are cleared. Audio and
+original HUD are enabled; overlay and replay recording are OFF.
 
-The deployed executable remains SHA-256
-`77536f56ad17de9cf8772175c73442d9cb246d87aeb6fbf6c8d7f07c3d6ab53e`;
-the existing pre-parallel-prep backup remains
-`ed27bc04b41c402e2181a1f36c4b3876becffea6224a9499bd9a181120dbedb1`.
-There is one Rave Racer Ports launcher. No production binary replacement,
-launcher modification or commit has been made. EmulationStation is restored
-after tests. Preserve all diagnostic inputs and rejected harness captures.
+The original playable executable (SHA-256
+`77536f56ad17de9cf8772175c73442d9cb246d87aeb6fbf6c8d7f07c3d6ab53e`),
+exact launcher and replay-mode are preserved under
+`/userdata/system/rave-racer-backups/20261014-pre-gpu-hud-interactive/`.
+Its `restore.sh` restores those files and removes newly introduced configuration.
+Exit the game with START+SELECT before running it over SSH. The earlier
+pre-parallel-prep backup is untouched.
 
+The previous default input path was absent. The launcher now supplies a compact
+copy of the exact RG40XX-H entry from `/usr/share/emulationstation/es_input.cfg`
+as `controller-input.cfg`. This avoids other devices sharing its GUID. Startup
+confirms controller recognition, glyph-quads (`verify=0`), three-stage threading,
+zero full-layer uploads and zero audio underruns. These short startup checks do
+not substitute for the user's physical gameplay/audio validation.
+
+EmulationStation is restored, game stopped, one active launcher. No source
+changes, additional optimisation, rebuild or commits in this deployment.
+Preserve all prior diagnostic inputs and rejected harness captures.

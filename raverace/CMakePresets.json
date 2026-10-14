@@ -29,7 +29,14 @@
       "toolchainFile": "${sourceDir}/cmake/knulli-aarch64.cmake",
       "cacheVariables": {
         "KNULLI_HOST": "$env{HOME}/dev/knulli-scarab/output/h700/host",
-        "RR_TEXTURE_TILE_RUNS": "ON"
+        "RR_TEXTURE_TILE_RUNS": "ON",
+        "RR_PARALLEL_FRAME_PREP": "ON",
+        "RR_GPU_HUD": "ON",
+        "RR_GPU_HUD_DEFAULT": "ON",
+        "RR_GLES2_MULTITEXTURE_BATCH": "OFF",
+        "RR_TEXTURE_PREDECODE_EXPERIMENT": "OFF",
+        "RR_PREP_WAKE_ON_SNAPSHOT": "OFF",
+        "RR_PARALLEL_PREP_PROFILE": "OFF"
       }
     }
   ],

@@ -5,7 +5,45 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
-## GPU HUD prototype validated; playable integration pending (2026-10-14)
+## H700 production GPU HUD integrated and deployed (2026-10-14)
+
+Read [GPU_HUD_PRODUCTION.md](GPU_HUD_PRODUCTION.md) for final configuration,
+regressions, [confirmation benchmark](benchmarks/gpu-hud-production-20261014-summary.json)
+and rollback instructions. The user confirmed original HUD/gameplay, steering,
+controller operation and audible synchronised sound.
+
+- `playable-knulli`: GPU HUD/default glyph-quads ON, CPU fallback selectable;
+  all validated three-stage/geometry/memory/C352/tile-run flags preserved;
+  batching, pre-decoding and wake experiment OFF.
+- Installed executable SHA256
+  `6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`.
+  Existing launcher uses `gpu-hud-mode=default`, recording OFF, exact controller
+  mapping and audio ON. Source changes remain uncommitted.
+- Native full replay: 2,002 RGBA pictures exact against CPU; 46 frozen/synthetic
+  cases pass. ThreadSanitizer through 1700: no application race, exact pixels,
+  state/PCM/voices and checkpoint prefix (existing Mesa-only suppression).
+- Final ARM64: 2,002 fixed pictures plus 913 adaptive/live-audio pictures exact;
+  all 63 recording state records match; final pixels, geometry, misses, PCM and
+  voices match pre-GPU references; CPU/serial fallback checks pass. Verification
+  readbacks cause one diagnostic resync, excluded from performance claims.
+- Two alternating final confirmation pairs: accepted GPU prototype 52.728 FPS,
+  consolidated 52.939; 1% low 25.214 / 25.297; p99 32.802 / 32.657 ms;
+  image age median 38.706 / 37.370 ms. Every normal benchmark run has zero audio
+  underruns and resyncs, simulation ~59.904 Hz. Prior five-pair 52.714 FPS benefit
+  retained; tiny consolidation difference is not a new optimisation claim.
+- Fresh previous GPU playable/config backup:
+  `/userdata/system/rave-racer-backups/20261014-pre-consolidated-gpu-hud/`.
+  `restore.sh` restores the manually accepted GPU trial. Older CPU and
+  pre-parallel-prep backups/hashes untouched. Mode `off` selects original CPU
+  HUD in the new binary without changing controller configuration.
+- Device artifacts `/userdata/system/rave-racer-gpu-hud-consolidated-20261014/`;
+  validation `validation-20261014-152511-6403`, benchmark
+  `ab-20261014-153427-7324`, startup `deployed-startup.log`; host
+  `/tmp/rr-hud/consolidated/`. All preserved.
+- Last final check: EmulationStation PID 23050, no game running, one active
+  `/userdata/roms/ports/Rave Racer.sh`. No commits.
+
+## Earlier GPU HUD interactive trial (superseded by production integration above)
 
 Read [GPU_HUD_PROTOTYPE.md](GPU_HUD_PROTOTYPE.md) and
 [the five-pair summary](benchmarks/gpu-hud-20261014-summary.json).
@@ -40,10 +78,24 @@ Read [GPU_HUD_PROTOTYPE.md](GPU_HUD_PROTOTYPE.md) and
   `final-checks-20261014-141928-20309`. Preserve captures and diagnostics.
 - Candidate `bin/rr_hud_geometry_capture`, SHA256
   `fef8f66dc7e87c18668a32b5c43f473d14c98b9323cb9236d47380700ce32b52`.
-  Physical controller/menu/audio/START+SELECT spot check is still pending; an
-  async user question was sent. Do not replace the playable executable before
-  that required check. No deployment, launcher modification or commits.
-  Known-good executable/backup hashes unchanged; one Ports launcher retained.
+  Deployed to the existing Ports → Rave Racer launcher at the user's explicit
+  request for physical controller/audio validation. GPU glyph-quads and the
+  validated three-stage production optimisations are enabled; batching and
+  texture pre-decoding are compiled OFF. Verification/capture diagnostics are
+  disabled. `gpu-hud-mode=on`, `replay-mode=off`.
+- Prior executable (SHA256 `77536f56ad17de9cf8772175c73442d9cb246d87aeb6fbf6c8d7f07c3d6ab53e`),
+  exact launcher and mode configuration are preserved under
+  `/userdata/system/rave-racer-backups/20261014-pre-gpu-hud-interactive/`.
+  Exit the game with START+SELECT and run that directory's `restore.sh` over SSH
+  to restore the previous playable executable and configuration. The earlier
+  pre-parallel-prep backup remains untouched.
+- Launcher explicitly loads the exact built-in RG40XX-H controller mapping from
+  `controller-input.cfg`; startup confirms recognition, three-stage mode,
+  glyph-quads with verification OFF and zero audio underruns. ES restored.
+- Physical controller, HUD/menu, audio and full-race validation remain pending
+  user confirmation. This is an authorised interactive trial, not acceptance
+  as the permanent default. One Ports launcher; no commits or optimisation work.
+
 
 ## Texture preparation investigation completed (2026-10-14)
 

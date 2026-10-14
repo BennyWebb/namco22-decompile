@@ -30,7 +30,12 @@ void rr_video_layers_enable(bool on){enabled=on;}
 bool rr_video_layers_enabled(void){return enabled;}
 bool rr_video_layers_gpu(void){
 #ifdef RR_GPU_HUD
- const char *s=getenv("ENG_GPU_HUD");return enabled&&s&&!strcmp(s,"1");
+ const char *s=getenv("ENG_GPU_HUD");
+#ifdef RR_GPU_HUD_DEFAULT
+ return enabled&&(!s||!strcmp(s,"1"));
+#else
+ return enabled&&s&&!strcmp(s,"1");
+#endif
 #else
  return false;
 #endif
