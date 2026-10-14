@@ -49,7 +49,13 @@ def monitor_summary(path, begin, end):
             if len(parts) == 3:
                 current["wchan"][int(parts[1])] = parts[2]
         elif "scaling_cur_freq " in line:
-            current["freq"].append(int(line.split()[-1]))
+            # A sysfs read can fail between the monitor's existence check and
+            # cat, leaving a label without a numeric sample. Preserve the other
+            # samples rather than rejecting the complete benchmark.
+            try:
+                current["freq"].append(int(line.split()[-1]))
+            except ValueError:
+                pass
         elif re.match(r"^/sys/class/thermal/thermal_zone[0-3]/temp ", line):
             current["thermal"].append(int(line.split()[-1]))
         elif line.startswith("VmRSS:"):

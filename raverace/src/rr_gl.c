@@ -85,6 +85,9 @@ bool rr_gl_init(const char *dir)
         return false;
     }
     if (g_rr_game->tex_fixup) eng_texture_tilemap_sys22_fixup();
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    tex_bake_predecode_prepare();
+#endif
 #ifdef RR_GLES2
     fprintf(stderr, "[TEX] ROM CPU bytes=%zu; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque\n",
             (size_t)TEXTURE_TOTAL_SIZE + TEXTUREMAP_SIZE);

@@ -233,6 +233,11 @@ static void cmode_params(int cmode, int *out_offset, int *out_shift, int *out_ma
     }
 }
 
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+#include "texture_predecode_experiment.inc"
+#include "texture_gpu_prewarm_experiment.inc"
+#endif
+
 /* ========== Per-Quad Texture Cache ========== */
 
 /*
@@ -722,6 +727,9 @@ void renderer_texture_init(void) {
         if (want > atlas_maxp) want = atlas_maxp;
         while (ap_n < want) atlas_page_init(ap_n++);
     }
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    gpw_init();
+#endif
 }
 
 static uint32_t tex_cache_hash(int min_u, int min_v, int range_u, int range_v,
@@ -1045,6 +1053,15 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
             page_dirty(slot_page, slot_x, slot_y, bw, bh);
         }
     }
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    const uint8_t *prepared_pens=NULL;
+    int oriented_active=oriented_pixels && oriented_rom==g_texture_data && oriented_map==g_texture_tilemap && oriented_tile16==g_eng_tex_tile16 && !g_tex_pow2sample && !atlas_on();
+    if(pen_count && !g_tex_pow2sample && !atlas_on()) {
+        prepared_pens=pen_find(min_u,min_v,range_u,range_v,texbank,cmode,cap,bw,bh);
+        if(prepared_pens)pen_hits++;else pen_fallbacks++;
+    }
+    if(oriented_active&&!prepared_pens){oriented_bakes++;oriented_texels+=(unsigned long long)bw*bh;}
+#endif
     for (int py = 0; py < bh; py++) {
         int tv = g_tex_pow2sample ? min_v + py * range_v / sh
                                   : min_v + py * step_v;
@@ -1053,10 +1070,42 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         int vrow = (v & 0xFFF0) << 4;            /* tilemap row base */
         int local_y0 = v & 0xF;
         uint8_t *dst = bake_dst + (size_t)py * bake_stride;
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+        if(prepared_pens) {
+            const uint8_t *pens=prepared_pens+(size_t)py*bw;
+            for(int px=0;px<bw;px++){memcpy(dst,lut[pens[px]],4);dst+=4;}
+            if(pen_verify) {
+                uint8_t reference[1025*4];
+#ifdef RR_TEXTURE_TILE_RUNS
+                texture_decode_tile_runs(reference,bw,min_u,step_u,vrow,local_y0,lut,cm_offset,cm_shift,cm_mask);
+#else
+                for(int px=0;px<bw;px++) {
+                    unsigned fetch=texture_pen_lookup(min_u+px*step_u,tv,texbank);
+                    memcpy(reference+px*4,lut[(cm_offset+((fetch>>cm_shift)&cm_mask))&255],4);
+                }
+#endif
+                if(memcmp(reference,bake_dst+(size_t)py*bake_stride,(size_t)bw*4)) {
+                    fprintf(stderr,"[PREDECODE] exact decode failure frame=%u u=%d v=%d cap=%d row=%d\n",g_eng_frame,min_u,min_v,cap,py);exit(2);
+                }
+                pen_verified_texels+=bw;
+            }
+            continue;
+        }
+#endif
 #ifdef RR_TEXTURE_TILE_RUNS
         /* The alternative ratio sampler and atlas guard-clamp retain their
          * original path. All GLES integer-step samples use the same positions. */
         if (!g_tex_pow2sample && !atlas_on() && tmap && tdata) {
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+            if(oriented_active) {
+                oriented_decode_row(dst,bw,min_u,step_u,vrow,local_y0,lut,cm_offset,cm_shift,cm_mask);
+                if(pen_verify) {
+                    uint8_t ref[1025*4];texture_decode_tile_runs(ref,bw,min_u,step_u,vrow,local_y0,lut,cm_offset,cm_shift,cm_mask);
+                    if(memcmp(ref,dst,(size_t)bw*4)){fprintf(stderr,"[ORIENTED-PREDECODE] RGBA verification failure frame=%u\n",g_eng_frame);exit(2);}
+                }
+                continue;
+            }
+#endif
             texture_decode_tile_runs(dst, bw, min_u, step_u, vrow, local_y0,
                 lut, cm_offset, cm_shift, cm_mask);
             continue;
@@ -1179,6 +1228,14 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         if (out_ov) *out_ov = (float)slot_y / ATLAS_DIM;
     } else {
     int had_w = slotp->alloc_w, had_h = slotp->alloc_h;
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    int preloaded=0;
+    if(!g_tex_pow2sample && tw==bw && th==bh) {
+        uint32_t key[9]={min_u,min_v,range_u,range_v,texbank,cmode,cap,tw,th};
+        gpw_record_bake(key,tex_pixel_buf);
+        if(gpw_n){tex=gpw_take(key,tex_pixel_buf);preloaded=tex!=0;}
+    }
+#endif
     if (!tex) {
         tex = tex_free_pop(tw, th, &had_w, &had_h);
         if (!tex) { tex = gen_texture(); had_w = had_h = 0; }
@@ -1221,6 +1278,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 #ifndef RR_GLES2
     if (atlas_flush_hook) atlas_flush_hook(tex);   /* a recycled object's storage is about to be discarded/replaced: buffered quads draw first */
 #endif
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    if(!preloaded) {
+#endif
     if (!g_tex_orphan && had_w == tw && had_h == th) {
         tex_subimages++;
     } else {
@@ -1236,6 +1296,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
 #endif
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, bw, bh,
                     GL_RGBA, GL_UNSIGNED_BYTE, tex_pixel_buf);
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    }
+#endif
     }
 
 #ifdef RR_GLES2
@@ -1304,6 +1367,9 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
     slotp->su = su; slotp->sv = sv;
     slotp->bytes = atlas_on() ? (uint32_t)(bw * bh * 4) : (uint32_t)(tw * th * 4);
     tex_cache_bytes += slotp->bytes;
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    gpw_track(tex_cache_bytes);
+#endif
 #ifdef RR_GLES2
     if (tex_cache_bytes > tex_gpu_peak) tex_gpu_peak = tex_cache_bytes;
 #endif
@@ -1474,5 +1540,11 @@ void tex_bake_gles2_report(void)
             tex_gpu_peak + 4, tex_cache_budget + 4, tex_cache_total, tex_frame_hits, tex_frame_misses,
             tex_cache_evictions, sizeof tex_cache + sizeof tex_free,
             sizeof apages + sizeof gen_pool + sizeof pend, sizeof tex_pixel_buf);
+}
+void tex_bake_gles2_experiment_close(void)
+{
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+    gpw_close();
+#endif
 }
 #endif

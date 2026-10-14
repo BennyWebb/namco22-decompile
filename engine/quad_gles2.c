@@ -786,6 +786,7 @@ void eng_gles2_close(void)
     if (batch_trace) { fclose(batch_trace); batch_trace = NULL; }
 #endif
     tex_bake_set_flush_hook(NULL);
+    tex_bake_gles2_experiment_close();
     tex_bake_gles2_report();
     renderer_texture_init(); /* delete cache storage before context destruction */
     if (white) glDeleteTextures(1, &white);

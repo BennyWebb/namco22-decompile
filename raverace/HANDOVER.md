@@ -5,6 +5,55 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Texture preparation investigation completed (2026-10-14)
+
+Read [TEXTURE_PREDECODE_INVESTIGATION.md](TEXTURE_PREDECODE_INVESTIGATION.md)
+and [the complete measurements](benchmarks/texture-predecode-20261014-summary.json)
+before further texture-cache work. Batching remains OFF; no more batching work.
+
+- Actual HEAD at start: `309e053` (`Multitexture followup`). No commits made in
+  this investigation. The working tree adds default-OFF CPU pen-bake/complete-ROM
+  preparation and bounded private GPU preload diagnostics, plus tools/reports.
+- Fresh five-pair deployed/newer-unbatched reconciliation: 41.090 / 40.953 FPS.
+  Historical 34.48 FPS does not reproduce as a build regression. Long historical
+  swap scopes and simulation pauses are documented; simple 256 MiB `/tmp`
+  occupancy was tested and did not explain it. Initiating historical cause is
+  unresolved. Audio anomalies correlate with simulation gaps, often before the
+  racing window; whole-process counters must not be labelled racing-only.
+- Final five pairs compare the **installed multicore executable directly** with
+  startup-prepared pen bakes: FPS 41.278 / 41.122, 1% low 19.853 / 23.142,
+  p99 40.313 / 37.287 ms, median worst 104.110 / 71.758 ms. All five improve
+  low/worst pacing; average FPS is unchanged. Additional RSS ~110 MiB, startup
+  ~3.55 s preparation; active GPU budget remains 64 MiB. Every endpoint matches.
+- Complete replay through 6006: 14 selected HUD frames + final capture identical,
+  texture semantics `2a6578ef363d13f3`, PCM `0c24e8fca4b6400e`, voices
+  `b76f90445ba87e18`, board `f9154a83`. 136,188,011 live RGBA texels checked
+  byte-exactly. Corrected code-generation candidate validated separately.
+- Initial same-binary A/B had a compiler artefact: verification's second call
+  stopped inlining the ordinary tile-run decoder. It was corrected with a flag-
+  gated always-inline attribute; final deployed-baseline pairs supersede it.
+- Current Rave game table does **not** enable conditional Sys22 map fixup.
+  Complete-ROM representation needs 65,747 combinations, 32-bit map indices,
+  20.05 MiB resident. A 16-bit attempt safely did not activate and is excluded.
+  Corrected raw/row/frame verification passed; one probe saved ~6 ms of first-
+  burst decode, with weaker hitch improvement. No five-pair claim for that mode.
+- Independent 8 MiB GPU preload: exact live-RGBA equality required before adopting
+  unused private objects. 80 valid objects used; deliberately corrupted data
+  rejected and normal uploads/pixels/state preserved. One GPU-only probe reduced
+  upload scope 23.548 -> 1.348 ms but did not improve mean FPS. Not production.
+- Persistent-cache feasibility sample: source SHA-256 + decoder/version/mode,
+  canonical keys and CRCs, ~110 MiB raw -> 33.5 MiB gzip. Handheld cold/warm read
+  + inflate medians 2.227 / 2.115 s, excluding validation/allocation/import.
+  No learner/loader implemented. Production must learn/derive generic keys,
+  retain missing-entry fallback and preserve actual GPU tier/palette selection.
+- Stop with `RR_TEXTURE_PREDECODE_EXPERIMENT=OFF` by default. No deployment,
+  extra Ports launcher or commits. Known executable and backup hashes unchanged;
+  EmulationStation restored (last verified PID 27340), no test game running,
+  `/tmp` 16 KiB, pressure diagnostic removed. Existing captures/tools preserved.
+- Device: `/userdata/system/rave-racer-predecode-20261014/`; host:
+  `/tmp/rr-predecode/`. Final headline run `final-ab-20261014-092916-29756`.
+  Report names all exact validation/probe directories and reproducible flags.
+
 ## Current state (2026-10-13)
 
 - Repository: `BennyWebb/namco22-decompile`, branch `feature/knulli-h700`.

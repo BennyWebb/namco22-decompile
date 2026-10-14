@@ -1,7 +1,14 @@
 /* Existing decoder, executed one sampled tile run at a time. ROM mapping,
  * attribute orientation and palette conversion are unchanged. No cache/state,
  * no allocation, no SIMD rounding, and no speculative/out-of-bounds reads. */
-static void texture_decode_tile_runs(uint8_t *dst, int width, int min_u,
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+/* The reference check adds a second call site. Keep the ordinary cold decoder
+ * inlined as in the deployed build, rather than distorting its benchmark. */
+__attribute__((always_inline)) static inline
+#else
+static
+#endif
+void texture_decode_tile_runs(uint8_t *dst, int width, int min_u,
     int step, int vrow, int local_y, const uint8_t lut[256][4],
     int cm_offset, int cm_shift, int cm_mask)
 {

@@ -2,7 +2,8 @@
 
 The original CG ROMs load into `g_texture_data` (16 MiB), and CCR low/high
 ROMs load into `g_texture_tilemap` (2.5 MiB), through `eng_load_texture_roms`.
-Rave Racer also applies `eng_texture_tilemap_sys22_fixup`. These ROM-derived
+`eng_texture_tilemap_sys22_fixup` is conditional on the game table; the current
+Rave Racer table leaves that flag disabled. These ROM-derived
 pixels and tile addresses are immutable after startup. `rr_scene` supplies the
 actual DSP geometry; texture bank, cmode, palette selector and UV bounds are
 already decoded in the shared geometry pipeline.

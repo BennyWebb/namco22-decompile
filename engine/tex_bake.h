@@ -6,8 +6,12 @@
 #include "eng_gl.h"
 
 void renderer_texture_init(void);
+#ifdef RR_TEXTURE_PREDECODE_EXPERIMENT
+void tex_bake_predecode_prepare(void);
+#endif
 #ifdef RR_GLES2
 void tex_bake_gles2_report(void);
+void tex_bake_gles2_experiment_close(void);
 size_t tex_bake_gles2_resident_bytes(void);
 void tex_bake_gles2_bind(GLenum target, GLuint texture);
 void tex_bake_gles2_binding_mode(int skip_redundant);
