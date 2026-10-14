@@ -5,6 +5,31 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## GPU-native world texture sampling gate completed (2026-10-14)
+
+Read [GPU_NATIVE_TEXTURE_INVESTIGATION.md](GPU_NATIVE_TEXTURE_INVESTIGATION.md)
+and [isolated measurements](benchmarks/gpu-native-20261014/summary.json).
+**Retain production; stop the measured three-dependent-lookup prototype.**
+
+- Starting HEAD `1c40c2f`; production executable hash unchanged. Standalone
+  diagnostics only; no renderer integration, deployment or commits.
+- CPU source/palette model reproduces all 6,524,539 allocated texels in the
+  preserved 670-resource tick-2500 scene. Raw and pre-oriented integer GPU
+  layouts both match its Mali world framebuffer with zero differing pixels.
+- Thirty alternating warmed pairs per layout: raw completion median 81.002 ms
+  versus RGBA 37.530; oriented 77.942 versus RGBA 37.371. These include command
+  feeding and explicit diagnostic completion; they are not exclusive GPU
+  shader times or full-game FPS. All source uploads precede measurement.
+- Oriented pens/map require 20.0625 MiB padded, plus 128 KiB palette. Immutable
+  ROM data does not remove the need for snapshot-consistent palette updates.
+- Native llvmpipe differs at three pixels from its own RGBA reference; source
+  texels agree. Boundary/interpolation fidelity remains unresolved. Exhaustive
+  targeted tests, dynamic updates, batching and live five-pair benchmarks were
+  not entered after the performance stop. No broader correctness claim.
+- Source/tools and raw measurements are preserved in the linked report. ES
+  restored (PID 6271), production hash verified. Further work needs a materially
+  different justified sampling approach, not speculative live integration.
+
 ## Mali-G31 texture-array driver investigation completed (2026-10-14)
 
 Read [MALI_TEXTURE_ARRAY_DRIVER_INVESTIGATION.md](MALI_TEXTURE_ARRAY_DRIVER_INVESTIGATION.md)

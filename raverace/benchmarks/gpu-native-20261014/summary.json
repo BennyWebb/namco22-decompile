@@ -1,0 +1,30 @@
+{
+  "0-0": {
+    "samples": 30,
+    "cpu_median_ms": 23.6646255,
+    "completion_median_ms": 37.530325,
+    "completion_p95_ms": 38.16146415,
+    "completion_min_ms": 28.508921
+  },
+  "0-1": {
+    "samples": 30,
+    "cpu_median_ms": 34.807832000000005,
+    "completion_median_ms": 81.00207599999999,
+    "completion_p95_ms": 82.0302943,
+    "completion_min_ms": 67.105109
+  },
+  "1-0": {
+    "samples": 30,
+    "cpu_median_ms": 23.5977295,
+    "completion_median_ms": 37.370746,
+    "completion_p95_ms": 37.82880455,
+    "completion_min_ms": 23.858971
+  },
+  "1-1": {
+    "samples": 30,
+    "cpu_median_ms": 34.901604,
+    "completion_median_ms": 77.942228,
+    "completion_p95_ms": 78.7369894,
+    "completion_min_ms": 63.797566
+  }
+}
