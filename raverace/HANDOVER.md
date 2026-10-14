@@ -5,6 +5,56 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Native renderer Milestone 1 completed (2026-10-14)
+
+**Milestone 1 COMPLETE. STOPPED. Milestone 2 requires separate explicit user
+approval; it has not started.** No commits, deployment or production changes.
+Read [roadmap and checked exit gates](NATIVE_RENDERER_ROADMAP.md),
+[progress/reproduction commands](NATIVE_RENDERER_PROGRESS.md),
+[asset investigation](NATIVE_ASSET_INVESTIGATION.md) and
+[native asset v1 format](native/assets/FORMAT.md).
+
+- Isolated offline converter/inspector in `native/assets/asset_tool.py`; original
+  ROM geometry, UV/material/lighting attributes, vertex/index buffers, actual
+  palette RGBA bakes, versioned manifests, source provenance and SHA256 checks.
+- Actual inventory: 2,421 models, 97,116 quads, 388,464 vertices, zero exclusions;
+  112 material keys and 21,783 source rectangles. Static/dynamic transforms,
+  palettes/solid overrides, point RAM and direct polygons documented.
+- Terrain identity proven at actual replay tick 2500: course 6 / segment 10,
+  tag 1211 -> executed DSP PC 0x4425 ADDK 69 -> object 1280. Incumbent geometry
+  matches 50 emitted quads / 182 valid raw vertices with zero discrepancies.
+  Private traced vs uninstrumented endpoint state and polygon RAM match exactly.
+- Representative visible assets are terrain 1280 and racing car body 1945;
+  **144 material recipes** validate. Earlier car-select tag 1765 was mistakenly
+  treated as a direct ROM object ID; object 1765 is a flat panel, not the car
+  representative. Preserve this correction when reading earlier pack evidence.
+- Two final visible packs have matching manifest/payload hashes, manifest SHA256
+  `954b624365e8a80773fa9e4de20a6d868260dff96392d786cfa5111752dd97eb`.
+  Actual captured oracle: 670 resources / 6,524,539 texels, zero RGBA differences.
+  Topology/indices/UV/material checks and malformed-input gates pass. Fresh native
+  headless build/regressions and existing H700 playable build pass.
+- Geometry buffers cost 11.11 MiB; full-inventory RGBA rectangles would cost
+  2.02 GiB. Actual frozen scene uses 24.89 MiB RGBA. Proposed bounded 128 MiB
+  asset residency is documented; complete track union, palette variants,
+  native scene fidelity and Mali performance remain future unknowns.
+- Generated packs `/tmp/rr-m1-visible-pack{,-repeat}`; previews
+  `/tmp/rr-m1-visible-preview/`: `model-1280.png`, `model-1945.png`, `textures.png`.
+  Preview tool `native/tools/preview_assets.py` is a CPU asset inspector, omitting
+  game lighting/fog. It is not the Milestone 2 frozen-scene GLES renderer.
+  ROM-derived outputs remain outside Git (repository outputs must use ignored
+  `native/generated/`). Preserve existing recordings, palettes and captures.
+- Raw evidence `/tmp/rr-m1-visible-validation.log`,
+  `/tmp/rr-m1-terrain-validation.json`, `/tmp/rr-m1-durable-trace/validation.json`;
+  durable source trace/geometry comparison tools and commands are in the progress
+  report. `/tmp` artifacts are local and may need regeneration after cleanup.
+- Read-only device verification succeeded after authentication: production hash
+  `6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`
+  matches the accepted GPU HUD playable. EmulationStation PID 3154, no game,
+  one Ports Rave Racer launcher, all backup checksums pass, controller config
+  matches backup, GPU HUD `default`, replay `off`; reference replay/sidecars
+  present. Later asset closure/preview work was host-only. Recheck live state
+  before future device testing; no new performance baseline was measured.
+
 ## GPU-native world texture sampling gate completed (2026-10-14)
 
 Read [GPU_NATIVE_TEXTURE_INVESTIGATION.md](GPU_NATIVE_TEXTURE_INVESTIGATION.md)

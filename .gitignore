@@ -84,3 +84,6 @@ __pycache__/
 /cybsled/screenshots/
 *.log
 *.ppm
+
+# Offline native asset outputs contain user ROM data.
+/raverace/native/generated/
