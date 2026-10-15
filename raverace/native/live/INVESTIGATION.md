@@ -21,7 +21,19 @@ host. The user's instruction forbids deployment without explicit authorisation;
 H700 transfer/run approval is a separate final step only after a concrete build
 is ready. Read-only production integrity inspection remains authorised.
 
-## Result: BLOCKED / STOPPED
+## Current continuation result
+
+Full replay coverage investigation complete; STOPPED. All6006 host ticks and21
+authoritative checkpoint sets pass. Added302 ROM meshes/four material variants
+without changing original M3 IDs, command parity or existing readbacks.
+Native static482,760,448 bytes fits512 MiB; boot remains legacy-rendered.
+ARM built locally only; no handheld transfer/run. Full interactive coverage and
+H700 measurements remain open; M3 performance-blocked. See current report and
+`benchmarks/native-live-coverage-20261015/README.md` for evidence/reproduction.
+
+## Historical initial result
+
+ BLOCKED / STOPPED
 
 The host live run completed native ticks1800–5654, then exited2 on tick5655
 because mesh code2028/packet1456601 is absent from the static M3 pack. Integration

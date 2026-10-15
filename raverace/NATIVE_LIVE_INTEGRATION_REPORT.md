@@ -1,4 +1,127 @@
-# Controlled Milestone 4A live integration — BLOCKED (2026-10-15)
+# Controlled Milestone 4A live integration — host replay coverage complete
+
+## Focused 4A asset-coverage continuation — COMPLETE / STOPPED (2026-10-15)
+
+The tick-5655 asset blocker is resolved for the complete recorded replay. **M3
+remains performance-BLOCKED** at its unchanged <=12 ms median / <=14 ms p95 H700
+world-plus-HUD gates. This completes the authorised host coverage investigation,
+not overall M4A hardware acceptance or general interactive coverage. No M4B work,
+commit, push, transfer, handheld run or deployment occurred.
+
+### Acceptance evidence
+
+- [x] Audited all **6006 source ticks / 7,097,784 commands** before expansion.
+  Found 19,279 mesh identities and 10,652 exact recipe/palette variants. Against
+  M3: 3,613 meshes / 5,249 variants absent, explicitly partitioned into native-use
+  **302 meshes / four variants** and legacy-boot-only **3,311 / 5,245**.
+  Neither portion contains point-RAM or solid-format quads. These observations
+  concern this replay only.
+- [x] ROM-authenticated all 3,613 absent mesh identities against captured local
+  positions/UV hashes. Appended all 302 native-needed meshes (including all 203
+  code-2028 packets, specifically packet1456601). Other newly needed codes are
+  2029,2018,2006,1278,2066,1276,1277. Added four exact materials, using three new
+  unique padded images; one reuses existing exact image content. Pack totals:
+  **15,968 meshes / 5,407 materials / nine pages**. Original mesh/material IDs,
+  material binary prefix, UV placement and eight existing pages remain unchanged.
+- [x] Native static GPU footprint **482,760,448 bytes (460.396 MiB)**, an increase
+  of 190,208 bytes, with **54,110,464 bytes** below the unchanged 512 MiB ceiling.
+  Full boot+race distinct padded texture content alone is **605,170,708 bytes**;
+  full simultaneous residency cannot fit in the current disjoint-rectangle RGBA atlas design. No limit was raised. Original rendering
+  remains explicit for ticks1–1799, with native rendering on ticks1800–6006.
+- [x] Host prototype completed **6006 ticks**, **4207 native pictures** and
+  **5,699,037 native-window source commands**, exit0, zero traps. All **21 complete
+  authoritative checkpoint sets through6006** match CPU/RAM, board/video RAM,
+  raw PCM and C352 voice hashes. Audible output was off; original mixing and PCM
+  checkpoint generation remained active. This does not validate physical audio.
+- [x] Original **3840 ticks1800–5639 / 5,152,196 commands** retain byte-identical
+  compact commands after the existing normalization of only offline font/style/
+  palette revision IDs. All **22 existing world/composed readbacks** match exactly.
+- [x] Seven new-scene pairs reviewed at5655,5867,5874,5878,5889,5921,6006 against
+  a fresh original-renderer replay. Geometry, tunnel textures, mirrors, priorities
+  and HUD show no conspicuous missing objects. Original GLES2 and native GLES3
+  rasterization is **not pixel-identical**: composed changed RGB pixels2.96–23.11%,
+  mean absolute RGB error0.278–1.600/255, maxima248–255. These aggregate differences
+  are disclosed, not waived or called exact fidelity. The independent original
+  palette/shadow/LUT CPU oracle matches **every pixel in all18 native captures**.
+  Final subjective approval of original-versus-native appearance remains open.
+- [x] Isolated ARM64 prototype built locally for review, **not transferred or run**.
+- [x] Coverage risks, bounded residency proposal and reproduction documented.
+- [ ] General interactive/menu/alternative-track/dynamic-format coverage proven.
+- [ ] H700 live performance, controls, sound output and physical pacing measured.
+
+Evidence: [native-live-coverage-20261015](benchmarks/native-live-coverage-20261015/),
+especially `assets-validation.json`, `reproduced-validation.json`,
+`host-checkpoints.txt`, `hud-validation.json`, `visual-comparison.json`,
+`coverage-budget.json` and `run-summary.json`.
+
+### Coverage limits and bounded residency proposal
+
+The audited replay is one deterministic input path. Boot/title/attract/selection
+states use the original renderer; their absent native assets are inventoried, not
+silently dropped. The activation tick1800 remains a diagnostic boundary, unsuitable
+as a general interactive state detector. Other tracks, reverse/alternate routes,
+car selections, traffic combinations, race results, continues and arbitrary palette
+changes have not been exhaustively sampled. ROM-authenticated geometry does not
+prove that all lighting/packet combinations will compile in unseen live states.
+Point-RAM(code5), solid formats and future unknown recipes still fail explicitly;
+none was exercised here. Lookup limits remain32768 meshes/8192 materials, commands
+4096, instances512 and direct512; observed native maxima2157/111/15 fit. Full
+boot+race material count10652 already exceeds the current resolver's8192 limit.
+
+A future full-native solution should build ROM-authenticated state/track bundles,
+retain stable global asset identities but resolve them to bounded resident slots,
+and load before state transitions. Enforce **512 MiB total native static residency**,
+reserve geometry/material tables first, pack texture bundles into the remainder,
+and refuse admission before allocation if a required working set exceeds it.
+Use a bounded staging buffer, fenced retirement and explicit transition loading;
+retain required current/next-state assets and evict only unused resources. A scene
+must never omit an object on a cache miss. Dynamic palette changes need explicit
+validated resources or a bounded pen/palette representation. Per-state worst-case
+working-set sizes, transition peaks and stalls require separate measurement before
+this proposal can be implemented or accepted. No streaming rewrite was attempted.
+
+The native-only ceiling is not whole-process VRAM/RSS: the original boot texture
+cache remains live (~66.8 MB at end), plus native dynamic buffers229,376 bytes,
+HUD requested-format attachments3,336,192 bytes, lookup4,517,232 CPU bytes, source
+ROMs, simulation and driver allocations. Thus combined legacy+native texture
+residency can exceed512 MiB even though native static resources meet their existing
+ceiling. Releasing/partitioning boot residency is future integration work; no claim
+of whole-process512 MiB compliance or H700 memory safety is made.
+
+### Review artifacts and reproduction
+
+All paths below are under the repository, **not `/tmp`**. Generated ROM-derived
+assets and images remain ignored by Git.
+
+- Pack: `raverace/native/generated/milestone4a-coverage/race-live-v2/`
+- Lookup: `raverace/native/generated/milestone4a-coverage/lookup/live.lookup`
+- Host: `raverace/native/generated/milestone4a/coverage-host/rr_native_live`
+- ARM: `raverace/native/generated/milestone4a/coverage-arm/rr_native_live`
+- Review PNGs: `raverace/native/generated/milestone4a-coverage/review/`
+  (`tick-5655-original-left-native-right.png`, plus5867,5874,5878,5889,5921,6006).
+- Full source capture/audit, original/native logs, checkpoints and command dumps:
+  `raverace/native/generated/milestone4a-coverage/`.
+
+SHA256 ARM: `a9e84cf5f0d0576efbcb011a880c340e1cb38dd990055891601bd50146bc2f04`.
+SHA256 pack manifest: `2872f4e1984a21e610e5f764c5cd14198fa3b00ffd023bc0a55fdce9a2e2b362`.
+The prepared binary needs the expanded pack, lookup, certified shaders, original
+ROMs and compatible runtime libraries; it is not a standalone production package.
+Rollback is to exit the private prototype. No original simulation/engine sources,
+physics, audio, controls, saves, production or replay files were edited. No contact
+with the handheld occurred during this continuation; earlier production hashes are
+historical read-only evidence, not a fresh device attestation.
+
+Tools: `build_race_capture.py --first 1 --last 6006`,
+`audit_live_coverage.py`, `extend_live_assets.py`, `validate_live_assets.py`,
+`export_live_lookup.py`, `build_live_prototype.py`, `validate_live_evidence.py`,
+and `check_native_hud_pixels.py --live-states .../original-captures`.
+Exact commands are in the evidence README. **STOP here.** Hardware transfer/run
+and any subsequent integration or optimization require separate authorisation.
+
+
+## Historical initial 4A investigation (superseded coverage blocker)
+
+
 
 **STOPPED at a significant integration blocker.** The isolated host prototype
 renders commands generated by the original running simulation, but the M3 asset

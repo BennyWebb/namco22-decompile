@@ -1,0 +1,111 @@
+{
+  "original_m3_readbacks_exact": 22,
+  "new_scene_comparisons": [
+    {
+      "tick": 5655,
+      "world": {
+        "changed_rgb_pixels": 78611,
+        "rgb_changed_fraction": 0.2558951822916667,
+        "mean_rgb_error": 0.9719129774305556,
+        "max_rgb_error": 255
+      },
+      "composed": {
+        "changed_rgb_pixels": 70991,
+        "rgb_changed_fraction": 0.23109049479166666,
+        "mean_rgb_error": 1.5995301649305556,
+        "max_rgb_error": 255
+      }
+    },
+    {
+      "tick": 5867,
+      "world": {
+        "changed_rgb_pixels": 30939,
+        "rgb_changed_fraction": 0.100712890625,
+        "mean_rgb_error": 0.30412434895833335,
+        "max_rgb_error": 253
+      },
+      "composed": {
+        "changed_rgb_pixels": 27859,
+        "rgb_changed_fraction": 0.09068684895833333,
+        "mean_rgb_error": 0.4636100260416667,
+        "max_rgb_error": 255
+      }
+    },
+    {
+      "tick": 5874,
+      "world": {
+        "changed_rgb_pixels": 34664,
+        "rgb_changed_fraction": 0.11283854166666667,
+        "mean_rgb_error": 0.3306119791666667,
+        "max_rgb_error": 254
+      },
+      "composed": {
+        "changed_rgb_pixels": 29750,
+        "rgb_changed_fraction": 0.09684244791666667,
+        "mean_rgb_error": 0.5226486545138889,
+        "max_rgb_error": 255
+      }
+    },
+    {
+      "tick": 5878,
+      "world": {
+        "changed_rgb_pixels": 39516,
+        "rgb_changed_fraction": 0.1286328125,
+        "mean_rgb_error": 0.3710167100694444,
+        "max_rgb_error": 252
+      },
+      "composed": {
+        "changed_rgb_pixels": 34382,
+        "rgb_changed_fraction": 0.11192057291666667,
+        "mean_rgb_error": 0.6051584201388889,
+        "max_rgb_error": 248
+      }
+    },
+    {
+      "tick": 5889,
+      "world": {
+        "changed_rgb_pixels": 16737,
+        "rgb_changed_fraction": 0.054482421875,
+        "mean_rgb_error": 0.22312391493055556,
+        "max_rgb_error": 250
+      },
+      "composed": {
+        "changed_rgb_pixels": 14976,
+        "rgb_changed_fraction": 0.04875,
+        "mean_rgb_error": 0.3432541232638889,
+        "max_rgb_error": 250
+      }
+    },
+    {
+      "tick": 5921,
+      "world": {
+        "changed_rgb_pixels": 9427,
+        "rgb_changed_fraction": 0.030686848958333332,
+        "mean_rgb_error": 0.16681640625,
+        "max_rgb_error": 255
+      },
+      "composed": {
+        "changed_rgb_pixels": 9095,
+        "rgb_changed_fraction": 0.029606119791666666,
+        "mean_rgb_error": 0.27834635416666664,
+        "max_rgb_error": 255
+      }
+    },
+    {
+      "tick": 6006,
+      "world": {
+        "changed_rgb_pixels": 10497,
+        "rgb_changed_fraction": 0.034169921875,
+        "mean_rgb_error": 0.17331597222222223,
+        "max_rgb_error": 255
+      },
+      "composed": {
+        "changed_rgb_pixels": 10163,
+        "rgb_changed_fraction": 0.033082682291666665,
+        "mean_rgb_error": 0.2827029079861111,
+        "max_rgb_error": 255
+      }
+    }
+  ],
+  "scope": "Original GLES2 versus native GLES3 rasterization differs; byte equality not asserted. Original left/native right review PNGs accompany measurements."
+}

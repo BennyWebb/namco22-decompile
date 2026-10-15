@@ -6,12 +6,12 @@ STATE_BYTES=0x18000+0x8000+0x8000+0x1e000+0x2000+16
 MAX_QUADS=32768
 MAX_DIRECT=4096
 
-def read(path):
+def read(path,first_tick=1800,last_tick=5639):
  b=pathlib.Path(path).read_bytes()
  if len(b)<32:raise ValueError('truncated packet')
  magic,version,tick,walk,n,d,stride,state=struct.unpack_from('<8I',b)
  if magic!=MAGIC or version!=1:raise ValueError('unknown scene protocol')
- if not 1800<=tick<=5639 or walk>1 or n>MAX_QUADS or d>MAX_DIRECT or stride!=352 or state!=STATE_BYTES:raise ValueError('invalid packet bounds')
+ if not first_tick<=tick<=last_tick or walk>1 or n>MAX_QUADS or d>MAX_DIRECT or stride!=352 or state!=STATE_BYTES:raise ValueError('invalid packet bounds')
  off=32+n*352
  if len(b)!=off+d*56+state:raise ValueError('packet size mismatch')
  q=np.frombuffer(b,'<i4',n*88,32).reshape(n,88)

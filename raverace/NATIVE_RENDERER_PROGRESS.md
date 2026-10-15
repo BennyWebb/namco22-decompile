@@ -1,9 +1,28 @@
 # Native renderer progress
 
-**Current: controlled M4A stopped at live asset-coverage blocker; M3 remains performance-BLOCKED, 2026-10-15.**
+**Current: focused M4A host coverage complete / STOPPED; M3 remains performance-BLOCKED, 2026-10-15.**
 Milestones 1 and 2 remain complete. The current gate and evidence follow.
 
-## Controlled Milestone 4A — BLOCKED at live asset coverage (2026-10-15)
+## Focused M4A coverage continuation — COMPLETE / STOPPED (2026-10-15)
+
+The full6006-tick host replay now passes all21 authoritative CPU/RAM, board/video,
+PCM/voice checkpoints. All3840 original M3 packets /5,152,196 commands retain parity.
+Full-replay audit preceded ROM-authenticated expansion:302 native meshes and four
+materials added; code2028/packet1456601 is covered. Native static482,760,448 bytes
+fits the unchanged512 MiB ceiling. Boot-only3311 meshes/5245 variants remain explicitly
+legacy-rendered; loading all boot/race textures together exceeds the ceiling.
+All22 old native readbacks match;18 captures pass exact HUD oracle; seven new
+original/native scene pairs reviewed with raster differences disclosed in the report.
+General interactive/track/dynamic-format coverage is not established.
+
+ARM prototype prepared locally at `native/generated/milestone4a/coverage-arm/rr_native_live`;
+**no transfer, handheld run, deployment, commit or push**. Production and original
+simulation/audio/physics/controls/saves/replays untouched. M3 remains performance-
+BLOCKED at12/14 ms; H700 gameplay validation is pending and4B is unauthorised.
+See [current report](NATIVE_LIVE_INTEGRATION_REPORT.md) and
+[evidence](benchmarks/native-live-coverage-20261015/). Stop at this authorised gate.
+
+## Historical initial Milestone 4A — asset-coverage blocker (resolved above)
 
 Explicitly authorised despite M3 remaining performance-BLOCKED. M3's H700 12/14 ms
 renderer targets remain unmet; they are not waived or marked passed. M4B is not

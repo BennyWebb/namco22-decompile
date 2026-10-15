@@ -5,6 +5,7 @@ p=argparse.ArgumentParser();p.add_argument('build',type=pathlib.Path);p.add_argu
 # Generate the current selected M3 backend/HUD; experimental bandwidth/LUT flags off.
 if not (out/'m3').exists():subprocess.run([sys.executable,str(root/'raverace/native/tools/build_depth_lut_probe.py'),str(out/'m3'),'--linear'],check=True)
 s=(out/'m3/probe.c').read_text();s=s[:s.index('int main(int argc,char**argv)')];s=s.replace('#include "'+str(out/'m3/layers.c')+'"','#include "rr_video_layers.h"\n#include "rr_gl.h"')
+s=s.replace('h->tick==5639)', 'h->tick==5639||h->tick==5655||h->tick==5867||h->tick==5874||h->tick==5878||h->tick==5889||h->tick==5921||h->tick==6006)')
 s=s.replace('unsigned g_eng_frame;','extern unsigned g_eng_frame;').replace('void eng_gles2_priority(bool enabled_){(void)enabled_;}','')
 start=s.index(' fonts3=file3(');end=s.index(' instances3=texture3(',start);s=s[:start]+s[end:]
 start=s.index(' stream3=open3(');end=s.index('\n}',start);s=s[:start]+' glFinish();'+s[end:]

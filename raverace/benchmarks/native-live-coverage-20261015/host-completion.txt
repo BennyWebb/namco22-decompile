@@ -1,0 +1,5 @@
+[NATIVE-LIVE] source=live-simulation serial=1 activation_tick=1800 preload_ms=555.615 meshes=15968 materials=5407 no_frame_stream=1
+[NATIVE-LIVE] completed_native_pictures=4207
+[GPU-HUD] pictures=6006 verified=0 bytes=127745584 calls=5668 profile_bytes=118360376 profile_calls=4670
+[RR] stop at frame 6006, 0 traps
+[REPLAY] completed_frames=6006 status=ok

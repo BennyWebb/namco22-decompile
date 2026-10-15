@@ -332,11 +332,13 @@ blocker is encountered. **Milestone 4B remains unauthorised.**
 
 - [x] Live simulation-generated scene commands drive the isolated host native renderer.
 - [x] Partial CPU/RAM, board/video, PCM/voice checkpoint prefix matches through tick 5400.
-- [ ] Full original replay/state/audio validation completes through tick 6006.
+- [x] Full original replay/state/audio validation completes through tick6006: all21 checkpoint sets match (focused continuation2026-10-15).
 - [x] Isolated host prototype and rollback documented; production unchanged.
 - [ ] ARM/H700 build and physical gameplay measurements complete.
-- [x] Initial host diagnostics/fidelity documented; missing live mesh code 2028/packet 1456601 blocks tick 5655.
-- [x] Stopped at 4A integration blocker; no further optimization, deployment or 4B work.
+- [x] Initial host diagnostics/fidelity and complete6006-tick coverage audit documented;302 native meshes/four materials added, including code2028/packet1456601.
+- [x] Focused host coverage continuation complete and STOPPED; isolated ARM build prepared locally only. No transfer, run, deployment, optimization or4B work.
+- [x] Expanded native static482,760,448 bytes respects512 MiB; boot stays explicitly legacy-rendered. Full residency exceeds budget; bounded-state residency proposed.
+- [ ] General interactive/alternative-track/dynamic-format coverage proven.
 
 ### Remaining Milestone 4 / 4B — Full live-game integration (NOT AUTHORISED)
 
