@@ -1,0 +1,16 @@
+{
+  "timing_runs": {
+    "reference-1-both-q2-fence": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-both-q2-timed": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-both-q3-fence": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-both-q3-timed": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-stock-q2-fence": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-stock-q2-timed": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-stock-q3-fence": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS",
+    "reference-1-stock-q3-timed": "6006 ordered,4207 native-window samples,21 state sets,restorations PASS"
+  },
+  "arm_packets_each_queue": 4207,
+  "mali_images_each_queue": 36,
+  "all47_protected_files_pass": true,
+  "local_doc_links_exist": true
+}

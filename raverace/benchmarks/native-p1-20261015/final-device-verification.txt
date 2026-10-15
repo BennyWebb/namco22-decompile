@@ -1,0 +1,7 @@
+A redundant post-retrieval read-only SSH recheck lost its connection.
+Use integrity-after-reduced-matrix.txt (47 files OK), shutdown-status.json,
+and all eight per-run clocks/production before-after records.
+Immediately before retrieval, the device reported rr_p1 SHA256
+7b7ac2d7e8fdf36d491182d9ccbe35cea831c1c70b9fc4ffb1260d70b02aacd5,
+EmulationStation PID 7711 and no rr_p1 or memory_sampler processes.
+No further test or device mutation was performed during final analysis.

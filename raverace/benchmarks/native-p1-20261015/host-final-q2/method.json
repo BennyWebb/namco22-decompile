@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/rr_p1",
+    "/home/bwebb/dev/namco22-decompile/raverace/extracted",
+    "--replay-input",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone3/inputs/race-20261013-122242-25136.rec",
+    "--input-checkpoints",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host-final-q2/states.jsonl",
+    "--audio",
+    "off",
+    "--thread-profile",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host-final-q2/thread.csv"
+  ],
+  "environment": {
+    "SDL_VIDEODRIVER": "offscreen",
+    "SDL_AUDIODRIVER": "dummy",
+    "LP_NUM_THREADS": "1",
+    "ENG_P1_VALIDATION": "1",
+    "ENG_P1_QUEUE": "2",
+    "ENG_GPU_HUD": "1",
+    "ENG_GPU_HUD_GEOMETRY": "1",
+    "ENG_LIVE_PACK": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a-coverage/race-live-v2",
+    "ENG_LIVE_LOOKUP": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a-coverage/lookup/live.lookup",
+    "ENG_LIVE_SHADERS": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/stage1b/hardware-shaders",
+    "ENG_LIVE_COMMAND_DUMP": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host-final-q2/commands",
+    "ENG_LIVE_CAPTURE": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host-final-q2/captures"
+  },
+  "binary_sha256": "770bfde0d6e1e4906cdfa4a39d39c99fbf4337ebdff569bbdeb8de473ad30649",
+  "validation_only": true
+}

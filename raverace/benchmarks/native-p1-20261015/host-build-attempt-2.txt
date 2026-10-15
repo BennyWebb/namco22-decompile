@@ -1,0 +1,63 @@
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c: In function ‘direct_quad’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:216:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:216:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:217:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:217:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c: In function ‘rr_gl_prepare_gles2’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:449:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:449:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:450:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:450:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:458:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:458:39: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                       ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:470:25: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:470:45: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c:4:9: warning: ‘_GNU_SOURCE’ redefined
+    4 | #define _GNU_SOURCE
+      |         ^~~~~~~~~~~
+<command-line>: note: this is the location of the previous definition
+In file included from /home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/live.c:114:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c: In function ‘quad_fixed’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:357:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  357 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:357:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  357 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:358:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  358 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:358:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  358 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:549:15: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  549 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a/coverage-host/geometry.c:549:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  549 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |                                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/rr_p1

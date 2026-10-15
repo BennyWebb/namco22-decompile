@@ -1,0 +1,56 @@
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c: In function ‘direct_quad’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:216:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:216:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:217:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:217:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c: In function ‘rr_gl_prepare_gles2’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:449:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:449:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:450:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:450:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:458:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:458:39: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                       ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:470:25: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/gl.c:470:45: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c: In function ‘render’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c:177:31: error: implicit declaration of function ‘sched_getcpu’; did you mean ‘SYS_getcpu’? [-Wimplicit-function-declaration]
+  177 |     unsigned core = (unsigned)sched_getcpu();
+      |                               ^~~~~~~~~~~~
+      |                               SYS_getcpu
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c: In function ‘prepare’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c:239:5: error: implicit declaration of function ‘pthread_setname_np’; did you mean ‘pthread_setcanceltype’? [-Wimplicit-function-declaration]
+  239 |     pthread_setname_np(pthread_self(),"rr-prepare");
+      |     ^~~~~~~~~~~~~~~~~~
+      |     pthread_setcanceltype
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/p1/build.py", line 66, in <module>
+    cmd=[cc,*get('C_DEFINES'),*incs,*get('C_INCLUDES'),*get('C_FLAGS'),'-c',str(out/(n+'.c')),'-o',str(out/(n+'.o'))];commands.append(cmd);subprocess.run(cmd,check=True)
+                                                                                                                                           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/usr/bin/cc', '-DRR_GLES2', '-DRR_GLES2_TEXTURE_BUDGET_KB=65536', '-DRR_GLES2_TEXTURE_MAX_BUDGET_KB=131072', '-DRR_GPU_HUD', '-DRR_GPU_HUD_DEFAULT', '-DRR_HEADLESS', '-DRR_PARALLEL_FRAME_PREP', '-DRR_THREADED_PRESENTATION', '-I/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host', '-I/home/bwebb/dev/namco22-decompile/raverace/native/p1', '-I/home/bwebb/dev/namco22-decompile/raverace/src', '-I/home/bwebb/dev/namco22-decompile/raverace/native/live', '-I/home/bwebb/dev/namco22-decompile/raverace/include', '-I/home/bwebb/dev/namco22-decompile/raverace/gen', '-I/home/bwebb/dev/namco22-decompile/engine', '-I/home/bwebb/dev/namco22-decompile/engine/snd', '-I/home/bwebb/dev/namco22-decompile/engine/c25', '-I/home/bwebb/dev/namco22-decompile/tools/c25oracle', '-I/home/bwebb/dev/namco22-decompile/raverace/src/snd', '-isystem', '/usr/include/SDL2', '-O2', '-g', '-DNDEBUG', '-std=gnu11', '-fno-strict-aliasing', '-fwrapv', '-include', '/home/bwebb/dev/namco22-decompile/raverace/include/glibc_compat.h', '-Wall', '-Wno-unused-function', '-Wno-unused-variable', '-D_REENTRANT', '-c', '/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.c', '-o', '/home/bwebb/dev/namco22-decompile/raverace/native/generated/p1/host/presentation.o']' returned non-zero exit status 1.

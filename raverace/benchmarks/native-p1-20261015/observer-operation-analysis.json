@@ -1,0 +1,1066 @@
+{
+  "reference-1-both-q2-fence": {
+    "slow_observer_operations": [
+      [
+        3271.801934,
+        "READ_SLOW 17911.072515316 3.271801934 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        2175.372476,
+        "READ_SLOW 17870.575196281 2.175372476 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        1657.456739,
+        "READ_SLOW 17880.822868161 1.657456739 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        1508.633248,
+        "READ_SLOW 17860.172769993 1.508633248 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        443.31427299999996,
+        "READ_SLOW 17829.924505749 0.443314273 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        151.985764,
+        "READ_SLOW 17790.972334278 0.151985764 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        108.345654,
+        "READ_SLOW 17799.682122946 0.108345654 /proc/7573/task/7579/wchan voluntary=1 involuntary=0"
+      ],
+      [
+        18.821029,
+        "READ_SLOW 17793.272445618 0.018821029 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        17.712408999999997,
+        "WRITE_SLOW 17778.726099261 0.017712409"
+      ],
+      [
+        17.174096,
+        "READ_SLOW 17796.622646926 0.017174096 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        17.017561,
+        "WRITE_SLOW 17798.456604785 0.017017561"
+      ],
+      [
+        16.992896000000002,
+        "WRITE_SLOW 17778.576732263 0.016992896"
+      ],
+      [
+        16.966688,
+        "WRITE_SLOW 17796.956727898 0.016966688"
+      ],
+      [
+        16.956814,
+        "WRITE_SLOW 17797.056781346 0.016956814"
+      ],
+      [
+        16.925023,
+        "WRITE_SLOW 17797.256915242 0.016925023"
+      ],
+      [
+        16.916107,
+        "WRITE_SLOW 17796.053273023 0.016916107"
+      ],
+      [
+        16.911399,
+        "WRITE_SLOW 17790.305142287 0.016911399"
+      ],
+      [
+        16.908732,
+        "WRITE_SLOW 17800.107340933 0.016908732"
+      ],
+      [
+        16.904898000000003,
+        "WRITE_SLOW 17800.307757275 0.016904898"
+      ],
+      [
+        16.904399,
+        "WRITE_SLOW 17800.207486169 0.016904399"
+      ],
+      [
+        16.904108,
+        "WRITE_SLOW 17796.153209768 0.016904108"
+      ],
+      [
+        16.897358,
+        "WRITE_SLOW 17796.206350158 0.016897358"
+      ],
+      [
+        16.896482000000002,
+        "WRITE_SLOW 17797.156840170 0.016896482"
+      ],
+      [
+        16.887774,
+        "WRITE_SLOW 17792.107537155 0.016887774"
+      ],
+      [
+        16.872233,
+        "WRITE_SLOW 17796.804144952 0.016872233"
+      ],
+      [
+        16.856776,
+        "WRITE_SLOW 17785.704876115 0.016856776"
+      ],
+      [
+        16.846652,
+        "WRITE_SLOW 17786.653846124 0.016846652"
+      ],
+      [
+        16.840652000000002,
+        "WRITE_SLOW 17781.655252120 0.016840652"
+      ],
+      [
+        16.814319,
+        "WRITE_SLOW 17795.953140828 0.016814319"
+      ],
+      [
+        16.81107,
+        "WRITE_SLOW 17795.853261580 0.016811070"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "47": 2,
+      "26": 1,
+      "27": 1,
+      "57": 2,
+      "2": 1,
+      "54": 1,
+      "1": 2
+    }
+  },
+  "reference-1-both-q2-timed": {
+    "slow_observer_operations": [
+      [
+        470.19477,
+        "READ_SLOW 17702.081440799 0.470194770 /proc/7156/task/7177/stat voluntary=1 involuntary=1"
+      ],
+      [
+        292.15729699999997,
+        "READ_SLOW 17727.315122316 0.292157297 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        275.094361,
+        "READ_SLOW 17671.802736518 0.275094361 /proc/7156/task/7177/wchan voluntary=1 involuntary=1"
+      ],
+      [
+        160.976794,
+        "READ_SLOW 17737.474381596 0.160976794 /proc/vmstat voluntary=1 involuntary=0"
+      ],
+      [
+        134.709421,
+        "READ_SLOW 17671.113781704 0.134709421 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        127.27965099999999,
+        "READ_SLOW 17634.613473458 0.127279651 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        92.929589,
+        "READ_SLOW 17707.114480014 0.092929589 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        59.702612,
+        "READ_SLOW 17621.012204234 0.059702612 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        57.425324,
+        "READ_SLOW 17637.962693092 0.057425324 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        27.766468,
+        "READ_SLOW 17665.911435509 0.027766468 /proc/7156/task/7177/wchan voluntary=1 involuntary=0"
+      ],
+      [
+        27.145497000000002,
+        "WRITE_SLOW 17628.379330312 0.027145497"
+      ],
+      [
+        26.381026,
+        "READ_SLOW 17640.220561141 0.026381026 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        23.112866,
+        "READ_SLOW 17640.295049155 0.023112866 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        22.333064,
+        "WRITE_SLOW 17629.108336038 0.022333064"
+      ],
+      [
+        21.798793,
+        "WRITE_SLOW 17628.608693837 0.021798793"
+      ],
+      [
+        21.717172,
+        "WRITE_SLOW 17628.943256107 0.021717172"
+      ],
+      [
+        21.201484,
+        "READ_SLOW 17630.245523708 0.021201484 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        20.921661,
+        "WRITE_SLOW 17640.271000828 0.020921661"
+      ],
+      [
+        20.877248,
+        "READ_SLOW 17621.262376099 0.020877248 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        20.628339999999998,
+        "WRITE_SLOW 17628.717174535 0.020628340"
+      ],
+      [
+        20.411559,
+        "READ_SLOW 17618.218098186 0.020411559 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        20.394641,
+        "READ_SLOW 17639.213266681 0.020394641 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        20.342602000000003,
+        "WRITE_SLOW 17629.409348610 0.020342602"
+      ],
+      [
+        20.25273,
+        "WRITE_SLOW 17638.746463806 0.020252730"
+      ],
+      [
+        20.174525,
+        "WRITE_SLOW 17628.206184745 0.020174525"
+      ],
+      [
+        20.023073999999998,
+        "READ_SLOW 17617.162114509 0.020023074 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        19.869954,
+        "READ_SLOW 17628.567384574 0.019869954 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.809165,
+        "READ_SLOW 17627.016968900 0.019809165 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.801374,
+        "READ_SLOW 17629.065758035 0.019801374 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.762624,
+        "WRITE_SLOW 17642.297938117 0.019762624"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "47": 1,
+      "26": 1,
+      "27": 1,
+      "1": 1,
+      "2": 1,
+      "56": 1
+    }
+  },
+  "reference-1-both-q3-fence": {
+    "slow_observer_operations": [
+      [
+        3625.314042,
+        "READ_SLOW 17234.812547649 3.625314042 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        2821.1835779999997,
+        "READ_SLOW 17204.565882817 2.821183578 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        1652.259792,
+        "READ_SLOW 17245.963675383 1.652259792 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        1610.526474,
+        "READ_SLOW 17163.069728029 1.610526474 /proc/pressure/memory voluntary=1 involuntary=6"
+      ],
+      [
+        1401.4131670000002,
+        "READ_SLOW 17174.270498797 1.401413167 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        35.357321999999996,
+        "READ_SLOW 17129.061972147 0.035357322 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        24.105165000000003,
+        "READ_SLOW 17146.413648535 0.024105165 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        20.233951,
+        "READ_SLOW 17111.562293854 0.020233951 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.540354999999998,
+        "READ_SLOW 17125.362531429 0.019540355 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.173661,
+        "WRITE_SLOW 17125.293398012 0.018173661"
+      ],
+      [
+        17.939796,
+        "READ_SLOW 17125.333831289 0.017939796 /proc/5943/task/5948/stat voluntary=1 involuntary=0"
+      ],
+      [
+        17.791468000000002,
+        "WRITE_SLOW 17111.618446437 0.017791468"
+      ],
+      [
+        17.781927,
+        "READ_SLOW 17125.314670044 0.017781927 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.747971,
+        "READ_SLOW 17125.383379229 0.017747971 /proc/5943/task/5947/wchan voluntary=1 involuntary=0"
+      ],
+      [
+        17.734763,
+        "READ_SLOW 17125.161954142 0.017734763 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.46115,
+        "READ_SLOW 17112.813707707 0.017461150 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.308405,
+        "WRITE_SLOW 17113.026625190 0.017308405"
+      ],
+      [
+        17.031333999999998,
+        "WRITE_SLOW 17111.718290328 0.017031334"
+      ],
+      [
+        17.00771,
+        "WRITE_SLOW 17130.793689619 0.017007710"
+      ],
+      [
+        16.988461,
+        "WRITE_SLOW 17112.849191107 0.016988461"
+      ],
+      [
+        16.970336,
+        "WRITE_SLOW 17135.393336210 0.016970336"
+      ],
+      [
+        16.944462,
+        "WRITE_SLOW 17120.395571529 0.016944462"
+      ],
+      [
+        16.935337,
+        "READ_SLOW 17121.812118352 0.016935337 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        16.925005,
+        "WRITE_SLOW 17121.947106948 0.016925005"
+      ],
+      [
+        16.912380000000002,
+        "WRITE_SLOW 17120.794302412 0.016912380"
+      ],
+      [
+        16.90013,
+        "WRITE_SLOW 17135.693735265 0.016900130"
+      ],
+      [
+        16.88434,
+        "WRITE_SLOW 17120.096656496 0.016884340"
+      ],
+      [
+        16.880131,
+        "WRITE_SLOW 17135.293053629 0.016880131"
+      ],
+      [
+        16.863049,
+        "WRITE_SLOW 17118.146529104 0.016863049"
+      ],
+      [
+        16.860924999999998,
+        "WRITE_SLOW 17118.445067402 0.016860925"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "48": 2,
+      "27": 1,
+      "28": 1,
+      "1": 5,
+      "3": 1
+    }
+  },
+  "reference-1-both-q3-timed": {
+    "slow_observer_operations": [
+      [
+        2951.2046870000004,
+        "READ_SLOW 16948.043912442 2.951204687 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        2334.667296,
+        "READ_SLOW 16987.143215842 2.334667296 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        1030.5364379999999,
+        "READ_SLOW 16964.143906427 1.030536438 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        931.688844,
+        "READ_SLOW 17007.293722051 0.931688844 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        924.642342,
+        "READ_SLOW 16971.976050864 0.924642342 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        690.817398,
+        "READ_SLOW 16968.264266379 0.690817398 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        519.07467,
+        "READ_SLOW 17059.393201173 0.519074670 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        310.956279,
+        "READ_SLOW 17029.094547263 0.310956279 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        211.11480699999998,
+        "READ_SLOW 17071.849935914 0.211114807 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        21.189743,
+        "READ_SLOW 16960.046136454 0.021189743 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.753096000000003,
+        "READ_SLOW 16959.844037399 0.019753096 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.159869999999998,
+        "READ_SLOW 16956.585021007 0.019159870 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.640308,
+        "WRITE_SLOW 16946.627437015 0.018640308"
+      ],
+      [
+        18.105081,
+        "READ_SLOW 16943.643209909 0.018105081 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.335112,
+        "WRITE_SLOW 16954.393451893 0.017335112"
+      ],
+      [
+        17.262282,
+        "WRITE_SLOW 16954.590793811 0.017262282"
+      ],
+      [
+        17.077415,
+        "WRITE_SLOW 16957.778119809 0.017077415"
+      ],
+      [
+        17.068373,
+        "WRITE_SLOW 16953.551134129 0.017068373"
+      ],
+      [
+        17.058624000000002,
+        "WRITE_SLOW 16959.175727982 0.017058624"
+      ],
+      [
+        17.054082,
+        "WRITE_SLOW 16946.784518399 0.017054082"
+      ],
+      [
+        17.047957,
+        "WRITE_SLOW 16956.041968840 0.017047957"
+      ],
+      [
+        17.031083,
+        "WRITE_SLOW 16970.853446504 0.017031083"
+      ],
+      [
+        17.025084,
+        "WRITE_SLOW 16968.107887673 0.017025084"
+      ],
+      [
+        17.005418000000002,
+        "WRITE_SLOW 16957.879066403 0.017005418"
+      ],
+      [
+        16.998919,
+        "WRITE_SLOW 16943.703791306 0.016998919"
+      ],
+      [
+        16.998877,
+        "WRITE_SLOW 16955.071005050 0.016998877"
+      ],
+      [
+        16.979377,
+        "WRITE_SLOW 16971.332707033 0.016979377"
+      ],
+      [
+        16.956919,
+        "WRITE_SLOW 16952.386416397 0.016956919"
+      ],
+      [
+        16.953962,
+        "WRITE_SLOW 16970.753710859 0.016953962"
+      ],
+      [
+        16.951462,
+        "WRITE_SLOW 16968.007358437 0.016951462"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "48": 2,
+      "1": 2,
+      "27": 1,
+      "28": 1,
+      "3": 1,
+      "54": 1,
+      "56": 1
+    }
+  },
+  "reference-1-stock-q2-fence": {
+    "slow_observer_operations": [
+      [
+        3769.4977679999997,
+        "READ_SLOW 16795.092666694 3.769497768 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        1681.631651,
+        "READ_SLOW 16825.391667777 1.681631651 /proc/pressure/io voluntary=1 involuntary=2"
+      ],
+      [
+        461.99721,
+        "READ_SLOW 16855.691523318 0.461997210 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        456.945127,
+        "READ_SLOW 16885.941495642 0.456945127 /proc/pressure/io voluntary=1 involuntary=3"
+      ],
+      [
+        281.021709,
+        "READ_SLOW 16791.041312418 0.281021709 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        168.369622,
+        "READ_SLOW 16897.793859761 0.168369622 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        25.584653999999997,
+        "WRITE_SLOW 16775.874731101 0.025584654"
+      ],
+      [
+        25.339789000000003,
+        "READ_SLOW 16785.565695140 0.025339789 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        24.985179,
+        "READ_SLOW 16785.094279819 0.024985179 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        22.522572,
+        "WRITE_SLOW 16773.395434370 0.022522572"
+      ],
+      [
+        21.732146,
+        "WRITE_SLOW 16775.074463751 0.021732146"
+      ],
+      [
+        21.668191,
+        "WRITE_SLOW 16792.227610650 0.021668191"
+      ],
+      [
+        21.627942,
+        "READ_SLOW 16783.641219333 0.021627942 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        21.148128,
+        "READ_SLOW 16785.528488715 0.021148128 /proc/5124/task/5129/stat voluntary=1 involuntary=0"
+      ],
+      [
+        20.824267,
+        "READ_SLOW 16785.772052218 0.020824267 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        20.350369,
+        "WRITE_SLOW 16800.752732169 0.020350369"
+      ],
+      [
+        19.953094,
+        "READ_SLOW 16792.655173737 0.019953094 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.376618,
+        "READ_SLOW 16785.676078590 0.019376618 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.365702,
+        "READ_SLOW 16792.560398726 0.019365702 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.194043,
+        "READ_SLOW 16800.889569862 0.019194043 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        19.004009,
+        "READ_SLOW 16800.776121996 0.019004009 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.912471,
+        "WRITE_SLOW 16802.918443702 0.018912471"
+      ],
+      [
+        18.799309,
+        "READ_SLOW 16778.841191211 0.018799309 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.680063999999998,
+        "READ_SLOW 16800.848527637 0.018680064 /proc/5124/task/5129/stat voluntary=1 involuntary=1"
+      ],
+      [
+        18.521818999999997,
+        "WRITE_SLOW 16774.356134275 0.018521819"
+      ],
+      [
+        18.424449,
+        "READ_SLOW 16800.828750827 0.018424449 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.347952,
+        "READ_SLOW 16779.491257502 0.018347952 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.218,
+        "WRITE_SLOW 16799.122532814 0.018218000"
+      ],
+      [
+        18.211249,
+        "READ_SLOW 16785.376592059 0.018211249 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.940261,
+        "READ_SLOW 16790.644863132 0.017940261 /proc/pressure/memory voluntary=1 involuntary=0"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "47": 2,
+      "1": 2,
+      "26": 1,
+      "27": 1,
+      "2": 1
+    }
+  },
+  "reference-1-stock-q2-timed": {
+    "slow_observer_operations": [
+      [
+        3593.3915,
+        "READ_SLOW 16650.975254228 3.593391500 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        3285.4077890000003,
+        "READ_SLOW 16706.424719460 3.285407789 /proc/pressure/io voluntary=1 involuntary=2"
+      ],
+      [
+        2778.354309,
+        "READ_SLOW 16676.174629146 2.778354309 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        2412.7862809999997,
+        "READ_SLOW 16600.525934026 2.412786281 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        2257.8011899999997,
+        "READ_SLOW 16736.674707201 2.257801190 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        1114.759295,
+        "READ_SLOW 16612.775350831 1.114759295 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        235.206138,
+        "READ_SLOW 16636.974714242 0.235206138 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        18.07363,
+        "READ_SLOW 16597.474415035 0.018073630 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        17.50207,
+        "WRITE_SLOW 16597.905393059 0.017502070"
+      ],
+      [
+        17.063671999999997,
+        "WRITE_SLOW 16622.014730236 0.017063672"
+      ],
+      [
+        17.062921000000003,
+        "WRITE_SLOW 16592.429424060 0.017062921"
+      ],
+      [
+        17.041131,
+        "WRITE_SLOW 16619.198600371 0.017041131"
+      ],
+      [
+        16.993007000000002,
+        "WRITE_SLOW 16605.216577776 0.016993007"
+      ],
+      [
+        16.992342,
+        "WRITE_SLOW 16599.657126884 0.016992342"
+      ],
+      [
+        16.988633,
+        "READ_SLOW 16597.674061929 0.016988633 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        16.984092,
+        "WRITE_SLOW 16609.807233523 0.016984092"
+      ],
+      [
+        16.964051,
+        "WRITE_SLOW 16604.545728265 0.016964051"
+      ],
+      [
+        16.932760000000002,
+        "WRITE_SLOW 16594.562249383 0.016932760"
+      ],
+      [
+        16.931468000000002,
+        "WRITE_SLOW 16598.507926053 0.016931468"
+      ],
+      [
+        16.918594,
+        "READ_SLOW 16609.076543521 0.016918594 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        16.916178000000002,
+        "READ_SLOW 16636.626257440 0.016916178 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        16.91372,
+        "READ_SLOW 16606.314847915 0.016913720 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        16.908678,
+        "WRITE_SLOW 16616.480333388 0.016908678"
+      ],
+      [
+        16.890387,
+        "WRITE_SLOW 16619.098712239 0.016890387"
+      ],
+      [
+        16.875929000000003,
+        "WRITE_SLOW 16621.846378968 0.016875929"
+      ],
+      [
+        16.875929000000003,
+        "WRITE_SLOW 16621.752592918 0.016875929"
+      ],
+      [
+        16.874513,
+        "WRITE_SLOW 16594.361034803 0.016874513"
+      ],
+      [
+        16.846304999999997,
+        "WRITE_SLOW 16597.108552868 0.016846305"
+      ],
+      [
+        16.846263999999998,
+        "WRITE_SLOW 16598.104571973 0.016846264"
+      ],
+      [
+        16.845806,
+        "WRITE_SLOW 16620.242379383 0.016845806"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "47": 2,
+      "45": 1,
+      "26": 1,
+      "27": 1,
+      "1": 3,
+      "2": 1
+    }
+  },
+  "reference-1-stock-q3-fence": {
+    "slow_observer_operations": [
+      [
+        285.739023,
+        "READ_SLOW 17527.146240661 0.285739023 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        259.203903,
+        "READ_SLOW 17501.950090432 0.259203903 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        132.56794,
+        "READ_SLOW 17558.397547434 0.132567940 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        115.700285,
+        "READ_SLOW 17481.596152348 0.115700285 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        53.317199,
+        "WRITE_SLOW 17473.892839979 0.053317199"
+      ],
+      [
+        51.148617,
+        "READ_SLOW 17471.545190257 0.051148617 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        45.683498,
+        "WRITE_SLOW 17475.374298060 0.045683498"
+      ],
+      [
+        20.084795999999997,
+        "READ_SLOW 17464.151521777 0.020084796 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        18.99617,
+        "READ_SLOW 17479.097778292 0.018996170 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        18.264825,
+        "WRITE_SLOW 17470.280214188 0.018264825"
+      ],
+      [
+        18.165661,
+        "WRITE_SLOW 17474.878697938 0.018165661"
+      ],
+      [
+        18.023042999999998,
+        "WRITE_SLOW 17471.081558284 0.018023043"
+      ],
+      [
+        17.970629,
+        "WRITE_SLOW 17463.490765965 0.017970629"
+      ],
+      [
+        17.712014,
+        "WRITE_SLOW 17468.030441068 0.017712014"
+      ],
+      [
+        17.489064,
+        "WRITE_SLOW 17467.929183206 0.017489064"
+      ],
+      [
+        17.308236,
+        "WRITE_SLOW 17479.181903153 0.017308236"
+      ],
+      [
+        17.159077,
+        "WRITE_SLOW 17471.715084297 0.017159077"
+      ],
+      [
+        17.116536,
+        "WRITE_SLOW 17478.625770964 0.017116536"
+      ],
+      [
+        17.060997,
+        "WRITE_SLOW 17470.476703145 0.017060997"
+      ],
+      [
+        17.04833,
+        "WRITE_SLOW 17479.477599909 0.017048330"
+      ],
+      [
+        17.023835000000002,
+        "WRITE_SLOW 17457.479440884 0.017023835"
+      ],
+      [
+        17.016458,
+        "WRITE_SLOW 17466.520790770 0.017016458"
+      ],
+      [
+        16.994752,
+        "WRITE_SLOW 17457.931446774 0.016994752"
+      ],
+      [
+        16.994626,
+        "WRITE_SLOW 17464.587748345 0.016994626"
+      ],
+      [
+        16.975875000000002,
+        "READ_SLOW 17472.145254123 0.016975875 /proc/pressure/io voluntary=1 involuntary=0"
+      ],
+      [
+        16.960917,
+        "WRITE_SLOW 17472.380879042 0.016960917"
+      ],
+      [
+        16.941709,
+        "WRITE_SLOW 17479.276802424 0.016941709"
+      ],
+      [
+        16.929463,
+        "WRITE_SLOW 17454.977197664 0.016929463"
+      ],
+      [
+        16.920002999999998,
+        "WRITE_SLOW 17472.681007427 0.016920003"
+      ],
+      [
+        16.914503,
+        "WRITE_SLOW 17472.580781570 0.016914503"
+      ]
+    ],
+    "stalls_modulo60": {
+      "1": 1,
+      "20": 1,
+      "48": 1,
+      "27": 1,
+      "28": 1,
+      "3": 1,
+      "47": 1
+    }
+  },
+  "reference-1-stock-q3-timed": {
+    "slow_observer_operations": [
+      [
+        3010.111009,
+        "READ_SLOW 17332.579787831 3.010111009 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        2913.872724,
+        "READ_SLOW 17362.829726190 2.913872724 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        1466.218029,
+        "READ_SLOW 17287.183982930 1.466218029 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        1172.115002,
+        "READ_SLOW 17302.329559061 1.172115002 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        522.119596,
+        "READ_SLOW 17317.380996956 0.522119596 /proc/pressure/memory voluntary=1 involuntary=1"
+      ],
+      [
+        365.114414,
+        "READ_SLOW 17388.029707726 0.365114414 /proc/pressure/io voluntary=1 involuntary=1"
+      ],
+      [
+        359.230492,
+        "READ_SLOW 17413.233881433 0.359230492 /proc/pressure/memory voluntary=1 involuntary=2"
+      ],
+      [
+        20.26245,
+        "READ_SLOW 17299.429705728 0.020262450 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.756804000000002,
+        "READ_SLOW 17296.179473415 0.017756804 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.679474,
+        "READ_SLOW 17303.967207135 0.017679474 /proc/6358/task/6363/stat voluntary=1 involuntary=1"
+      ],
+      [
+        17.285115,
+        "WRITE_SLOW 17291.068042277 0.017285115"
+      ],
+      [
+        17.238742000000002,
+        "WRITE_SLOW 17286.964448386 0.017238742"
+      ],
+      [
+        17.204202,
+        "WRITE_SLOW 17300.261539662 0.017204202"
+      ],
+      [
+        17.184744,
+        "WRITE_SLOW 17312.315209996 0.017184744"
+      ],
+      [
+        17.169078000000003,
+        "WRITE_SLOW 17309.266269898 0.017169078"
+      ],
+      [
+        17.149079,
+        "WRITE_SLOW 17307.961288583 0.017149079"
+      ],
+      [
+        17.112747000000002,
+        "WRITE_SLOW 17301.715184466 0.017112747"
+      ],
+      [
+        17.069748999999998,
+        "WRITE_SLOW 17309.166002148 0.017069749"
+      ],
+      [
+        17.068291,
+        "READ_SLOW 17285.681769730 0.017068291 /proc/pressure/memory voluntary=1 involuntary=0"
+      ],
+      [
+        17.064333,
+        "WRITE_SLOW 17308.863765165 0.017064333"
+      ],
+      [
+        17.042375,
+        "WRITE_SLOW 17309.320257655 0.017042375"
+      ],
+      [
+        17.035042,
+        "WRITE_SLOW 17289.629880374 0.017035042"
+      ],
+      [
+        17.024583999999997,
+        "WRITE_SLOW 17306.410583104 0.017024584"
+      ],
+      [
+        17.011585,
+        "WRITE_SLOW 17312.214894081 0.017011585"
+      ],
+      [
+        17.006127,
+        "WRITE_SLOW 17308.964571101 0.017006127"
+      ],
+      [
+        16.991501999999997,
+        "WRITE_SLOW 17312.416045015 0.016991502"
+      ],
+      [
+        16.980794,
+        "WRITE_SLOW 17290.114940842 0.016980794"
+      ],
+      [
+        16.974961,
+        "WRITE_SLOW 17310.511846807 0.016974961"
+      ],
+      [
+        16.974377999999998,
+        "WRITE_SLOW 17300.913261872 0.016974378"
+      ],
+      [
+        16.956879,
+        "WRITE_SLOW 17306.113945180 0.016956879"
+      ]
+    ],
+    "stalls_modulo60": {
+      "20": 1,
+      "48": 2,
+      "1": 3,
+      "21": 1,
+      "27": 1,
+      "28": 1,
+      "3": 1
+    }
+  }
+}

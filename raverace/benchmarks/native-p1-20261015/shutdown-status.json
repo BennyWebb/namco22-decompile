@@ -1,0 +1,24 @@
+{
+  "status": "hardware matrix stopped after user-reduced first round",
+  "completed_runs": 8,
+  "normal_runs": 4,
+  "fence_runs": 4,
+  "checkpoints_per_run": 21,
+  "protected_files_verified": 47,
+  "gpu_governor": "simple_ondemand",
+  "gpu_min_freq": 0,
+  "gpu_max_freq": 0,
+  "cpu_governors": [
+    "schedutil",
+    "schedutil",
+    "schedutil",
+    "schedutil"
+  ],
+  "emulationstation_pid": 7711,
+  "game_running": false,
+  "sampler_running": false,
+  "evidence_location": "/userdata/system/rave-racer-native-p1-20261015",
+  "thermal_soaks": "deferred by user",
+  "repeat_rounds": "deferred by user",
+  "analysis": "pending retrieval and final analysis"
+}

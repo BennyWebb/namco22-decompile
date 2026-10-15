@@ -5,6 +5,36 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Milestone P1 — COMPLETE under reduced scope / performance FAIL / STOPPED
+
+See [P1 report](NATIVE_P1_PIPELINE_REPORT.md) and
+[evidence/methods](benchmarks/native-p1-20261015/README.md). Private hybrid
+main/rr-prepare/rr-present FIFO prototype, per-slot native/HUD state, rotating
+GPU resources with reuse fences, no normal per-frame glFinish, legacy GPU
+release/lazy fallback recreation. Accepted presentation-paced59.7104Hz policy;
+O2 generated sources with O1 switch and stack protection, opt-in clocks,
+affinity OFF. Production source/executable remains unchanged.
+
+Host/ARM6006 ticks, all21 checkpoint sets, exact4207 packets;36 sampled Mali
+images match per queue depth. Eight user-reduced runs completed (one normal and
+one diagnostic fence per stock/both-clock × queue2/3); repeats and both30-minute
+soaks deferred. Best observed normal both-clock queue2:16 inferred repeated
+vblanks,199.391ms worst interval,17,284 missing output sample frames. No clean-audio
+or zero-repeat pass. Queue2 snapshot→swap age~33ms versus queue3~50ms. Legacy
+release saves~52–57MiB RSS, but transition MemAvailable does not rise; preparation
+p99~18ms and GPU completion p95~16.1ms remain limiting. Multi-second stalls and
+sampler pressure-read gaps prevent a complete cause claim; continuous ≥10Hz
+coverage and the historical2.74s D-state root cause are not established.
+
+Manual City racing/controls work, no observed corruption;9806 unsupported pictures
+fall back through legacy without exiting. Audio stutters and long stalls remain.
+This is not native City coverage. All47 protected files verified at shutdown;
+stock governors restored, EmulationStation running, no game/sampler. Final analysis
+retrieved all evidence without new tests. Detailed scope, caveats and hashes are
+in the report. No production deployment, commit/push, P2 compiler/texture work or
+further tests/soaks authorised. M3 remains historically performance-blocked.
+**STOPPED; next work requires explicit user authorisation.**
+
 ## Stage 1b environment/build-flag audit — COMPLETE / STOPPED (2026-10-15)
 
 See [headroom report](NATIVE_STAGE1B_HEADROOM_REPORT.md) and

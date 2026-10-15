@@ -1,0 +1,75 @@
+run,frame,native,gap_ms,simulation_ms,fifo_blocked_ms,main_D_observed,worker_D_observed,interpretation
+reference-1-both-q2-fence,80,0,63.91982700006338,62.419845999,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q2-fence,167,0,54.28784200194059,8.232541,44.748895998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,287,0,51.058098000794416,5.514902001,43.503321001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,1346,0,172.9018640035065,12.922934999,158.750855,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q2-fence,1347,0,96.05152199947042,13.170800001,74.475064001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,1437,0,322.19768399590976,12.816062997,308.285663999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,1802,1,103.36818100040546,13.393915,88.827980999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,3054,1,651.0054849968583,12.720109,637.362871999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,3597,1,1863.8805030022922,12.150172999,1850.44084,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-fence,4081,1,1646.7794240015792,1645.932166,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q2-fence,5821,1,2761.1656169974594,2760.168991001,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q2-timed,80,0,67.44237800012343,66.277884001,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q2-timed,167,0,54.73922199962544,8.146215001,44.867326,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-timed,1346,0,181.59045599895762,11.581202001,168.852217001,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q2-timed,1347,0,104.03902900361572,11.073805999,91.755772999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-timed,1561,0,179.93464399842196,178.848854001,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q2-timed,1802,1,101.44279599990114,14.310882998,85.929337001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q2-timed,3236,1,212.749389000237,11.800898999,198.741245,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-fence,80,0,67.40819800324971,66.070378998,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q3-fence,168,0,53.20916299751843,8.672930999,43.334239999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-fence,288,0,52.60193800131674,5.556060001,44.798512998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-fence,1347,0,161.22425699722953,10.825091002,149.343042001,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-both-q3-fence,1348,0,98.36295299828635,15.487064,81.484279999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-fence,1441,0,1473.4003400008078,1472.240971998,0.0,False,True,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-fence,1803,1,104.77910300323856,12.934753999,90.661023001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-fence,1861,1,546.4312460026122,545.395788999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-fence,3601,1,2491.61523499788,2490.518739,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-fence,5281,1,2886.477455998829,2885.431749,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-fence,5761,1,1147.1529090013064,1146.040871998,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-timed,80,0,61.40877999860095,60.172540001,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-timed,168,0,55.84617700515082,8.047582,46.696559002,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,288,0,51.46290200354997,5.509354,43.732056998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,781,0,2031.6186060008476,2029.522942001,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-timed,1347,0,170.29012700004387,11.757094999,157.227838001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,1348,0,101.03933999926085,15.878214999,83.940467997,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,1803,1,97.73747800136334,13.726346002,82.720476999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,2874,1,87.36640899951453,12.911004,71.831262998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-both-q3-timed,4676,1,310.508756996569,308.609045002,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-both-q3-timed,5401,1,82.26537099835696,80.281246002,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-fence,80,0,73.50988699909067,72.471137999,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q2-fence,167,0,71.21902300059446,10.570398001,59.656083002,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-fence,287,0,64.56308899942087,6.996920001,56.309679003,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-fence,1321,0,886.374634999811,885.149894999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-fence,1346,0,184.02154100112966,11.865303,171.086490001,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q2-fence,1347,0,99.68284999922616,14.241829998,83.944998998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-fence,1802,1,107.31574399687815,12.955007998,93.044622998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-fence,5281,1,103.04346499833628,102.019757,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-timed,80,0,78.21706700269715,77.235982997,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q2-timed,167,0,84.74242299780599,13.168457001,70.428179999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-timed,287,0,57.10306300170487,7.265658998,48.575081,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-timed,825,0,232.10668200044893,231.036393001,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-timed,1346,0,188.50535499950638,14.845013,172.574261,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q2-timed,1347,0,97.00850100489333,12.425571,83.427228998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-timed,1561,0,2710.903793999023,2710.027871999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-timed,1802,1,104.91204999925685,12.922425001,90.748883998,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q2-timed,2761,1,2201.159767999343,2199.810865997,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q2-timed,4441,1,2543.1454659992596,2541.845144999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q3-fence,61,0,108.31932500150288,107.055999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q3-fence,80,0,75.47165799769573,74.242955998,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q3-fence,288,0,64.04797999857692,7.734779003,54.864009002,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-fence,1347,0,184.0557390023605,13.257602001,169.672931002,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-fence,1348,0,100.67448699555825,14.215105999,84.990146999,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-fence,1803,1,107.13443199711037,12.61546,92.988866003,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-fence,2507,1,101.13803799686139,12.893864998,87.443413002,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-timed,80,0,68.05300600171904,67.092670997,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q3-timed,168,0,65.4331559962884,10.278365,54.142500001,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-timed,241,0,302.4284339953738,300.184234999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q3-timed,288,0,71.82705700324732,9.267531997,61.017131,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-timed,1141,0,2606.6185659983603,2603.829432999,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
+reference-1-stock-q3-timed,1341,0,50.6310630007647,49.745892,0.0,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q3-timed,1347,0,171.97481300172512,12.756887001,158.244633003,True,False,Main D-state observed; inspect kernel wait/stack and VM/IO deltas
+reference-1-stock-q3-timed,1348,0,100.32999699978973,13.305156001,85.495821997,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-timed,1803,1,98.4836580028059,12.401567998,84.60436,False,False,FIFO backpressure dominates main wait; underlying consumer/preparation delay remains to be attributed
+reference-1-stock-q3-timed,2521,1,2722.347182003432,2720.572587998,0.0,False,False,No main D-state captured; CPU/scheduling or service delay remains unproven
