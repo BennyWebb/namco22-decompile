@@ -1,0 +1,332 @@
+{
+  "B-1-both-native/clocks.txt": {
+    "uncompressed_bytes": 26868348,
+    "uncompressed_sha256": "af93a1298d1ab52b4ff97ae17953ba2e81d0267c10cd4975ec4766117eb74c7b",
+    "retained_as": "B-1-both-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-both-production/clocks.txt": {
+    "uncompressed_bytes": 15535233,
+    "uncompressed_sha256": "8f123f1de95e6bd309347428ded1983ff40886fe1c831307ebefe678dd1c7eb0",
+    "retained_as": "B-1-both-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-cpu-native/clocks.txt": {
+    "uncompressed_bytes": 28441734,
+    "uncompressed_sha256": "2db555d1461d9163bcfd7a12ce6670cce83958524444e8e16a69a998f14e5815",
+    "retained_as": "B-1-cpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-cpu-production/clocks.txt": {
+    "uncompressed_bytes": 15527884,
+    "uncompressed_sha256": "7449cbc1be9fb4efe84a736378fca2e7de2a56945974d2360f57b5e6090b483c",
+    "retained_as": "B-1-cpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-gpu-native/clocks.txt": {
+    "uncompressed_bytes": 27209344,
+    "uncompressed_sha256": "bdea4fb9427bec9496972e81a8da480ce3c0d57f79101c377473ea1b5d3bdfd7",
+    "retained_as": "B-1-gpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-gpu-production/clocks.txt": {
+    "uncompressed_bytes": 15935661,
+    "uncompressed_sha256": "7ead471ccd56dd70fe4df96a894d416ff39f1331aa4e12d6a530d76fc41584ce",
+    "retained_as": "B-1-gpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-stock-native/clocks.txt": {
+    "uncompressed_bytes": 28878917,
+    "uncompressed_sha256": "be5b68e285c3bc0258c9c67b47d9bfda0e5f9b78066378250f98ca49a6e112ba",
+    "retained_as": "B-1-stock-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-1-stock-production/clocks.txt": {
+    "uncompressed_bytes": 15502843,
+    "uncompressed_sha256": "e9276781e9e9bf6317376733aa5dd73d17bfb70a412fad070f0a2e36e2186ec7",
+    "retained_as": "B-1-stock-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-both-native/clocks.txt": {
+    "uncompressed_bytes": 27083030,
+    "uncompressed_sha256": "a10b2b23007514d6eb7bfcf64c7142fa64dd16d324e7f38dbdf51234369f654b",
+    "retained_as": "B-2-both-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-both-production/clocks.txt": {
+    "uncompressed_bytes": 15419859,
+    "uncompressed_sha256": "c7d7c50dcb7be6ee65aa4688523cb8656ed28d13f07691632829f51d9778b83c",
+    "retained_as": "B-2-both-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-cpu-native/clocks.txt": {
+    "uncompressed_bytes": 28503409,
+    "uncompressed_sha256": "c80999925832d3a4632fe1c829184711496f64d6e38872707b9550a2a364bf8d",
+    "retained_as": "B-2-cpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-cpu-production/clocks.txt": {
+    "uncompressed_bytes": 15499674,
+    "uncompressed_sha256": "9a2f272893037abe173eba5335fa1ae02e5d32fb3c0659457d41e5eddde39322",
+    "retained_as": "B-2-cpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-gpu-native/clocks.txt": {
+    "uncompressed_bytes": 27715275,
+    "uncompressed_sha256": "80e7a44f8d676e32543405e3d0a6feebc6e689b70834c59b63e9f24213203257",
+    "retained_as": "B-2-gpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-gpu-production/clocks.txt": {
+    "uncompressed_bytes": 15721463,
+    "uncompressed_sha256": "2dcbb8f3d0edb2bfc2f6a022c6516337023acb20c82117ec15cf9644797bf3bc",
+    "retained_as": "B-2-gpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-stock-native/clocks.txt": {
+    "uncompressed_bytes": 29921951,
+    "uncompressed_sha256": "7446456f03ce8faeb79972d4a6d3c7f64a7915f9c9521ad2526387bd6ed180c3",
+    "retained_as": "B-2-stock-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-2-stock-production/clocks.txt": {
+    "uncompressed_bytes": 16354320,
+    "uncompressed_sha256": "d6edb296394729ca530931421a5fef6674d0bea0a813f4912315bc9fad8483ea",
+    "retained_as": "B-2-stock-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-both-native/clocks.txt": {
+    "uncompressed_bytes": 27749728,
+    "uncompressed_sha256": "84ab26e6283441c14c26f42d916f40b2b2705d9663bdc670352430e4eb81fcf8",
+    "retained_as": "B-3-both-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-both-production/clocks.txt": {
+    "uncompressed_bytes": 17357741,
+    "uncompressed_sha256": "e620aacfa6bc35edd102cd310fa1e460128a082acb7a4cd0b32b3cf387f5eb45",
+    "retained_as": "B-3-both-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-cpu-native/clocks.txt": {
+    "uncompressed_bytes": 28881693,
+    "uncompressed_sha256": "07b42a36b20fff5ef93e95aaaecd242ae591026494d7c343dd69b499eb49b0e0",
+    "retained_as": "B-3-cpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-cpu-production/clocks.txt": {
+    "uncompressed_bytes": 16700468,
+    "uncompressed_sha256": "758b8036bbfaaef5ff72ebac16358845536b31da93e359261e8e84e72743a577",
+    "retained_as": "B-3-cpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-gpu-native/clocks.txt": {
+    "uncompressed_bytes": 28769702,
+    "uncompressed_sha256": "d0be0d0c28e7234878122795dadbe63d778f591a95792facad503d253f585a9d",
+    "retained_as": "B-3-gpu-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-gpu-production/clocks.txt": {
+    "uncompressed_bytes": 17484082,
+    "uncompressed_sha256": "9d479e8fd802cc3bfcab5b89b7fef4a2442b1c022ae0fbf960924a58a3913ff6",
+    "retained_as": "B-3-gpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-stock-native/clocks.txt": {
+    "uncompressed_bytes": 30157574,
+    "uncompressed_sha256": "a31af8b45ee2ab1fc2e4744e4a6edc6c6266df73cfb2cbf8b3c42287a77810ee",
+    "retained_as": "B-3-stock-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-3-stock-production/clocks.txt": {
+    "uncompressed_bytes": 17664490,
+    "uncompressed_sha256": "06653da5640d478766c08f39fa5c4edb31e7e9a35d2767258ed1856711832537",
+    "retained_as": "B-3-stock-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-supplement-cpu-production/clocks.txt": {
+    "uncompressed_bytes": 16070115,
+    "uncompressed_sha256": "910163d55444c6fce0a4e402c6b46b8e0d8298a7250e2af903142baae4139d08",
+    "retained_as": "B-supplement-cpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "B-supplement-gpu-production/clocks.txt": {
+    "uncompressed_bytes": 16183123,
+    "uncompressed_sha256": "118b22aeb5a1c0856f704ccbb668837ff50024dca05822d8c4d31b73055f4efb",
+    "retained_as": "B-supplement-gpu-production/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "C-panel/clocks.txt": {
+    "uncompressed_bytes": 5176077,
+    "uncompressed_sha256": "22e1f9b963f7b023bac4e1cf3bcf228d8ac2209e264271b1ad9096ac7efd4129",
+    "retained_as": "C-panel/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "C-panel-observed/clocks.txt": {
+    "uncompressed_bytes": 5168824,
+    "uncompressed_sha256": "27841249b9311c3b34c9ef4ee63dc64ee991b7cfd6fa44e62b6e3e54e2232f61",
+    "retained_as": "C-panel-observed/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-both-native-off/clocks.txt": {
+    "uncompressed_bytes": 28276142,
+    "uncompressed_sha256": "b0fc40cbafb096923bb70a8177d12e9e2aed99e5a7eec8ac41e3979b98a9e39b",
+    "retained_as": "D-1-both-native-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-both-native-pinned/clocks.txt": {
+    "uncompressed_bytes": 28259978,
+    "uncompressed_sha256": "78fafb5b94e14caecd4339cee8c438886fba12f6f49cad7fe6e5dfa400a848ef",
+    "retained_as": "D-1-both-native-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-both-production-off/clocks.txt": {
+    "uncompressed_bytes": 16096068,
+    "uncompressed_sha256": "e84517e4a23c40281a0cf8eda8ad592cc09ba804d1dd29ba4a8e0ae539520e96",
+    "retained_as": "D-1-both-production-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-both-production-pinned/clocks.txt": {
+    "uncompressed_bytes": 16029174,
+    "uncompressed_sha256": "8773ed3ada599ba716b6be3e5b8ec345d367f66e583988dd7523f15a207ba924",
+    "retained_as": "D-1-both-production-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-stock-native-off/clocks.txt": {
+    "uncompressed_bytes": 30345502,
+    "uncompressed_sha256": "e86f288a658733cb08249806ebe1f437c1a029f81b2bbd0bb90e0af967ffb3ef",
+    "retained_as": "D-1-stock-native-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-stock-native-pinned/clocks.txt": {
+    "uncompressed_bytes": 30355550,
+    "uncompressed_sha256": "dca36ff641dc3ce8eb6531fb01192f56bdb9abe24d8aca650d31a1ab672ddd59",
+    "retained_as": "D-1-stock-native-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-stock-production-off/clocks.txt": {
+    "uncompressed_bytes": 16162056,
+    "uncompressed_sha256": "f3f66dddd02f74ab55dd1f7156852ef9dc29b41ab2f644feaf6e3503efc6fd82",
+    "retained_as": "D-1-stock-production-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-1-stock-production-pinned/clocks.txt": {
+    "uncompressed_bytes": 16047298,
+    "uncompressed_sha256": "94b8fba0ea38e7b6b321715a45ff1feb825b7bb04aa089ab9e783032de52a973",
+    "retained_as": "D-1-stock-production-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-both-native-off/clocks.txt": {
+    "uncompressed_bytes": 28332701,
+    "uncompressed_sha256": "234447a33888126903f54504419b48d83619c338d1d54f9b4717ba4691ebf6fe",
+    "retained_as": "D-2-both-native-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-both-native-pinned/clocks.txt": {
+    "uncompressed_bytes": 28161379,
+    "uncompressed_sha256": "83504e0fbab362a5ed032746fa563aecf4fb3153863de3ba654c479f73574446",
+    "retained_as": "D-2-both-native-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-both-production-off/clocks.txt": {
+    "uncompressed_bytes": 16057300,
+    "uncompressed_sha256": "fe465d99bf0754037b474a5abe3072d14f8b910439c0195dc86ab1c7f5fcf0cb",
+    "retained_as": "D-2-both-production-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-both-production-pinned/clocks.txt": {
+    "uncompressed_bytes": 16060645,
+    "uncompressed_sha256": "c98dba795138401a9eaae80626bb62dc288396b23c4bae9cf1c84e7f18e85b9d",
+    "retained_as": "D-2-both-production-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-stock-native-off/clocks.txt": {
+    "uncompressed_bytes": 30528567,
+    "uncompressed_sha256": "d31cdc7ae664549fa8bfb779677357a1b87ada5fdf7a1be3b3e8748c5eed5482",
+    "retained_as": "D-2-stock-native-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-stock-native-pinned/clocks.txt": {
+    "uncompressed_bytes": 30162765,
+    "uncompressed_sha256": "fdb5bbf3007b421aa745e004112a43ebc7d94f99f20e34823ec8a4a1bfdbe7e6",
+    "retained_as": "D-2-stock-native-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-stock-production-off/clocks.txt": {
+    "uncompressed_bytes": 16087764,
+    "uncompressed_sha256": "7636aa623397114e090c2b09b109f7797ab3394377220b0178bc1bae5132b590",
+    "retained_as": "D-2-stock-production-off/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-2-stock-production-pinned/clocks.txt": {
+    "uncompressed_bytes": 16080025,
+    "uncompressed_sha256": "3989f23ec01c39e478c6c7f52944e452ddf3c4f5ee1a5d311c53c302290366ed",
+    "retained_as": "D-2-stock-production-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-affinity-validation-pinned/clocks.txt": {
+    "uncompressed_bytes": 21680,
+    "uncompressed_sha256": "52208b79acf5ac4eb6619ae316736c81f4dbb30e3acc6c3dc1cc3e5f8948adda",
+    "retained_as": "D-affinity-validation-pinned/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "D-affinity-validation-unset/clocks.txt": {
+    "uncompressed_bytes": 21680,
+    "uncompressed_sha256": "e9b4e71e410aaa16c78b5963ae295506aabf8a5c9e0be27d26fd8f725671f1b1",
+    "retained_as": "D-affinity-validation-unset/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-1-best-O1-native/clocks.txt": {
+    "uncompressed_bytes": 28013630,
+    "uncompressed_sha256": "2d0b89dc38b9ee788ac413b9c28dd7a6856868d5a991588ef4f77c6eb636834a",
+    "retained_as": "E-1-best-O1-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-1-best-O2-native/clocks.txt": {
+    "uncompressed_bytes": 27455957,
+    "uncompressed_sha256": "55f78db71162cb66fe87c5e7a910e8e75c05415a375dc456c645147650be56d7",
+    "retained_as": "E-1-best-O2-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-1-best-O2-nosp-native/clocks.txt": {
+    "uncompressed_bytes": 27517467,
+    "uncompressed_sha256": "b03f8f4c6a2d92d5016f706ad02ab596806d659cc848826bc50c33c15da2c740",
+    "retained_as": "E-1-best-O2-nosp-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-1-stock-O1-native/clocks.txt": {
+    "uncompressed_bytes": 30277877,
+    "uncompressed_sha256": "d2989b4cf2b9916a05e916c4e0668120fd4774539cf9bee28f19d67ef2a511ac",
+    "retained_as": "E-1-stock-O1-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-validation-O1-native/clocks.txt": {
+    "uncompressed_bytes": 28156419,
+    "uncompressed_sha256": "3a8d89ca593c2a2399187b2d5a98247e9f2fc10acd67755d79fea80bc6a0811f",
+    "retained_as": "E-validation-O1-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-validation-O2-native/clocks.txt": {
+    "uncompressed_bytes": 27821419,
+    "uncompressed_sha256": "d7ac445f29713ff91cf3278e4fef81521047711b077641df4d2b38d6677d7873",
+    "retained_as": "E-validation-O2-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-validation-O2-nosp-native/clocks.txt": {
+    "uncompressed_bytes": 27720406,
+    "uncompressed_sha256": "0686cbf45955cc4c8dfc9877b62b958aaff2cbef0227c4a3284895aba1454b3a",
+    "retained_as": "E-validation-O2-nosp-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "E-validation-current-native/clocks.txt": {
+    "uncompressed_bytes": 28247999,
+    "uncompressed_sha256": "c78087e3ac8fe84d831af4118f6fc3d253ffc2ffa23337c4f559bc9d3366c9c3",
+    "retained_as": "E-validation-current-native/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  },
+  "hash-smoke-arm-sampled/clocks.txt": {
+    "uncompressed_bytes": 21678,
+    "uncompressed_sha256": "74d8d6ddf1257d3aee2e06a35282d0f0a39991ee118f9d815fd7ec827d3ffeb8",
+    "retained_as": "hash-smoke-arm-sampled/clocks.txt.gz",
+    "lossless_roundtrip_verified": true
+  }
+}

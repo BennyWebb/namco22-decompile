@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETE",
+  "h700_replays": 50,
+  "checkpoint_sets_per_replay": 21,
+  "full_ticks_per_replay": 6006,
+  "arm_packet_validations": 4,
+  "host_packet_validations": 3,
+  "packets_per_validation": 4207,
+  "packet_bytes_per_validation": 267308900,
+  "protected_hashes": 47,
+  "clock_logs_losslessly_retained": 55,
+  "compressed_reader_produces_identical_summary": true,
+  "flag_timing_runs_per_configuration": 1,
+  "repeats_omitted_on_explicit_user_instruction": true,
+  "optional_perf": "skipped: missing flex; no hardware attribution runs",
+  "production_unchanged": true,
+  "stopped": true
+}

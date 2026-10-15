@@ -1,0 +1,390 @@
+{
+  "B-3-cpu-native": {
+    "peak_temperature_c": 59.111,
+    "cooling_state_counts": {}
+  },
+  "D-1-both-production-pinned": {
+    "peak_temperature_c": 64.943,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2032
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 2032
+      }
+    }
+  },
+  "B-1-gpu-production": {
+    "peak_temperature_c": 66.158,
+    "cooling_state_counts": {}
+  },
+  "D-1-stock-native-off": {
+    "peak_temperature_c": 54.818,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4447
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4447
+      }
+    }
+  },
+  "D-2-stock-native-pinned": {
+    "peak_temperature_c": 56.762,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4421
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4421
+      }
+    }
+  },
+  "B-3-stock-production": {
+    "peak_temperature_c": 65.753,
+    "cooling_state_counts": {}
+  },
+  "E-validation-current-native": {
+    "peak_temperature_c": 57.005,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4170
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4170
+      }
+    }
+  },
+  "E-1-stock-O1-native": {
+    "peak_temperature_c": 57.248,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4456
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4456
+      }
+    }
+  },
+  "B-1-both-native": {
+    "peak_temperature_c": 60.488,
+    "cooling_state_counts": {}
+  },
+  "B-1-cpu-native": {
+    "peak_temperature_c": 59.273,
+    "cooling_state_counts": {}
+  },
+  "D-1-both-native-pinned": {
+    "peak_temperature_c": 56.438,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4161
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4161
+      }
+    }
+  },
+  "B-1-cpu-production": {
+    "peak_temperature_c": 66.563,
+    "cooling_state_counts": {}
+  },
+  "D-2-both-production-pinned": {
+    "peak_temperature_c": 64.943,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2031
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 2031
+      }
+    }
+  },
+  "B-2-gpu-native": {
+    "peak_temperature_c": 60.731,
+    "cooling_state_counts": {}
+  },
+  "B-3-stock-native": {
+    "peak_temperature_c": 59.03,
+    "cooling_state_counts": {}
+  },
+  "B-2-stock-native": {
+    "peak_temperature_c": 59.759,
+    "cooling_state_counts": {}
+  },
+  "E-1-best-O2-native": {
+    "peak_temperature_c": 58.22,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4054
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4054
+      }
+    }
+  },
+  "D-2-stock-production-pinned": {
+    "peak_temperature_c": 63.647,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2035
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1933,
+        "1": 102
+      }
+    }
+  },
+  "E-1-best-O1-native": {
+    "peak_temperature_c": 57.653,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4135
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4135
+      }
+    }
+  },
+  "B-1-both-production": {
+    "peak_temperature_c": 67.697,
+    "cooling_state_counts": {}
+  },
+  "D-1-stock-production-off": {
+    "peak_temperature_c": 62.837,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2056
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1985,
+        "1": 71
+      }
+    }
+  },
+  "E-validation-O2-native": {
+    "peak_temperature_c": 57.896,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4112
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4112
+      }
+    }
+  },
+  "B-2-cpu-native": {
+    "peak_temperature_c": 60.731,
+    "cooling_state_counts": {}
+  },
+  "E-1-best-O2-nosp-native": {
+    "peak_temperature_c": 58.544,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4050
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4050
+      }
+    }
+  },
+  "B-supplement-cpu-production": {
+    "peak_temperature_c": 65.024,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2031
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1437,
+        "1": 584,
+        "2": 10
+      }
+    }
+  },
+  "B-supplement-gpu-production": {
+    "peak_temperature_c": 64.862,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2068
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 2068
+      }
+    }
+  },
+  "B-1-gpu-native": {
+    "peak_temperature_c": 57.572,
+    "cooling_state_counts": {}
+  },
+  "B-2-cpu-production": {
+    "peak_temperature_c": 67.292,
+    "cooling_state_counts": {}
+  },
+  "D-1-both-production-off": {
+    "peak_temperature_c": 64.457,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2040
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 2040
+      }
+    }
+  },
+  "B-2-gpu-production": {
+    "peak_temperature_c": 68.588,
+    "cooling_state_counts": {}
+  },
+  "D-1-both-native-off": {
+    "peak_temperature_c": 56.519,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4176
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4176
+      }
+    }
+  },
+  "D-1-stock-production-pinned": {
+    "peak_temperature_c": 62.513,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2036
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1975,
+        "1": 61
+      }
+    }
+  },
+  "B-3-gpu-native": {
+    "peak_temperature_c": 58.787,
+    "cooling_state_counts": {}
+  },
+  "B-3-both-production": {
+    "peak_temperature_c": 66.644,
+    "cooling_state_counts": {}
+  },
+  "B-3-both-native": {
+    "peak_temperature_c": 59.192,
+    "cooling_state_counts": {}
+  },
+  "B-3-cpu-production": {
+    "peak_temperature_c": 65.105,
+    "cooling_state_counts": {}
+  },
+  "D-1-stock-native-pinned": {
+    "peak_temperature_c": 55.79,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4472
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4472
+      }
+    }
+  },
+  "D-2-stock-production-off": {
+    "peak_temperature_c": 64.052,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2036
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1770,
+        "1": 266
+      }
+    }
+  },
+  "B-3-gpu-production": {
+    "peak_temperature_c": 66.887,
+    "cooling_state_counts": {}
+  },
+  "D-2-both-production-off": {
+    "peak_temperature_c": 64.781,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 2029
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 2029
+      }
+    }
+  },
+  "D-2-both-native-off": {
+    "peak_temperature_c": 57.572,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4181
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4181
+      }
+    }
+  },
+  "D-2-stock-native-off": {
+    "peak_temperature_c": 56.438,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4501
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4501
+      }
+    }
+  },
+  "B-1-stock-native": {
+    "peak_temperature_c": 54.332,
+    "cooling_state_counts": {}
+  },
+  "B-2-both-production": {
+    "peak_temperature_c": 68.345,
+    "cooling_state_counts": {}
+  },
+  "E-validation-O1-native": {
+    "peak_temperature_c": 57.896,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4167
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4167
+      }
+    }
+  },
+  "E-validation-O2-nosp-native": {
+    "peak_temperature_c": 57.653,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4087
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4087
+      }
+    }
+  },
+  "B-1-stock-production": {
+    "peak_temperature_c": 63.242,
+    "cooling_state_counts": {}
+  },
+  "B-2-both-native": {
+    "peak_temperature_c": 60.002,
+    "cooling_state_counts": {}
+  },
+  "B-2-stock-production": {
+    "peak_temperature_c": 66.887,
+    "cooling_state_counts": {}
+  },
+  "D-2-both-native-pinned": {
+    "peak_temperature_c": 58.058,
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 4133
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 4133
+      }
+    }
+  }
+}

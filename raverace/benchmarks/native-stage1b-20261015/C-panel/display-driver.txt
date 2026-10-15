@@ -1,0 +1,180 @@
+PATH /sys/class/graphics/fb0/bits_per_pixel
+32
+PATH /sys/class/graphics/fb0/blank
+PATH /sys/class/graphics/fb0/console
+PATH /sys/class/graphics/fb0/cursor
+PATH /sys/class/graphics/fb0/dev
+29:0
+PATH /sys/class/graphics/fb0/mode
+PATH /sys/class/graphics/fb0/modes
+U:640x480p-59
+PATH /sys/class/graphics/fb0/name
+
+PATH /sys/class/graphics/fb0/pan
+0,0
+PATH /sys/class/graphics/fb0/rotate
+0
+PATH /sys/class/graphics/fb0/state
+0
+PATH /sys/class/graphics/fb0/stride
+2560
+PATH /sys/class/graphics/fb0/uevent
+MAJOR=29
+MINOR=0
+DEVNAME=fb0
+PATH /sys/class/graphics/fb0/virtual_size
+640,960
+PATH /sys/class/disp/disp/attr/sys
+screen 0:
+de_rate 696000000 hz, ref_fps:60
+mgr0: 640x480 fmt[rgb] cs[0x204] range[full] eotf[0x4] bits[8bits] err[0] force_sync[0] unblank direct_show[false] iommu[1]
+dmabuf: cache[0] cache max[0] umap skip[0] umap skip max[0]
+	lcd output	backlight(  3)	fps:60.6	 640x 480
+	err:0	skip:0	irq:314745	vsync:0	vsync_skip:0	
+   BUF    enable ch[1] lyr[0] z[0] prem[N] a[globl 255] fmt[  0] fb[ 640, 960; 640, 960; 640, 960] crop[   0,   0, 640, 480] frame[   0,   0, 640, 480] addr[ff800000,       0,       0] flags[0x       0] trd[0,0]
+depth[ 0] transf[0]
+PATH /sys/kernel/debug/clk/clk_summary
+   clock                         enable_cnt  prepare_cnt        rate   accuracy   phase
+----------------------------------------------------------------------------------------
+ pcf8563-clkout                           0            0       32768          0 0  
+ pll_periph0div25m                        0            0    25000000          0 0  
+    ephy_25m                              0            0    25000000          0 0  
+ hoscdiv32k                               1            1       32768          0 0  
+    hosc32k                               1            1       32768          0 0  
+       losc_out                           2            2       32768          0 0  
+ osc48m                                   0            0    48000000          0 0  
+    osc48md4                              0            0    12000000          0 0  
+       usbohci3_12m                       0            0    12000000          0 0  
+       usbohci2_12m                       0            0    12000000          0 0  
+       usbohci1_12m                       0            0    12000000          0 0  
+       usbohci0_12m                       0            0    12000000          0 0  
+ hosc                                    21           22    24000000          0 0  
+    dcxo_out                              0            0    24000000          0 0  
+    cpurapbs2                             0            0    24000000          0 0  
+    cpurcpus                              1            1    24000000          0 0  
+       cpurahbs                           1            1    24000000          0 0  
+          cpurapbs1                       2            2    24000000          0 0  
+             stwi                         1            1    24000000          0 0  
+             cpurpio                      1            1    24000000          0 0  
+    cpurcir                               0            0    24000000          0 0  
+    csi_master1                           0            0    24000000          0 0  
+    csi_master0                           0            0    24000000          0 0  
+    hdmi_slow                             1            1    24000000          0 0  
+    usbphy3                               2            2    24000000          0 0  
+    usbphy2                               2            2    24000000          0 0  
+    usbphy1                               2            2    24000000          0 0  
+    usbphy0                               0            0    24000000          0 0  
+    ths                                   1            1    24000000          0 0  
+    ts                                    0            0    24000000          0 0  
+    gpadc                                 1            1    24000000          0 0  
+    spi1                                  0            0    24000000          0 0  
+    spi0                                  0            0    24000000          0 0  
+    sdmmc2_rst                            1            1    24000000          0 0  
+    sdmmc2_bus                            1            1    24000000          0 0  
+    sdmmc1_rst                            1            1    24000000          0 0  
+    sdmmc1_bus                            1            1    24000000          0 0  
+    sdmmc0_rst                            1            1    24000000          0 0  
+    sdmmc0_bus                            1            1    24000000          0 0  
+    nand1                                 0            0    24000000          0 0  
+    nand0                                 0            0    24000000          0 0  
+    avs                                   0            0    24000000          0 0  
+    apb2                                  2            2    24000000          0 0  
+       scr0                               0            0    24000000          0 0  
+       twi4                               0            0    24000000          0 0  
+       twi3                               0            0    24000000          0 0  
+       twi2                               0            0    24000000          0 0  
+       twi1                               0            0    24000000          0 0  
+       twi0                               0            0    24000000          0 0  
+       uart5                              1            1    24000000          0 0  
+       uart4                              0            0    24000000          0 0  
+       uart3                              0            0    24000000          0 0  
+       uart2                              0            0    24000000          0 0  
+       uart1                              0            0    24000000          0 0  
+       uart0                              1            1    24000000          0 0  
+    hoscd2                                0            0    12000000          0 0  
+    pll_audiox4                           5            5    98304000          0 0  
+       ahub                               1            1    98304000          0 0  
+       codec_1x                           1            1    49152000          0 0  
+       pll_audiox2                        0            0    49152000          0 0  
+       pll_audio                          1            1    24576000          0 0  
+          codec_4x                        0            0    24576000          0 0  
+          dmic                            0            0    24576000          0 0  
+          spdif                           0            0    24576000          0 0  
+    pll_csi                               0            0   384000000          0 0  
+       csi_top                            0            0   384000000          0 0  
+    pll_de                                1            1   696000000          0 0  
+       de                                 1            1   696000000          0 0  
+    pll_ve                                0            1   432000000          0 0  
+       ve                                 0            1   432000000          0 0  
+    pll_video2                            2            2   297000000          0 0  
+       tcon_tv                            1            1   297000000          0 0  
+       hdmi                               1            1   297000000          0 0  
+       pll_video2x4                       0            0  1188000000          0 0  
+    pll_video1                            0            0   432000000          0 0  
+       tve_top                            0            0   432000000          0 0  
+       tve                                0            0   216000000          0 0  
+       tcon_tv1                           0            0   432000000          0 0  
+       tcon_lcd1                          0            0   432000000          0 0  
+       pll_video1x4                       0            0  1728000000          0 0  
+    pll_video0x4                          1            1   288000000          0 0  
+       tcon_lcd                           1            1   288000000          0 0  
+          lvds                            0            0   288000000          0 0  
+       pll_video0                         0            0    72000000          0 0  
+    pll_gpu                               0            0   288000000          0 0  
+       gpu0                               0            0   288000000          0 0  
+    pll_periph1                           2            2   600000000          0 0  
+       hdmi_hdcp                          1            1   300000000          0 0  
+       pll_periph1x2                      3            3  1200000000          0 0  
+          sdmmc1_mod                      1            1   200000000          0 0  
+          sdmmc2_mod                      1            1   100000000          0 0  
+          sdmmc0_mod                      1            1   100000000          0 0  
+    pll_periph0                           4            4   600000000          0 0  
+       cpurapbs2_pll                      0            0   600000000          0 0  
+       cpurcpus_pll                       0            0   600000000          0 0  
+       apb1                               2            2   100000000          0 0  
+          pio                             1            1   100000000          0 0  
+          lradc                           0            0   100000000          0 0  
+          pwm                             1            1   100000000          0 0  
+       ahb3                               7            7   200000000          0 0  
+          display_top                     1            1   200000000          0 0  
+          usbotg                          0            0   200000000          0 0  
+          usb3_0_host                     0            0   200000000          0 0  
+          usbehci3                        1            1   200000000          0 0  
+          usbehci2                        1            1   200000000          0 0  
+          usbehci1                        1            1   200000000          0 0  
+          usbehci0                        0            0   200000000          0 0  
+          usbohci3                        1            1   200000000          0 0  
+          usbohci2                        1            1   200000000          0 0  
+          usbohci1                        1            1   200000000          0 0  
+          usbohci0                        0            0   200000000          0 0  
+          gmac1                           0            0   200000000          0 0  
+          gmac0                           0            0   200000000          0 0  
+       psi                                1            1   200000000          0 0  
+          ahb2                            0            0   200000000          0 0  
+          ahb1                            2            2   200000000          0 0  
+             iommu                        1            1   200000000          0 0  
+             dbgsys                       0            0   200000000          0 0  
+             hstimer                      0            0   200000000          0 0  
+             hwspinlock_bus               0            0   200000000          0 0  
+             hwspinlock_rst               0            0   200000000          0 0  
+             msgbox                       0            0   200000000          0 0  
+             dma                          1            1   200000000          0 0  
+       pll_periph0d6                      0            0   100000000          0 0  
+       periph32k                          0            0       32768          0 0  
+       pll_periph0x4                      0            0  2400000000          0 0  
+       pll_periph0x2                      2            2  1200000000          0 0  
+          ce                              0            0   300000000          0 0  
+          gpu1                            1            1   600000000          0 0  
+          di                              1            1   300000000          0 0  
+          g2d                             0            0   300000000          0 0  
+          mbus                            0            0   400000000          0 0  
+    pll_ddr1                              0            0   432000000          0 0  
+    pll_ddr0                              0            0  1344000000          0 0  
+       sdram                              0            0  1344000000          0 0  
+    pll_cpu                               0            0  1416000000          0 0  
+       cpu                                0            0  1416000000          0 0  
+          cpuapb                          0            0   354000000          0 0  
+          axi                             0            0   708000000          0 0  
+ iosc                                     0            0    16000000          0 0  
+ losc                                     1            1       32768          0 0  
+    hdmi_cec                              1            1       32768          0 0  

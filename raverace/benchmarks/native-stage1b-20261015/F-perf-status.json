@@ -1,0 +1,12 @@
+{
+  "status": "SKIPPED_NON_BLOCKING",
+  "matching_kernel_source": "/home/bwebb/dev/knulli-scarab/output/h700/build/linux-headers-4.9.170/tools/perf",
+  "buildroot_perf_enabled": false,
+  "build_exit": 2,
+  "primary_error": "flex is missing on this system",
+  "additional_missing_dependency": "target libelf.h",
+  "output_directory": "raverace/native/generated/stage1b/perf-build",
+  "device_installation": false,
+  "attribution_runs": false,
+  "reason": "Bounded optional attempt stopped at missing build dependency. No system packages or external Buildroot configuration changed; no profiler timings mixed with timed runs."
+}

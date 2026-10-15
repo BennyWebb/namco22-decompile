@@ -1,0 +1,39 @@
+MemTotal:         996632 kB
+MemFree:           65584 kB
+MemAvailable:     732916 kB
+Buffers:          244684 kB
+Cached:           423188 kB
+SwapCached:            0 kB
+Active:           440276 kB
+Inactive:         366156 kB
+Active(anon):     139152 kB
+Inactive(anon):     5892 kB
+Active(file):     301124 kB
+Inactive(file):   360264 kB
+Unevictable:         136 kB
+Mlocked:             136 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:               148 kB
+Writeback:             0 kB
+AnonPages:        138612 kB
+Mapped:            81124 kB
+Shmem:              6436 kB
+Slab:              41136 kB
+SReclaimable:      21316 kB
+SUnreclaim:        19820 kB
+KernelStack:        2992 kB
+PageTables:         1996 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      498316 kB
+Committed_AS:     457452 kB
+VmallocTotal:   263061440 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+CmaTotal:          65536 kB
+CmaFree:           47184 kB
+Filesystem     1K-blocks  Used Available Use% Mounted on
+tmpfs             498316    16    498300   1% /tmp
+16	/tmp

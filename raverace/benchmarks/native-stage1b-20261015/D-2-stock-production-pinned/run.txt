@@ -1,0 +1,322 @@
+[STAGE1B-AFFINITY] role=0 cpu=0 result=0
+[SND] translated sound program (2965 instructions)
+[INPUT] replaying /userdata/system/rave-racer-replays/race-20261013-122242-25136.rec
+[REPLAY] inputs sampled at emulated boundaries; ROM hashes FNV1a64; checkpoints every 300 ticks
+[TEX] ROM CPU bytes=19398656; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque
+[GLES2] SDL driver 0: mali
+[GLES2] SDL compiled=2.32.8 runtime=2.32.8
+[GLES2] active SDL video driver: mali
+[GLES2] vendor: ARM
+[GLES2] renderer: Mali-G31
+[GLES2] version: OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+[GLES2] GLSL: OpenGL ES GLSL ES 3.20
+[GLES2] drawable 640x480 depth bits=24
+[TEX] GL max texture=8192 fragment highp bits=23
+[GLES2] triangle storage: CPU=2400000 bytes, GPU store upper bound=2400000 bytes
+[GLES2] VBO mode=frame command storage=114688 bytes; frame mode re-specifies storage per contiguous chunk
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[GLES2] GLSL ES 1.00 linked; textures=textured budget=67108864; per-texture cache, atlas disabled
+[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[AUDIO] driver=alsa output 48000 Hz stereo, 512-sample buffer, gain x6.00
+[INPUT] unmapped Anbernic RG40XX-H Controller GUID=19000000010000000100000000010000; configure --es-input FILE or --controller-db FILE
+[GLES2] unmapped joystick: Anbernic RG40XX-H Controller (START+SELECT needs an SDL mapping)
+[INPUT] mode=scripted; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit
+[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames
+[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=1 mode=textured
+[TIMING] mode=independent target_hz=59.904059904 render_hz=0 (0=adaptive) catchup_limit=4
+[THREAD] simulation_tid=18633 mode=three-stage slots=3 bytes=3546456 point_copy_bytes=524288 target_hz=59.904059904
+[STAGE1B-AFFINITY] role=2 cpu=2 result=0
+[THREAD] presentation_tid=18650 affinity=OS
+[PREP] slots=3 fixed_hud_bytes=0 queue=latest
+[HEADLESS] translated baseline; stop after 6006 frames
+[INPUT] unmapped Anbernic RG40XX-H Controller GUID=19000000010000000100000000010000; configure --es-input FILE or --controller-db FILE
+[GLES2] unmapped joystick: Anbernic RG40XX-H Controller (START+SELECT needs an SDL mapping)
+[STAGE1B-AFFINITY] role=1 cpu=1 result=0
+[PREP] tid=18651 affinity=OS
+[RR] frame 60  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/0/0/0  en 00 pc_sr 2719
+     dsp: ctrl 00 run 0 irq 0 slave 0 fault 0 pc 0000 idle 0 imr 0 ifr 0 intm 0 pdp 0 steps 0
+[SND] sound CPU out of reset (#1), PC=C030
+[SND] sound CPU out of reset (#2), PC=C030
+[GLES2] CPU geometry allocation: 2138112 bytes
+[RR] frame 120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/40/80/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 22 steps 1776256
+[GLES2] CPU geometry allocation: 2138112 bytes
+[GLES2] CPU geometry allocation: 2138112 bytes
+[RR] frame 180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/100/200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 79 steps 2734393
+[RR] frame 240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/160/320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 139 steps 3783985
+[THREAD-FRAME] frame=297 quads=377 triangles=715 draws=288 binds=303
+[THREAD-WINDOW] frame=299 steps=299 presentations=288 sim_hz=59.735 render_fps=57.537
+[RR] frame 300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/220/440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 199 steps 4721666
+[RR] frame 360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/280/560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 259 steps 5463488
+[RR] frame 420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/340/680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 319 steps 6513080
+[RR] frame 480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/400/800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 379 steps 7434932
+[RR] frame 540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/460/920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 439 steps 8188904
+[THREAD-FRAME] frame=597 quads=803 triangles=1522 draws=760 binds=762
+[THREAD-WINDOW] frame=599 steps=599 presentations=587 sim_hz=59.817 render_fps=58.619
+[RR] frame 600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/520/1040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 499 steps 9042644
+[RR] frame 660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/580/1160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 559 steps 9894539
+[RR] frame 720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/640/1280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 619 steps 10726370
+[RR] frame 780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/700/1400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 679 steps 11550299
+[RR] frame 840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/760/1520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 736 steps 12589846
+[THREAD-FRAME] frame=897 quads=36 triangles=68 draws=34 binds=35
+[THREAD-WINDOW] frame=899 steps=899 presentations=886 sim_hz=59.847 render_fps=58.981
+[RR] frame 900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/820/1640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 796 steps 12836908
+[RR] frame 960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/880/1760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 856 steps 13083970
+[RR] frame 1020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/940/1880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 916 steps 13331032
+[RR] frame 1080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1000/2000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 976 steps 13862221
+[RR] frame 1140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1060/2120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1036 steps 14434003
+[THREAD-FRAME] frame=1197 quads=93 triangles=180 draws=90 binds=91
+[THREAD-WINDOW] frame=1199 steps=1199 presentations=1185 sim_hz=59.860 render_fps=59.161
+[RR] frame 1200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1120/2240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1096 steps 15005785
+[RR] frame 1260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1180/2360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1156 steps 15546615
+[RR] frame 1320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1240/2480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1216 steps 16071357
+[GLES2] CPU geometry allocation: 4276224 bytes
+[GLES2] CPU geometry allocation: 4276224 bytes
+[GLES2] CPU geometry allocation: 4276224 bytes
+[RR] frame 1380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1300/2600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1272 steps 17736895
+[RR] frame 1440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1360/2720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1332 steps 18991765
+[THREAD-FRAME] frame=1496 quads=2281 triangles=3635 draws=1701 binds=1702
+[THREAD-WINDOW] frame=1499 steps=1499 presentations=1420 sim_hz=59.870 render_fps=56.715
+[RR] frame 1500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1420/2840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1392 steps 20246635
+[RR] frame 1560  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1480/2960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1452 steps 21501505
+[RR] frame 1620  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1540/3080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1512 steps 23943799
+[RR] frame 1680  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1600/3200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1572 steps 27073550
+[RR] frame 1740  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1660/3320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1632 steps 30203300
+[THREAD-FRAME] frame=1796 quads=1445 triangles=2328 draws=1106 binds=1109
+[THREAD-WINDOW] frame=1799 steps=1799 presentations=1616 sim_hz=59.875 render_fps=53.785
+[RR] frame 1800  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1720/3440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1692 steps 33333050
+[RR] frame 1860  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1780/3560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1752 steps 36462800
+[RR] frame 1920  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1840/3680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1812 steps 39561302
+[RR] frame 1980  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1900/3800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1872 steps 42753156
+[RR] frame 2040  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1960/3920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1932 steps 46506486
+[THREAD-FRAME] frame=2097 quads=1020 triangles=1464 draws=684 binds=685
+[THREAD-WINDOW] frame=2099 steps=2099 presentations=1875 sim_hz=59.879 render_fps=53.489
+[RR] frame 2100  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2020/4040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1992 steps 50259816
+[RR] frame 2160  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2080/4160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2052 steps 54013146
+[RR] frame 2220  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2140/4280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2112 steps 57766476
+[RR] frame 2280  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2200/4400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2172 steps 61519806
+[RR] frame 2340  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2260/4520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2232 steps 65273136
+[THREAD-FRAME] frame=2396 quads=1252 triangles=1988 draws=953 binds=954
+[THREAD-WINDOW] frame=2399 steps=2399 presentations=2167 sim_hz=59.882 render_fps=54.091
+[RR] frame 2400  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2320/4640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2292 steps 69026466
+[RR] frame 2460  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2380/4760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2352 steps 72779796
+[RR] frame 2520  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2440/4880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2412 steps 76533126
+[RR] frame 2580  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2500/5000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2472 steps 80286456
+[RR] frame 2640  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2560/5120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2532 steps 84039786
+[THREAD-WINDOW] frame=2699 steps=2699 presentations=2424 sim_hz=59.885 render_fps=53.783
+[THREAD-FRAME] frame=2696 quads=1589 triangles=2230 draws=1062 binds=1266
+[RR] frame 2700  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2620/5240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2592 steps 87793116
+[RR] frame 2760  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2680/5360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2652 steps 91546446
+[RR] frame 2820  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2740/5480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2712 steps 95299776
+[RR] frame 2880  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2800/5600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2772 steps 99053106
+[RR] frame 2940  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2860/5720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2832 steps 102806436
+[THREAD-WINDOW] frame=2999 steps=2999 presentations=2694 sim_hz=59.887 render_fps=53.796
+[THREAD-FRAME] frame=2997 quads=1408 triangles=1773 draws=834 binds=836
+[RR] frame 3000  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2920/5840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2892 steps 106559766
+[RR] frame 3060  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2980/5960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2952 steps 110313096
+[RR] frame 3120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3040/6080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3012 steps 114066426
+[RR] frame 3180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3100/6200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3072 steps 117819756
+[RR] frame 3240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3160/6320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3132 steps 121573086
+[THREAD-WINDOW] frame=3299 steps=3299 presentations=2984 sim_hz=59.888 render_fps=54.170
+[THREAD-FRAME] frame=3298 quads=1138 triangles=1581 draws=753 binds=755
+[RR] frame 3300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3220/6440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3192 steps 125326416
+[RR] frame 3360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3280/6560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3252 steps 129079746
+[RR] frame 3420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3340/6680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3312 steps 133020564
+[RR] frame 3480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3400/6800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3372 steps 137378022
+[RR] frame 3540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3460/6920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3432 steps 141318840
+[THREAD-WINDOW] frame=3599 steps=3599 presentations=3239 sim_hz=59.890 render_fps=53.899
+[THREAD-FRAME] frame=3596 quads=1790 triangles=3059 draws=1468 binds=1470
+[RR] frame 3600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3520/7040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3492 steps 145093002
+[RR] frame 3660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3580/7160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3552 steps 148846332
+[RR] frame 3720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3640/7280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3612 steps 152599662
+[RR] frame 3780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3700/7400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3672 steps 156352992
+[RR] frame 3840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3760/7520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3732 steps 160106322
+[SND] TRANSLATED DRIVER: no translation for this address at 00CECC (M/X=0) -- sound stopped
+[SND] cannot execute opcode 0xFFFF at 00CECC -- sound halted
+[THREAD-WINDOW] frame=3899 steps=3899 presentations=3488 sim_hz=59.891 render_fps=53.578
+[THREAD-FRAME] frame=3898 quads=1094 triangles=1592 draws=753 binds=754
+[SND] sound CPU out of reset (#3), PC=C030
+[RR] frame 3900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3820/7640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3792 steps 163859652
+[RR] frame 3960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3880/7760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3852 steps 167623398
+[RR] frame 4020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3940/7880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3912 steps 171460056
+[RR] frame 4080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4000/8000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3972 steps 175213386
+[RR] frame 4140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4060/8120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4032 steps 178966716
+[THREAD-WINDOW] frame=4199 steps=4199 presentations=3787 sim_hz=59.892 render_fps=54.015
+[THREAD-FRAME] frame=4198 quads=1029 triangles=1335 draws=635 binds=636
+[RR] frame 4200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4120/8240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4092 steps 182720046
+[RR] frame 4260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4180/8360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4152 steps 186473376
+[RR] frame 4320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4240/8480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4212 steps 190226706
+[RR] frame 4380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4300/8600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4272 steps 193980036
+[RR] frame 4440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4360/8720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4332 steps 197733366
+[THREAD-WINDOW] frame=4499 steps=4499 presentations=4050 sim_hz=59.892 render_fps=53.915
+[THREAD-FRAME] frame=4497 quads=1326 triangles=1523 draws=716 binds=717
+[RR] frame 4500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4420/8840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4392 steps 201497112
+[RR] frame 4560  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4480/8960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4452 steps 205333770
+[RR] frame 4620  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4540/9080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4512 steps 209170428
+[RR] frame 4680  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4600/9200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4572 steps 213132078
+[RR] frame 4740  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4660/9320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4632 steps 217499952
+[THREAD-WINDOW] frame=4799 steps=4799 presentations=4326 sim_hz=59.893 render_fps=53.990
+[THREAD-FRAME] frame=4797 quads=1537 triangles=2376 draws=1139 binds=1142
+[RR] frame 4800  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4720/9440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4692 steps 221690754
+[RR] frame 4860  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4780/9560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4752 steps 226069044
+[RR] frame 4920  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4840/9680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4812 steps 230447334
+[RR] frame 4980  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4900/9800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4872 steps 234825624
+[RR] frame 5040  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4960/9920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4932 steps 239203914
+[THREAD-WINDOW] frame=5099 steps=5099 presentations=4600 sim_hz=59.894 render_fps=54.032
+[THREAD-FRAME] frame=5097 quads=1352 triangles=1850 draws=865 binds=866
+[RR] frame 5100  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5020/10040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4992 steps 243582204
+[RR] frame 5160  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5080/10160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5052 steps 247960494
+[RR] frame 5220  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5140/10280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5112 steps 252338784
+[RR] frame 5280  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5200/10400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5172 steps 256664994
+[RR] frame 5340  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5260/10520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5232 steps 260657892
+[THREAD-WINDOW] frame=5399 steps=5399 presentations=4861 sim_hz=59.894 render_fps=53.926
+[THREAD-FRAME] frame=5398 quads=1064 triangles=1558 draws=732 binds=733
+[RR] frame 5400  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5320/10640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5292 steps 264411222
+[RR] frame 5460  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5380/10760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5352 steps 268174968
+[RR] frame 5520  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5440/10880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5412 steps 272553258
+[RR] frame 5580  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5500/11000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5472 steps 276931548
+[RR] frame 5640  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5560/11120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5532 steps 281309838
+[THREAD-WINDOW] frame=5699 steps=5699 presentations=5123 sim_hz=59.895 render_fps=53.841
+[THREAD-FRAME] frame=5697 quads=1586 triangles=1816 draws=871 binds=874
+[RR] frame 5700  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5620/11240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5592 steps 285646464
+[RR] frame 5760  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5680/11360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5652 steps 289493538
+[RR] frame 5820  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5740/11480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5712 steps 293371860
+[RR] frame 5880  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5800/11600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5772 steps 297125190
+[RR] frame 5940  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5860/11720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5832 steps 301232664
+[THREAD-WINDOW] frame=5999 steps=5999 presentations=5419 sim_hz=59.895 render_fps=54.105
+[THREAD-FRAME] frame=5998 quads=1230 triangles=646 draws=296 binds=300
+[RR] frame 6000  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5920/11840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5892 steps 305610954
+{"schema":1,"frames":6006,"slices":96096,"instructions_68k":499612436,"last_instruction_pc":"00026c5c","sr":"2000","d":["00003c59","000002f4","000002d6","fe5f0411","00005924","0000ffff","00000000","00000001"],"a":["100096ee","00029038","00029070","000290a8","1000d834","0006c400","10008000","10000800"],"fnv1a32":{"register_bytes":"4e918ad7","wram":"8cbbe8c9","shared":"ab1f2a85","poly_be":"9c171bcf","text":"76a6f961","palette":"3725e78c","eeprom":"6d859b6e"},"traps":0,"unmapped":0,"romwrites":0,"irqs":[0,0,0,0,5926,11852,0],"dsp_steps":306048783,"sound_cycles":576218693,"dsp_fault":false,"sound_fault":false}
+[C352] inactive_fastpath=on counters=off
+[AUDIO-CHECK] from=1 samples=8555269 intervals=96096 pcm_fnv1a64=0c24e8fca4b6400e voice_fnv1a64=b76f90445ba87e18 final_fnv1a64=0a901571d869608d acc=852544
+[AUDIO-OUTPUT] underrun_samples=0 overrun_samples=0 latency_resets=0 queued_frames=2761
+[THREAD-RATE] from=1 steps=6006 rendered=5426 drain=2 sim_hz=59.895483 render_fps=54.111371 sim_cpu_ms=11.467983 copy_cpu_ms=0.645971 presentation_cpu_ms=14.017285 scene_wall_ms=3.175122 publication_age_ms=34.942034 cpu_cores_equivalent=1.689821 dropped=574 queue_peak=2 resyncs=1 discarded_lag_ms=20.124902 worker_core_counts=0/0/5428/0
+[THREAD-PERIOD] start=6615.621065395 end=6715.895738556 total_dropped=574
+[THREAD-DETAIL] producer_cpu_ms=1.225035 includes_copy=1 record_overflow=0 simulation_core_counts=6006/0/0/0 presentation_core_counts=0/0/5428/0
+[PREP-RATE] prepared=5428 prep_cpu_ms=3.155157 hud_cpu_ms=0.040625 scene_wall_ms=3.175122 dropped_prepared=0 extra_hud_bytes=7372800
+[THREAD-SYNC] scope=whole-run producer_calls=18036 producer_acquire_ms=8.729138 producer_acquire_max_us=56.957000 producer_cond_wait_ms=0.177704 consumer_calls=16286 consumer_acquire_ms=4.233888 consumer_acquire_max_us=65.206000 consumer_idle_ms=3498.571837
+[PREP-SYNC] calls=13683 acquire_ms=8.132958 acquire_max_us=162.704000 idle_ms=65633.354097
+[BOARD-STATE] fnv1a32=f9154a83
+[MEM-READER] implementation=split
+[MEM-READS] fast=on counters=off
+[SIM] ticks=4207 from=1800 overflow=0 reconciliation_max_us=0.000000
+[SIM-STAGE] name=translated68k_inclusive_memory n=4207 avg_ms=4.967314 median_ms=4.929455 p95_ms=5.611937 max_ms=7.424351 percent=40.965
+[SIM-STAGE] name=scheduler n=4207 avg_ms=0.085017 median_ms=0.068039 p95_ms=0.121286 max_ms=3.157043 percent=0.701
+[SIM-STAGE] name=dsp_inclusive_pdp n=4207 avg_ms=3.644038 median_ms=3.623326 p95_ms=4.454051 max_ms=5.977264 percent=30.052
+[SIM-STAGE] name=sound_inclusive_bus n=4207 avg_ms=1.972700 median_ms=1.968533 p95_ms=3.018921 max_ms=4.042272 percent=16.269
+[SIM-STAGE] name=c352_mix n=4207 avg_ms=1.115216 median_ms=1.030474 p95_ms=1.760661 max_ms=2.674724 percent=9.197
+[SIM-STAGE] name=serial n=4207 avg_ms=0.004036 median_ms=0.003707 p95_ms=0.005292 max_ms=0.206410 percent=0.033
+[SIM-STAGE] name=board_io n=4207 avg_ms=0.005112 median_ms=0.004292 p95_ms=0.007375 max_ms=0.263035 percent=0.042
+[SIM-STAGE] name=irq_inclusive_handlers n=4207 avg_ms=0.332245 median_ms=0.313700 p95_ms=0.479987 max_ms=1.298175 percent=2.740
+[SIM-STAGE] name=simulation_wall n=4207 avg_ms=12.125678 median_ms=12.059389 p95_ms=14.102470 max_ms=18.099282 percent=100.000
+[SIM-STAGE] name=simulation_thread_cpu n=4207 avg_ms=11.917279 median_ms=11.860166 p95_ms=13.839376 max_ms=17.518751 percent=98.281
+[GEOMETRY] skip=on effective=on test_present_every=0 ticks=6006 walks=5910 direct_consumed=48624 digest=5201027135af15fb
+[PROFILE] total mode=textured frames=1..6006 samples=5428 avg_ms simulation=0.000 scene=3.175 lookup_decode=1.553 uploads=0.457 submission=7.878 swap=3.487 render_other=2.941 pacing=0.000 capture=0.000 vertex_upload=0.271 draw_call=5.911 avg_triangles=1508.8 avg_draws=713.4 avg_binds=717.1 avg_skipped_binds=0.0 flushes texture=3867429 scissor=6696 capacity=0 mutation=0 end=5324 same_texture=243947 empty_texture_flush=424082 vbo=frame avg_vertex_uploads=0.98 avg_vertex_bytes=181054.1 texture_barriers=0
+[PROFILE-CACHE] total mode=textured frames=1..6006 samples=5428 hits=6102208 misses=14777 evictions=13364 texture_uploads=14777 GPU_end=66769364 GPU_frame_end_peak=67108852
+[VIDEO] presentations=5428 full_layer_uploads=0
+[GPU-HUD] pictures=5428 verified=0 bytes=554379776 calls=5178 profile_bytes=0 profile_calls=0
+[GPU-HUD-TRANSFER] scope=profile glyph_bytes=0 vertex_bytes=0 palette_bytes=0 lut_bytes=0
+[TEX] decoded=14777 uploads=14777 GPU=66769364 peak=67108860 budget=67108864 live=1413 hits=6102208 misses=14777 evictions=13364 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[RR] stop at frame 6006, 0 traps
+[REPLAY] completed_frames=6006 status=ok

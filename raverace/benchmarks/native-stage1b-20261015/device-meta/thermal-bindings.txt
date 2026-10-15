@@ -1,0 +1,20 @@
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_type
+passive
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_type
+passive
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_type
+critical
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/cdev0_trip_point
+1
+PATH /sys/class/thermal/thermal_zone0/cdev1_trip_point
+1
+PATH /sys/class/thermal/cooling_device0/max_state
+8
+PATH /sys/class/thermal/cooling_device1/max_state
+5

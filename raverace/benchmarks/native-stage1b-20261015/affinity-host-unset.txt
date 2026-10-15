@@ -1,0 +1,5 @@
+main: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+rr-prepare: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+rr-present: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+audio-helper: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+syscall_stops=436 sched_setaffinity_entry_and_exit_stops=0 child_exit=0

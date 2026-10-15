@@ -1,0 +1,78 @@
+{
+  "swap_returns": 3001,
+  "all_between_return_intervals": {
+    "n": 3000,
+    "mean_ms": 16.742526702329,
+    "median_ms": 16.748020500000003,
+    "stddev_ms": 0.3633406274261056,
+    "p95_ms": 16.880125,
+    "p99_ms": 17.447375,
+    "worst_ms": 19.989875,
+    "mean_hz": 59.728141264418184,
+    "median_hz": 59.708548840145006,
+    "shorter_than_half_median": 1,
+    "longer_than_1_5_median": 0,
+    "nearest_multiple_missed_vsync_estimate": 0
+  },
+  "swap_blocking": {
+    "n": 3001,
+    "mean_ms": 16.651960252906697,
+    "median_ms": 16.670125,
+    "stddev_ms": 0.4697821738275877,
+    "p95_ms": 16.794417,
+    "p99_ms": 17.366,
+    "worst_ms": 19.919417,
+    "mean_hz": 60.05298984697277,
+    "median_hz": 59.987552582839065,
+    "shorter_than_half_median": 2,
+    "longer_than_1_5_median": 0,
+    "nearest_multiple_missed_vsync_estimate": 0
+  },
+  "metadata": [
+    "# clock=CLOCK_MONOTONIC_RAW; all samples retained",
+    "# drawable=640x480 depth=24",
+    "# egl_config=2 min_swap_interval=0 max_swap_interval=1",
+    "# swap_interval_set_rc=0 reported=1 driver=mali error=",
+    "# sdl_mode=640x480 refresh_rate=60",
+    "# gl=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da renderer=Mali-G31",
+    "# fb xres=640 yres=480 virtual=640x960 pixclock_ps=41666 left=26 right=84 upper=11 lower=27 hsync=20 vsync=4 vmode=0",
+    "# fb_waitforvsync count=3001 errno=0"
+  ],
+  "vsync_wait_intervals": {
+    "n": 3000,
+    "mean_ms": 0.008239833403666668,
+    "median_ms": 0.0072705005,
+    "stddev_ms": 0.006658463405910798,
+    "p95_ms": 0.012041,
+    "p99_ms": 0.012834001,
+    "worst_ms": 0.345209,
+    "mean_hz": 121361.67699155265,
+    "median_hz": 137542.11281602966,
+    "shorter_than_half_median": 0,
+    "longer_than_1_5_median": 478,
+    "nearest_multiple_missed_vsync_estimate": 556
+  },
+  "note": "Every between-return interval retained; no warmup trimming. Return rate is not automatically physical refresh when delayed/dropped returns occur. Timestamps cannot prove absence of visible tearing.",
+  "all_return_linear_fit": {
+    "samples": 3001,
+    "period_ms": 16.747501829767725,
+    "hz": 59.71039801426129,
+    "all_samples_used": true,
+    "residual_min_ms": -0.9662329025248613,
+    "residual_max_ms": 15.472768926486978,
+    "note": "All return timestamps used, including startup queue filling. Fit separates long-run cadence from first queued immediate return; no outlier exclusion."
+  },
+  "fb_vsync_wait_blocks": false,
+  "fb_vsync_wait_rejection": "IOCTL reports success but returns in microseconds: not a physical vsync measurement.",
+  "arcade_hz": 59.904059904059906,
+  "swap_mean_cadence_difference": {
+    "hz": -0.17591863964172205,
+    "one_repeat_or_drop_seconds": 5.684445957725751,
+    "policy": "panel slower: omit a presentation while preserving authoritative ticks"
+  },
+  "fitted_panel_cadence_difference": {
+    "hz": -0.1936618897986193,
+    "one_repeat_or_drop_seconds": 5.163638550877806,
+    "policy": "panel slower: omit a presentation while preserving authoritative ticks"
+  }
+}

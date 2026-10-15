@@ -1,0 +1,8 @@
+PATH /sys/class/thermal/thermal_zone0/policy
+power_allocator
+PATH /sys/class/thermal/thermal_zone0/sustainable_power
+1000
+PATH /sys/class/thermal/thermal_zone0/k_po
+20
+PATH /sys/class/thermal/thermal_zone0/k_pu
+40

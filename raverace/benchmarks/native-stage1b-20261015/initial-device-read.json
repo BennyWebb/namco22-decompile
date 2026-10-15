@@ -1,0 +1,41 @@
+{
+  "read_time_device": "2026-10-15 18:47:52 BST",
+  "gpu": {
+    "governor": "simple_ondemand",
+    "cur_freq_hz": 240000000,
+    "available_governors": [
+      "simple_ondemand"
+    ],
+    "available_frequencies_hz": [
+      240000000,
+      336000000,
+      420000000,
+      504000000,
+      600000000,
+      696000000
+    ],
+    "min_freq": 0,
+    "max_freq": 0
+  },
+  "cpu": {
+    "governor": "schedutil",
+    "available_governors": [
+      "interactive",
+      "conservative",
+      "ondemand",
+      "userspace",
+      "powersave",
+      "performance",
+      "schedutil"
+    ],
+    "min_khz": 480000,
+    "max_khz": 1512000
+  },
+  "emulationstation_pid": 6229,
+  "tmp": {
+    "size_mib": 487,
+    "used_mib": 18
+  },
+  "mem_available_kib": 695408,
+  "note": "Read-only idle snapshot. No timed replay or governor change occurred before connection failure."
+}

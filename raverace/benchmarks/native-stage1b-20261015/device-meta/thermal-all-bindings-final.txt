@@ -1,0 +1,45 @@
+ZONE /sys/class/thermal/thermal_zone0
+PATH /sys/class/thermal/thermal_zone0/type
+cpu_thermal_zone
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_temp
+60000
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_type
+passive
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_temp
+70000
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_type
+passive
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_hyst
+0
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_temp
+115000
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_type
+critical
+PATH /sys/class/thermal/thermal_zone0/cdev0_trip_point
+1
+PATH /sys/class/thermal/thermal_zone0/cdev1_trip_point
+1
+ZONE /sys/class/thermal/thermal_zone1
+PATH /sys/class/thermal/thermal_zone1/type
+gpu_thermal_zone
+ZONE /sys/class/thermal/thermal_zone2
+PATH /sys/class/thermal/thermal_zone2/type
+ve_thermal_zone
+ZONE /sys/class/thermal/thermal_zone3
+PATH /sys/class/thermal/thermal_zone3/type
+ddr_thermal_zone
+ZONE /sys/class/thermal/thermal_zone4
+PATH /sys/class/thermal/thermal_zone4/type
+axp2202-battery
+DEVICE /sys/class/thermal/cooling_device0
+thermal-cpufreq-0
+0
+8
+DEVICE /sys/class/thermal/cooling_device1
+thermal-devfreq-0
+0
+5

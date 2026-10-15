@@ -1,0 +1,255 @@
+/userdata/roms/ports/rave-gles2/rr_gles2: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potu3.2d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg5.1j: OK
+/userdata/roms/ports/rave-gles2/extracted/c74.bin: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potu0.5d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg2.1d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv2_prgumb.8d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potm3.2c: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg4.1f: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potl3.2b: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg6.1k: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1ccrh.5c: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potl1.4b: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg0.1a: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg7.1n: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1wav3.10l: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1data.6r: OK
+/userdata/roms/ports/rave-gles2/extracted/rv2_prgllb.4d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv2_prguub.6d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potm1.4c: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1wav0.10r: OK
+/userdata/roms/ports/rave-gles2/extracted/rv2_prglmb.2d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1wav1.10p: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potl0.5b: OK
+/userdata/roms/ports/rave-gles2/extracted/rr1gam.3d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potu1.4d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1wav2.10n: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potl2.3b: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1ccrl.5a: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg3.1e: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potm2.3c: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1cg1.1c: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1eeprm.9e: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potm0.5c: OK
+/userdata/roms/ports/rave-gles2/extracted/rr1gam.4d: OK
+/userdata/roms/ports/rave-gles2/extracted/rv1potu2.3d: OK
+/userdata/roms/ports/rave-gles2/extracted/rr1gam.2d: OK
+/userdata/roms/ports/rave-gles2/replay-mode: OK
+/userdata/roms/ports/rave-gles2/gpu-hud-mode: OK
+/userdata/roms/ports/rave-gles2/controller-input.cfg: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec.build.sha256: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec.meta: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec.eeprom: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec.states.jsonl: OK
+/userdata/system/rave-racer-replays/race-20261013-122242-25136.rec.end: OK
+/userdata/roms/ports/Rave Racer.sh: OK
+a9bf7074208f1c4eb8cce4fb281428a65ab77744417acf6056b1dfd171263d51  /userdata/system/rave-racer-native-stage1-20261015/rr_stage1
+6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e  /userdata/system/rave-racer-native-live-4a-20261015/rr_production_baseline
+PATH /sys/class/devfreq/gpu/governor
+simple_ondemand
+PATH /sys/class/devfreq/gpu/min_freq
+0
+PATH /sys/class/devfreq/gpu/max_freq
+0
+PATH /sys/class/devfreq/gpu/cur_freq
+240000000
+PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+schedutil
+PATH /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+schedutil
+PATH /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+schedutil
+PATH /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+schedutil
+PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+480000
+PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+1512000
+EMULATIONSTATION
+29007
+PROCESSES
+  PID  PPID STAT COMMAND
+    1     0 Ss   init
+    2     0 S    kthreadd
+    4     2 S<   kworker/0:0H
+    6     2 S    ksoftirqd/0
+    7     2 S    rcu_preempt
+    8     2 S    rcu_sched
+    9     2 S    rcu_bh
+   10     2 S    migration/0
+   11     2 S<   lru-add-drain
+   12     2 S    cpuhp/0
+   13     2 S    cpuhp/1
+   14     2 S    migration/1
+   15     2 S    ksoftirqd/1
+   17     2 S<   kworker/1:0H
+   18     2 S    cpuhp/2
+   19     2 S    migration/2
+   20     2 S    ksoftirqd/2
+   22     2 S<   kworker/2:0H
+   23     2 S    cpuhp/3
+   24     2 S    migration/3
+   25     2 S    ksoftirqd/3
+   27     2 S<   kworker/3:0H
+   28     2 S    kdevtmpfs
+   29     2 S<   netns
+  449     2 S    oom_reaper
+  450     2 S<   writeback
+  452     2 S    kcompactd0
+  453     2 S<   crypto
+  454     2 S<   bioset
+  456     2 S<   kblockd
+  511     2 S    sys_user
+  514     2 S<   devfreq_wq
+  527     2 S<   cfg80211
+  539     2 S    irq/322-axp2202
+  726     2 S    kswapd0
+  727     2 S<   vmstat
+  805     2 S<   SquashFS read w
+  886     2 S<   bioset
+  887     2 S<   bioset
+  888     2 S<   bioset
+  889     2 S<   bioset
+  890     2 S<   bioset
+  891     2 S<   bioset
+  892     2 S<   bioset
+  893     2 S<   bioset
+  894     2 S<   bioset
+  895     2 S<   bioset
+  896     2 S<   bioset
+  897     2 S<   bioset
+  898     2 S<   bioset
+  899     2 S<   bioset
+  900     2 S<   bioset
+  901     2 S<   bioset
+  935     2 S<   bioset
+  938     2 S<   bioset
+  941     2 S<   bioset
+  944     2 S<   bioset
+  947     2 S<   bioset
+  950     2 S<   bioset
+  953     2 S<   bioset
+  956     2 S<   bioset
+  959     2 S<   memory_wq
+ 1048     2 S<   dm_bufio_cache
+ 1049     2 S    cfinteractive
+ 1056     2 S    irq/295-sunxi-m
+ 1059     2 S    irq/151-sdc0 cd
+ 1060     2 S    irq/296-sunxi-m
+ 1062     2 S    irq/297-sunxi-m
+ 1065     2 S<   bioset
+ 1066     2 S    mmcqd/0
+ 1165     2 S    kpktgend_0
+ 1166     2 S    kpktgend_1
+ 1167     2 S    kpktgend_2
+ 1168     2 S    kpktgend_3
+ 1189     2 S<   ipv6_addrconf
+ 1200     2 S<   krfcommd
+ 1208     2 S<   hdcp22_workqueu
+ 1211     2 S    hdmi proc
+ 1212     2 S    cec thread
+ 1217     2 D    usb_pmu_scan
+ 1256     2 S<   kworker/2:1H
+ 1260     2 S<   loop0
+ 1262     2 S<   kworker/1:1H
+ 1263     2 S<   kworker/0:1H
+ 1265     2 S<   bioset
+ 1266     2 S    mmcqd/1
+ 1271     2 S<   kworker/3:1H
+ 1339     2 S    mali-simple-pow
+ 1342     2 S<   kbase_job_fault
+ 1374     1 Ss   syslogd
+ 1434     2 S    ksdioirqd/mmc2
+ 1435     1 Ss   udevd
+ 1528     1 S<l  pipewire
+ 2062     1 S<l  wireplumber
+ 2064     1 S<l  pipewire
+ 2164     1 S    wpa_supplicant
+ 2176     2 S    RTW_XMIT_THREAD
+ 2177     2 S    RTW_RECV_THREAD
+ 2178     2 S    RTW_CMD_THREAD
+ 2179     2 S    RTWHALXT
+ 2204     1 Ss   mount.exfat
+ 2213     2 S    RTWHALXT
+ 2716     1 S    batteryplus
+ 2803     1 Ss   thd
+ 2845     1 Ss   login
+ 2926     1 Ss   rpc.mountd
+ 2934     1 S    idlewatcher
+ 2971     1 Ss   dropbear
+ 3178     1 Ss   smbd
+ 3199  3178 S    smbd-notifyd
+ 3200  3178 S    smbd-cleanupd
+ 3211     1 Ss   nmbd
+ 3220     1 S    python3
+ 3323     1 Sl   knulli-rgb
+ 3368  3323 Z    knulli-settings
+ 3709     1 S    connmand
+ 4019  2971 Ss   dropbear
+18411     2 S    kworker/u8:1
+23557     2 S    kworker/3:0
+24187     2 S    kworker/0:7
+25316     2 S    kworker/3:1
+25632     2 S    kworker/u8:0
+25683     2 S    kworker/0:0
+25691     2 S    kworker/2:0
+25856     2 S    kworker/0:2
+25857     2 S    kworker/0:3
+25865     2 S    kworker/1:11
+25871     2 S    kworker/2:2
+25872     2 S    kworker/3:3
+25874     2 S    kworker/3:6
+25877     2 S    kworker/3:9
+25878     2 S    kworker/0:4
+25882     2 S    kworker/2:5
+25883     2 S    kworker/2:6
+26321     2 S    kworker/0:5
+26322     2 S    kworker/0:8
+26324     2 S    kworker/0:10
+26327     2 S    kworker/2:8
+26770     2 S    kworker/0:12
+27060     2 S    kworker/u8:3
+27212     2 S    kworker/3:10
+27213     2 S    kworker/3:11
+27214     2 S    kworker/3:12
+27215     2 S    kworker/3:13
+27217     2 S    kworker/3:15
+27564     2 S    kworker/1:0
+27567     2 S<   kworker/u9:2
+27706     2 S    kworker/0:1
+27708     2 S    kworker/1:1
+27709     2 S    kworker/1:2
+27710     2 S    kworker/1:3
+27711     2 S    kworker/1:4
+27713     2 S    kworker/1:6
+28023     2 S<   kworker/u9:1
+28604     2 S    kworker/1:5
+28605     2 S    kworker/1:7
+28606     2 S    kworker/1:8
+28607     2 S    kworker/1:9
+28608     2 S    kworker/3:2
+28609     2 S    kworker/3:4
+28610     2 S    kworker/3:5
+28611     2 S    kworker/3:7
+28612     2 S    kworker/3:8
+28613     2 S    kworker/3:14
+28614     2 S    kworker/3:16
+28615     2 S    kworker/0:6
+28616     2 S    kworker/0:9
+28899     2 S<   kworker/u9:0
+28903     2 S    kworker/u8:2
+28923     2 S    sugov:0
+28936     1 S    emulationstatio
+29007 28936 SLl  emulationstatio
+29035     2 S<   kbase_event
+29046     2 S    kworker/2:1
+29047     2 S    kworker/2:3
+29048     2 S    kworker/2:4
+29049     2 S    kworker/2:7
+29050     2 S    kworker/2:9
+29051     2 S    kworker/2:10
+29316  4019 S    bash
+29319  1435 S    udevd
+29331 29316 R    ps

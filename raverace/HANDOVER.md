@@ -5,6 +5,22 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Stage 1b environment/build-flag audit — COMPLETE / STOPPED (2026-10-15)
+
+See [headroom report](NATIVE_STAGE1B_HEADROOM_REPORT.md) and
+[evidence/methods](benchmarks/native-stage1b-20261015/README.md).
+Stock native GPU stays at 240 MHz. GPU-max saves ~2.96 ms median rendering;
+CPU performance saves ~0.59 ms simulation, generated-source O2 a further ~0.86 ms.
+Retain stack protection; affinity OFF. Flag timings use one run/configuration at
+user request, so repeatability remains unproven. All 50 H700 replays pass 6,006
+ticks/all 21 checkpoint sets; host/ARM variants preserve 4,207 exact packets.
+Best-clock O2 model still misses 70/298 pictures at 10/20% contention. Panel is
+**59.7104 Hz**, below arcade refresh (~one omitted presentation/5.16 s with vsync).
+Some stock production runs show GPU thermal limiting. All 47 protected hashes
+match; original governors restored, EmulationStation up, no game running.
+Production unchanged; no commit/push. **M3 remains blocked. Stage 2/M4B and any
+architecture/presentation/production implementation require explicit approval.**
+
 ## Stage 1 architecture/CPU audit — COMPLETE / STOPPED (2026-10-15)
 
 **GO recommendation for a limited three-stage parallel-execution prototype; separate

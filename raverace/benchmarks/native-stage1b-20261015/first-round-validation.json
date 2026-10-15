@@ -1,0 +1,50 @@
+{
+  "B-1-both-native": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-both-production": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-cpu-native": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-cpu-production": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-gpu-native": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-gpu-production": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-stock-native": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  },
+  "B-1-stock-production": {
+    "exit": 0,
+    "clock_restore_identical": true,
+    "production_hash_identical": true,
+    "checkpoint_validation": "PASS: 21 completed checkpoints, through tick 6006; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+  }
+}

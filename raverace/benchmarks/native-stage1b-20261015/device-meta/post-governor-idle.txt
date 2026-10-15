@@ -1,0 +1,41 @@
+PATH /sys/class/thermal/thermal_zone0/type
+cpu_thermal_zone
+PATH /sys/class/thermal/thermal_zone1/type
+gpu_thermal_zone
+PATH /sys/class/thermal/thermal_zone2/type
+ve_thermal_zone
+PATH /sys/class/thermal/thermal_zone3/type
+ddr_thermal_zone
+PATH /sys/class/thermal/thermal_zone4/type
+axp2202-battery
+PATH /sys/class/thermal/thermal_zone0/trip_point_0_temp
+60000
+PATH /sys/class/thermal/thermal_zone0/trip_point_1_temp
+70000
+PATH /sys/class/thermal/thermal_zone0/trip_point_2_temp
+115000
+PATH /sys/class/thermal/cooling_device0/type
+thermal-cpufreq-0
+PATH /sys/class/thermal/cooling_device1/type
+thermal-devfreq-0
+PATH /sys/class/thermal/cooling_device0/cur_state
+0
+PATH /sys/class/thermal/cooling_device1/cur_state
+0
+PATH /sys/class/devfreq/gpu/governor
+simple_ondemand
+PATH /sys/class/devfreq/gpu/available_governors
+simple_ondemand
+PATH /sys/class/devfreq/gpu/available_frequencies
+240000000 336000000 420000000 504000000 600000000 696000000
+PATH /sys/class/devfreq/gpu/min_freq
+0
+PATH /sys/class/devfreq/gpu/max_freq
+0
+PATH /sys/devices/system/cpu/cpu0/cpufreq/related_cpus
+0 1 2 3
+PATH /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+480000 792000 1008000 1200000 1320000 1416000 1512000 1600000 1704000 
+a9bf7074208f1c4eb8cce4fb281428a65ab77744417acf6056b1dfd171263d51  /userdata/system/rave-racer-native-stage1-20261015/rr_stage1
+6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e  /userdata/roms/ports/rave-gles2/rr_gles2
+15117

@@ -1,0 +1,1212 @@
+{
+  "target_hz": 59.904059904059906,
+  "period_ms": 16.693359375,
+  "strict_deadline_ms": 16.693,
+  "source": "Current control run: joint per-tick simulation/copy/preparation/GPU completion. Sequential shadow-original work is excluded from native product model, never CPU work genuinely needed by the renderer.",
+  "assumptions": "Separate cores and stages, FIFO no omitted snapshots/ticks, finite3-slot ownership, no bandwidth/thermal penalty except explicit CPU slowdown.0.1ms assumed per-stage handoff/scheduling cost, not measured native parallel overhead. GPU completion adds slowdown only to measured render-thread CPU component. No prediction of real scanout or production readiness. Existing6ms preparation coalescing and latest-picture dropping are NOT assumed in this strict FIFO model; they would require explicit policy review in a separately authorised prototype.",
+  "service_ms": {
+    "simulation": {
+      "n": 4207,
+      "median": 10.501444,
+      "p95": 13.631118,
+      "p99": 15.508514,
+      "worst": 19.170525,
+      "mean": 10.63531517423342,
+      "over_16_693": 20
+    },
+    "snapshot_copy": {
+      "n": 4207,
+      "median": 0.438291667,
+      "p95": 0.535416667,
+      "p99": 0.695166667,
+      "worst": 1.634291667,
+      "mean": 0.4534940971402424,
+      "over_16_693": 0
+    },
+    "native_preparation": {
+      "n": 4207,
+      "median": 10.66996,
+      "p95": 13.978842,
+      "p99": 15.655864000000001,
+      "worst": 18.009014999999998,
+      "mean": 10.833580178274303,
+      "over_16_693": 7
+    },
+    "renderer": {
+      "n": 4207,
+      "median": 10.258842,
+      "p95": 12.127471,
+      "p99": 13.529958,
+      "worst": 15.260092,
+      "mean": 10.254073864986927,
+      "over_16_693": 0
+    },
+    "renderer_cpu": {
+      "n": 4207,
+      "median": 2.68725,
+      "p95": 3.796458,
+      "p99": 4.497458,
+      "worst": 5.994875,
+      "mean": 2.783710317565961,
+      "over_16_693": 0
+    },
+    "two_stage_cpu_producer": {
+      "n": 4207,
+      "median": 21.625992333,
+      "p95": 26.998300667,
+      "p99": 29.506866332999998,
+      "worst": 37.072868667,
+      "mean": 21.922389449647966,
+      "over_16_693": 4207
+    },
+    "two_stage_preparation_plus_render": {
+      "n": 4207,
+      "median": 20.788668,
+      "p95": 25.468443999999998,
+      "p99": 28.805956,
+      "worst": 32.201411,
+      "mean": 21.08765404326123,
+      "over_16_693": 4155
+    },
+    "ideal_three_stage_bottleneck": {
+      "n": 4207,
+      "median": 11.629149,
+      "p95": 14.956551000000001,
+      "p99": 16.457432999999998,
+      "worst": 19.632941667,
+      "mean": 11.83039399469123,
+      "over_16_693": 29
+    }
+  },
+  "scenarios": {
+    "0": {
+      "ideal_bottleneck_ms": {
+        "n": 4207,
+        "median": 11.729149,
+        "p95": 15.056551,
+        "p99": 16.557433,
+        "worst": 19.732941667000002,
+        "mean": 11.930393994691228,
+        "over_16_693": 33
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 32.31031066700234,
+          "p95": 39.06365466700299,
+          "p99": 44.42539120800211,
+          "worst": 49.1155112919987,
+          "mean": 32.53146817600689,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 32.31031066700234,
+          "p95": 39.06365466700299,
+          "p99": 44.42539120800211,
+          "worst": 49.1155112919987,
+          "mean": 32.53146817600689,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.651123541505513,
+          "p95": 20.160524374998204,
+          "p99": 22.495656709004834,
+          "worst": 25.48947870900156,
+          "mean": 16.689955616242514,
+          "over_16_693": 2029
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 11.061066332993505,
+          "p95": 14.252287999996042,
+          "p99": 16.091116666999937,
+          "worst": 19.732941666999977,
+          "mean": 11.196725946567609,
+          "over_16_693": 27
+        },
+        "late_2_periods": 1416,
+        "late_3_periods": 0,
+        "backpressure_events": 0,
+        "backpressure_total_ms": 0.0,
+        "output_fps": 59.91627677109034,
+        "strict_pacing_late_intervals": 2029
+      },
+      "fixed_2_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 32.31031066700234,
+          "p95": 39.06365466700299,
+          "p99": 44.42539120800211,
+          "worst": 49.1155112919987,
+          "mean": 32.53146817600689,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 33.38671875,
+          "p95": 39.06365466700299,
+          "p99": 44.42539120800211,
+          "worst": 49.1155112919987,
+          "mean": 34.29038216480582,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 18.912916624998616,
+          "p99": 21.537142041999687,
+          "worst": 25.320141374999366,
+          "mean": 16.6913041396417,
+          "over_16_693": 3250
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 11.061066332993505,
+          "p95": 14.252287999996042,
+          "p99": 16.091116666999937,
+          "worst": 19.732941666999977,
+          "mean": 11.196725946567609,
+          "over_16_693": 27
+        },
+        "late_2_periods": 1416,
+        "late_3_periods": 0,
+        "backpressure_events": 0,
+        "backpressure_total_ms": 0.0,
+        "output_fps": 59.91143601685435,
+        "strict_pacing_late_intervals": 846
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 43.74500375000025,
+          "p95": 45.62152675000107,
+          "p99": 47.266121749999,
+          "worst": 49.1155112919987,
+          "mean": 43.74674488137867,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 50.080078125,
+          "p99": 50.080078125,
+          "worst": 50.080078125,
+          "mean": 50.080078125,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 16.693359375,
+          "p99": 16.693359375,
+          "worst": 16.693359375,
+          "mean": 16.693359375,
+          "over_16_693": 4206
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 11.061066332993505,
+          "p95": 14.252287999996042,
+          "p99": 16.091116666999937,
+          "worst": 19.732941666999977,
+          "mean": 11.196725946567609,
+          "over_16_693": 27
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 0,
+        "backpressure_events": 0,
+        "backpressure_total_ms": 0.0,
+        "output_fps": 59.904059904059906,
+        "strict_pacing_late_intervals": 0
+      }
+    },
+    "0.1": {
+      "ideal_bottleneck_ms": {
+        "n": 4207,
+        "median": 12.7984825,
+        "p95": 16.5314249,
+        "p99": 18.203176300000003,
+        "worst": 21.696235833700005,
+        "mean": 13.026982458411196,
+        "over_16_693": 180
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 34.78786713370209,
+          "p95": 43.50886879999962,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 36.16388151544963,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 34.78786713370209,
+          "p95": 43.50886879999962,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 36.16388151544963,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.61958760815105,
+          "p95": 20.4134136749999,
+          "p99": 23.06764020760056,
+          "worst": 26.371073642389092,
+          "mean": 16.68973043090409,
+          "over_16_693": 1990
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 12.167263633698894,
+          "p95": 16.468738100000337,
+          "p99": 40.32862723371363,
+          "worst": 59.27135714132601,
+          "mean": 12.844757302907144,
+          "over_16_693": 190
+        },
+        "late_2_periods": 2751,
+        "late_3_periods": 153,
+        "backpressure_events": 86,
+        "backpressure_total_ms": 236.04476626987162,
+        "output_fps": 59.91708518840527,
+        "strict_pacing_late_intervals": 1990
+      },
+      "fixed_2_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 34.78786713370209,
+          "p95": 43.50886879999962,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 36.16388151544963,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 34.78786713370209,
+          "p95": 43.50886879999962,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 36.80816277186163,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 19.93801957499818,
+          "p99": 22.754758217386552,
+          "worst": 26.139510675002384,
+          "mean": 16.690562131875012,
+          "over_16_693": 2598
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 12.167263633698894,
+          "p95": 16.468738100000337,
+          "p99": 40.32862723371363,
+          "worst": 59.27135714132601,
+          "mean": 12.844757302907144,
+          "over_16_693": 190
+        },
+        "late_2_periods": 2751,
+        "late_3_periods": 153,
+        "backpressure_events": 86,
+        "backpressure_total_ms": 236.04476626987162,
+        "output_fps": 59.914099483218564,
+        "strict_pacing_late_intervals": 1402
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 44.0257895499999,
+          "p95": 46.261107449998235,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 45.06368790727439,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 50.080078125,
+          "p99": 89.9296095250138,
+          "worst": 106.85089862502355,
+          "mean": 50.98951151108088,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 16.693359375,
+          "p99": 17.35761360000106,
+          "worst": 20.09155389999796,
+          "mean": 16.693359375,
+          "over_16_693": 4114
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 12.167263633698894,
+          "p95": 16.468738100000337,
+          "p99": 40.32862723371363,
+          "worst": 59.27135714132601,
+          "mean": 12.844757302907144,
+          "over_16_693": 190
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 153,
+        "backpressure_events": 86,
+        "backpressure_total_ms": 236.04476626987162,
+        "output_fps": 59.904059904059906,
+        "strict_pacing_late_intervals": 63
+      }
+    },
+    "0.2": {
+      "ideal_bottleneck_ms": {
+        "n": 4207,
+        "median": 13.9487536,
+        "p95": 18.0251908,
+        "p99": 19.8489196,
+        "worst": 23.659530000400004,
+        "mean": 14.182401830711195,
+        "over_16_693": 435
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 37.42777280039445,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 53.69073284189033,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 37.42777280039445,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 53.69073284189033,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.563891150402924,
+          "p95": 20.629319774598116,
+          "p99": 23.546444974592305,
+          "worst": 27.252668575798452,
+          "mean": 16.689505245565666,
+          "over_16_693": 1933
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 13.309481199999937,
+          "p95": 181.49661040121282,
+          "p99": 276.41680600079417,
+          "worst": 287.56927142459244,
+          "mean": 28.378942470791312,
+          "over_16_693": 607
+        },
+        "late_2_periods": 3665,
+        "late_3_periods": 387,
+        "backpressure_events": 180,
+        "backpressure_total_ms": 493.2307417269949,
+        "output_fps": 59.91789362753554,
+        "strict_pacing_late_intervals": 1933
+      },
+      "fixed_2_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 37.42777280039445,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 53.69073284189033,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 37.42777280039445,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 53.83334459347099,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 20.505058775801444,
+          "p99": 23.252934574999927,
+          "worst": 26.958879974998126,
+          "mean": 16.68982012410832,
+          "over_16_693": 2123
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 13.309481199999937,
+          "p95": 181.49661040121282,
+          "p99": 276.41680600079417,
+          "worst": 287.56927142459244,
+          "mean": 28.378942470791312,
+          "over_16_693": 607
+        },
+        "late_2_periods": 3665,
+        "late_3_periods": 387,
+        "backpressure_events": 180,
+        "backpressure_total_ms": 493.2307417269949,
+        "output_fps": 59.9167631864113,
+        "strict_pacing_late_intervals": 1752
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 44.33459235000191,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 60.182038904925655,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 219.03530695000518,
+          "p99": 325.1473531499905,
+          "worst": 336.19027542499316,
+          "mean": 65.56131447205637,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 16.693359375,
+          "p99": 19.119153600000573,
+          "worst": 21.91766380000263,
+          "mean": 16.693359375,
+          "over_16_693": 4017
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 13.309481199999937,
+          "p95": 181.49661040121282,
+          "p99": 276.41680600079417,
+          "worst": 287.56927142459244,
+          "mean": 28.378942470791312,
+          "over_16_693": 607
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 387,
+        "backpressure_events": 180,
+        "backpressure_total_ms": 493.2307417269949,
+        "output_fps": 59.904059904059906,
+        "strict_pacing_late_intervals": 200
+      }
+    },
+    "0.3": {
+      "ideal_bottleneck_ms": {
+        "n": 4207,
+        "median": 15.1025044,
+        "p95": 19.5189567,
+        "p99": 21.4946629,
+        "worst": 25.622824167100003,
+        "mean": 15.352803519562944,
+        "over_16_693": 825
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 40.63582236709772,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 100.79703912782755,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 40.63582236709772,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 100.79703912782755,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.487037399996552,
+          "p95": 20.76541870789515,
+          "p99": 23.624938875000225,
+          "worst": 28.134263509207813,
+          "mean": 16.68928006022725,
+          "over_16_693": 1840
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 14.872006167101063,
+          "p95": 595.5847133171847,
+          "p99": 662.3411443013138,
+          "worst": 667.477755932945,
+          "mean": 72.50259884622886,
+          "over_16_693": 1219
+        },
+        "late_2_periods": 4150,
+        "late_3_periods": 894,
+        "backpressure_events": 285,
+        "backpressure_total_ms": 811.4221974460088,
+        "output_fps": 59.91870208848203,
+        "strict_pacing_late_intervals": 1840
+      },
+      "fixed_2_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 40.63582236709772,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 100.79703912782755,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 40.63582236709772,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 100.81007902386422,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.497336637501576,
+          "p95": 20.732417992105184,
+          "p99": 23.624938875000225,
+          "worst": 28.134263509207813,
+          "mean": 16.68928006022725,
+          "over_16_693": 1855
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 14.872006167101063,
+          "p95": 595.5847133171847,
+          "p99": 662.3411443013138,
+          "worst": 667.477755932945,
+          "mean": 72.50259884622886,
+          "over_16_693": 1219
+        },
+        "late_2_periods": 4150,
+        "late_3_periods": 894,
+        "backpressure_events": 285,
+        "backpressure_total_ms": 811.4221974460088,
+        "output_fps": 59.91870208848203,
+        "strict_pacing_late_intervals": 1824
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 44.81845445000363,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 104.69890445354027,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 634.1780949329914,
+          "p99": 691.57790680791,
+          "worst": 697.2368306579119,
+          "mean": 109.05709197911358,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 18.40467293290567,
+          "p99": 20.70785359999718,
+          "worst": 23.74377370000002,
+          "mean": 16.693047055803113,
+          "over_16_693": 3755
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 14.872006167101063,
+          "p95": 595.5847133171847,
+          "p99": 662.3411443013138,
+          "worst": 667.477755932945,
+          "mean": 72.50259884622886,
+          "over_16_693": 1219
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 894,
+        "backpressure_events": 285,
+        "backpressure_total_ms": 811.4221974460088,
+        "output_fps": 59.90518068134022,
+        "strict_pacing_late_intervals": 456
+      }
+    }
+  },
+  "gpu_contention_stress": {
+    "0.1": {
+      "renderer_service_ms": {
+        "n": 4207,
+        "median": 11.3847262,
+        "p95": 13.440218100000001,
+        "p99": 14.9829538,
+        "worst": 16.886101200000002,
+        "mean": 11.37948125148562,
+        "over_16_693": 1
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 35.55154343369941,
+          "p95": 44.31464688370397,
+          "p99": 90.82331662501383,
+          "worst": 107.71459342502567,
+          "mean": 36.91367509415557,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 35.55154343369941,
+          "p95": 44.31464688370397,
+          "p99": 90.82331662501383,
+          "worst": 107.71459342502567,
+          "mean": 36.91367509415557,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.61674290814699,
+          "p95": 20.4193941413032,
+          "p99": 23.04841760760064,
+          "worst": 26.36909064239444,
+          "mean": 16.689615240366766,
+          "over_16_693": 1986
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 12.167263633698894,
+          "p95": 16.47717546629974,
+          "p99": 41.22233433371366,
+          "worst": 60.14221814132543,
+          "mean": 12.864708560567008,
+          "over_16_693": 190
+        },
+        "late_2_periods": 3088,
+        "late_3_periods": 157,
+        "backpressure_events": 89,
+        "backpressure_total_ms": 244.86458629491244,
+        "output_fps": 59.91749873186557,
+        "strict_pacing_late_intervals": 1986
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 44.77144494999811,
+          "p95": 47.10678895000092,
+          "p99": 90.82331662501383,
+          "worst": 107.71459342502567,
+          "mean": 45.81072426201639,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 50.080078125,
+          "p99": 90.82331662501383,
+          "worst": 107.71459342502567,
+          "mean": 51.021664617403424,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 16.693359375,
+          "p99": 17.363075500001287,
+          "worst": 20.0819883999975,
+          "mean": 16.693359375,
+          "over_16_693": 4110
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 12.167263633698894,
+          "p95": 16.47717546629974,
+          "p99": 41.22233433371366,
+          "worst": 60.14221814132543,
+          "mean": 12.864708560567008,
+          "over_16_693": 190
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 157,
+        "backpressure_events": 89,
+        "backpressure_total_ms": 244.86458629491244,
+        "output_fps": 59.904059904059906,
+        "strict_pacing_late_intervals": 64
+      }
+    },
+    "0.2": {
+      "renderer_service_ms": {
+        "n": 4207,
+        "median": 12.4106104,
+        "p95": 14.652965199999999,
+        "p99": 16.335949600000003,
+        "worst": 18.4121104,
+        "mean": 12.40488863798431,
+        "over_16_693": 26
+      },
+      "unpaced": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 38.95435119960166,
+          "p95": 220.75427862580545,
+          "p99": 326.76031754998985,
+          "worst": 337.8744536249942,
+          "mean": 55.25214206835584,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 38.95435119960166,
+          "p95": 220.75427862580545,
+          "p99": 326.76031754998985,
+          "worst": 337.8744536249942,
+          "mean": 55.25214206835584,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.547770175402547,
+          "p95": 20.597520574199734,
+          "p99": 23.54165177460527,
+          "worst": 27.24870257580187,
+          "mean": 16.68927486449101,
+          "over_16_693": 1925
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 13.313083200399888,
+          "p95": 183.10860900121043,
+          "p99": 278.06000160079566,
+          "worst": 289.2089270245924,
+          "mean": 28.531081241352414,
+          "over_16_693": 608
+        },
+        "late_2_periods": 4013,
+        "late_3_periods": 395,
+        "backpressure_events": 180,
+        "backpressure_total_ms": 496.9270755266007,
+        "output_fps": 59.91872074248433,
+        "strict_pacing_late_intervals": 1925
+      },
+      "fixed_3_period_latency": {
+        "completion_latency_ms": {
+          "n": 4207,
+          "median": 45.84899515000143,
+          "p95": 220.75427862580545,
+          "p99": 326.76031754998985,
+          "worst": 337.8744536249942,
+          "mean": 61.73155479185555,
+          "over_16_693": 4207
+        },
+        "presentation_latency_ms": {
+          "n": 4207,
+          "median": 50.080078125,
+          "p95": 220.75427862580545,
+          "p99": 326.76031754998985,
+          "worst": 337.8744536249942,
+          "mean": 65.7701810103711,
+          "over_16_693": 4207
+        },
+        "presentation_interval_ms": {
+          "n": 4206,
+          "median": 16.693359375,
+          "p95": 16.693359375,
+          "p99": 19.11281080000117,
+          "worst": 21.898532800001703,
+          "mean": 16.693288721582167,
+          "over_16_693": 4011
+        },
+        "cpu_publication_lag_ms": {
+          "n": 4207,
+          "median": 13.313083200399888,
+          "p95": 183.10860900121043,
+          "p99": 278.06000160079566,
+          "worst": 289.2089270245924,
+          "mean": 28.531081241352414,
+          "over_16_693": 608
+        },
+        "late_2_periods": 4207,
+        "late_3_periods": 396,
+        "backpressure_events": 180,
+        "backpressure_total_ms": 496.9270755266007,
+        "output_fps": 59.904313444668034,
+        "strict_pacing_late_intervals": 206
+      }
+    }
+  },
+  "hypothetical_preparation_savings": {
+    "cpu_penalty=0.1,saved_ms=0.5": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.0257895499999,
+        "p95": 46.001592950000486,
+        "p99": 62.79848569130263,
+        "worst": 78.58185309130567,
+        "mean": 44.35084850431202,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 50.080078125,
+        "p99": 62.79848569130263,
+        "worst": 78.58185309130567,
+        "mean": 50.34603487295998,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 16.693359375,
+        "worst": 19.59155389999796,
+        "mean": 16.693359375,
+        "over_16_693": 4168
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 12.167263633698894,
+        "p95": 16.099621733700133,
+        "p99": 19.795868499997596,
+        "worst": 28.984491632607387,
+        "mean": 12.422573566461697,
+        "over_16_693": 144
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 75,
+      "backpressure_events": 38,
+      "backpressure_total_ms": 107.57737812503547,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 41
+    },
+    "cpu_penalty=0.1,saved_ms=1.0": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.0257895499999,
+        "p95": 45.99800595000124,
+        "p99": 50.5586858912975,
+        "worst": 61.581853091305675,
+        "mean": 44.11665491748204,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 50.080078125,
+        "p99": 50.5586858912975,
+        "worst": 61.581853091305675,
+        "mean": 50.13302171035386,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 16.693359375,
+        "worst": 19.09155389999796,
+        "mean": 16.693359375,
+        "over_16_693": 4178
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 12.167263633698894,
+        "p95": 15.837739599999622,
+        "p99": 17.758621199998743,
+        "worst": 21.696235833700484,
+        "mean": 12.332238671014869,
+        "over_16_693": 112
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 46,
+      "backpressure_events": 0,
+      "backpressure_total_ms": 0.0,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 21
+    },
+    "cpu_penalty=0.1,saved_ms=2.0": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.02408285000274,
+        "p95": 45.989833550000185,
+        "p99": 47.71257174999846,
+        "worst": 51.1691587337009,
+        "mean": 44.028739297863076,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 50.080078125,
+        "p99": 50.080078125,
+        "worst": 51.1691587337009,
+        "mean": 50.08051550865638,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 16.693359375,
+        "worst": 17.782439983700897,
+        "mean": 16.693359375,
+        "over_16_693": 4204
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 12.167263633698894,
+        "p95": 15.837739599999622,
+        "p99": 17.758621199998743,
+        "worst": 21.696235833700484,
+        "mean": 12.332238671014869,
+        "over_16_693": 112
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 2,
+      "backpressure_events": 0,
+      "backpressure_total_ms": 0.0,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 1
+    },
+    "cpu_penalty=0.2,saved_ms=0.5": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.32018654999956,
+        "p95": 130.90021112500108,
+        "p99": 228.00173704999543,
+        "worst": 237.24913367499903,
+        "mean": 53.18190538892609,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 130.90021112500108,
+        "p99": 228.00173704999543,
+        "worst": 237.24913367499903,
+        "mean": 58.65504079183348,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 18.619905400002608,
+        "worst": 21.41766380000263,
+        "mean": 16.693359375,
+        "over_16_693": 4047
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 13.298209599999609,
+        "p95": 94.6161509523954,
+        "p99": 178.68150597460408,
+        "worst": 190.03560985039803,
+        "mean": 21.464443002371073,
+        "over_16_693": 555
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 328,
+      "backpressure_events": 156,
+      "backpressure_total_ms": 375.7995023543954,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 171
+    },
+    "cpu_penalty=0.2,saved_ms=1.0": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.291206549998606,
+        "p95": 62.85787224959495,
+        "p99": 150.80540197458322,
+        "worst": 167.15692547459548,
+        "mean": 48.17974931926171,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 62.85787224959495,
+        "p99": 150.80540197458322,
+        "worst": 167.15692547459548,
+        "mean": 53.755342132105724,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 18.119153600000573,
+        "worst": 24.02165340281863,
+        "mean": 16.693359375,
+        "over_16_693": 4072
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 13.298209599999609,
+        "p95": 25.71698447419476,
+        "p99": 101.24992384998404,
+        "worst": 121.10344647419333,
+        "mean": 16.556977873752654,
+        "over_16_693": 475
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 252,
+      "backpressure_events": 109,
+      "backpressure_total_ms": 238.88744517897794,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 119
+    },
+    "cpu_penalty=0.2,saved_ms=2.0": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 44.28646355000001,
+        "p95": 46.45460214999912,
+        "p99": 68.766948099601,
+        "worst": 85.21331722460309,
+        "mean": 44.741014963875884,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 50.080078125,
+        "p99": 68.766948099601,
+        "worst": 85.21331722460309,
+        "mean": 50.44752997565273,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 16.928819199998543,
+        "worst": 19.91766380000263,
+        "mean": 16.693359375,
+        "over_16_693": 4155
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 13.298209599999609,
+        "p95": 17.92657200040003,
+        "p99": 23.84470472580142,
+        "worst": 35.659839099203964,
+        "mean": 13.689281253472721,
+        "over_16_693": 357
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 94,
+      "backpressure_events": 29,
+      "backpressure_total_ms": 60.16618400079824,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 48
+    }
+  },
+  "observed_proxy_stress": {
+    "assumption": "Original production all-tick simulation wall-mean ratio1.1252 and paired snapshot-copy median ratio1.4308 are applied to native measurements; preparation/GPU unchanged. This is NOT measured native concurrency and is not a causal contention estimate.",
+    "result": {
+      "completion_latency_ms": {
+        "n": 4207,
+        "median": 43.74556075000146,
+        "p95": 45.6315337499982,
+        "p99": 47.36985935999837,
+        "worst": 51.70421126214569,
+        "mean": 43.7626807345535,
+        "over_16_693": 4207
+      },
+      "presentation_latency_ms": {
+        "n": 4207,
+        "median": 50.080078125,
+        "p95": 50.080078125,
+        "p99": 50.080078125,
+        "worst": 51.70421126214569,
+        "mean": 50.08215076247584,
+        "over_16_693": 4207
+      },
+      "presentation_interval_ms": {
+        "n": 4206,
+        "median": 16.693359375,
+        "p95": 16.693359375,
+        "p99": 16.693359375,
+        "worst": 18.311948887145263,
+        "mean": 16.693359375,
+        "over_16_693": 4198
+      },
+      "cpu_publication_lag_ms": {
+        "n": 4207,
+        "median": 12.587127690858324,
+        "p95": 16.38720380045561,
+        "p99": 18.4805181064512,
+        "worst": 22.581122205203428,
+        "mean": 12.772550469684253,
+        "over_16_693": 172
+      },
+      "late_2_periods": 4207,
+      "late_3_periods": 11,
+      "backpressure_events": 0,
+      "backpressure_total_ms": 0.0,
+      "output_fps": 59.904059904059906,
+      "strict_pacing_late_intervals": 6
+    }
+  },
+  "production_p99_copy_stress": {
+    "completion_latency_ms": {
+      "n": 4207,
+      "median": 43.74500375000025,
+      "p95": 45.622083750000456,
+      "p99": 47.27253075000044,
+      "worst": 49.819927624997945,
+      "mean": 43.74982023897671,
+      "over_16_693": 4207
+    },
+    "presentation_latency_ms": {
+      "n": 4207,
+      "median": 50.080078125,
+      "p95": 50.080078125,
+      "p99": 50.080078125,
+      "worst": 50.080078125,
+      "mean": 50.080078125,
+      "over_16_693": 4207
+    },
+    "presentation_interval_ms": {
+      "n": 4206,
+      "median": 16.693359375,
+      "p95": 16.693359375,
+      "p99": 16.693359375,
+      "worst": 16.693359375,
+      "mean": 16.693359375,
+      "over_16_693": 4206
+    },
+    "cpu_publication_lag_ms": {
+      "n": 4207,
+      "median": 11.777154000001246,
+      "p95": 14.965303999997559,
+      "p99": 16.784089000000677,
+      "worst": 20.437732999998843,
+      "mean": 11.916596392381,
+      "over_16_693": 53
+    },
+    "late_2_periods": 4207,
+    "late_3_periods": 0,
+    "backpressure_events": 0,
+    "backpressure_total_ms": 0.0,
+    "output_fps": 59.904059904059906,
+    "strict_pacing_late_intervals": 0
+  }
+}

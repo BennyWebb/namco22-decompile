@@ -1,0 +1,88 @@
+{
+  "command": [
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/bin/aarch64-buildroot-linux-gnu-gcc",
+    "--sysroot=/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot",
+    "-O2",
+    "-g",
+    "-DNDEBUG",
+    "CMakeFiles/rr_gles2.dir/src/rr_main.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_input_stream.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_mem.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_hw.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_game.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_env.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_link.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_dsp.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_scene.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_audio.c.o",
+    "CMakeFiles/rr_gles2.dir/src/snd/snd_board.c.o",
+    "CMakeFiles/rr_gles2.dir/gen/snd_driver.c.o",
+    "CMakeFiles/rr_gles2.dir/gen/rr_lifted.c.o",
+    "CMakeFiles/rr_gles2.dir/gen/rr_c25.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b1.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b2.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b3.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b4.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b5.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b6.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_b7.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_calls.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_core.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rd/rd_funcs.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/lift_cpu.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/lift_env.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/c25/c25_bus.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/c25/c25_core.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/c25/c71_bios.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/c352.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/snd/m377_periph.c.o",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone4a-hardware/telemetry-arm-v2/sim.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/eng_audit.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_presentation.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_gles2.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_gl.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_video_layers.c.o",
+    "CMakeFiles/rr_gles2.dir/src/rr_overlay.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/quad_gles2.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/tex_bake.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/eng.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/geo_hw.c.o",
+    "CMakeFiles/rr_gles2.dir/home/bwebb/dev/namco22-decompile/engine/slave_list.c.o",
+    "-o",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/stage1b/production-logging/rr_production_logging",
+    "-lm",
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libGLESv2.so",
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libEGL.so",
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libmali.so",
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib/libSDL2.so"
+  ],
+  "hot_function_opcode_hashes": {
+    "rr_sim_pause": {
+      "old": "d1979a09478fd1e4b8837089b2a5d1f063547e62485e0e5e0f5f122ec27a0938",
+      "csv": "d1979a09478fd1e4b8837089b2a5d1f063547e62485e0e5e0f5f122ec27a0938",
+      "identical": true
+    },
+    "rr_sim_resume": {
+      "old": "223635d419c223de8e3e2d7b6a601a56ae26808b25116dd34d34af1e057b71a6",
+      "csv": "223635d419c223de8e3e2d7b6a601a56ae26808b25116dd34d34af1e057b71a6",
+      "identical": true
+    },
+    "rr_sim_enter": {
+      "old": "02d6bc31380cff0a86fe36c0a24f75e185fc949d7940bb0b7cef5e97aa6b0558",
+      "csv": "02d6bc31380cff0a86fe36c0a24f75e185fc949d7940bb0b7cef5e97aa6b0558",
+      "identical": true
+    },
+    "rr_sim_leave": {
+      "old": "48b7410e396507a8a0439c700af78e884b3af817cbab4d3a7d46428ebed338ad",
+      "csv": "48b7410e396507a8a0439c700af78e884b3af817cbab4d3a7d46428ebed338ad",
+      "identical": true
+    },
+    "rr_sim_present_tick": {
+      "old": "32013462d8ecdbec005a51f93acbf2d41780fe8d75795eec5f58d98f298317f1",
+      "csv": "32013462d8ecdbec005a51f93acbf2d41780fe8d75795eec5f58d98f298317f1",
+      "identical": true
+    }
+  },
+  "exe_sha256": "a6406666960867d65f80b69a21f5273aa400d41b6d4307d35f42a0ece01d2f74",
+  "note": "Existing Stage1 private CSV exporter is default OFF; only profiler report differs, after replay timing ends."
+}

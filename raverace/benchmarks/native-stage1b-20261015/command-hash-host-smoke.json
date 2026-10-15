@@ -1,0 +1,28 @@
+{
+  "exit": 0,
+  "known_vectors_verified": 3,
+  "lengths": [
+    3,
+    0,
+    1048576
+  ],
+  "no_packet_files_written": true,
+  "receipts": [
+    {
+      "tick": "1",
+      "bytes": "3",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+    },
+    {
+      "tick": "2",
+      "bytes": "0",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tick": "3",
+      "bytes": "1048576",
+      "sha256": "3a814d27145f9540c495715da2f85208f3805c323d7da3e9867df2992be4432d"
+    }
+  ],
+  "note": "Validation-only hash sink; host test uses SDK OpenSSL headers and host libcrypto.so.3. Timed game runs never load this helper."
+}

@@ -1,0 +1,9 @@
+1. Initial SSH192.168.1.69: Connection timed out, before device changes.
+2. User confirmed reconnection; SSH authenticated. Read-only sysfs/memory/ES inspection succeeded.
+3. SCP of clock_sampler and run.sh to/tmp stalled, then Connection closed. Transfer completion unknown; no runner executed.
+4. Independent connection: No route to host. Multiplexed echo check exited255.
+5. Final pre-reboot connection: Connection timed out.
+6. User restarted handheld. Connection: No route to host.
+7. Waited45 seconds; postboot connection: No route to host.
+8. Asked for current exact IP from Network Settings; awaiting reply.
+No game launch, governor/frequency write, production write, ES stop or new replay test was issued.

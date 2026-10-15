@@ -1,0 +1,464 @@
+{
+  "SIM-STAGE": [],
+  "SIM-RATE": [],
+  "THREAD-RATE": [],
+  "AUDIO": [],
+  "AUDIO-OUTPUT": [],
+  "TIMING": [],
+  "GEOMETRY-RATE": [],
+  "clocks": {
+    "cooling_state_counts": {
+      "/sys/class/thermal/cooling_device0/cur_state": {
+        "0": 1012
+      },
+      "/sys/class/thermal/cooling_device1/cur_state": {
+        "0": 1012
+      }
+    },
+    "cpu_policy_max_khz": {
+      "n": 1012,
+      "median": 1512000.0,
+      "p95": 1512000.0,
+      "p99": 1512000.0,
+      "worst": 1512000.0,
+      "mean": 1512000.0,
+      "stddev": 0.0,
+      "minimum": 1512000.0
+    },
+    "sampler_core_equivalents": 0.1329486085810751,
+    "peak_rss_kib": 20308,
+    "minimum_mem_available_kib": 793196,
+    "samples": 1012,
+    "sample_interval_ms": {
+      "n": 1011,
+      "median": 49.99989599946275,
+      "p95": 50.064107999787666,
+      "p99": 50.08280400033982,
+      "worst": 51.04902799939737,
+      "mean": 50.000164988129804,
+      "stddev": 0.07679349688135742,
+      "minimum": 48.88432700045087
+    },
+    "gpu_frequency_hz_counts": {
+      "240000000": 1012
+    },
+    "gpu_governor_counts": {
+      "simple_ondemand": 1012
+    },
+    "cpu_frequency_khz": {
+      "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+        "n": 1012,
+        "median": 480000.0,
+        "p95": 480000.0,
+        "p99": 792000.0,
+        "worst": 1512000.0,
+        "mean": 488798.41897233203,
+        "stddev": 79193.93116065282,
+        "minimum": 480000.0
+      },
+      "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+        "n": 1012,
+        "median": 480000.0,
+        "p95": 480000.0,
+        "p99": 792000.0,
+        "worst": 1512000.0,
+        "mean": 488395.25691699603,
+        "stddev": 76567.27322611025,
+        "minimum": 480000.0
+      },
+      "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+        "n": 1012,
+        "median": 480000.0,
+        "p95": 480000.0,
+        "p99": 792000.0,
+        "worst": 1512000.0,
+        "mean": 488395.25691699603,
+        "stddev": 76567.27322611025,
+        "minimum": 480000.0
+      },
+      "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+        "n": 1012,
+        "median": 480000.0,
+        "p95": 480000.0,
+        "p99": 792000.0,
+        "worst": 1512000.0,
+        "mean": 488395.25691699603,
+        "stddev": 76567.27322611025,
+        "minimum": 480000.0
+      }
+    },
+    "cpu_frequency_khz_counts": {
+      "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+        "1416000": 1,
+        "1512000": 1,
+        "1008000": 1,
+        "480000": 998,
+        "1200000": 6,
+        "792000": 4,
+        "1320000": 1
+      },
+      "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+        "1416000": 1,
+        "1512000": 1,
+        "1008000": 1,
+        "480000": 998,
+        "1200000": 5,
+        "792000": 5,
+        "1320000": 1
+      },
+      "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+        "1416000": 1,
+        "1512000": 1,
+        "1008000": 1,
+        "480000": 998,
+        "1200000": 5,
+        "792000": 5,
+        "1320000": 1
+      },
+      "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+        "1416000": 1,
+        "1512000": 1,
+        "1008000": 1,
+        "480000": 998,
+        "1200000": 5,
+        "792000": 5,
+        "1320000": 1
+      }
+    },
+    "temperature_c": {
+      "n": 5060,
+      "median": 47.447,
+      "p95": 48.419,
+      "p99": 48.743,
+      "worst": 48.824,
+      "mean": 44.07802747035573,
+      "stddev": 7.056123139649251,
+      "minimum": 30.0
+    },
+    "thermal_zones_c": {
+      "/sys/class/thermal/thermal_zone3/temp": {
+        "n": 1012,
+        "median": 47.933,
+        "p95": 48.662,
+        "p99": 48.743,
+        "worst": 48.743,
+        "mean": 47.942284584980236,
+        "stddev": 0.3798443487641604,
+        "minimum": 46.961
+      },
+      "/sys/class/thermal/thermal_zone1/temp": {
+        "n": 1012,
+        "median": 48.014,
+        "p95": 48.662,
+        "p99": 48.824,
+        "worst": 48.824,
+        "mean": 48.07162845849802,
+        "stddev": 0.29876258023423286,
+        "minimum": 47.528
+      },
+      "/sys/class/thermal/thermal_zone4/temp": {
+        "n": 1012,
+        "median": 30.0,
+        "p95": 30.0,
+        "p99": 30.0,
+        "worst": 30.0,
+        "mean": 30.0,
+        "stddev": 0.0,
+        "minimum": 30.0
+      },
+      "/sys/class/thermal/thermal_zone2/temp": {
+        "n": 1012,
+        "median": 47.042,
+        "p95": 47.528,
+        "p99": 48.095,
+        "worst": 48.095,
+        "mean": 47.03999901185771,
+        "stddev": 0.31491194107469883,
+        "minimum": 46.475
+      },
+      "/sys/class/thermal/thermal_zone0/temp": {
+        "n": 1012,
+        "median": 47.285,
+        "p95": 48.176,
+        "p99": 48.257,
+        "worst": 48.257,
+        "mean": 47.33622529644269,
+        "stddev": 0.3877378329582055,
+        "minimum": 46.556
+      }
+    },
+    "gpu_stays_240mhz_in_samples": true,
+    "trans_stat_numeric_delta_sums": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      50550,
+      0
+    ],
+    "throttling_note": "Frequency/temperature observations alone cannot establish thermal-cause throttling; retain raw driver evidence."
+  },
+  "threads": {
+    "15789": {
+      "name": "panel_probe",
+      "first": 5271.626152847,
+      "first_cpu": 0,
+      "last": 5322.17631965,
+      "last_cpu": 104,
+      "cores": {
+        "3": 116,
+        "1": 332,
+        "2": 386,
+        "0": 178
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 8,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 3026,
+        "nonvoluntary_ctxt_switches": 557
+      },
+      "observed_core_changes": 199,
+      "last_core": 0,
+      "allowed_mask_counts": {
+        "0-3": 1012
+      },
+      "cpu_seconds": 1.04,
+      "core_equivalents": 0.020573621528352605,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 3018,
+        "nonvoluntary_ctxt_switches": 557
+      }
+    },
+    "15792": {
+      "name": "mali-mem-purge",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.076328189,
+      "last_cpu": 2,
+      "cores": {
+        "0": 426,
+        "1": 196,
+        "2": 341,
+        "3": 46
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 1,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 504,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "observed_core_changes": 12,
+      "last_core": 1,
+      "allowed_mask_counts": {
+        "0-3": 1009
+      },
+      "cpu_seconds": 0.02,
+      "core_equivalents": 0.00039682460720741314,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 503,
+        "nonvoluntary_ctxt_switches": 0
+      }
+    },
+    "15793": {
+      "name": "mali-utility-wo",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.026296165,
+      "last_cpu": 0,
+      "cores": {
+        "1": 1008
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 2,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 2,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "observed_core_changes": 0,
+      "last_core": 1,
+      "allowed_mask_counts": {
+        "0-3": 1008
+      },
+      "cpu_seconds": 0.0,
+      "core_equivalents": 0.0,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 0,
+        "nonvoluntary_ctxt_switches": 0
+      }
+    },
+    "15794": {
+      "name": "mali-utility-wo",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.026296165,
+      "last_cpu": 0,
+      "cores": {
+        "1": 1008
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 1,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 1,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "observed_core_changes": 0,
+      "last_core": 1,
+      "allowed_mask_counts": {
+        "0-3": 1008
+      },
+      "cpu_seconds": 0.0,
+      "core_equivalents": 0.0,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 0,
+        "nonvoluntary_ctxt_switches": 0
+      }
+    },
+    "15795": {
+      "name": "mali-utility-wo",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.026296165,
+      "last_cpu": 0,
+      "cores": {
+        "0": 1008
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 2,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 2,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "observed_core_changes": 0,
+      "last_core": 0,
+      "allowed_mask_counts": {
+        "0-3": 1008
+      },
+      "cpu_seconds": 0.0,
+      "core_equivalents": 0.0,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 0,
+        "nonvoluntary_ctxt_switches": 0
+      }
+    },
+    "15796": {
+      "name": "mali-utility-wo",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.026296165,
+      "last_cpu": 0,
+      "cores": {
+        "0": 1008
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 1,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 1,
+        "nonvoluntary_ctxt_switches": 0
+      },
+      "observed_core_changes": 0,
+      "last_core": 0,
+      "allowed_mask_counts": {
+        "0-3": 1008
+      },
+      "cpu_seconds": 0.0,
+      "core_equivalents": 0.0,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 0,
+        "nonvoluntary_ctxt_switches": 0
+      }
+    },
+    "15797": {
+      "name": "mali-cmar-backe",
+      "first": 5271.676227901,
+      "first_cpu": 0,
+      "last": 5322.026296165,
+      "last_cpu": 243,
+      "cores": {
+        "1": 328,
+        "0": 635,
+        "3": 13,
+        "2": 32
+      },
+      "status_first": {
+        "voluntary_ctxt_switches": 10,
+        "nonvoluntary_ctxt_switches": 2
+      },
+      "status_last": {
+        "voluntary_ctxt_switches": 3023,
+        "nonvoluntary_ctxt_switches": 293
+      },
+      "observed_core_changes": 171,
+      "last_core": 1,
+      "allowed_mask_counts": {
+        "0-3": 1008
+      },
+      "cpu_seconds": 2.43,
+      "core_equivalents": 0.04826209941283141,
+      "context_switch_deltas": {
+        "voluntary_ctxt_switches": 3013,
+        "nonvoluntary_ctxt_switches": 291
+      }
+    }
+  }
+}

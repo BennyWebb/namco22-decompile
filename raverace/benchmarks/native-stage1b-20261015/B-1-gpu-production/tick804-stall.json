@@ -1,0 +1,56 @@
+{
+  "tick": 804,
+  "interval_ms": 2740.092044999983,
+  "samples": 55,
+  "gpu_hz_counts": {
+    "696000000": 55
+  },
+  "thread_states": {
+    "rr_production_b": {
+      "D": 54,
+      "R": 1
+    },
+    "mali-mem-purge": {
+      "S": 55
+    },
+    "mali-utility-wo": {
+      "S": 220
+    },
+    "mali-cmar-backe": {
+      "S": 55
+    },
+    "SDLHotplugALSA": {
+      "S": 54,
+      "R": 1
+    },
+    "alsa-pipewire": {
+      "S": 55
+    },
+    "data-loop.0": {
+      "S": 55
+    },
+    "SDLAudioP2": {
+      "S": 52,
+      "R": 3
+    },
+    "rr-present": {
+      "S": 55
+    },
+    "rr-prepare": {
+      "S": 55
+    }
+  },
+  "thread_cpu_seconds": {
+    "rr_production_b": 0.0,
+    "mali-mem-purge": 0.01,
+    "mali-utility-wo": 0.0,
+    "mali-cmar-backe": 0.0,
+    "SDLHotplugALSA": 0.02,
+    "alsa-pipewire": 0.0,
+    "data-loop.0": 0.04,
+    "SDLAudioP2": 0.03,
+    "rr-present": 0.0,
+    "rr-prepare": 0.0
+  },
+  "note": "Retained pre-window stall; sampled thread states/CPU are observations, not a proved root cause. Not excluded from full-replay rate/audio statistics."
+}
