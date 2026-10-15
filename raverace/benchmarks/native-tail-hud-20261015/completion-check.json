@@ -1,0 +1,19 @@
+{
+  "status": "BLOCKED",
+  "investigation": "complete",
+  "milestone": 3,
+  "next_milestone_started": false,
+  "head_unchanged": "8fa13315d6da43f6d7d618fa39f3da1e680aedb2",
+  "full_race_processes": 6,
+  "retained_timing_samples": 23040,
+  "new_optimizations_selected": false,
+  "all_experimental_bandwidth_flags_default_off": true,
+  "production_integrity": "PASS",
+  "documentation_updated": [
+    "NATIVE_RENDERER_ROADMAP.md",
+    "NATIVE_RENDERER_PROGRESS.md",
+    "NATIVE_RACE_REPLAY_REPORT.md",
+    "HANDOVER.md"
+  ],
+  "gate": "candidate p95 fails14ms in every process; no acceptance relaxation"
+}

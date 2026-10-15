@@ -1,0 +1,54 @@
+{
+  "component-front": {
+    "complete": {
+      "paired_reduction_median": -0.2955394999999985,
+      "p95": 3.2451500000000006,
+      "minimum": -8.223066999999999,
+      "maximum": 6.274178000000001
+    },
+    "prepare": {
+      "paired_reduction_median": -0.5084135,
+      "p95": -0.180241,
+      "minimum": -2.1206899999999997,
+      "maximum": 0.14532399999999995
+    },
+    "world": {
+      "paired_reduction_median": 0.17794049999999917,
+      "p95": 2.714252,
+      "minimum": -6.1959800000000005,
+      "maximum": 5.469561000000002
+    },
+    "world_with_prepare_upload": {
+      "paired_reduction_median": -0.35633999999999943,
+      "p95": 2.401336999999998,
+      "minimum": -6.727539,
+      "maximum": 5.209665000000001
+    }
+  },
+  "component-fold": {
+    "complete": {
+      "paired_reduction_median": 0.02368000000000059,
+      "p95": 2.977454,
+      "minimum": -9.983885999999998,
+      "maximum": 6.951631999999998
+    },
+    "prepare": {
+      "paired_reduction_median": 0.00033200000000001284,
+      "p95": 0.04203900000000001,
+      "minimum": -0.47472800000000004,
+      "maximum": 0.465393
+    },
+    "world": {
+      "paired_reduction_median": 0.012933000000000305,
+      "p95": 2.122793999999999,
+      "minimum": -8.860278999999998,
+      "maximum": 5.625199000000002
+    },
+    "world_with_prepare_upload": {
+      "paired_reduction_median": 0.012558000000002068,
+      "p95": 2.199708000000001,
+      "minimum": -8.872863,
+      "maximum": 5.762191000000001
+    }
+  }
+}

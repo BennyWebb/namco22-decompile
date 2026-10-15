@@ -1,0 +1,261 @@
+{
+  "scope": "Full-window diagnostic attribution. Split fences perturb tile scheduling. World raster discard and skipped draw controls omit rendering and cannot satisfy headroom/visual gates. CPU spans include application and driver work; wall minus CPU is not exclusive GPU time.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/profile-20261015/staged-cheap-fragment/run.txt",
+      "frames": 3840,
+      "mode": 0,
+      "gpu": "GPU renderer=Mali-G31 version=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da max_texture=8192 vertex_units=16 attributes=16 stage_sync=1",
+      "stages": {
+        "wait_ms": {
+          "median": 0.001125,
+          "p95": 0.001667,
+          "p99": 0.001834,
+          "worst": 0.04929
+        },
+        "read_ms": {
+          "median": 0.0992885,
+          "p95": 0.419612,
+          "p99": 0.57894,
+          "worst": 1.962691
+        },
+        "inflate_ms": {
+          "median": 1.7002605,
+          "p95": 2.859576,
+          "p99": 3.310228,
+          "worst": 4.089748
+        },
+        "worker_cpu_ms": {
+          "median": 1.848042,
+          "p95": 3.023916,
+          "p99": 3.408958,
+          "worst": 3.998541
+        },
+        "prepare_ms": {
+          "median": 0.09639249999999999,
+          "p95": 0.143328,
+          "p99": 0.189411,
+          "worst": 0.643521
+        },
+        "upload_ms": {
+          "median": 0.152828,
+          "p95": 0.217827,
+          "p99": 0.269116,
+          "worst": 0.938471
+        },
+        "world_submit_ms": {
+          "median": 2.693708,
+          "p95": 5.029174,
+          "p99": 6.626216,
+          "worst": 11.426113
+        },
+        "world_sync_ms": {
+          "median": 3.3779165,
+          "p95": 4.131119,
+          "p99": 4.645189,
+          "worst": 5.368166
+        },
+        "hud_submit_ms": {
+          "median": 0.7863085000000001,
+          "p95": 1.150881,
+          "p99": 1.359708,
+          "worst": 1.940646
+        },
+        "finish_ms": {
+          "median": 4.5835255,
+          "p95": 4.861386,
+          "p99": 5.068506,
+          "worst": 5.841272
+        },
+        "total_ms": {
+          "median": 11.759708,
+          "p95": 14.739805,
+          "p99": 16.853975,
+          "worst": 20.428652
+        },
+        "cpu_ms": {
+          "median": 4.227167,
+          "p95": 6.761418,
+          "p99": 8.467416,
+          "worst": 12.944042
+        },
+        "interval_ms": {
+          "median": 12.0296205,
+          "p95": 18.941356,
+          "p99": 21.209069,
+          "worst": 26.24764
+        }
+      },
+      "derived": {
+        "world_submit_plus_sync_ms": {
+          "median": 6.1006625,
+          "p95": 9.156047000000001,
+          "p99": 11.104831,
+          "worst": 15.63286
+        },
+        "hud_submit_plus_finish_ms": {
+          "median": 5.3978105,
+          "p95": 5.912193,
+          "p99": 6.178559,
+          "worst": 7.0396920000000005
+        }
+      },
+      "thread_cpu": {
+        "world_cpu_ms": {
+          "median": 2.5982085,
+          "p95": 4.905334,
+          "p99": 6.476458,
+          "worst": 11.33875
+        },
+        "world_sync_cpu_ms": {
+          "median": 0.275771,
+          "p95": 0.420667,
+          "p99": 0.501209,
+          "worst": 1.821541
+        },
+        "hud_cpu_ms": {
+          "median": 0.7721255,
+          "p95": 1.115625,
+          "p99": 1.286833,
+          "worst": 1.856167
+        },
+        "finish_cpu_ms": {
+          "median": 0.17918800000000001,
+          "p95": 0.3035,
+          "p99": 0.3565,
+          "worst": 0.534998
+        }
+      },
+      "over_deadline": 43,
+      "peak_rss_kib": 567280
+    },
+    {
+      "file": "raverace/native/generated/milestone3/profile-20261015/reference-normal/run.txt",
+      "frames": 3840,
+      "mode": 0,
+      "gpu": "GPU renderer=Mali-G31 version=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da max_texture=8192 vertex_units=16 attributes=16 stage_sync=0",
+      "stages": {
+        "wait_ms": {
+          "median": 0.001417,
+          "p95": 0.001792,
+          "p99": 0.001958,
+          "worst": 0.017957
+        },
+        "read_ms": {
+          "median": 0.1057255,
+          "p95": 0.471692,
+          "p99": 0.828013,
+          "worst": 7.561778
+        },
+        "inflate_ms": {
+          "median": 2.395521,
+          "p95": 3.214346,
+          "p99": 3.702331,
+          "worst": 4.613174
+        },
+        "worker_cpu_ms": {
+          "median": 2.5576245,
+          "p95": 3.449626,
+          "p99": 3.897583,
+          "worst": 4.461042
+        },
+        "prepare_ms": {
+          "median": 0.115621,
+          "p95": 0.16062,
+          "p99": 0.205827,
+          "worst": 0.804014
+        },
+        "upload_ms": {
+          "median": 0.19491,
+          "p95": 0.237659,
+          "p99": 0.326864,
+          "worst": 0.862762
+        },
+        "world_submit_ms": {
+          "median": 3.605977,
+          "p95": 6.3269,
+          "p99": 7.950769,
+          "worst": 10.822587
+        },
+        "world_sync_ms": {
+          "median": 0.009416,
+          "p95": 0.009875,
+          "p99": 0.010083,
+          "worst": 0.14737
+        },
+        "hud_submit_ms": {
+          "median": 1.256061,
+          "p95": 1.622027,
+          "p99": 1.950265,
+          "worst": 3.909661
+        },
+        "finish_ms": {
+          "median": 11.833705,
+          "p95": 16.011561,
+          "p99": 17.105439,
+          "worst": 17.731458
+        },
+        "total_ms": {
+          "median": 17.553258,
+          "p95": 22.434812,
+          "p99": 23.766912,
+          "worst": 27.180385
+        },
+        "cpu_ms": {
+          "median": 5.436082000000001,
+          "p95": 8.23825,
+          "p99": 10.072041,
+          "worst": 13.097375
+        },
+        "interval_ms": {
+          "median": 18.154297999999997,
+          "p95": 25.099286,
+          "p99": 28.907316,
+          "worst": 33.360104
+        }
+      },
+      "derived": {
+        "world_submit_plus_sync_ms": {
+          "median": 3.6151665,
+          "p95": 6.336358000000001,
+          "p99": 7.96031,
+          "worst": 10.832586000000001
+        },
+        "hud_submit_plus_finish_ms": {
+          "median": 13.0798675,
+          "p95": 17.416876000000002,
+          "p99": 18.460891,
+          "worst": 19.172282
+        }
+      },
+      "thread_cpu": {
+        "world_cpu_ms": {
+          "median": 3.4765625,
+          "p95": 6.16425,
+          "p99": 7.771541,
+          "worst": 10.670875
+        },
+        "world_sync_cpu_ms": {
+          "median": 0.004541,
+          "p95": 0.004834,
+          "p99": 0.005,
+          "worst": 0.086959
+        },
+        "hud_cpu_ms": {
+          "median": 1.237125,
+          "p95": 1.528333,
+          "p99": 1.783917,
+          "worst": 3.073083
+        },
+        "finish_cpu_ms": {
+          "median": 0.263833,
+          "p95": 0.327208,
+          "p99": 0.418874,
+          "worst": 0.561377
+        }
+      },
+      "over_deadline": 2197,
+      "peak_rss_kib": 567260
+    }
+  ]
+}

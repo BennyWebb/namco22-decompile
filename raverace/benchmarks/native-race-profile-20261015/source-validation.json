@@ -1,0 +1,18 @@
+{
+  "ticks": 3840,
+  "source_commands": 5152196,
+  "instance_records": 267433,
+  "source_or_material_or_priority_errors": 0,
+  "cull_reason_counts": [
+    3677980,
+    566760,
+    849520,
+    52451,
+    5485,
+    0
+  ],
+  "cull_proof": "Original local vertices + compact instance matrices + float-error interval projected by native camera; only wholly outside declared scissor with guard margin.",
+  "fonts": 1,
+  "styles": 166,
+  "all_hud_states_byte_identical": true
+}

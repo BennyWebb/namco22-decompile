@@ -1,0 +1,72 @@
+{
+  "scope": "No-gather attribution control only; all3840 host ticks execute, eleven composed captures compare against unchanged native reference. CPU float/affine clipping arithmetic can differ at edges.",
+  "frames_executed": 3840,
+  "samples": [
+    {
+      "tick": 1800,
+      "changed_pixels": 5,
+      "mean_rgb": 7.269965277777777e-05,
+      "max": 13
+    },
+    {
+      "tick": 1965,
+      "changed_pixels": 0,
+      "mean_rgb": 0.0,
+      "max": 0
+    },
+    {
+      "tick": 2500,
+      "changed_pixels": 13,
+      "mean_rgb": 0.00026801215277777777,
+      "max": 47
+    },
+    {
+      "tick": 2643,
+      "changed_pixels": 0,
+      "mean_rgb": 0.0,
+      "max": 0
+    },
+    {
+      "tick": 3000,
+      "changed_pixels": 0,
+      "mean_rgb": 0.0,
+      "max": 0
+    },
+    {
+      "tick": 3546,
+      "changed_pixels": 2,
+      "mean_rgb": 1.8446180555555556e-05,
+      "max": 6
+    },
+    {
+      "tick": 3600,
+      "changed_pixels": 3,
+      "mean_rgb": 5.099826388888889e-05,
+      "max": 11
+    },
+    {
+      "tick": 4200,
+      "changed_pixels": 10,
+      "mean_rgb": 0.0006087239583333333,
+      "max": 55
+    },
+    {
+      "tick": 4800,
+      "changed_pixels": 4,
+      "mean_rgb": 6.401909722222223e-05,
+      "max": 36
+    },
+    {
+      "tick": 5400,
+      "changed_pixels": 0,
+      "mean_rgb": 0.0,
+      "max": 0
+    },
+    {
+      "tick": 5639,
+      "changed_pixels": 2,
+      "mean_rgb": 1.3020833333333334e-05,
+      "max": 5
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Original byte palette/shadow/LUT CPU oracle from the actual native world readback and exact source HUD bytes.",
+  "frames": 1,
+  "all_pixels_match": true,
+  "samples": [
+    {
+      "tick": 2500,
+      "visible_hud_pixels": 36047,
+      "visible_shadow_pixels": 13180,
+      "changed_pixels": 0,
+      "changed_channels": 0,
+      "maximum": 0
+    }
+  ]
+}

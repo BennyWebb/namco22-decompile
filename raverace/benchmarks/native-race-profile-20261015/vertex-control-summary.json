@@ -1,0 +1,133 @@
+{
+  "scope": "Full-window diagnostic attribution. Split fences perturb tile scheduling. World raster discard and skipped draw controls omit rendering and cannot satisfy headroom/visual gates. CPU spans include application and driver work; wall minus CPU is not exclusive GPU time.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/profile-20261015/staged-vertex-control/run.txt",
+      "frames": 3840,
+      "mode": 0,
+      "gpu": "GPU renderer=Mali-G31 version=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da max_texture=8192 vertex_units=16 attributes=16 stage_sync=1",
+      "stages": {
+        "wait_ms": {
+          "median": 0.001291,
+          "p95": 0.00175,
+          "p99": 0.001916,
+          "worst": 0.480022
+        },
+        "read_ms": {
+          "median": 0.106204,
+          "p95": 0.446523,
+          "p99": 0.560518,
+          "worst": 3.749761
+        },
+        "inflate_ms": {
+          "median": 2.1296405,
+          "p95": 3.071622,
+          "p99": 3.555477,
+          "worst": 11.230781
+        },
+        "worker_cpu_ms": {
+          "median": 2.2601459999999998,
+          "p95": 3.243874,
+          "p99": 3.623875,
+          "worst": 4.397916
+        },
+        "prepare_ms": {
+          "median": 1.4143365,
+          "p95": 2.113203,
+          "p99": 2.446731,
+          "worst": 4.269488
+        },
+        "upload_ms": {
+          "median": 0.2705305,
+          "p95": 0.368027,
+          "p99": 0.447106,
+          "worst": 1.172284
+        },
+        "world_submit_ms": {
+          "median": 3.214262,
+          "p95": 5.269905,
+          "p99": 6.348402,
+          "worst": 11.312778
+        },
+        "world_sync_ms": {
+          "median": 8.480167,
+          "p95": 12.716053,
+          "p99": 13.736177,
+          "worst": 17.537102
+        },
+        "hud_submit_ms": {
+          "median": 0.9220029999999999,
+          "p95": 1.278905,
+          "p99": 1.527687,
+          "worst": 3.030207
+        },
+        "finish_ms": {
+          "median": 4.876588,
+          "p95": 5.221823,
+          "p99": 5.476147,
+          "worst": 6.585434
+        },
+        "total_ms": {
+          "median": 19.4572305,
+          "p95": 24.935543,
+          "p99": 26.900628,
+          "worst": 29.870254
+        },
+        "cpu_ms": {
+          "median": 6.335896,
+          "p95": 9.094084,
+          "p99": 10.524251,
+          "worst": 14.033084
+        },
+        "interval_ms": {
+          "median": 20.211261,
+          "p95": 27.987999,
+          "p99": 31.659513,
+          "worst": 51.523226
+        }
+      },
+      "derived": {
+        "world_submit_plus_sync_ms": {
+          "median": 11.7593005,
+          "p95": 17.119077,
+          "p99": 18.249156,
+          "worst": 21.477229
+        },
+        "hud_submit_plus_finish_ms": {
+          "median": 5.8181735,
+          "p95": 6.391400000000001,
+          "p99": 6.684553999999999,
+          "worst": 7.693221
+        }
+      },
+      "thread_cpu": {
+        "world_cpu_ms": {
+          "median": 3.091271,
+          "p95": 5.099875,
+          "p99": 6.193209,
+          "worst": 9.016542
+        },
+        "world_sync_cpu_ms": {
+          "median": 0.3350835,
+          "p95": 0.451541,
+          "p99": 0.519042,
+          "worst": 1.826291
+        },
+        "hud_cpu_ms": {
+          "median": 0.9010205,
+          "p95": 1.227625,
+          "p99": 1.440917,
+          "worst": 1.835084
+        },
+        "finish_cpu_ms": {
+          "median": 0.231833,
+          "p95": 0.332917,
+          "p99": 0.396625,
+          "worst": 0.533333
+        }
+      },
+      "over_deadline": 3082,
+      "peak_rss_kib": 567280
+    }
+  ]
+}

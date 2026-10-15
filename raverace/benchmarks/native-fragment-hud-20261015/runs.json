@@ -1,0 +1,46 @@
+{
+  "hud-full": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-no-shadow": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-no-lut": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "world-opaque": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-cull": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-native-baseline": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-ubo": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "hud-shadow-math": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  },
+  "baseline-one-fence-1": {
+    "ticks": 3840,
+    "headroom_eligible": true
+  },
+  "candidate-one-fence-1": {
+    "ticks": 3840,
+    "headroom_eligible": true
+  },
+  "selected-visual": {
+    "ticks": 3840,
+    "headroom_eligible": false
+  }
+}

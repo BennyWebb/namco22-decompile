@@ -1,0 +1,150 @@
+{
+  "platform": "Host x86_64 Mesa llvmpipe, diagnostic unpaced serial run, audio output off; not H700 or live cadence acceptance",
+  "source": "Original simulation consuming original recorded human inputs; world command stream compiled live",
+  "completed_native_frames": 3855,
+  "first": 1800,
+  "last": 5654,
+  "first_unrenderable_tick": 5655,
+  "blocker": "mesh code2028 packet1456601 absent from immutable M3 pack",
+  "cohorts": {
+    "all_completed": {
+      "renderer_completion": {
+        "samples": 3855,
+        "median": 2.602833,
+        "p95": 3.068081,
+        "p99": 3.543671,
+        "worst": 166.361422
+      },
+      "completion_interval": {
+        "samples": 3855,
+        "median": 4.515268,
+        "p95": 5.400863,
+        "p99": 5.947955,
+        "worst": 166.361422
+      },
+      "live_walk": {
+        "samples": 3855,
+        "median": 0.257806,
+        "p95": 0.353988,
+        "p99": 0.444489,
+        "worst": 1.165604
+      },
+      "live_compile": {
+        "samples": 3855,
+        "median": 0.555447,
+        "p95": 0.786523,
+        "p99": 0.950672,
+        "worst": 1.403487
+      },
+      "submission": {
+        "samples": 3855,
+        "median": 0.484623,
+        "p95": 0.699008,
+        "p99": 0.834593,
+        "worst": 162.30311
+      },
+      "hud_submission": {
+        "samples": 3855,
+        "median": 1.512783,
+        "p95": 1.820804,
+        "p99": 2.123334,
+        "worst": 3.668217
+      },
+      "final_gpu_driver_wait": {
+        "samples": 3855,
+        "median": 0.563703,
+        "p95": 0.740431,
+        "p99": 0.969413,
+        "worst": 2.284998
+      },
+      "renderer_thread_cpu": {
+        "samples": 3855,
+        "median": 0.979546,
+        "p95": 1.251485,
+        "p99": 1.488343,
+        "worst": 164.303461
+      },
+      "completion_misses": 1,
+      "interval_misses": 1,
+      "source_commands": 5174549,
+      "visible_commands": 3691528,
+      "draws": {
+        "samples": 3855,
+        "median": 104.0,
+        "p95": 172.0,
+        "p99": 200.0,
+        "worst": 241.0
+      }
+    },
+    "m3_racing_window": {
+      "renderer_completion": {
+        "samples": 3840,
+        "median": 2.603159,
+        "p95": 3.068081,
+        "p99": 3.543671,
+        "worst": 166.361422
+      },
+      "completion_interval": {
+        "samples": 3840,
+        "median": 4.515764,
+        "p95": 5.400863,
+        "p99": 5.947955,
+        "worst": 166.361422
+      },
+      "live_walk": {
+        "samples": 3840,
+        "median": 0.25765099999999996,
+        "p95": 0.353988,
+        "p99": 0.444489,
+        "worst": 1.165604
+      },
+      "live_compile": {
+        "samples": 3840,
+        "median": 0.5549265,
+        "p95": 0.786523,
+        "p99": 0.950672,
+        "worst": 1.403487
+      },
+      "submission": {
+        "samples": 3840,
+        "median": 0.484804,
+        "p95": 0.699008,
+        "p99": 0.834593,
+        "worst": 162.30311
+      },
+      "hud_submission": {
+        "samples": 3840,
+        "median": 1.513026,
+        "p95": 1.820804,
+        "p99": 2.123334,
+        "worst": 3.668217
+      },
+      "final_gpu_driver_wait": {
+        "samples": 3840,
+        "median": 0.5636985,
+        "p95": 0.740115,
+        "p99": 0.969413,
+        "worst": 2.284998
+      },
+      "renderer_thread_cpu": {
+        "samples": 3840,
+        "median": 0.979584,
+        "p95": 1.251485,
+        "p99": 1.488343,
+        "worst": 164.303461
+      },
+      "completion_misses": 1,
+      "interval_misses": 1,
+      "source_commands": 5152196,
+      "visible_commands": 3677980,
+      "draws": {
+        "samples": 3840,
+        "median": 105.0,
+        "p95": 172.0,
+        "p99": 200.0,
+        "worst": 241.0
+      }
+    }
+  },
+  "limits": "Every sample retained, including11 captured pictures and per-frame source packet dumps; this traced host run cannot establish H700 performance or visible stutter. Native compiler/scene walk precede renderer completion span and are included in completion intervals. Serial sim/render has no concurrent thread overlap; GPU may overlap CPU submissions. Existing legacy STAGES quad/cache accounting does not instrument native buffers and must not be interpreted as zero native geometry or total GPU memory."
+}

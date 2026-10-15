@@ -1,0 +1,1091 @@
+{
+  "method": "32x24 original pixel-centre samples, source projection/near clipping, group scissors, triangle coverage and constant synthetic depth. No shader/texture cost model; NOT hardware counters or exact full-resolution overdraw. Unioned triangles per quad; raster top-left edge rules approximated.",
+  "frames": 155,
+  "rows": [
+    {
+      "tick": 1800,
+      "sampled_coverage": 3.2955729166666665,
+      "original_depth_passes": 1489,
+      "front_depth_passes": 1261,
+      "samples": 768
+    },
+    {
+      "tick": 1815,
+      "sampled_coverage": 3.3307291666666665,
+      "original_depth_passes": 1556,
+      "front_depth_passes": 1320,
+      "samples": 768
+    },
+    {
+      "tick": 1816,
+      "sampled_coverage": 3.3255208333333335,
+      "original_depth_passes": 1556,
+      "front_depth_passes": 1318,
+      "samples": 768
+    },
+    {
+      "tick": 1817,
+      "sampled_coverage": 3.3424479166666665,
+      "original_depth_passes": 1556,
+      "front_depth_passes": 1323,
+      "samples": 768
+    },
+    {
+      "tick": 1818,
+      "sampled_coverage": 3.3489583333333335,
+      "original_depth_passes": 1561,
+      "front_depth_passes": 1325,
+      "samples": 768
+    },
+    {
+      "tick": 1819,
+      "sampled_coverage": 3.3489583333333335,
+      "original_depth_passes": 1560,
+      "front_depth_passes": 1324,
+      "samples": 768
+    },
+    {
+      "tick": 1820,
+      "sampled_coverage": 3.3489583333333335,
+      "original_depth_passes": 1559,
+      "front_depth_passes": 1319,
+      "samples": 768
+    },
+    {
+      "tick": 1822,
+      "sampled_coverage": 3.3684895833333335,
+      "original_depth_passes": 1566,
+      "front_depth_passes": 1318,
+      "samples": 768
+    },
+    {
+      "tick": 1823,
+      "sampled_coverage": 3.39453125,
+      "original_depth_passes": 1580,
+      "front_depth_passes": 1329,
+      "samples": 768
+    },
+    {
+      "tick": 1824,
+      "sampled_coverage": 3.39453125,
+      "original_depth_passes": 1588,
+      "front_depth_passes": 1335,
+      "samples": 768
+    },
+    {
+      "tick": 1827,
+      "sampled_coverage": 3.4036458333333335,
+      "original_depth_passes": 1598,
+      "front_depth_passes": 1359,
+      "samples": 768
+    },
+    {
+      "tick": 1828,
+      "sampled_coverage": 3.4075520833333335,
+      "original_depth_passes": 1595,
+      "front_depth_passes": 1357,
+      "samples": 768
+    },
+    {
+      "tick": 1856,
+      "sampled_coverage": 3.3567708333333335,
+      "original_depth_passes": 1576,
+      "front_depth_passes": 1389,
+      "samples": 768
+    },
+    {
+      "tick": 1870,
+      "sampled_coverage": 3.30859375,
+      "original_depth_passes": 1525,
+      "front_depth_passes": 1355,
+      "samples": 768
+    },
+    {
+      "tick": 1912,
+      "sampled_coverage": 3.3177083333333335,
+      "original_depth_passes": 1597,
+      "front_depth_passes": 1389,
+      "samples": 768
+    },
+    {
+      "tick": 1936,
+      "sampled_coverage": 3.1158854166666665,
+      "original_depth_passes": 1507,
+      "front_depth_passes": 1417,
+      "samples": 768
+    },
+    {
+      "tick": 1965,
+      "sampled_coverage": 3.5963541666666665,
+      "original_depth_passes": 1540,
+      "front_depth_passes": 1243,
+      "samples": 768
+    },
+    {
+      "tick": 1968,
+      "sampled_coverage": 3.6419270833333335,
+      "original_depth_passes": 1570,
+      "front_depth_passes": 1245,
+      "samples": 768
+    },
+    {
+      "tick": 2024,
+      "sampled_coverage": 3.2018229166666665,
+      "original_depth_passes": 1395,
+      "front_depth_passes": 1182,
+      "samples": 768
+    },
+    {
+      "tick": 2080,
+      "sampled_coverage": 3.3736979166666665,
+      "original_depth_passes": 1565,
+      "front_depth_passes": 1416,
+      "samples": 768
+    },
+    {
+      "tick": 2136,
+      "sampled_coverage": 3.2942708333333335,
+      "original_depth_passes": 1574,
+      "front_depth_passes": 1238,
+      "samples": 768
+    },
+    {
+      "tick": 2182,
+      "sampled_coverage": 2.7760416666666665,
+      "original_depth_passes": 1224,
+      "front_depth_passes": 1088,
+      "samples": 768
+    },
+    {
+      "tick": 2192,
+      "sampled_coverage": 2.7265625,
+      "original_depth_passes": 1227,
+      "front_depth_passes": 1126,
+      "samples": 768
+    },
+    {
+      "tick": 2248,
+      "sampled_coverage": 2.74609375,
+      "original_depth_passes": 1203,
+      "front_depth_passes": 1078,
+      "samples": 768
+    },
+    {
+      "tick": 2296,
+      "sampled_coverage": 2.4270833333333335,
+      "original_depth_passes": 1014,
+      "front_depth_passes": 876,
+      "samples": 768
+    },
+    {
+      "tick": 2304,
+      "sampled_coverage": 2.50390625,
+      "original_depth_passes": 1212,
+      "front_depth_passes": 1069,
+      "samples": 768
+    },
+    {
+      "tick": 2360,
+      "sampled_coverage": 2.3177083333333335,
+      "original_depth_passes": 1092,
+      "front_depth_passes": 962,
+      "samples": 768
+    },
+    {
+      "tick": 2416,
+      "sampled_coverage": 2.36328125,
+      "original_depth_passes": 1253,
+      "front_depth_passes": 1039,
+      "samples": 768
+    },
+    {
+      "tick": 2472,
+      "sampled_coverage": 2.4934895833333335,
+      "original_depth_passes": 1258,
+      "front_depth_passes": 998,
+      "samples": 768
+    },
+    {
+      "tick": 2500,
+      "sampled_coverage": 2.5638020833333335,
+      "original_depth_passes": 1151,
+      "front_depth_passes": 979,
+      "samples": 768
+    },
+    {
+      "tick": 2528,
+      "sampled_coverage": 2.82421875,
+      "original_depth_passes": 1141,
+      "front_depth_passes": 964,
+      "samples": 768
+    },
+    {
+      "tick": 2584,
+      "sampled_coverage": 2.9088541666666665,
+      "original_depth_passes": 1274,
+      "front_depth_passes": 952,
+      "samples": 768
+    },
+    {
+      "tick": 2640,
+      "sampled_coverage": 2.65234375,
+      "original_depth_passes": 1369,
+      "front_depth_passes": 1252,
+      "samples": 768
+    },
+    {
+      "tick": 2643,
+      "sampled_coverage": 2.60546875,
+      "original_depth_passes": 1333,
+      "front_depth_passes": 1202,
+      "samples": 768
+    },
+    {
+      "tick": 2691,
+      "sampled_coverage": 2.3776041666666665,
+      "original_depth_passes": 1424,
+      "front_depth_passes": 1314,
+      "samples": 768
+    },
+    {
+      "tick": 2696,
+      "sampled_coverage": 2.27734375,
+      "original_depth_passes": 1451,
+      "front_depth_passes": 1370,
+      "samples": 768
+    },
+    {
+      "tick": 2752,
+      "sampled_coverage": 2.2682291666666665,
+      "original_depth_passes": 1203,
+      "front_depth_passes": 1158,
+      "samples": 768
+    },
+    {
+      "tick": 2808,
+      "sampled_coverage": 2.5169270833333335,
+      "original_depth_passes": 1350,
+      "front_depth_passes": 1253,
+      "samples": 768
+    },
+    {
+      "tick": 2834,
+      "sampled_coverage": 2.4895833333333335,
+      "original_depth_passes": 1343,
+      "front_depth_passes": 1262,
+      "samples": 768
+    },
+    {
+      "tick": 2835,
+      "sampled_coverage": 2.4713541666666665,
+      "original_depth_passes": 1277,
+      "front_depth_passes": 1204,
+      "samples": 768
+    },
+    {
+      "tick": 2864,
+      "sampled_coverage": 2.5104166666666665,
+      "original_depth_passes": 1262,
+      "front_depth_passes": 1156,
+      "samples": 768
+    },
+    {
+      "tick": 2920,
+      "sampled_coverage": 2.9934895833333335,
+      "original_depth_passes": 1322,
+      "front_depth_passes": 1121,
+      "samples": 768
+    },
+    {
+      "tick": 2969,
+      "sampled_coverage": 2.7630208333333335,
+      "original_depth_passes": 1258,
+      "front_depth_passes": 1116,
+      "samples": 768
+    },
+    {
+      "tick": 2976,
+      "sampled_coverage": 2.7356770833333335,
+      "original_depth_passes": 1477,
+      "front_depth_passes": 1385,
+      "samples": 768
+    },
+    {
+      "tick": 3000,
+      "sampled_coverage": 2.7291666666666665,
+      "original_depth_passes": 1386,
+      "front_depth_passes": 1244,
+      "samples": 768
+    },
+    {
+      "tick": 3032,
+      "sampled_coverage": 2.3697916666666665,
+      "original_depth_passes": 1276,
+      "front_depth_passes": 1163,
+      "samples": 768
+    },
+    {
+      "tick": 3088,
+      "sampled_coverage": 2.1666666666666665,
+      "original_depth_passes": 1161,
+      "front_depth_passes": 1113,
+      "samples": 768
+    },
+    {
+      "tick": 3144,
+      "sampled_coverage": 2.1354166666666665,
+      "original_depth_passes": 1071,
+      "front_depth_passes": 1039,
+      "samples": 768
+    },
+    {
+      "tick": 3200,
+      "sampled_coverage": 2.1705729166666665,
+      "original_depth_passes": 1009,
+      "front_depth_passes": 965,
+      "samples": 768
+    },
+    {
+      "tick": 3256,
+      "sampled_coverage": 2.1276041666666665,
+      "original_depth_passes": 1077,
+      "front_depth_passes": 1004,
+      "samples": 768
+    },
+    {
+      "tick": 3312,
+      "sampled_coverage": 2.2330729166666665,
+      "original_depth_passes": 1113,
+      "front_depth_passes": 979,
+      "samples": 768
+    },
+    {
+      "tick": 3368,
+      "sampled_coverage": 2.20703125,
+      "original_depth_passes": 1158,
+      "front_depth_passes": 1121,
+      "samples": 768
+    },
+    {
+      "tick": 3424,
+      "sampled_coverage": 2.36328125,
+      "original_depth_passes": 1338,
+      "front_depth_passes": 1295,
+      "samples": 768
+    },
+    {
+      "tick": 3457,
+      "sampled_coverage": 2.5364583333333335,
+      "original_depth_passes": 1194,
+      "front_depth_passes": 1072,
+      "samples": 768
+    },
+    {
+      "tick": 3476,
+      "sampled_coverage": 2.4791666666666665,
+      "original_depth_passes": 1144,
+      "front_depth_passes": 1070,
+      "samples": 768
+    },
+    {
+      "tick": 3480,
+      "sampled_coverage": 2.4049479166666665,
+      "original_depth_passes": 1170,
+      "front_depth_passes": 1093,
+      "samples": 768
+    },
+    {
+      "tick": 3482,
+      "sampled_coverage": 2.375,
+      "original_depth_passes": 1167,
+      "front_depth_passes": 1092,
+      "samples": 768
+    },
+    {
+      "tick": 3495,
+      "sampled_coverage": 2.30859375,
+      "original_depth_passes": 1178,
+      "front_depth_passes": 1103,
+      "samples": 768
+    },
+    {
+      "tick": 3502,
+      "sampled_coverage": 2.5026041666666665,
+      "original_depth_passes": 1259,
+      "front_depth_passes": 1166,
+      "samples": 768
+    },
+    {
+      "tick": 3506,
+      "sampled_coverage": 2.5260416666666665,
+      "original_depth_passes": 1229,
+      "front_depth_passes": 1122,
+      "samples": 768
+    },
+    {
+      "tick": 3508,
+      "sampled_coverage": 2.5481770833333335,
+      "original_depth_passes": 1239,
+      "front_depth_passes": 1120,
+      "samples": 768
+    },
+    {
+      "tick": 3510,
+      "sampled_coverage": 2.51953125,
+      "original_depth_passes": 1231,
+      "front_depth_passes": 1109,
+      "samples": 768
+    },
+    {
+      "tick": 3512,
+      "sampled_coverage": 2.5768229166666665,
+      "original_depth_passes": 1269,
+      "front_depth_passes": 1144,
+      "samples": 768
+    },
+    {
+      "tick": 3513,
+      "sampled_coverage": 2.59765625,
+      "original_depth_passes": 1293,
+      "front_depth_passes": 1158,
+      "samples": 768
+    },
+    {
+      "tick": 3514,
+      "sampled_coverage": 2.5924479166666665,
+      "original_depth_passes": 1288,
+      "front_depth_passes": 1157,
+      "samples": 768
+    },
+    {
+      "tick": 3515,
+      "sampled_coverage": 2.58984375,
+      "original_depth_passes": 1296,
+      "front_depth_passes": 1169,
+      "samples": 768
+    },
+    {
+      "tick": 3516,
+      "sampled_coverage": 2.6158854166666665,
+      "original_depth_passes": 1325,
+      "front_depth_passes": 1185,
+      "samples": 768
+    },
+    {
+      "tick": 3517,
+      "sampled_coverage": 2.6263020833333335,
+      "original_depth_passes": 1320,
+      "front_depth_passes": 1169,
+      "samples": 768
+    },
+    {
+      "tick": 3519,
+      "sampled_coverage": 2.62109375,
+      "original_depth_passes": 1346,
+      "front_depth_passes": 1182,
+      "samples": 768
+    },
+    {
+      "tick": 3520,
+      "sampled_coverage": 2.6041666666666665,
+      "original_depth_passes": 1359,
+      "front_depth_passes": 1248,
+      "samples": 768
+    },
+    {
+      "tick": 3524,
+      "sampled_coverage": 2.5533854166666665,
+      "original_depth_passes": 1377,
+      "front_depth_passes": 1204,
+      "samples": 768
+    },
+    {
+      "tick": 3528,
+      "sampled_coverage": 2.5325520833333335,
+      "original_depth_passes": 1369,
+      "front_depth_passes": 1212,
+      "samples": 768
+    },
+    {
+      "tick": 3530,
+      "sampled_coverage": 2.50390625,
+      "original_depth_passes": 1266,
+      "front_depth_passes": 1158,
+      "samples": 768
+    },
+    {
+      "tick": 3533,
+      "sampled_coverage": 2.5078125,
+      "original_depth_passes": 1326,
+      "front_depth_passes": 1187,
+      "samples": 768
+    },
+    {
+      "tick": 3536,
+      "sampled_coverage": 2.4244791666666665,
+      "original_depth_passes": 1190,
+      "front_depth_passes": 1066,
+      "samples": 768
+    },
+    {
+      "tick": 3537,
+      "sampled_coverage": 2.4049479166666665,
+      "original_depth_passes": 1191,
+      "front_depth_passes": 1067,
+      "samples": 768
+    },
+    {
+      "tick": 3541,
+      "sampled_coverage": 2.3229166666666665,
+      "original_depth_passes": 1196,
+      "front_depth_passes": 1115,
+      "samples": 768
+    },
+    {
+      "tick": 3546,
+      "sampled_coverage": 2.23828125,
+      "original_depth_passes": 1128,
+      "front_depth_passes": 1031,
+      "samples": 768
+    },
+    {
+      "tick": 3550,
+      "sampled_coverage": 2.23828125,
+      "original_depth_passes": 1106,
+      "front_depth_passes": 1005,
+      "samples": 768
+    },
+    {
+      "tick": 3551,
+      "sampled_coverage": 2.24609375,
+      "original_depth_passes": 1244,
+      "front_depth_passes": 1134,
+      "samples": 768
+    },
+    {
+      "tick": 3552,
+      "sampled_coverage": 2.2513020833333335,
+      "original_depth_passes": 1204,
+      "front_depth_passes": 1090,
+      "samples": 768
+    },
+    {
+      "tick": 3553,
+      "sampled_coverage": 2.2486979166666665,
+      "original_depth_passes": 1138,
+      "front_depth_passes": 1035,
+      "samples": 768
+    },
+    {
+      "tick": 3554,
+      "sampled_coverage": 2.2447916666666665,
+      "original_depth_passes": 1255,
+      "front_depth_passes": 1159,
+      "samples": 768
+    },
+    {
+      "tick": 3555,
+      "sampled_coverage": 2.2369791666666665,
+      "original_depth_passes": 1222,
+      "front_depth_passes": 1127,
+      "samples": 768
+    },
+    {
+      "tick": 3556,
+      "sampled_coverage": 2.2330729166666665,
+      "original_depth_passes": 1181,
+      "front_depth_passes": 1073,
+      "samples": 768
+    },
+    {
+      "tick": 3557,
+      "sampled_coverage": 2.2239583333333335,
+      "original_depth_passes": 1114,
+      "front_depth_passes": 1013,
+      "samples": 768
+    },
+    {
+      "tick": 3558,
+      "sampled_coverage": 2.2278645833333335,
+      "original_depth_passes": 1254,
+      "front_depth_passes": 1150,
+      "samples": 768
+    },
+    {
+      "tick": 3559,
+      "sampled_coverage": 2.2213541666666665,
+      "original_depth_passes": 1238,
+      "front_depth_passes": 1128,
+      "samples": 768
+    },
+    {
+      "tick": 3560,
+      "sampled_coverage": 2.23046875,
+      "original_depth_passes": 1177,
+      "front_depth_passes": 1079,
+      "samples": 768
+    },
+    {
+      "tick": 3561,
+      "sampled_coverage": 2.21484375,
+      "original_depth_passes": 1087,
+      "front_depth_passes": 1002,
+      "samples": 768
+    },
+    {
+      "tick": 3562,
+      "sampled_coverage": 2.2252604166666665,
+      "original_depth_passes": 1246,
+      "front_depth_passes": 1153,
+      "samples": 768
+    },
+    {
+      "tick": 3567,
+      "sampled_coverage": 2.1588541666666665,
+      "original_depth_passes": 1151,
+      "front_depth_passes": 1072,
+      "samples": 768
+    },
+    {
+      "tick": 3587,
+      "sampled_coverage": 2.1197916666666665,
+      "original_depth_passes": 1043,
+      "front_depth_passes": 968,
+      "samples": 768
+    },
+    {
+      "tick": 3592,
+      "sampled_coverage": 2.109375,
+      "original_depth_passes": 1049,
+      "front_depth_passes": 957,
+      "samples": 768
+    },
+    {
+      "tick": 3594,
+      "sampled_coverage": 2.08984375,
+      "original_depth_passes": 1038,
+      "front_depth_passes": 961,
+      "samples": 768
+    },
+    {
+      "tick": 3600,
+      "sampled_coverage": 2.1106770833333335,
+      "original_depth_passes": 1036,
+      "front_depth_passes": 962,
+      "samples": 768
+    },
+    {
+      "tick": 3621,
+      "sampled_coverage": 2.2239583333333335,
+      "original_depth_passes": 1097,
+      "front_depth_passes": 981,
+      "samples": 768
+    },
+    {
+      "tick": 3622,
+      "sampled_coverage": 2.2200520833333335,
+      "original_depth_passes": 1148,
+      "front_depth_passes": 1039,
+      "samples": 768
+    },
+    {
+      "tick": 3631,
+      "sampled_coverage": 2.2942708333333335,
+      "original_depth_passes": 1258,
+      "front_depth_passes": 1084,
+      "samples": 768
+    },
+    {
+      "tick": 3646,
+      "sampled_coverage": 2.2916666666666665,
+      "original_depth_passes": 1144,
+      "front_depth_passes": 978,
+      "samples": 768
+    },
+    {
+      "tick": 3648,
+      "sampled_coverage": 2.26171875,
+      "original_depth_passes": 1140,
+      "front_depth_passes": 985,
+      "samples": 768
+    },
+    {
+      "tick": 3650,
+      "sampled_coverage": 2.3098958333333335,
+      "original_depth_passes": 1203,
+      "front_depth_passes": 1041,
+      "samples": 768
+    },
+    {
+      "tick": 3654,
+      "sampled_coverage": 2.265625,
+      "original_depth_passes": 1119,
+      "front_depth_passes": 972,
+      "samples": 768
+    },
+    {
+      "tick": 3658,
+      "sampled_coverage": 2.3072916666666665,
+      "original_depth_passes": 1129,
+      "front_depth_passes": 965,
+      "samples": 768
+    },
+    {
+      "tick": 3704,
+      "sampled_coverage": 2.3059895833333335,
+      "original_depth_passes": 1105,
+      "front_depth_passes": 995,
+      "samples": 768
+    },
+    {
+      "tick": 3760,
+      "sampled_coverage": 2.36328125,
+      "original_depth_passes": 1128,
+      "front_depth_passes": 1044,
+      "samples": 768
+    },
+    {
+      "tick": 3816,
+      "sampled_coverage": 2.0299479166666665,
+      "original_depth_passes": 1081,
+      "front_depth_passes": 1024,
+      "samples": 768
+    },
+    {
+      "tick": 3872,
+      "sampled_coverage": 2.33984375,
+      "original_depth_passes": 1123,
+      "front_depth_passes": 998,
+      "samples": 768
+    },
+    {
+      "tick": 3928,
+      "sampled_coverage": 2.2578125,
+      "original_depth_passes": 1031,
+      "front_depth_passes": 915,
+      "samples": 768
+    },
+    {
+      "tick": 3984,
+      "sampled_coverage": 2.5013020833333335,
+      "original_depth_passes": 1526,
+      "front_depth_passes": 1335,
+      "samples": 768
+    },
+    {
+      "tick": 4040,
+      "sampled_coverage": 2.50390625,
+      "original_depth_passes": 1619,
+      "front_depth_passes": 1463,
+      "samples": 768
+    },
+    {
+      "tick": 4096,
+      "sampled_coverage": 2.2526041666666665,
+      "original_depth_passes": 1392,
+      "front_depth_passes": 1368,
+      "samples": 768
+    },
+    {
+      "tick": 4152,
+      "sampled_coverage": 2.20703125,
+      "original_depth_passes": 1345,
+      "front_depth_passes": 1303,
+      "samples": 768
+    },
+    {
+      "tick": 4200,
+      "sampled_coverage": 2.1640625,
+      "original_depth_passes": 1091,
+      "front_depth_passes": 1067,
+      "samples": 768
+    },
+    {
+      "tick": 4208,
+      "sampled_coverage": 2.1744791666666665,
+      "original_depth_passes": 1176,
+      "front_depth_passes": 1131,
+      "samples": 768
+    },
+    {
+      "tick": 4264,
+      "sampled_coverage": 2.15234375,
+      "original_depth_passes": 1253,
+      "front_depth_passes": 1194,
+      "samples": 768
+    },
+    {
+      "tick": 4320,
+      "sampled_coverage": 2.1263020833333335,
+      "original_depth_passes": 1318,
+      "front_depth_passes": 1248,
+      "samples": 768
+    },
+    {
+      "tick": 4376,
+      "sampled_coverage": 2.1731770833333335,
+      "original_depth_passes": 1120,
+      "front_depth_passes": 980,
+      "samples": 768
+    },
+    {
+      "tick": 4432,
+      "sampled_coverage": 2.10546875,
+      "original_depth_passes": 1105,
+      "front_depth_passes": 975,
+      "samples": 768
+    },
+    {
+      "tick": 4488,
+      "sampled_coverage": 2.0716145833333335,
+      "original_depth_passes": 1119,
+      "front_depth_passes": 943,
+      "samples": 768
+    },
+    {
+      "tick": 4544,
+      "sampled_coverage": 2.4296875,
+      "original_depth_passes": 1180,
+      "front_depth_passes": 1000,
+      "samples": 768
+    },
+    {
+      "tick": 4600,
+      "sampled_coverage": 2.1809895833333335,
+      "original_depth_passes": 1011,
+      "front_depth_passes": 843,
+      "samples": 768
+    },
+    {
+      "tick": 4656,
+      "sampled_coverage": 2.3424479166666665,
+      "original_depth_passes": 1101,
+      "front_depth_passes": 974,
+      "samples": 768
+    },
+    {
+      "tick": 4712,
+      "sampled_coverage": 3.1145833333333335,
+      "original_depth_passes": 1515,
+      "front_depth_passes": 1345,
+      "samples": 768
+    },
+    {
+      "tick": 4768,
+      "sampled_coverage": 3.1744791666666665,
+      "original_depth_passes": 1617,
+      "front_depth_passes": 1377,
+      "samples": 768
+    },
+    {
+      "tick": 4800,
+      "sampled_coverage": 3.3203125,
+      "original_depth_passes": 1720,
+      "front_depth_passes": 1197,
+      "samples": 768
+    },
+    {
+      "tick": 4822,
+      "sampled_coverage": 3.5690104166666665,
+      "original_depth_passes": 1761,
+      "front_depth_passes": 1252,
+      "samples": 768
+    },
+    {
+      "tick": 4823,
+      "sampled_coverage": 3.5807291666666665,
+      "original_depth_passes": 1855,
+      "front_depth_passes": 1375,
+      "samples": 768
+    },
+    {
+      "tick": 4824,
+      "sampled_coverage": 3.5559895833333335,
+      "original_depth_passes": 1837,
+      "front_depth_passes": 1278,
+      "samples": 768
+    },
+    {
+      "tick": 4880,
+      "sampled_coverage": 3.0963541666666665,
+      "original_depth_passes": 1542,
+      "front_depth_passes": 1451,
+      "samples": 768
+    },
+    {
+      "tick": 4936,
+      "sampled_coverage": 2.5677083333333335,
+      "original_depth_passes": 1285,
+      "front_depth_passes": 1194,
+      "samples": 768
+    },
+    {
+      "tick": 4987,
+      "sampled_coverage": 2.9114583333333335,
+      "original_depth_passes": 1440,
+      "front_depth_passes": 1360,
+      "samples": 768
+    },
+    {
+      "tick": 4992,
+      "sampled_coverage": 2.9661458333333335,
+      "original_depth_passes": 1507,
+      "front_depth_passes": 1396,
+      "samples": 768
+    },
+    {
+      "tick": 5048,
+      "sampled_coverage": 4.337239583333333,
+      "original_depth_passes": 1995,
+      "front_depth_passes": 1774,
+      "samples": 768
+    },
+    {
+      "tick": 5104,
+      "sampled_coverage": 3.6953125,
+      "original_depth_passes": 1601,
+      "front_depth_passes": 1485,
+      "samples": 768
+    },
+    {
+      "tick": 5160,
+      "sampled_coverage": 3.78125,
+      "original_depth_passes": 1906,
+      "front_depth_passes": 1458,
+      "samples": 768
+    },
+    {
+      "tick": 5216,
+      "sampled_coverage": 3.6223958333333335,
+      "original_depth_passes": 1750,
+      "front_depth_passes": 1403,
+      "samples": 768
+    },
+    {
+      "tick": 5272,
+      "sampled_coverage": 3.7643229166666665,
+      "original_depth_passes": 1794,
+      "front_depth_passes": 1482,
+      "samples": 768
+    },
+    {
+      "tick": 5328,
+      "sampled_coverage": 3.515625,
+      "original_depth_passes": 1473,
+      "front_depth_passes": 1332,
+      "samples": 768
+    },
+    {
+      "tick": 5384,
+      "sampled_coverage": 3.5208333333333335,
+      "original_depth_passes": 1580,
+      "front_depth_passes": 1268,
+      "samples": 768
+    },
+    {
+      "tick": 5400,
+      "sampled_coverage": 3.3138020833333335,
+      "original_depth_passes": 1400,
+      "front_depth_passes": 1242,
+      "samples": 768
+    },
+    {
+      "tick": 5440,
+      "sampled_coverage": 3.2330729166666665,
+      "original_depth_passes": 1442,
+      "front_depth_passes": 1257,
+      "samples": 768
+    },
+    {
+      "tick": 5496,
+      "sampled_coverage": 3.2369791666666665,
+      "original_depth_passes": 1461,
+      "front_depth_passes": 1063,
+      "samples": 768
+    },
+    {
+      "tick": 5524,
+      "sampled_coverage": 2.6471354166666665,
+      "original_depth_passes": 1195,
+      "front_depth_passes": 1084,
+      "samples": 768
+    },
+    {
+      "tick": 5525,
+      "sampled_coverage": 2.65234375,
+      "original_depth_passes": 1267,
+      "front_depth_passes": 1162,
+      "samples": 768
+    },
+    {
+      "tick": 5526,
+      "sampled_coverage": 2.6640625,
+      "original_depth_passes": 1190,
+      "front_depth_passes": 1086,
+      "samples": 768
+    },
+    {
+      "tick": 5527,
+      "sampled_coverage": 2.625,
+      "original_depth_passes": 1181,
+      "front_depth_passes": 1077,
+      "samples": 768
+    },
+    {
+      "tick": 5528,
+      "sampled_coverage": 2.6276041666666665,
+      "original_depth_passes": 1194,
+      "front_depth_passes": 1081,
+      "samples": 768
+    },
+    {
+      "tick": 5529,
+      "sampled_coverage": 2.6028645833333335,
+      "original_depth_passes": 1197,
+      "front_depth_passes": 1090,
+      "samples": 768
+    },
+    {
+      "tick": 5530,
+      "sampled_coverage": 2.6171875,
+      "original_depth_passes": 1279,
+      "front_depth_passes": 1185,
+      "samples": 768
+    },
+    {
+      "tick": 5531,
+      "sampled_coverage": 2.5963541666666665,
+      "original_depth_passes": 1171,
+      "front_depth_passes": 1095,
+      "samples": 768
+    },
+    {
+      "tick": 5532,
+      "sampled_coverage": 2.5872395833333335,
+      "original_depth_passes": 1159,
+      "front_depth_passes": 1084,
+      "samples": 768
+    },
+    {
+      "tick": 5552,
+      "sampled_coverage": 2.6497395833333335,
+      "original_depth_passes": 1222,
+      "front_depth_passes": 1053,
+      "samples": 768
+    },
+    {
+      "tick": 5608,
+      "sampled_coverage": 2.38671875,
+      "original_depth_passes": 1119,
+      "front_depth_passes": 928,
+      "samples": 768
+    },
+    {
+      "tick": 5639,
+      "sampled_coverage": 2.40625,
+      "original_depth_passes": 1109,
+      "front_depth_passes": 894,
+      "samples": 768
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "scope": "Every frame and 3839 end-to-next-start gaps retained. Component fences are diagnostic only. Gap residual includes instrumentation, bookkeeping and scheduling; context switches are attribution evidence, not exclusive scheduler timers. RAM drain is outside lap and reported, not discarded.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/depth-lut-device/component-linear/run.txt",
+      "frames": 3840,
+      "gaps": 3839,
+      "options": "NATIVE_OPTIONS front=1 folded=0 log=ram cull=1 trace_cap=16777216",
+      "depth": "DEPTH bits=24 front_guard_bins=8",
+      "gap_stages": {
+        "gap_ms": {
+          "samples": 3839,
+          "median": 0.176952,
+          "p95": 0.222908,
+          "p99": 0.288614,
+          "worst": 0.630266,
+          "minimum": 0.068872
+        },
+        "cpu_ms": {
+          "samples": 3839,
+          "median": 0.175666,
+          "p95": 0.221208,
+          "p99": 0.267749,
+          "worst": 0.3605,
+          "minimum": 0.068875
+        },
+        "check_ms": {
+          "samples": 3839,
+          "median": 0.005083,
+          "p95": 0.005499,
+          "p99": 0.005625,
+          "worst": 0.133786,
+          "minimum": 0.001583
+        },
+        "check_cpu_ms": {
+          "samples": 3839,
+          "median": 0.004958,
+          "p95": 0.005333,
+          "p99": 0.0055,
+          "worst": 0.073083,
+          "minimum": 0.001542
+        },
+        "log_ms": {
+          "samples": 3839,
+          "median": 0.097745,
+          "p95": 0.140285,
+          "p99": 0.185659,
+          "worst": 0.547602,
+          "minimum": 0.040873
+        },
+        "log_cpu_ms": {
+          "samples": 3839,
+          "median": 0.099125,
+          "p95": 0.141624,
+          "p99": 0.170832,
+          "worst": 0.28175,
+          "minimum": 0.041375
+        },
+        "release_ms": {
+          "samples": 3839,
+          "median": 0.029166,
+          "p95": 0.033332,
+          "p99": 0.036498,
+          "worst": 0.16616,
+          "minimum": 0.0055
+        },
+        "release_cpu_ms": {
+          "samples": 3839,
+          "median": 0.029625,
+          "p95": 0.033833,
+          "p99": 0.036959,
+          "worst": 0.166833,
+          "minimum": 0.005458
+        },
+        "residual_ms": {
+          "samples": 3839,
+          "median": 0.044291,
+          "p95": 0.047373,
+          "p99": 0.084788,
+          "worst": 0.497564,
+          "minimum": 0.015959
+        }
+      },
+      "context_switches": {
+        "voluntary": 0.0,
+        "involuntary": 102.0
+      },
+      "worst_gaps": [
+        {
+          "tick": 2504.0,
+          "next_tick": 2505.0,
+          "gap_ms": 0.630266,
+          "cpu_ms": 0.350959,
+          "check_ms": 0.005084,
+          "check_cpu_ms": 0.004791,
+          "log_ms": 0.547602,
+          "log_cpu_ms": 0.13971,
+          "release_ms": 0.031291,
+          "release_cpu_ms": 0.0315,
+          "residual_ms": 0.046289,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 2596.0,
+          "next_tick": 2597.0,
+          "gap_ms": 0.626142,
+          "cpu_ms": 0.323832,
+          "check_ms": 0.005791,
+          "check_cpu_ms": 0.00525,
+          "log_ms": 0.094871,
+          "log_cpu_ms": 0.096167,
+          "release_ms": 0.027916,
+          "release_cpu_ms": 0.028333,
+          "residual_ms": 0.497564,
+          "voluntary": 0.0,
+          "involuntary": 0.0
+        },
+        {
+          "tick": 3749.0,
+          "next_tick": 3750.0,
+          "gap_ms": 0.623016,
+          "cpu_ms": 0.342041,
+          "check_ms": 0.005167,
+          "check_cpu_ms": 0.005083,
+          "log_ms": 0.542686,
+          "log_cpu_ms": 0.264915,
+          "release_ms": 0.028249,
+          "release_cpu_ms": 0.028167,
+          "residual_ms": 0.046914,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 1832.0,
+          "next_tick": 1833.0,
+          "gap_ms": 0.620808,
+          "cpu_ms": 0.350917,
+          "check_ms": 0.006249,
+          "check_cpu_ms": 0.005667,
+          "log_ms": 0.100663,
+          "log_cpu_ms": 0.102,
+          "release_ms": 0.027624,
+          "release_cpu_ms": 0.028042,
+          "residual_ms": 0.486272,
+          "voluntary": 0.0,
+          "involuntary": 0.0
+        },
+        {
+          "tick": 5091.0,
+          "next_tick": 5092.0,
+          "gap_ms": 0.609641,
+          "cpu_ms": 0.33496,
+          "check_ms": 0.004916,
+          "check_cpu_ms": 0.004708,
+          "log_ms": 0.529769,
+          "log_cpu_ms": 0.258336,
+          "release_ms": 0.030041,
+          "release_cpu_ms": 0.030334,
+          "residual_ms": 0.044915,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 5293.0,
+          "next_tick": 5294.0,
+          "gap_ms": 0.604142,
+          "cpu_ms": 0.341125,
+          "check_ms": 0.005083,
+          "check_cpu_ms": 0.004917,
+          "log_ms": 0.523729,
+          "log_cpu_ms": 0.264125,
+          "release_ms": 0.028207,
+          "release_cpu_ms": 0.028416,
+          "residual_ms": 0.047123,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 3165.0,
+          "next_tick": 3166.0,
+          "gap_ms": 0.595767,
+          "cpu_ms": 0.322499,
+          "check_ms": 0.004749,
+          "check_cpu_ms": 0.00475,
+          "log_ms": 0.516853,
+          "log_cpu_ms": 0.246791,
+          "release_ms": 0.029166,
+          "release_cpu_ms": 0.029459,
+          "residual_ms": 0.044999,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 4162.0,
+          "next_tick": 4163.0,
+          "gap_ms": 0.474814,
+          "cpu_ms": 0.174667,
+          "check_ms": 0.00525,
+          "check_cpu_ms": 0.005083,
+          "log_ms": 0.411317,
+          "log_cpu_ms": 0.113833,
+          "release_ms": 0.020041,
+          "release_cpu_ms": 0.020375,
+          "residual_ms": 0.038206,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 3175.0,
+          "next_tick": 3176.0,
+          "gap_ms": 0.447148,
+          "cpu_ms": 0.282584,
+          "check_ms": 0.005208,
+          "check_cpu_ms": 0.005,
+          "log_ms": 0.09583,
+          "log_cpu_ms": 0.097542,
+          "release_ms": 0.137869,
+          "release_cpu_ms": 0.138875,
+          "residual_ms": 0.208241,
+          "voluntary": 0.0,
+          "involuntary": 0.0
+        },
+        {
+          "tick": 2772.0,
+          "next_tick": 2773.0,
+          "gap_ms": 0.443482,
+          "cpu_ms": 0.195959,
+          "check_ms": 0.005125,
+          "check_cpu_ms": 0.004958,
+          "log_ms": 0.360152,
+          "log_cpu_ms": 0.116668,
+          "release_ms": 0.030791,
+          "release_cpu_ms": 0.031333,
+          "residual_ms": 0.047414,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 3115.0,
+          "next_tick": 3116.0,
+          "gap_ms": 0.440107,
+          "cpu_ms": 0.267749,
+          "check_ms": 0.003542,
+          "check_cpu_ms": 0.003125,
+          "log_ms": 0.38761,
+          "log_cpu_ms": 0.217416,
+          "release_ms": 0.017875,
+          "release_cpu_ms": 0.018083,
+          "residual_ms": 0.03108,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        },
+        {
+          "tick": 3598.0,
+          "next_tick": 3599.0,
+          "gap_ms": 0.430107,
+          "cpu_ms": 0.237206,
+          "check_ms": 0.003375,
+          "check_cpu_ms": 0.003375,
+          "log_ms": 0.335486,
+          "log_cpu_ms": 0.170832,
+          "release_ms": 0.019374,
+          "release_cpu_ms": 0.019458,
+          "residual_ms": 0.071872,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        }
+      ],
+      "world": {
+        "samples": 3840,
+        "median": 8.44101,
+        "p95": 12.121255999999999,
+        "p99": 15.032012,
+        "worst": 17.940184000000002,
+        "minimum": 3.209578
+      },
+      "pen": {
+        "samples": 3840,
+        "median": 1.7293665,
+        "p95": 2.063374,
+        "p99": 2.352863,
+        "worst": 3.529231,
+        "minimum": 0.138703
+      },
+      "final": {
+        "samples": 3840,
+        "median": 3.9576105,
+        "p95": 4.372280000000001,
+        "p99": 4.660477,
+        "worst": 5.427362,
+        "minimum": 3.3489050000000002
+      },
+      "completion": {
+        "samples": 3840,
+        "median": 14.4575765,
+        "p95": 18.363582,
+        "p99": 21.571203,
+        "worst": 25.087226,
+        "minimum": 8.036881
+      },
+      "interval": {
+        "samples": 3840,
+        "median": 14.630735999999999,
+        "p95": 18.542159,
+        "p99": 21.759029,
+        "worst": 25.277552,
+        "minimum": 8.144751
+      },
+      "completion_misses": 602,
+      "interval_misses": 675,
+      "drain": "TRACE_DRAIN mode=ram bytes=2763894 wall_ms=34.372643 outside_race=1",
+      "peak_rss_kib": 567164
+    }
+  ]
+}

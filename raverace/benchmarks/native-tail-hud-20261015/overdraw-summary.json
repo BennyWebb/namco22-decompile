@@ -1,0 +1,22 @@
+{
+  "all_sampled": {
+    "frames": 155,
+    "median_coverage": 2.5169270833333335,
+    "median_original_passes": 1258.0,
+    "median_front_passes": 1134.0
+  },
+  "slow": {
+    "frames": 69,
+    "median_coverage": 2.51953125,
+    "median_original_passes": 1239.0,
+    "median_front_passes": 1127.0
+  },
+  "other": {
+    "frames": 86,
+    "median_coverage": 2.513671875,
+    "median_original_passes": 1280.5,
+    "median_front_passes": 1160.5
+  },
+  "coverage_completion_correlation": -0.09470844695696491,
+  "method_limit": "32x24 original pixel-centre samples, source projection/near clipping, group scissors, triangle coverage and constant synthetic depth. No shader/texture cost model; NOT hardware counters or exact full-resolution overdraw. Unioned triangles per quad; raster top-left edge rules approximated."
+}

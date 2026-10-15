@@ -1,0 +1,83 @@
+[
+  {
+    "tick": 1800,
+    "changed_rgba_pixels": 89045,
+    "changed_rgb_pixels": 89045,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 252,
+    "mean_rgb_absolute_error": 3.230693359375,
+    "changed_pixel_fraction": 0.28986002604166666
+  },
+  {
+    "tick": 1965,
+    "changed_rgba_pixels": 106145,
+    "changed_rgb_pixels": 106145,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 255,
+    "mean_rgb_absolute_error": 3.6528135850694445,
+    "changed_pixel_fraction": 0.34552408854166666
+  },
+  {
+    "tick": 2500,
+    "changed_rgba_pixels": 93132,
+    "changed_rgb_pixels": 93132,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 255,
+    "mean_rgb_absolute_error": 1.4876996527777777,
+    "changed_pixel_fraction": 0.3031640625
+  },
+  {
+    "tick": 3000,
+    "changed_rgba_pixels": 70543,
+    "changed_rgb_pixels": 70543,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 250,
+    "mean_rgb_absolute_error": 1.5848882378472222,
+    "changed_pixel_fraction": 0.22963216145833334
+  },
+  {
+    "tick": 3600,
+    "changed_rgba_pixels": 50898,
+    "changed_rgb_pixels": 50898,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 255,
+    "mean_rgb_absolute_error": 1.9295692274305556,
+    "changed_pixel_fraction": 0.16568359375
+  },
+  {
+    "tick": 4200,
+    "changed_rgba_pixels": 41214,
+    "changed_rgb_pixels": 41214,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 255,
+    "mean_rgb_absolute_error": 1.798271484375,
+    "changed_pixel_fraction": 0.13416015625
+  },
+  {
+    "tick": 4800,
+    "changed_rgba_pixels": 63790,
+    "changed_rgb_pixels": 63790,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 250,
+    "mean_rgb_absolute_error": 2.9926888020833333,
+    "changed_pixel_fraction": 0.20764973958333333
+  },
+  {
+    "tick": 5400,
+    "changed_rgba_pixels": 80937,
+    "changed_rgb_pixels": 80937,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 255,
+    "mean_rgb_absolute_error": 3.0424620225694445,
+    "changed_pixel_fraction": 0.263466796875
+  },
+  {
+    "tick": 5639,
+    "changed_rgba_pixels": 52117,
+    "changed_rgb_pixels": 52117,
+    "changed_alpha_pixels": 0,
+    "maximum_channel_error": 229,
+    "mean_rgb_absolute_error": 1.5744574652777779,
+    "changed_pixel_fraction": 0.16965169270833333
+  }
+]

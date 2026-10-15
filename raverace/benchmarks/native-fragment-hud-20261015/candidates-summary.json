@@ -1,0 +1,167 @@
+{
+  "scope": "Controlled serial fences perturb scheduling; pen includes preparation/upload/render completion, final includes palette/LUT uploads and fullscreen composition/completion. Shadow/LUT omissions are diagnostic only. Separate stock-governor processes; paired differences are sensitivities, not exclusive GPU times.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-native-baseline/run.txt",
+      "control": 0,
+      "frames": 3840,
+      "world": {
+        "median": 12.585539,
+        "p95": 17.374257999999998,
+        "p99": 18.846927,
+        "worst": 22.060025
+      },
+      "pen": {
+        "median": 2.8382585000000002,
+        "p95": 3.23345,
+        "p99": 3.527602,
+        "worst": 12.34395
+      },
+      "pen_cpu": {
+        "median": 0.9037085,
+        "p95": 1.096374,
+        "p99": 1.328874,
+        "worst": 1.788291
+      },
+      "final_composition": {
+        "median": 4.069875000000001,
+        "p95": 4.5254840000000005,
+        "p99": 4.822588,
+        "worst": 5.469445
+      },
+      "total": {
+        "median": 19.6370655,
+        "p95": 24.676923,
+        "p99": 26.393224,
+        "worst": 31.341208
+      },
+      "peak_rss_kib": 567240
+    },
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-cull/run.txt",
+      "control": 0,
+      "frames": 3840,
+      "world": {
+        "median": 12.272127999999999,
+        "p95": 17.463735,
+        "p99": 18.97496,
+        "worst": 28.226186
+      },
+      "pen": {
+        "median": 1.811272,
+        "p95": 2.203653,
+        "p99": 2.498888,
+        "worst": 4.206558
+      },
+      "pen_cpu": {
+        "median": 0.7987705,
+        "p95": 0.9935,
+        "p99": 1.196041,
+        "worst": 1.560708
+      },
+      "final_composition": {
+        "median": 4.014590500000001,
+        "p95": 4.494547,
+        "p99": 4.786457,
+        "worst": 5.488092000000001
+      },
+      "total": {
+        "median": 18.351815,
+        "p95": 23.822416,
+        "p99": 25.380139,
+        "worst": 34.800306
+      },
+      "peak_rss_kib": 567148,
+      "paired_final_reduction_from_first": {
+        "median": 0.062095499999999415,
+        "p95": 0.5849050000000009,
+        "p99": 0.8756029999999999,
+        "worst": 1.4128309999999993
+      }
+    },
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-ubo/run.txt",
+      "control": 0,
+      "frames": 3840,
+      "world": {
+        "median": 12.5027215,
+        "p95": 17.509849,
+        "p99": 19.041551,
+        "worst": 22.522430999999997
+      },
+      "pen": {
+        "median": 2.8496595,
+        "p95": 3.238084,
+        "p99": 3.561905,
+        "worst": 6.491625
+      },
+      "pen_cpu": {
+        "median": 0.918771,
+        "p95": 1.119001,
+        "p99": 1.318208,
+        "worst": 2.769667
+      },
+      "final_composition": {
+        "median": 4.8704975,
+        "p95": 5.762105,
+        "p99": 6.050762,
+        "worst": 9.055109999999999
+      },
+      "total": {
+        "median": 20.430253,
+        "p95": 25.9767,
+        "p99": 27.536782,
+        "worst": 31.304512
+      },
+      "peak_rss_kib": 568396,
+      "paired_final_reduction_from_first": {
+        "median": -0.8268525000000009,
+        "p95": -0.032508000000000425,
+        "p99": 0.3013110000000001,
+        "worst": 1.430428999999998
+      }
+    },
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-shadow-math/run.txt",
+      "control": 3,
+      "frames": 3840,
+      "world": {
+        "median": 12.7188365,
+        "p95": 17.571839999999998,
+        "p99": 19.006926,
+        "worst": 21.997506
+      },
+      "pen": {
+        "median": 2.8399565,
+        "p95": 3.211213,
+        "p99": 3.557283,
+        "worst": 5.335217
+      },
+      "pen_cpu": {
+        "median": 0.9199375000000001,
+        "p95": 1.115999,
+        "p99": 1.329958,
+        "worst": 3.280833
+      },
+      "final_composition": {
+        "median": 4.0184335,
+        "p95": 4.488999000000001,
+        "p99": 4.807949000000001,
+        "worst": 5.8559470000000005
+      },
+      "total": {
+        "median": 19.781578000000003,
+        "p95": 24.856836,
+        "p99": 26.50765,
+        "worst": 29.342063
+      },
+      "peak_rss_kib": 567104,
+      "paired_final_reduction_from_first": {
+        "median": 0.05491599999999952,
+        "p95": 0.46459199999999923,
+        "p99": 0.7793230000000011,
+        "worst": 1.6107889999999987
+      }
+    }
+  ]
+}

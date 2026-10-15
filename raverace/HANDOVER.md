@@ -5,6 +5,279 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Controlled Milestone 4A — BLOCKED at live asset coverage (2026-10-15)
+
+Explicitly authorised despite M3 remaining performance-BLOCKED. M3's H700 12/14 ms
+renderer targets remain unmet; they are not waived or marked passed. M4B is not
+authorised. **Stopped at a significant integration blocker; no H700 deployment.**
+
+The isolated host executable generates native commands from the original running
+simulation, retaining original input/scheduler/physics/AI/collisions/audio and
+checkpoint code. Native rendering begins at tick 1800; earlier boot/menus use the
+existing renderer. It completed 3,855 native pictures through tick 5654, then stopped
+at tick 5655: **mesh code 2028 / packet 1456601 is absent from the M3 asset pack**.
+No missing geometry is silently omitted. Complete live/interactive coverage and
+full 6006-tick replay validation remain blocked.
+
+All 3,840 live command packets in the M3 racing window match the offline reference
+exactly after normalising offline revision IDs; all 5,152,196 commands are accounted
+for. Eleven world/HUD pairs are byte-identical, with independent HUD oracle passes.
+All 18 authoritative checkpoint ticks through 5400 match CPU/RAM, board/video and
+raw PCM/voice state. This is a successful prefix, **not full replay validation**.
+
+Host unpaced/traced renderer median/p95 2.603/3.068 ms and interval 4.516/5.401 ms
+are not H700 measurements or paced FPS evidence. First native frame 166.361 ms is
+retained. Serial sim/render overlap is absent; audio output/controller feel and
+physical presentation/stutter remain untested. No further optimization follows.
+
+Read [4A report](NATIVE_LIVE_INTEGRATION_REPORT.md) and
+[investigation/reproduction](native/live/INVESTIGATION.md).
+Host binary: `native/generated/milestone4a/prototype-host/rr_native_live`;
+SHA256 `05494648a73d39b93550ad8c93f351a7e28f69b9637f077a02061fe091713ef3`.
+Production executable/launcher/controls and all six replay files match prior
+hashes; recovery checks pass. No shared game/engine code, saves, production files,
+commit, push or deployment changed. Exit private prototype for rollback.
+
+## Slow-picture/HUD/Mali repeatability continuation — BLOCKED (2026-10-15)
+
+**Current investigation complete; STOPPED at the failed repeated headroom gate.**
+M2's seven exit checks remain complete. All 69 previous misses were analysed:
+dense pictures have 1528 visible quads/181 draws, including 151 protected single-quad
+batches. Fenced world completion on those ticks is 13.041 ms versus 8.654 ms overall;
+final HUD stays ~4 ms. Near clipping, glyph count and sampled overdraw do not
+explain the main deficit. Hardware-level cause of isolated tail waits remains open.
+
+Original-order versus front-to-back **21 actual Mali frames match byte-for-byte**,
+including priority, mirrors and HUD; independent HUD oracle passes. The depth-
+discard candidate also matches all 21. Combined bandwidth changes match the
+entire 3,840-frame host sequence/all 166 LUT revisions; ASan/UBSan passes.
+
+RG8 pen and previous-output color invalidation were rejected for insufficient
+measured gain. Dead-depth invalidation showed 0.274 ms paired component benefit
+and was tested in three fixed alternating pairs against current optimized front1.
+Candidate medians range **11.912–12.112 ms**, p95 **15.489–16.139 ms**,
+p99 17.451–18.969, worst 22.815; completion misses per run [136, 77, 89].
+All 23,040 timings retained; full completion/interval tables are in the report.
+The unchanged 12/14 ms gate fails. Repeated one-fence gains 0.092–0.143 ms fall below the 0.2 ms selection threshold;
+deadline misses increase in every pair. Depth discard is rejected and remains
+opt-in diagnostic only; no further tuning after the fixed series. Original HUD/LUT remains selected.
+
+Production/launcher/controls, physics/audio/saves/replays and recovery files remain
+unchanged; no commit, push or deployment. M4 has not begun and needs explicit
+authorisation. Read the [current race report](NATIVE_RACE_REPLAY_REPORT.md),
+[method](native/scene/TAIL_HUD_METHOD.md), and
+[evidence](benchmarks/native-tail-hud-20261015/).
+Actual lossless review gallery:
+`/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone3/tail-hud-review/index.html`.
+Previous continuation entries below are historical.
+
+## Depth/LUT/inter-picture Milestone 3 continuation — BLOCKED (2026-10-15)
+
+**Current investigation complete; STOPPED at failed p95 gate.** M2's seven exit
+checks remain complete. Matched one-fence full-race current optimized baseline
+12.417/15.914 ms median/p95; constrained linear front-to-back candidate
+**11.943/15.300 ms**, p9917.260, worst20.666;69/3840 completions >16.693 ms.
+Median passes12 ms; p95 fails14 ms. All3,840 ticks and5,152,196 commands retained.
+Candidate complete intervals12.086/15.458/17.415/20.851 ms median/p95/p99/worst,
+71 deadline misses. No samples excluded or further performance tuning after failure.
+
+Linear reversal only inside proven opaque compatible unprotected batches reduces
+overdraw with unchanged draws; conservative D16 proof has27-step minimum separation
+and zero ties, actual queried H700 depth24 bits. LUT palette/shadow folding was
+byte-exact in host tests but gave only~0.023 ms composition benefit: rejected,
+original dynamic LUT retained. No UBO was compiled or revisited. RAM logging
+removes demonstrated synchronous output stalls without dropping lines; drain34.467 ms
+is reported outside the lap. Historical943 ms stall did not reproduce and remains
+unresolved. Selected peak RSS567192 KiB; no additional selected GPU allocation.
+
+Full host combined sequence equals the current optimized output byte-for-byte;
+linear permutation equivalence is proven across the lap. Independent CPU HUD
+oracle and ASan/UBSan pass. **No new candidate Mali image comparison** was run
+before the failed gate; earlier Mali captures validate the previous revision only.
+
+Build `native/tools/build_depth_lut_probe.py OUT --linear`; final selection
+`ENG_NATIVE_FRONT=1`, `ENG_NATIVE_FOLD=0`, `ENG_NATIVE_LOG=ram`, certified opaque
+shaders, one final fence. It remains an isolated diagnostic renderer. Production,
+physics, audio, saves and replay inputs preserved; no commit, push or deployment.
+M4 has not begun and requires explicit authorisation.
+
+See [current race report](NATIVE_RACE_REPLAY_REPORT.md),
+[method](native/scene/DEPTH_LUT_GAP_METHOD.md), and
+[evidence](benchmarks/native-depth-lut-20261015/). Previous entries below are history.
+
+## Fragment/HUD Milestone 3 continuation — BLOCKED (2026-10-15)
+
+Focused investigation complete; **STOPPED at the failed full-picture headroom
+gate**. M2's seven exit checks remain complete. M4 is not authorised or started.
+No commit, push, production deployment, physics/audio or replay changes.
+
+All5403 material footprints are proven opaque across5,152,196 source commands,
+with >=2.499 texel UV guard. The selected standalone path removes world discard
+only under that exact pack proof and omits only HUD tiles containing all pen15.
+Original cutout shader/fallback, dynamic texture LUT, shadows and priority remain.
+An equivalent UBO LUT was tested but rejected as slower; keep it disabled.
+
+Matched one-fence full-race baseline: **17.418/22.714 ms median/p95**. Selected
+candidate: **12.310/15.648 ms**,p9918.804,worst22.349;95/3840 completions exceed
+16.693 ms. Both fixed12/14 ms gates fail. Candidate intervals median12.636,
+p9519.711,p9922.195,worst965.300 ms; all intervals retained. The largest gap is
+between pictures (logging/bookkeeping/scheduling), not hidden from the result.
+No more optimisation or favourable-run selection after the failed gate.
+
+Full3840 source validation passes; all3840 host selected HUD images match the
+original HUD exactly. World priority alpha is unchanged throughout; only ten
+isolated world edge pixels differ across the host lap. Eleven actual Mali world
+and composed captures are **byte-identical to the previous native Mali captures**;
+the independent CPU palette/shadow/LUT oracle also matches every selected pixel.
+Dynamic glyph invalidation GL fixture and ASan/UBSan playback pass.
+
+Read [race report](NATIVE_RACE_REPLAY_REPORT.md),
+[method and switches](native/scene/FRAGMENT_HUD_METHOD.md), and
+[numeric/raw evidence](benchmarks/native-fragment-hud-20261015/).
+Review original-left/selected-Mali-right images in the durable local directory
+`native/generated/milestone3/fragment-hud-review/h700/index.html`.
+
+Selected build: `build_hud_candidates.py` derives private native HUD sources;
+`ENG_NATIVE_HUD_CULL=1`, **`ENG_NATIVE_HUD_UBO=0`**, certified opaque shader directory,
+HUD CONTROL0, SPLITnone. Production/shared source is untouched. Resource budgets:
+482570240 static world GPU bytes (<512 MiB),229376 dynamic world bytes,3336192
+HUD fixed bytes; selected peak RSS567164 KiB, startup27.240 s. No additional GPU
+allocation in the selected path. Raw proof/images stay ignored.
+
+Production/launcher/controller, six replay files and five rollback checks remain
+unchanged; HUDdefault/replayoff, sole Ports launcher retained, EmulationStation
+restored, no game left running. A separately authorised M3 follow-up would need
+to address dense-world submission/final-composition costs and attribute the
+inter-picture stalls. Current report gives a bounded proposal; none is begun.
+**Do not begin M4.**
+
+## Focused Milestone 3 continuation — profiling complete, BLOCKED (2026-10-15)
+
+The user authorised profiling and a conditional indexed-buffer rewrite. The
+investigation is complete; **M3 remains BLOCKED and STOPPED**. M2's completed
+seven-check gate remains valid. No M4, commit, push or production deployment.
+
+Controlled full-window diagnostics isolate world completion at **12.213 ms median /
+17.335 ms p95**, and subsequent HUD at **5.918 / 6.415 ms**. A cheap-fragment
+control reduces world to6.101/9.156 ms. Removing all vertex texture gathers and
+using four indexed ordinary corner invocations gives11.759/17.119 ms; its median
+per-tick paired world saving is **-0.055 ms** (slightly slower). That does not
+support a full persistent indexed-buffer rewrite as the next fix. The CPU-prepared
+vertex control is diagnostic only, not a new accepted native backend.
+
+The unchanged one-fence reference still fails: world+HUD **17.553 ms median /
+22.435 ms p95 /23.767 ms p99 /27.180 ms worst**, against <=12/14 ms.
+2197/3840 pictures exceed16.693 ms. No acceptance criterion was relaxed.
+All3840 ticks,5,152,196 commands and exact material/transform/HUD source bindings
+validate again. Original renderer/shader sources remain hash-identical; prior
+full-sequence fidelity evidence remains valid. Six full-window diagnostic runs
+and a full host vertex-control lap are accounted for. The incomplete controls
+are not performance/visual acceptance evidence.
+
+See [current race report](NATIVE_RACE_REPLAY_REPORT.md),
+[profiling method](native/scene/PROFILE_METHOD.md), and
+[logs/distributions](benchmarks/native-race-profile-20261015/).
+Production executable/launcher/controller, six replay files and five rollback
+checks are unchanged; HUDdefault/replayoff, EmulationStation restored. Shared
+simulation, physics and audio were not modified or linked to the diagnostic.
+
+Next proposal, **not implemented or authorised**: a bounded M3 fragment/HUD
+investigation, first proving recipe opacity and measuring an opaque shader path
+without alpha discard only where source coverage allows, while preserving an
+alpha-tested path for cutouts. Profile the unchanged HUD's pen pass and final
+LUT/shadow composition separately before proposing any equivalent compositor
+change. Revalidate all ticks and fidelity, then a matched one-fence full-race
+<=12/14 ms gate. M4 remains unauthorised; do not begin it.
+
+## Revised Milestone 3 — BLOCKED at measured headroom gate (2026-10-15)
+
+The authorised focused revision is implemented and tested. M2's seven exit checks
+remain complete. **M3 is not complete: STOPPED at the failed H700 performance
+gate; M4 is not authorised or started.** See the current
+[race report](NATIVE_RACE_REPLAY_REPORT.md), [v3 protocol](native/scene/COMPACT_FORMAT.md)
+and [raw/numeric evidence](benchmarks/native-race-revised-20261015/).
+
+All 3840 ticks and 5,152,196 original commands validate. All 3840 revised host
+pictures are byte-identical to prior native pictures. Eleven actual Mali captures
+cover the full race and preserve the reviewed track, traffic, mirror and HUD
+relationships. Static assets remain resident: 482,570,240 bytes (<512 MiB).
+Compressed command payload is 107,235,244 bytes; buffering is a bounded three-slot
+FIFO. ASan/UBSan two-pass host playback and malformed-stream checks pass.
+
+Clean H700 world+HUD completion: **median 17.418 ms / p95 22.527 ms / p99 23.882 ms /
+worst 32.617 ms**, versus the prospective <=12/14 ms median/p95 gate.
+2203/3840 pictures exceed 16.693 ms. Intervals: median17.914 / p95 24.190 /
+p99 28.476 / worst39.587 ms; offline capacity54.933 pictures/s, 1% low33.403.
+These are not live FPS. Queue wait median0.0012 ms rules out packet starvation
+in this run; final combined GPU wait median11.812 ms remains substantial.
+One final fence is used, unlike the historical two-fence run; no matched-control
+speedup claim is made. The failed gate stopped further performance tuning.
+
+Production executable/launcher/controller hashes, default HUD/off replay modes,
+all six replay files and five rollback checks remain unchanged; EmulationStation
+is restored and no game is running. No commits, push, deployment, live simulation
+integration or OS/clock changes. Proposed next work requires separate authorisation:
+attribute world/HUD GPU costs, then consider a bounded native indexed-vertex
+backend to replace repeated vertex-texture gathers. Do not start M4.
+
+Review actual handheld comparisons in the durable local directory
+`native/generated/milestone3/v3-h700-review/` (original left, Mali right).
+The full 3840-frame browser review remains `native/generated/milestone3/review/index.html`;
+v3's host output is proven identical to that review's native side.
+
+## Historical initial Milestone 3 — BLOCKED (2026-10-15)
+
+User authorised M3 only. M2's seven exit checks were confirmed complete before
+work; its evidence and the user's frozen-image approval remain valid. M3 now
+has complete source-command capture/playback and host comparison coverage, but
+**does not pass its performance gate. STOPPED; M4 not started or authorised.**
+
+Read [race report](NATIVE_RACE_REPLAY_REPORT.md), [scene API/reproduction](native/scene/FORMAT.md)
+and [H700 numeric results](benchmarks/native-race-20261015/h700-summary.json).
+All 3840 ticks 1800–5639 are captured, validated and rendered on H700:5,117,636
+source mesh quads,34,560 direct polygons,15,666 reusable source mesh packets.
+Original recording checkpoints and untouched headless/GLES endpoints agree,
+including board/PCM/voices. Material/UV/gutter/index/instance/priority/hash gates
+pass. Native static world resources are482,471,936 bytes, below the declared512 MiB
+full-lap preload ceiling. No steady-state static mesh/material uploads occur.
+
+Final corrected H700 process: completion median**32.729ms**,p95**39.595ms**,
+p99**42.690ms**,worst**57.123ms**;3834/3840 exceed16.693ms without simulation/audio.
+Actual offline capacity31.165 pictures/s,1% low capacity20.924; these are not live
+FPS. Packet read median 13.191ms; derived completion minus reads still19.917ms,
+so storage alone does not explain away the rendering failure. Startup25.438s,
+peak RSS567188 KiB. No further optimisation campaign after this failed gate.
+
+The final full host reference/native review set covers3840 pictures. Open
+`native/generated/milestone3/review/index.html` (original left/native right).
+Nine PNG comparisons are in`native/generated/milestone3/comparisons/`.
+An unintended fog difference was fixed to follow production GLES2's explicitly
+disabled polygon-fog policy; earlier fog-on data is superseded. H700 frame
+readbacks/sequence signoff remain open, so the visual gate stays unchecked.
+
+Delivered code: private race capture/reference relinkers; bounded versioned
+source and native scene protocol; offline full-lap material/mesh/command compiler
+and stream packer; native GLES3 instanced renderer using resident original local
+meshes, GPU transforms/near clipping and production HUD; actual-data validators,
+analysis and durable sequence-review tools. No shared game/engine source changes.
+Python syntax, host/ARM64 warning-clean renderer builds, packet negative fixtures,
+full source/captured palette sampling, complete replay state checks and actual
+H700 full-window execution pass their stated scopes. See report for exact commands,
+hashes, intermediate capture fixes, remaining limits and raw logs.
+
+At this historical stop, a focused revised-M3 proposal was **not yet implemented/authorised** (subsequently executed; see current entry above):
+instance-deduplicated compact commands; versioned immutable HUD resources;
+bounded prefetched/compressed transport; six-vertex ordinary quads and a separate
+near-clipped path; reduced repeated instance fetches; full world+HUD measurement.
+Every source ID/cull reason must remain accounted for. This requires separate
+approval before restarting M3. M4 requires M3 completion and explicit approval.
+
+Production unchanged: executable`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`,
+launcher/controller hashes and all replay sidecars match; five backups pass,
+HUD`default`, replay`off`; EmulationStation restored(PID 28879), no game running.
+Only the isolated userdata diagnostic directory was added; no launcher changes,
+commit, push, deployment, save writes or clock/OS changes. HEAD`8fa1331` unchanged.
+
 ## Revised Milestone 2 — COMPLETE (2026-10-15)
 
 Milestone 1's completed exit gate was confirmed before this work. The revised

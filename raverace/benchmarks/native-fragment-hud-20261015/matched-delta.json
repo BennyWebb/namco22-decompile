@@ -1,0 +1,11 @@
+{
+  "samples": 3840,
+  "paired_completion_reduction_ms": {
+    "median": 4.9492995,
+    "p95": 9.279123000000002,
+    "p99": 11.179262000000001,
+    "minimum": -6.1590289999999985,
+    "maximum": 13.178691
+  },
+  "scope": "One matched pair, original then candidate; stock governor, no repeated-run confidence interval. Candidate fails the fixed gate, so no tuning or pass-selection campaign."
+}

@@ -1,0 +1,13 @@
+{
+  "prototypes": 170418,
+  "persistent_vertex_bytes_upper_bound": 21813504,
+  "lighting_texture_bytes_upper_bound": 5455872,
+  "estimated_draws": {
+    "median": 248.0,
+    "p95": 431,
+    "max": 567
+  },
+  "ordinary_quads": 3520049,
+  "near_quads": 157931,
+  "duplicate_within_group": 0
+}

@@ -1,0 +1,42 @@
+{
+  "staged-cheap-fragment": {
+    "paired_world_reduction_ms": {
+      "median": 5.784521499999999,
+      "p95": 10.322417,
+      "p99": 11.755222,
+      "minimum": -1.1204039999999988,
+      "maximum": 14.750950999999997
+    },
+    "warning": "Separate stock-governor processes, not same-instant samples or an exclusive GPU timer; no speedup confidence interval."
+  },
+  "staged-vertex-control": {
+    "paired_world_reduction_ms": {
+      "median": -0.055471999999999966,
+      "p95": 2.544873000000001,
+      "p99": 3.686367999999998,
+      "minimum": -8.805271,
+      "maximum": 7.557536000000001
+    },
+    "warning": "Separate stock-governor processes, not same-instant samples or an exclusive GPU timer; no speedup confidence interval."
+  },
+  "staged-discard": {
+    "paired_world_reduction_ms": {
+      "median": 11.378988999999999,
+      "p95": 16.452751,
+      "p99": 17.69828,
+      "minimum": 2.5744320000000016,
+      "maximum": 21.674359000000003
+    },
+    "warning": "Separate stock-governor processes, not same-instant samples or an exclusive GPU timer; no speedup confidence interval."
+  },
+  "staged-skip": {
+    "paired_world_reduction_ms": {
+      "median": 11.5761535,
+      "p95": 16.668976,
+      "p99": 17.889049,
+      "minimum": 4.388928999999999,
+      "maximum": 21.71647
+    },
+    "warning": "Separate stock-governor processes, not same-instant samples or an exclusive GPU timer; no speedup confidence interval."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "all": {
+    "world_submit_ms": 3.801915,
+    "world_sync_ms": 4.870680999999999,
+    "hud_submit_ms": 1.991017,
+    "finish_ms": 3.763147,
+    "total_ms": 14.767184,
+    "cpu_ms": 5.7888745,
+    "wait_ms": 0.010791,
+    "world_complete_median": 8.653745,
+    "pen_complete_median": 1.761339,
+    "final_complete_median": 3.9899690000000003,
+    "pictures": 3840
+  },
+  "previous_69": {
+    "world_submit_ms": 7.116812,
+    "world_sync_ms": 5.827245,
+    "hud_submit_ms": 1.994745,
+    "finish_ms": 3.802333,
+    "total_ms": 19.158406,
+    "cpu_ms": 9.202875,
+    "wait_ms": 0.010917,
+    "world_complete_median": 13.040675,
+    "pen_complete_median": 1.76888,
+    "final_complete_median": 4.051321,
+    "pictures": 69
+  }
+}

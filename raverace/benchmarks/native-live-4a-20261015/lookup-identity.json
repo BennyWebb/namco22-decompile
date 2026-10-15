@@ -1,0 +1,10 @@
+{
+  "format": "RR native live asset lookup",
+  "version": 1,
+  "meshes": 15666,
+  "materials": 5403,
+  "bytes": 4510408,
+  "sha256": "1736ed75dec3d9e4770b2b07d98e1702d1afc8393c6f567cf8d6e4dc76cafa01",
+  "pack_manifest_sha256": "5172bdf669747601342f4d44cb193202c35dbeac6db260c3ffc7afd4175b8c8b",
+  "scope": "Only immutable mesh/material identity and exact palette values; no frames, cameras, transforms, source command streams, fonts or HUD styles."
+}

@@ -1,0 +1,14 @@
+{
+  "component_revisions": {
+    "cgram": 1,
+    "text": 3573,
+    "palette": 1,
+    "mixer": 166,
+    "czram": 1,
+    "attributes": 1
+  },
+  "native_packet_bytes": 1276401984,
+  "host_zlib1_bytes": 266636575,
+  "host_zlib1_max_packet_bytes": 94800,
+  "scope": "Offline sizing investigation only. No compressed player implemented or H700 inflate timing measured; not performance acceptance."
+}

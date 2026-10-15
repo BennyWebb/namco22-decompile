@@ -1,0 +1,9 @@
+{
+  "pack_manifest_sha256": "5172bdf669747601342f4d44cb193202c35dbeac6db260c3ffc7afd4175b8c8b",
+  "selected_shader": "race_opaque.frag",
+  "cutout_fallback": "cutout.frag",
+  "policy": "Any unproved material conservatively retains original discard for the entire pack; this actual pack has all5403 materials proven opaque.",
+  "shader_sha256": "b97ce175cebea614bbf099c148f1bd6a6b9c52b607c12268618795510a0a814d",
+  "opacity_proof_matches_first_audit": true,
+  "opaque_shader_matches_timed_variant": true
+}

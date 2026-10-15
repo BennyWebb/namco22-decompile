@@ -1,0 +1,50 @@
+[
+  {
+    "run": "staged-full",
+    "mode": 0,
+    "split_fences": true,
+    "shaders": "original",
+    "headroom_eligible": false,
+    "frames": 3840
+  },
+  {
+    "run": "staged-discard",
+    "mode": 1,
+    "split_fences": true,
+    "shaders": "original",
+    "headroom_eligible": false,
+    "frames": 3840
+  },
+  {
+    "run": "staged-skip",
+    "mode": 2,
+    "split_fences": true,
+    "shaders": "original",
+    "headroom_eligible": false,
+    "frames": 3840
+  },
+  {
+    "run": "staged-cheap-fragment",
+    "mode": 0,
+    "split_fences": true,
+    "shaders": "cheap fragment, original vertices",
+    "headroom_eligible": false,
+    "frames": 3840
+  },
+  {
+    "run": "reference-normal",
+    "mode": 0,
+    "split_fences": false,
+    "shaders": "original",
+    "headroom_eligible": true,
+    "frames": 3840
+  },
+  {
+    "run": "staged-vertex-control",
+    "mode": 0,
+    "split_fences": true,
+    "shaders": "no-gather diagnostic vertices, original fragment",
+    "headroom_eligible": false,
+    "frames": 3840
+  }
+]

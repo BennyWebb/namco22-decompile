@@ -1,0 +1,3 @@
+#version 300 es
+precision highp float;in highp vec2 uv;out vec4 out_colour;layout(std140) uniform NativeLUT {vec4 native_lut[256];};uniform sampler2D scene_tex,raw_tex,palette_tex,lut_tex;uniform bool shadow_on;uniform vec3 mix0,mix1,mix2;void main(){vec4 base=texture(scene_tex,uv);vec3 c=floor(base.rgb*255.+.5);if(base.a<.5){vec4 t=texture(raw_tex,uv);if(t.a>.5){float idx=floor(t.r*255.+.5);if(shadow_on&&idx>=252.&&idx<=254.){vec3 m=idx<252.5?mix0:(idx<253.5?mix1:mix2);c=floor(c*m/256.);}else c=floor(texture(palette_tex,vec2((idx+.5)/256.,.5)).rgb*255.+.5);}}vec3 o;o.r=native_lut[int(c.r)].r;o.g=native_lut[int(c.g)].g;o.b=native_lut[int(c.b)].b;out_colour=vec4(o,1.);}
+

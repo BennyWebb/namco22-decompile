@@ -1,0 +1,627 @@
+{
+  "scope": "Every frame and 3839 end-to-next-start gaps retained. Component fences are diagnostic only. Gap residual includes instrumentation, bookkeeping and scheduling; context switches are attribution evidence, not exclusive scheduler timers. RAM drain is outside lap and reported, not discarded.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/depth-lut-device/baseline-1/run.txt",
+      "frames": 3840,
+      "gaps": 3839,
+      "options": "NATIVE_OPTIONS front=0 folded=0 log=ram cull=1 trace_cap=16777216",
+      "depth": "DEPTH bits=24 front_guard_bins=8",
+      "gap_stages": {
+        "gap_ms": {
+          "samples": 3839,
+          "median": 0.155411,
+          "p95": 0.221533,
+          "p99": 0.298363,
+          "worst": 0.953378,
+          "minimum": 0.069289
+        },
+        "cpu_ms": {
+          "samples": 3839,
+          "median": 0.154292,
+          "p95": 0.219291,
+          "p99": 0.258917,
+          "worst": 0.401625,
+          "minimum": 0.069
+        },
+        "check_ms": {
+          "samples": 3839,
+          "median": 0.0035,
+          "p95": 0.005541,
+          "p99": 0.005749,
+          "worst": 0.432691,
+          "minimum": 0.001791
+        },
+        "check_cpu_ms": {
+          "samples": 3839,
+          "median": 0.003541,
+          "p95": 0.005458,
+          "p99": 0.005833,
+          "worst": 0.168792,
+          "minimum": 0.00175
+        },
+        "log_ms": {
+          "samples": 3839,
+          "median": 0.092663,
+          "p95": 0.137869,
+          "p99": 0.173618,
+          "worst": 0.839549,
+          "minimum": 0.039956
+        },
+        "log_cpu_ms": {
+          "samples": 3839,
+          "median": 0.093917,
+          "p95": 0.138792,
+          "p99": 0.165,
+          "worst": 0.281874,
+          "minimum": 0.040458
+        },
+        "release_ms": {
+          "samples": 3839,
+          "median": 0.021416,
+          "p95": 0.033123,
+          "p99": 0.03729,
+          "worst": 0.366277,
+          "minimum": 0.00325
+        },
+        "release_cpu_ms": {
+          "samples": 3839,
+          "median": 0.021709,
+          "p95": 0.033625,
+          "p99": 0.036666,
+          "worst": 0.131583,
+          "minimum": 0.003292
+        },
+        "residual_ms": {
+          "samples": 3839,
+          "median": 0.030832,
+          "p95": 0.046791,
+          "p99": 0.084579,
+          "worst": 0.478273,
+          "minimum": 0.016292
+        }
+      },
+      "context_switches": {
+        "voluntary": 0.0,
+        "involuntary": 125.0
+      },
+      "worst_gaps": [
+        {
+          "tick": 2160.0,
+          "next_tick": 2161.0,
+          "gap_ms": 0.953378,
+          "cpu_ms": 0.401625,
+          "check_ms": 0.005375,
+          "check_cpu_ms": 0.005083,
+          "log_ms": 0.839549,
+          "log_cpu_ms": 0.281874,
+          "release_ms": 0.041998,
+          "release_cpu_ms": 0.051625,
+          "residual_ms": 0.066456,
+          "voluntary": 0.0,
+          "involuntary": 2.0
+        },
+        {
+          "tick": 4142.0,
+          "next_tick": 4143.0,
+          "gap_ms": 0.628267,
+          "cpu_ms": 0.347666,
+          "check_ms": 0.005416,
+          "check_cpu_ms": 0.005333,
+          "log_ms": 0.543228,
+          "log_cpu_ms": 0.26625,
+          "release_ms": 0.031041,
+          "release_cpu_ms": 0.031459,
+          "residual_ms": 0.048582,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 3087.0,
+          "next_tick": 3088.0,
+          "gap_ms": 0.623183,
+          "cpu_ms": 0.35304,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005417,
+          "log_ms": 0.539395,
+          "log_cpu_ms": 0.272457,
+          "release_ms": 0.031374,
+          "release_cpu_ms": 0.031875,
+          "residual_ms": 0.046956,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 2901.0,
+          "next_tick": 2902.0,
+          "gap_ms": 0.613559,
+          "cpu_ms": 0.347792,
+          "check_ms": 0.432691,
+          "check_cpu_ms": 0.168792,
+          "log_ms": 0.102579,
+          "log_cpu_ms": 0.104126,
+          "release_ms": 0.029332,
+          "release_cpu_ms": 0.029959,
+          "residual_ms": 0.048957,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 2634.0,
+          "next_tick": 2635.0,
+          "gap_ms": 0.608725,
+          "cpu_ms": 0.324458,
+          "check_ms": 0.004833,
+          "check_cpu_ms": 0.004917,
+          "log_ms": 0.096912,
+          "log_cpu_ms": 0.098292,
+          "release_ms": 0.028707,
+          "release_cpu_ms": 0.117249,
+          "residual_ms": 0.478273,
+          "voluntary": 0.0,
+          "involuntary": 8.0
+        },
+        {
+          "tick": 1993.0,
+          "next_tick": 1994.0,
+          "gap_ms": 0.594392,
+          "cpu_ms": 0.384043,
+          "check_ms": 0.005333,
+          "check_cpu_ms": 0.00525,
+          "log_ms": 0.228991,
+          "log_cpu_ms": 0.231459,
+          "release_ms": 0.281614,
+          "release_cpu_ms": 0.096084,
+          "residual_ms": 0.078454,
+          "voluntary": 0.0,
+          "involuntary": 5.0
+        },
+        {
+          "tick": 2136.0,
+          "next_tick": 2137.0,
+          "gap_ms": 0.526729,
+          "cpu_ms": 0.231624,
+          "check_ms": 0.005708,
+          "check_cpu_ms": 0.005709,
+          "log_ms": 0.425733,
+          "log_cpu_ms": 0.134208,
+          "release_ms": 0.029457,
+          "release_cpu_ms": 0.03,
+          "residual_ms": 0.065831,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 4903.0,
+          "next_tick": 4904.0,
+          "gap_ms": 0.511605,
+          "cpu_ms": 0.179417,
+          "check_ms": 0.005292,
+          "check_cpu_ms": 0.005084,
+          "log_ms": 0.097954,
+          "log_cpu_ms": 0.099042,
+          "release_ms": 0.366277,
+          "release_cpu_ms": 0.035667,
+          "residual_ms": 0.042082,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 2576.0,
+          "next_tick": 2577.0,
+          "gap_ms": 0.503063,
+          "cpu_ms": 0.176291,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005209,
+          "log_ms": 0.097621,
+          "log_cpu_ms": 0.098916,
+          "release_ms": 0.356819,
+          "release_cpu_ms": 0.032208,
+          "residual_ms": 0.043165,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 5627.0,
+          "next_tick": 5628.0,
+          "gap_ms": 0.498521,
+          "cpu_ms": 0.176791,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005375,
+          "log_ms": 0.102037,
+          "log_cpu_ms": 0.103167,
+          "release_ms": 0.346987,
+          "release_cpu_ms": 0.027333,
+          "residual_ms": 0.044039,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 3580.0,
+          "next_tick": 3581.0,
+          "gap_ms": 0.498021,
+          "cpu_ms": 0.175792,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005375,
+          "log_ms": 0.103204,
+          "log_cpu_ms": 0.10425,
+          "release_ms": 0.345944,
+          "release_cpu_ms": 0.025542,
+          "residual_ms": 0.043415,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 4516.0,
+          "next_tick": 4517.0,
+          "gap_ms": 0.482689,
+          "cpu_ms": 0.174083,
+          "check_ms": 0.005333,
+          "check_cpu_ms": 0.005417,
+          "log_ms": 0.102204,
+          "log_cpu_ms": 0.107208,
+          "release_ms": 0.02154,
+          "release_cpu_ms": 0.021458,
+          "residual_ms": 0.353612,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        }
+      ],
+      "world": {
+        "samples": 3840,
+        "median": 3.2020999999999997,
+        "p95": 5.860765,
+        "p99": 7.780354,
+        "worst": 11.023641,
+        "minimum": 0.769469
+      },
+      "pen": {
+        "samples": 3840,
+        "median": 0.752345,
+        "p95": 1.034375,
+        "p99": 1.278699,
+        "worst": 11.940645,
+        "minimum": 0.151785
+      },
+      "final": {
+        "samples": 3840,
+        "median": 8.166422,
+        "p95": 9.437745,
+        "p99": 9.941144,
+        "worst": 10.579657999999998,
+        "minimum": 5.536277
+      },
+      "completion": {
+        "samples": 3840,
+        "median": 12.416896999999999,
+        "p95": 15.914152,
+        "p99": 18.292973,
+        "worst": 24.301275,
+        "minimum": 7.19792
+      },
+      "interval": {
+        "samples": 3840,
+        "median": 12.5734325,
+        "p95": 16.084062,
+        "p99": 18.453509,
+        "worst": 24.431145,
+        "minimum": 7.300332
+      },
+      "completion_misses": 115,
+      "interval_misses": 126,
+      "drain": "TRACE_DRAIN mode=ram bytes=2763457 wall_ms=33.731647 outside_race=1",
+      "peak_rss_kib": 567164
+    },
+    {
+      "file": "raverace/native/generated/milestone3/depth-lut-device/candidate-1/run.txt",
+      "frames": 3840,
+      "gaps": 3839,
+      "options": "NATIVE_OPTIONS front=1 folded=0 log=ram cull=1 trace_cap=16777216",
+      "depth": "DEPTH bits=24 front_guard_bins=8",
+      "gap_stages": {
+        "gap_ms": {
+          "samples": 3839,
+          "median": 0.125412,
+          "p95": 0.215616,
+          "p99": 0.262115,
+          "worst": 0.615434,
+          "minimum": 0.071497
+        },
+        "cpu_ms": {
+          "samples": 3839,
+          "median": 0.124791,
+          "p95": 0.211334,
+          "p99": 0.237208,
+          "worst": 0.348333,
+          "minimum": 0.071875
+        },
+        "check_ms": {
+          "samples": 3839,
+          "median": 0.003416,
+          "p95": 0.005542,
+          "p99": 0.005709,
+          "worst": 0.166035,
+          "minimum": 0.001708
+        },
+        "check_cpu_ms": {
+          "samples": 3839,
+          "median": 0.003334,
+          "p95": 0.005417,
+          "p99": 0.005625,
+          "worst": 0.098,
+          "minimum": 0.001625
+        },
+        "log_ms": {
+          "samples": 3839,
+          "median": 0.072081,
+          "p95": 0.130453,
+          "p99": 0.157702,
+          "worst": 0.532228,
+          "minimum": 0.041165
+        },
+        "log_cpu_ms": {
+          "samples": 3839,
+          "median": 0.073041,
+          "p95": 0.127166,
+          "p99": 0.154208,
+          "worst": 0.268499,
+          "minimum": 0.041625
+        },
+        "release_ms": {
+          "samples": 3839,
+          "median": 0.019625,
+          "p95": 0.031915,
+          "p99": 0.034665,
+          "worst": 0.459065,
+          "minimum": 0.006042
+        },
+        "release_cpu_ms": {
+          "samples": 3839,
+          "median": 0.019916,
+          "p95": 0.032333,
+          "p99": 0.03475,
+          "worst": 0.201833,
+          "minimum": 0.006208
+        },
+        "residual_ms": {
+          "samples": 3839,
+          "median": 0.030039,
+          "p95": 0.046664,
+          "p99": 0.084203,
+          "worst": 0.393693,
+          "minimum": 0.016165
+        }
+      },
+      "context_switches": {
+        "voluntary": 0.0,
+        "involuntary": 95.0
+      },
+      "worst_gaps": [
+        {
+          "tick": 2522.0,
+          "next_tick": 2523.0,
+          "gap_ms": 0.615434,
+          "cpu_ms": 0.348333,
+          "check_ms": 0.005417,
+          "check_cpu_ms": 0.00525,
+          "log_ms": 0.532228,
+          "log_cpu_ms": 0.268499,
+          "release_ms": 0.030457,
+          "release_cpu_ms": 0.030791,
+          "residual_ms": 0.047332,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        },
+        {
+          "tick": 3775.0,
+          "next_tick": 3776.0,
+          "gap_ms": 0.605517,
+          "cpu_ms": 0.346333,
+          "check_ms": 0.005375,
+          "check_cpu_ms": 0.005292,
+          "log_ms": 0.096538,
+          "log_cpu_ms": 0.097916,
+          "release_ms": 0.459065,
+          "release_cpu_ms": 0.201833,
+          "residual_ms": 0.044539,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        },
+        {
+          "tick": 4100.0,
+          "next_tick": 4101.0,
+          "gap_ms": 0.559727,
+          "cpu_ms": 0.239501,
+          "check_ms": 0.005708,
+          "check_cpu_ms": 0.005375,
+          "log_ms": 0.491563,
+          "log_cpu_ms": 0.174125,
+          "release_ms": 0.020374,
+          "release_cpu_ms": 0.020583,
+          "residual_ms": 0.042082,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 5163.0,
+          "next_tick": 5164.0,
+          "gap_ms": 0.536312,
+          "cpu_ms": 0.1935,
+          "check_ms": 0.005291,
+          "check_cpu_ms": 0.005416,
+          "log_ms": 0.105913,
+          "log_cpu_ms": 0.107416,
+          "release_ms": 0.378777,
+          "release_cpu_ms": 0.038168,
+          "residual_ms": 0.046331,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 5040.0,
+          "next_tick": 5041.0,
+          "gap_ms": 0.515729,
+          "cpu_ms": 0.196208,
+          "check_ms": 0.005208,
+          "check_cpu_ms": 0.005166,
+          "log_ms": 0.097371,
+          "log_cpu_ms": 0.098958,
+          "release_ms": 0.019457,
+          "release_cpu_ms": 0.019209,
+          "residual_ms": 0.393693,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 2145.0,
+          "next_tick": 2146.0,
+          "gap_ms": 0.500771,
+          "cpu_ms": 0.1715,
+          "check_ms": 0.005416,
+          "check_cpu_ms": 0.005292,
+          "log_ms": 0.093996,
+          "log_cpu_ms": 0.095541,
+          "release_ms": 0.359069,
+          "release_cpu_ms": 0.032125,
+          "residual_ms": 0.04229,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 5196.0,
+          "next_tick": 5197.0,
+          "gap_ms": 0.476731,
+          "cpu_ms": 0.172292,
+          "check_ms": 0.0055,
+          "check_cpu_ms": 0.005458,
+          "log_ms": 0.100914,
+          "log_cpu_ms": 0.102333,
+          "release_ms": 0.326737,
+          "release_cpu_ms": 0.024416,
+          "residual_ms": 0.04358,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 3424.0,
+          "next_tick": 3425.0,
+          "gap_ms": 0.470397,
+          "cpu_ms": 0.147333,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005334,
+          "log_ms": 0.405693,
+          "log_cpu_ms": 0.085125,
+          "release_ms": 0.020041,
+          "release_cpu_ms": 0.020417,
+          "residual_ms": 0.039205,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 2627.0,
+          "next_tick": 2628.0,
+          "gap_ms": 0.469189,
+          "cpu_ms": 0.286291,
+          "check_ms": 0.003292,
+          "check_cpu_ms": 0.003208,
+          "log_ms": 0.416358,
+          "log_cpu_ms": 0.234999,
+          "release_ms": 0.019083,
+          "release_cpu_ms": 0.019291,
+          "residual_ms": 0.030456,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        },
+        {
+          "tick": 5129.0,
+          "next_tick": 5130.0,
+          "gap_ms": 0.434024,
+          "cpu_ms": 0.25925,
+          "check_ms": 0.003417,
+          "check_cpu_ms": 0.003292,
+          "log_ms": 0.342361,
+          "log_cpu_ms": 0.201667,
+          "release_ms": 0.017499,
+          "release_cpu_ms": 0.017833,
+          "residual_ms": 0.070747,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        },
+        {
+          "tick": 4222.0,
+          "next_tick": 4223.0,
+          "gap_ms": 0.422441,
+          "cpu_ms": 0.177375,
+          "check_ms": 0.005458,
+          "check_cpu_ms": 0.005417,
+          "log_ms": 0.341569,
+          "log_cpu_ms": 0.099751,
+          "release_ms": 0.029124,
+          "release_cpu_ms": 0.029417,
+          "residual_ms": 0.04629,
+          "voluntary": 0.0,
+          "involuntary": 1.0
+        },
+        {
+          "tick": 2869.0,
+          "next_tick": 2870.0,
+          "gap_ms": 0.399276,
+          "cpu_ms": 0.25579,
+          "check_ms": 0.003458,
+          "check_cpu_ms": 0.003417,
+          "log_ms": 0.099662,
+          "log_cpu_ms": 0.10075,
+          "release_ms": 0.224449,
+          "release_cpu_ms": 0.109748,
+          "residual_ms": 0.071707,
+          "voluntary": 0.0,
+          "involuntary": 9.0
+        }
+      ],
+      "world": {
+        "samples": 3840,
+        "median": 2.9421735,
+        "p95": 5.2547060000000005,
+        "p99": 6.874474,
+        "worst": 9.847731,
+        "minimum": 0.799426
+      },
+      "pen": {
+        "samples": 3840,
+        "median": 0.693826,
+        "p95": 1.007668,
+        "p99": 1.320947,
+        "worst": 2.648436,
+        "minimum": 0.141619
+      },
+      "final": {
+        "samples": 3840,
+        "median": 7.988867999999999,
+        "p95": 9.202007,
+        "p99": 9.684278999999998,
+        "worst": 17.368721,
+        "minimum": 5.507113
+      },
+      "completion": {
+        "samples": 3840,
+        "median": 11.943376,
+        "p95": 15.300262,
+        "p99": 17.260225,
+        "worst": 20.666297,
+        "minimum": 7.106758
+      },
+      "interval": {
+        "samples": 3840,
+        "median": 12.086390999999999,
+        "p95": 15.458131,
+        "p99": 17.415428,
+        "worst": 20.850789,
+        "minimum": 7.20967
+      },
+      "completion_misses": 69,
+      "interval_misses": 71,
+      "drain": "TRACE_DRAIN mode=ram bytes=2763266 wall_ms=34.467247 outside_race=1",
+      "peak_rss_kib": 567192
+    }
+  ]
+}

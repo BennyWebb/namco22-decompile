@@ -1,0 +1,13 @@
+{
+  "production_launcher_controls_and_six_replays_unchanged": true,
+  "hash_comparisons": 9,
+  "rollback_checks": 5,
+  "immutable_world_checks": 9,
+  "immutable_pack_checks": 5,
+  "modes": "default HUD/off replay",
+  "emulationstation_restored": true,
+  "no_production_game_running": true,
+  "stock_governor": "schedutil",
+  "sole_ports_launcher": "/userdata/roms/ports/Rave Racer.sh",
+  "no_shared_engine_gameplay_source_changes": true
+}

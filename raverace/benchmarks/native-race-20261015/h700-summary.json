@@ -1,0 +1,286 @@
+{
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/device-final/run.txt",
+      "frames": 3840,
+      "stages": {
+        "load_ms": {
+          "samples": 3840,
+          "median": 13.191426,
+          "p95": 14.089443,
+          "p99": 18.536477,
+          "worst": 25.418895
+        },
+        "upload_ms": {
+          "samples": 3840,
+          "median": 0.7693795000000001,
+          "p95": 1.120862,
+          "p99": 1.329186,
+          "worst": 2.775283
+        },
+        "submit_ms": {
+          "samples": 3840,
+          "median": 3.526517,
+          "p95": 7.22736,
+          "p99": 10.095636,
+          "worst": 14.379804
+        },
+        "world_ms": {
+          "samples": 3840,
+          "median": 26.856181499999998,
+          "p95": 33.59645,
+          "p99": 36.947545,
+          "worst": 50.858498
+        },
+        "hud_ms": {
+          "samples": 3840,
+          "median": 5.938317,
+          "p95": 6.486811,
+          "p99": 6.930332,
+          "worst": 13.48243
+        },
+        "total_ms": {
+          "samples": 3840,
+          "median": 32.729415,
+          "p95": 39.595001,
+          "p99": 42.689809,
+          "worst": 57.122695
+        },
+        "cpu_ms": {
+          "samples": 3840,
+          "median": 7.2821245,
+          "p95": 11.607667,
+          "p99": 14.962374,
+          "worst": 20.084249
+        },
+        "interval_ms": {
+          "samples": 3840,
+          "median": 33.136084499999996,
+          "p95": 39.825607,
+          "p99": 43.062499,
+          "worst": 57.18415
+        }
+      },
+      "draws": {
+        "samples": 3840,
+        "median": 146.0,
+        "p95": 233.0,
+        "p99": 260.0,
+        "worst": 300.0
+      },
+      "dynamic_bytes": {
+        "samples": 3840,
+        "median": 189216.0,
+        "p95": 258336.0,
+        "p99": 294480.0,
+        "worst": 311760.0
+      },
+      "over_deadline": 3834,
+      "over_14ms": 3840,
+      "slowest": [
+        {
+          "pass": 0.0,
+          "tick": 3546.0,
+          "primitives": 2157.0,
+          "draws": 297.0,
+          "dynamic_bytes": 311760.0,
+          "load_ms": 25.046872,
+          "upload_ms": 1.317436,
+          "submit_ms": 12.979497,
+          "world_ms": 50.858498,
+          "hud_ms": 6.264197,
+          "total_ms": 57.122695,
+          "cpu_ms": 18.451791,
+          "interval_ms": 57.18415
+        },
+        {
+          "pass": 0.0,
+          "tick": 3565.0,
+          "primitives": 2074.0,
+          "draws": 279.0,
+          "dynamic_bytes": 299808.0,
+          "load_ms": 25.418895,
+          "upload_ms": 1.36185,
+          "submit_ms": 12.141038,
+          "world_ms": 49.89196,
+          "hud_ms": 6.186659,
+          "total_ms": 56.078619,
+          "cpu_ms": 17.49596,
+          "interval_ms": 56.163824
+        },
+        {
+          "pass": 0.0,
+          "tick": 3638.0,
+          "primitives": 1895.0,
+          "draws": 262.0,
+          "dynamic_bytes": 274032.0,
+          "load_ms": 24.748718,
+          "upload_ms": 1.329811,
+          "submit_ms": 11.039424,
+          "world_ms": 47.549198,
+          "hud_ms": 6.044707,
+          "total_ms": 53.593905,
+          "cpu_ms": 16.197167,
+          "interval_ms": 53.677568
+        },
+        {
+          "pass": 0.0,
+          "tick": 3592.0,
+          "primitives": 1838.0,
+          "draws": 239.0,
+          "dynamic_bytes": 265824.0,
+          "load_ms": 25.044122,
+          "upload_ms": 1.13082,
+          "submit_ms": 9.618409,
+          "world_ms": 46.431045,
+          "hud_ms": 6.579848,
+          "total_ms": 53.010893,
+          "cpu_ms": 15.014709,
+          "interval_ms": 53.094388
+        },
+        {
+          "pass": 0.0,
+          "tick": 3654.0,
+          "primitives": 1841.0,
+          "draws": 248.0,
+          "dynamic_bytes": 266256.0,
+          "load_ms": 24.837465,
+          "upload_ms": 1.150986,
+          "submit_ms": 9.959934,
+          "world_ms": 46.254386,
+          "hud_ms": 6.089247,
+          "total_ms": 52.343633,
+          "cpu_ms": 15.265209,
+          "interval_ms": 52.429212
+        },
+        {
+          "pass": 0.0,
+          "tick": 3553.0,
+          "primitives": 2149.0,
+          "draws": 297.0,
+          "dynamic_bytes": 310608.0,
+          "load_ms": 19.713505,
+          "upload_ms": 1.332685,
+          "submit_ms": 14.379804,
+          "world_ms": 46.226263,
+          "hud_ms": 6.068207,
+          "total_ms": 52.29447,
+          "cpu_ms": 20.084249,
+          "interval_ms": 52.380507
+        },
+        {
+          "pass": 0.0,
+          "tick": 3624.0,
+          "primitives": 1945.0,
+          "draws": 240.0,
+          "dynamic_bytes": 281232.0,
+          "load_ms": 24.706929,
+          "upload_ms": 1.190984,
+          "submit_ms": 9.55787,
+          "world_ms": 45.749868,
+          "hud_ms": 5.998543,
+          "total_ms": 51.748411,
+          "cpu_ms": 15.129959,
+          "interval_ms": 51.834032
+        },
+        {
+          "pass": 0.0,
+          "tick": 3551.0,
+          "primitives": 2146.0,
+          "draws": 300.0,
+          "dynamic_bytes": 310176.0,
+          "load_ms": 19.672506,
+          "upload_ms": 1.396516,
+          "submit_ms": 13.455974,
+          "world_ms": 45.438509,
+          "hud_ms": 6.228407,
+          "total_ms": 51.666916,
+          "cpu_ms": 18.585835,
+          "interval_ms": 51.752662
+        },
+        {
+          "pass": 0.0,
+          "tick": 3613.0,
+          "primitives": 1803.0,
+          "draws": 231.0,
+          "dynamic_bytes": 260784.0,
+          "load_ms": 24.779967,
+          "upload_ms": 1.126487,
+          "submit_ms": 9.202597,
+          "world_ms": 45.004947,
+          "hud_ms": 6.484352,
+          "total_ms": 51.489299,
+          "cpu_ms": 14.733209,
+          "interval_ms": 51.57292
+        },
+        {
+          "pass": 0.0,
+          "tick": 3548.0,
+          "primitives": 2151.0,
+          "draws": 297.0,
+          "dynamic_bytes": 310896.0,
+          "load_ms": 19.530555,
+          "upload_ms": 1.338602,
+          "submit_ms": 12.873168,
+          "world_ms": 44.966741,
+          "hud_ms": 6.317569,
+          "total_ms": 51.28431,
+          "cpu_ms": 18.766041,
+          "interval_ms": 51.370806
+        },
+        {
+          "pass": 0.0,
+          "tick": 3536.0,
+          "primitives": 2141.0,
+          "draws": 282.0,
+          "dynamic_bytes": 309456.0,
+          "load_ms": 18.112665,
+          "upload_ms": 2.775283,
+          "submit_ms": 12.616098,
+          "world_ms": 45.16594,
+          "hud_ms": 5.812093,
+          "total_ms": 50.978033,
+          "cpu_ms": 16.529292,
+          "interval_ms": 51.026239
+        },
+        {
+          "pass": 0.0,
+          "tick": 3560.0,
+          "primitives": 2084.0,
+          "draws": 282.0,
+          "dynamic_bytes": 301248.0,
+          "load_ms": 19.182989,
+          "upload_ms": 1.300728,
+          "submit_ms": 12.208535,
+          "world_ms": 43.689094,
+          "hud_ms": 6.775131,
+          "total_ms": 50.464225,
+          "cpu_ms": 17.114875,
+          "interval_ms": 50.526513
+        }
+      ],
+      "tick1965": [
+        {
+          "pass": 0.0,
+          "tick": 1965.0,
+          "primitives": 1301.0,
+          "draws": 125.0,
+          "dynamic_bytes": 188496.0,
+          "load_ms": 7.303439,
+          "upload_ms": 0.848168,
+          "submit_ms": 1.523551,
+          "world_ms": 22.365713,
+          "hud_ms": 5.481028,
+          "total_ms": 27.846741,
+          "cpu_ms": 4.223084,
+          "interval_ms": 27.892322
+        }
+      ],
+      "peak_rss_kib": 567188,
+      "load_line": "LOAD ms=25437.715163 static_gpu_bytes=482471936 dynamic_gpu_bytes=655360 bounded_frame_bytes=919577",
+      "offline_capacity_fps": 31.165386545676512,
+      "low_1pct_capacity_fps": 20.924372573433374
+    }
+  ],
+  "scope": "Offline scene playback. Per-frame total includes file read, command upload, world glFinish and HUD glFinish. No simulation/audio, vsync/swap or display cadence. Readback/capture diagnostic work is outside timed span."
+}

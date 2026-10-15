@@ -1,0 +1,95 @@
+{
+  "scope": "Interval minus current completion equals time between prior completion and current start: bookkeeping, synchronous telemetry output and scheduling, not an exclusive storage timer. No gaps removed.",
+  "worst": [
+    {
+      "tick": 5184,
+      "interval_ms": 176.076735,
+      "completion_ms": 23.47657,
+      "post_previous_completion_ms": 152.600165
+    },
+    {
+      "tick": 3510,
+      "interval_ms": 110.124028,
+      "completion_ms": 25.044472,
+      "post_previous_completion_ms": 85.079556
+    },
+    {
+      "tick": 2036,
+      "interval_ms": 75.893345,
+      "completion_ms": 21.157112,
+      "post_previous_completion_ms": 54.736233
+    },
+    {
+      "tick": 2594,
+      "interval_ms": 70.071973,
+      "completion_ms": 16.143668,
+      "post_previous_completion_ms": 53.928304999999995
+    },
+    {
+      "tick": 1936,
+      "interval_ms": 33.11843,
+      "completion_ms": 26.062434,
+      "post_previous_completion_ms": 7.055995999999997
+    },
+    {
+      "tick": 5292,
+      "interval_ms": 32.157091,
+      "completion_ms": 25.098179,
+      "post_previous_completion_ms": 7.058912000000003
+    },
+    {
+      "tick": 5259,
+      "interval_ms": 31.961722,
+      "completion_ms": 25.036722,
+      "post_previous_completion_ms": 6.925000000000001
+    },
+    {
+      "tick": 3477,
+      "interval_ms": 31.479656,
+      "completion_ms": 24.535407,
+      "post_previous_completion_ms": 6.944248999999999
+    },
+    {
+      "tick": 3527,
+      "interval_ms": 31.46799,
+      "completion_ms": 24.486158,
+      "post_previous_completion_ms": 6.981832000000001
+    },
+    {
+      "tick": 5234,
+      "interval_ms": 31.237624,
+      "completion_ms": 24.078215,
+      "post_previous_completion_ms": 7.159409
+    },
+    {
+      "tick": 5300,
+      "interval_ms": 31.20475,
+      "completion_ms": 24.159212,
+      "post_previous_completion_ms": 7.0455380000000005
+    },
+    {
+      "tick": 3659,
+      "interval_ms": 31.123252,
+      "completion_ms": 24.138837,
+      "post_previous_completion_ms": 6.984415000000002
+    },
+    {
+      "tick": 5250,
+      "interval_ms": 30.946592,
+      "completion_ms": 23.846265,
+      "post_previous_completion_ms": 7.100327
+    },
+    {
+      "tick": 3543,
+      "interval_ms": 30.936718,
+      "completion_ms": 23.837391,
+      "post_previous_completion_ms": 7.099326999999999
+    },
+    {
+      "tick": 3651,
+      "interval_ms": 30.588605,
+      "completion_ms": 23.473528,
+      "post_previous_completion_ms": 7.115076999999999
+    }
+  ]
+}

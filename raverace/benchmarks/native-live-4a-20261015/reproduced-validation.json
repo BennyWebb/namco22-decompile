@@ -1,0 +1,12 @@
+{
+  "racing_window_frames": 3840,
+  "source_commands": 5152196,
+  "visible_commands": 3677980,
+  "normalized_command_bytes_identical": true,
+  "checkpoint_ticks": 18,
+  "last_checkpoint": 5400,
+  "all_authoritative_domain_records_identical": true,
+  "partial_validation": true,
+  "full_replay_pass": false,
+  "limits": "Offline font/style/palette IDs only are normalised. Partial validation is explicit and cannot satisfy the complete replay gate."
+}

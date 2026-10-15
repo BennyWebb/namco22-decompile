@@ -1,0 +1,98 @@
+{
+  "frames": 3840,
+  "changed_world_priority_pixels": 0,
+  "total_changed_world_pixels": 10,
+  "total_changed_composed_pixels": 10,
+  "different_frames": [
+    {
+      "tick": 1964,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.0004546440972222222,
+      "world_max": 152,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0006239149305555555,
+      "composed_max": 200
+    },
+    {
+      "tick": 1973,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.000341796875,
+      "world_max": 238,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0004166666666666667,
+      "composed_max": 246
+    },
+    {
+      "tick": 2273,
+      "world_pixels": 1,
+      "world_mean_rgb": 3.90625e-05,
+      "world_max": 13,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.00012586805555555555,
+      "composed_max": 41
+    },
+    {
+      "tick": 3150,
+      "world_pixels": 1,
+      "world_mean_rgb": 9.331597222222223e-05,
+      "world_max": 29,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0002495659722222222,
+      "composed_max": 77
+    },
+    {
+      "tick": 3232,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.0003374565972222222,
+      "world_max": 237,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.00041341145833333334,
+      "composed_max": 246
+    },
+    {
+      "tick": 3330,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.00043077256944444445,
+      "world_max": 199,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0005815972222222222,
+      "composed_max": 227
+    },
+    {
+      "tick": 3522,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.00013237847222222223,
+      "world_max": 51,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0003081597222222222,
+      "composed_max": 109
+    },
+    {
+      "tick": 5325,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.00013129340277777778,
+      "world_max": 41,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.0003070746527777778,
+      "composed_max": 95
+    },
+    {
+      "tick": 5326,
+      "world_pixels": 1,
+      "world_mean_rgb": 0.00034505208333333333,
+      "world_max": 239,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.00042100694444444444,
+      "composed_max": 247
+    },
+    {
+      "tick": 5328,
+      "world_pixels": 1,
+      "world_mean_rgb": 9.548611111111112e-05,
+      "world_max": 30,
+      "composed_pixels": 1,
+      "composed_mean_rgb": 0.00025282118055555556,
+      "composed_max": 79
+    }
+  ]
+}

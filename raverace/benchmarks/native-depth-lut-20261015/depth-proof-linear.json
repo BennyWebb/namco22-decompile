@@ -1,0 +1,15 @@
+{
+  "ticks": 3840,
+  "source_commands": 5152196,
+  "pack_manifest_sha256": "5172bdf669747601342f4d44cb193202c35dbeac6db260c3ffc7afd4175b8c8b",
+  "depth_buffer_bits": 16,
+  "minimum_float_depth_gap": 0.000834047794342041,
+  "minimum_quantised_depth_gap": 27,
+  "quantised_ties": 0,
+  "conservative_required_bin_guard": 8,
+  "reordered_indices": 3176880,
+  "reorderable_groups": 57639,
+  "protected_indices_preserved": 315000,
+  "near_indices_preserved": 157931,
+  "policy": "Linear reverse equals stable ascending synthetic depth only within original ordinary unprotected opaque group; group boundaries, draws, all source IDs and protected/near order remain unchanged. D16 CPU quantisation separation is audited; driver raster/clipping precision still requires full host and Mali image checks."
+}

@@ -1,0 +1,28 @@
+{
+  "over_14_ms": {
+    "frames": 509,
+    "features": {
+      "draws": 149.0,
+      "visible": 1246.0,
+      "protected_quads": 121.0,
+      "near_quads": 39.0,
+      "glyph_vertices": 1488.0,
+      "world_submit_ms": 4.862014,
+      "cpu_ms": 6.611542,
+      "finish_ms": 8.490119
+    }
+  },
+  "top_192": {
+    "frames": 192,
+    "features": {
+      "draws": 168.5,
+      "visible": 1319.0,
+      "protected_quads": 141.0,
+      "near_quads": 39.0,
+      "glyph_vertices": 1488.0,
+      "world_submit_ms": 5.95747,
+      "cpu_ms": 7.845562,
+      "finish_ms": 8.6335295
+    }
+  }
+}

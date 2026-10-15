@@ -1,0 +1,158 @@
+{
+  "frames": 3840,
+  "different_composed_frames": [
+    1964,
+    1973,
+    2273,
+    3150,
+    3232,
+    3330,
+    3522,
+    5325,
+    5326,
+    5328
+  ],
+  "byte_identical": false,
+  "differences": [
+    {
+      "tick": 1964,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0006239149305555555,
+      "max": 200,
+      "bounds": [
+        322,
+        192,
+        322,
+        192
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 1973,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0004166666666666667,
+      "max": 246,
+      "bounds": [
+        193,
+        190,
+        193,
+        190
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 2273,
+      "changed_pixels": 1,
+      "mean_rgb": 0.00012586805555555555,
+      "max": 41,
+      "bounds": [
+        311,
+        405,
+        311,
+        405
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 3150,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0002495659722222222,
+      "max": 77,
+      "bounds": [
+        298,
+        217,
+        298,
+        217
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 3232,
+      "changed_pixels": 1,
+      "mean_rgb": 0.00041341145833333334,
+      "max": 246,
+      "bounds": [
+        381,
+        224,
+        381,
+        224
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 3330,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0005815972222222222,
+      "max": 227,
+      "bounds": [
+        515,
+        213,
+        515,
+        213
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 3522,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0003081597222222222,
+      "max": 109,
+      "bounds": [
+        292,
+        234,
+        292,
+        234
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 5325,
+      "changed_pixels": 1,
+      "mean_rgb": 0.0003070746527777778,
+      "max": 95,
+      "bounds": [
+        318,
+        210,
+        318,
+        210
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 5326,
+      "changed_pixels": 1,
+      "mean_rgb": 0.00042100694444444444,
+      "max": 247,
+      "bounds": [
+        237,
+        210,
+        237,
+        210
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    },
+    {
+      "tick": 5328,
+      "changed_pixels": 1,
+      "mean_rgb": 0.00025282118055555556,
+      "max": 79,
+      "bounds": [
+        321,
+        210,
+        321,
+        210
+      ],
+      "world_changed_pixels": 1,
+      "world_alpha_changes": 0
+    }
+  ]
+}

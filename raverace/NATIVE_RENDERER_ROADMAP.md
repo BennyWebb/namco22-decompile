@@ -1,6 +1,6 @@
 # Rave Racer — Native H700 Renderer Roadmap
 
-**Status:** Milestones 1 and revised 2 COMPLETE (2026-10-15). STOPPED at M2 exit gate. Initial failed probe retained as historical evidence. Milestone 3 not started or authorised.
+**Status:** Milestones 1 and revised 2 COMPLETE. Focused M3 slow-picture/HUD/Mali investigation complete; BLOCKED at repeated 12/14 ms gate (candidate p95 15.489–16.139 ms). Controlled Milestone 4A live-integration experiment authorised; M3 remains performance-BLOCKED. Milestone 4A STOPPED/BLOCKED at live mesh coverage (tick 5655); no H700 deployment. Milestone 4B not authorised.
 **Target:** Anbernic RG40XX H / Allwinner H700 / Cortex-A53 ARM64 / Mali-G31 / Knulli.  
 **Approach:** A **separate native renderer and offline asset pipeline**, initially driven by the original Rave Racer simulation.  
 **Primary goal:** Original game handling and behaviour with visually faithful graphics at a consistently paced arcade-rate **59.9040599 Hz** (or an explicitly validated display-compatible presentation policy).  
@@ -219,6 +219,59 @@ commit, push, deploy or change the playable without separate user authorisation.
 
 ### Milestone 3 — Replay a complete race with native scene commands
 
+**Latest focused continuation authorised and completed (2026-10-15):** analyse all69
+previous slow pictures; investigate HUD bandwidth/intermediate costs without
+reviving rejected LUT paths; validate ordering/candidate on Mali; run three fixed
+alternating current-optimized/candidate pairs with buffered telemetry and all
+frames retained. Actual21-frame Mali comparisons and full host3840-frame parity
+pass. RG8/output-color discard rejected; depth-discard repeated candidate p95
+15.489–16.139 ms fails the fixed14 ms gate. **BLOCKED and STOPPED**; no M4,
+production changes, commit, push or deployment. Full acceptance distributions,
+limits and evidence: `NATIVE_RACE_REPLAY_REPORT.md` current section. The performance
+exit check below stays unchecked; earlier continuation summaries are historical.
+
+
+**Depth/LUT/gap continuation authorised (2026-10-15):** audit synthetic-depth
+precision/ties and source painter semantics before testing front-to-back order
+only within proven opaque compatible unprotected batches. Test dynamic LUT
+folding into palette/shadow texture tables, preserving all166 observed revisions;
+no rejected UBO work. Attribute inter-picture logging/FIFO/scheduling and test
+bounded buffered logging with every sample retained. Use matched current-optimised
+one-fence full-race baselines; fixed <=12/14 ms median/p95 and all tails/intervals.
+Stop at investigation completion or a candidate's failed gate. No M4, production
+change, commit, push or deployment.
+
+
+**Fragment/HUD continuation authorised (2026-10-15):** prove material opacity,
+test removal of discard only for proven material footprints, and profile pen,
+shadow and final LUT/composition costs. Preserve cutout fallback and all actual
+LUT changes. Only evidence-supported native improvements may proceed to matched
+full-race one-fence tests at the unchanged <=12/14 ms median/p95 gate. All3840
+ticks and original commands remain accounted for. Stop at investigation completion
+or a candidate's failed gate; no M4, commit, push or production deployment.
+
+
+**Focused continuation authorised (2026-10-15):** profile actual world/HUD,
+completion and CPU/driver costs with controlled fences and matched full-window
+benchmarks. Only if evidence supports it, test persistent indexed vertices and
+per-instance attributes. Preserve every source tick/command and the existing
+512 MiB ceiling; complete world+HUD median <=12 ms / p95 <=14 ms remains fixed.
+Diagnostic omissions/readbacks are never acceptance runs. Stop after the bounded
+investigation or a candidate's failed performance gate. No M4 or production change.
+
+
+**Revised authorisation (2026-10-15):** user approved the focused M3 revision
+from the blocked race report. Keep the original failed results as history. This
+one bounded experiment deduplicates instances and immutable HUD resources,
+uses a compressed three-slot prefetch ring, explicit conservative cull reasons,
+six-vertex ordinary quads and a separate near-clipped path. Preserve all source
+IDs, actual palette/geometry events, 512 MiB preload ceiling and the unchanged
+HUD. Prospective complete-world-plus-HUD target: **median <=12 ms, p95 <=14 ms**;
+report p99/worst/misses and stop if headroom fails. Headline capacity uses one
+end-of-picture glFinish; any matched v2 control must use the same fence policy.
+Separate diagnostic stage sync/readbacks are not headline timing evidence.
+Milestone 4 remains unauthorised.
+
 **Outcome:** Feed recorded, **time-varying** scene information to the standalone renderer over the complete representative race, without replacing the live emulator's graphics path.
 
 **Scope**
@@ -237,17 +290,55 @@ commit, push, deploy or change the playable without separate user authorisation.
 - Complete replay clips or comparison captures stored outside Git where they contain game assets.
 - `raverace/NATIVE_RACE_REPLAY_REPORT.md` with coverage, exceptions and real-device performance data.
 
-**Exit gate**
+**Exit gate — BLOCKED (2026-10-15)**
 
-- [ ] Every required tick's scene command packet is accounted for; no omitted polygons/objects are hidden to improve performance.
-- [ ] Scene output retains the original track, car movement, scenery, HUD/world relationships and atmosphere to an agreed visual standard.
-- [ ] Static resources are reused through the lap and resource-loading hitches are measured explicitly.
+Evidence: [race report](NATIVE_RACE_REPLAY_REPORT.md) and
+[fragment/HUD results](benchmarks/native-fragment-hud-20261015/one-fence-summary.json).
+Selected opaque-world/transparent-HUD-tile candidate completes all3840 ticks and
+preserves all5,152,196 source commands. Full one-fence world+HUD **median12.310 ms /
+p9515.648 ms** still fails the unchanged12/14 ms gate;95 completions exceed16.693 ms.
+Eleven Mali captures and the independent HUD oracle match exactly; all host
+world-priority pixels agree. Slower UBO LUT rejected. No further optimisation
+after the failed gate. M3 remains blocked and stopped; M4 remains unauthorised.
+
+- [x] Every required tick's scene command packet is accounted for; no omitted polygons/objects are hidden to improve performance.
+- [x] Scene output retains the original track, car movement, scenery, HUD/world relationships and atmosphere to an agreed visual standard. Full host sequence parity plus 11 actual Mali comparison captures; no claim of all-frame Mali readback or new user signoff.
+- [x] Static resources are reused through the lap and resource-loading hitches are measured explicitly.
 - [ ] The H700 race-playback benchmark demonstrates a credible path to the 16.693 ms total picture deadline **with headroom for simulation and audio**; otherwise mark blocked and stop.
-- [ ] Production emulator, physics and audio paths are unchanged.
+- [x] Production emulator, physics and audio paths are unchanged.
 
-**STOP. Do not begin Milestone 4.**
+**M3 remains BLOCKED. The explicitly authorised controlled 4A experiment below is the sole exception to this stop; it does not pass M3.**
 
-### Milestone 4 — Integrate live original gameplay with the native renderer
+### Milestone 4A — Controlled live-integration experiment (authorised 2026-10-15)
+
+The user explicitly authorises this exception to sequential milestone gating:
+**Milestone 3 remains performance-BLOCKED**, including its unmet <=12 ms median /
+<=14 ms p95 renderer targets. This experiment neither passes nor waives M3.
+
+Connect the existing optimized native renderer to current simulation scene state,
+retain original controls/physics/AI/collisions/timing/audio and authoritative
+state/PCM checkpoints, and build an isolated runnable prototype. Measure actual
+simulation/audio/command preparation/render submission/GPU completion/presentation,
+intervals, missed 16.693 ms deadlines, overlap and visible stutter. Examine dense
+protected draws without speculative optimization. Keep production/launcher/saves/
+replays untouched; no commit, push, replacement or deployment without separate
+explicit authorisation. Preparing a prototype does not authorise device deployment.
+
+Initial scope uses the existing legacy renderer before the native racing window;
+unsupported native scene assets must fail explicitly. Any limitation must be
+reported, never silently omitted or represented as a complete live renderer.
+Stop when prototype/initial measurements complete or a significant integration
+blocker is encountered. **Milestone 4B remains unauthorised.**
+
+- [x] Live simulation-generated scene commands drive the isolated host native renderer.
+- [x] Partial CPU/RAM, board/video, PCM/voice checkpoint prefix matches through tick 5400.
+- [ ] Full original replay/state/audio validation completes through tick 6006.
+- [x] Isolated host prototype and rollback documented; production unchanged.
+- [ ] ARM/H700 build and physical gameplay measurements complete.
+- [x] Initial host diagnostics/fidelity documented; missing live mesh code 2028/packet 1456601 blocks tick 5655.
+- [x] Stopped at 4A integration blocker; no further optimization, deployment or 4B work.
+
+### Remaining Milestone 4 / 4B — Full live-game integration (NOT AUTHORISED)
 
 **Outcome:** A separate playable native-renderer build driven by the *unchanged original Rave Racer game logic*, with no dependence on the old GLES world renderer.
 

@@ -1,0 +1,63 @@
+{
+  "compressed_payload_bytes": 107235244,
+  "cull_reason_counts": [
+    3677980,
+    566760,
+    849520,
+    52451,
+    5485,
+    0
+  ],
+  "fonts": 1,
+  "format": "rr-native-race",
+  "frame_count": 3840,
+  "instance_stride": 80,
+  "maxima": {
+    "compressed": 43959,
+    "groups": 241,
+    "instances": 111,
+    "raw": 95588,
+    "visible": 1792
+  },
+  "pages": [
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      4096,
+      4096
+    ],
+    [
+      2984,
+      896
+    ]
+  ],
+  "preload_ceiling_bytes": 536870912,
+  "quad_stride": 32,
+  "source_meshes": 15666,
+  "source_payload_bytes": 1276401984,
+  "source_v2_manifest_sha256": "481a32a799acedeb2b8d757d5c5ff424fef7b9c5af8732da8c783142821aabb7",
+  "styles": 166,
+  "version": 3
+}

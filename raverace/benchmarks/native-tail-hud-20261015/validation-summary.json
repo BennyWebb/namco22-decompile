@@ -1,0 +1,12 @@
+{
+  "full_host_frames": 3840,
+  "full_host_world_pixel_changes": 0,
+  "full_host_composed_pixel_changes": 0,
+  "mali_order_frames": 21,
+  "mali_candidate_frames": 21,
+  "mali_all_bytes_match": true,
+  "independent_cpu_hud_oracles": true,
+  "asan_ubsan_ticks": 21,
+  "python_shell_syntax": "PASS",
+  "limits": "Complete host sequence and sampled actual Mali comparisons; not every-frame Mali capture, user signoff or live gameplay/audio proof."
+}

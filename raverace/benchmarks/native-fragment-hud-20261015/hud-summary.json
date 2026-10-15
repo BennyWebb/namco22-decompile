@@ -1,0 +1,125 @@
+{
+  "scope": "Controlled serial fences perturb scheduling; pen includes preparation/upload/render completion, final includes palette/LUT uploads and fullscreen composition/completion. Shadow/LUT omissions are diagnostic only. Separate stock-governor processes; paired differences are sensitivities, not exclusive GPU times.",
+  "runs": [
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-full/run.txt",
+      "control": 0,
+      "frames": 3840,
+      "world": {
+        "median": 12.7728445,
+        "p95": 17.530982,
+        "p99": 18.919558000000002,
+        "worst": 22.354554999999998
+      },
+      "pen": {
+        "median": 2.785252,
+        "p95": 3.160259,
+        "p99": 3.502164,
+        "worst": 4.183263
+      },
+      "pen_cpu": {
+        "median": 0.84425,
+        "p95": 1.028667,
+        "p99": 1.281125,
+        "worst": 1.737374
+      },
+      "final_composition": {
+        "median": 4.0691844999999995,
+        "p95": 4.5202919999999995,
+        "p99": 4.827655,
+        "worst": 5.525256000000001
+      },
+      "total": {
+        "median": 19.7897535,
+        "p95": 24.788593,
+        "p99": 26.306328,
+        "worst": 29.574624
+      },
+      "peak_rss_kib": 567308
+    },
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-no-shadow/run.txt",
+      "control": 1,
+      "frames": 3840,
+      "world": {
+        "median": 12.730978499999999,
+        "p95": 17.501002,
+        "p99": 18.903369,
+        "worst": 24.890757
+      },
+      "pen": {
+        "median": 2.825711,
+        "p95": 3.195303,
+        "p99": 3.501914,
+        "worst": 8.089413
+      },
+      "pen_cpu": {
+        "median": 0.862062,
+        "p95": 1.045,
+        "p99": 1.286208,
+        "worst": 2.488249
+      },
+      "final_composition": {
+        "median": 4.061416,
+        "p95": 4.525043999999999,
+        "p99": 4.835156999999999,
+        "worst": 5.3908439999999995
+      },
+      "total": {
+        "median": 19.8320235,
+        "p95": 24.785178,
+        "p99": 26.317997,
+        "worst": 33.414154
+      },
+      "peak_rss_kib": 567176,
+      "paired_final_reduction_from_first": {
+        "median": 0.010166999999999593,
+        "p95": 0.4336080000000013,
+        "p99": 0.6941380000000006,
+        "worst": 1.3312839999999997
+      }
+    },
+    {
+      "file": "raverace/native/generated/milestone3/fragment-hud-device/hud-no-lut/run.txt",
+      "control": 2,
+      "frames": 3840,
+      "world": {
+        "median": 12.645988,
+        "p95": 17.549543,
+        "p99": 19.087322,
+        "worst": 22.330624
+      },
+      "pen": {
+        "median": 2.776151,
+        "p95": 3.148471,
+        "p99": 3.482002,
+        "worst": 6.17653
+      },
+      "pen_cpu": {
+        "median": 0.8442289999999999,
+        "p95": 1.034834,
+        "p99": 1.250082,
+        "worst": 1.631
+      },
+      "final_composition": {
+        "median": 2.9783939999999998,
+        "p95": 3.383755,
+        "p99": 3.715034,
+        "worst": 5.405766000000001
+      },
+      "total": {
+        "median": 18.5272375,
+        "p95": 23.64166,
+        "p99": 25.367266,
+        "worst": 28.688605
+      },
+      "peak_rss_kib": 567016,
+      "paired_final_reduction_from_first": {
+        "median": 1.091686,
+        "p95": 1.5344420000000003,
+        "p99": 1.805389,
+        "worst": 2.800478000000001
+      }
+    }
+  ]
+}

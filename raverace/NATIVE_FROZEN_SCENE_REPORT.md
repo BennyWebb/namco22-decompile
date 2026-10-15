@@ -81,9 +81,11 @@ The initial HUD validation mask needed a top-down/bottom-up correction; final
 logs use the corrected oracle. No production rendering code was changed.
 
 View actual images outside Git:
-`/tmp/rr-m2rev/visual-hud2500/side-by-side.png` and
-`/tmp/rr-m2rev/visual-hud3600/side-by-side.png` (original left, native right).
-Raw images, ROMs, meshes and pages stay outside Git.
+`/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone2-review/tick2500/side-by-side.png` and
+`/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone2-review/tick3600/side-by-side.png` (original left, native right).
+Review images were recovered from the handheld after host `/tmp` cleanup; their
+comparison metrics exactly match the archived acceptance evidence. Raw images,
+ROMs, meshes and pages stay outside Git.
 
 ## H700 performance acceptance
 

@@ -1,0 +1,16 @@
+{
+  "milestone": "4A",
+  "status": "BLOCKED",
+  "stop_reason": "Missing native mesh code2028 packet1456601 at live tick5655",
+  "live_host_prototype_built": true,
+  "full_live_replay_completed": false,
+  "h700_measurements_complete": false,
+  "h700_deployed": false,
+  "milestone3_status": "performance-BLOCKED, targets unchanged",
+  "milestone4b_started": false,
+  "source_command_frames_validated": 3840,
+  "authoritative_checkpoint_ticks_validated": 18,
+  "final_validated_checkpoint": 5400,
+  "production_unchanged": true,
+  "git_head": "8fa13315d6da43f6d7d618fa39f3da1e680aedb2"
+}

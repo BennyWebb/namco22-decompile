@@ -1,0 +1,77 @@
+{
+  "frames": 3840,
+  "median_frame_mean_rgb_error": 2.684273003472222,
+  "worst": [
+    {
+      "tick": 2643,
+      "mean_rgb_absolute_error": 7.67853515625,
+      "changed_rgb_pixels": 167911,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 2648,
+      "mean_rgb_absolute_error": 7.586497395833334,
+      "changed_rgb_pixels": 156348,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 245
+    },
+    {
+      "tick": 2656,
+      "mean_rgb_absolute_error": 7.466183810763889,
+      "changed_rgb_pixels": 153670,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 245
+    },
+    {
+      "tick": 4825,
+      "mean_rgb_absolute_error": 7.414028862847222,
+      "changed_rgb_pixels": 189898,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 4830,
+      "mean_rgb_absolute_error": 7.362564019097222,
+      "changed_rgb_pixels": 179409,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 4831,
+      "mean_rgb_absolute_error": 7.332548828125,
+      "changed_rgb_pixels": 171218,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 4824,
+      "mean_rgb_absolute_error": 7.324092881944445,
+      "changed_rgb_pixels": 185569,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 4829,
+      "mean_rgb_absolute_error": 7.195397135416667,
+      "changed_rgb_pixels": 184183,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 4819,
+      "mean_rgb_absolute_error": 7.146859809027778,
+      "changed_rgb_pixels": 175005,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 250
+    },
+    {
+      "tick": 2647,
+      "mean_rgb_absolute_error": 7.13927734375,
+      "changed_rgb_pixels": 148084,
+      "changed_alpha_pixels": 0,
+      "maximum_channel_error": 245
+    }
+  ],
+  "frames_with_changed_final_alpha": 0
+}
