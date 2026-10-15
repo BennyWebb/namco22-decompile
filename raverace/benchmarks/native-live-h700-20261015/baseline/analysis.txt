@@ -1,0 +1,50 @@
+{
+  "completed_tick_intervals": {
+    "all": {
+      "n": 6005,
+      "median_ms": 27.644571993732825,
+      "p95_ms": 39.77594800380757,
+      "p99_ms": 43.67966399877332,
+      "worst_ms": 5684.329698997317,
+      "mean_ms": 28.040989233972525,
+      "missed_16_693_ms": 5477
+    },
+    "native": {
+      "n": 4207,
+      "median_ms": 28.53161999519216,
+      "p95_ms": 37.48470899881795,
+      "p99_ms": 42.19684900454013,
+      "worst_ms": 5684.329698997317,
+      "mean_ms": 30.175512256239617,
+      "missed_16_693_ms": 4207
+    },
+    "m3_window": {
+      "n": 3840,
+      "median_ms": 28.802401498978725,
+      "p95_ms": 37.68028500053333,
+      "p99_ms": 42.40158500033431,
+      "worst_ms": 5684.329698997317,
+      "mean_ms": 30.68915333749942,
+      "missed_16_693_ms": 3840
+    }
+  },
+  "memory": {
+    "samples": 167,
+    "max_rss_kib": 278536,
+    "max_hwm_kib": 279892,
+    "max_mali_bytes": 152383488,
+    "min_available_kib": 394912,
+    "last": {
+      "uptime_seconds": 44105.25,
+      "VmRSS_kib": 128368,
+      "VmHWM_kib": 279892,
+      "RssAnon_kib": 85380,
+      "RssFile_kib": 42988,
+      "MemAvailable_kib": 614824,
+      "CmaFree_kib": 36516,
+      "mali_pages": 97,
+      "mali_bytes": 397312
+    }
+  },
+  "definition": "Nearest-rank p95/p99, standard median, all samples retained. Native interval includes previous completion to this completion, including transition. One final glFinish; finish_ms is CPU wait, not isolated GPU execution. RSS and Mali backing overlap; do not add."
+}

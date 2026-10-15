@@ -1,0 +1,227 @@
+[SND] translated sound program (2965 instructions)
+[TEX] ROM CPU bytes=19398656; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque
+[GLES2] SDL driver 0: mali
+[GLES2] SDL compiled=2.32.8 runtime=2.32.8
+[GLES2] active SDL video driver: mali
+[GLES2] vendor: ARM
+[GLES2] renderer: Mali-G31
+[GLES2] version: OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+[GLES2] GLSL: OpenGL ES GLSL ES 3.20
+[GLES2] drawable 640x480 depth bits=24
+[TEX] GL max texture=8192 fragment highp bits=23
+[GLES2] triangle storage: CPU=2400000 bytes, GPU store upper bound=2400000 bytes
+[GLES2] VBO mode=frame command storage=114688 bytes; frame mode re-specifies storage per contiguous chunk
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[GLES2] GLSL ES 1.00 linked; textures=textured budget=67108864; per-texture cache, atlas disabled
+[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[NATIVE-LIVE] source=live-simulation serial=1 activation_tick=1800 preload_ms=25739.065 meshes=15968 materials=5407 no_frame_stream=1
+[AUDIO] driver=alsa output 48000 Hz stereo, 512-sample buffer, gain x6.00
+[INPUT] mapping from /userdata/system/rave-racer-native-live-4a-20261015/controller-input.cfg: 19000000010000000100000000010000,Knulli saved controller,b:b3,a:b4,dpdown:h0.4,leftx:a0,dpleft:h0.8,rightshoulder:b8,leftshoulder:b7,dpright:h0.2,back:b9,start:b10,dpup:h0.1,y:b6,x:b5,
+[INPUT] controller=Knulli saved controller GUID=19000000010000000100000000010000 instance=0 axes=4 buttons=17 hats=1
+[INPUT] mode=interactive; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit
+[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames
+[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=1 mode=textured
+[TIMING] mode=independent target_hz=59.904059904 render_hz=0 (0=adaptive) catchup_limit=4
+[HEADLESS] translated baseline; stop after 1500 frames
+[RR] frame 60  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/0/0/0  en 00 pc_sr 2719
+     dsp: ctrl 00 run 0 irq 0 slave 0 fault 0 pc 0000 idle 0 imr 0 ifr 0 intm 0 pdp 0 steps 0
+[SND] sound CPU out of reset (#1), PC=C030
+[SND] sound CPU out of reset (#2), PC=C030
+[GLES2] CPU geometry allocation: 2138112 bytes
+[GLES2] first geometry frame=100 quads=2 triangles=4 draws=1
+[RR] frame 120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/40/80/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 22 steps 1776256
+[RR] frame 180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/100/200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 79 steps 2734393
+[INPUT] joystick=0 button=9 pressed=1
+[INPUT] joystick=0 button=9 pressed=0
+[RR] frame 240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/160/320/0  en 14 pc_sr 2008
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 452D idle 0 imr 9 ifr 31 intm 0 pdp 139 steps 3786835
+[GLES2] frame=289 fps=52.91 quads=36 triangles=68 draws=34
+[TEX] decoded=677 uploads=677 GPU=18553712 peak=18553712 budget=67108864 live=677 hits=41294 misses=677 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[PROFILE] window mode=textured frames=1..289 samples=265 avg_ms simulation=8.924 scene=0.686 lookup_decode=0.353 uploads=0.358 submission=0.589 swap=0.688 render_other=0.396 pacing=0.002 capture=0.626 vertex_upload=0.020 draw_call=0.475 avg_triangles=92.2 avg_draws=45.8 avg_binds=49.4 avg_skipped_binds=0.0 flushes texture=11966 scissor=0 capacity=0 mutation=0 end=175 same_texture=115 empty_texture_flush=6824 vbo=frame avg_vertex_uploads=0.66 avg_vertex_bytes=11059.0 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1..289 samples=265 hits=41294 misses=677 evictions=0 texture_uploads=677 GPU_end=18553712 GPU_frame_end_peak=18553712
+[TIMING] window mode=independent steps=293 renders=269 skipped=24 sim_hz=58.44 render_fps=53.65 window_sim_hz=58.44 window_render_fps=53.65 lag_ms=0.604 max_lag_ms=65.732 discarded_lag_ms=136.825 resyncs=3 avg_sim_ms=9.808 avg_scene_ms=0.680
+[INPUT] joystick=0 axis=0 value=10975
+[INPUT] joystick=0 axis=1 value=-11872
+[INPUT] joystick=0 axis=0 value=32767
+[INPUT] joystick=0 axis=1 value=-11648
+[INPUT] joystick=0 axis=1 value=-11816
+[INPUT] joystick=0 axis=1 value=-11768
+[RR] frame 300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/220/440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 196 steps 4460228
+[INPUT] joystick=0 axis=1 value=-11568
+[INPUT] joystick=0 axis=1 value=-12432
+[INPUT] joystick=0 axis=0 value=-12264
+[INPUT] joystick=0 axis=0 value=-31136
+[INPUT] joystick=0 axis=0 value=-32768
+[INPUT] joystick=0 axis=1 value=-12768
+[INPUT] joystick=0 axis=0 value=-29288
+[INPUT] joystick=0 axis=1 value=-9296
+[INPUT] joystick=0 axis=0 value=32767
+[INPUT] joystick=0 axis=0 value=15231
+[INPUT] joystick=0 axis=0 value=-15344
+[INPUT] joystick=0 axis=0 value=-32768
+[RR] frame 360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/280/560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 256 steps 4707290
+[INPUT] joystick=0 button=4 pressed=1
+[RR] frame 420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/340/680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 316 steps 4967879
+[INPUT] joystick=0 button=4 pressed=0
+[INPUT] joystick=0 axis=0 value=19655
+[INPUT] joystick=0 axis=0 value=32767
+[RR] frame 480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/400/800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 376 steps 5539661
+[INPUT] joystick=0 axis=0 value=-15064
+[INPUT] joystick=0 axis=0 value=-32768
+[INPUT] joystick=0 axis=0 value=31471
+[INPUT] joystick=0 axis=0 value=32767
+[INPUT] joystick=0 axis=0 value=24471
+[RR] frame 540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/460/920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 436 steps 6111443
+[INPUT] joystick=0 axis=0 value=-27384
+[INPUT] joystick=0 axis=0 value=-32768
+[INPUT] joystick=0 axis=0 value=-31136
+[GLES2] frame=588 fps=59.78 quads=93 triangles=180 draws=90
+[TEX] decoded=728 uploads=728 GPU=22019100 peak=22019100 budget=67108864 live=728 hits=61549 misses=728 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[PROFILE] window mode=textured frames=290..588 samples=299 avg_ms simulation=8.478 scene=0.473 lookup_decode=0.098 uploads=0.040 submission=0.797 swap=2.941 render_other=0.280 pacing=0.025 capture=0.612 vertex_upload=0.023 draw_call=0.658 avg_triangles=130.7 avg_draws=65.3 avg_binds=66.5 avg_skipped_binds=0.0 flushes texture=19234 scissor=0 capacity=0 mutation=0 end=299 same_texture=1 empty_texture_flush=456 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=15679.5 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=290..588 samples=299 hits=20255 misses=51 evictions=0 texture_uploads=51 GPU_end=22019100 GPU_frame_end_peak=22019100
+[INPUT] joystick=0 axis=0 value=26599
+[TIMING] window mode=independent steps=592 renders=568 skipped=24 sim_hz=59.11 render_fps=56.71 window_sim_hz=59.77 window_render_fps=59.77 lag_ms=6.852 max_lag_ms=65.732 discarded_lag_ms=136.825 resyncs=3 avg_sim_ms=9.140 avg_scene_ms=0.576
+[INPUT] joystick=0 axis=0 value=32767
+[RR] frame 600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/520/1040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 496 steps 6683225
+[RR] frame 660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/580/1160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 556 steps 7255007
+[RR] frame 720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/640/1280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 616 steps 7826789
+[RR] frame 780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/700/1400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 676 steps 8398571
+[INPUT] joystick=0 axis=0 value=22399
+[INPUT] joystick=0 axis=0 value=12263
+[INPUT] joystick=0 axis=0 value=17695
+[INPUT] joystick=0 axis=0 value=31471
+[INPUT] joystick=0 axis=0 value=32767
+[INPUT] joystick=0 axis=0 value=14615
+[INPUT] joystick=0 axis=0 value=27495
+[INPUT] joystick=0 axis=0 value=32767
+[RR] frame 840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/760/1520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 736 steps 8970353
+[INPUT] joystick=0 axis=0 value=20327
+[INPUT] joystick=0 axis=0 value=8231
+[GLES2] frame=888 fps=59.71 quads=93 triangles=180 draws=90
+[TEX] decoded=728 uploads=728 GPU=22019100 peak=22019100 budget=67108864 live=728 hits=89356 misses=728 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[PROFILE] window mode=textured frames=589..888 samples=299 avg_ms simulation=8.088 scene=0.536 lookup_decode=0.078 uploads=0.000 submission=0.963 swap=5.328 render_other=0.300 pacing=0.004 capture=0.570 vertex_upload=0.025 draw_call=0.791 avg_triangles=180.0 avg_draws=90.0 avg_binds=91.0 avg_skipped_binds=0.0 flushes texture=26611 scissor=0 capacity=0 mutation=0 end=299 same_texture=0 empty_texture_flush=299 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=21600.0 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=589..888 samples=299 hits=27807 misses=0 evictions=0 texture_uploads=0 GPU_end=22019100 GPU_frame_end_peak=22019100
+[INPUT] joystick=0 axis=0 value=8271
+[INPUT] joystick=0 axis=0 value=8303
+[INPUT] joystick=0 axis=0 value=10975
+[TIMING] window mode=independent steps=892 renders=867 skipped=25 sim_hz=59.37 render_fps=57.71 window_sim_hz=59.91 window_render_fps=59.71 lag_ms=4.978 max_lag_ms=65.732 discarded_lag_ms=136.825 resyncs=3 avg_sim_ms=8.789 avg_scene_ms=0.563
+[INPUT] joystick=0 axis=0 value=16183
+[INPUT] joystick=0 axis=0 value=18703
+[INPUT] joystick=0 axis=0 value=18559
+[INPUT] joystick=0 axis=0 value=18711
+[INPUT] joystick=0 axis=0 value=18751
+[INPUT] joystick=0 axis=0 value=18791
+[INPUT] joystick=0 axis=0 value=20887
+[RR] frame 900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/820/1640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 796 steps 9542135
+[INPUT] joystick=0 axis=0 value=21111
+[INPUT] joystick=0 axis=0 value=21151
+[INPUT] joystick=0 axis=0 value=21207
+[INPUT] joystick=0 axis=0 value=21407
+[INPUT] joystick=0 axis=0 value=21623
+[INPUT] joystick=0 axis=0 value=23127
+[INPUT] joystick=0 axis=0 value=24583
+[INPUT] joystick=0 axis=0 value=24719
+[INPUT] joystick=0 axis=0 value=24871
+[INPUT] joystick=0 axis=0 value=23687
+[INPUT] joystick=0 axis=0 value=20103
+[INPUT] joystick=0 axis=0 value=16911
+[INPUT] joystick=0 axis=0 value=16863
+[INPUT] joystick=0 axis=0 value=16719
+[INPUT] joystick=0 axis=0 value=16679
+[INPUT] joystick=0 axis=0 value=16623
+[INPUT] joystick=0 axis=0 value=16399
+[INPUT] joystick=0 axis=0 value=14727
+[INPUT] joystick=0 axis=0 value=13887
+[INPUT] joystick=0 axis=0 value=12319
+[INPUT] joystick=0 axis=0 value=11703
+[INPUT] joystick=0 axis=0 value=9687
+[RR] frame 960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/880/1760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 856 steps 10113917
+[INPUT] joystick=0 axis=0 value=9127
+[INPUT] joystick=0 axis=0 value=11703
+[INPUT] joystick=0 axis=0 value=13775
+[INPUT] joystick=0 axis=0 value=16351
+[INPUT] joystick=0 axis=0 value=18031
+[INPUT] joystick=0 axis=0 value=18087
+[INPUT] joystick=0 axis=0 value=18143
+[INPUT] joystick=0 axis=0 value=18183
+[INPUT] joystick=0 axis=0 value=18223
+[INPUT] joystick=0 axis=0 value=18255
+[INPUT] joystick=0 axis=0 value=16855
+[INPUT] joystick=0 axis=0 value=18199
+[INPUT] joystick=0 axis=0 value=18239
+[INPUT] joystick=0 axis=0 value=18271
+[RR] frame 1020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/940/1880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 916 steps 10697083
+[INPUT] joystick=0 axis=0 value=18239
+[INPUT] joystick=0 axis=0 value=18295
+[INPUT] joystick=0 axis=0 value=18239
+[INPUT] joystick=0 axis=0 value=18183
+[INPUT] joystick=0 axis=0 value=16575
+[INPUT] joystick=0 axis=0 value=14895
+[INPUT] joystick=0 axis=0 value=13775
+[INPUT] joystick=0 axis=0 value=12319
+[INPUT] joystick=0 axis=0 value=10191
+[RR] frame 1080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1000/2000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 976 steps 11221825
+[RR] frame 1140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1060/2120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1036 steps 11746567
+[GLES2] CPU geometry allocation: 4276224 bytes
+[GLES2] frame=1168 fps=52.89 quads=2267 triangles=3538 draws=1651
+[TEX] decoded=1728 uploads=1728 GPU=48056092 peak=48056092 budget=67108864 live=1728 hits=114469 misses=1728 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[PROFILE] window mode=textured frames=889..1168 samples=267 avg_ms simulation=8.742 scene=0.599 lookup_decode=0.456 uploads=0.508 submission=0.833 swap=5.059 render_other=0.323 pacing=0.004 capture=0.542 vertex_upload=0.032 draw_call=0.683 avg_triangles=139.5 avg_draws=68.7 avg_binds=73.4 avg_skipped_binds=0.0 flushes texture=18065 scissor=6 capacity=0 mutation=0 end=266 same_texture=336 empty_texture_flush=835 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=16740.7 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=889..1168 samples=267 hits=25113 misses=1000 evictions=0 texture_uploads=1000 GPU_end=48056092 GPU_frame_end_peak=48056092
+[TIMING] window mode=independent steps=1169 renders=1130 skipped=39 sim_hz=58.38 render_fps=56.43 window_sim_hz=55.38 window_render_fps=52.59 lag_ms=24.830 max_lag_ms=193.629 discarded_lag_ms=502.344 resyncs=6 avg_sim_ms=8.856 avg_scene_ms=0.626
+[RR] frame 1200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1120/2240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1092 steps 13485113
+[RR] frame 1260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1180/2360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1152 steps 14739983
+[RR] frame 1320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1240/2480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1212 steps 15994853
+[RR] frame 1380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1300/2600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1272 steps 17249723
+[TIMING] window mode=independent steps=1402 renders=1176 skipped=226 sim_hz=56.02 render_fps=46.99 window_sim_hz=46.57 window_render_fps=9.19 lag_ms=36.982 max_lag_ms=193.629 discarded_lag_ms=1603.801 resyncs=52 avg_sim_ms=9.030 avg_scene_ms=1.690
+[GLES2] frame=1403 fps=9.27 quads=2359 triangles=3799 draws=1773
+[TEX] decoded=1833 uploads=1833 GPU=48546420 peak=48546420 budget=67108864 live=1833 hits=222061 misses=1833 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[PROFILE] window mode=textured frames=1173..1403 samples=47 avg_ms simulation=9.886 scene=6.978 lookup_decode=1.493 uploads=0.172 submission=14.621 swap=0.119 render_other=4.876 pacing=0.003 capture=1.293 vertex_upload=0.616 draw_call=11.350 avg_triangles=3638.2 avg_draws=1698.9 avg_binds=1702.1 avg_skipped_binds=0.0 flushes texture=79803 scissor=60 capacity=0 mutation=0 end=47 same_texture=6500 empty_texture_flush=5126 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=436585.5 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1173..1403 samples=47 hits=107592 misses=105 evictions=0 texture_uploads=105 GPU_end=48546420 GPU_frame_end_peak=48546420
+[RR] frame 1440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1360/2720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1332 steps 19879505
+[RR] frame 1500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1420/2840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1392 steps 23009256
+{"schema":1,"frames":1500,"slices":24000,"instructions_68k":124896212,"last_instruction_pc":"00026c5c","sr":"2000","d":["0000480e","00000056","0000235a","ff790006","000025ac","0000ffff","00000000","00000000"],"a":["1000d85e","0002903e","00029074","000290ac","1000d834","0006c400","10008000","10000800"],"fnv1a32":{"register_bytes":"778c7fd1","wram":"4d5d1ccc","shared":"f2c326f5","poly_be":"33d3355f","text":"c6b88396","palette":"3725e78c","eeprom":"6d859b6e"},"traps":0,"unmapped":0,"romwrites":0,"irqs":[0,0,0,0,1420,2840,0],"dsp_steps":23009256,"sound_cycles":387980739,"dsp_fault":false,"sound_fault":false}
+[C352] inactive_fastpath=on counters=off
+[AUDIO-OUTPUT] underrun_samples=98863 overrun_samples=0 latency_resets=0 queued_frames=92
+[NATIVE-LIVE] completed_native_pictures=0
+TRACE_DRAIN mode=ram bytes=0 wall_ms=0.003708 outside_race=1
+[BOARD-STATE] fnv1a32=c1f32bde
+[MEM-READER] implementation=split
+[MEM-READS] fast=on counters=off
+[TIMING] total mode=independent steps=1500 renders=1196 skipped=304 sim_hz=54.98 render_fps=43.84 window_sim_hz=43.51 window_render_fps=8.88 lag_ms=19.564 max_lag_ms=193.629 discarded_lag_ms=2180.081 resyncs=72 avg_sim_ms=9.145 avg_scene_ms=2.012
+[GEOMETRY] skip=off effective=off test_present_every=0 ticks=1500 walks=1404 direct_consumed=6016 digest=a420e02eaf3386b9
+[GEOMETRY-RATE] from=1 resyncs=72 discarded_lag_ms=2180.081
+[PROFILE] window-final mode=textured frames=1408..1498 samples=19 avg_ms simulation=10.663 scene=6.417 lookup_decode=2.227 uploads=1.504 submission=13.771 swap=0.179 render_other=4.792 pacing=0.003 capture=1.043 vertex_upload=0.557 draw_call=10.801 avg_triangles=3561.1 avg_draws=1663.2 avg_binds=1679.6 avg_skipped_binds=0.0 flushes texture=31617 scissor=35 capacity=0 mutation=0 end=19 same_texture=2302 empty_texture_flush=2603 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=427332.6 texture_barriers=0
+[PROFILE-CACHE] window-final mode=textured frames=1408..1498 samples=19 hits=40402 misses=292 evictions=0 texture_uploads=292 GPU_end=52393988 GPU_frame_end_peak=52393988
+[PROFILE] total mode=textured frames=1..1498 samples=1196 avg_ms simulation=8.628 scene=0.914 lookup_decode=0.318 uploads=0.233 submission=1.550 swap=3.357 render_other=0.573 pacing=0.009 capture=0.623 vertex_upload=0.057 draw_call=1.238 avg_triangles=328.8 avg_draws=157.5 avg_binds=160.3 avg_skipped_binds=0.0 flushes texture=187296 scissor=101 capacity=0 mutation=0 end=1105 same_texture=9254 empty_texture_flush=16143 vbo=frame avg_vertex_uploads=0.92 avg_vertex_bytes=39453.0 texture_barriers=0
+[PROFILE-CACHE] total mode=textured frames=1..1498 samples=1196 hits=262463 misses=2125 evictions=0 texture_uploads=2125 GPU_end=52393988 GPU_frame_end_peak=52393988
+[VIDEO] presentations=1196 full_layer_uploads=0
+[GPU-HUD] pictures=1196 verified=0 bytes=6576240 calls=790 profile_bytes=0 profile_calls=0
+[GPU-HUD-TRANSFER] scope=profile glyph_bytes=0 vertex_bytes=0 palette_bytes=0 lut_bytes=0
+[TEX] decoded=2125 uploads=2125 GPU=52393988 peak=52393988 budget=67108864 live=2125 hits=262463 misses=2125 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[RR] stop at frame 1500, 0 traps

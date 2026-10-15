@@ -1,0 +1,466 @@
+[SND] translated sound program (2965 instructions)
+[INPUT] replaying /userdata/system/rave-racer-native-live-4a-20261015/race-20261013-122242-25136.rec
+[REPLAY] inputs sampled at emulated boundaries; ROM hashes FNV1a64; checkpoints every 300 ticks
+[TEX] ROM CPU bytes=19398656; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque
+[GLES2] SDL driver 0: mali
+[GLES2] SDL compiled=2.32.8 runtime=2.32.8
+[GLES2] active SDL video driver: mali
+[GLES2] vendor: ARM
+[GLES2] renderer: Mali-G31
+[GLES2] version: OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+[GLES2] GLSL: OpenGL ES GLSL ES 3.20
+[GLES2] drawable 640x480 depth bits=24
+[TEX] GL max texture=8192 fragment highp bits=23
+[GLES2] triangle storage: CPU=2400000 bytes, GPU store upper bound=2400000 bytes
+[GLES2] VBO mode=frame command storage=114688 bytes; frame mode re-specifies storage per contiguous chunk
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[GLES2] GLSL ES 1.00 linked; textures=textured budget=67108864; per-texture cache, atlas disabled
+[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[AUDIO] driver=alsa output 48000 Hz stereo, 512-sample buffer, gain x6.00
+[INPUT] mapping from /userdata/system/rave-racer-native-live-4a-20261015/controller-input.cfg: 19000000010000000100000000010000,Knulli saved controller,b:b3,a:b4,dpdown:h0.4,leftx:a0,dpleft:h0.8,rightshoulder:b8,leftshoulder:b7,dpright:h0.2,back:b9,start:b10,dpup:h0.1,y:b6,x:b5,
+[INPUT] controller=Knulli saved controller GUID=19000000010000000100000000010000 instance=0 axes=4 buttons=17 hats=1
+[INPUT] mode=scripted; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit
+[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames
+[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=1 mode=textured
+[TIMING] mode=coupled target_hz=59.904059904 render_hz=0 (0=adaptive) catchup_limit=4
+[HEADLESS] translated baseline; stop after 6006 frames
+[RR] frame 60  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/0/0/0  en 00 pc_sr 2719
+     dsp: ctrl 00 run 0 irq 0 slave 0 fault 0 pc 0000 idle 0 imr 0 ifr 0 intm 0 pdp 0 steps 0
+[SND] sound CPU out of reset (#1), PC=C030
+[SND] sound CPU out of reset (#2), PC=C030
+[GLES2] CPU geometry allocation: 2138112 bytes
+[GLES2] first geometry frame=97 quads=3 triangles=6 draws=3
+[RR] frame 120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/40/80/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 22 steps 1776256
+[RR] frame 180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/100/200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 79 steps 2734393
+[RR] frame 240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/160/320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 139 steps 3783985
+[GLES2] frame=285 fps=56.50 quads=385 triangles=308 draws=116
+[TEX] decoded=871 uploads=871 GPU=21046748 peak=21046748 budget=67108864 live=871 hits=79700 misses=871 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=285 rendered=285 skipped=0 wall_s=5.044 sim_hz=56.50 render_fps=56.50
+[STAGES] window timing=coupled cohort=rendered frames=1..285 samples=285 avg_ms core68k_other=6.232 dsp=2.162 sound=0.789 audio_mix=0.664 serial=0.006 board_io=0.004 video_latch=0.001 palette=0.240 direct_decode=0.005 list_decode=0.550 sort=0.099 scene_other=0.005 clip_build_state=0.606 texture_lookup_decode=0.432 texture_upload=0.341 vertex_upload=0.031 submission_other=0.153 draw_call=0.739 swap=0.171 host_wait=3.945 capture=0.511 avg_quads=282.7 avg_triangles=150.0 avg_draws=74.5 misses=871 evictions=0 texture_uploads=871 GPU_end=21046748 GPU_frame_end_peak=21046748
+[PROFILE] window mode=textured frames=1..285 samples=285 avg_ms simulation=9.857 scene=0.900 lookup_decode=0.432 uploads=0.341 submission=0.923 swap=0.171 render_other=0.606 pacing=3.891 capture=0.511 vertex_upload=0.031 draw_call=0.739 avg_triangles=150.0 avg_draws=74.5 avg_binds=78.6 avg_skipped_binds=0.0 flushes texture=21058 scissor=0 capacity=0 mutation=0 end=184 same_texture=211 empty_texture_flush=13526 vbo=frame avg_vertex_uploads=0.65 avg_vertex_bytes=18000.8 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1..285 samples=285 hits=79700 misses=871 evictions=0 texture_uploads=871 GPU_end=21046748 GPU_frame_end_peak=21046748
+[RR] frame 300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/220/440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 199 steps 4721666
+[RR] frame 360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/280/560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 259 steps 5463488
+[RR] frame 420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/340/680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 319 steps 6513080
+[RR] frame 480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/400/800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 379 steps 7434932
+[RR] frame 540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/460/920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 439 steps 8188904
+[GLES2] frame=570 fps=56.91 quads=409 triangles=767 draws=313
+[TEX] decoded=2949 uploads=2949 GPU=67075056 peak=67108852 budget=67108864 live=2726 hits=247463 misses=2949 evictions=223 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=285 rendered=285 skipped=0 wall_s=5.010 sim_hz=56.89 render_fps=56.89
+[STAGES] window timing=coupled cohort=rendered frames=286..570 samples=285 avg_ms core68k_other=3.253 dsp=2.469 sound=0.713 audio_mix=0.384 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.239 direct_decode=0.011 list_decode=1.142 sort=0.213 scene_other=0.005 clip_build_state=1.193 texture_lookup_decode=1.052 texture_upload=0.850 vertex_upload=0.114 submission_other=0.610 draw_call=2.788 swap=0.721 host_wait=1.192 capture=0.603 avg_quads=596.9 avg_triangles=733.4 avg_draws=333.8 misses=2078 evictions=223 texture_uploads=2078 GPU_end=67075056 GPU_frame_end_peak=67107752
+[PROFILE] window mode=textured frames=286..570 samples=285 avg_ms simulation=6.829 scene=1.611 lookup_decode=1.052 uploads=0.850 submission=3.512 swap=0.721 render_other=1.193 pacing=1.133 capture=0.603 vertex_upload=0.114 draw_call=2.788 avg_triangles=733.4 avg_draws=333.8 avg_binds=342.1 avg_skipped_binds=0.0 flushes texture=94860 scissor=0 capacity=0 mutation=0 end=285 same_texture=9649 empty_texture_flush=17015 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=88007.6 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=286..570 samples=285 hits=167763 misses=2078 evictions=223 texture_uploads=2078 GPU_end=67075056 GPU_frame_end_peak=67107752
+[RR] frame 600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/520/1040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 499 steps 9042644
+[RR] frame 660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/580/1160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 559 steps 9894539
+[RR] frame 720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/640/1280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 619 steps 10726370
+[RR] frame 780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/700/1400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 679 steps 11550299
+[RR] frame 840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/760/1520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 736 steps 12589846
+[GLES2] frame=849 fps=55.75 quads=36 triangles=68 draws=34
+[TEX] decoded=5030 uploads=5030 GPU=67104204 peak=67108860 budget=67108864 live=2787 hits=381433 misses=5030 evictions=2243 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=279 rendered=279 skipped=0 wall_s=5.008 sim_hz=55.71 render_fps=55.71
+[STAGES] window timing=coupled cohort=rendered frames=571..849 samples=279 avg_ms core68k_other=3.525 dsp=2.118 sound=0.817 audio_mix=0.458 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.244 direct_decode=0.011 list_decode=0.928 sort=0.164 scene_other=0.005 clip_build_state=1.071 texture_lookup_decode=1.250 texture_upload=0.596 vertex_upload=0.118 submission_other=0.837 draw_call=3.325 swap=0.579 host_wait=1.246 capture=0.635 avg_quads=488.5 avg_triangles=864.0 avg_draws=400.8 misses=2081 evictions=2020 texture_uploads=2081 GPU_end=67104204 GPU_frame_end_peak=67108404
+[PROFILE] window mode=textured frames=571..849 samples=279 avg_ms simulation=6.929 scene=1.352 lookup_decode=1.250 uploads=0.596 submission=4.280 swap=0.579 render_other=1.071 pacing=1.188 capture=0.635 vertex_upload=0.118 draw_call=3.325 avg_triangles=864.0 avg_draws=400.8 avg_binds=409.2 avg_skipped_binds=0.0 flushes texture=111542 scissor=0 capacity=0 mutation=0 end=276 same_texture=8985 empty_texture_flush=9058 vbo=frame avg_vertex_uploads=0.99 avg_vertex_bytes=103685.6 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=571..849 samples=279 hits=133970 misses=2081 evictions=2020 texture_uploads=2081 GPU_end=67104204 GPU_frame_end_peak=67108404
+[RR] frame 900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/820/1640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 796 steps 12836908
+[RR] frame 960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/880/1760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 856 steps 13083970
+[RR] frame 1020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/940/1880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 916 steps 13331032
+[RR] frame 1080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1000/2000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 976 steps 13862221
+[RR] frame 1140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1060/2120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1036 steps 14434003
+[GLES2] frame=1147 fps=59.48 quads=93 triangles=180 draws=90
+[TEX] decoded=5081 uploads=5081 GPU=67099304 peak=67108860 budget=67108864 live=2675 hits=398745 misses=5081 evictions=2406 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=298 rendered=298 skipped=0 wall_s=5.011 sim_hz=59.47 render_fps=59.47
+[STAGES] window timing=coupled cohort=rendered frames=850..1147 samples=298 avg_ms core68k_other=4.010 dsp=1.894 sound=1.940 audio_mix=1.710 serial=0.007 board_io=0.005 video_latch=0.001 palette=0.252 direct_decode=0.008 list_decode=0.163 sort=0.025 scene_other=0.005 clip_build_state=0.271 texture_lookup_decode=0.127 texture_upload=0.036 vertex_upload=0.024 submission_other=0.158 draw_call=0.674 swap=1.951 host_wait=2.922 capture=0.620 avg_quads=58.3 avg_triangles=111.5 avg_draws=55.7 misses=51 evictions=163 texture_uploads=51 GPU_end=67099304 GPU_frame_end_peak=67104204
+[PROFILE] window mode=textured frames=850..1147 samples=298 avg_ms simulation=9.566 scene=0.453 lookup_decode=0.127 uploads=0.036 submission=0.856 swap=1.951 render_other=0.271 pacing=2.868 capture=0.620 vertex_upload=0.024 draw_call=0.674 avg_triangles=111.5 avg_draws=55.7 avg_binds=56.9 avg_skipped_binds=0.0 flushes texture=16309 scissor=0 capacity=0 mutation=0 end=298 same_texture=1 empty_texture_flush=491 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=13375.6 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=850..1147 samples=298 hits=17312 misses=51 evictions=163 texture_uploads=51 GPU_end=67099304 GPU_frame_end_peak=67104204
+[RR] frame 1200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1120/2240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1096 steps 15005785
+[RR] frame 1260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1180/2360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1156 steps 15546615
+[RR] frame 1320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1240/2480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1216 steps 16071357
+[GLES2] CPU geometry allocation: 4276224 bytes
+[GLES2] frame=1380 fps=46.54 quads=2328 triangles=3552 draws=1663
+[TEX] decoded=6113 uploads=6113 GPU=67089600 peak=67108860 budget=67108864 live=2681 hits=494842 misses=6113 evictions=3432 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=233 rendered=233 skipped=0 wall_s=5.001 sim_hz=46.59 render_fps=46.59
+[STAGES] window timing=coupled cohort=rendered frames=1148..1380 samples=233 avg_ms core68k_other=4.150 dsp=2.283 sound=2.043 audio_mix=1.805 serial=0.006 board_io=0.004 video_latch=0.001 palette=0.251 direct_decode=0.008 list_decode=0.977 sort=0.222 scene_other=0.005 clip_build_state=0.989 texture_lookup_decode=0.873 texture_upload=0.356 vertex_upload=0.091 submission_other=0.533 draw_call=2.129 swap=1.399 host_wait=2.738 capture=0.585 avg_quads=416.9 avg_triangles=622.3 avg_draws=293.1 misses=1032 evictions=1026 texture_uploads=1032 GPU_end=67089600 GPU_frame_end_peak=67108044
+[PROFILE] window mode=textured frames=1148..1380 samples=233 avg_ms simulation=10.292 scene=1.464 lookup_decode=0.873 uploads=0.356 submission=2.754 swap=1.399 render_other=0.989 pacing=2.686 capture=0.585 vertex_upload=0.091 draw_call=2.129 avg_triangles=622.3 avg_draws=293.1 avg_binds=298.5 avg_skipped_binds=0.0 flushes texture=68082 scissor=41 capacity=0 mutation=0 end=229 same_texture=4891 empty_texture_flush=4251 vbo=frame avg_vertex_uploads=0.98 avg_vertex_bytes=74679.1 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1148..1380 samples=233 hits=96097 misses=1032 evictions=1026 texture_uploads=1032 GPU_end=67089600 GPU_frame_end_peak=67108044
+[RR] frame 1380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1300/2600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1272 steps 17736895
+[RR] frame 1440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1360/2720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1332 steps 18991765
+[RR] frame 1500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1420/2840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1392 steps 20246635
+[GLES2] frame=1506 fps=25.02 quads=2281 triangles=3635 draws=1699
+[TEX] decoded=6115 uploads=6115 GPU=67094848 peak=67108860 budget=67108864 live=2683 hits=783386 misses=6115 evictions=3432 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=126 rendered=126 skipped=0 wall_s=5.036 sim_hz=25.02 render_fps=25.02
+[STAGES] window timing=coupled cohort=rendered frames=1381..1506 samples=126 avg_ms core68k_other=3.957 dsp=3.027 sound=2.307 audio_mix=1.776 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.301 direct_decode=0.013 list_decode=4.849 sort=1.132 scene_other=0.009 clip_build_state=4.911 texture_lookup_decode=1.452 texture_upload=0.003 vertex_upload=0.420 submission_other=2.964 draw_call=11.546 swap=0.120 host_wait=0.070 capture=1.082 avg_quads=2290.0 avg_triangles=3601.5 avg_draws=1684.4 misses=2 evictions=0 texture_uploads=2 GPU_end=67094848 GPU_frame_end_peak=67094848
+[PROFILE] window mode=textured frames=1381..1506 samples=126 avg_ms simulation=11.078 scene=6.305 lookup_decode=1.452 uploads=0.003 submission=14.930 swap=0.120 render_other=4.911 pacing=0.007 capture=1.082 vertex_upload=0.420 draw_call=11.546 avg_triangles=3601.5 avg_draws=1684.4 avg_binds=1685.4 avg_skipped_binds=0.0 flushes texture=212151 scissor=126 capacity=0 mutation=0 end=126 same_texture=17261 empty_texture_flush=13934 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=432179.0 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1381..1506 samples=126 hits=288544 misses=2 evictions=0 texture_uploads=2 GPU_end=67094848 GPU_frame_end_peak=67094848
+[RR] frame 1560  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1480/2960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1452 steps 21501505
+[RR] frame 1620  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1540/3080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1512 steps 23943799
+[GLES2] frame=1628 fps=24.34 quads=2395 triangles=3807 draws=1812
+[TEX] decoded=6206 uploads=6206 GPU=67096188 peak=67108860 budget=67108864 live=2674 hits=1066562 misses=6206 evictions=3532 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=122 rendered=122 skipped=0 wall_s=5.012 sim_hz=24.34 render_fps=24.34
+[STAGES] window timing=coupled cohort=rendered frames=1507..1628 samples=122 avg_ms core68k_other=4.369 dsp=3.270 sound=2.187 audio_mix=1.457 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.292 direct_decode=0.013 list_decode=4.936 sort=1.150 scene_other=0.009 clip_build_state=5.023 texture_lookup_decode=1.584 texture_upload=0.079 vertex_upload=0.465 submission_other=3.046 draw_call=11.823 swap=0.124 host_wait=0.069 capture=1.158 avg_quads=2321.9 avg_triangles=3738.1 avg_draws=1747.8 misses=91 evictions=100 texture_uploads=91 GPU_end=67096188 GPU_frame_end_peak=67108760
+[PROFILE] window mode=textured frames=1507..1628 samples=122 avg_ms simulation=11.294 scene=6.401 lookup_decode=1.584 uploads=0.079 submission=15.334 swap=0.124 render_other=5.023 pacing=0.007 capture=1.158 vertex_upload=0.465 draw_call=11.823 avg_triangles=3738.1 avg_draws=1747.8 avg_binds=1749.5 avg_skipped_binds=0.0 flushes texture=213048 scissor=256 capacity=0 mutation=0 end=122 same_texture=16487 empty_texture_flush=14619 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=448576.7 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1507..1628 samples=122 hits=283176 misses=91 evictions=100 texture_uploads=91 GPU_end=67096188 GPU_frame_end_peak=67108760
+[RR] frame 1680  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1600/3200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1572 steps 27073550
+[RR] frame 1740  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1660/3320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1632 steps 30203300
+[GLES2] frame=1759 fps=26.07 quads=1715 triangles=2832 draws=1316
+[TEX] decoded=6541 uploads=6541 GPU=67099984 peak=67108860 budget=67108864 live=2564 hits=1328473 misses=6541 evictions=3977 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=131 rendered=131 skipped=0 wall_s=5.026 sim_hz=26.07 render_fps=26.07
+[STAGES] window timing=coupled cohort=rendered frames=1629..1759 samples=131 avg_ms core68k_other=4.953 dsp=3.114 sound=2.333 audio_mix=1.553 serial=0.006 board_io=0.006 video_latch=0.001 palette=0.277 direct_decode=0.014 list_decode=4.335 sort=0.979 scene_other=0.009 clip_build_state=4.337 texture_lookup_decode=1.670 texture_upload=0.296 vertex_upload=0.412 submission_other=2.535 draw_call=10.204 swap=0.121 host_wait=0.068 capture=1.130 avg_quads=2001.9 avg_triangles=3310.0 avg_draws=1548.8 misses=335 evictions=445 texture_uploads=335 GPU_end=67099984 GPU_frame_end_peak=67108484
+[PROFILE] window mode=textured frames=1629..1759 samples=131 avg_ms simulation=11.965 scene=5.613 lookup_decode=1.670 uploads=0.296 submission=13.150 swap=0.121 render_other=4.337 pacing=0.007 capture=1.130 vertex_upload=0.412 draw_call=10.204 avg_triangles=3310.0 avg_draws=1548.8 avg_binds=1552.4 avg_skipped_binds=0.0 flushes texture=203118 scissor=186 capacity=0 mutation=0 end=131 same_texture=13943 empty_texture_flush=17110 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=397196.3 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1629..1759 samples=131 hits=261911 misses=335 evictions=445 texture_uploads=335 GPU_end=67099984 GPU_frame_end_peak=67108484
+[RR] frame 1800  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1720/3440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1692 steps 33333050
+[RR] frame 1860  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1780/3560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1752 steps 36462800
+[GLES2] frame=1916 fps=31.25 quads=1254 triangles=2100 draws=981
+[TEX] decoded=6775 uploads=6775 GPU=66211048 peak=67108860 budget=67108864 live=1684 hits=1560284 misses=6775 evictions=5091 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=157 rendered=157 skipped=0 wall_s=5.025 sim_hz=31.25 render_fps=31.25
+[STAGES] window timing=coupled cohort=rendered frames=1760..1916 samples=157 avg_ms core68k_other=4.632 dsp=2.557 sound=2.331 audio_mix=1.499 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.267 direct_decode=0.012 list_decode=3.221 sort=0.620 scene_other=0.008 clip_build_state=3.613 texture_lookup_decode=1.999 texture_upload=0.560 vertex_upload=0.325 submission_other=1.759 draw_call=7.418 swap=0.106 host_wait=0.084 capture=0.964 avg_quads=1478.0 avg_triangles=2433.2 avg_draws=1159.9 misses=234 evictions=1114 texture_uploads=234 GPU_end=66211048 GPU_frame_end_peak=67108408
+[PROFILE] window mode=textured frames=1760..1916 samples=157 avg_ms simulation=11.029 scene=4.130 lookup_decode=1.999 uploads=0.560 submission=9.503 swap=0.106 render_other=3.613 pacing=0.007 capture=0.964 vertex_upload=0.325 draw_call=7.418 avg_triangles=2433.2 avg_draws=1159.9 avg_binds=1162.4 avg_skipped_binds=0.0 flushes texture=182036 scissor=200 capacity=0 mutation=0 end=157 same_texture=8421 empty_texture_flush=11772 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=291982.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1760..1916 samples=157 hits=231811 misses=234 evictions=1114 texture_uploads=234 GPU_end=66211048 GPU_frame_end_peak=67108408
+[RR] frame 1920  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1840/3680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1812 steps 39561302
+[RR] frame 1980  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1900/3800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1872 steps 42753156
+[RR] frame 2040  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1960/3920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1932 steps 46506486
+[GLES2] frame=2090 fps=34.66 quads=1033 triangles=1477 draws=687
+[TEX] decoded=6981 uploads=6981 GPU=67101188 peak=67108860 budget=67108864 live=901 hits=1770326 misses=6981 evictions=6080 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=174 rendered=174 skipped=0 wall_s=5.020 sim_hz=34.66 render_fps=34.66
+[STAGES] window timing=coupled cohort=rendered frames=1917..2090 samples=174 avg_ms core68k_other=4.783 dsp=2.808 sound=2.254 audio_mix=1.483 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.256 direct_decode=0.012 list_decode=2.601 sort=0.444 scene_other=0.008 clip_build_state=2.821 texture_lookup_decode=1.520 texture_upload=0.305 vertex_upload=0.258 submission_other=1.654 draw_call=6.442 swap=0.109 host_wait=0.084 capture=0.983 avg_quads=1208.3 avg_triangles=1924.0 avg_draws=903.1 misses=206 evictions=989 texture_uploads=206 GPU_end=67101188 GPU_frame_end_peak=67108588
+[PROFILE] window mode=textured frames=1917..2090 samples=174 avg_ms simulation=11.339 scene=3.321 lookup_decode=1.520 uploads=0.305 submission=8.353 swap=0.109 render_other=2.821 pacing=0.007 capture=0.983 vertex_upload=0.258 draw_call=6.442 avg_triangles=1924.0 avg_draws=903.1 avg_binds=905.2 avg_skipped_binds=0.0 flushes texture=156867 scissor=289 capacity=0 mutation=0 end=174 same_texture=9810 empty_texture_flush=11457 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=230875.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1917..2090 samples=174 hits=210042 misses=206 evictions=989 texture_uploads=206 GPU_end=67101188 GPU_frame_end_peak=67108588
+[RR] frame 2100  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2020/4040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1992 steps 50259816
+[RR] frame 2160  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2080/4160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2052 steps 54013146
+[RR] frame 2220  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2140/4280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2112 steps 57766476
+[GLES2] frame=2269 fps=35.77 quads=1227 triangles=2034 draws=945
+[TEX] decoded=7284 uploads=7284 GPU=66768756 peak=67108860 budget=67108864 live=933 hits=1967941 misses=7284 evictions=6351 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=179 rendered=179 skipped=0 wall_s=5.005 sim_hz=35.77 render_fps=35.77
+[STAGES] window timing=coupled cohort=rendered frames=2091..2269 samples=179 avg_ms core68k_other=5.068 dsp=2.903 sound=2.335 audio_mix=1.496 serial=0.005 board_io=0.006 video_latch=0.001 palette=0.258 direct_decode=0.012 list_decode=2.448 sort=0.403 scene_other=0.007 clip_build_state=2.395 texture_lookup_decode=1.246 texture_upload=0.352 vertex_upload=0.198 submission_other=1.596 draw_call=5.975 swap=0.112 host_wait=0.072 capture=1.056 avg_quads=1105.7 avg_triangles=1776.3 avg_draws=828.0 misses=303 evictions=271 texture_uploads=303 GPU_end=66768756 GPU_frame_end_peak=67106892
+[PROFILE] window mode=textured frames=2091..2269 samples=179 avg_ms simulation=11.813 scene=3.129 lookup_decode=1.246 uploads=0.352 submission=7.768 swap=0.112 render_other=2.395 pacing=0.007 capture=1.056 vertex_upload=0.198 draw_call=5.975 avg_triangles=1776.3 avg_draws=828.0 avg_binds=830.7 avg_skipped_binds=0.0 flushes texture=147958 scissor=302 capacity=0 mutation=0 end=179 same_texture=10399 empty_texture_flush=9162 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=213160.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2091..2269 samples=179 hits=197615 misses=303 evictions=271 texture_uploads=303 GPU_end=66768756 GPU_frame_end_peak=67106892
+[RR] frame 2280  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2200/4400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2172 steps 61519806
+[RR] frame 2340  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2260/4520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2232 steps 65273136
+[RR] frame 2400  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2320/4640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2292 steps 69026466
+[GLES2] frame=2445 fps=35.11 quads=1398 triangles=2052 draws=992
+[TEX] decoded=7616 uploads=7616 GPU=67029992 peak=67108860 budget=67108864 live=1134 hits=2186926 misses=7616 evictions=6482 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=176 rendered=176 skipped=0 wall_s=5.013 sim_hz=35.11 render_fps=35.11
+[STAGES] window timing=coupled cohort=rendered frames=2270..2445 samples=176 avg_ms core68k_other=4.973 dsp=2.782 sound=2.250 audio_mix=1.437 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.256 direct_decode=0.012 list_decode=2.707 sort=0.469 scene_other=0.008 clip_build_state=2.660 texture_lookup_decode=1.303 texture_upload=0.306 vertex_upload=0.221 submission_other=1.579 draw_call=6.136 swap=0.113 host_wait=0.075 capture=1.171 avg_quads=1246.1 avg_triangles=1809.6 avg_draws=854.5 misses=332 evictions=131 texture_uploads=332 GPU_end=67029992 GPU_frame_end_peak=67106800
+[PROFILE] window mode=textured frames=2270..2445 samples=176 avg_ms simulation=11.452 scene=3.452 lookup_decode=1.303 uploads=0.306 submission=7.935 swap=0.113 render_other=2.660 pacing=0.009 capture=1.171 vertex_upload=0.221 draw_call=6.136 avg_triangles=1809.6 avg_draws=854.5 avg_binds=857.4 avg_skipped_binds=0.0 flushes texture=150064 scissor=298 capacity=0 mutation=0 end=176 same_texture=9226 empty_texture_flush=14637 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=217148.9 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2270..2445 samples=176 hits=218985 misses=332 evictions=131 texture_uploads=332 GPU_end=67029992 GPU_frame_end_peak=67106800
+[RR] frame 2460  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2380/4760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2352 steps 72779796
+[RR] frame 2520  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2440/4880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2412 steps 76533126
+[RR] frame 2580  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2500/5000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2472 steps 80286456
+[GLES2] frame=2600 fps=30.98 quads=1339 triangles=1671 draws=780
+[TEX] decoded=8033 uploads=8033 GPU=66733968 peak=67108860 budget=67108864 live=1321 hits=2418328 misses=8033 evictions=6712 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=155 rendered=155 skipped=0 wall_s=5.003 sim_hz=30.98 render_fps=30.98
+[STAGES] window timing=coupled cohort=rendered frames=2446..2600 samples=155 avg_ms core68k_other=4.894 dsp=3.050 sound=2.242 audio_mix=1.557 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.258 direct_decode=0.012 list_decode=3.219 sort=0.626 scene_other=0.008 clip_build_state=3.156 texture_lookup_decode=1.694 texture_upload=0.422 vertex_upload=0.257 submission_other=2.012 draw_call=7.484 swap=0.109 host_wait=0.069 capture=1.178 avg_quads=1495.6 avg_triangles=2186.8 avg_draws=1040.3 misses=417 evictions=230 texture_uploads=417 GPU_end=66733968 GPU_frame_end_peak=67108600
+[PROFILE] window mode=textured frames=2446..2600 samples=155 avg_ms simulation=11.754 scene=4.124 lookup_decode=1.694 uploads=0.422 submission=9.753 swap=0.109 render_other=3.156 pacing=0.008 capture=1.178 vertex_upload=0.257 draw_call=7.484 avg_triangles=2186.8 avg_draws=1040.3 avg_binds=1044.0 avg_skipped_binds=0.0 flushes texture=161253 scissor=275 capacity=0 mutation=0 end=155 same_texture=8484 empty_texture_flush=14430 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=262412.1 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2446..2600 samples=155 hits=231402 misses=417 evictions=230 texture_uploads=417 GPU_end=66733968 GPU_frame_end_peak=67108600
+[RR] frame 2640  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2560/5120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2532 steps 84039786
+[RR] frame 2700  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2620/5240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2592 steps 87793116
+[RR] frame 2760  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2680/5360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2652 steps 91546446
+[GLES2] frame=2771 fps=34.17 quads=1395 triangles=1579 draws=753
+[TEX] decoded=8831 uploads=8831 GPU=67008228 peak=67108860 budget=67108864 live=1771 hits=2650135 misses=8831 evictions=7060 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=171 rendered=171 skipped=0 wall_s=5.004 sim_hz=34.18 render_fps=34.18
+[STAGES] window timing=coupled cohort=rendered frames=2601..2771 samples=171 avg_ms core68k_other=4.937 dsp=2.983 sound=2.357 audio_mix=1.567 serial=0.006 board_io=0.005 video_latch=0.001 palette=0.254 direct_decode=0.012 list_decode=2.901 sort=0.541 scene_other=0.007 clip_build_state=2.659 texture_lookup_decode=1.463 texture_upload=0.443 vertex_upload=0.195 submission_other=1.611 draw_call=5.972 swap=0.111 host_wait=0.068 capture=1.155 avg_quads=1360.3 avg_triangles=1720.9 avg_draws=812.1 misses=798 evictions=348 texture_uploads=798 GPU_end=67008228 GPU_frame_end_peak=67107440
+[PROFILE] window mode=textured frames=2601..2771 samples=171 avg_ms simulation=11.855 scene=3.716 lookup_decode=1.463 uploads=0.443 submission=7.777 swap=0.111 render_other=2.659 pacing=0.007 capture=1.155 vertex_upload=0.195 draw_call=5.972 avg_triangles=1720.9 avg_draws=812.1 avg_binds=817.8 avg_skipped_binds=0.0 flushes texture=138946 scissor=273 capacity=0 mutation=0 end=171 same_texture=9373 empty_texture_flush=19415 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=206502.5 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2601..2771 samples=171 hits=231807 misses=798 evictions=348 texture_uploads=798 GPU_end=67008228 GPU_frame_end_peak=67107440
+[RR] frame 2820  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2740/5480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2712 steps 95299776
+[RR] frame 2880  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2800/5600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2772 steps 99053106
+[GLES2] frame=2932 fps=32.14 quads=1259 triangles=1976 draws=924
+[TEX] decoded=9090 uploads=9090 GPU=67016456 peak=67108860 budget=67108864 live=1921 hits=2878596 misses=9090 evictions=7169 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=161 rendered=161 skipped=0 wall_s=5.009 sim_hz=32.14 render_fps=32.14
+[STAGES] window timing=coupled cohort=rendered frames=2772..2932 samples=161 avg_ms core68k_other=4.895 dsp=2.864 sound=2.376 audio_mix=1.635 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.253 direct_decode=0.012 list_decode=2.926 sort=0.575 scene_other=0.008 clip_build_state=2.973 texture_lookup_decode=1.137 texture_upload=0.180 vertex_upload=0.239 submission_other=2.023 draw_call=7.597 swap=0.112 host_wait=0.074 capture=1.204 avg_quads=1420.6 avg_triangles=2083.6 avg_draws=1007.5 misses=259 evictions=109 texture_uploads=259 GPU_end=67016456 GPU_frame_end_peak=67106516
+[PROFILE] window mode=textured frames=2772..2932 samples=161 avg_ms simulation=11.781 scene=3.775 lookup_decode=1.137 uploads=0.180 submission=9.859 swap=0.112 render_other=2.973 pacing=0.007 capture=1.204 vertex_upload=0.239 draw_call=7.597 avg_triangles=2083.6 avg_draws=1007.5 avg_binds=1010.2 avg_skipped_binds=0.0 flushes texture=161988 scissor=307 capacity=0 mutation=0 end=161 same_texture=5692 empty_texture_flush=15043 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=250026.3 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2772..2932 samples=161 hits=228461 misses=259 evictions=109 texture_uploads=259 GPU_end=67016456 GPU_frame_end_peak=67106516
+[RR] frame 2940  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2860/5720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2832 steps 102806436
+[RR] frame 3000  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2920/5840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2892 steps 106559766
+[RR] frame 3060  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/2980/5960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 2952 steps 110313096
+[GLES2] frame=3104 fps=34.30 quads=1267 triangles=2180 draws=1045
+[TEX] decoded=9368 uploads=9368 GPU=66781916 peak=67108860 budget=67108864 live=1985 hits=3102726 misses=9368 evictions=7383 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=172 rendered=172 skipped=0 wall_s=5.014 sim_hz=34.30 render_fps=34.30
+[STAGES] window timing=coupled cohort=rendered frames=2933..3104 samples=172 avg_ms core68k_other=4.953 dsp=3.159 sound=2.208 audio_mix=1.478 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.254 direct_decode=0.013 list_decode=2.761 sort=0.491 scene_other=0.007 clip_build_state=2.666 texture_lookup_decode=1.136 texture_upload=0.240 vertex_upload=0.200 submission_other=1.741 draw_call=6.451 swap=0.110 host_wait=0.071 capture=1.189 avg_quads=1304.7 avg_triangles=1820.1 avg_draws=859.2 misses=278 evictions=214 texture_uploads=278 GPU_end=66781916 GPU_frame_end_peak=67108304
+[PROFILE] window mode=textured frames=2933..3104 samples=172 avg_ms simulation=11.808 scene=3.528 lookup_decode=1.136 uploads=0.240 submission=8.392 swap=0.110 render_other=2.666 pacing=0.007 capture=1.189 vertex_upload=0.200 draw_call=6.451 avg_triangles=1820.1 avg_draws=859.2 avg_binds=861.8 avg_skipped_binds=0.0 flushes texture=147656 scissor=322 capacity=0 mutation=0 end=172 same_texture=10675 empty_texture_flush=19426 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=218414.0 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=2933..3104 samples=172 hits=224130 misses=278 evictions=214 texture_uploads=278 GPU_end=66781916 GPU_frame_end_peak=67108304
+[RR] frame 3120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3040/6080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3012 steps 114066426
+[RR] frame 3180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3100/6200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3072 steps 117819756
+[RR] frame 3240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3160/6320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3132 steps 121573086
+[GLES2] frame=3289 fps=36.94 quads=1089 triangles=1493 draws=706
+[TEX] decoded=9760 uploads=9760 GPU=67068564 peak=67108860 budget=67108864 live=2161 hits=3307549 misses=9760 evictions=7599 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=185 rendered=185 skipped=0 wall_s=5.008 sim_hz=36.94 render_fps=36.94
+[STAGES] window timing=coupled cohort=rendered frames=3105..3289 samples=185 avg_ms core68k_other=4.922 dsp=2.940 sound=2.233 audio_mix=1.495 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.250 direct_decode=0.012 list_decode=2.507 sort=0.394 scene_other=0.007 clip_build_state=2.219 texture_lookup_decode=0.951 texture_upload=0.180 vertex_upload=0.174 submission_other=1.596 draw_call=5.851 swap=0.112 host_wait=0.067 capture=1.132 avg_quads=1109.3 avg_triangles=1604.9 avg_draws=764.1 misses=392 evictions=216 texture_uploads=392 GPU_end=67068564 GPU_frame_end_peak=67107800
+[PROFILE] window mode=textured frames=3105..3289 samples=185 avg_ms simulation=11.601 scene=3.171 lookup_decode=0.951 uploads=0.180 submission=7.622 swap=0.112 render_other=2.219 pacing=0.007 capture=1.132 vertex_upload=0.174 draw_call=5.851 avg_triangles=1604.9 avg_draws=764.1 avg_binds=767.2 avg_skipped_binds=0.0 flushes texture=141029 scissor=314 capacity=0 mutation=0 end=185 same_texture=7189 empty_texture_flush=16034 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=192585.7 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3105..3289 samples=185 hits=204823 misses=392 evictions=216 texture_uploads=392 GPU_end=67068564 GPU_frame_end_peak=67107800
+[RR] frame 3300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3220/6440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3192 steps 125326416
+[RR] frame 3360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3280/6560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3252 steps 129079746
+[RR] frame 3420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3340/6680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3312 steps 133020564
+[GLES2] frame=3466 fps=35.36 quads=1863 triangles=1164 draws=562
+[TEX] decoded=10358 uploads=10358 GPU=66776380 peak=67108860 budget=67108864 live=2079 hits=3575585 misses=10358 evictions=8279 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=177 rendered=177 skipped=0 wall_s=5.006 sim_hz=35.36 render_fps=35.36
+[STAGES] window timing=coupled cohort=rendered frames=3290..3466 samples=177 avg_ms core68k_other=4.993 dsp=3.185 sound=2.333 audio_mix=1.568 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.238 direct_decode=0.012 list_decode=3.167 sort=0.606 scene_other=0.007 clip_build_state=2.831 texture_lookup_decode=1.612 texture_upload=0.435 vertex_upload=0.132 submission_other=1.282 draw_call=4.575 swap=0.113 host_wait=0.072 capture=1.096 avg_quads=1517.7 avg_triangles=1213.0 avg_draws=580.9 misses=598 evictions=680 texture_uploads=598 GPU_end=66776380 GPU_frame_end_peak=67108668
+[PROFILE] window mode=textured frames=3290..3466 samples=177 avg_ms simulation=12.090 scene=4.032 lookup_decode=1.612 uploads=0.435 submission=5.989 swap=0.113 render_other=2.831 pacing=0.007 capture=1.096 vertex_upload=0.132 draw_call=4.575 avg_triangles=1213.0 avg_draws=580.9 avg_binds=585.3 avg_skipped_binds=0.0 flushes texture=102404 scissor=337 capacity=0 mutation=0 end=177 same_texture=6144 empty_texture_flush=18699 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=145557.3 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3290..3466 samples=177 hits=268036 misses=598 evictions=680 texture_uploads=598 GPU_end=66776380 GPU_frame_end_peak=67108668
+[RR] frame 3480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3400/6800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3372 steps 137378022
+[RR] frame 3540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3460/6920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3432 steps 141318840
+[GLES2] frame=3596 fps=25.92 quads=1790 triangles=3059 draws=1468
+[TEX] decoded=10511 uploads=10511 GPU=67099784 peak=67108860 budget=67108864 live=2000 hits=3832146 misses=10511 evictions=8511 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=130 rendered=130 skipped=0 wall_s=5.016 sim_hz=25.92 render_fps=25.92
+[STAGES] window timing=coupled cohort=rendered frames=3467..3596 samples=130 avg_ms core68k_other=5.185 dsp=3.455 sound=2.542 audio_mix=1.704 serial=0.005 board_io=0.006 video_latch=0.001 palette=0.257 direct_decode=0.013 list_decode=4.045 sort=0.892 scene_other=0.008 clip_build_state=4.249 texture_lookup_decode=1.435 texture_upload=0.175 vertex_upload=0.368 submission_other=2.573 draw_call=10.178 swap=0.114 host_wait=0.067 capture=1.300 avg_quads=1974.7 avg_triangles=3169.7 avg_draws=1520.9 misses=153 evictions=232 texture_uploads=153 GPU_end=67099784 GPU_frame_end_peak=67107996
+[PROFILE] window mode=textured frames=3467..3596 samples=130 avg_ms simulation=12.897 scene=5.214 lookup_decode=1.435 uploads=0.175 submission=13.120 swap=0.114 render_other=4.249 pacing=0.007 capture=1.300 vertex_upload=0.368 draw_call=10.178 avg_triangles=3169.7 avg_draws=1520.9 avg_binds=1523.1 avg_skipped_binds=0.0 flushes texture=197786 scissor=189 capacity=0 mutation=0 end=130 same_texture=8137 empty_texture_flush=14742 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=380361.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3467..3596 samples=130 hits=256561 misses=153 evictions=232 texture_uploads=153 GPU_end=67099784 GPU_frame_end_peak=67107996
+[RR] frame 3600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3520/7040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3492 steps 145093002
+[RR] frame 3660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3580/7160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3552 steps 148846332
+[RR] frame 3720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3640/7280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3612 steps 152599662
+[GLES2] frame=3732 fps=27.18 quads=1386 triangles=2291 draws=1089
+[TEX] decoded=10640 uploads=10640 GPU=67072116 peak=67108860 budget=67108864 live=1855 hits=4064556 misses=10640 evictions=8785 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=136 rendered=136 skipped=0 wall_s=5.003 sim_hz=27.18 render_fps=27.18
+[STAGES] window timing=coupled cohort=rendered frames=3597..3732 samples=136 avg_ms core68k_other=5.253 dsp=3.932 sound=2.504 audio_mix=1.603 serial=0.005 board_io=0.006 video_latch=0.001 palette=0.255 direct_decode=0.012 list_decode=3.662 sort=0.719 scene_other=0.007 clip_build_state=3.732 texture_lookup_decode=1.378 texture_upload=0.164 vertex_upload=0.311 submission_other=2.423 draw_call=9.339 swap=0.112 host_wait=0.069 capture=1.286 avg_quads=1709.8 avg_triangles=2824.7 avg_draws=1346.5 misses=129 evictions=274 texture_uploads=129 GPU_end=67072116 GPU_frame_end_peak=67108412
+[PROFILE] window mode=textured frames=3597..3732 samples=136 avg_ms simulation=13.302 scene=4.657 lookup_decode=1.378 uploads=0.164 submission=12.073 swap=0.112 render_other=3.732 pacing=0.007 capture=1.286 vertex_upload=0.311 draw_call=9.339 avg_triangles=2824.7 avg_draws=1346.5 avg_binds=1348.4 avg_skipped_binds=0.0 flushes texture=182965 scissor=272 capacity=0 mutation=0 end=136 same_texture=9293 empty_texture_flush=11095 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=338962.1 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3597..3732 samples=136 hits=232410 misses=129 evictions=274 texture_uploads=129 GPU_end=67072116 GPU_frame_end_peak=67108412
+[RR] frame 3780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3700/7400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3672 steps 156352992
+[RR] frame 3840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3760/7520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3732 steps 160106322
+[SND] TRANSLATED DRIVER: no translation for this address at 00CECC (M/X=0) -- sound stopped
+[SND] cannot execute opcode 0xFFFF at 00CECC -- sound halted
+[SND] sound CPU out of reset (#3), PC=C030
+[GLES2] frame=3900 fps=33.51 quads=1085 triangles=1574 draws=745
+[TEX] decoded=10873 uploads=10873 GPU=67108824 peak=67108860 budget=67108864 live=1475 hits=4272634 misses=10873 evictions=9398 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=168 rendered=168 skipped=0 wall_s=5.014 sim_hz=33.51 render_fps=33.51
+[STAGES] window timing=coupled cohort=rendered frames=3733..3900 samples=168 avg_ms core68k_other=5.110 dsp=3.547 sound=2.176 audio_mix=1.431 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.253 direct_decode=0.012 list_decode=2.760 sort=0.459 scene_other=0.008 clip_build_state=2.664 texture_lookup_decode=1.307 texture_upload=0.234 vertex_upload=0.206 submission_other=1.706 draw_call=6.594 swap=0.109 host_wait=0.073 capture=1.170 avg_quads=1240.0 avg_triangles=1881.5 avg_draws=894.4 misses=233 evictions=613 texture_uploads=233 GPU_end=67108824 GPU_frame_end_peak=67108824
+[PROFILE] window mode=textured frames=3733..3900 samples=168 avg_ms simulation=12.274 scene=3.494 lookup_decode=1.307 uploads=0.234 submission=8.506 swap=0.109 render_other=2.664 pacing=0.007 capture=1.170 vertex_upload=0.206 draw_call=6.594 avg_triangles=1881.5 avg_draws=894.4 avg_binds=896.8 avg_skipped_binds=0.0 flushes texture=150005 scissor=306 capacity=0 mutation=0 end=168 same_texture=7968 empty_texture_flush=16217 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=225777.1 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3733..3900 samples=168 hits=208078 misses=233 evictions=613 texture_uploads=233 GPU_end=67108824 GPU_frame_end_peak=67108824
+[RR] frame 3900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3820/7640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3792 steps 163859652
+[RR] frame 3960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3880/7760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3852 steps 167623398
+[RR] frame 4020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/3940/7880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3912 steps 171460056
+[RR] frame 4080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4000/8000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 3972 steps 175213386
+[GLES2] frame=4118 fps=43.49 quads=1049 triangles=1499 draws=707
+[TEX] decoded=11422 uploads=11422 GPU=67095532 peak=67108860 budget=67108864 live=1664 hits=4517900 misses=11422 evictions=9758 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=218 rendered=218 skipped=0 wall_s=5.013 sim_hz=43.49 render_fps=43.49
+[STAGES] window timing=coupled cohort=rendered frames=3901..4118 samples=218 avg_ms core68k_other=4.983 dsp=2.992 sound=1.170 audio_mix=0.629 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.259 direct_decode=0.013 list_decode=2.529 sort=0.404 scene_other=0.007 clip_build_state=2.178 texture_lookup_decode=1.057 texture_upload=0.269 vertex_upload=0.130 submission_other=1.081 draw_call=4.031 swap=0.110 host_wait=0.073 capture=1.054 avg_quads=1127.6 avg_triangles=1114.4 avg_draws=526.6 misses=549 evictions=360 texture_uploads=549 GPU_end=67095532 GPU_frame_end_peak=67108824
+[PROFILE] window mode=textured frames=3901..4118 samples=218 avg_ms simulation=9.785 scene=3.213 lookup_decode=1.057 uploads=0.269 submission=5.241 swap=0.110 render_other=2.178 pacing=0.007 capture=1.054 vertex_upload=0.130 draw_call=4.031 avg_triangles=1114.4 avg_draws=526.6 avg_binds=530.1 avg_skipped_binds=0.0 flushes texture=114779 scissor=261 capacity=0 mutation=0 end=218 same_texture=9197 empty_texture_flush=18254 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=133722.4 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=3901..4118 samples=218 hits=245266 misses=549 evictions=360 texture_uploads=549 GPU_end=67095532 GPU_frame_end_peak=67108824
+[RR] frame 4140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4060/8120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4032 steps 178966716
+[RR] frame 4200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4120/8240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4092 steps 182720046
+[RR] frame 4260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4180/8360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4152 steps 186473376
+[RR] frame 4320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4240/8480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4212 steps 190226706
+[GLES2] frame=4323 fps=40.84 quads=1348 triangles=2032 draws=982
+[TEX] decoded=11769 uploads=11769 GPU=67006840 peak=67108860 budget=67108864 live=1734 hits=4754051 misses=11769 evictions=10035 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=205 rendered=205 skipped=0 wall_s=5.020 sim_hz=40.84 render_fps=40.84
+[STAGES] window timing=coupled cohort=rendered frames=4119..4323 samples=205 avg_ms core68k_other=4.972 dsp=2.929 sound=1.122 audio_mix=0.512 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.258 direct_decode=0.012 list_decode=2.444 sort=0.416 scene_other=0.007 clip_build_state=2.341 texture_lookup_decode=1.054 texture_upload=0.193 vertex_upload=0.162 submission_other=1.429 draw_call=5.322 swap=0.110 host_wait=0.074 capture=1.103 avg_quads=1153.6 avg_triangles=1469.3 avg_draws=702.0 misses=347 evictions=277 texture_uploads=347 GPU_end=67006840 GPU_frame_end_peak=67108420
+[PROFILE] window mode=textured frames=4119..4323 samples=205 avg_ms simulation=9.545 scene=3.139 lookup_decode=1.054 uploads=0.193 submission=6.912 swap=0.110 render_other=2.341 pacing=0.007 capture=1.103 vertex_upload=0.162 draw_call=5.322 avg_triangles=1469.3 avg_draws=702.0 avg_binds=704.7 avg_skipped_binds=0.0 flushes texture=143533 scissor=351 capacity=0 mutation=0 end=205 same_texture=7199 empty_texture_flush=14533 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=176319.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=4119..4323 samples=205 hits=236151 misses=347 evictions=277 texture_uploads=347 GPU_end=67006840 GPU_frame_end_peak=67108420
+[RR] frame 4380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4300/8600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4272 steps 193980036
+[RR] frame 4440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4360/8720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4332 steps 197733366
+[GLES2] frame=4484 fps=32.20 quads=1459 triangles=1737 draws=834
+[TEX] decoded=12064 uploads=12064 GPU=67104280 peak=67108860 budget=67108864 live=1718 hits=5013468 misses=12064 evictions=10346 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=161 rendered=161 skipped=0 wall_s=5.000 sim_hz=32.20 render_fps=32.20
+[STAGES] window timing=coupled cohort=rendered frames=4324..4484 samples=161 avg_ms core68k_other=5.145 dsp=3.556 sound=1.044 audio_mix=0.462 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.247 direct_decode=0.012 list_decode=3.298 sort=0.678 scene_other=0.007 clip_build_state=3.437 texture_lookup_decode=1.428 texture_upload=0.223 vertex_upload=0.262 submission_other=1.990 draw_call=7.859 swap=0.111 host_wait=0.070 capture=1.202 avg_quads=1613.1 avg_triangles=2366.0 avg_draws=1136.3 misses=295 evictions=311 texture_uploads=295 GPU_end=67104280 GPU_frame_end_peak=67108728
+[PROFILE] window mode=textured frames=4324..4484 samples=161 avg_ms simulation=10.217 scene=4.242 lookup_decode=1.428 uploads=0.223 submission=10.111 swap=0.111 render_other=3.437 pacing=0.007 capture=1.202 vertex_upload=0.262 draw_call=7.859 avg_triangles=2366.0 avg_draws=1136.3 avg_binds=1139.1 avg_skipped_binds=0.0 flushes texture=182714 scissor=298 capacity=0 mutation=0 end=161 same_texture=8463 empty_texture_flush=15358 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=283917.0 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=4324..4484 samples=161 hits=259417 misses=295 evictions=311 texture_uploads=295 GPU_end=67104280 GPU_frame_end_peak=67108728
+[RR] frame 4500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4420/8840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4392 steps 201497112
+[RR] frame 4560  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4480/8960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4452 steps 205333770
+[RR] frame 4620  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4540/9080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4512 steps 209170428
+[RR] frame 4680  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4600/9200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4572 steps 213132078
+[GLES2] frame=4689 fps=40.84 quads=1270 triangles=1581 draws=751
+[TEX] decoded=12624 uploads=12624 GPU=67066208 peak=67108860 budget=67108864 live=1344 hits=5248245 misses=12624 evictions=11280 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=205 rendered=205 skipped=0 wall_s=5.019 sim_hz=40.84 render_fps=40.84
+[STAGES] window timing=coupled cohort=rendered frames=4485..4689 samples=205 avg_ms core68k_other=5.024 dsp=3.599 sound=0.982 audio_mix=0.495 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.268 direct_decode=0.012 list_decode=2.638 sort=0.413 scene_other=0.007 clip_build_state=2.223 texture_lookup_decode=1.626 texture_upload=0.468 vertex_upload=0.135 submission_other=1.122 draw_call=4.186 swap=0.112 host_wait=0.070 capture=1.076 avg_quads=1148.0 avg_triangles=1175.6 avg_draws=555.9 misses=560 evictions=934 texture_uploads=560 GPU_end=67066208 GPU_frame_end_peak=67108484
+[PROFILE] window mode=textured frames=4485..4689 samples=205 avg_ms simulation=10.112 scene=3.339 lookup_decode=1.626 uploads=0.468 submission=5.444 swap=0.112 render_other=2.223 pacing=0.007 capture=1.076 vertex_upload=0.135 draw_call=4.186 avg_triangles=1175.6 avg_draws=555.9 avg_binds=559.6 avg_skipped_binds=0.0 flushes texture=113656 scissor=338 capacity=0 mutation=0 end=205 same_texture=9559 empty_texture_flush=20368 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=141073.2 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=4485..4689 samples=205 hits=234777 misses=560 evictions=934 texture_uploads=560 GPU_end=67066208 GPU_frame_end_peak=67108484
+[RR] frame 4740  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4660/9320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4632 steps 217499952
+[RR] frame 4800  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4720/9440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4692 steps 221690754
+[GLES2] frame=4852 fps=32.57 quads=1593 triangles=2106 draws=994
+[TEX] decoded=13095 uploads=13095 GPU=67048284 peak=67108860 budget=67108864 live=1225 hits=5493383 misses=13095 evictions=11870 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=163 rendered=163 skipped=0 wall_s=5.005 sim_hz=32.57 render_fps=32.57
+[STAGES] window timing=coupled cohort=rendered frames=4690..4852 samples=163 avg_ms core68k_other=4.889 dsp=3.092 sound=0.960 audio_mix=0.450 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.259 direct_decode=0.013 list_decode=3.291 sort=0.646 scene_other=0.008 clip_build_state=3.556 texture_lookup_decode=1.889 texture_upload=0.503 vertex_upload=0.320 submission_other=1.910 draw_call=7.499 swap=0.108 host_wait=0.084 capture=1.203 avg_quads=1506.8 avg_triangles=2245.6 avg_draws=1073.3 misses=471 evictions=590 texture_uploads=471 GPU_end=67048284 GPU_frame_end_peak=67108244
+[PROFILE] window mode=textured frames=4690..4852 samples=163 avg_ms simulation=9.400 scene=4.218 lookup_decode=1.889 uploads=0.503 submission=9.729 swap=0.108 render_other=3.556 pacing=0.008 capture=1.203 vertex_upload=0.320 draw_call=7.499 avg_triangles=2245.6 avg_draws=1073.3 avg_binds=1077.1 avg_skipped_binds=0.0 flushes texture=175248 scissor=247 capacity=0 mutation=0 end=163 same_texture=8286 empty_texture_flush=21650 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=269472.9 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=4690..4852 samples=163 hits=245138 misses=471 evictions=590 texture_uploads=471 GPU_end=67048284 GPU_frame_end_peak=67108244
+[RR] frame 4860  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4780/9560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4752 steps 226069044
+[RR] frame 4920  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4840/9680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4812 steps 230447334
+[RR] frame 4980  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4900/9800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4872 steps 234825624
+[RR] frame 5040  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/4960/9920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4932 steps 239203914
+[GLES2] frame=5041 fps=37.66 quads=1281 triangles=1812 draws=855
+[TEX] decoded=13512 uploads=13512 GPU=67095624 peak=67108860 budget=67108864 live=1015 hits=5748203 misses=13512 evictions=12497 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=189 rendered=189 skipped=0 wall_s=5.019 sim_hz=37.66 render_fps=37.66
+[STAGES] window timing=coupled cohort=rendered frames=4853..5041 samples=189 avg_ms core68k_other=5.069 dsp=3.179 sound=1.056 audio_mix=0.474 serial=0.006 board_io=0.005 video_latch=0.001 palette=0.254 direct_decode=0.013 list_decode=3.112 sort=0.540 scene_other=0.009 clip_build_state=2.852 texture_lookup_decode=1.642 texture_upload=0.462 vertex_upload=0.188 submission_other=1.276 draw_call=5.040 swap=0.112 host_wait=0.082 capture=1.165 avg_quads=1350.5 avg_triangles=1492.7 avg_draws=707.3 misses=417 evictions=627 texture_uploads=417 GPU_end=67095624 GPU_frame_end_peak=67108308
+[PROFILE] window mode=textured frames=4853..5041 samples=189 avg_ms simulation=9.790 scene=3.929 lookup_decode=1.642 uploads=0.462 submission=6.504 swap=0.112 render_other=2.852 pacing=0.007 capture=1.165 vertex_upload=0.188 draw_call=5.040 avg_triangles=1492.7 avg_draws=707.3 avg_binds=710.5 avg_skipped_binds=0.0 flushes texture=133885 scissor=285 capacity=0 mutation=0 end=189 same_texture=10563 empty_texture_flush=28661 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=179123.8 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=4853..5041 samples=189 hits=254820 misses=417 evictions=627 texture_uploads=417 GPU_end=67095624 GPU_frame_end_peak=67108308
+[RR] frame 5100  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5020/10040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 4992 steps 243582204
+[RR] frame 5160  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5080/10160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5052 steps 247960494
+[GLES2] frame=5216 fps=34.92 quads=1469 triangles=2416 draws=1157
+[TEX] decoded=13659 uploads=13659 GPU=66845544 peak=67108860 budget=67108864 live=783 hits=5987381 misses=13659 evictions=12876 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=175 rendered=175 skipped=0 wall_s=5.012 sim_hz=34.92 render_fps=34.92
+[STAGES] window timing=coupled cohort=rendered frames=5042..5216 samples=175 avg_ms core68k_other=4.899 dsp=2.958 sound=1.326 audio_mix=0.730 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.267 direct_decode=0.013 list_decode=3.070 sort=0.575 scene_other=0.008 clip_build_state=3.228 texture_lookup_decode=1.454 texture_upload=0.292 vertex_upload=0.255 submission_other=1.666 draw_call=6.478 swap=0.107 host_wait=0.085 capture=1.205 avg_quads=1367.6 avg_triangles=1947.8 avg_draws=923.1 misses=147 evictions=379 texture_uploads=147 GPU_end=66845544 GPU_frame_end_peak=67107252
+[PROFILE] window mode=textured frames=5042..5216 samples=175 avg_ms simulation=9.923 scene=3.933 lookup_decode=1.454 uploads=0.292 submission=8.399 swap=0.107 render_other=3.228 pacing=0.007 capture=1.205 vertex_upload=0.255 draw_call=6.478 avg_triangles=1947.8 avg_draws=923.1 avg_binds=925.0 avg_skipped_binds=0.0 flushes texture=161831 scissor=206 capacity=0 mutation=0 end=175 same_texture=9162 empty_texture_flush=18595 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=233738.7 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=5042..5216 samples=175 hits=239178 misses=147 evictions=379 texture_uploads=147 GPU_end=66845544 GPU_frame_end_peak=67107252
+[RR] frame 5220  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5140/10280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5112 steps 252338784
+[RR] frame 5280  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5200/10400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5172 steps 256664994
+[RR] frame 5340  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5260/10520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5232 steps 260657892
+[GLES2] frame=5390 fps=34.67 quads=1069 triangles=1586 draws=742
+[TEX] decoded=13738 uploads=13738 GPU=66659340 peak=67108860 budget=67108864 live=768 hits=6216253 misses=13738 evictions=12970 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=174 rendered=174 skipped=0 wall_s=5.018 sim_hz=34.67 render_fps=34.67
+[STAGES] window timing=coupled cohort=rendered frames=5217..5390 samples=174 avg_ms core68k_other=4.892 dsp=2.929 sound=1.560 audio_mix=0.864 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.270 direct_decode=0.012 list_decode=2.828 sort=0.524 scene_other=0.008 clip_build_state=3.221 texture_lookup_decode=1.146 texture_upload=0.173 vertex_upload=0.291 submission_other=1.784 draw_call=6.909 swap=0.107 host_wait=0.092 capture=1.203 avg_quads=1315.8 avg_triangles=2126.1 avg_draws=967.0 misses=79 evictions=94 texture_uploads=79 GPU_end=66659340 GPU_frame_end_peak=67106620
+[PROFILE] window mode=textured frames=5217..5390 samples=174 avg_ms simulation=10.255 scene=3.643 lookup_decode=1.146 uploads=0.173 submission=8.984 swap=0.107 render_other=3.221 pacing=0.009 capture=1.203 vertex_upload=0.291 draw_call=6.909 avg_triangles=2126.1 avg_draws=967.0 avg_binds=968.4 avg_skipped_binds=0.0 flushes texture=168067 scissor=275 capacity=0 mutation=0 end=174 same_texture=16201 empty_texture_flush=10149 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=255131.7 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=5217..5390 samples=174 hits=228872 misses=79 evictions=94 texture_uploads=79 GPU_end=66659340 GPU_frame_end_peak=67106620
+[RR] frame 5400  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5320/10640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5292 steps 264411222
+[RR] frame 5460  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5380/10760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5352 steps 268174968
+[RR] frame 5520  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5440/10880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5412 steps 272553258
+[GLES2] frame=5565 fps=34.99 quads=1457 triangles=2558 draws=1195
+[TEX] decoded=14242 uploads=14242 GPU=67104532 peak=67108860 budget=67108864 live=1100 hits=6426499 misses=14242 evictions=13142 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=175 rendered=175 skipped=0 wall_s=5.001 sim_hz=34.99 render_fps=34.99
+[STAGES] window timing=coupled cohort=rendered frames=5391..5565 samples=175 avg_ms core68k_other=4.893 dsp=2.883 sound=1.510 audio_mix=0.809 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.253 direct_decode=0.012 list_decode=2.597 sort=0.459 scene_other=0.007 clip_build_state=2.791 texture_lookup_decode=1.399 texture_upload=0.421 vertex_upload=0.250 submission_other=1.887 draw_call=6.973 swap=0.107 host_wait=0.084 capture=1.215 avg_quads=1204.3 avg_triangles=1978.2 avg_draws=929.0 misses=504 evictions=172 texture_uploads=504 GPU_end=67104532 GPU_frame_end_peak=67105080
+[PROFILE] window mode=textured frames=5391..5565 samples=175 avg_ms simulation=10.104 scene=3.329 lookup_decode=1.399 uploads=0.421 submission=9.110 swap=0.107 render_other=2.791 pacing=0.007 capture=1.215 vertex_upload=0.250 draw_call=6.973 avg_triangles=1978.2 avg_draws=929.0 avg_binds=932.9 avg_skipped_binds=0.0 flushes texture=162413 scissor=295 capacity=0 mutation=0 end=175 same_texture=9724 empty_texture_flush=9600 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=237381.3 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=5391..5565 samples=175 hits=210246 misses=504 evictions=172 texture_uploads=504 GPU_end=67104532 GPU_frame_end_peak=67105080
+[RR] frame 5580  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5500/11000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5472 steps 276931548
+[RR] frame 5640  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5560/11120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5532 steps 281309838
+[RR] frame 5700  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5620/11240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5592 steps 285646464
+[GLES2] frame=5734 fps=33.73 quads=1505 triangles=1521 draws=745
+[TEX] decoded=14446 uploads=14446 GPU=67037704 peak=67108860 budget=67108864 live=1182 hits=6680756 misses=14446 evictions=13264 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=169 rendered=169 skipped=0 wall_s=5.011 sim_hz=33.73 render_fps=33.73
+[STAGES] window timing=coupled cohort=rendered frames=5566..5734 samples=169 avg_ms core68k_other=5.005 dsp=2.900 sound=1.533 audio_mix=0.865 serial=0.005 board_io=0.006 video_latch=0.001 palette=0.257 direct_decode=0.012 list_decode=3.232 sort=0.660 scene_other=0.009 clip_build_state=3.196 texture_lookup_decode=1.407 texture_upload=0.245 vertex_upload=0.236 submission_other=1.821 draw_call=6.865 swap=0.110 host_wait=0.075 capture=1.195 avg_quads=1505.7 avg_triangles=1957.5 avg_draws=933.6 misses=204 evictions=122 texture_uploads=204 GPU_end=67037704 GPU_frame_end_peak=67105604
+[PROFILE] window mode=textured frames=5566..5734 samples=169 avg_ms simulation=10.313 scene=4.171 lookup_decode=1.407 uploads=0.245 submission=8.922 swap=0.110 render_other=3.196 pacing=0.007 capture=1.195 vertex_upload=0.236 draw_call=6.865 avg_triangles=1957.5 avg_draws=933.6 avg_binds=935.8 avg_skipped_binds=0.0 flushes texture=157603 scissor=294 capacity=0 mutation=0 end=169 same_texture=8453 empty_texture_flush=17085 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=234904.6 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=5566..5734 samples=169 hits=254257 misses=204 evictions=122 texture_uploads=204 GPU_end=67037704 GPU_frame_end_peak=67105604
+[RR] frame 5760  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5680/11360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5652 steps 289493538
+[RR] frame 5820  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5740/11480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5712 steps 293371860
+[RR] frame 5880  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5800/11600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5772 steps 297125190
+[RR] frame 5940  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5860/11720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5832 steps 301232664
+[GLES2] frame=5942 fps=41.55 quads=1375 triangles=523 draws=240
+[TEX] decoded=14747 uploads=14747 GPU=67106016 peak=67108860 budget=67108864 live=1352 hits=6997335 misses=14747 evictions=13395 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=208 rendered=208 skipped=0 wall_s=5.006 sim_hz=41.55 render_fps=41.55
+[STAGES] window timing=coupled cohort=rendered frames=5735..5942 samples=208 avg_ms core68k_other=4.937 dsp=2.791 sound=1.503 audio_mix=0.792 serial=0.005 board_io=0.006 video_latch=0.001 palette=0.256 direct_decode=0.013 list_decode=3.150 sort=0.617 scene_other=0.008 clip_build_state=2.796 texture_lookup_decode=1.320 texture_upload=0.224 vertex_upload=0.120 submission_other=0.872 draw_call=3.418 swap=0.110 host_wait=0.072 capture=1.042 avg_quads=1523.5 avg_triangles=988.3 avg_draws=473.6 misses=301 evictions=131 texture_uploads=301 GPU_end=67106016 GPU_frame_end_peak=67106344
+[PROFILE] window mode=textured frames=5735..5942 samples=208 avg_ms simulation=10.034 scene=4.044 lookup_decode=1.320 uploads=0.224 submission=4.409 swap=0.110 render_other=2.796 pacing=0.007 capture=1.042 vertex_upload=0.120 draw_call=3.418 avg_triangles=988.3 avg_draws=473.6 avg_binds=476.1 avg_skipped_binds=0.0 flushes texture=98011 scissor=354 capacity=0 mutation=0 end=208 same_texture=6832 empty_texture_flush=22559 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=118597.5 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=5735..5942 samples=208 hits=316579 misses=301 evictions=131 texture_uploads=301 GPU_end=67106016 GPU_frame_end_peak=67106344
+[RR] frame 6000  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/5920/11840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 5892 steps 305610954
+{"schema":1,"frames":6006,"slices":96096,"instructions_68k":499612436,"last_instruction_pc":"00026c5c","sr":"2000","d":["00003c59","000002f4","000002d6","fe5f0411","00005924","0000ffff","00000000","00000001"],"a":["100096ee","00029038","00029070","000290a8","1000d834","0006c400","10008000","10000800"],"fnv1a32":{"register_bytes":"4e918ad7","wram":"8cbbe8c9","shared":"ab1f2a85","poly_be":"9c171bcf","text":"76a6f961","palette":"3725e78c","eeprom":"6d859b6e"},"traps":0,"unmapped":0,"romwrites":0,"irqs":[0,0,0,0,5926,11852,0],"dsp_steps":306048783,"sound_cycles":576218693,"dsp_fault":false,"sound_fault":false}
+[C352] inactive_fastpath=on counters=off
+[AUDIO-CHECK] from=1 samples=8555269 intervals=96096 pcm_fnv1a64=0c24e8fca4b6400e voice_fnv1a64=b76f90445ba87e18 final_fnv1a64=0a901571d869608d acc=852544
+[AUDIO-OUTPUT] underrun_samples=2927303 overrun_samples=0 latency_resets=0 queued_frames=41
+[BOARD-STATE] fnv1a32=f9154a83
+[MEM-READER] implementation=split
+[MEM-READS] fast=on counters=off
+[SIM-RATE] from=1 steps=6006 rendered=6006 skipped=0 wall_s=161.782633 sim_hz=37.123886 render_fps=37.123886
+[SIM] ticks=6006 from=1 overflow=0 reconciliation_max_us=0.000000
+[SIM-STAGE] name=translated68k_inclusive_memory n=6006 avg_ms=4.396814 median_ms=4.512215 p95_ms=5.111897 max_ms=45.364392 percent=42.159
+[SIM-STAGE] name=scheduler n=6006 avg_ms=0.073938 median_ms=0.061292 p95_ms=0.091038 max_ms=3.510134 percent=0.709
+[SIM-STAGE] name=dsp_inclusive_pdp n=6006 avg_ms=2.870037 median_ms=2.933662 p95_ms=3.776959 max_ms=58.046453 percent=27.519
+[SIM-STAGE] name=sound_inclusive_bus n=6006 avg_ms=1.694304 median_ms=1.684928 p95_ms=2.741793 max_ms=5.018402 percent=16.246
+[SIM-STAGE] name=c352_mix n=6006 avg_ms=1.100680 median_ms=1.041038 p95_ms=1.916705 max_ms=2.960159 percent=10.554
+[SIM-STAGE] name=serial n=6006 avg_ms=0.005373 median_ms=0.005083 p95_ms=0.006958 max_ms=0.099580 percent=0.052
+[SIM-STAGE] name=board_io n=6006 avg_ms=0.004640 median_ms=0.004458 p95_ms=0.005750 max_ms=0.135453 percent=0.044
+[SIM-STAGE] name=irq_inclusive_handlers n=6006 avg_ms=0.283350 median_ms=0.272779 p95_ms=0.367067 max_ms=13.164327 percent=2.717
+[SIM-STAGE] name=simulation_wall n=6006 avg_ms=10.429135 median_ms=10.335770 p95_ms=13.081001 max_ms=70.195743 percent=100.000
+[SIM-STAGE] name=simulation_thread_cpu n=6006 avg_ms=10.245627 median_ms=10.188833 p95_ms=12.942666 max_ms=21.555959 percent=98.240
+[STAGES-RATE] window-final timing=coupled steps=64 rendered=64 skipped=0 wall_s=1.380 sim_hz=46.36 render_fps=46.36
+[STAGES] window-final timing=coupled cohort=rendered frames=5943..6006 samples=64 avg_ms core68k_other=4.879 dsp=2.841 sound=1.377 audio_mix=0.755 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.249 direct_decode=0.012 list_decode=2.882 sort=0.512 scene_other=0.007 clip_build_state=2.392 texture_lookup_decode=1.152 texture_upload=0.244 vertex_upload=0.086 submission_other=0.624 draw_call=2.382 swap=0.108 host_wait=0.073 capture=0.967 avg_quads=1330.6 avg_triangles=643.3 avg_draws=296.3 misses=113 evictions=37 texture_uploads=113 GPU_end=66824012 GPU_frame_end_peak=67107280
+[STAGES-RATE] total timing=coupled steps=6006 rendered=6006 skipped=0 wall_s=161.790 sim_hz=37.12 render_fps=37.12
+[STAGES] total timing=coupled cohort=rendered frames=1..6006 samples=6006 avg_ms core68k_other=4.766 dsp=2.867 sound=1.691 audio_mix=1.098 serial=0.005 board_io=0.005 video_latch=0.001 palette=0.256 direct_decode=0.012 list_decode=2.538 sort=0.481 scene_other=0.007 clip_build_state=2.522 texture_lookup_decode=1.248 texture_upload=0.328 vertex_upload=0.198 submission_other=1.433 draw_call=5.537 swap=0.306 host_wait=0.610 capture=1.012 avg_quads=1181.8 avg_triangles=1618.7 avg_draws=765.3 misses=14860 evictions=13432 texture_uploads=14860 GPU_end=66824012 GPU_frame_end_peak=67108824
+[TIMING] total mode=coupled steps=6006 renders=6006 skipped=0 sim_hz=37.12 render_fps=37.12 window_sim_hz=37.12 window_render_fps=37.12 lag_ms=0.000 max_lag_ms=0.000 discarded_lag_ms=0.000 resyncs=0 avg_sim_ms=10.434 avg_scene_ms=3.295
+[GEOMETRY] skip=off effective=off test_present_every=0 ticks=6006 walks=5910 direct_consumed=48624 digest=5201027135af15fb
+[GEOMETRY-RATE] from=1 resyncs=0 discarded_lag_ms=0.000
+[PROFILE] window-final mode=textured frames=5943..6006 samples=64 avg_ms simulation=9.862 scene=3.664 lookup_decode=1.152 uploads=0.244 submission=3.092 swap=0.108 render_other=2.392 pacing=0.006 capture=0.967 vertex_upload=0.086 draw_call=2.382 avg_triangles=643.3 avg_draws=296.3 avg_binds=299.1 avg_skipped_binds=0.0 flushes texture=18807 scissor=103 capacity=0 mutation=0 end=64 same_texture=2190 empty_texture_flush=1833 vbo=frame avg_vertex_uploads=1.00 avg_vertex_bytes=77201.2 texture_barriers=0
+[PROFILE-CACHE] window-final mode=textured frames=5943..6006 samples=64 hits=85042 misses=113 evictions=37 texture_uploads=113 GPU_end=66824012 GPU_frame_end_peak=67107280
+[PROFILE] total mode=textured frames=1..6006 samples=6006 avg_ms simulation=10.434 scene=3.295 lookup_decode=1.248 uploads=0.328 submission=7.168 swap=0.306 render_other=2.522 pacing=0.546 capture=1.012 vertex_upload=0.198 draw_call=5.537 avg_triangles=1618.7 avg_draws=765.3 avg_binds=768.8 avg_skipped_binds=0.0 flushes texture=4591672 scissor=7600 capacity=0 mutation=0 end=5898 same_texture=288068 empty_texture_flush=480778 vbo=frame avg_vertex_uploads=0.98 avg_vertex_bytes=194248.5 texture_barriers=0
+[PROFILE-CACHE] total mode=textured frames=1..6006 samples=6006 hits=7082377 misses=14860 evictions=13432 texture_uploads=14860 GPU_end=66824012 GPU_frame_end_peak=67108824
+[VIDEO] presentations=6006 full_layer_uploads=0
+[VIDEO-PROFILE] samples=6006 decode_samples=6006 avg_ms decode_cpu=0.029357 upload_cpu=0.647136 upload_wall=0.658879 composition_cpu=0.299786 composition_wall=0.304058
+[GPU-HUD] pictures=6006 verified=0 bytes=608937728 calls=5679 profile_bytes=608937728 profile_calls=5679
+[GPU-HUD-TRANSFER] scope=profile glyph_bytes=174080 vertex_bytes=607968000 palette_bytes=11264 lut_bytes=784384
+[TEX] decoded=14860 uploads=14860 GPU=66824012 peak=67108860 budget=67108864 live=1428 hits=7082377 misses=14860 evictions=13432 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[RR] stop at frame 6006, 0 traps
+[REPLAY] completed_frames=6006 status=ok

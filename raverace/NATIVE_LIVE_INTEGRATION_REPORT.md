@@ -1,4 +1,227 @@
-# Controlled Milestone 4A live integration — host replay coverage complete
+# Controlled Milestone 4A live integration — hardware validation complete, real-time gate failed
+
+## Controlled H700 4A validation — COMPLETE / STOPPED (2026-10-15)
+
+**Full H700 replay determinism passes; real-time gameplay/audio acceptance fails.**
+The isolated prototype completes all 6006 ticks with original simulation, board and
+PCM/voice checkpoints. It does not achieve59.904 FPS. M3 remains performance-BLOCKED;
+its existing <=12 ms median/<=14 ms p95 acceptance is not waived or retrospectively
+passed. No4B work, speculative optimisation, production deployment, commit or push.
+
+### Complete replay, visuals and controls
+
+- Exact prepared ARM binary and validated expanded assets were staged under
+  `/userdata/system/rave-racer-native-live-4a-20261015`, with every bundle hash
+  verified. Production executable/launcher/settings/saves/replays were not targets.
+- Exact prepared-build clean capture run:6006 ticks,4207 native pictures1800–6006,
+  **5,699,037 native source commands**, exit0/zero traps. All **21 authoritative
+  checkpoint sets (63 domain records)** match CPU/register/RAM, board/video and
+  original raw PCM/C352 voice state through 6006. Both telemetry replays and both
+  production-copy baselines also match all 21 sets. The original3840-picture M3
+  window's5,152,196-command byte parity remains the prior validated host evidence;
+  hardware timing did not introduce command-file dump I/O.
+- All18 sampled H700 world/HUD pairs pass the independent original byte palette/
+  shadow/LUT CPU compositor oracle exactly. Host-versus-Mali rasterization differs:
+  none of36 world/composed readbacks is byte-identical; composed mean RGB error
+  ranges0.00675–0.16608/255, sparse maximum errors up to255. Reviewed difficult/new
+  scenes1965,3600,5655,5889 show no conspicuous missing geometry, mirror, priority
+  or HUD corruption. This is sampled fidelity, not an all-frame pixel proof.
+- The user observed good visuals with slow movement and garbled/stuttering audio
+  in the initial prefix, and **no perceived control delay** in a separate interactive
+  boot/menu check. That session was bounded to1500 ticks, before native activation.
+  Controller mapping/detection and raw input events are logged. It cannot establish
+  native race input responsiveness or general interactive playability. Boot/menus
+  remain legacy-rendered and1800 remains a diagnostic activation tick, not a state
+  detector. The broader coverage/residency risks in the host phase below remain.
+
+### Low-overhead performance, every sample retained
+
+Primary result is the second no-capture replay (`timing-repeat`), exit0. Same
+original serial/coupled policy, audio on, no screenshot readbacks, command dumps,
+component fences, concurrent archival or bulk transfer.6006 presentation records
+and6006 existing simulation-profiler records are retained;4207 native completion
+records cover the full native phase, including the first native picture. All
+medians are standard; p95/p99 are nearest-rank. Times below are milliseconds.
+
+| Native phase metric (4207 samples) | Median | p95 | p99 | Worst | >16.693 ms |
+|---|---:|---:|---:|---:|---:|
+| Original simulation | 10.432 | 13.198 | 15.483 | 19.056 | 16 |
+| Original 68K core component | 4.294 | 5.081 | 6.841 | 12.107 | 0 |
+| Original DSP component | 2.822 | 3.799 | 6.026 | 8.118 | 0 |
+| Original sound CPU/bus component | 1.724 | 2.709 | 3.519 | 9.453 | 0 |
+| Original C352 audio mixing component | 1.054 | 1.786 | 2.263 | 4.945 | 0 |
+| Live scene walk | 3.293 | 4.278 | 4.864 | 7.080 | 0 |
+| Live command compilation | 7.277 | 9.720 | 11.026 | 12.490 | 0 |
+| Complete scene preparation | 10.611 | 13.961 | 15.627 | 18.182 | 5 |
+| World submission | 1.472 | 2.556 | 3.184 | 5.511 | 0 |
+| HUD submission | 0.846 | 1.076 | 1.274 | 4.244 | 0 |
+| Final GPU/driver fence wait | 7.536 | 8.741 | 9.231 | 20.675 | 1 |
+| World plus HUD completion | 10.187 | 12.071 | 13.441 | 24.458 | 1 |
+| Renderer thread CPU time | 2.669 | 3.797 | 4.381 | 6.256 | 0 |
+| SDL swap | 0.054 | 0.065 | 0.109 | 15.043 | 0 |
+| Actual presentation interval | 31.601 | 38.636 | 41.615 | 49.866 | 4207 |
+
+The four original device/core component rows are portions of simulation, not
+additional stages to add to its total.
+
+Completion uses the existing single final `glFinish`. Fence wait is CPU waiting for
+GPU/driver completion, **not isolated GPU execution time**. World and HUD submission
+can overlap GPU work; they are not separate GPU-duration measurements. Swap-return
+intervals are presentation-call observations, not DRM scanout/photon timestamps.
+GPU completion excludes original simulation and live command generation; complete
+frame intervals include them. There is no across-frame simulation/GPU overlap in
+this serial bridge. The legacy PROFILE banner says “no glFinish”; that banner is
+inaccurate for the native branch. Native FRAME/LIVE records describe the real fence. Legacy PROFILE cache/quads
+counters are placeholders in the native branch (including misleading GPU_end=0);
+use native source counts, actual retained-cache report and kernel Mali counters.
+
+The repeated native phase averages **31.45 presented FPS**; all 4207 frame intervals miss16.693 ms. Simulation+scene preparation together have median21.034 ms/p95 26.485 ms and exceed the entire deadline on4206/4207 pictures **before rendering**. Thus renderer-only improvements cannot by themselves resolve this serial CPU budget. Command compilation is a measured7.277 ms median/9.720 ms p95 stage, not an inferred tiny overhead. Its internal causes require separate profiling; no rewrite was attempted. Dense/protected draw work remains, but is not the sole live bottleneck.
+
+The first no-capture run (`timing`) gives a close repeat: world+HUD median/p95/
+p99/worst10.182/12.086/13.445/23.884 ms, two renderer misses(ticks1800,3482);
+presentation31.578/38.361/41.947/55.202 ms,4207 misses. The repeat has one renderer
+miss, tick 1800 (cold native24.458 ms); it is retained. These live renderer-only
+median/p95 values meet12/14 **in this live scheduling context**; they do not rerun
+or retrospectively pass the historically failed offline M3 benchmark, and do not
+satisfy complete real-time gameplay. M3 status remains unchanged.
+
+The first telemetry replay returned2 only after gameplay completed: cleanup called
+the logger twice and its second exclusive-create failed. All6006 timing/simulation
+rows,4207 native samples and21 checkpoint sets had already been written. An
+idempotent private flush guard fixed that instrumentation bug; the repeat exits0.
+The original prepared binary and shared simulation/rendering code were unchanged.
+All failed and successful runs remain in the evidence, including every slow frame.
+
+### Production-copy comparison
+
+`baseline-clean` uses the exact copied production binary and the same serial,
+coupled, audio-on replay policy, without unrelated archival/bulk transfer. It is
+**not the normal production launcher's threaded/independent configuration**; no
+claim is made about normal production FPS or sound quality. Baseline has no matched
+native final GPU fence; compare completed replay-tick intervals, not GPU completion.
+Both rows below use the same completed-tick endpoints for ticks1800–6006.
+
+| Completed tick interval | Median | p95 | p99 | Worst | >16.693 ms |
+|---|---:|---:|---:|---:|---:|
+| Production copy, serial diagnostic | 28.385 | 37.268 | 41.238 | 85.776 | 4207 |
+| Native prototype, serial diagnostic | 31.609 | 38.651 | 41.571 | 49.873 | 4207 |
+
+The prototype is slower on the complete serial pipeline despite its lower renderer
+cost. All6006 ticks are retained too: prototype completed-tick intervals median/
+p95/p99/worst30.777/40.390/43.907/190.227 ms (5460/6005 misses); clean baseline
+27.360/39.658/43.381/173.255 ms (5455/6005 misses). Boot and transition outliers are
+not hidden. The earlier baseline overlapped archival of old RAM files and has a
+5684 ms worst stall; it is retained as a confounded run and not used to claim an
+improvement. There is no arbitrary warm-up/sample exclusion.
+
+### Memory and startup
+
+The unchanged native static figure is **482,760,448 bytes (460.396 MiB)**, within the
+existing512 MiB ceiling. It excludes retained legacy textures (~66,001,964 requested
+bytes at exit), native dynamic buffers229,376 bytes, requested HUD allocations
+3,336,192 bytes (Mali chose depth24), lookup4,517,232 CPU bytes, other legacy buffers,
+source ROMs, simulation, staging and driver allocations. Requested application
+figures do not account for all driver/page/heap costs.
+
+| Observed run | Peak RSS (KiB) | Peak VmHWM (KiB) | Peak Mali bytes | Minimum MemAvailable (KiB) |
+|---|---:|---:|---:|---:|
+| Capture | 744612 | 744644 | 617852928 | 124796 |
+| Timing | 744644 | 745024 | 617582592 | 122564 |
+| Timing repeat | 743952 | 743952 | 617582592 | 117240 |
+| Clean production copy | 277632 | 278196 | 152190976 | 577716 |
+
+RSS includes mapped Mali backing on this unified-memory device: **do not add RSS
+and GPU values**. Full-live GPU allocation is about589 MiB and process peak about
+727 MiB, substantially above the native-only figure.1Hz polling can miss shorter
+peaks; VmHWM and kernelOOM evidence are retained. Native requested-resource ceiling
+passes; whole-process512 MiB compliance is neither claimed nor achieved.
+
+Capture-run memory was already high before native activation: legacy phase peak
+616,443,904 Mali bytes/739,448 KiB RSS, versus617,852,928/744,612 during native.
+Across the native phase, first/last sampled GPU allocations617,721,856→617,852,928
+bytes are approximately flat. This is stability over one replay, not a long-session
+leak proof. The repeat's minimum available memory117,240 KiB (~114.5 MiB) and low
+CMA headroom leave limited tolerance for other applications or staging.
+
+The first exact prepared-build run was killed by kernelOOM after logged tick 300,
+before native activation: kernelRSS612,360 KiB, sampled Mali543,862,784 bytes.
+A shell sampler's16 KiB fork-stack allocation triggered the OOM decision; the system
+had4528 KiB free,764 KiB free CMA, no swap and unreclaimable memory. Only the simulation
+record300 survived buffered I/O; it matches, but board/audio triplet and timing
+buffers did not survive SIGKILL. No complete checkpoint or distribution is claimed
+for that failed run. All retained kernel/memory logs remain available.
+
+Approximately192 MiB of **pre-existing M2 diagnostic files** occupied RAM-backed/tmp.
+Nine enumerated trees were copied into persistent diagnostic storage, SHA256-verified,
+then their RAM copies removed. No save/config/replay was removed. A persistent C
+sampler replaced repeated shell forks. Both environmental changes are disclosed;
+no renderer residency, ceiling, swap, clock/governor or gameplay optimisation was
+made. The same prepared executable then completed the entire replay. Old diagnostic
+files remain recoverable under `stale-m2-tmp-archive` with manifests/verification logs.
+
+Native preload was36.949s in the failed memory-pressure run,24.456s in the clean
+capture run and24.957s in the repeat. Startup precedes tick1; it is reported separately
+from frame distributions, not erased. The native first-frame and legacy→native
+transition are included in timing. SSH connectivity intermittently stalled; local
+logging and auto-restoration continued, including after an SSH client timeout.
+
+### Audio, controls, integrity and remaining work
+
+The repeat has **3,596,071 underrun samples**, zero overruns/resets and an empty
+output queue at its last timing sample. The first timing run has3,602,645 underruns;
+clean serial baseline2,927,303, zero overruns/resets. ALSA output48kHz stereo with
+512-sample buffer opened successfully. The CPU audio stages and raw output hashes
+are unchanged, but insufficient wall-clock progress starves audible playback.
+User-observed garbled/stuttering audio supports that failure; deterministic PCM
+hashes do not certify real-time sound or original wall-clock simulation speed.
+
+The input check is limited to original boot/menu handling before native 1800.
+The user reports no delay. There is no instrumented input-to-photon latency measure,
+full interactive native race, alternative-track validation, display scanout proof,
+or original real-time pacing acceptance. General coverage still fails explicitly
+for unseen point-RAM/solid/missing recipes. This is not production-ready playability.
+
+Final checks pass: **all 47 protected file SHA256 values are unchanged**, including
+production executable/launcher, controller configuration, HUD/replay settings,
+ROM/EEPROM source files and all six original replay files. EmulationStation is
+running, no diagnostic game remains, HUD mode isdefault and replay modeoff.
+The interactive session exits0 at1500/zero traps,0 native pictures;4 button events
+(SELECT/south) and95 axis events were recorded. The user reports no control delay.
+No shared engine/game sources were edited. No commit, push or production deployment.
+
+- [x] Isolated H700 transfer and hash validation.
+- [x] Complete6006-tick H700 replay and all 21 authoritative checkpoint sets.
+- [x] Sampled hardware visual/HUD fidelity and disclosed raster differences.
+- [x] Full timing distributions, every available sample, memory and audio diagnostics.
+- [x] Bounded original boot/menu controller test and physical feedback.
+- [x] EmulationStation restored and production integrity verified; STOPPED.
+- [ ] Consistent59.904 FPS, original real-time pacing and smooth audible playback.
+- [ ] Interactive native race controls, unseen states and general game coverage.
+- [ ] M3 performance acceptance (remains BLOCKED; not waived or retrospectively passed).
+
+
+Recommended next work, **only with separate authorisation**:
+1. Profile the live walk/command-compilation stages internally; the aggregate CPU
+   cost already exceeds the available frame budget before GPU completion.
+2. Design a safe immutable scene handoff if pursuing cross-frame CPU/GPU overlap;
+   preserve every original tick, authoritative state, audio and event ordering.
+3. Define a whole-live memory budget, release/partition retained boot residency and
+   validate bounded state/track working sets without increasing the static ceiling.
+4. Retest real-time audio, native interactive controls and actual presentation only
+   after the measured complete-pipeline deficit is addressed. No audio/physics/timing
+   shortcut, speculative GPU rewrite or production replacement is justified here.
+
+Evidence: [hardware validation](benchmarks/native-live-h700-20261015/), including
+raw FRAME/LIVE logs,6006-row telemetry/simulation CSVs, all deadline flags, checkpoint
+files,1Hz memory traces, kernel logs, initial failure and comparison runs.
+Review images (host left/H700 right) persist under
+`raverace/native/generated/milestone4a-hardware/results/validation-clean/review/`.
+Prototype/build scripts and exact measurement limits are in the evidence README.
+**STOP. M3 remains performance-blocked; no Milestone 4B begins.**
+
+
+## Prior host-only coverage phase (historical; diagnostic transfer subsequently authorised)
+
 
 ## Focused 4A asset-coverage continuation — COMPLETE / STOPPED (2026-10-15)
 
@@ -30,7 +253,7 @@ commit, push, transfer, handheld run or deployment occurred.
   remains explicit for ticks1–1799, with native rendering on ticks1800–6006.
 - [x] Host prototype completed **6006 ticks**, **4207 native pictures** and
   **5,699,037 native-window source commands**, exit0, zero traps. All **21 complete
-  authoritative checkpoint sets through6006** match CPU/RAM, board/video RAM,
+  authoritative checkpoint sets through 6006** match CPU/RAM, board/video RAM,
   raw PCM and C352 voice hashes. Audible output was off; original mixing and PCM
   checkpoint generation remained active. This does not validate physical audio.
 - [x] Original **3840 ticks1800–5639 / 5,152,196 commands** retain byte-identical
@@ -42,7 +265,7 @@ commit, push, transfer, handheld run or deployment occurred.
   rasterization is **not pixel-identical**: composed changed RGB pixels2.96–23.11%,
   mean absolute RGB error0.278–1.600/255, maxima248–255. These aggregate differences
   are disclosed, not waived or called exact fidelity. The independent original
-  palette/shadow/LUT CPU oracle matches **every pixel in all18 native captures**.
+  palette/shadow/LUT CPU oracle matches **every pixel in all 18 native captures**.
   Final subjective approval of original-versus-native appearance remains open.
 - [x] Isolated ARM64 prototype built locally for review, **not transferred or run**.
 - [x] Coverage risks, bounded residency proposal and reproduction documented.
@@ -58,7 +281,7 @@ especially `assets-validation.json`, `reproduced-validation.json`,
 
 The audited replay is one deterministic input path. Boot/title/attract/selection
 states use the original renderer; their absent native assets are inventoried, not
-silently dropped. The activation tick1800 remains a diagnostic boundary, unsuitable
+silently dropped. The activation tick 1800 remains a diagnostic boundary, unsuitable
 as a general interactive state detector. Other tracks, reverse/alternate routes,
 car selections, traffic combinations, race results, continues and arbitrary palette
 changes have not been exhaustively sampled. ROM-authenticated geometry does not

@@ -1,0 +1,526 @@
+[44236.765424] fb30  2b3bfb70 ffffffc0 00b04814 ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44236.765455] fb50  09fbb000 ffffff80 2b3bfc9f ffffffc0 00000000 00000000 00000000 00000000
+[44236.765486] fb70  2b3bfbb0 ffffffc0 00b246bc ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44236.765517] fb90  09fbb000 ffffff80 2b3bfc9f ffffffc0 01200020 84000c00 000409aa 00000000
+[44236.765553] 
+               X14: 0xffffffc03e8ea980:
+[44236.765556] a980  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765587] a9a0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765617] a9c0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765647] a9e0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765677] aa00  00000010 00000000 ffffffff ffffffff 41161000 00000000 00000002 00000000
+[44236.765708] aa20  00000000 00000000 3e8f8000 ffffffc0 00000002 00200040 00000000 00000000
+[44236.765739] aa40  00000000 00000000 00000000 00000002 00000027 00000000 004309e0 00000001
+[44236.765769] aa60  3e89d400 ffffffc0 00000002 00000001 00000078 00000078 00000078 00000000
+[44236.765804] 
+               X26: 0xffffffc03c8a6980:
+[44236.765807] 6980  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765839] 69a0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765869] 69c0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765900] 69e0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765930] 6a00  00000006 00000006 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.765960] 6a20  00000000 00000000 00000003 00000003 00000125 e2bf6eb0 00014c00 0000000b
+[44236.765991] 6a40  646e6f50 736f7265 00355f61 00000000 00000000 00000000 00000000 00000000
+[44236.766021] 6a60  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44236.766053] 
+               X29: 0xffffffc02b3bfab0:
+[44236.766057] fab0  00000001 00000000 00000000 00000000 00000000 00000000 00b92050 ffffff80
+[44236.766087] fad0  3c8a6a00 ffffffc0 00b92138 ffffff80 00000000 00000000 2b3bfb30 ffffffc0
+[44236.766118] faf0  00b0168c ffffff80 2b3bfb30 ffffffc0 00b0168c ffffff80 80400145 00000000
+[44236.766148] fb10  00000400 00000000 00000001 00000000 ffffffff ffffffff 3ff26358 ffffffc0
+[44236.766179] fb30  2b3bfb70 ffffffc0 00b04814 ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44236.766210] fb50  09fbb000 ffffff80 2b3bfc9f ffffffc0 00000000 00000000 00000000 00000000
+[44236.766240] fb70  2b3bfbb0 ffffffc0 00b246bc ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44236.766271] fb90  09fbb000 ffffff80 2b3bfc9f ffffffc0 01200020 84000c00 000409aa 00000000
+
+[44236.766308] ---[ end trace a6c5df977fe855d5 ]---
+[44236.766313] Call trace:
+[44236.766319] Exception stack(0xffffffc02b3bf920 to 0xffffffc02b3bfa50)
+[44236.766326] f920: 0000000000000000 0000007fffffffff 0000000041161000 ffffff8000b0168c
+[44236.766333] f940: 0000000080400145 000000000000003d ffffff8000b92050 ffffffc03c8a6a00
+[44236.766339] f960: ffffff8000b92138 0000000000000002 ffffffc02b3bf990 ffffff8008c022d0
+[44236.766345] f980: ffffff8008fedec8 0000000000000007 ffffffc02b3bfa30 ffffff80080f0760
+[44236.766351] f9a0: ffffff8008fede90 ffffff8009fb5000 0000000000000604 0000000000000001
+[44236.766357] f9c0: 0000000000000000 0000000000000000 ffffff8000b92050 ffffffc03c8a6a00
+[44236.766363] f9e0: ffffff8000b92138 0000000000000000 0000000000000001 00000000000409aa
+[44236.766369] fa00: 000000000000003f 0000000000000000 00000000000409aa 0000000000000001
+[44236.766375] fa20: 0000000000000000 0000000000000000 0000000000000018 0000000000000000
+[44236.766379] fa40: 0000000000013dac 0000000000000001
+[44236.767201] [<ffffff8000b0168c>] rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[44236.767963] [<ffffff8000b04814>] SetHwReg+0x90c/0x9c0 [8821cs]
+[44236.768697] [<ffffff8000b246bc>] rtl8821c_sethwreg+0xf3c/0x1070 [8821cs]
+[44236.769375] [<ffffff8000b29068>] sethwreg+0x34/0x40 [8821cs]
+[44236.770041] [<ffffff8000afa820>] rtw_hal_set_hwreg+0x10/0x18 [8821cs]
+[44236.770698] [<ffffff8000aa16c4>] rtw_set_ps_mode+0x12c/0x2c0 [8821cs]
+[44236.771357] [<ffffff8000aa1ba0>] LPS_Leave+0x98/0xf0 [8821cs]
+[44236.772005] [<ffffff8000a5fea0>] lps_ctrl_wk_hdl+0x134/0x1ec [8821cs]
+[44236.772652] [<ffffff8000a62630>] rtw_drvextra_cmd_hdl+0x98/0x3f0 [8821cs]
+[44236.773299] [<ffffff8000a5d290>] rtw_cmd_thread+0x414/0x724 [8821cs]
+[44236.773313] [<ffffff80080c0c98>] kthread+0xec/0xf4
+[44236.773323] [<ffffff80080834f0>] ret_from_fork+0x10/0x20
+[44237.328173] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44237.328174] rcq unprotect not at safe region!
+[44238.266054] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44238.266054] rcq unprotect not at safe region!
+[44238.450258] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44238.450258] rcq unprotect not at safe region!
+[44238.935954] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44238.935955] rcq unprotect not at safe region!
+[44239.069925] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44239.069925] rcq unprotect not at safe region!
+[44239.136895] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44239.136896] rcq unprotect not at safe region!
+[44239.237458] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44239.237459] rcq unprotect not at safe region!
+[44239.773304] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44239.773305] rcq unprotect not at safe region!
+[44240.058097] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44240.058098] rcq unprotect not at safe region!
+[44241.213606] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44241.213607] rcq unprotect not at safe region!
+[44241.330855] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44241.330855] rcq unprotect not at safe region!
+[44241.883514] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44241.883515] rcq unprotect not at safe region!
+[44243.524810] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44243.524810] rcq unprotect not at safe region!
+[44243.708964] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44243.708964] rcq unprotect not at safe region!
+[44243.859710] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44243.859710] rcq unprotect not at safe region!
+[44244.010449] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44244.010450] rcq unprotect not at safe region!
+[44244.043912] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44244.043912] rcq unprotect not at safe region!
+[44244.764076] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44244.764076] rcq unprotect not at safe region!
+[44245.266577] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.266577] rcq unprotect not at safe region!
+[44245.300066] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.300066] rcq unprotect not at safe region!
+[44245.333501] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.333501] rcq unprotect not at safe region!
+[44245.366970] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.366971] rcq unprotect not at safe region!
+[44245.400488] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.400489] rcq unprotect not at safe region!
+[44245.467466] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44245.467467] rcq unprotect not at safe region!
+[44246.221098] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.221098] rcq unprotect not at safe region!
+[44246.254622] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.254622] rcq unprotect not at safe region!
+[44246.321606] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.321606] rcq unprotect not at safe region!
+[44246.355068] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.355069] rcq unprotect not at safe region!
+[44246.388572] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.388572] rcq unprotect not at safe region!
+[44246.489081] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.489081] rcq unprotect not at safe region!
+[44246.690025] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.690025] rcq unprotect not at safe region!
+[44246.790540] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.790541] rcq unprotect not at safe region!
+[44246.924592] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.924593] rcq unprotect not at safe region!
+[44246.958074] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44246.958074] rcq unprotect not at safe region!
+[44247.092024] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44247.092024] rcq unprotect not at safe region!
+[44247.359930] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44247.359931] rcq unprotect not at safe region!
+[44247.426963] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44247.426963] rcq unprotect not at safe region!
+[44247.460432] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44247.460432] rcq unprotect not at safe region!
+[44247.493900] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44247.493900] rcq unprotect not at safe region!
+[44248.565738] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44248.565738] rcq unprotect not at safe region!
+[44249.955798] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44249.955798] rcq unprotect not at safe region!
+[44250.709413] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44250.709413] rcq unprotect not at safe region!
+[44250.994202] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44250.994202] rcq unprotect not at safe region!
+[44251.077884] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44251.077884] rcq unprotect not at safe region!
+[44251.245379] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44251.245379] rcq unprotect not at safe region!
+[44253.606765] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44253.606765] rcq unprotect not at safe region!
+[44254.460893] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44254.460893] rcq unprotect not at safe region!
+[44254.578098] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44254.578098] rcq unprotect not at safe region!
+[44254.996791] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44254.996792] rcq unprotect not at safe region!
+[44255.114013] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44255.114013] rcq unprotect not at safe region!
+[44255.867705] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44255.867706] rcq unprotect not at safe region!
+[44256.068657] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44256.068658] rcq unprotect not at safe region!
+[44256.738543] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44256.738543] rcq unprotect not at safe region!
+[44257.006512] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44257.006512] rcq unprotect not at safe region!
+[44258.212310] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44258.212311] rcq unprotect not at safe region!
+[44259.133419] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44259.133420] rcq unprotect not at safe region!
+[44259.736408] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44259.736409] rcq unprotect not at safe region!
+[44260.121510] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44260.121511] rcq unprotect not at safe region!
+[44260.155045] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44260.155045] rcq unprotect not at safe region!
+[44260.891907] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44260.891907] rcq unprotect not at safe region!
+[44261.277103] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44261.277103] rcq unprotect not at safe region!
+[44261.494849] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44261.494850] rcq unprotect not at safe region!
+[44261.779524] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44261.779524] rcq unprotect not at safe region!
+[44262.231690] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44262.231690] rcq unprotect not at safe region!
+[44262.667153] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44262.667154] rcq unprotect not at safe region!
+[44262.734121] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44262.734121] rcq unprotect not at safe region!
+[44263.337029] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44263.337030] rcq unprotect not at safe region!
+[44264.124174] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44264.124175] rcq unprotect not at safe region!
+[44264.358654] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44264.358655] rcq unprotect not at safe region!
+[44265.145768] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44265.145769] rcq unprotect not at safe region!
+[44265.564985] RTW: ERROR rtw_lps_state_chk(wlan0) PS_MODE_ACTIVE check failed
+[44265.565095] ------------[ cut here ]------------
+[44265.566084] WARNING: CPU: 1 PID: 2065 at drivers/net/wireless/rtl8821cs/hal/hal_com.c:11447 rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[44265.566091] Modules linked in: rtl_btlpm 8821cs mali_kbase(O)
+
+[44265.566121] CPU: 1 PID: 2065 Comm: RTW_CMD_THREAD Tainted: G        W  O    4.9.170 #13
+[44265.566126] Hardware name: Anbernic RG40XX-H (DT)
+[44265.566132] task: ffffffc03c693800 task.stack: ffffffc02b3bc000
+[44265.567063] PC is at rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[44265.567761] LR is at rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[44265.567766] pc : [<ffffff8000b0168c>] lr : [<ffffff8000b0168c>] pstate: 80400145
+[44265.567770] sp : ffffffc02b3bfb30
+[44265.567773] x29: ffffffc02b3bfb30 x28: 0000000000000000 
+[44265.567784] x27: ffffff8000b92138 x26: ffffffc03c8a6a00 
+[44265.567793] x25: ffffff8000b92050 x24: 0000000000000000 
+[44265.567803] x23: 0000000000000000 x22: 0000000000000001 
+[44265.567813] x21: 0000000000000604 x20: ffffff8009fb5000 
+[44265.567823] x19: 0000000000000000 x18: 0000000000000004 
+[44265.567832] x17: 0000000000000000 x16: ffffff8008116ef4 
+[44265.567843] x15: 0000000000000001 x14: ffffff8008c016ea 
+[44265.567852] x13: 0000000000000003 x12: ffffff8009009000 
+[44265.567862] x11: ffffff800916a3e0 x10: 0000000000000000 
+[44265.567871] x9 : 0000000000000001 x8 : 0000000000013e91 
+[44265.567881] x7 : 0000000000000000 x6 : 0000000000000018 
+[44265.567890] x5 : 0000000000000000 x4 : 0000000000000000 
+[44265.567900] x3 : 0000000000000001 x2 : 00000000000409aa 
+[44265.567909] x1 : 0000000000000000 x0 : 000000000000003f 
+[44265.567921] 
+               SP: 0xffffffc02b3bfab0:
+[44265.567924] fab0  00000001 00000000 00000000 00000000 00000000 00000000 00b92050 ffffff80
+[44265.567957] fad0  3c8a6a00 ffffffc0 00b92138 ffffff80 00000000 00000000 2b3bfb30 ffffffc0
+[44265.567988] faf0  00b0168c ffffff80 2b3bfb30 ffffffc0 00b0168c ffffff80 80400145 00000000
+[44265.568019] fb10  00000400 00000000 00000001 00000000 ffffffff ffffffff 0000001b 00000000
+[44265.568050] fb30  2b3bfb70 ffffffc0 00b04814 ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44265.568081] fb50  09fbb000 ffffff80 2b3bfc9f ffffffc0 00000000 00000000 00000000 00000000
+[44265.568112] fb70  2b3bfbb0 ffffffc0 00b246bc ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44265.568143] fb90  09fbb000 ffffff80 2b3bfc9f ffffffc0 01200020 84000c00 000409aa 00000000
+[44265.568184] 
+               X26: 0xffffffc03c8a6980:
+[44265.568187] 6980  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568218] 69a0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568249] 69c0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568279] 69e0  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568309] 6a00  00000006 00000005 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568341] 6a20  00000000 00000000 00000003 00000003 00000125 e2bf6eb0 00014c00 0000000b
+[44265.568372] 6a40  646e6f50 736f7265 00355f61 00000000 00000000 00000000 00000000 00000000
+[44265.568403] 6a60  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+[44265.568435] 
+               X29: 0xffffffc02b3bfab0:
+[44265.568438] fab0  00000001 00000000 00000000 00000000 00000000 00000000 00b92050 ffffff80
+[44265.568468] fad0  3c8a6a00 ffffffc0 00b92138 ffffff80 00000000 00000000 2b3bfb30 ffffffc0
+[44265.568499] faf0  00b0168c ffffff80 2b3bfb30 ffffffc0 00b0168c ffffff80 80400145 00000000
+[44265.568530] fb10  00000400 00000000 00000001 00000000 ffffffff ffffffff 0000001b 00000000
+[44265.568560] fb30  2b3bfb70 ffffffc0 00b04814 ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44265.568591] fb50  09fbb000 ffffff80 2b3bfc9f ffffffc0 00000000 00000000 00000000 00000000
+[44265.568622] fb70  2b3bfbb0 ffffffc0 00b246bc ffffff80 09fb5000 ffffff80 2b3bfc9f ffffffc0
+[44265.568652] fb90  09fbb000 ffffff80 2b3bfc9f ffffffc0 01200020 84000c00 000409aa 00000000
+
+[44265.568687] ---[ end trace a6c5df977fe855d6 ]---
+[44265.568693] Call trace:
+[44265.568699] Exception stack(0xffffffc02b3bf920 to 0xffffffc02b3bfa50)
+[44265.568706] f920: 0000000000000000 0000007fffffffff 00000000411ed000 ffffff8000b0168c
+[44265.568712] f940: 0000000080400145 000000000000003d ffffff8000b92050 ffffffc03c8a6a00
+[44265.568719] f960: ffffff8000b92138 0000000000000002 ffffffc02b3bf990 ffffff8008c022d0
+[44265.568725] f980: ffffff8008fedec8 0000000000000007 ffffffc02b3bfa30 ffffff80080f0760
+[44265.568731] f9a0: ffffff8008fede90 ffffff8009fb5000 0000000000000604 0000000000000001
+[44265.568738] f9c0: 0000000000000000 0000000000000000 ffffff8000b92050 ffffffc03c8a6a00
+[44265.568744] f9e0: ffffff8000b92138 0000000000000000 0000000000000001 00000000000409aa
+[44265.568750] fa00: 000000000000003f 0000000000000000 00000000000409aa 0000000000000001
+[44265.568756] fa20: 0000000000000000 0000000000000000 0000000000000018 0000000000000000
+[44265.568760] fa40: 0000000000013e91 0000000000000001
+[44265.569445] [<ffffff8000b0168c>] rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[44265.570118] [<ffffff8000b04814>] SetHwReg+0x90c/0x9c0 [8821cs]
+[44265.570785] [<ffffff8000b246bc>] rtl8821c_sethwreg+0xf3c/0x1070 [8821cs]
+[44265.571451] [<ffffff8000b29068>] sethwreg+0x34/0x40 [8821cs]
+[44265.572117] [<ffffff8000afa820>] rtw_hal_set_hwreg+0x10/0x18 [8821cs]
+[44265.572807] [<ffffff8000aa16c4>] rtw_set_ps_mode+0x12c/0x2c0 [8821cs]
+[44265.573503] [<ffffff8000aa1ba0>] LPS_Leave+0x98/0xf0 [8821cs]
+[44265.574169] [<ffffff8000a5fe80>] lps_ctrl_wk_hdl+0x114/0x1ec [8821cs]
+[44265.574818] [<ffffff8000a62630>] rtw_drvextra_cmd_hdl+0x98/0x3f0 [8821cs]
+[44265.575466] [<ffffff8000a5d290>] rtw_cmd_thread+0x414/0x724 [8821cs]
+[44265.575477] [<ffffff80080c0c98>] kthread+0xec/0xf4
+[44265.575484] [<ffffff80080834f0>] ret_from_fork+0x10/0x20
+[44265.999918] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44265.999918] rcq unprotect not at safe region!
+[44266.083670] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44266.083671] rcq unprotect not at safe region!
+[44266.452092] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44266.452093] rcq unprotect not at safe region!
+[44267.071759] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44267.071759] rcq unprotect not at safe region!
+[44268.009599] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44268.009599] rcq unprotect not at safe region!
+[44268.545524] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44268.545525] rcq unprotect not at safe region!
+[44269.366135] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44269.366135] rcq unprotect not at safe region!
+[44270.404485] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44270.404486] rcq unprotect not at safe region!
+[44270.705932] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44270.705932] rcq unprotect not at safe region!
+[44270.923655] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44270.923656] rcq unprotect not at safe region!
+[44272.079308] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44272.079308] rcq unprotect not at safe region!
+[44272.832858] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44272.832859] rcq unprotect not at safe region!
+[44272.966881] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44272.966882] rcq unprotect not at safe region!
+[44273.402377] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44273.402378] rcq unprotect not at safe region!
+[44274.172700] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44274.172700] rcq unprotect not at safe region!
+[44275.093778] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44275.093778] rcq unprotect not at safe region!
+[44275.529272] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44275.529272] rcq unprotect not at safe region!
+[44276.818767] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44276.818767] rcq unprotect not at safe region!
+[44277.455198] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.455198] rcq unprotect not at safe region!
+[44277.488687] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.488687] rcq unprotect not at safe region!
+[44277.790163] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.790163] rcq unprotect not at safe region!
+[44277.823736] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.823737] rcq unprotect not at safe region!
+[44277.857118] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.857118] rcq unprotect not at safe region!
+[44277.924118] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.924118] rcq unprotect not at safe region!
+[44277.957714] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44277.957714] rcq unprotect not at safe region!
+[44278.610767] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44278.610767] rcq unprotect not at safe region!
+[44278.644286] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44278.644286] rcq unprotect not at safe region!
+[44279.665868] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44279.665869] rcq unprotect not at safe region!
+[44279.732854] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44279.732854] rcq unprotect not at safe region!
+[44279.866827] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44279.866827] rcq unprotect not at safe region!
+[44279.900347] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44279.900348] rcq unprotect not at safe region!
+[44281.290355] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44281.290356] rcq unprotect not at safe region!
+[44281.524854] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44281.524854] rcq unprotect not at safe region!
+[44281.859788] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44281.859788] rcq unprotect not at safe region!
+[44281.893277] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44281.893278] rcq unprotect not at safe region!
+[44282.646905] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44282.646905] rcq unprotect not at safe region!
+[44282.831143] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44282.831143] rcq unprotect not at safe region!
+[44283.417295] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44283.417295] rcq unprotect not at safe region!
+[44284.087189] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44284.087189] rcq unprotect not at safe region!
+[44284.304989] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44284.304989] rcq unprotect not at safe region!
+[44284.472390] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44284.472390] rcq unprotect not at safe region!
+[44284.589656] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44284.589656] rcq unprotect not at safe region!
+[44284.824082] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44284.824082] rcq unprotect not at safe region!
+[44286.214215] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44286.214215] rcq unprotect not at safe region!
+[44286.297871] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44286.297871] rcq unprotect not at safe region!
+[44287.939152] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44287.939152] rcq unprotect not at safe region!
+[44288.140087] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44288.140087] rcq unprotect not at safe region!
+[44288.759817] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44288.759818] rcq unprotect not at safe region!
+[44289.764622] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44289.764622] rcq unprotect not at safe region!
+[44290.149886] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44290.149886] rcq unprotect not at safe region!
+[44290.601976] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44290.601977] rcq unprotect not at safe region!
+[44290.953688] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44290.953689] rcq unprotect not at safe region!
+[44292.762463] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44292.762463] rcq unprotect not at safe region!
+[44293.348567] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44293.348567] rcq unprotect not at safe region!
+[44295.006583] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44295.006584] rcq unprotect not at safe region!
+[44295.157290] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44295.157290] rcq unprotect not at safe region!
+[44295.910952] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44295.910953] rcq unprotect not at safe region!
+[44296.279396] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44296.279396] rcq unprotect not at safe region!
+[44296.346390] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44296.346390] rcq unprotect not at safe region!
+[44296.597598] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44296.597598] rcq unprotect not at safe region!
+[44297.099996] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44297.099996] rcq unprotect not at safe region!
+[44298.573815] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44298.573816] rcq unprotect not at safe region!
+[44298.808272] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44298.808272] rcq unprotect not at safe region!
+[44299.210270] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44299.210270] rcq unprotect not at safe region!
+[44301.270114] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44301.270115] rcq unprotect not at safe region!
+[44301.990330] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44301.990330] rcq unprotect not at safe region!
+[44302.023761] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44302.023762] rcq unprotect not at safe region!
+[44302.090745] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44302.090746] rcq unprotect not at safe region!
+[44302.258258] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44302.258258] rcq unprotect not at safe region!
+[44307.048023] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44307.048023] rcq unprotect not at safe region!
+[44309.024225] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44309.024225] rcq unprotect not at safe region!
+[44309.174969] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44309.174970] rcq unprotect not at safe region!
+[44309.861623] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44309.861624] rcq unprotect not at safe region!
+[44310.330530] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44310.330530] rcq unprotect not at safe region!
+[44310.481268] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44310.481268] rcq unprotect not at safe region!
+[44310.766054] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44310.766055] rcq unprotect not at safe region!
+[44310.966940] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44310.966941] rcq unprotect not at safe region!
+[44311.703940] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44311.703941] rcq unprotect not at safe region!
+[44311.821062] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44311.821062] rcq unprotect not at safe region!
+[44312.491000] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44312.491001] rcq unprotect not at safe region!
+[44313.771455] RTW: OnDeAuth(wlan0) reason=7, ta=b0:6e:bf:e2:00:4c, ignore=0
+[44313.772516] RTW: clear key for addr:b0:6e:bf:e2:00:4c, camid:0
+[44313.773040] RTW: clear key for addr:b0:6e:bf:e2:00:4c, camid:1
+[44313.776238] RTW: rtw_set_802_11_connect(wlan0)  fw_state=0x00000008
+[44314.601225] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44314.601225] rcq unprotect not at safe region!
+[44314.701623] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44314.701624] rcq unprotect not at safe region!
+[44317.029560] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44317.029561] rcq unprotect not at safe region!
+[44317.414719] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44317.414719] rcq unprotect not at safe region!
+[44317.816751] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44317.816752] rcq unprotect not at safe region!
+[44317.989363] RTW: start auth
+[44318.067864] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44318.067864] rcq unprotect not at safe region!
+[44318.335837] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44318.335837] rcq unprotect not at safe region!
+[44318.369340] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44318.369340] rcq unprotect not at safe region!
+[44318.587064] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44318.587064] rcq unprotect not at safe region!
+[44319.122947] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44319.122947] rcq unprotect not at safe region!
+[44319.910092] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44319.910092] rcq unprotect not at safe region!
+[44320.596758] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44320.596759] rcq unprotect not at safe region!
+[44321.229677] RTW: rtw_set_802_11_connect(wlan0)  fw_state=0x00000008
+[44321.321379] RTW: start auth
+[44321.322224] RTW: auth success, start assoc
+[44321.324032] RTW: assoc success
+[44321.331817] RTW: recv eapol packet
+[44321.332258] RTW: ============ STA [38:2c:4a:cc:10:a4]  ===================
+[44321.332263] RTW: mac_id : 0
+[44321.332267] RTW: wireless_mode : 0x44
+[44321.332271] RTW: mimo_type : 0
+[44321.332275] RTW: bw_mode : 80MHz, ra_bw_mode : 80MHz
+[44321.332280] RTW: rate_id : 10
+[44321.332285] RTW: rssi : 11 (%), rssi_level : 0
+[44321.332289] RTW: is_support_sgi : Y, is_vht_enable : Y
+[44321.332294] RTW: disable_ra : N, disable_pt : N
+[44321.332298] RTW: is_noisy : N
+[44321.332302] RTW: txrx_state : 0
+[44321.332307] RTW: curr_tx_rate : CCK_1M (L)
+[44321.332310] RTW: curr_tx_bw : 20MHz
+[44321.332314] RTW: curr_retry_ratio : 0
+[44321.332318] RTW: ra_mask : 0x00000000003ffff0
+
+[44321.332411] RTW: send eapol packet
+[44321.340748] RTW: recv eapol packet
+[44321.341053] RTW: send eapol packet
+[44321.342483] RTW: set pairwise key camid:0, addr:38:2c:4a:cc:10:a4, kid:0, type:AES
+[44321.343060] RTW: set group key camid:1, addr:38:2c:4a:cc:10:a4, kid:2, type:AES
+[44321.434130] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44321.434131] rcq unprotect not at safe region!
+[44321.953293] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44321.953293] rcq unprotect not at safe region!
+[44321.986809] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44321.986810] rcq unprotect not at safe region!
+[44322.305068] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44322.305068] rcq unprotect not at safe region!
+[44324.297940] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44324.297940] rcq unprotect not at safe region!
+[44325.018083] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44325.018084] rcq unprotect not at safe region!
+[44325.922465] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44325.922466] rcq unprotect not at safe region!
+[44326.123439] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44326.123439] rcq unprotect not at safe region!
+[44326.240652] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44326.240652] rcq unprotect not at safe region!
+[44326.893820] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44326.893821] rcq unprotect not at safe region!
+[44327.279002] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44327.279002] rcq unprotect not at safe region!
+[44328.066136] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44328.066136] rcq unprotect not at safe region!
+[44328.853254] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44328.853254] rcq unprotect not at safe region!
+[44329.104480] [DISP] disp_mgr_protect_reg_for_rcq,line:1002:
+[44329.104480] rcq unprotect not at safe region!

@@ -1,0 +1,258 @@
+{
+  "samples": [
+    {
+      "tick": 1800,
+      "kind": "composed",
+      "changed_rgba_pixels": 13995,
+      "maximum": 137,
+      "mean_rgb_error": 0.061820746527777776
+    },
+    {
+      "tick": 1800,
+      "kind": "world",
+      "changed_rgba_pixels": 16936,
+      "maximum": 134,
+      "mean_rgb_error": 0.05277018229166667
+    },
+    {
+      "tick": 1965,
+      "kind": "composed",
+      "changed_rgba_pixels": 19382,
+      "maximum": 255,
+      "mean_rgb_error": 0.09914279513888889
+    },
+    {
+      "tick": 1965,
+      "kind": "world",
+      "changed_rgba_pixels": 24563,
+      "maximum": 255,
+      "mean_rgb_error": 0.083330078125
+    },
+    {
+      "tick": 2500,
+      "kind": "composed",
+      "changed_rgba_pixels": 2904,
+      "maximum": 162,
+      "mean_rgb_error": 0.03993815104166667
+    },
+    {
+      "tick": 2500,
+      "kind": "world",
+      "changed_rgba_pixels": 3015,
+      "maximum": 137,
+      "mean_rgb_error": 0.024270833333333332
+    },
+    {
+      "tick": 2643,
+      "kind": "composed",
+      "changed_rgba_pixels": 30510,
+      "maximum": 161,
+      "mean_rgb_error": 0.08617947048611112
+    },
+    {
+      "tick": 2643,
+      "kind": "world",
+      "changed_rgba_pixels": 32599,
+      "maximum": 211,
+      "mean_rgb_error": 0.05800998263888889
+    },
+    {
+      "tick": 3000,
+      "kind": "composed",
+      "changed_rgba_pixels": 15507,
+      "maximum": 171,
+      "mean_rgb_error": 0.08871744791666666
+    },
+    {
+      "tick": 3000,
+      "kind": "world",
+      "changed_rgba_pixels": 18550,
+      "maximum": 173,
+      "mean_rgb_error": 0.07263346354166667
+    },
+    {
+      "tick": 3546,
+      "kind": "composed",
+      "changed_rgba_pixels": 34905,
+      "maximum": 175,
+      "mean_rgb_error": 0.12110894097222222
+    },
+    {
+      "tick": 3546,
+      "kind": "world",
+      "changed_rgba_pixels": 41422,
+      "maximum": 176,
+      "mean_rgb_error": 0.10193684895833334
+    },
+    {
+      "tick": 3600,
+      "kind": "composed",
+      "changed_rgba_pixels": 36071,
+      "maximum": 201,
+      "mean_rgb_error": 0.16607530381944444
+    },
+    {
+      "tick": 3600,
+      "kind": "world",
+      "changed_rgba_pixels": 40618,
+      "maximum": 215,
+      "mean_rgb_error": 0.14118815104166665
+    },
+    {
+      "tick": 4200,
+      "kind": "composed",
+      "changed_rgba_pixels": 14820,
+      "maximum": 133,
+      "mean_rgb_error": 0.14984483506944443
+    },
+    {
+      "tick": 4200,
+      "kind": "world",
+      "changed_rgba_pixels": 16856,
+      "maximum": 115,
+      "mean_rgb_error": 0.0989572482638889
+    },
+    {
+      "tick": 4800,
+      "kind": "composed",
+      "changed_rgba_pixels": 35354,
+      "maximum": 167,
+      "mean_rgb_error": 0.12680989583333332
+    },
+    {
+      "tick": 4800,
+      "kind": "world",
+      "changed_rgba_pixels": 42949,
+      "maximum": 153,
+      "mean_rgb_error": 0.08792534722222223
+    },
+    {
+      "tick": 5400,
+      "kind": "composed",
+      "changed_rgba_pixels": 8199,
+      "maximum": 130,
+      "mean_rgb_error": 0.06782118055555555
+    },
+    {
+      "tick": 5400,
+      "kind": "world",
+      "changed_rgba_pixels": 10324,
+      "maximum": 162,
+      "mean_rgb_error": 0.04893229166666667
+    },
+    {
+      "tick": 5639,
+      "kind": "composed",
+      "changed_rgba_pixels": 6312,
+      "maximum": 142,
+      "mean_rgb_error": 0.04453667534722222
+    },
+    {
+      "tick": 5639,
+      "kind": "world",
+      "changed_rgba_pixels": 7193,
+      "maximum": 97,
+      "mean_rgb_error": 0.028745659722222223
+    },
+    {
+      "tick": 5655,
+      "kind": "composed",
+      "changed_rgba_pixels": 3878,
+      "maximum": 152,
+      "mean_rgb_error": 0.09710177951388889
+    },
+    {
+      "tick": 5655,
+      "kind": "world",
+      "changed_rgba_pixels": 4073,
+      "maximum": 91,
+      "mean_rgb_error": 0.05734049479166667
+    },
+    {
+      "tick": 5867,
+      "kind": "composed",
+      "changed_rgba_pixels": 1923,
+      "maximum": 135,
+      "mean_rgb_error": 0.015074869791666667
+    },
+    {
+      "tick": 5867,
+      "kind": "world",
+      "changed_rgba_pixels": 2106,
+      "maximum": 95,
+      "mean_rgb_error": 0.011274956597222222
+    },
+    {
+      "tick": 5874,
+      "kind": "composed",
+      "changed_rgba_pixels": 1242,
+      "maximum": 87,
+      "mean_rgb_error": 0.009986979166666667
+    },
+    {
+      "tick": 5874,
+      "kind": "world",
+      "changed_rgba_pixels": 1782,
+      "maximum": 82,
+      "mean_rgb_error": 0.007393663194444444
+    },
+    {
+      "tick": 5878,
+      "kind": "composed",
+      "changed_rgba_pixels": 1306,
+      "maximum": 168,
+      "mean_rgb_error": 0.01032986111111111
+    },
+    {
+      "tick": 5878,
+      "kind": "world",
+      "changed_rgba_pixels": 1414,
+      "maximum": 129,
+      "mean_rgb_error": 0.007062717013888889
+    },
+    {
+      "tick": 5889,
+      "kind": "composed",
+      "changed_rgba_pixels": 866,
+      "maximum": 152,
+      "mean_rgb_error": 0.015317925347222223
+    },
+    {
+      "tick": 5889,
+      "kind": "world",
+      "changed_rgba_pixels": 1300,
+      "maximum": 111,
+      "mean_rgb_error": 0.0113671875
+    },
+    {
+      "tick": 5921,
+      "kind": "composed",
+      "changed_rgba_pixels": 528,
+      "maximum": 113,
+      "mean_rgb_error": 0.007242838541666667
+    },
+    {
+      "tick": 5921,
+      "kind": "world",
+      "changed_rgba_pixels": 576,
+      "maximum": 90,
+      "mean_rgb_error": 0.004659288194444444
+    },
+    {
+      "tick": 6006,
+      "kind": "composed",
+      "changed_rgba_pixels": 664,
+      "maximum": 132,
+      "mean_rgb_error": 0.006745876736111111
+    },
+    {
+      "tick": 6006,
+      "kind": "world",
+      "changed_rgba_pixels": 1024,
+      "maximum": 71,
+      "mean_rgb_error": 0.004505208333333333
+    }
+  ],
+  "exact_matches": 0,
+  "total": 36
+}

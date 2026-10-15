@@ -1,0 +1,16 @@
+{
+  "exit": 137,
+  "last_logged_tick": 300,
+  "full_replay_pass": false,
+  "native_frames": 0,
+  "preload_ms": 36948.764,
+  "sampled_peak_rss_kib": 607384,
+  "sampled_peak_hwm_kib": 609816,
+  "sampled_peak_mali_bytes": 543862784,
+  "sampled_min_available_kib": 46936,
+  "kernel_kill_rss_kib": 612360,
+  "retained_complete_checkpoints": 0,
+  "retained_simulation_checkpoint_tick": 300,
+  "timing_distributions_available": false,
+  "reason": "Kernel OOM; ~192 MiB pre-existing M2 tmpfs outputs plus preloaded native resources and growing legacy renderer. Captures had not started. Buffered timing data lost on SIGKILL; no manufactured distributions."
+}

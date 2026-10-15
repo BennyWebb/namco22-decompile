@@ -1,0 +1,114 @@
+{
+  "preload": {
+    "samples": 26,
+    "peak_rss_kib": 610176,
+    "peak_mali_bytes": 489660416,
+    "min_available_kib": 251240,
+    "first": {
+      "uptime_seconds": 44125.528557,
+      "VmRSS_kib": 4,
+      "VmHWM_kib": 4,
+      "RssAnon_kib": 4,
+      "RssFile_kib": 0,
+      "MemAvailable_kib": 767632,
+      "CmaFree_kib": 36668,
+      "mali_pages": 0,
+      "mali_bytes": 0
+    },
+    "last": {
+      "uptime_seconds": 44150.558224,
+      "VmRSS_kib": 562008,
+      "VmHWM_kib": 610176,
+      "RssAnon_kib": 52724,
+      "RssFile_kib": 509284,
+      "MemAvailable_kib": 301032,
+      "CmaFree_kib": 34816,
+      "mali_pages": 119546,
+      "mali_bytes": 489660416
+    }
+  },
+  "legacy": {
+    "samples": 42,
+    "peak_rss_kib": 739448,
+    "peak_mali_bytes": 616443904,
+    "min_available_kib": 131860,
+    "first": {
+      "uptime_seconds": 44151.558867,
+      "VmRSS_kib": 573316,
+      "VmHWM_kib": 610176,
+      "RssAnon_kib": 54792,
+      "RssFile_kib": 518368,
+      "MemAvailable_kib": 293048,
+      "CmaFree_kib": 39816,
+      "mali_pages": 120432,
+      "mali_bytes": 493289472
+    },
+    "last": {
+      "uptime_seconds": 44192.590753,
+      "VmRSS_kib": 739448,
+      "VmHWM_kib": 739448,
+      "RssAnon_kib": 94312,
+      "RssFile_kib": 644980,
+      "MemAvailable_kib": 131860,
+      "CmaFree_kib": 23344,
+      "mali_pages": 150499,
+      "mali_bytes": 616443904
+    }
+  },
+  "native": {
+    "samples": 134,
+    "peak_rss_kib": 744612,
+    "peak_mali_bytes": 617852928,
+    "min_available_kib": 124796,
+    "first": {
+      "uptime_seconds": 44193.591467,
+      "VmRSS_kib": 742960,
+      "VmHWM_kib": 742960,
+      "RssAnon_kib": 96556,
+      "RssFile_kib": 646248,
+      "MemAvailable_kib": 129464,
+      "CmaFree_kib": 20392,
+      "mali_pages": 150811,
+      "mali_bytes": 617721856
+    },
+    "last": {
+      "uptime_seconds": 44326.691869,
+      "VmRSS_kib": 742112,
+      "VmHWM_kib": 744644,
+      "RssAnon_kib": 99492,
+      "RssFile_kib": 642464,
+      "MemAvailable_kib": 126176,
+      "CmaFree_kib": 11556,
+      "mali_pages": 150843,
+      "mali_bytes": 617852928
+    }
+  },
+  "shutdown": {
+    "samples": 1,
+    "peak_rss_kib": 707220,
+    "peak_mali_bytes": 583708672,
+    "min_available_kib": 125780,
+    "first": {
+      "uptime_seconds": 44327.692526,
+      "VmRSS_kib": 707220,
+      "VmHWM_kib": 744644,
+      "RssAnon_kib": 98968,
+      "RssFile_kib": 608252,
+      "MemAvailable_kib": 125780,
+      "CmaFree_kib": 4656,
+      "mali_pages": 142507,
+      "mali_bytes": 583708672
+    },
+    "last": {
+      "uptime_seconds": 44327.692526,
+      "VmRSS_kib": 707220,
+      "VmHWM_kib": 744644,
+      "RssAnon_kib": 98968,
+      "RssFile_kib": 608252,
+      "MemAvailable_kib": 125780,
+      "CmaFree_kib": 4656,
+      "mali_pages": 142507,
+      "mali_bytes": 583708672
+    }
+  }
+}

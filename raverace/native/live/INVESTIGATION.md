@@ -21,7 +21,20 @@ host. The user's instruction forbids deployment without explicit authorisation;
 H700 transfer/run approval is a separate final step only after a concrete build
 is ready. Read-only production integrity inspection remains authorised.
 
-## Current continuation result
+## Current hardware result — complete / stopped
+
+Authorised isolated H700 transfer/run completed; all 6006 ticks and21 authoritative
+checkpoint sets pass.18 hardware HUDs pass exact oracle. No real-time acceptance:
+world+HUD10.187/12.071 ms median/p95, actual interval31.601/38.636 ms,4207 deadline
+misses and3,596,071 audio underruns. Simulation+scene median21.034 ms is already over
+budget. InitialOOM/environment and logger shutdown error are retained; successful
+clean prepared replay and logger-fixed repeat complete. All47 production file
+hashes unchanged, frontend restored, no test game remains. M3 remains blocked;
+no4B, speculative optimisation, commit/push or production deployment. Read current
+report and `benchmarks/native-live-h700-20261015/README.md` for exact methods, memory,
+control limits and next work requiring separate authorisation.
+
+## Prior host-only continuation result (historical)
 
 Full replay coverage investigation complete; STOPPED. All6006 host ticks and21
 authoritative checkpoint sets pass. Added302 ROM meshes/four material variants
@@ -43,7 +56,7 @@ No ARM prototype was built or copied to H700. Read-only production checks pass.
 All3840 racing-window commands match the M3 packets after normalising only offline
 font/style/palette revision indices. All5,152,196 source commands are accounted for.
 Eleven host world/composed pairs are byte-identical and independently HUD-validated.
-CPU/RAM, board/video and raw PCM/voice checkpoint records match at all18 available
+CPU/RAM, board/video and raw PCM/voice checkpoint records match at all 18 available
 checkpoint ticks through5400. The original final6006 checkpoint remains unvalidated.
 See `NATIVE_LIVE_INTEGRATION_REPORT.md` for timings, scope and known limits.
 

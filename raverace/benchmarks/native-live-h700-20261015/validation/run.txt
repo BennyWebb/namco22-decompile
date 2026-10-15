@@ -1,0 +1,49 @@
+[SND] translated sound program (2965 instructions)
+[INPUT] replaying /userdata/system/rave-racer-native-live-4a-20261015/race-20261013-122242-25136.rec
+[REPLAY] inputs sampled at emulated boundaries; ROM hashes FNV1a64; checkpoints every 300 ticks
+[TEX] ROM CPU bytes=19398656; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque
+[GLES2] SDL driver 0: mali
+[GLES2] SDL compiled=2.32.8 runtime=2.32.8
+[GLES2] active SDL video driver: mali
+[GLES2] vendor: ARM
+[GLES2] renderer: Mali-G31
+[GLES2] version: OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+[GLES2] GLSL: OpenGL ES GLSL ES 3.20
+[GLES2] drawable 640x480 depth bits=24
+[TEX] GL max texture=8192 fragment highp bits=23
+[GLES2] triangle storage: CPU=2400000 bytes, GPU store upper bound=2400000 bytes
+[GLES2] VBO mode=frame command storage=114688 bytes; frame mode re-specifies storage per contiguous chunk
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[GLES2] GLSL ES 1.00 linked; textures=textured budget=67108864; per-texture cache, atlas disabled
+[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[NATIVE-LIVE] source=live-simulation serial=1 activation_tick=1800 preload_ms=36948.764 meshes=15968 materials=5407 no_frame_stream=1
+[AUDIO] driver=alsa output 48000 Hz stereo, 512-sample buffer, gain x6.00
+[INPUT] mapping from /userdata/system/rave-racer-native-live-4a-20261015/controller-input.cfg: 19000000010000000100000000010000,Knulli saved controller,b:b3,a:b4,dpdown:h0.4,leftx:a0,dpleft:h0.8,rightshoulder:b8,leftshoulder:b7,dpright:h0.2,back:b9,start:b10,dpup:h0.1,y:b6,x:b5,
+[INPUT] controller=Knulli saved controller GUID=19000000010000000100000000010000 instance=0 axes=4 buttons=17 hats=1
+[INPUT] mode=scripted; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit
+[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames
+[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=1 mode=textured
+[TIMING] mode=coupled target_hz=59.904059904 render_hz=0 (0=adaptive) catchup_limit=4
+[HEADLESS] translated baseline; stop after 6006 frames
+[RR] frame 60  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/0/0/0  en 00 pc_sr 2719
+     dsp: ctrl 00 run 0 irq 0 slave 0 fault 0 pc 0000 idle 0 imr 0 ifr 0 intm 0 pdp 0 steps 0
+[SND] sound CPU out of reset (#1), PC=C030
+[SND] sound CPU out of reset (#2), PC=C030
+[GLES2] CPU geometry allocation: 2138112 bytes
+[GLES2] first geometry frame=97 quads=3 triangles=6 draws=3
+[RR] frame 120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/40/80/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 22 steps 1776256
+[RR] frame 180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/100/200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 79 steps 2734393
+[RR] frame 240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/160/320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 139 steps 3783985
+[GLES2] frame=283 fps=56.45 quads=688 triangles=373 draws=186
+[TEX] decoded=710 uploads=710 GPU=15673904 peak=15673904 budget=67108864 live=710 hits=78792 misses=710 evictions=0 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[STAGES-RATE] window timing=coupled steps=283 rendered=283 skipped=0 wall_s=5.014 sim_hz=56.45 render_fps=56.45
+[STAGES] window timing=coupled cohort=rendered frames=1..283 samples=283 avg_ms core68k_other=5.890 dsp=2.175 sound=0.843 audio_mix=0.617 serial=0.006 board_io=0.004 video_latch=0.001 palette=0.246 direct_decode=0.006 list_decode=0.667 sort=0.102 scene_other=0.005 clip_build_state=0.670 texture_lookup_decode=0.366 texture_upload=0.361 vertex_upload=0.027 submission_other=0.152 draw_call=0.714 swap=1.420 host_wait=2.623 capture=0.809 avg_quads=280.9 avg_triangles=148.7 avg_draws=74.0 misses=710 evictions=0 texture_uploads=710 GPU_end=15673904 GPU_frame_end_peak=15673904
+[PROFILE] window mode=textured frames=1..283 samples=283 avg_ms simulation=9.534 scene=1.028 lookup_decode=0.366 uploads=0.361 submission=0.892 swap=1.420 render_other=0.670 pacing=2.594 capture=0.809 vertex_upload=0.027 draw_call=0.714 avg_triangles=148.7 avg_draws=74.0 avg_binds=77.5 avg_skipped_binds=0.0 flushes texture=20758 scissor=0 capacity=0 mutation=0 end=182 same_texture=145 empty_texture_flush=13400 vbo=frame avg_vertex_uploads=0.64 avg_vertex_bytes=17838.9 texture_barriers=0
+[PROFILE-CACHE] window mode=textured frames=1..283 samples=283 hits=78792 misses=710 evictions=0 texture_uploads=710 GPU_end=15673904 GPU_frame_end_peak=15673904
+[RR] frame 300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/220/440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 199 steps 4721666

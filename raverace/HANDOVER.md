@@ -5,9 +5,44 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
-## Focused M4A coverage continuation — COMPLETE / STOPPED (2026-10-15)
+## Controlled M4A H700 validation — COMPLETE / STOPPED (2026-10-15)
 
-The full6006-tick host replay now passes all21 authoritative CPU/RAM, board/video,
+Full6006-tick H700 replay and all 21 authoritative CPU/RAM, board/video and PCM/voice
+checkpoint sets pass.4207 live-native pictures/5,699,037 source commands; all 18
+sampled hardware HUDs pass the exact CPU oracle. Small host/Mali raster differences
+are disclosed. User reports good visuals with slow/garbled playback; bounded
+boot/menu control test1500 ticks has no perceived input delay. Native race controls
+and general interactive coverage remain unproven.
+
+No-capture repeat: world+HUD completion **10.187/12.071/13.441/24.458 ms** median/
+p95/p99/worst,1 renderer deadline miss. Actual native presentation intervals
+**31.601/38.636/41.615/49.866 ms**, all 4207 miss16.693 ms (~31.45 FPS). Simulation+
+scene alone median21.034 ms, over budget4206/4207 pictures. Compiler7.277 ms median;
+simulation10.432 ms, walk3.293 ms. Serial pipeline/audio real-time acceptance fails:
+3,596,071 underrun samples. Clean serial production-copy tick intervals median
+28.385 ms; this diagnostic is not the normal threaded/independent launcher.
+
+Native static482,760,448 bytes fits512 MiB, but full-live Mali allocation peaks
+~618MB and process peak~727 MiB. Initial test OOM at~tick 300 with192 MiB old M2/tmp
+outputs. Those outputs were copied/hash-verified into persistent diagnostic archive,
+then RAM copies removed; same prepared build passes. Clean whole-live headroom is
+limited (~114.5 MiB minimum available on repeat). No residency/clock/swap/gameplay
+optimisation was made. Timing logger double-close bug was fixed in a private
+instrumented build; failed run and all written samples retained, repeat exits0.
+
+Separate device test directory: `/userdata/system/rave-racer-native-live-4a-20261015`.
+EmulationStation restored; all 47 protected production/ROM/config/replay file hashes
+unchanged, no diagnostic game remains. No commit, push or production deployment.
+**M3 remains performance-BLOCKED;4B remains unauthorised. STOP.**
+See [current report](NATIVE_LIVE_INTEGRATION_REPORT.md) and
+[raw evidence/methods](benchmarks/native-live-h700-20261015/README.md).
+Review PNGs persist in `native/generated/milestone4a-hardware/results/validation-clean/review/`.
+Next work requires separate authorisation: profile live command compilation,
+immutable CPU/GPU handoff and a whole-live residency budget; do not begin it now.
+
+## Prior host-only M4A coverage phase (historical)
+
+The full6006-tick host replay now passes all 21 authoritative CPU/RAM, board/video,
 PCM/voice checkpoints. All3840 original M3 packets /5,152,196 commands retain parity.
 Full-replay audit preceded ROM-authenticated expansion:302 native meshes and four
 materials added; code2028/packet1456601 is covered. Native static482,760,448 bytes
@@ -260,10 +295,10 @@ including board/PCM/voices. Material/UV/gutter/index/instance/priority/hash gate
 pass. Native static world resources are482,471,936 bytes, below the declared512 MiB
 full-lap preload ceiling. No steady-state static mesh/material uploads occur.
 
-Final corrected H700 process: completion median**32.729ms**,p95**39.595ms**,
-p99**42.690ms**,worst**57.123ms**;3834/3840 exceed16.693ms without simulation/audio.
+Final corrected H700 process: completion median**32.729 ms**,p95**39.595 ms**,
+p99**42.690 ms**,worst**57.123 ms**;3834/3840 exceed16.693 ms without simulation/audio.
 Actual offline capacity31.165 pictures/s,1% low capacity20.924; these are not live
-FPS. Packet read median 13.191ms; derived completion minus reads still19.917ms,
+FPS. Packet read median 13.191 ms; derived completion minus reads still19.917 ms,
 so storage alone does not explain away the rendering failure. Startup25.438s,
 peak RSS567188 KiB. No further optimisation campaign after this failed gate.
 

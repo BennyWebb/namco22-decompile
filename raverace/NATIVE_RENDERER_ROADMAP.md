@@ -332,13 +332,34 @@ blocker is encountered. **Milestone 4B remains unauthorised.**
 
 - [x] Live simulation-generated scene commands drive the isolated host native renderer.
 - [x] Partial CPU/RAM, board/video, PCM/voice checkpoint prefix matches through tick 5400.
-- [x] Full original replay/state/audio validation completes through tick6006: all21 checkpoint sets match (focused continuation2026-10-15).
+- [x] Full original replay/state/audio validation completes through tick6006: all 21 checkpoint sets match (focused continuation2026-10-15).
 - [x] Isolated host prototype and rollback documented; production unchanged.
-- [ ] ARM/H700 build and physical gameplay measurements complete.
+- [x] Isolated ARM/H700 build and initial replay/timing/memory/audio measurements complete; whole-frame/audio acceptance fails. Native interactive playability remains open.
 - [x] Initial host diagnostics/fidelity and complete6006-tick coverage audit documented;302 native meshes/four materials added, including code2028/packet1456601.
-- [x] Focused host coverage continuation complete and STOPPED; isolated ARM build prepared locally only. No transfer, run, deployment, optimization or4B work.
+- [x] Host coverage and separately authorised H700 diagnostics complete / STOPPED. Isolated test transfer/run only; no production deployment, gameplay optimisation or4B work.
 - [x] Expanded native static482,760,448 bytes respects512 MiB; boot stays explicitly legacy-rendered. Full residency exceeds budget; bounded-state residency proposed.
 - [ ] General interactive/alternative-track/dynamic-format coverage proven.
+
+#### Controlled H700 validation continuation (authorised 2026-10-15)
+
+The user explicitly permits transfer of the prepared4A prototype and validated
+assets into a separate diagnostic directory, complete6006-tick replay/checkpoint
+validation, audio/control checks where safely possible, low-overhead timing and
+memory monitoring, then restoration of EmulationStation and production integrity
+checks. M3 remains performance-BLOCKED; no speculative optimisation, production
+deployment, commit/push or4B work. Existing host-only transfer prohibition is lifted
+solely for this diagnostic continuation. Stop after validation and reporting.
+
+Hardware continuation result: complete6006-tick replay/all 21 checkpoint sets pass;
+18 sampled H700 HUDs match exact source composition. Repeat world+HUD completion
+10.187/12.071 ms median/p95 in the live context, but actual frame intervals31.601/
+38.636 ms and all 4207 native intervals miss16.693 ms. Simulation+scene median21.034 ms
+already exceeds the full deadline. Audio3,596,071 underruns. Full-live GPU~618MB,
+RSS~727 MiB; initialOOM with stale192 MiB M2/tmp outputs preserved in evidence.
+Bounded boot/menu inputs respond without user-perceived delay; native race controls
+remain unproven. EmulationStation restored,47 protected file hashes unchanged.
+**Investigation complete / STOPPED. M3 remains performance-BLOCKED, not retroactively
+passed;4B not authorised.** See `NATIVE_LIVE_INTEGRATION_REPORT.md`.
 
 ### Remaining Milestone 4 / 4B — Full live-game integration (NOT AUTHORISED)
 

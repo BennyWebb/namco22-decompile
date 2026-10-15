@@ -1,0 +1,11 @@
+{
+  "protected_files": 47,
+  "all_sha256_unchanged": true,
+  "includes": "Production executable, launcher, controller config, HUD/replay settings, all production ROM/EEPROM source files and six original replay files.",
+  "emulationstation": [
+    "9821 emulationstation --exit-on-reboot-required"
+  ],
+  "diagnostic_games_running": [],
+  "settings": "gpu-hud-mode default; replay-mode off",
+  "no_commit_push_production_deployment": true
+}

@@ -1,0 +1,1123 @@
+
+SAMPLE 43776.78 159308.84
+VmPeak:	  107132 kB
+VmSize:	  107132 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    1148 kB
+VmRSS:	    1148 kB
+RssAnon:	     136 kB
+RssFile:	     948 kB
+RssShmem:	      64 kB
+VmData:	   51844 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47748 kB
+VmPTE:	      36 kB
+VmPMD:	      12 kB
+VmSwap:	       0 kB
+Threads:	1
+mali0                      0
+MemAvailable:     628836 kB
+CmaFree:           19632 kB
+1512000
+47204
+
+SAMPLE 43777.81 159311.33
+VmPeak:	  126300 kB
+VmSize:	  121072 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   35840 kB
+VmRSS:	   29900 kB
+RssAnon:	   17256 kB
+RssFile:	   12644 kB
+RssShmem:	       0 kB
+VmData:	   64460 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47748 kB
+VmPTE:	     156 kB
+VmPMD:	      16 kB
+VmSwap:	       0 kB
+Threads:	1
+mali0                      0
+MemAvailable:     611104 kB
+CmaFree:           19644 kB
+1320000
+47528
+
+SAMPLE 43778.85 159314.07
+VmPeak:	  346584 kB
+VmSize:	  291372 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   81032 kB
+VmRSS:	   81032 kB
+RssAnon:	   46924 kB
+RssFile:	   34108 kB
+RssShmem:	       0 kB
+VmData:	  150932 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     288 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                   1101
+  kctx-0xffffff800dca6000       1101
+MemAvailable:     581604 kB
+CmaFree:           14236 kB
+1512000
+47852
+
+SAMPLE 43779.88 159316.11
+VmPeak:	  356912 kB
+VmSize:	  356896 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  101364 kB
+VmRSS:	  101364 kB
+RssAnon:	   67256 kB
+RssFile:	   34108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     328 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                   1101
+  kctx-0xffffff800dca6000       1101
+MemAvailable:     561820 kB
+CmaFree:            2372 kB
+1320000
+47690
+
+SAMPLE 43780.92 159318.12
+VmPeak:	  356912 kB
+VmSize:	  356896 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  120108 kB
+VmRSS:	  120108 kB
+RssAnon:	   86000 kB
+RssFile:	   34108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     364 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                   1101
+  kctx-0xffffff800dca6000       1101
+MemAvailable:     543772 kB
+CmaFree:            2364 kB
+1320000
+46718
+
+SAMPLE 43781.96 159320.09
+VmPeak:	  356912 kB
+VmSize:	  356896 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  140172 kB
+VmRSS:	  140172 kB
+RssAnon:	  106064 kB
+RssFile:	   34108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     404 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                   1101
+  kctx-0xffffff800dca6000       1101
+MemAvailable:     524000 kB
+CmaFree:            2524 kB
+1320000
+46880
+
+SAMPLE 43782.99 159322.13
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  215192 kB
+RssAnon:	  115284 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     548 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     450244 kB
+CmaFree:            7360 kB
+1512000
+47447
+
+SAMPLE 43784.04 159324.13
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149652 kB
+RssAnon:	   49744 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516028 kB
+CmaFree:           14480 kB
+1200000
+47609
+
+SAMPLE 43785.08 159326.16
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149652 kB
+RssAnon:	   49744 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516284 kB
+CmaFree:           14480 kB
+1200000
+46961
+
+SAMPLE 43786.11 159328.15
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149652 kB
+RssAnon:	   49744 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516292 kB
+CmaFree:           14480 kB
+1200000
+46637
+
+SAMPLE 43787.15 159330.17
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149652 kB
+RssAnon:	   49744 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516580 kB
+CmaFree:           14492 kB
+1200000
+46961
+
+SAMPLE 43788.18 159332.23
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516160 kB
+CmaFree:           14536 kB
+1200000
+46475
+
+SAMPLE 43789.21 159334.28
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516232 kB
+CmaFree:           14536 kB
+1200000
+46070
+
+SAMPLE 43790.25 159336.29
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516264 kB
+CmaFree:           14540 kB
+1200000
+46880
+
+SAMPLE 43791.28 159338.33
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516488 kB
+CmaFree:           14540 kB
+1200000
+46475
+
+SAMPLE 43792.32 159340.36
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516356 kB
+CmaFree:           14540 kB
+1200000
+46313
+
+SAMPLE 43793.35 159342.39
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  149904 kB
+RssAnon:	   49996 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     424 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     516300 kB
+CmaFree:           14540 kB
+1200000
+46637
+
+SAMPLE 43794.38 159344.41
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  155712 kB
+RssAnon:	   55804 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     432 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     510368 kB
+CmaFree:           14540 kB
+1200000
+46799
+
+SAMPLE 43795.42 159346.41
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  178944 kB
+RssAnon:	   79036 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     480 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     487648 kB
+CmaFree:            2140 kB
+1512000
+46313
+
+SAMPLE 43796.46 159348.34
+VmPeak:	  422436 kB
+VmSize:	  422436 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  215192 kB
+VmRSS:	  201908 kB
+RssAnon:	  102000 kB
+RssFile:	   99908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     524 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  17518
+  kctx-0xffffff800dca6000      17518
+MemAvailable:     463824 kB
+CmaFree:            3088 kB
+1320000
+46637
+
+SAMPLE 43797.49 159350.62
+VmPeak:	  487976 kB
+VmSize:	  487976 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  280996 kB
+VmRSS:	  218240 kB
+RssAnon:	   52532 kB
+RssFile:	  165708 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     556 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  33935
+  kctx-0xffffff800dca6000      33935
+MemAvailable:     447868 kB
+CmaFree:           13328 kB
+1320000
+47690
+
+SAMPLE 43798.52 159352.48
+VmPeak:	  487976 kB
+VmSize:	  487976 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  280996 kB
+VmRSS:	  241472 kB
+RssAnon:	   75764 kB
+RssFile:	  165708 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     600 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  33935
+  kctx-0xffffff800dca6000      33935
+MemAvailable:     424664 kB
+CmaFree:            4752 kB
+1320000
+47609
+
+SAMPLE 43799.56 159354.67
+VmPeak:	  487976 kB
+VmSize:	  487976 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  280996 kB
+VmRSS:	  264704 kB
+RssAnon:	   98996 kB
+RssFile:	  165708 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     648 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  33935
+  kctx-0xffffff800dca6000      33935
+MemAvailable:     401452 kB
+CmaFree:            2412 kB
+1320000
+47528
+
+SAMPLE 43800.59 159357.01
+VmPeak:	  553516 kB
+VmSize:	  553516 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  346800 kB
+VmRSS:	  346800 kB
+RssAnon:	  115292 kB
+RssFile:	  231508 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     804 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  50352
+  kctx-0xffffff800dca6000      50352
+MemAvailable:     319216 kB
+CmaFree:            3544 kB
+1512000
+47852
+
+SAMPLE 43801.63 159359.10
+VmPeak:	  553516 kB
+VmSize:	  553516 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  346800 kB
+VmRSS:	  302904 kB
+RssAnon:	   71396 kB
+RssFile:	  231508 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     720 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  50352
+  kctx-0xffffff800dca6000      50352
+MemAvailable:     363436 kB
+CmaFree:           12100 kB
+1512000
+47609
+
+SAMPLE 43802.66 159361.08
+VmPeak:	  553516 kB
+VmSize:	  553516 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  346800 kB
+VmRSS:	  326136 kB
+RssAnon:	   94628 kB
+RssFile:	  231508 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     764 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  50352
+  kctx-0xffffff800dca6000      50352
+MemAvailable:     339992 kB
+CmaFree:            2376 kB
+1320000
+47123
+
+SAMPLE 43803.77 159363.10
+VmPeak:	  619056 kB
+VmSize:	  619056 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  412604 kB
+VmRSS:	  412604 kB
+RssAnon:	  115296 kB
+RssFile:	  297308 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     932 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  66769
+  kctx-0xffffff800dca6000      66769
+MemAvailable:     254072 kB
+CmaFree:            5092 kB
+1512000
+46880
+
+SAMPLE 43804.81 159365.28
+VmPeak:	  619056 kB
+VmSize:	  619056 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  412604 kB
+VmRSS:	  366068 kB
+RssAnon:	   68760 kB
+RssFile:	  297308 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     844 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  66769
+  kctx-0xffffff800dca6000      66769
+MemAvailable:     299508 kB
+CmaFree:           15924 kB
+1200000
+47285
+
+SAMPLE 43805.84 159367.27
+VmPeak:	  619056 kB
+VmSize:	  619056 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  412604 kB
+VmRSS:	  389036 kB
+RssAnon:	   91728 kB
+RssFile:	  297308 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     888 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  66769
+  kctx-0xffffff800dca6000      66769
+MemAvailable:     277032 kB
+CmaFree:            2752 kB
+1512000
+46637
+
+SAMPLE 43806.87 159369.15
+VmPeak:	  619056 kB
+VmSize:	  619056 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  412604 kB
+VmRSS:	  412268 kB
+RssAnon:	  114960 kB
+RssFile:	  297308 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     932 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  83186
+  kctx-0xffffff800dca6000      83186
+MemAvailable:     188808 kB
+CmaFree:            7908 kB
+1512000
+47690
+
+SAMPLE 43807.99 159371.47
+VmPeak:	  684596 kB
+VmSize:	  684596 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  478412 kB
+VmRSS:	  430792 kB
+RssAnon:	   67684 kB
+RssFile:	  363108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	     968 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  83186
+  kctx-0xffffff800dca6000      83186
+MemAvailable:     235944 kB
+CmaFree:           18652 kB
+1200000
+47771
+
+SAMPLE 43809.03 159373.40
+VmPeak:	  684596 kB
+VmSize:	  684596 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  478412 kB
+VmRSS:	  453760 kB
+RssAnon:	   90652 kB
+RssFile:	  363108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1016 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  83186
+  kctx-0xffffff800dca6000      83186
+MemAvailable:     211916 kB
+CmaFree:            2348 kB
+1512000
+46961
+
+SAMPLE 43810.06 159375.29
+VmPeak:	  684596 kB
+VmSize:	  684596 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  478412 kB
+VmRSS:	  476992 kB
+RssAnon:	  113884 kB
+RssFile:	  363108 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1060 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  83186
+  kctx-0xffffff800dca6000      83186
+MemAvailable:     188332 kB
+CmaFree:            7124 kB
+1200000
+47204
+
+SAMPLE 43811.10 159377.54
+VmPeak:	  750136 kB
+VmSize:	  750136 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  544216 kB
+VmRSS:	  492664 kB
+RssAnon:	   63756 kB
+RssFile:	  428908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1088 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  99603
+  kctx-0xffffff800dca6000      99603
+MemAvailable:     172792 kB
+CmaFree:           21428 kB
+1200000
+47285
+
+SAMPLE 43812.13 159379.49
+VmPeak:	  750136 kB
+VmSize:	  750136 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  544216 kB
+VmRSS:	  515896 kB
+RssAnon:	   86988 kB
+RssFile:	  428908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1136 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  99603
+  kctx-0xffffff800dca6000      99603
+MemAvailable:     149796 kB
+CmaFree:            2452 kB
+1512000
+47285
+
+SAMPLE 43813.16 159381.53
+VmPeak:	  750136 kB
+VmSize:	  750136 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  544216 kB
+VmRSS:	  538864 kB
+RssAnon:	  109956 kB
+RssFile:	  428908 kB
+RssShmem:	       0 kB
+VmData:	  216472 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1180 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                  99603
+  kctx-0xffffff800dca6000      99603
+MemAvailable:     126480 kB
+CmaFree:            3376 kB
+1512000
+47123
+
+SAMPLE 43814.24 159383.80
+VmPeak:	  815676 kB
+VmSize:	  760584 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  538608 kB
+RssAnon:	   59776 kB
+RssFile:	  478832 kB
+RssShmem:	       0 kB
+VmData:	  161380 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1208 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	7
+mali0                 118644
+  kctx-0xffffff800dca6000     118644
+MemAvailable:     101384 kB
+CmaFree:           22756 kB
+1512000
+47285
+
+SAMPLE 43815.29 159385.61
+VmPeak:	  897280 kB
+VmSize:	  831744 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  546664 kB
+RssAnon:	   52292 kB
+RssFile:	  494372 kB
+RssShmem:	       0 kB
+VmData:	  153256 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   47904 kB
+VmPTE:	    1224 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	8
+mali0                 119545
+  kctx-0xffffff800dca6000     119545
+MemAvailable:     104884 kB
+CmaFree:           17112 kB
+1512000
+48500
+
+SAMPLE 43816.33 159387.86
+VmPeak:	  897280 kB
+VmSize:	  854148 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  560788 kB
+RssAnon:	   53976 kB
+RssFile:	  506812 kB
+RssShmem:	       0 kB
+VmData:	  170896 kB
+VmStk:	     132 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1244 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	10
+mali0                 119613
+  kctx-0xffffff800dca6000     119613
+MemAvailable:     101872 kB
+CmaFree:           11760 kB
+1512000
+48581
+
+SAMPLE 43817.37 159390.90
+VmPeak:	 1240308 kB
+VmSize:	 1240308 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  567100 kB
+RssAnon:	   55148 kB
+RssFile:	  511796 kB
+RssShmem:	     156 kB
+VmData:	  180584 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1272 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 120977
+  kctx-0xffffff800dca6000     120977
+MemAvailable:      95176 kB
+CmaFree:           14144 kB
+1200000
+48500
+
+SAMPLE 43818.40 159394.04
+VmPeak:	 1242396 kB
+VmSize:	 1242396 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  568892 kB
+RssAnon:	   55292 kB
+RssFile:	  513444 kB
+RssShmem:	     156 kB
+VmData:	  182672 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1276 kB
+VmPMD:	      20 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 121105
+  kctx-0xffffff800dca6000     121105
+MemAvailable:      95272 kB
+CmaFree:           13068 kB
+1200000
+48500
+
+SAMPLE 43819.48 159397.24
+VmPeak:	 1255176 kB
+VmSize:	 1255176 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  583924 kB
+RssAnon:	   60952 kB
+RssFile:	  522816 kB
+RssShmem:	     156 kB
+VmData:	  186504 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1308 kB
+VmPMD:	      24 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 123090
+  kctx-0xffffff800dca6000     123090
+MemAvailable:      80524 kB
+CmaFree:           13604 kB
+1512000
+48014
+
+SAMPLE 43820.53 159399.94
+VmPeak:	 1274616 kB
+VmSize:	 1274616 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  584284 kB
+RssAnon:	   62112 kB
+RssFile:	  522016 kB
+RssShmem:	     156 kB
+VmData:	  187884 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1336 kB
+VmPMD:	      24 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 125564
+  kctx-0xffffff800dca6000     125564
+MemAvailable:      69192 kB
+CmaFree:           16612 kB
+1512000
+50849
+
+SAMPLE 43821.68 159402.87
+VmPeak:	 1406828 kB
+VmSize:	 1394264 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  597284 kB
+RssAnon:	   66468 kB
+RssFile:	  530656 kB
+RssShmem:	     160 kB
+VmData:	  192236 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1384 kB
+VmPMD:	      24 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 130085
+  kctx-0xffffff800dca6000     130085
+MemAvailable:      46936 kB
+CmaFree:            9392 kB
+1512000
+51740
+
+SAMPLE 43823.30 159405.87
+VmPeak:	 1407332 kB
+VmSize:	 1407332 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  609816 kB
+VmRSS:	  607384 kB
+RssAnon:	   68652 kB
+RssFile:	  538572 kB
+RssShmem:	     160 kB
+VmData:	  195320 kB
+VmStk:	     148 kB
+VmExe:	    7140 kB
+VmLib:	   52300 kB
+VmPTE:	    1408 kB
+VmPMD:	      24 kB
+VmSwap:	       0 kB
+Threads:	11
+mali0                 132779
+  kctx-0xffffff800dca6000     132779
+MemAvailable:     101296 kB
+CmaFree:           17952 kB
+1200000
+52550

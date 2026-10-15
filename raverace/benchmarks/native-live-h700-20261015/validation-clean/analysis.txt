@@ -1,0 +1,223 @@
+{
+  "native": {
+    "wait_ms": {
+      "n": 4207,
+      "median_ms": 0.0,
+      "p95_ms": 0.0,
+      "p99_ms": 0.0,
+      "worst_ms": 0.0,
+      "mean_ms": 0.0,
+      "missed_16_693_ms": 0
+    },
+    "read_ms": {
+      "n": 4207,
+      "median_ms": 0.0,
+      "p95_ms": 0.0,
+      "p99_ms": 0.0,
+      "worst_ms": 0.0,
+      "mean_ms": 0.0,
+      "missed_16_693_ms": 0
+    },
+    "inflate_ms": {
+      "n": 4207,
+      "median_ms": 0.0,
+      "p95_ms": 0.0,
+      "p99_ms": 0.0,
+      "worst_ms": 0.0,
+      "mean_ms": 0.0,
+      "missed_16_693_ms": 0
+    },
+    "worker_cpu_ms": {
+      "n": 4207,
+      "median_ms": 0.0,
+      "p95_ms": 0.0,
+      "p99_ms": 0.0,
+      "worst_ms": 0.0,
+      "mean_ms": 0.0,
+      "missed_16_693_ms": 0
+    },
+    "prepare_ms": {
+      "n": 4207,
+      "median_ms": 0.076705,
+      "p95_ms": 0.106038,
+      "p99_ms": 0.145578,
+      "worst_ms": 0.534978,
+      "mean_ms": 0.07924867791775612,
+      "missed_16_693_ms": 0
+    },
+    "upload_ms": {
+      "n": 4207,
+      "median_ms": 0.157743,
+      "p95_ms": 0.181242,
+      "p99_ms": 0.278988,
+      "worst_ms": 0.510145,
+      "mean_ms": 0.1614801316852864,
+      "missed_16_693_ms": 0
+    },
+    "world_submit_ms": {
+      "n": 4207,
+      "median_ms": 1.472939,
+      "p95_ms": 2.530395,
+      "p99_ms": 3.094914,
+      "worst_ms": 5.38711,
+      "mean_ms": 1.5724949265509862,
+      "missed_16_693_ms": 0
+    },
+    "world_sync_ms": {
+      "n": 4207,
+      "median_ms": 0.000125,
+      "p95_ms": 0.000333,
+      "p99_ms": 0.000459,
+      "worst_ms": 0.000916,
+      "mean_ms": 0.0001739474685048729,
+      "missed_16_693_ms": 0
+    },
+    "hud_submit_ms": {
+      "n": 4207,
+      "median_ms": 0.844006,
+      "p95_ms": 1.084435,
+      "p99_ms": 1.430149,
+      "worst_ms": 177.790164,
+      "mean_ms": 0.9780786365581176,
+      "missed_16_693_ms": 6
+    },
+    "finish_ms": {
+      "n": 4207,
+      "median_ms": 7.51673,
+      "p95_ms": 8.741011,
+      "p99_ms": 9.278448,
+      "worst_ms": 11.683723,
+      "mean_ms": 7.490369437366295,
+      "missed_16_693_ms": 0
+    },
+    "total_ms": {
+      "n": 4207,
+      "median_ms": 10.178994,
+      "p95_ms": 12.149538,
+      "p99_ms": 13.763928,
+      "worst_ms": 183.127719,
+      "mean_ms": 10.281845757546945,
+      "missed_16_693_ms": 19
+    },
+    "cpu_ms": {
+      "n": 4207,
+      "median_ms": 2.667376,
+      "p95_ms": 3.808041,
+      "p99_ms": 4.632208,
+      "worst_ms": 11.435418,
+      "mean_ms": 2.7839739947706206,
+      "missed_16_693_ms": 0
+    },
+    "interval_ms": {
+      "n": 4207,
+      "median_ms": 31.633312,
+      "p95_ms": 38.693354,
+      "p99_ms": 42.488069,
+      "worst_ms": 209.399642,
+      "mean_ms": 31.917348367720464,
+      "missed_16_693_ms": 4207
+    }
+  },
+  "native_source_commands": 5699037,
+  "first_native_frame": {
+    "pass": "0",
+    "tick": "1800",
+    "primitives": "1453",
+    "visible": "1178",
+    "culled": "275",
+    "draws": "107",
+    "vertices": "7278",
+    "instances": "50",
+    "dynamic_bytes": "42048",
+    "wait_ms": "0.000000",
+    "read_ms": "0.000000",
+    "inflate_ms": "0.000000",
+    "worker_cpu_ms": "0.000000",
+    "prepare_ms": "0.135953",
+    "upload_ms": "0.203783",
+    "world_submit_ms": "2.471481",
+    "world_sync_ms": "0.000333",
+    "hud_submit_ms": "64.469203",
+    "finish_ms": "4.029083",
+    "total_ms": "71.309836",
+    "cpu_ms": "10.615831",
+    "interval_ms": "71.309836"
+  },
+  "live": {
+    "walk_ms": {
+      "n": 4207,
+      "median_ms": 3.294988,
+      "p95_ms": 4.316529,
+      "p99_ms": 5.071748,
+      "worst_ms": 10.568533,
+      "mean_ms": 3.3621204761112433,
+      "missed_16_693_ms": 0
+    },
+    "compile_ms": {
+      "n": 4207,
+      "median_ms": 7.2492,
+      "p95_ms": 9.777261,
+      "p99_ms": 11.041083,
+      "worst_ms": 19.659112,
+      "mean_ms": 7.411147042072736,
+      "missed_16_693_ms": 1
+    },
+    "renderer_ms": {
+      "n": 4207,
+      "median_ms": 10.243951,
+      "p95_ms": 12.218411,
+      "p99_ms": 13.844759,
+      "worst_ms": 207.362306,
+      "mean_ms": 10.401342596862373,
+      "missed_16_693_ms": 19
+    }
+  },
+  "completed_tick_intervals": {
+    "all": {
+      "n": 6005,
+      "median_ms": 30.769348006288055,
+      "p95_ms": 40.36128600273514,
+      "p99_ms": 44.84851699817227,
+      "worst_ms": 240.84112999844365,
+      "mean_ms": 29.338684871607267,
+      "missed_16_693_ms": 5510
+    },
+    "native": {
+      "n": 4207,
+      "median_ms": 31.61747700505657,
+      "p95_ms": 38.49940099462401,
+      "p99_ms": 42.701894002675544,
+      "worst_ms": 240.84112999844365,
+      "mean_ms": 31.92574491918303,
+      "missed_16_693_ms": 4207
+    },
+    "m3_window": {
+      "n": 3840,
+      "median_ms": 31.71970500261523,
+      "p95_ms": 38.612102005572524,
+      "p99_ms": 42.50265099835815,
+      "worst_ms": 109.75290900387336,
+      "mean_ms": 31.952413418751274,
+      "missed_16_693_ms": 3840
+    }
+  },
+  "memory": {
+    "samples": 203,
+    "max_rss_kib": 744612,
+    "max_hwm_kib": 744644,
+    "max_mali_bytes": 617852928,
+    "min_available_kib": 124796,
+    "last": {
+      "uptime_seconds": 44327.692526,
+      "VmRSS_kib": 707220,
+      "VmHWM_kib": 744644,
+      "RssAnon_kib": 98968,
+      "RssFile_kib": 608252,
+      "MemAvailable_kib": 125780,
+      "CmaFree_kib": 4656,
+      "mali_pages": 142507,
+      "mali_bytes": 583708672
+    }
+  },
+  "definition": "Nearest-rank p95/p99, standard median, all samples retained. Native interval includes previous completion to this completion, including transition. One final glFinish; finish_ms is CPU wait, not isolated GPU execution. RSS and Mali backing overlap; do not add."
+}
