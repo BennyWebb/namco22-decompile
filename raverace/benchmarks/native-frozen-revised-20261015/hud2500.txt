@@ -1,0 +1,6 @@
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[VIDEO] presentations=2 full_layer_uploads=2
+[GPU-HUD] pictures=1 verified=0 bytes=203904 calls=232 profile_bytes=0 profile_calls=0
+[GPU-HUD-TRANSFER] scope=profile glyph_bytes=0 vertex_bytes=0 palette_bytes=0 lut_bytes=0
+HUD_CHECK cpu_gpu_differences=0 opaque_glyph_pixels=22867 changed_opaque_glyph_pixels=0 world_priority_pixels_changed=0 changed_glyph_priority_pixels=0

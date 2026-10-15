@@ -1,0 +1,99 @@
+GPU Mali-G31 VERSION OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+FEATURES units=16 max_texture=8192 depth_requested=24
+DEPTH unique=1328 min_separation_16bit_lsb=35.893984
+ASSETS resources=670 original_draws=1280 resident_draws=701 vertices=7998 texture_bytes=26098156 vertex_bytes=319920 index_bytes=31992 steady_upload_bytes=0
+LOAD wall_ms=526.986633
+VERIFY mode=0 vs_original=0 vs_capture=0
+VERIFY mode=1 vs_original=0 vs_capture=0
+VERIFY mode=2 vs_original=0 vs_capture=0
+TIMING sample=0 mode=0 cpu_ms=15.236459 submission_ms=15.245130 completion_ms=28.297354
+TIMING sample=0 mode=1 cpu_ms=16.812750 submission_ms=16.883768 completion_ms=29.984660
+TIMING sample=0 mode=2 cpu_ms=10.909915 submission_ms=10.984864 completion_ms=22.878924
+TIMING sample=1 mode=1 cpu_ms=14.898915 submission_ms=15.061498 completion_ms=28.113180
+TIMING sample=1 mode=2 cpu_ms=11.084583 submission_ms=11.238289 completion_ms=23.167851
+TIMING sample=1 mode=0 cpu_ms=19.186625 submission_ms=19.234886 completion_ms=32.387447
+TIMING sample=2 mode=2 cpu_ms=11.214916 submission_ms=11.487005 completion_ms=23.491527
+TIMING sample=2 mode=0 cpu_ms=15.490170 submission_ms=15.877026 completion_ms=28.884623
+TIMING sample=2 mode=1 cpu_ms=14.724459 submission_ms=14.797781 completion_ms=28.076888
+TIMING sample=3 mode=0 cpu_ms=18.232082 submission_ms=18.307482 completion_ms=31.676091
+TIMING sample=3 mode=1 cpu_ms=14.695250 submission_ms=14.703320 completion_ms=28.101014
+TIMING sample=3 mode=2 cpu_ms=13.671333 submission_ms=14.693486 completion_ms=26.625715
+TIMING sample=4 mode=1 cpu_ms=14.857418 submission_ms=15.137001 completion_ms=28.187475
+TIMING sample=4 mode=2 cpu_ms=10.910499 submission_ms=11.161661 completion_ms=22.957510
+TIMING sample=4 mode=0 cpu_ms=19.161291 submission_ms=19.243220 completion_ms=32.662414
+TIMING sample=5 mode=2 cpu_ms=11.064000 submission_ms=11.218246 completion_ms=23.313772
+TIMING sample=5 mode=0 cpu_ms=15.190875 submission_ms=15.198545 completion_ms=28.343105
+TIMING sample=5 mode=1 cpu_ms=17.020000 submission_ms=17.173360 completion_ms=30.480300
+TIMING sample=6 mode=0 cpu_ms=15.223291 submission_ms=15.430594 completion_ms=28.608114
+TIMING sample=6 mode=1 cpu_ms=17.611292 submission_ms=17.619291 completion_ms=30.713058
+TIMING sample=6 mode=2 cpu_ms=11.048918 submission_ms=11.261498 completion_ms=23.172851
+TIMING sample=7 mode=1 cpu_ms=14.756167 submission_ms=14.788115 completion_ms=27.991552
+TIMING sample=7 mode=2 cpu_ms=12.587375 submission_ms=12.830549 completion_ms=24.899116
+TIMING sample=7 mode=0 cpu_ms=15.021500 submission_ms=15.031202 completion_ms=28.232178
+TIMING sample=8 mode=2 cpu_ms=10.851292 submission_ms=10.883858 completion_ms=22.904712
+TIMING sample=8 mode=0 cpu_ms=22.008583 submission_ms=22.019641 completion_ms=35.085030
+TIMING sample=8 mode=1 cpu_ms=14.718000 submission_ms=14.726943 completion_ms=27.868417
+TIMING sample=9 mode=0 cpu_ms=14.897333 submission_ms=14.907449 completion_ms=28.407935
+TIMING sample=9 mode=1 cpu_ms=21.298208 submission_ms=21.350494 completion_ms=34.466676
+TIMING sample=9 mode=2 cpu_ms=10.978211 submission_ms=11.230203 completion_ms=23.301392
+TIMING sample=10 mode=1 cpu_ms=14.739333 submission_ms=14.748111 completion_ms=27.799874
+TIMING sample=10 mode=2 cpu_ms=14.988958 submission_ms=15.165291 completion_ms=27.120310
+TIMING sample=10 mode=0 cpu_ms=15.148167 submission_ms=15.157166 completion_ms=28.319516
+TIMING sample=11 mode=2 cpu_ms=11.037208 submission_ms=11.102407 completion_ms=23.011591
+TIMING sample=11 mode=0 cpu_ms=23.559333 submission_ms=23.567067 completion_ms=36.787628
+TIMING sample=11 mode=1 cpu_ms=14.689417 submission_ms=14.698275 completion_ms=27.754289
+TIMING sample=12 mode=0 cpu_ms=15.161833 submission_ms=15.170541 completion_ms=28.598066
+TIMING sample=12 mode=1 cpu_ms=22.190708 submission_ms=22.200648 completion_ms=35.343372
+TIMING sample=12 mode=2 cpu_ms=11.246291 submission_ms=11.415834 completion_ms=23.293934
+TIMING sample=13 mode=1 cpu_ms=14.989333 submission_ms=14.998035 completion_ms=28.021381
+TIMING sample=13 mode=2 cpu_ms=11.084583 submission_ms=11.296955 completion_ms=23.156429
+TIMING sample=13 mode=0 cpu_ms=22.466583 submission_ms=22.477240 completion_ms=35.514669
+TIMING sample=14 mode=2 cpu_ms=11.044875 submission_ms=11.263370 completion_ms=23.198013
+TIMING sample=14 mode=0 cpu_ms=15.145458 submission_ms=15.154499 completion_ms=28.183470
+TIMING sample=14 mode=1 cpu_ms=23.339083 submission_ms=23.459689 completion_ms=36.712958
+TIMING sample=15 mode=0 cpu_ms=14.963750 submission_ms=14.972576 completion_ms=28.095592
+TIMING sample=15 mode=1 cpu_ms=14.579666 submission_ms=14.589272 completion_ms=27.678536
+TIMING sample=15 mode=2 cpu_ms=13.769959 submission_ms=14.181800 completion_ms=26.043774
+TIMING sample=16 mode=1 cpu_ms=14.877833 submission_ms=15.014786 completion_ms=28.227387
+TIMING sample=16 mode=2 cpu_ms=12.064375 submission_ms=13.070181 completion_ms=25.051575
+TIMING sample=16 mode=0 cpu_ms=15.153126 submission_ms=15.327713 completion_ms=28.362517
+TIMING sample=17 mode=2 cpu_ms=11.147874 submission_ms=11.642175 completion_ms=23.845743
+TIMING sample=17 mode=0 cpu_ms=21.818541 submission_ms=21.875970 completion_ms=34.822605
+TIMING sample=17 mode=1 cpu_ms=15.756040 submission_ms=16.423166 completion_ms=30.980686
+TIMING sample=18 mode=0 cpu_ms=9.252375 submission_ms=9.260804 completion_ms=21.913804
+TIMING sample=18 mode=1 cpu_ms=8.679250 submission_ms=8.687452 completion_ms=21.390704
+TIMING sample=18 mode=2 cpu_ms=6.722541 submission_ms=6.917311 completion_ms=18.652364
+TIMING sample=19 mode=1 cpu_ms=14.697751 submission_ms=14.764445 completion_ms=27.868418
+TIMING sample=19 mode=2 cpu_ms=10.855250 submission_ms=11.115407 completion_ms=22.985548
+TIMING sample=19 mode=0 cpu_ms=15.057292 submission_ms=15.066200 completion_ms=28.087501
+TIMING sample=20 mode=2 cpu_ms=14.052207 submission_ms=14.477057 completion_ms=26.410531
+TIMING sample=20 mode=0 cpu_ms=15.081291 submission_ms=15.139870 completion_ms=28.323927
+TIMING sample=20 mode=1 cpu_ms=14.673750 submission_ms=14.683689 completion_ms=27.918997
+TIMING sample=21 mode=0 cpu_ms=18.336417 submission_ms=18.403060 completion_ms=31.778790
+TIMING sample=21 mode=1 cpu_ms=14.772500 submission_ms=14.781984 completion_ms=27.922164
+TIMING sample=21 mode=2 cpu_ms=11.049459 submission_ms=11.233660 completion_ms=23.169925
+TIMING sample=22 mode=1 cpu_ms=16.894541 submission_ms=16.904511 completion_ms=29.922521
+TIMING sample=22 mode=2 cpu_ms=10.736708 submission_ms=10.850939 completion_ms=22.805163
+TIMING sample=22 mode=0 cpu_ms=18.993083 submission_ms=19.003163 completion_ms=32.041132
+TIMING sample=23 mode=2 cpu_ms=10.941583 submission_ms=11.413665 completion_ms=23.279304
+TIMING sample=23 mode=0 cpu_ms=15.019958 submission_ms=15.029784 completion_ms=28.336261
+TIMING sample=23 mode=1 cpu_ms=21.679417 submission_ms=21.690293 completion_ms=34.801014
+TIMING sample=24 mode=0 cpu_ms=15.057833 submission_ms=15.116370 completion_ms=28.236257
+TIMING sample=24 mode=1 cpu_ms=14.652000 submission_ms=14.824943 completion_ms=28.164255
+TIMING sample=24 mode=2 cpu_ms=15.182294 submission_ms=15.433755 completion_ms=27.331269
+TIMING sample=25 mode=1 cpu_ms=14.763833 submission_ms=14.780442 completion_ms=27.888204
+TIMING sample=25 mode=2 cpu_ms=11.745042 submission_ms=12.939924 completion_ms=24.744560
+TIMING sample=25 mode=0 cpu_ms=15.286459 submission_ms=15.339252 completion_ms=28.495891
+TIMING sample=26 mode=2 cpu_ms=12.139125 submission_ms=12.535994 completion_ms=24.507719
+TIMING sample=26 mode=0 cpu_ms=15.135750 submission_ms=15.143537 completion_ms=28.293176
+TIMING sample=26 mode=1 cpu_ms=14.756292 submission_ms=14.765609 completion_ms=27.875371
+TIMING sample=27 mode=0 cpu_ms=21.830208 submission_ms=21.885050 completion_ms=34.918018
+TIMING sample=27 mode=1 cpu_ms=14.705250 submission_ms=14.714231 completion_ms=27.846786
+TIMING sample=27 mode=2 cpu_ms=12.530292 submission_ms=12.613580 completion_ms=24.658057
+TIMING sample=28 mode=1 cpu_ms=15.010749 submission_ms=15.421296 completion_ms=28.480557
+TIMING sample=28 mode=2 cpu_ms=11.084583 submission_ms=11.362580 completion_ms=23.244136
+TIMING sample=28 mode=0 cpu_ms=22.020333 submission_ms=22.030638 completion_ms=35.167401
+TIMING sample=29 mode=2 cpu_ms=10.755625 submission_ms=10.763352 completion_ms=22.528487
+TIMING sample=29 mode=0 cpu_ms=15.039667 submission_ms=15.083202 completion_ms=28.241799
+TIMING sample=29 mode=1 cpu_ms=23.176291 submission_ms=23.189009 completion_ms=36.270021
+RSS max_kib=141108

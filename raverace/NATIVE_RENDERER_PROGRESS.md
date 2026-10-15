@@ -1,5 +1,50 @@
 # Native renderer progress
 
+**Current: revised Milestone 2 COMPLETE, 2026-10-15. STOPPED at its exit gate.**
+Milestone 1 remains complete. The current gate and evidence follow.
+
+## Revised Milestone 2 — COMPLETE (2026-10-15)
+
+Milestone 1's completed exit gate was confirmed before this work. The revised
+M2 exit gate now passes. **STOPPED: Milestone 3 is not started or authorised.**
+No commit, push, deployment or production playable change occurred.
+
+The offline compiler now builds source-derived RGBA pages with fresh native UVs,
+source-aware gutters and snapshot palette provenance. The standalone renderer
+loads original local-space meshes and actual Q15 instances, prepares clipping
+once, projects through the native GPU camera and keeps its buffers resident.
+The previous projected-triangle probe remains historical failed evidence below.
+
+Acceptance evidence is in [the revised report](NATIVE_FROZEN_SCENE_REPORT.md)
+and [numeric records](benchmarks/native-frozen-revised-20261015/summary.json).
+Tick 2500 uses **81 draws**, one 4096² RGBA page, and **72.24 MiB budgeted native
+asset residency** including an 8 MiB reserve. Three matched H700 processes give
+completion medians **9.644 / 10.093 / 10.118 ms**, with p95
+**10.613 / 10.513 / 10.451 ms**: all pass the prospective 12/14 ms gate.
+The additional actual tick-3600 coastal scene gives **9.442 / 9.317 / 9.419 ms**,
+p95 at most **11.306 ms**, with 155 draws (the 128-draw target applies to tick
+2500). These are frozen-world completion measurements, not playable FPS.
+
+All 1,642 / 1,784 source primitives are represented, including nine direct
+polygons in each scene, both main/mirror views and priority/scissor boundaries.
+Independent source sampling, source mesh/instance comparisons, checksums and
+fresh UV validations pass. Full frames were visually reviewed. The isolated
+production HUD compositor preserves all **22,867 / 22,150 opaque glyph pixels**
+exactly; CPU/GPU HUD compositions agree. Texture sampling is intentionally
+visually faithful rather than incumbent-cache pixel exact.
+
+Final device checks: executable SHA256
+`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`,
+launcher `5358c57fe1a1d73b717c05a32e10b1683613db3771fc78b1ebad4ec6c22e3fad`;
+all five backup checks pass, including controls and mode files. EmulationStation
+restored (PID 11053); no game left running. Shared gameplay/engine sources have
+no changes. Diagnostic device files are in `/tmp` only. Existing saves/replays
+were read only, never used as diagnostic outputs.
+
+Live palette updates, changing scene commands, full-race residency, frame pacing,
+input/audio latency and playable integration remain unproved and outside M2.
+Next work requires separate explicit Milestone 3 authorisation.
+
 ## Milestone 1 — Recover and package reusable game assets
 
 **Authorised:** Milestone 1 only. **Status: COMPLETE.**
@@ -140,3 +185,88 @@ Raw evidence `/tmp/rr-m1-visible-validation.log`; packs
 `/tmp/rr-m1-visible-pack` and `/tmp/rr-m1-visible-pack-repeat`.
 Previous packs remain preserved; the terrain trace evidence is unchanged.
 Milestone 1 remains complete. No Milestone 2 work, deployment or commits.
+
+## Milestone 2 — Standalone native frozen-scene renderer (2026-10-15)
+
+**Authorised: Milestone 2 only. Status: FAILED/RETHINK. STOPPED at the measured
+resident-design gate. No Milestone 3 work.**
+
+Read [full report](NATIVE_FROZEN_SCENE_REPORT.md),
+[build/reproduction commands](native/render/README.md),
+[final metrics](benchmarks/native-frozen-20261015/summary.json) and
+[source validation](benchmarks/native-frozen-20261015/source-validation.json).
+
+Prior gate: all five M1 gates confirmed checked. Fresh final asset inspection and
+real-ROM/captured-resource validation pass (2,421 models, 670 resources,
+6,524,539 texels, zero differences). Starting HEAD `237641b`, clean tree.
+
+Delivered files:
+
+- `native/render/frozen.c`, `native/render/README.md`: isolated GLES2 resident
+  frozen-world ceiling probe, persistent buffers/RGBA textures, original and
+  grouped/indexed draw modes, correctness checks and timings; no emulator linked.
+- `native/tools/export_frozen_instances.py`: actual snapshot camera/instance/
+  packet/material export and converted-mesh coordinate validation.
+- `native/tools/analyse_frozen.py`: repeated-run analysis and comparison PNGs.
+- `benchmarks/native-frozen-20261015/{summary.json,source-validation.json,mali-run1.txt,mali-run2.txt,mali-run3.txt}`:
+  numeric evidence only; no game assets. Original device/run logs retained too.
+- `NATIVE_FROZEN_SCENE_REPORT.md`; roadmap/progress/handover updated.
+
+Accepted final evidence:
+
+| Item | Result |
+|---|---|
+| Original ROM mesh correspondence | 1,633 source quads / 6,468 valid raw vertices / 50 ROM models / 68 object-view tuples; zero discrepancies. Frozen capture and source snapshot have equal endpoint state. |
+| Full captured world pixels | All three modes in all three final H700 runs equal preserved Mali RGBA reference exactly. No polygons/resources omitted. |
+| Resource reuse | 670 2D RGBA resources, 7,998 vertices; 1,280 original draws -> 701 grouped draws. Candidate modes never upload/rebuild in timed loops. Baseline has a separate streamed VBO. |
+| Final H700 medians | Streamed original / resident original / resident grouped completion: 28.494 / 28.107 / 23.409 ms. Grouped CPU 11.132 ms; submission 11.467 ms. Three processes, 30 rotating triplets each; no final sample discarded. |
+| Native host | GLES build/run passes; candidate modes equal their llvmpipe original reference exactly. Host original differs from Mali capture at 941 pixels; portability equivalence not claimed. |
+| Invalid scene inputs | Short command header, malformed triangle count and empty command stream all reject with exit 2; raw logs `/tmp/rr-m2/negative-tests`. |
+| Overall exit | **Not passed.** Projected resident probe already lacks 16.693 ms headroom. Full local-space model/instance shader, native clipping/lighting and HUD integration were not implemented. No claim of a completed genuine native object renderer. |
+
+The measured first design is rejected, not the whole native-renderer objective.
+Per roadmap section 2.8 and the M2 redesign gate, stop before extending it.
+Proposed next bounded investigation: offline native mesh/material consolidation
+with fresh source UV/gutter/priority rules and an explicit draw-reduction budget;
+not a return to the rejected runtime cache atlas/array or dependent-lookup shader.
+This proposal is **not implemented** and needs separate authorisation as a revised
+Milestone 2. Full time-varying scene protocol/replay belongs to Milestone 3 and
+has not started.
+
+Local assets/captures: `/tmp/rr-m2/instances-final`, `/tmp/rr-m2/device-final`,
+`/tmp/rr-m2/analysis-final` (side-by-side PNG: incumbent left, resident right).
+Private host binaries `/tmp/rr-m2/frozen-host` SHA256
+`a7580666cc6420327f6fa4ee9c42891019e2399a761786c7a3d71565a0dbf8a2`,
+`/tmp/rr-m2/frozen-arm` SHA256
+`885b3ba5d4fce866cf91570db549a80f59c07655d8465642cb78d5305e1c1196`.
+Device binary `/tmp/rr-m2-frozen-final`, results `/tmp/rr-m2-results-final`.
+Earlier shared-VBO exploratory results are preserved under `/tmp/rr-m2/device`;
+only the separate-buffer final results support the headline numbers.
+No new racing FPS, refresh/swap policy, latency or audio result is claimed.
+
+Final device checks after all tests: production executable, launcher and
+controller hashes match M1/hand-over references; all five backup checksum entries
+pass; exactly one Rave Racer Ports launcher; frontend restored (PID **5664**), no
+rr_gles2 game process, GPU HUD `default`, replay `off`. No production deployment,
+shared gameplay/simulation/audio/renderer source edits, commits, push, settings
+changes or deletion of user data. No credentials stored. No transfers during runs.
+
+**STOPPED. Milestone 2 requires an approved redesign to resume; Milestone 3
+requires explicit user authorisation and the earlier gate must be resolved.**
+
+## Milestone 2 focused revision authorised (2026-10-15)
+
+The user requested amendment of M2 to carry out the focused offline native
+mesh/material consolidation proposal. The roadmap now defines that authorised
+revision: actual-source footprint audit and deterministic RGBA compiler, fresh
+native UV/seam/gutter rules, small terrain/car fidelity gate, genuine reusable
+mesh/instance backend, complete frozen scenes and repeated H700 headroom tests.
+Initial working budgets: <=128 world draws, <=128 MiB native asset residency;
+world completion median <=12 ms / p95 <=14 ms on tick 2500. These are prospective
+acceptance targets, not measured results or a claim that the design is feasible.
+
+All revised gates are unchecked. This amendment changed documentation only; the
+initial 23.409 ms failure and its captures/source remain preserved. Implementation
+has not resumed as part of this amendment. Follow the revised roadmap's bounded
+sequence and stop at its first failed gate or completion. No Milestone 3, commit,
+push, deployment or production change is authorised.

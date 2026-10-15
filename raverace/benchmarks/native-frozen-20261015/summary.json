@@ -1,0 +1,193 @@
+{
+  "runs": [
+    {
+      "run": "run1",
+      "modes": {
+        "0": {
+          "thread_cpu_ms": {
+            "median": 15.217375,
+            "p95": 23.016417,
+            "maximum": 23.648916
+          },
+          "submission_ms": {
+            "median": 15.4110155,
+            "p95": 23.026568,
+            "maximum": 23.733374
+          },
+          "completion_ms": {
+            "median": 28.532239,
+            "p95": 36.095749,
+            "maximum": 36.694136
+          }
+        },
+        "1": {
+          "thread_cpu_ms": {
+            "median": 14.8633115,
+            "p95": 20.256167,
+            "maximum": 21.430292
+          },
+          "submission_ms": {
+            "median": 14.893724500000001,
+            "p95": 20.41357,
+            "maximum": 21.485005
+          },
+          "completion_ms": {
+            "median": 28.1248575,
+            "p95": 33.543306,
+            "maximum": 35.049232
+          }
+        },
+        "2": {
+          "thread_cpu_ms": {
+            "median": 11.690582,
+            "p95": 14.190292,
+            "maximum": 14.581916
+          },
+          "submission_ms": {
+            "median": 11.896835,
+            "p95": 14.68838,
+            "maximum": 15.117071
+          },
+          "completion_ms": {
+            "median": 23.9094655,
+            "p95": 26.605278,
+            "maximum": 27.041508
+          }
+        }
+      },
+      "rss_kib": 141068
+    },
+    {
+      "run": "run2",
+      "modes": {
+        "0": {
+          "thread_cpu_ms": {
+            "median": 15.1650405,
+            "p95": 21.305791,
+            "maximum": 23.694791
+          },
+          "submission_ms": {
+            "median": 15.2702405,
+            "p95": 21.316532,
+            "maximum": 23.760592
+          },
+          "completion_ms": {
+            "median": 28.4943785,
+            "p95": 34.458952,
+            "maximum": 36.752613
+          }
+        },
+        "1": {
+          "thread_cpu_ms": {
+            "median": 14.806270999999999,
+            "p95": 18.683542,
+            "maximum": 23.163666
+          },
+          "submission_ms": {
+            "median": 14.875958,
+            "p95": 18.726949,
+            "maximum": 23.175192
+          },
+          "completion_ms": {
+            "median": 28.0892505,
+            "p95": 32.023573,
+            "maximum": 36.557849
+          }
+        },
+        "2": {
+          "thread_cpu_ms": {
+            "median": 11.132083,
+            "p95": 15.531417,
+            "maximum": 16.792333
+          },
+          "submission_ms": {
+            "median": 11.4673865,
+            "p95": 15.97866,
+            "maximum": 17.090279
+          },
+          "completion_ms": {
+            "median": 23.4092445,
+            "p95": 27.749055,
+            "maximum": 29.297674
+          }
+        }
+      },
+      "rss_kib": 141008
+    },
+    {
+      "run": "run3",
+      "modes": {
+        "0": {
+          "thread_cpu_ms": {
+            "median": 15.207083,
+            "p95": 22.020333,
+            "maximum": 23.559333
+          },
+          "submission_ms": {
+            "median": 15.2864215,
+            "p95": 22.030638,
+            "maximum": 23.567067
+          },
+          "completion_ms": {
+            "median": 28.451912999999998,
+            "p95": 35.167401,
+            "maximum": 36.787628
+          }
+        },
+        "1": {
+          "thread_cpu_ms": {
+            "median": 14.814959,
+            "p95": 22.190708,
+            "maximum": 23.339083
+          },
+          "submission_ms": {
+            "median": 14.911489,
+            "p95": 22.200648,
+            "maximum": 23.459689
+          },
+          "completion_ms": {
+            "median": 28.107097,
+            "p95": 35.343372,
+            "maximum": 36.712958
+          }
+        },
+        "2": {
+          "thread_cpu_ms": {
+            "median": 11.084583,
+            "p95": 14.052207,
+            "maximum": 15.182294
+          },
+          "submission_ms": {
+            "median": 11.329767499999999,
+            "p95": 14.693486,
+            "maximum": 15.433755
+          },
+          "completion_ms": {
+            "median": 23.286619,
+            "p95": 26.625715,
+            "maximum": 27.331269
+          }
+        }
+      },
+      "rss_kib": 141108
+    }
+  ],
+  "median_of_round_medians": {
+    "0": {
+      "thread_cpu_ms": 15.207083,
+      "submission_ms": 15.2864215,
+      "completion_ms": 28.4943785
+    },
+    "1": {
+      "thread_cpu_ms": 14.814959,
+      "submission_ms": 14.893724500000001,
+      "completion_ms": 28.107097
+    },
+    "2": {
+      "thread_cpu_ms": 11.132083,
+      "submission_ms": 11.4673865,
+      "completion_ms": 23.4092445
+    }
+  },
+  "scope": "Frozen world pass only; completion includes command submission and glFinish, not exclusive GPU time or playable FPS."
+}

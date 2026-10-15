@@ -1,6 +1,6 @@
 # Rave Racer — Native H700 Renderer Roadmap
 
-**Status:** Milestone 1 COMPLETE (2026-10-14); Milestone 2 not started or authorised. See [progress and acceptance evidence](NATIVE_RENDERER_PROGRESS.md).  
+**Status:** Milestones 1 and revised 2 COMPLETE (2026-10-15). STOPPED at M2 exit gate. Initial failed probe retained as historical evidence. Milestone 3 not started or authorised.
 **Target:** Anbernic RG40XX H / Allwinner H700 / Cortex-A53 ARM64 / Mali-G31 / Knulli.  
 **Approach:** A **separate native renderer and offline asset pipeline**, initially driven by the original Rave Racer simulation.  
 **Primary goal:** Original game handling and behaviour with visually faithful graphics at a consistently paced arcade-rate **59.9040599 Hz** (or an explicitly validated display-compatible presentation policy).  
@@ -107,34 +107,115 @@ recipes. All five gates below passed.
 
 **STOP. Do not begin Milestone 2.**
 
-### Milestone 2 — Build a standalone native frozen-scene renderer
+### Milestone 2 — Native frozen-scene renderer with offline mesh/material consolidation
 
-**Outcome:** Render a representative actual Rave Racer scene using persistent native assets, with *no running game simulation* in the benchmark loop.
+**Authorisation:** User approved this focused revision on 2026-10-15. This replaces
+the rejected ordinary-2D resident draw design; its measurements remain in
+[NATIVE_FROZEN_SCENE_REPORT.md](NATIVE_FROZEN_SCENE_REPORT.md). Milestone 1 stays
+complete. The revision is now implemented and validated; see the revised report
+and progress entry for acceptance evidence.
 
-**Scope**
+**Outcome:** Render actual frozen Rave Racer scenes from converted reusable
+local-space meshes, original instance/camera state and **offline consolidated
+RGBA materials**, with persistent GPU resources and no running simulation.
 
-- Implement a separate GLES backend optimised for the H700/Mali-G31. Request/test actual supported GLES features; use a simple, performant RGBA shader first.
-- Load the converted meshes/materials once before timing. Use persistent GPU vertex/index buffers, grouped material draws and stable GPU texture resources. No per-frame ROM decode or GL texture creation/deletion in the steady-state benchmark.
-- Import real camera, instance transforms, per-object lighting, visibility/scissor information and material state from an existing frozen captured scene (start with tick 2500).
-- Choose and document a native coordinate and transform convention. Conventional GPU vertex transforms and a depth buffer are acceptable, but original synthetic priority, painter-order dependencies, transparency, sky/road overlays, near clipping, direct polygons and HUD interactions must be either represented correctly or explicitly identified as visual gaps. Do not assume depth testing alone reproduces them.
-- Add side-by-side captures against the current renderer at 640×480, a scene-coverage checklist, and automated geometry/material/instance checks. **Visual fidelity is the criterion; byte-identical pixels are not required.**
-- Benchmark representative static scenes with resources resident and warmed. Report thread CPU, submission/completion spans, world rendering cost, draw counts, GPU memory, frame completeness and driver caveats. Separate loading/preprocessing from steady-state timing. Do not interpret `glFinish` timings as exclusive shader cost or as live-game FPS.
+**Scope and bounded sequence**
+
+1. **Audit and budget before the full renderer.** Use the actual tick-2500 scene,
+   its source snapshot, M1 meshes, original source UVs and actual palette. Measure
+   source footprints, duplicate material coverage, scissor/priority constraints,
+   degenerate geometry and the minimum feasible material groups. Produce a
+   deterministic dry-run packing report including gutters/mips, native buffers,
+   peak loading/staging and physical page occupancy. Working targets are
+   **at most 128 world draws at tick 2500** (versus 701 rejected grouped draws)
+   and **at most 128 MiB native asset residency**, with CPU shadows and driver
+   overhead accounted separately. If these targets cannot be justified with
+   actual data, propose a specific change and stop before full integration.
+2. **Implement the offline material compiler.** Derive sampled footprints from
+   original mesh UVs, trim/deduplicate compatible content and bake actual RGBA
+   with a documented palette identity. Create bounded ordinary 2D material pages
+   or equivalent consolidated native material groups once before timing. Generate
+   **fresh native UVs**, seam vertices and appropriate source-aware gutters;
+   define texel-centre, nearest/filtering and mip contracts. Retain source UVs,
+   flags, provenance and material identity for validation. Outputs must be
+   deterministic, versioned, checksummed and ignored by Git. Record padding,
+   fragmentation and mip costs; do not assume all textures fit.
+3. **Small visual/geometry gate.** Validate actual terrain 1280, racing car 1945
+   and representative seam/flip/wrap/palette cases against original source
+   sampling. Measure changed texels/pixels and inspect enlarged comparisons.
+   Visual fidelity is the criterion; exact incumbent cache sampling is not.
+   Explain every intended sampling difference. Do not silently stretch UVs,
+   omit geometry or use a palette from a different snapshot. A failed small
+   visual test stops this design before the complete scene renderer.
+4. **Build the genuine standalone native backend.** Load reusable local-space
+   meshes/materials once into persistent vertex/index buffers. Import actual
+   model/view/projection, lighting, visibility and scissor state. Transform native
+   meshes in the GPU or an explicitly bounded load-time preparation step that
+   retains reusable object/instance identity. Coalesce compatible opaque mesh
+   parts by native material while respecting synthetic priority, painter ties,
+   transparency, mirror/scissor views and degenerate boundaries. Represent near
+   clipping, sky/road overlays, runtime point RAM/direct geometry and HUD/world
+   priority correctly or document visible gaps. A persistent replay of incumbent
+   projected triangles remains a diagnostic reference, **not the deliverable**.
+5. **Complete-scene fidelity and coverage.** Produce 640x480 side-by-side captures
+   and automated mesh/index/UV/material/instance checks against the current
+   renderer. Begin at actual tick 2500; include at least one additional actual
+   frozen race scene if the first scene passes. Account for every captured
+   object/polygon and explicitly identify any fallback, dynamic or missing
+   content. HUD may use an isolated captured/compositor reference at this stage;
+   its completeness and priority interactions must be checked, not presumed.
+6. **Real H700 validation.** Query supported GLES features; start with a simple
+   single-RGBA-sample shader. Upload all static resources before timing; no
+   steady-state ROM decode, geometry reconstruction, resource allocation or
+   static buffer/texture upload. Compare streamed incumbent, rejected resident
+   probe and revised native backend under matched conditions, with warm-ups,
+   rotating/alternating measurements and at least three independent processes.
+   Report thread CPU, submission/completion, p50/p95/p99, draw counts, resident
+   bytes, process RSS and loading costs separately. A working headroom budget is
+   **world completion median <=12 ms and p95 <=14 ms** on tick 2500, leaving
+   some of the 16.693 ms picture deadline for other work. Confirm this budget
+   before interpreting results; do not retrospectively relax it to declare a
+   pass. It is a frozen-world design target, not proof of live-game cadence.
+
+**Distinction from rejected designs**
+
+This is a new offline native material/UV contract. It must not revive the runtime
+exact-resource atlas/array allocator, relocate history-dependent incumbent bake
+resources while claiming exact sampling, or use a dependent map→pen→palette
+fragment shader. Original source UVs and fresh native vertices determine the
+material mapping; snapshot-consistent palette variants are baked before use.
+Investigate palette update feasibility and cost, but implementing live per-tick
+updates, race scene-command capture/playback or simulation integration is outside
+this milestone. If the distinction or budget cannot be demonstrated, stop rather
+than relabel an old failed experiment. Do not expand this into unlimited packing,
+shader or allocator optimisation: one bounded design through the gates above;
+a failure requires a documented redesign and stop.
 
 **Deliverables**
 
-- Standalone renderer executable using original ROM-derived converted assets; preserve independent production binary.
-- Frozen-scene comparison captures and `raverace/NATIVE_FROZEN_SCENE_REPORT.md`.
-- Reproducible native and H700 build/test commands plus asset-validation tests.
+- Offline native material/mesh consolidation compiler, format changes and tests;
+  deterministic manifests with source/UV/palette provenance and memory/draw budget.
+- Separate standalone native frozen-scene executable with original reusable
+  mesh/instance identity, persistent buffers and consolidated RGBA materials.
+- Native/H700 reproduction commands, actual comparison captures outside Git,
+  scene coverage checklist and updated `NATIVE_FROZEN_SCENE_REPORT.md`.
+- Updated progress and handover preserving the initial probe's failed evidence.
 
-**Exit gate**
+**Revised exit gate — COMPLETE (2026-10-15)**
 
-- [ ] The captured scene is recognisably faithful: correct major geometry, road, car/scenery placement, textures, camera and layering; significant exceptions are documented.
-- [ ] No per-frame rebuilding/uploading of static models or textures in steady-state mode.
-- [ ] Repeatable **real H700** measurements establish whether the new path has convincing performance headroom over the incumbent frozen-scene path; do not claim a full-game FPS result.
-- [ ] No gameplay/physics/simulation source changes, no production deployment.
-- [ ] If the native scene is too slow or visually incomplete for the stated model, document a focused redesign and stop.
+The initial design's 23.409 ms result and limited checked gates are historical;
+they do not satisfy any revised gate automatically. Check these only on new evidence.
 
-**STOP. Do not begin Milestone 3.**
+- [x] Actual-data dry run demonstrates a bounded draw/material/residency plan; compiler output is deterministic and checksum/provenance validated.
+- [x] Terrain/car/material seam tests validate the fresh native UV and RGBA contract; intended differences and palette policy are documented.
+- [x] A genuine reusable-mesh/instance native backend renders recognisably faithful complete frozen scenes, including required placement/layering; every significant gap is documented.
+- [x] Static meshes/materials are persistent: no steady-state reconstruction, decode, allocation or static resource uploads; memory/load costs are bounded and measured.
+- [x] At least three real H700 processes establish repeatable headroom against matched references under the declared budget, with loading/completion/CPU and full-game FPS clearly distinguished.
+- [x] Production executable, launcher, controls, saves/replays and backups are unchanged; no shared gameplay/physics/audio/simulation changes or deployment.
+- [x] Final report, progress and handover record COMPLETE, BLOCKED or FAILED/RETHINK with acceptance evidence; any failed design gate has a focused proposal and stops.
+
+**STOP at the first failed design gate or at completion. Do not begin Milestone 3,
+commit, push, deploy or change the playable without separate user authorisation.**
 
 ### Milestone 3 — Replay a complete race with native scene commands
 
