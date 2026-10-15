@@ -1,0 +1,11 @@
+{
+  "protected_files": 47,
+  "all_sha256_unchanged": true,
+  "emulationstation": [
+    "6229 emulationstation --exit-on-reboot-required"
+  ],
+  "profiling_games_running": [],
+  "governor": "schedutil unchanged",
+  "stage2_or_architecture_implementation": false,
+  "commit_push_production_deployment": false
+}

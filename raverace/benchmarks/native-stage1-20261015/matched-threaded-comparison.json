@@ -1,0 +1,13 @@
+{
+  "paired_ticks": 3800,
+  "original_prep_cpu_ratio_threaded_to_shadow": {
+    "median": 0.9601962191359543,
+    "p95": 1.0787339338793367,
+    "mean": 0.9663807048204252
+  },
+  "snapshot_copy_wall_ratio": {
+    "median": 1.4307591870584881,
+    "p95": 2.1379113843681523
+  },
+  "notes": "Snapshot delta includes additional producer publication bookkeeping. World preparation same selected ticks, but metadata hooks/cache context/profiling differ; ratio is an observation, not causal isolation of contention."
+}

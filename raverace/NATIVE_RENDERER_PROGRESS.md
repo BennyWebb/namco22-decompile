@@ -1,7 +1,32 @@
 # Native renderer progress
 
-**Current: M4A H700 validation complete / STOPPED; real-time/audio acceptance failed; M3 remains performance-BLOCKED, 2026-10-15.**
-Milestones 1 and 2 remain complete. The current gate and evidence follow.
+**Current: Stage 1 architecture/CPU audit complete / STOPPED; GO recommendation only. M3 remains performance-BLOCKED.**
+
+## Stage 1 architecture/CPU audit — COMPLETE / STOPPED (2026-10-15)
+
+**GO recommendation for a limited three-stage parallel-execution prototype; separate
+user authorisation is required. No architecture or CPU optimisation was implemented.**
+M3 remains performance-BLOCKED; Stage 2 and Milestone 4B remain unauthorised.
+
+The playable port already has simulation, preparation and GL workers. The native
+bridge serialises those stages. Same-frame H700 control measurements put original
+world preparation at3.839 ms median CPU versus native walk+compile10.591 ms: paired
+additional cost6.722 ms. Compiler7.231 ms median CPU is dominated by conservative
+culling and material/palette resolution (~25% /24% of instrumented wall time), not
+instance deduplication (~2.5%). Original GLES backend/HUD costs are separate.
+
+Three-stage service modelling has only0.161 ms p99 headroom with assumed0.1 ms
+handoffs. A three-tick latency absorbs measured base-case tails;10% CPU contention
+causes163 late pictures. This is feasibility evidence, **not proven59.904 FPS**.
+The unchanged production threaded baseline presents53.774 FPS with602 unpresented
+ticks; picture dropping is not native acceptance. All three H700 runs complete6006
+ticks and pass21 checkpoint sets. Host command parity covers all4207 native packets
+and the original3840-picture M3 window. All47 protected hashes are unchanged,
+EmulationStation is restored, and no profiling game remains. No commit/push or
+production deployment. **STOP after Stage 1.**
+
+See [architecture feasibility report](NATIVE_ARCHITECTURE_FEASIBILITY_REPORT.md)
+and [retained samples and reproduction](benchmarks/native-stage1-20261015/README.md).
 
 ## Controlled M4A H700 validation — COMPLETE / STOPPED (2026-10-15)
 
@@ -35,8 +60,8 @@ unchanged, no diagnostic game remains. No commit, push or production deployment.
 See [current report](NATIVE_LIVE_INTEGRATION_REPORT.md) and
 [raw evidence/methods](benchmarks/native-live-h700-20261015/README.md).
 Review PNGs persist in `native/generated/milestone4a-hardware/results/validation-clean/review/`.
-Next work requires separate authorisation: profile live command compilation,
-immutable CPU/GPU handoff and a whole-live residency budget; do not begin it now.
+Historical next-work recommendation: Stage 1 subsequently audited compilation and
+immutable handoff as documented above. Implementation still requires authorisation.
 
 ## Prior host-only M4A coverage phase (historical)
 

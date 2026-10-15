@@ -361,6 +361,36 @@ remain unproven. EmulationStation restored,47 protected file hashes unchanged.
 **Investigation complete / STOPPED. M3 remains performance-BLOCKED, not retroactively
 passed;4B not authorised.** See `NATIVE_LIVE_INTEGRATION_REPORT.md`.
 
+#### Stage 1 — Bounded architecture and CPU profiling audit (authorised 2026-10-15)
+
+Investigation only: compare existing production threading with the serial native
+bridge, establish matched original/native CPU costs, partition compiler work,
+assess immutable three-stage pipelining and bounded queues, model throughput/tails/
+contention/latency/memory/determinism, and deliver an explicit GO/NO-GO for a limited
+parallel prototype. Small temporary diagnostic instrumentation and isolated H700
+profiling are allowed. Preserve original game, audio, timing, production/config/
+saves/replays. Restore frontend and verify integrity. No CPU optimisation, threading
+change or new architecture may be implemented. M3 remains blocked. STOP after the
+feasibility report; Stage2 and4B remain unauthorised.
+
+**Stage 1 result — COMPLETE / STOPPED (2026-10-15).**
+
+- [x] Compare existing threaded scheduling with the serial native bridge, including
+  CPU-core observations, queue/drop policy and audio ownership.
+- [x] Matched same-frame original/native CPU costs and detailed compiler partition,
+  with control-run instrumentation overhead disclosed.
+- [x] Assess immutable three-stage ownership, bounded memory, latency and risks;
+  model measured median/p95/p99/worst costs and contention without omitting tails.
+- [x] Complete host6006-tick/checkpoint and command-parity validation; all three
+  H700 profiling runs pass21 checkpoint sets. Restore frontend and verify47 hashes.
+- [x] Deliver [feasibility report](NATIVE_ARCHITECTURE_FEASIBILITY_REPORT.md) with
+  explicit **GO for a limited parallel prototype**, requiring separate authorisation.
+
+The three-stage route is plausible but fragile: baseline p99 margin0.161 ms;
+10% CPU contention causes163 late pictures in the three-tick-latency model.
+No CPU optimisation, new threading or architecture was implemented. **M3 remains
+performance-BLOCKED. Stage2 and4B are not authorised. STOP.**
+
 ### Remaining Milestone 4 / 4B — Full live-game integration (NOT AUTHORISED)
 
 **Outcome:** A separate playable native-renderer build driven by the *unchanged original Rave Racer game logic*, with no dependence on the old GLES world renderer.

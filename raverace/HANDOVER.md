@@ -5,6 +5,32 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Stage 1 architecture/CPU audit — COMPLETE / STOPPED (2026-10-15)
+
+**GO recommendation for a limited three-stage parallel-execution prototype; separate
+user authorisation is required. No architecture or CPU optimisation was implemented.**
+M3 remains performance-BLOCKED; Stage 2 and Milestone 4B remain unauthorised.
+
+The playable port already has simulation, preparation and GL workers. The native
+bridge serialises those stages. Same-frame H700 control measurements put original
+world preparation at3.839 ms median CPU versus native walk+compile10.591 ms: paired
+additional cost6.722 ms. Compiler7.231 ms median CPU is dominated by conservative
+culling and material/palette resolution (~25% /24% of instrumented wall time), not
+instance deduplication (~2.5%). Original GLES backend/HUD costs are separate.
+
+Three-stage service modelling has only0.161 ms p99 headroom with assumed0.1 ms
+handoffs. A three-tick latency absorbs measured base-case tails;10% CPU contention
+causes163 late pictures. This is feasibility evidence, **not proven59.904 FPS**.
+The unchanged production threaded baseline presents53.774 FPS with602 unpresented
+ticks; picture dropping is not native acceptance. All three H700 runs complete6006
+ticks and pass21 checkpoint sets. Host command parity covers all4207 native packets
+and the original3840-picture M3 window. All47 protected hashes are unchanged,
+EmulationStation is restored, and no profiling game remains. No commit/push or
+production deployment. **STOP after Stage 1.**
+
+See [architecture feasibility report](NATIVE_ARCHITECTURE_FEASIBILITY_REPORT.md)
+and [retained samples and reproduction](benchmarks/native-stage1-20261015/README.md).
+
 ## Controlled M4A H700 validation — COMPLETE / STOPPED (2026-10-15)
 
 Full6006-tick H700 replay and all 21 authoritative CPU/RAM, board/video and PCM/voice
