@@ -1,0 +1,18 @@
+{
+  "status": "PASS / HOST FIDELITY / STOPPED",
+  "residual_classes": {
+    "a": 0,
+    "b": 5875,
+    "c": 0
+  },
+  "all_21_checkpoint_sets_each_replay": true,
+  "adjusted_4207_receipts_each_replay": true,
+  "all_colour_proofs_exact": true,
+  "all_ROM_palette_sample_proofs_exact": true,
+  "all_residuals_inside_original_uv_bounds": true,
+  "withdrawn_layout_control_used": false,
+  "ready_for_unchanged_C1b_device_Part2": true,
+  "device_stage_started": false,
+  "hardware_performance_passed": false,
+  "device_work_requires_explicit_authorisation": true
+}

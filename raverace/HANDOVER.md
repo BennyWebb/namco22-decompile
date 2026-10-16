@@ -12,6 +12,28 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone C1d — host fidelity PASS / device-ready / STOPPED (2026-10-16)
+
+See [C1d report](NATIVE_C1D_REPORT.md) and
+[evidence](benchmarks/native-c1d-20261016/README.md). User withdrew the exact-layout
+control; no alias-separated control is built or required. C1d adopts matching
+lowp palette precision in its private index derivation (earlier sources retained).
+ENG_C1_DEBUG=provenance records actual bank/U/V/material in an integer target.
+
+All5875 residuals are class(b), adjacent source texels in the same material/bank;
+class(a)=0,class(c)=0.2777horizontal/3090vertical/8diagonal; all inside original UV
+bounds, no gutters/wrap required. All-world material/bank mismatches0. Debug colour
+proofs match normal rendering exactly and11059200 sampled ROM/palette colours pass.
+Four full6006-tick host replays each pass21sets/4207adjusted commands; both RGBA runs
+also retain4207original packets. Normal36colour images match C1b/C1c baselines.
+No source-identity exception, tolerance, class(c) fix or replay retry was needed.
+
+**Ready for unchanged C1b Part2 device go/no-go; DO NOT START without authorisation.**
+Host gate does not pass H700 timing/audio/memory targets or historical M3/P3 gates.
+Only native/c1d plus docs/evidence changed; no SSH/device transfer/run, clocks,
+services, production/shared engine/saves/replays/controller changes, commit or push.
+STOPPED at the host readiness gate. Further device work requires explicit approval.
+
 ## Milestone C1c — host attribution BLOCKED / STOPPED (2026-10-16)
 
 See [C1c report](NATIVE_C1C_REPORT.md) and

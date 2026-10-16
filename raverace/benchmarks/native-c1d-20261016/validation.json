@@ -1,0 +1,47 @@
+{
+  "runs": [
+    {
+      "run": "colour-rgba",
+      "ticks": 6006,
+      "authoritative_sets": 21,
+      "domain_records": 63,
+      "adjusted_command_receipts": 4207,
+      "raw_RGBA_packets_equal": 4207,
+      "logger_drops": 0,
+      "logger_errors": 0
+    },
+    {
+      "run": "colour-index",
+      "ticks": 6006,
+      "authoritative_sets": 21,
+      "domain_records": 63,
+      "adjusted_command_receipts": 4207,
+      "raw_RGBA_packets_equal": null,
+      "logger_drops": 0,
+      "logger_errors": 0
+    },
+    {
+      "run": "provenance-rgba",
+      "ticks": 6006,
+      "authoritative_sets": 21,
+      "domain_records": 63,
+      "adjusted_command_receipts": 4207,
+      "raw_RGBA_packets_equal": 4207,
+      "logger_drops": 0,
+      "logger_errors": 0
+    },
+    {
+      "run": "provenance-index",
+      "ticks": 6006,
+      "authoritative_sets": 21,
+      "domain_records": 63,
+      "adjusted_command_receipts": 4207,
+      "raw_RGBA_packets_equal": null,
+      "logger_drops": 0,
+      "logger_errors": 0
+    }
+  ],
+  "colour_RGBA_matches_C1b": true,
+  "colour_index_matches_C1c_lowp": true,
+  "device_contacted": false
+}
