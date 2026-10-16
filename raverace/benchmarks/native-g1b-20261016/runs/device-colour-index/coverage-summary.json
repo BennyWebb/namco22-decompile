@@ -1,0 +1,269 @@
+{
+  "pictures": 6006,
+  "native": 5844,
+  "fallback": 162,
+  "groups": [
+    {
+      "main": 0,
+      "course": 0,
+      "native": 0,
+      "fallback": 145,
+      "reasons": {
+        "boot-state": 145
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 0,
+      "native": 640,
+      "fallback": 3,
+      "reasons": {
+        "prewarm": 3
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 2,
+      "course": 0,
+      "native": 533,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 3,
+      "course": 0,
+      "native": 2,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 3,
+      "course": 3,
+      "native": 4669,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 37,
+      "underrun_frames_in_native": 19152
+    },
+    {
+      "main": 65535,
+      "course": 0,
+      "native": 0,
+      "fallback": 2,
+      "reasons": {
+        "boot-state": 2
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 65535,
+      "course": 65535,
+      "native": 0,
+      "fallback": 12,
+      "reasons": {
+        "boot-state": 12
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    }
+  ],
+  "fallback_exact_records": [],
+  "cpu_dynamic": {
+    "hits": 45486,
+    "misses": 3015,
+    "evictions": 2897,
+    "pending_bytes": 24927989
+  },
+  "gpu_dynamic_pen_bytes": 24526439,
+  "dynamic_UV_bytes": 305328,
+  "native_window_cpu_dynamic": {
+    "hits": 37863,
+    "misses": 0,
+    "evictions": 0,
+    "pending_bytes": 315525
+  },
+  "native_window_gpu_pen_bytes": 0,
+  "native_window_dynamic_UV_bytes": 201936,
+  "native_stretches": [
+    {
+      "first_tick": 163,
+      "last_tick": 6006,
+      "course": 0,
+      "repeats": 37,
+      "underrun_frames": 19152
+    }
+  ],
+  "repeat_events_native": [
+    {
+      "tick": 1800,
+      "repeats": 3,
+      "interval_ms": 66.6884439997375,
+      "main_ms": 13.902356004,
+      "prepare_ms": 11.178433,
+      "draw_ms": 56.19125,
+      "swap_ms": 9.897041
+    },
+    {
+      "tick": 1965,
+      "repeats": 2,
+      "interval_ms": 53.006536996690556,
+      "main_ms": 12.284550998,
+      "prepare_ms": 10.630080999999999,
+      "draw_ms": 52.276875000000004,
+      "swap_ms": 0.137625
+    },
+    {
+      "tick": 2500,
+      "repeats": 2,
+      "interval_ms": 49.327738997817505,
+      "main_ms": 12.759988997,
+      "prepare_ms": 13.228927,
+      "draw_ms": 48.668583,
+      "swap_ms": 0.134458
+    },
+    {
+      "tick": 2643,
+      "repeats": 2,
+      "interval_ms": 49.477982000098564,
+      "main_ms": 11.703201002,
+      "prepare_ms": 11.227722,
+      "draw_ms": 48.848,
+      "swap_ms": 0.112834
+    },
+    {
+      "tick": 3000,
+      "repeats": 2,
+      "interval_ms": 49.27194999618223,
+      "main_ms": 11.828363,
+      "prepare_ms": 11.292802,
+      "draw_ms": 48.648583,
+      "swap_ms": 0.122583
+    },
+    {
+      "tick": 3546,
+      "repeats": 2,
+      "interval_ms": 49.15512200386729,
+      "main_ms": 13.795819999,
+      "prepare_ms": 17.241129,
+      "draw_ms": 44.18775,
+      "swap_ms": 0.11637499999999999
+    },
+    {
+      "tick": 3600,
+      "repeats": 2,
+      "interval_ms": 49.87650800467236,
+      "main_ms": 12.656744002,
+      "prepare_ms": 14.412543,
+      "draw_ms": 49.186583999999996,
+      "swap_ms": 0.143625
+    },
+    {
+      "tick": 4200,
+      "repeats": 2,
+      "interval_ms": 49.03966900019441,
+      "main_ms": 9.363760997,
+      "prepare_ms": 8.498507,
+      "draw_ms": 48.4615,
+      "swap_ms": 0.112584
+    },
+    {
+      "tick": 4800,
+      "repeats": 2,
+      "interval_ms": 49.65947599703213,
+      "main_ms": 9.800201005,
+      "prepare_ms": 12.623537,
+      "draw_ms": 49.017625,
+      "swap_ms": 0.112625
+    },
+    {
+      "tick": 5400,
+      "repeats": 2,
+      "interval_ms": 48.974380995787214,
+      "main_ms": 10.164851999,
+      "prepare_ms": 9.352388,
+      "draw_ms": 48.354583,
+      "swap_ms": 0.1215
+    },
+    {
+      "tick": 5639,
+      "repeats": 2,
+      "interval_ms": 49.05837799742585,
+      "main_ms": 10.614291001,
+      "prepare_ms": 11.854446,
+      "draw_ms": 48.419708,
+      "swap_ms": 0.112958
+    },
+    {
+      "tick": 5655,
+      "repeats": 2,
+      "interval_ms": 48.995421995641664,
+      "main_ms": 10.424840999,
+      "prepare_ms": 11.728742,
+      "draw_ms": 48.364208999999995,
+      "swap_ms": 0.1145
+    },
+    {
+      "tick": 5867,
+      "repeats": 2,
+      "interval_ms": 48.75497499597259,
+      "main_ms": 10.013942003,
+      "prepare_ms": 12.365715,
+      "draw_ms": 48.125,
+      "swap_ms": 0.11204199999999999
+    },
+    {
+      "tick": 5874,
+      "repeats": 2,
+      "interval_ms": 49.415779001719784,
+      "main_ms": 9.853406998,
+      "prepare_ms": 11.444464,
+      "draw_ms": 48.849041,
+      "swap_ms": 0.11666599999999999
+    },
+    {
+      "tick": 5878,
+      "repeats": 2,
+      "interval_ms": 49.326741995173506,
+      "main_ms": 9.476797997,
+      "prepare_ms": 11.469921,
+      "draw_ms": 44.803000000000004,
+      "swap_ms": 0.139708
+    },
+    {
+      "tick": 5889,
+      "repeats": 2,
+      "interval_ms": 48.97713199898135,
+      "main_ms": 9.634833004,
+      "prepare_ms": 11.342843,
+      "draw_ms": 48.366792,
+      "swap_ms": 0.107667
+    },
+    {
+      "tick": 5921,
+      "repeats": 2,
+      "interval_ms": 48.76872400200227,
+      "main_ms": 9.812116994,
+      "prepare_ms": 10.812616,
+      "draw_ms": 48.266667,
+      "swap_ms": 0.123709
+    },
+    {
+      "tick": 6006,
+      "repeats": 2,
+      "interval_ms": 52.54597699968144,
+      "main_ms": 10.082313995,
+      "prepare_ms": 9.496214,
+      "draw_ms": 52.041625,
+      "swap_ms": 0.143042
+    }
+  ],
+  "stream_reconstruction": "Remove separately retained shutdown stdout JSON/native trace and direct capture footer to rejoin intact stderr fragments; require every picture and every upload"
+}

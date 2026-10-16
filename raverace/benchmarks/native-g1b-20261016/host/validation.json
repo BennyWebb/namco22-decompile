@@ -1,0 +1,18 @@
+[
+  {
+    "run": "colour-index",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "adjusted_packets": 4207,
+    "raw_packets": 4207,
+    "all_exact": true
+  },
+  {
+    "run": "provenance-index",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "adjusted_packets": 4207,
+    "raw_packets": 4207,
+    "all_exact": true
+  }
+]

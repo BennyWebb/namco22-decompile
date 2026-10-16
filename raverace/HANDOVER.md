@@ -12,6 +12,26 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone G1b — reference PASS / attract BLOCKED / STOPPED (2026-10-16)
+
+See [G1b report](NATIVE_G1B_REPORT.md) and [evidence](benchmarks/native-g1b-20261016/README.md).
+Private `native/g1b/` resolves direct footprints from ROM into bounded LRU R8UI
+pages with immutable slot uploads and three fence-protected GPU copies. No replay
+recipes added to the unchanged 2,421-model / 112 MiB static whole-ROM pack.
+Host/Mali: all 21 sets, 4,207 adjusted packets, 36 provenance images pass, class(c)=0.
+Both reference timing windows 1800–6006: zero repeats/settled underruns/main gaps;
+dense preparation p99 13.120/13.222 ms. Full activated timeline retains one
+non-handover repeat at 1578 in run 2, separately from run 1's handover repeat 164.
+State activation starts at 163, release completes 178. Attract visits selectors
+0–3 with no unsupported fallback, but its second course-0 pass suffers compiler
+median 290 ms, severe repeats/audio shortages. Stopped after 356 s, not a completed
+10-minute gate; recovered samples prove slow progress rather than deadlock.
+Cache saturation is a suspect, not yet proven; no speculative fix or G2 work.
+Observed play Mali peak 154.656 MiB (debug 167.734) is within budget. All samples retained.
+Production/47 paths exact; CPU/GPU clocks and RT defaults restored, EmulationStation
+running, no game/sampler. No commit/push/production deployment. Separate approval
+is required for blocker attribution/fix or broader coverage.
+
 ## Milestone G1 — ROM assets PASS / host integration BLOCKED / STOPPED (2026-10-16)
 
 See [G1 report](NATIVE_G1_REPORT.md) and [evidence](benchmarks/native-g1-20261016/README.md).

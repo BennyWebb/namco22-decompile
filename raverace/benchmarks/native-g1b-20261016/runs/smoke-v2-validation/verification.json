@@ -1,0 +1,24 @@
+{
+  "pass_checks": true,
+  "ticks": 1900,
+  "checkpoint_domain_records": 21,
+  "native_packets": 101,
+  "policies": {
+    "validation-v2": {
+      "nice": 0,
+      "policy": 0,
+      "priority": 20
+    },
+    "rr-present": {
+      "nice": 0,
+      "policy": 0,
+      "priority": 20
+    },
+    "rr-prepare": {
+      "nice": 0,
+      "policy": 0,
+      "priority": 20
+    }
+  },
+  "binary_receipts": "156a3a4e7d0c822eec76621843fe8724ffbdf64a20d8050074059e78fe334d35  /userdata/system/rave-racer-native-g1b-20261016/validation-v2\n2a34b22965d9386688ca112a49ce1007aa338df64fa61eb43b1044ed486fe41f  /userdata/system/rave-racer-native-g1b-20261016/pack/manifest.json\n"
+}

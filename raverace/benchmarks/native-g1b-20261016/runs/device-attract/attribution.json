@@ -1,0 +1,307 @@
+{
+  "stretches": [
+    {
+      "first_tick": 163,
+      "last_tick": 4369,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0,
+      "stage_ms": {
+        "prep_wall": {
+          "n": 4207,
+          "median": 4.897728,
+          "p95": 9.316775,
+          "p99": 9.637598,
+          "worst": 10.268023
+        },
+        "native_compile_ms": {
+          "n": 4207,
+          "median": 3.154129001,
+          "p95": 8.404436005,
+          "p99": 8.704672997,
+          "worst": 9.356850001
+        },
+        "native_walk_ms": {
+          "n": 4207,
+          "median": 1.400321999,
+          "p95": 2.554778002,
+          "p99": 2.864974995,
+          "worst": 3.378289002
+        },
+        "simulation_ms": {
+          "n": 4207,
+          "median": 7.541339997,
+          "p95": 9.129441001,
+          "p99": 9.653631998,
+          "worst": 13.089252003
+        },
+        "simulation_blocked_ms": {
+          "n": 4207,
+          "median": 8.092983997,
+          "p95": 11.452599996,
+          "p99": 11.633342998,
+          "worst": 13.002055995
+        },
+        "draw_wall": {
+          "n": 4207,
+          "median": 2.7030000000000003,
+          "p95": 4.452917,
+          "p99": 5.058167,
+          "worst": 13.085374999999999
+        },
+        "swap_wall": {
+          "n": 4207,
+          "median": 13.463667000000001,
+          "p95": 14.829208999999999,
+          "p99": 15.049291,
+          "worst": 15.446333
+        }
+      }
+    },
+    {
+      "first_tick": 4370,
+      "last_tick": 7374,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0,
+      "stage_ms": {
+        "prep_wall": {
+          "n": 3005,
+          "median": 5.73436,
+          "p95": 9.178432,
+          "p99": 9.623124,
+          "worst": 10.996778
+        },
+        "native_compile_ms": {
+          "n": 3005,
+          "median": 3.670191996,
+          "p95": 8.276383996,
+          "p99": 8.679327999,
+          "worst": 9.891488
+        },
+        "native_walk_ms": {
+          "n": 3005,
+          "median": 1.770055998,
+          "p95": 2.374033,
+          "p99": 2.642398002,
+          "worst": 3.241123995
+        },
+        "simulation_ms": {
+          "n": 3005,
+          "median": 8.155307994,
+          "p95": 9.814115998,
+          "p99": 10.214892005,
+          "worst": 11.448470999
+        },
+        "simulation_blocked_ms": {
+          "n": 3005,
+          "median": 7.453211001,
+          "p95": 11.358137999,
+          "p99": 11.701956995,
+          "worst": 12.956740997
+        },
+        "draw_wall": {
+          "n": 3005,
+          "median": 2.86125,
+          "p95": 4.109083,
+          "p99": 4.945708,
+          "worst": 6.254499999999999
+        },
+        "swap_wall": {
+          "n": 3005,
+          "median": 13.340207999999999,
+          "p95": 14.744042,
+          "p99": 15.032166,
+          "worst": 15.430875
+        }
+      }
+    },
+    {
+      "first_tick": 7375,
+      "last_tick": 10380,
+      "course": 2,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0,
+      "stage_ms": {
+        "prep_wall": {
+          "n": 3006,
+          "median": 6.766545499999999,
+          "p95": 9.999896,
+          "p99": 11.647708,
+          "worst": 28.453841
+        },
+        "native_compile_ms": {
+          "n": 3006,
+          "median": 4.4954065015,
+          "p95": 8.319712004,
+          "p99": 8.698154001,
+          "worst": 26.651202999
+        },
+        "native_walk_ms": {
+          "n": 3006,
+          "median": 1.629226997,
+          "p95": 3.042796998,
+          "p99": 4.066298003,
+          "worst": 4.446824001
+        },
+        "simulation_ms": {
+          "n": 3006,
+          "median": 7.885626502999999,
+          "p95": 9.002059,
+          "p99": 9.346252999,
+          "worst": 10.175805
+        },
+        "simulation_blocked_ms": {
+          "n": 3006,
+          "median": 7.7367585000000005,
+          "p95": 11.304675005,
+          "p99": 11.484000999,
+          "worst": 12.997156002
+        },
+        "draw_wall": {
+          "n": 3006,
+          "median": 2.8888339999999997,
+          "p95": 4.634583,
+          "p99": 5.059333,
+          "worst": 6.014
+        },
+        "swap_wall": {
+          "n": 3006,
+          "median": 13.288979000000001,
+          "p95": 14.757624999999999,
+          "p99": 15.018042000000001,
+          "worst": 15.310083
+        }
+      }
+    },
+    {
+      "first_tick": 10381,
+      "last_tick": 13388,
+      "course": 3,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 401,
+      "stage_ms": {
+        "prep_wall": {
+          "n": 3008,
+          "median": 6.7140854999999995,
+          "p95": 12.752739,
+          "p99": 22.166733,
+          "worst": 24.168401999999997
+        },
+        "native_compile_ms": {
+          "n": 3008,
+          "median": 4.5422969994999995,
+          "p95": 10.447412998,
+          "p99": 21.323016001,
+          "worst": 23.317810999
+        },
+        "native_walk_ms": {
+          "n": 3008,
+          "median": 1.542605001,
+          "p95": 3.094001004,
+          "p99": 3.762683002,
+          "worst": 4.653314005
+        },
+        "simulation_ms": {
+          "n": 3008,
+          "median": 8.584303501499999,
+          "p95": 9.806397,
+          "p99": 10.359961998,
+          "worst": 11.313506002
+        },
+        "simulation_blocked_ms": {
+          "n": 3008,
+          "median": 6.986032498,
+          "p95": 11.523285,
+          "p99": 13.713531996,
+          "worst": 17.129726999
+        },
+        "draw_wall": {
+          "n": 3008,
+          "median": 2.9896455,
+          "p95": 4.806792,
+          "p99": 5.9322919999999995,
+          "worst": 17.796125
+        },
+        "swap_wall": {
+          "n": 3008,
+          "median": 13.0813955,
+          "p95": 14.74075,
+          "p99": 15.032125,
+          "worst": 15.380958999999999
+        }
+      }
+    },
+    {
+      "first_tick": 13389,
+      "last_tick": 13880,
+      "course": 0,
+      "main": 1,
+      "repeats": 7393,
+      "underrun_frames": 5902077,
+      "stage_ms": {
+        "prep_wall": {
+          "n": 492,
+          "median": 292.5766065,
+          "p95": 482.024407,
+          "p99": 510.9837739999999,
+          "worst": 519.5455420000001
+        },
+        "native_compile_ms": {
+          "n": 492,
+          "median": 290.365718498,
+          "p95": 479.181480994,
+          "p99": 508.226970996,
+          "worst": 516.931776998
+        },
+        "native_walk_ms": {
+          "n": 492,
+          "median": 2.2217649965,
+          "p95": 3.214409997,
+          "p99": 3.632726999,
+          "worst": 4.099790996
+        },
+        "simulation_ms": {
+          "n": 492,
+          "median": 7.903073496,
+          "p95": 8.772223002,
+          "p99": 9.211955003,
+          "worst": 9.648020001
+        },
+        "simulation_blocked_ms": {
+          "n": 492,
+          "median": 282.3280770025,
+          "p95": 472.079811996,
+          "p99": 501.787201996,
+          "worst": 509.886489002
+        },
+        "draw_wall": {
+          "n": 492,
+          "median": 2.0754375,
+          "p95": 3.4463749999999997,
+          "p99": 4.043708,
+          "worst": 4.435084
+        },
+        "swap_wall": {
+          "n": 492,
+          "median": 0.0692295,
+          "p95": 0.154041,
+          "p99": 0.3535,
+          "worst": 14.855
+        }
+      }
+    }
+  ],
+  "conclusion": "Compiler service grows; main waits on queue; no new dynamic decodes in second course-0 stretch. Function-level cause unknown; full recipe-cache probing is a hypothesis, not established.",
+  "termination": {
+    "requested_seconds": 600,
+    "observed_seconds": 356.233539947,
+    "signal": "SIGTERM",
+    "orderly_exit": 0,
+    "reason": "Severe preparation slowdown; initially appeared frozen because buffered log files stopped advancing; complete telemetry demonstrates continued progress. No rerun/fix under standing STOP rule."
+  }
+}
