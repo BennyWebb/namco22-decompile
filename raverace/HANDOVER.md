@@ -12,6 +12,25 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone C1 — BLOCKED / host design decision / STOPPED (2026-10-16)
+
+See [C1 report](NATIVE_C1_REPORT.md) and
+[evidence](benchmarks/native-c1-20261016/README.md). Direct texture-map flattening
+cannot fit the specified single 4096×4096 plane: the ROM map has sixteen distinct
+bank planes (256 MiB expanded). Reference recipes span fifteen banks (240 MiB);
+with palette this gives only 1.909× reduction versus 458.35 MiB RGBA, below 10×.
+Nonzero-bank reference recipes return different pens at the same original UV.
+Audit decodes/hashes all banks and passes 65,536 independent scalar checks.
+
+No replacement renderer, cache or runtime switch implemented; no new replay,
+packet/image validation, GPU timing or device clock change. P3 is unchanged.
+A revised compact addressing representation requires a decision; do not silently
+substitute a 256 MiB array or repeat the rejected three-lookup shader.
+Read-only hardware check: production SHA unchanged
+`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`,
+ES PID14605, CPU schedutil/GPU simple_ondemand. No commit/push/deployment.
+STOPPED. Further design/implementation requires explicit authorisation.
+
 ## Milestone P3 — COMPLETE / performance FAIL / STOPPED (2026-10-16)
 
 See [P3 report](NATIVE_P3_REPORT.md) and
