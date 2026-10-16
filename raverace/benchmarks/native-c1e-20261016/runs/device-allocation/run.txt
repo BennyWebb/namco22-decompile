@@ -1,0 +1,17 @@
+ALLOCATION mode=rgba page=0 bytes=67108864 mali_pages=16481
+ALLOCATION mode=rgba page=1 bytes=67108864 mali_pages=32898
+ALLOCATION mode=rgba page=2 bytes=67108864 mali_pages=49315
+ALLOCATION mode=rgba page=3 bytes=67108864 mali_pages=65732
+ALLOCATION mode=rgba page=4 bytes=67108864 mali_pages=82149
+ALLOCATION mode=rgba page=5 bytes=67108864 mali_pages=98566
+ALLOCATION mode=rgba page=6 bytes=67108864 mali_pages=114983
+ALLOCATION mode=rgba page=7 bytes=10694656 mali_pages=117607
+ALLOCATION mode=rgba page=8 bytes=157440 mali_pages=117671
+ATLAS mode=rgba baseline_pages=80 loaded_pages=117671 delta_pages=117591 delta_bytes=481652736 api_bytes=480614144 gl=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da renderer=Mali-G31
+RELEASE mode=rgba pages=117671
+ALLOCATION mode=index page=0 bytes=16777216 mali_pages=4390
+ALLOCATION mode=index page=1 bytes=16777216 mali_pages=8487
+ALLOCATION mode=index page=2 bytes=16777216 mali_pages=12584
+ALLOCATION mode=index page=3 bytes=11206656 mali_pages=15322
+ATLAS mode=index baseline_pages=19377 loaded_pages=15322 delta_pages=-4055 delta_bytes=-16609280 api_bytes=61538304 gl=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da renderer=Mali-G31
+RELEASE mode=index pages=15322

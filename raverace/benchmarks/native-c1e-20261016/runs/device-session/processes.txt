@@ -1,0 +1,153 @@
+  PID COMMAND         COMMAND
+    1 init            init [3]
+    2 kthreadd        [kthreadd]
+    4 kworker/0:0H    [kworker/0:0H]
+    6 ksoftirqd/0     [ksoftirqd/0]
+    7 rcu_preempt     [rcu_preempt]
+    8 rcu_sched       [rcu_sched]
+    9 rcu_bh          [rcu_bh]
+   10 migration/0     [migration/0]
+   11 lru-add-drain   [lru-add-drain]
+   12 cpuhp/0         [cpuhp/0]
+   13 cpuhp/1         [cpuhp/1]
+   14 migration/1     [migration/1]
+   15 ksoftirqd/1     [ksoftirqd/1]
+   17 kworker/1:0H    [kworker/1:0H]
+   18 cpuhp/2         [cpuhp/2]
+   19 migration/2     [migration/2]
+   20 ksoftirqd/2     [ksoftirqd/2]
+   22 kworker/2:0H    [kworker/2:0H]
+   23 cpuhp/3         [cpuhp/3]
+   24 migration/3     [migration/3]
+   25 ksoftirqd/3     [ksoftirqd/3]
+   27 kworker/3:0H    [kworker/3:0H]
+   28 kdevtmpfs       [kdevtmpfs]
+   29 netns           [netns]
+  449 oom_reaper      [oom_reaper]
+  450 writeback       [writeback]
+  452 kcompactd0      [kcompactd0]
+  453 crypto          [crypto]
+  454 bioset          [bioset]
+  456 kblockd         [kblockd]
+  511 sys_user        [sys_user]
+  514 devfreq_wq      [devfreq_wq]
+  527 cfg80211        [cfg80211]
+  539 irq/322-axp2202 [irq/322-axp2202]
+  726 kswapd0         [kswapd0]
+  727 vmstat          [vmstat]
+  801 kworker/u8:0    [kworker/u8:0]
+  805 SquashFS read w [SquashFS read w]
+  867 dropbear        /usr/sbin/dropbear -W 10485760 -R -2 9
+  886 bioset          [bioset]
+  887 bioset          [bioset]
+  888 bioset          [bioset]
+  889 bioset          [bioset]
+  890 bioset          [bioset]
+  891 bioset          [bioset]
+  892 bioset          [bioset]
+  893 bioset          [bioset]
+  894 bioset          [bioset]
+  895 bioset          [bioset]
+  896 bioset          [bioset]
+  897 bioset          [bioset]
+  898 bioset          [bioset]
+  899 bioset          [bioset]
+  900 bioset          [bioset]
+  901 bioset          [bioset]
+  935 bioset          [bioset]
+  938 bioset          [bioset]
+  941 bioset          [bioset]
+  944 bioset          [bioset]
+  947 bioset          [bioset]
+  950 bioset          [bioset]
+  953 bioset          [bioset]
+  956 bioset          [bioset]
+  959 memory_wq       [memory_wq]
+  991 bash            -bash
+ 1048 dm_bufio_cache  [dm_bufio_cache]
+ 1049 cfinteractive   [cfinteractive]
+ 1056 irq/295-sunxi-m [irq/295-sunxi-m]
+ 1059 irq/151-sdc0 cd [irq/151-sdc0 cd]
+ 1061 irq/296-sunxi-m [irq/296-sunxi-m]
+ 1063 irq/297-sunxi-m [irq/297-sunxi-m]
+ 1066 bioset          [bioset]
+ 1067 mmcqd/0         [mmcqd/0]
+ 1167 kpktgend_0      [kpktgend_0]
+ 1168 kpktgend_1      [kpktgend_1]
+ 1169 kpktgend_2      [kpktgend_2]
+ 1170 kpktgend_3      [kpktgend_3]
+ 1190 ipv6_addrconf   [ipv6_addrconf]
+ 1201 krfcommd        [krfcommd]
+ 1209 hdcp22_workqueu [hdcp22_workqueu]
+ 1212 hdmi proc       [hdmi proc]
+ 1213 cec thread      [cec thread]
+ 1218 usb_pmu_scan    [usb_pmu_scan]
+ 1256 kworker/3:1H    [kworker/3:1H]
+ 1260 loop0           [loop0]
+ 1262 kworker/2:1H    [kworker/2:1H]
+ 1263 kworker/0:1H    [kworker/0:1H]
+ 1264 kworker/1:1H    [kworker/1:1H]
+ 1266 bioset          [bioset]
+ 1267 mmcqd/1         [mmcqd/1]
+ 1344 mali-simple-pow [mali-simple-pow]
+ 1347 kbase_job_fault [kbase_job_fault]
+ 1382 dbus-daemon     dbus-daemon --system
+ 1394 syslogd         /sbin/syslogd -m 0
+ 1455 ksdioirqd/mmc2  [ksdioirqd/mmc2]
+ 1456 udevd           /sbin/udevd -d
+ 1515 pipewire        /usr/bin/pipewire
+ 1750 wireplumber     /usr/bin/wireplumber
+ 1753 pipewire        /usr/bin/pipewire -c pipewire-pulse.conf
+ 1972 wpa_supplicant  /usr/sbin/wpa_supplicant -u
+ 2051 RTW_XMIT_THREAD [RTW_XMIT_THREAD]
+ 2052 RTW_RECV_THREAD [RTW_RECV_THREAD]
+ 2053 RTW_CMD_THREAD  [RTW_CMD_THREAD]
+ 2054 RTWHALXT        [RTWHALXT]
+ 2123 kworker/0:2     [kworker/0:2]
+ 2124 kworker/0:3     [kworker/0:3]
+ 2127 kworker/0:7     [kworker/0:7]
+ 2130 kworker/1:1     [kworker/1:1]
+ 2142 kworker/2:9     [kworker/2:9]
+ 2144 kworker/3:2     [kworker/3:2]
+ 2187 mount.exfat     mount.exfat /dev/mmcblk1p1 /var/knullifs -o noatime
+ 2193 RTWHALXT        [RTWHALXT]
+ 2687 batteryplus     /usr/bin/batteryplus
+ 2744 kworker/u9:0    [kworker/u9:0]
+ 2814 avahi-daemon    avahi-daemon: running [KNULLI.local]
+ 2815 avahi-daemon    avahi-daemon: chroot helper
+ 2822 thd             /usr/sbin/thd --daemon --triggers /etc/triggerhappy/triggers.d/multimedia_keys.conf --socket /var/run/thd.socket --pidfile /var/run/thd.pid /dev/input/event0 /dev/input/event1
+ 2826 ntpd            /usr/sbin/ntpd -u ntp:ntp -g -p /var/run/ntpd.pid
+ 2832 login           login -- root
+ 2833 knulli-mixer    /bin/bash /usr/bin/knulli-mixer
+ 2834 getty           /sbin/getty 38400 tty5
+ 2861 alsamixer       /usr/bin/alsamixer -c0
+ 2890 bash            -bash
+ 2918 rpc.mountd      rpc.mountd
+ 2955 dropbear        /usr/sbin/dropbear -W 10485760 -R
+ 3193 smbd            smbd -D --configfile=/etc/samba/smb.conf
+ 3197 smbd-notifyd    smbd -D --configfile=/etc/samba/smb.conf
+ 3198 smbd-cleanupd   smbd -D --configfile=/etc/samba/smb.conf
+ 3200 nmbd            nmbd -D --configfile=/etc/samba/smb.conf
+ 3209 python3         python3 /usr/bin/wsdd -w WORKGROUP
+ 3247 kworker/u8:1    [kworker/u8:1]
+ 3318 knulli-rgb      /usr/bin/python /usr/bin/knulli-rgb
+ 3361 knulli-settings [knulli-settings] <defunct>
+ 4717 kworker/u9:1    [kworker/u9:1]
+ 4719 kworker/2:0     [kworker/2:0]
+ 5105 sugov:0         [sugov:0]
+ 5129 emulationstatio /bin/bash /usr/bin/emulationstation-standalone
+ 5200 emulationstatio emulationstation --exit-on-reboot-required
+ 5204 kbase_event     [kbase_event]
+ 5440 kworker/0:0     [kworker/0:0]
+ 5629 kworker/u9:2    [kworker/u9:2]
+ 5693 kworker/2:1     [kworker/2:1]
+ 5783 bash            bash -c b=/userdata/system/rave-racer-native-c1e-20261016; mkdir -p "$b/final-verification"; d=$b/final-verification; sha256sum -c "$b/protected.sha256" > "$d/protected.txt"; sha256sum /userdata/roms/ports/rave-gles2/rr_gles2 > "$d/production.sha256"; for c in 0 1 2 3; do p=/sys/devices/system/cpu/cpu$c/cpufreq; cat "$p/scaling_governor" "$p/scaling_min_freq" "$p/scaling_max_freq"; done > "$d/clocks.after"; cat /sys/class/devfreq/gpu/governor /sys/class/devfreq/gpu/min_freq /sys/class/devfreq/gpu/max_freq >> "$d/clocks.after"; cmp "$d/clocks.after" "$b/smoke-rgba/clocks.before"; cat /proc/sys/kernel/sched_rt_runtime_us /proc/sys/kernel/sched_rt_period_us > "$d/rt.after"; cmp "$d/rt.after" "$b/smoke-rgba/rt.before"; pidof emulationstation > "$d/emulationstation.txt"; ps -eo pid,comm,args > "$d/processes.txt"; cat /proc/uptime > "$d/final.uptime"; du -sk /tmp > "$d/tmp.txt"; cat "$d/production.sha256" "$d/emulationstation.txt" "$d/final.uptime"; echo protected=$(wc -l < "$d/protected.txt"); if pidof play validation validation-axis compact-fence atlas_memory_probe rr_p1b rr_gles2 memory_sampler; then exit 91; fi
+ 5786 udevd           /sbin/udevd -d
+ 5797 ps              ps -eo pid,comm,args
+22917 connmand        /usr/sbin/connmand -n -r
+24213 idlewatcher     /usr/bin/idlewatcher
+25043 dropbear        /usr/sbin/dropbear -W 10485760 -R -2 9
+25062 bash            -bash
+25918 dropbear        /usr/sbin/dropbear -W 10485760 -R -2 10
+26899 kworker/3:0     [kworker/3:0]
+32630 kworker/1:3     [kworker/1:3]

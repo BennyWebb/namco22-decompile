@@ -1,0 +1,6 @@
+ALLOCATION mode=index page=0 bytes=16777216 mali_pages=4169
+ALLOCATION mode=index page=1 bytes=16777216 mali_pages=8274
+ALLOCATION mode=index page=2 bytes=16777216 mali_pages=12379
+ALLOCATION mode=index page=3 bytes=11206656 mali_pages=15123
+ATLAS mode=index baseline_pages=80 loaded_pages=15123 delta_pages=15043 delta_bytes=61616128 api_bytes=61538304 gl=OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da renderer=Mali-G31
+RELEASE mode=index pages=15123

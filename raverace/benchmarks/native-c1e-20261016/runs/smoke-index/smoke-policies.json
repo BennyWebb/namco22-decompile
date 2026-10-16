@@ -1,0 +1,20 @@
+[
+  {
+    "thread": "play",
+    "priority": 20,
+    "nice": 0,
+    "policy": 0
+  },
+  {
+    "thread": "rr-present",
+    "priority": 20,
+    "nice": 0,
+    "policy": 0
+  },
+  {
+    "thread": "rr-prepare",
+    "priority": 20,
+    "nice": 0,
+    "policy": 0
+  }
+]

@@ -1,0 +1,17 @@
+error: invalid command --screen
+/usr/bin/knulli-resolution listOutputs
+/usr/bin/knulli-resolution currentResolution
+/usr/bin/knulli-resolution setOutput
+error: invalid command --screen
+/usr/bin/knulli-resolution listOutputs
+/usr/bin/knulli-resolution currentResolution
+/usr/bin/knulli-resolution setOutput
+which: no xrandr in (/usr/bin:/bin:/usr/sbin:/sbin)
+which: no batocera-backglass in (/usr/bin:/bin:/usr/sbin:/sbin)
+2026-10-16 18:34:27	ERROR	System "amiga" is missing name, extension, or command!
+2026-10-16 18:34:28	ERROR	System "library" path does not exist !
+2026-10-16 18:34:28	ERROR	System "msx" is missing name, extension, or command!
+2026-10-16 18:34:28	ERROR	System "recordings" path does not exist !
+hooking /usr/share/emulationstation/hooks/preupdate-gamelists-scummvm.sh
+/userdata/roms/scummvm/_info.txt does not exist. Aborting.
+2026-10-16 18:34:28	ERROR	HttpReq::onError (3) : Error

@@ -12,6 +12,24 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone C1e — device NO-GO / STOPPED (2026-10-16)
+
+See [C1e report](NATIVE_C1E_REPORT.md) and
+[evidence](benchmarks/native-c1e-20261016/README.md). Both stock index play runs:
+zero inferred repeats, settled audio underruns and main gaps>50ms. Mali fidelity:
+819 residual pixels, all adjacent-source class(b), class(c)=0; all21 sets and4207
+adjusted receipts pass. Atlas-associated Mali allocation falls459.34→58.76MiB
+(7.817×); settled total Mali539→95–96MiB, legacy-overlap peak596→196MiB.
+**Fenced world+HUD p95 fails:** index240MHz16.271ms,420MHz16.263ms versus14ms.
+No conditional GO; GPU execution versus driver/presentation dependency unresolved.
+Index compiler time increases slightly; no optimisation performed. Private native/c1e
+contains reproducible builds, capture/debug-memory refinement, safe runners and analysis.
+All raw telemetry and failed setup attempts retained; ROM-derived readbacks remain ignored.
+User reports colour replay looks good. Production/47 protected files unchanged;
+CPU/GPU bounds/governors and RT defaults restored, EmulationStation running, no game.
+M3/P3 gates remain unchanged. No commit/push/production deployment. STOPPED.
+Further profiling, texture changes or product work requires separate authorisation.
+
 ## Milestone C1d — host fidelity PASS / device-ready / STOPPED (2026-10-16)
 
 See [C1d report](NATIVE_C1D_REPORT.md) and

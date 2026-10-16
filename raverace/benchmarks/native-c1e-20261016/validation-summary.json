@@ -1,0 +1,52 @@
+{
+  "colour-rgba": {
+    "result": "device-colour-rgba PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "colour-index": {
+    "result": "device-colour-index PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "provenance-rgba": {
+    "result": "device-provenance-rgba PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "provenance-index": {
+    "result": "device-provenance-index PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "timing-index-1": {
+    "result": "device-timing-index-1 PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "timing-rgba": {
+    "result": "device-timing-rgba PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "timing-index-2": {
+    "result": "device-timing-index-2 PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "fence-compact-rgba": {
+    "result": "device-fence-compact-rgba PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "fence-compact-index": {
+    "result": "device-fence-compact-index PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  },
+  "fence-index-420": {
+    "result": "device-fence-index-420 PASS 6006 ticks 63 checkpoint records",
+    "states_sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+    "restoration": "0"
+  }
+}

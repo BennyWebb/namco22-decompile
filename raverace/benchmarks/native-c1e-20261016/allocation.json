@@ -1,0 +1,19 @@
+{
+  "rgba": {
+    "baseline_pages": 80,
+    "loaded_pages": 117671,
+    "delta_pages": 117591,
+    "driver_delta_bytes": 481652736,
+    "API_bytes": 480614144
+  },
+  "index": {
+    "baseline_pages": 80,
+    "loaded_pages": 15123,
+    "delta_pages": 15043,
+    "driver_delta_bytes": 61616128,
+    "API_bytes": 61538304
+  },
+  "atlas_reduction": 7.816991291630659,
+  "palette_API_bytes": 393216,
+  "scope": "fresh-context atlas-associated Mali allocation delta; palettes and game buffers separately included in native play total counters"
+}

@@ -1,0 +1,4 @@
+{
+  "use_for_gate": false,
+  "reason": "Combined-process second baseline includes asynchronously retiring first GL context; negative index delta. Replaced by separate processes with zero-context precondition."
+}

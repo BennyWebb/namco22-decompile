@@ -1,0 +1,264 @@
+{"schema":1,"frames":1900,"slices":30400,"instructions_68k":158159009,"last_instruction_pc":"00026c5c","sr":"2000","d":["000049df","00000078","0000235a","fe930006","00000ead","0000ffff","00000000","00000000"],"a":["1000d860","00029040","00029076","000290ae","1000d834","0006c400","10008000","10000800"],"fnv1a32":{"register_bytes":"ff097dda","wram":"19dfa0c1","shared":"2eb9c8b5","poly_be":"94c48b27","text":"611571c3","palette":"3725e78c","eeprom":"6d859b6e"},"traps":0,"unmapped":0,"romwrites":0,"irqs":[0,0,0,0,1820,3640,0],"dsp_steps":38549300,"sound_cycles":497392072,"dsp_fault":false,"sound_fault":false}
+C1E_FRAME tick=1800 upload_ms=0.002417 upload_cpu_ms=0.003125 groups=0 bytes=0 render_ms=35.602582 fence=1 world_ms=1.903221 hud_ms=1.880180 wait_ms=31.028318
+C1E_FRAME tick=1801 upload_ms=0.002792 upload_cpu_ms=0.002209 groups=0 bytes=0 render_ms=21.310259 fence=1 world_ms=1.577476 hud_ms=0.746072 wait_ms=18.540592
+C1E_FRAME tick=1802 upload_ms=0.002542 upload_cpu_ms=0.002209 groups=0 bytes=0 render_ms=16.386667 fence=1 world_ms=1.596601 hud_ms=0.903694 wait_ms=13.469211
+C1E_FRAME tick=1803 upload_ms=0.003875 upload_cpu_ms=0.003417 groups=0 bytes=0 render_ms=15.235143 fence=1 world_ms=1.719515 hud_ms=0.956944 wait_ms=12.199772
+C1E_FRAME tick=1804 upload_ms=0.002459 upload_cpu_ms=0.002167 groups=0 bytes=0 render_ms=10.857501 fence=1 world_ms=1.531310 hud_ms=0.755114 wait_ms=8.214791
+C1E_FRAME tick=1805 upload_ms=0.002334 upload_cpu_ms=0.001958 groups=0 bytes=0 render_ms=13.287673 fence=1 world_ms=1.517143 hud_ms=0.597074 wait_ms=10.887125
+C1E_FRAME tick=1806 upload_ms=0.002375 upload_cpu_ms=0.001958 groups=0 bytes=0 render_ms=15.911132 fence=1 world_ms=1.664058 hud_ms=0.696864 wait_ms=13.257381
+C1E_FRAME tick=1807 upload_ms=0.002541 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=16.472414 fence=1 world_ms=1.654266 hud_ms=0.933319 wait_ms=13.502085
+C1E_FRAME tick=1808 upload_ms=0.002708 upload_cpu_ms=0.002625 groups=0 bytes=0 render_ms=15.796550 fence=1 world_ms=1.585142 hud_ms=0.685240 wait_ms=13.134633
+C1E_FRAME tick=1809 upload_ms=0.003084 upload_cpu_ms=0.002417 groups=0 bytes=0 render_ms=15.897217 fence=1 world_ms=1.699724 hud_ms=0.690114 wait_ms=13.114342
+C1E_FRAME tick=1810 upload_ms=0.002292 upload_cpu_ms=0.002125 groups=0 bytes=0 render_ms=16.194337 fence=1 world_ms=1.633475 hud_ms=0.697031 wait_ms=13.496669
+C1E_FRAME tick=1811 upload_ms=0.002875 upload_cpu_ms=0.002792 groups=0 bytes=0 render_ms=16.494164 fence=1 world_ms=1.548101 hud_ms=0.944777 wait_ms=13.641708
+C1E_FRAME tick=1812 upload_ms=0.002667 upload_cpu_ms=0.002416 groups=0 bytes=0 render_ms=15.618345 fence=1 world_ms=1.757807 hud_ms=0.706240 wait_ms=12.795596
+C1E_FRAME tick=1813 upload_ms=0.003166 upload_cpu_ms=0.003000 groups=0 bytes=0 render_ms=16.012546 fence=1 world_ms=1.938803 hud_ms=0.730948 wait_ms=12.982551
+C1E_FRAME tick=1814 upload_ms=0.002291 upload_cpu_ms=0.002042 groups=0 bytes=0 render_ms=16.226751 fence=1 world_ms=1.984470 hud_ms=0.752738 wait_ms=13.096467
+C1E_FRAME tick=1815 upload_ms=0.003667 upload_cpu_ms=0.002167 groups=0 bytes=0 render_ms=16.248502 fence=1 world_ms=3.265367 hud_ms=0.976818 wait_ms=11.576948
+C1E_FRAME tick=1816 upload_ms=0.003791 upload_cpu_ms=0.002875 groups=0 bytes=0 render_ms=15.186101 fence=1 world_ms=3.080912 hud_ms=0.731614 wait_ms=11.054331
+C1E_FRAME tick=1817 upload_ms=0.005291 upload_cpu_ms=0.003000 groups=0 bytes=0 render_ms=15.328557 fence=1 world_ms=2.884831 hud_ms=0.750488 wait_ms=11.370868
+C1E_FRAME tick=1818 upload_ms=0.003458 upload_cpu_ms=0.002250 groups=0 bytes=0 render_ms=15.562387 fence=1 world_ms=2.723583 hud_ms=0.807154 wait_ms=11.693738
+C1E_FRAME tick=1819 upload_ms=0.003333 upload_cpu_ms=0.002583 groups=0 bytes=0 render_ms=15.650636 fence=1 world_ms=2.781416 hud_ms=0.993110 wait_ms=11.549032
+C1E_FRAME tick=1820 upload_ms=0.004083 upload_cpu_ms=0.003041 groups=0 bytes=0 render_ms=15.203726 fence=1 world_ms=2.628959 hud_ms=0.816988 wait_ms=11.417284
+C1E_FRAME tick=1821 upload_ms=0.003458 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.495055 fence=1 world_ms=2.473170 hud_ms=0.787197 wait_ms=11.901776
+C1E_FRAME tick=1822 upload_ms=0.004375 upload_cpu_ms=0.003042 groups=0 bytes=0 render_ms=15.298265 fence=1 world_ms=2.851373 hud_ms=1.015193 wait_ms=11.096704
+C1E_FRAME tick=1823 upload_ms=0.004000 upload_cpu_ms=0.002833 groups=0 bytes=0 render_ms=15.118851 fence=1 world_ms=2.436171 hud_ms=1.014651 wait_ms=11.336451
+C1E_FRAME tick=1824 upload_ms=0.006750 upload_cpu_ms=0.003375 groups=0 bytes=0 render_ms=14.000244 fence=1 world_ms=2.598793 hud_ms=0.732739 wait_ms=10.328592
+C1E_FRAME tick=1825 upload_ms=0.003500 upload_cpu_ms=0.002542 groups=0 bytes=0 render_ms=11.842776 fence=1 world_ms=2.373797 hud_ms=0.909194 wait_ms=8.226457
+C1E_FRAME tick=1826 upload_ms=0.003125 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=11.782069 fence=1 world_ms=2.222299 hud_ms=1.035067 wait_ms=8.196958
+C1E_FRAME tick=1827 upload_ms=0.003584 upload_cpu_ms=0.002583 groups=0 bytes=0 render_ms=12.470809 fence=1 world_ms=2.627668 hud_ms=1.589892 wait_ms=7.917920
+C1E_FRAME tick=1828 upload_ms=0.003875 upload_cpu_ms=0.002417 groups=0 bytes=0 render_ms=14.654734 fence=1 world_ms=2.561461 hud_ms=0.765989 wait_ms=10.993123
+C1E_FRAME tick=1829 upload_ms=0.003833 upload_cpu_ms=0.003208 groups=0 bytes=0 render_ms=14.421195 fence=1 world_ms=2.296715 hud_ms=0.818029 wait_ms=10.986331
+C1E_FRAME tick=1830 upload_ms=0.004833 upload_cpu_ms=0.003333 groups=0 bytes=0 render_ms=15.294890 fence=1 world_ms=2.238632 hud_ms=1.031943 wait_ms=11.707862
+C1E_FRAME tick=1831 upload_ms=0.003625 upload_cpu_ms=0.002625 groups=0 bytes=0 render_ms=16.120335 fence=1 world_ms=2.470712 hud_ms=1.023359 wait_ms=12.295811
+C1E_FRAME tick=1832 upload_ms=0.004083 upload_cpu_ms=0.002750 groups=0 bytes=0 render_ms=14.903271 fence=1 world_ms=2.643876 hud_ms=0.804696 wait_ms=11.140329
+C1E_FRAME tick=1833 upload_ms=0.003250 upload_cpu_ms=0.002250 groups=0 bytes=0 render_ms=15.313931 fence=1 world_ms=2.149134 hud_ms=0.800071 wait_ms=12.047773
+C1E_FRAME tick=1834 upload_ms=0.118123 upload_cpu_ms=0.008125 groups=0 bytes=0 render_ms=16.058378 fence=1 world_ms=2.334672 hud_ms=1.211524 wait_ms=12.062856
+C1E_FRAME tick=1835 upload_ms=0.004333 upload_cpu_ms=0.002833 groups=0 bytes=0 render_ms=14.929604 fence=1 world_ms=2.212008 hud_ms=0.806196 wait_ms=11.586947
+C1E_FRAME tick=1836 upload_ms=0.004375 upload_cpu_ms=0.003041 groups=0 bytes=0 render_ms=15.384847 fence=1 world_ms=2.160217 hud_ms=0.808695 wait_ms=12.084565
+C1E_FRAME tick=1837 upload_ms=0.003458 upload_cpu_ms=0.002583 groups=0 bytes=0 render_ms=15.557177 fence=1 world_ms=2.248674 hud_ms=0.951152 wait_ms=12.039481
+C1E_FRAME tick=1838 upload_ms=0.004417 upload_cpu_ms=0.002667 groups=0 bytes=0 render_ms=15.833382 fence=1 world_ms=2.255632 hud_ms=1.045150 wait_ms=12.217854
+C1E_FRAME tick=1839 upload_ms=0.004666 upload_cpu_ms=0.002917 groups=0 bytes=0 render_ms=14.777106 fence=1 world_ms=2.472796 hud_ms=0.757863 wait_ms=11.219745
+C1E_FRAME tick=1840 upload_ms=0.004083 upload_cpu_ms=0.002209 groups=0 bytes=0 render_ms=15.364514 fence=1 world_ms=2.265757 hud_ms=0.780572 wait_ms=11.986899
+C1E_FRAME tick=1841 upload_ms=0.002917 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.268516 fence=1 world_ms=2.214007 hud_ms=0.783321 wait_ms=11.859026
+C1E_FRAME tick=1842 upload_ms=0.003875 upload_cpu_ms=0.002666 groups=0 bytes=0 render_ms=15.734509 fence=1 world_ms=2.162425 hud_ms=1.048400 wait_ms=12.192897
+C1E_FRAME tick=1843 upload_ms=0.003416 upload_cpu_ms=0.002042 groups=0 bytes=0 render_ms=15.178308 fence=1 world_ms=2.379005 hud_ms=0.796029 wait_ms=11.676779
+C1E_FRAME tick=1844 upload_ms=0.002917 upload_cpu_ms=0.002333 groups=0 bytes=0 render_ms=15.358389 fence=1 world_ms=2.008135 hud_ms=1.108441 wait_ms=11.915942
+C1E_FRAME tick=1845 upload_ms=0.003791 upload_cpu_ms=0.002750 groups=0 bytes=0 render_ms=15.389305 fence=1 world_ms=2.189341 hud_ms=0.775113 wait_ms=12.098273
+C1E_FRAME tick=1846 upload_ms=0.003125 upload_cpu_ms=0.002292 groups=0 bytes=0 render_ms=15.972046 fence=1 world_ms=2.522919 hud_ms=1.019692 wait_ms=12.121689
+C1E_FRAME tick=1847 upload_ms=0.005333 upload_cpu_ms=0.003458 groups=0 bytes=0 render_ms=14.934604 fence=1 world_ms=2.044760 hud_ms=0.780321 wait_ms=11.785403
+C1E_FRAME tick=1848 upload_ms=0.003167 upload_cpu_ms=0.002584 groups=0 bytes=0 render_ms=15.752467 fence=1 world_ms=2.160175 hud_ms=0.851070 wait_ms=12.402226
+C1E_FRAME tick=1849 upload_ms=0.003708 upload_cpu_ms=0.002875 groups=0 bytes=0 render_ms=15.770674 fence=1 world_ms=2.158842 hud_ms=1.019984 wait_ms=12.272645
+C1E_FRAME tick=1850 upload_ms=0.003334 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.126810 fence=1 world_ms=2.102426 hud_ms=0.789155 wait_ms=11.909275
+C1E_FRAME tick=1851 upload_ms=0.003583 upload_cpu_ms=0.002541 groups=0 bytes=0 render_ms=15.576261 fence=1 world_ms=2.178508 hud_ms=0.788405 wait_ms=12.287103
+C1E_FRAME tick=1852 upload_ms=0.003959 upload_cpu_ms=0.002292 groups=0 bytes=0 render_ms=15.421264 fence=1 world_ms=2.151717 hud_ms=0.787905 wait_ms=12.070898
+C1E_FRAME tick=1853 upload_ms=0.004416 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.860839 fence=1 world_ms=2.076051 hud_ms=0.996860 wait_ms=12.458392
+C1E_FRAME tick=1854 upload_ms=0.004000 upload_cpu_ms=0.002958 groups=0 bytes=0 render_ms=14.952396 fence=1 world_ms=2.101343 hud_ms=0.768655 wait_ms=11.748320
+C1E_FRAME tick=1855 upload_ms=0.003292 upload_cpu_ms=0.002208 groups=0 bytes=0 render_ms=15.503596 fence=1 world_ms=2.149800 hud_ms=0.777030 wait_ms=12.020649
+C1E_FRAME tick=1856 upload_ms=0.004750 upload_cpu_ms=0.002625 groups=0 bytes=0 render_ms=15.445596 fence=1 world_ms=2.104801 hud_ms=0.771697 wait_ms=12.233145
+C1E_FRAME tick=1857 upload_ms=0.004083 upload_cpu_ms=0.002084 groups=0 bytes=0 render_ms=15.695800 fence=1 world_ms=2.135592 hud_ms=1.003234 wait_ms=12.220396
+C1E_FRAME tick=1858 upload_ms=0.002917 upload_cpu_ms=0.002291 groups=0 bytes=0 render_ms=14.953687 fence=1 world_ms=2.166758 hud_ms=0.947778 wait_ms=11.513906
+C1E_FRAME tick=1859 upload_ms=0.004458 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.382931 fence=1 world_ms=2.115509 hud_ms=0.960485 wait_ms=11.973775
+C1E_FRAME tick=1860 upload_ms=0.004208 upload_cpu_ms=0.002833 groups=0 bytes=0 render_ms=15.728675 fence=1 world_ms=2.166675 hud_ms=1.006526 wait_ms=12.230645
+C1E_FRAME tick=1861 upload_ms=0.003875 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=14.945813 fence=1 world_ms=2.172384 hud_ms=0.779196 wait_ms=11.674655
+C1E_FRAME tick=1862 upload_ms=0.004917 upload_cpu_ms=0.002875 groups=0 bytes=0 render_ms=15.589969 fence=1 world_ms=2.128509 hud_ms=0.905486 wait_ms=12.213938
+C1E_FRAME tick=1863 upload_ms=0.004958 upload_cpu_ms=0.003292 groups=0 bytes=0 render_ms=15.723592 fence=1 world_ms=2.191592 hud_ms=1.000276 wait_ms=12.195855
+C1E_FRAME tick=1864 upload_ms=0.004249 upload_cpu_ms=0.002583 groups=0 bytes=0 render_ms=15.158141 fence=1 world_ms=1.995302 hud_ms=0.789154 wait_ms=12.058523
+C1E_FRAME tick=1865 upload_ms=0.004459 upload_cpu_ms=0.002833 groups=0 bytes=0 render_ms=18.137597 fence=1 world_ms=2.074010 hud_ms=0.895320 wait_ms=14.845813
+C1E_FRAME tick=1866 upload_ms=0.004208 upload_cpu_ms=0.002667 groups=0 bytes=0 render_ms=13.166465 fence=1 world_ms=2.034343 hud_ms=4.666637 wait_ms=6.157031
+C1E_FRAME tick=1867 upload_ms=0.004125 upload_cpu_ms=0.002083 groups=0 bytes=0 render_ms=14.779773 fence=1 world_ms=2.050843 hud_ms=0.767113 wait_ms=11.642863
+C1E_FRAME tick=1868 upload_ms=0.004541 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.349264 fence=1 world_ms=2.196799 hud_ms=0.810487 wait_ms=11.980108
+C1E_FRAME tick=1869 upload_ms=0.004666 upload_cpu_ms=0.002917 groups=0 bytes=0 render_ms=15.709508 fence=1 world_ms=1.984595 hud_ms=1.013401 wait_ms=12.375727
+C1E_FRAME tick=1870 upload_ms=0.003625 upload_cpu_ms=0.002250 groups=0 bytes=0 render_ms=14.978270 fence=1 world_ms=1.957720 hud_ms=0.784321 wait_ms=11.923400
+C1E_FRAME tick=1871 upload_ms=0.003417 upload_cpu_ms=0.002584 groups=0 bytes=0 render_ms=15.363557 fence=1 world_ms=2.127009 hud_ms=0.769488 wait_ms=12.141439
+C1E_FRAME tick=1872 upload_ms=0.003167 upload_cpu_ms=0.002333 groups=0 bytes=0 render_ms=16.065046 fence=1 world_ms=1.946720 hud_ms=1.018192 wait_ms=12.790096
+C1E_FRAME tick=1873 upload_ms=0.003916 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=14.867521 fence=1 world_ms=2.020303 hud_ms=0.763321 wait_ms=11.766528
+C1E_FRAME tick=1874 upload_ms=0.003333 upload_cpu_ms=0.002333 groups=0 bytes=0 render_ms=15.535094 fence=1 world_ms=2.185758 hud_ms=0.795322 wait_ms=12.256811
+C1E_FRAME tick=1875 upload_ms=0.002791 upload_cpu_ms=0.002416 groups=0 bytes=0 render_ms=15.591302 fence=1 world_ms=1.984761 hud_ms=0.985568 wait_ms=12.305978
+C1E_FRAME tick=1876 upload_ms=0.004084 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.119852 fence=1 world_ms=2.001928 hud_ms=0.854153 wait_ms=11.953442
+C1E_FRAME tick=1877 upload_ms=0.003250 upload_cpu_ms=0.002583 groups=0 bytes=0 render_ms=15.466429 fence=1 world_ms=2.141134 hud_ms=0.775863 wait_ms=12.248187
+C1E_FRAME tick=1878 upload_ms=0.003000 upload_cpu_ms=0.002208 groups=0 bytes=0 render_ms=15.826674 fence=1 world_ms=1.948179 hud_ms=1.019110 wait_ms=12.560682
+C1E_FRAME tick=1879 upload_ms=0.004875 upload_cpu_ms=0.003042 groups=0 bytes=0 render_ms=15.095976 fence=1 world_ms=2.023010 hud_ms=0.769697 wait_ms=12.001190
+C1E_FRAME tick=1880 upload_ms=0.005208 upload_cpu_ms=0.002875 groups=0 bytes=0 render_ms=15.500970 fence=1 world_ms=1.492685 hud_ms=0.698989 wait_ms=13.001259
+C1E_FRAME tick=1881 upload_ms=0.004500 upload_cpu_ms=0.002584 groups=0 bytes=0 render_ms=15.755342 fence=1 world_ms=1.590892 hud_ms=0.732322 wait_ms=13.125965
+C1E_FRAME tick=1882 upload_ms=0.003583 upload_cpu_ms=0.002417 groups=0 bytes=0 render_ms=15.860005 fence=1 world_ms=1.378979 hud_ms=1.331271 wait_ms=12.856551
+C1E_FRAME tick=1883 upload_ms=0.003792 upload_cpu_ms=0.002500 groups=0 bytes=0 render_ms=15.380388 fence=1 world_ms=1.474893 hud_ms=0.715364 wait_ms=12.890968
+C1E_FRAME tick=1884 upload_ms=0.004041 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.886338 fence=1 world_ms=1.509768 hud_ms=0.976735 wait_ms=13.095673
+C1E_FRAME tick=1885 upload_ms=0.004375 upload_cpu_ms=0.002416 groups=0 bytes=0 render_ms=15.080226 fence=1 world_ms=1.389312 hud_ms=0.711155 wait_ms=12.675263
+C1E_FRAME tick=1886 upload_ms=0.003999 upload_cpu_ms=0.002250 groups=0 bytes=0 render_ms=15.419595 fence=1 world_ms=1.373687 hud_ms=0.680990 wait_ms=12.992341
+C1E_FRAME tick=1887 upload_ms=0.003500 upload_cpu_ms=0.002875 groups=0 bytes=0 render_ms=15.962254 fence=1 world_ms=1.439852 hud_ms=0.950194 wait_ms=13.276712
+C1E_FRAME tick=1888 upload_ms=0.003500 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.209641 fence=1 world_ms=1.367521 hud_ms=0.744114 wait_ms=12.809844
+C1E_FRAME tick=1889 upload_ms=0.003458 upload_cpu_ms=0.002709 groups=0 bytes=0 render_ms=15.093350 fence=1 world_ms=1.378312 hud_ms=0.685656 wait_ms=12.719637
+C1E_FRAME tick=1890 upload_ms=0.004667 upload_cpu_ms=0.003500 groups=0 bytes=0 render_ms=15.801298 fence=1 world_ms=1.373062 hud_ms=0.961568 wait_ms=13.171380
+C1E_FRAME tick=1891 upload_ms=0.003666 upload_cpu_ms=0.002709 groups=0 bytes=0 render_ms=15.385970 fence=1 world_ms=1.451519 hud_ms=0.743239 wait_ms=12.888134
+C1E_FRAME tick=1892 upload_ms=0.003916 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=14.835687 fence=1 world_ms=1.426769 hud_ms=0.721864 wait_ms=12.392058
+C1E_FRAME tick=1893 upload_ms=0.003834 upload_cpu_ms=0.002584 groups=0 bytes=0 render_ms=16.237958 fence=1 world_ms=1.516809 hud_ms=0.976943 wait_ms=13.441667
+C1E_FRAME tick=1894 upload_ms=0.004875 upload_cpu_ms=0.002916 groups=0 bytes=0 render_ms=14.333362 fence=1 world_ms=1.469019 hud_ms=0.763572 wait_ms=11.789651
+C1E_FRAME tick=1895 upload_ms=0.002875 upload_cpu_ms=0.002333 groups=0 bytes=0 render_ms=15.326388 fence=1 world_ms=1.462227 hud_ms=0.733114 wait_ms=12.830676
+C1E_FRAME tick=1896 upload_ms=0.004708 upload_cpu_ms=0.002625 groups=0 bytes=0 render_ms=15.622426 fence=1 world_ms=1.443144 hud_ms=0.986443 wait_ms=12.895635
+C1E_FRAME tick=1897 upload_ms=0.004875 upload_cpu_ms=0.003750 groups=0 bytes=0 render_ms=15.159974 fence=1 world_ms=1.497977 hud_ms=0.719697 wait_ms=12.629596
+C1E_FRAME tick=1898 upload_ms=0.003291 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.013017 fence=1 world_ms=1.528643 hud_ms=0.762238 wait_ms=12.418933
+C1E_FRAME tick=1899 upload_ms=0.004709 upload_cpu_ms=0.002833 groups=0 bytes=0 render_ms=15.366888 fence=1 world_ms=1.473310 hud_ms=0.749946 wait_ms=12.786261
+C1E_FRAME tick=1900 upload_ms=0.003250 upload_cpu_ms=0.002375 groups=0 bytes=0 render_ms=15.901338 fence=1 world_ms=1.386396 hud_ms=0.756071 wait_ms=13.487042
+[P1B-CLOCK] monotonic=38077.293775946 realtime=1792173083.341725588
+[SND] translated sound program (2965 instructions)
+[INPUT] replaying /userdata/system/rave-racer-replays/race-20261013-122242-25136.rec
+[REPLAY] inputs sampled at emulated boundaries; ROM hashes FNV1a64; checkpoints every 300 ticks
+[TEX] ROM CPU bytes=19398656; formats=8/4/2bpp cmodes; System22 polygon pen zero opaque
+[GLES2] SDL driver 0: mali
+[GLES2] SDL compiled=2.32.8 runtime=2.32.8
+[GLES2] active SDL video driver: mali
+[GLES2] vendor: ARM
+[GLES2] renderer: Mali-G31
+[GLES2] version: OpenGL ES 3.2 v1.r20p0-01rel0.8ec337de4ddab3365a32cff58063a9da
+[GLES2] GLSL: OpenGL ES GLSL ES 3.20
+[GLES2] drawable 640x480 depth bits=24
+[TEX] GL max texture=8192 fragment highp bits=23
+[GLES2] triangle storage: CPU=2400000 bytes, GPU store upper bound=2400000 bytes
+[GLES2] VBO mode=frame command storage=114688 bytes; frame mode re-specifies storage per contiguous chunk
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[GLES2] GLSL ES 1.00 linked; textures=textured budget=67108864; per-texture cache, atlas disabled
+[GLES2] unsupported/bypassed: polygon fog, Nuklear, desktop blits/render targets
+[VIDEO] original CG/text + priority + shadow + fade/gamma; GPU_fixed_bytes=3336192
+[GPU-HUD] mode=glyph-quads GLES2; verify=0
+[C1C-SAMPLER] sampler=texture palette_precision=lowp
+[C1-TEXTURES] mode=rgba pages=9 bytes=482662144 palette_copies=0 snapshot_only=1
+[C1D] debug=off precision=lowp isolated_c1e=1
+[C1E-LOAD] mode=rgba pages=9 page_bytes=480614144 cache_read_ms=20840.870914 upload_submit_ms=2072.223334 GL_ready_ms=23628.904199 debug=0
+[NATIVE-LIVE] source=live-simulation serial=0 fifo=1 activation_tick=1800 preload_ms=23630.834 meshes=15968 materials=5407 no_frame_stream=1
+[AUDIO] driver=alsa output 48000 Hz stereo, 512-sample buffer, gain x6.00
+[INPUT] unmapped Anbernic RG40XX-H Controller GUID=19000000010000000100000000010000; configure --es-input FILE or --controller-db FILE
+[GLES2] unmapped joystick: Anbernic RG40XX-H Controller (START+SELECT needs an SDL mapping)
+[INPUT] mode=scripted; interactive: SELECT coin, START/south/R1 gas-confirm, east/L1 brake, stick/D-pad steer, START+SELECT quit
+[GLES2] exit: START+SELECT/BACK, Escape or SDL quit; frames limited by --frames
+[PROFILE] CPU wall time (driver waits included); no glFinish; start frame=1 mode=textured
+[TIMING] mode=independent target_hz=59.904059904 render_hz=0 (0=adaptive) catchup_limit=4
+[THREAD] simulation_tid=1938 mode=three-stage slots=2 bytes=2366480 point_copy_bytes=524288 target_hz=59.904059904
+[THREAD] presentation_tid=1962 affinity=OS
+[PREP] slots=2 fixed_hud_bytes=0 queue=latest
+[PREP] tid=1963 affinity=OS
+[HEADLESS] translated baseline; stop after 1900 frames
+[INPUT] unmapped Anbernic RG40XX-H Controller GUID=19000000010000000100000000010000; configure --es-input FILE or --controller-db FILE
+[GLES2] unmapped joystick: Anbernic RG40XX-H Controller (START+SELECT needs an SDL mapping)
+[RR] frame 60  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/0/0/0  en 00 pc_sr 2719
+     dsp: ctrl 00 run 0 irq 0 slave 0 fault 0 pc 0000 idle 0 imr 0 ifr 0 intm 0 pdp 0 steps 0
+[SND] sound CPU out of reset (#1), PC=C030
+[SND] sound CPU out of reset (#2), PC=C030
+[GLES2] CPU geometry allocation: 2138112 bytes
+[GLES2] CPU geometry allocation: 2138112 bytes
+[RR] frame 120  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/40/80/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 22 steps 1776256
+[RR] frame 180  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/100/200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 79 steps 2734393
+[RR] frame 240  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/160/320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 139 steps 3783985
+[THREAD-FRAME] frame=289 quads=373 triangles=696 draws=279 binds=292
+[THREAD-WINDOW] frame=291 steps=291 presentations=289 sim_hz=58.097 render_fps=57.698
+[RR] frame 300  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/220/440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 199 steps 4721666
+[RR] frame 360  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/280/560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 259 steps 5463488
+[RR] frame 420  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/340/680/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 319 steps 6513080
+[RR] frame 480  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/400/800/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 379 steps 7434932
+[RR] frame 540  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/460/920/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 439 steps 8188904
+[THREAD-FRAME] frame=588 quads=395 triangles=744 draws=302 binds=315
+[THREAD-WINDOW] frame=590 steps=590 presentations=588 sim_hz=58.912 render_fps=58.712
+[RR] frame 600  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/520/1040/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 499 steps 9042644
+[RR] frame 660  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/580/1160/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 559 steps 9894539
+[RR] frame 720  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/640/1280/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 619 steps 10726370
+[RR] frame 780  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/700/1400/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 679 steps 11550299
+[RR] frame 840  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/760/1520/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 736 steps 12589846
+[THREAD-FRAME] frame=887 quads=36 triangles=68 draws=34 binds=35
+[THREAD-WINDOW] frame=889 steps=889 presentations=887 sim_hz=59.179 render_fps=59.046
+[RR] frame 900  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/820/1640/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 796 steps 12836908
+[RR] frame 960  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/880/1760/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 856 steps 13083970
+[RR] frame 1020  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/940/1880/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 916 steps 13331032
+[RR] frame 1080  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1000/2000/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 976 steps 13862221
+[RR] frame 1140  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1060/2120/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1036 steps 14434003
+[THREAD-FRAME] frame=1186 quads=93 triangles=180 draws=90 binds=91
+[THREAD-WINDOW] frame=1188 steps=1188 presentations=1186 sim_hz=59.312 render_fps=59.212
+[RR] frame 1200  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1120/2240/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1096 steps 15005785
+[RR] frame 1260  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1180/2360/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1156 steps 15546615
+[RR] frame 1320  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1240/2480/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1216 steps 16071357
+[GLES2] CPU geometry allocation: 4276224 bytes
+[GLES2] CPU geometry allocation: 4276224 bytes
+[RR] frame 1380  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1300/2600/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1272 steps 17736895
+[THREAD-FRAME] frame=1424 quads=2282 triangles=3593 draws=1679 binds=1680
+[THREAD-WINDOW] frame=1426 steps=1426 presentations=1424 sim_hz=56.967 render_fps=56.887
+[RR] frame 1440  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1360/2720/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1332 steps 18991765
+[RR] frame 1500  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1420/2840/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1392 steps 20246635
+[RR] frame 1560  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1480/2960/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1452 steps 21501505
+[THREAD-FRAME] frame=1614 quads=2379 triangles=3771 draws=1781 binds=1783
+[THREAD-WINDOW] frame=1616 steps=1616 presentations=1614 sim_hz=53.800 render_fps=53.733
+[RR] frame 1620  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1540/3080/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1512 steps 23943799
+[RR] frame 1680  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1600/3200/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1572 steps 27073550
+[RR] frame 1740  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1660/3320/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1632 steps 30203300
+[P1B-WARM] tick=1740 resource_copy=0 complete_ms=35.147800 offscreen=1 shader_variants=2
+[P1B-WARM] tick=1741 resource_copy=1 complete_ms=27.319085 offscreen=1 shader_variants=2
+[P1B-WARM] tick=1742 resource_copy=2 complete_ms=29.660842 offscreen=1 shader_variants=2
+[RR] frame 1800  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1720/3440/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1692 steps 33333050
+[THREAD-FRAME] frame=1820 quads=1452 triangles=2596 draws=176 binds=0
+[THREAD-WINDOW] frame=1822 steps=1822 presentations=1820 sim_hz=51.992 render_fps=51.935
+[RR] frame 1860  traps 0  unmapped 0  romwrites 0  irqs 0/0/0/0/1780/3560/0  en 14 pc_sr 2000
+     dsp: ctrl 01 run 1 irq 1 slave 1 fault 0 pc 4CA4 idle 1 imr 9 ifr 31 intm 0 pdp 1752 steps 36462800
+[C352] inactive_fastpath=on counters=off
+[AUDIO-CHECK] from=1 samples=2706462 intervals=30400 pcm_fnv1a64=b63d2e10f05e9bcf voice_fnv1a64=bb89920019775886 final_fnv1a64=0d9e676bc6720339 acc=322048
+[P1-AUDIO] resampler_ratio_min=0.980000000 max=1.005000000 final=1.003196181
+[AUDIO-OUTPUT] underrun_samples=213305 overrun_samples=0 latency_resets=0 queued_frames=578
+[THREAD-RATE] from=1 steps=1900 rendered=1898 drain=2 sim_hz=52.269704 render_fps=52.214683 sim_cpu_ms=8.089196 copy_cpu_ms=0.735502 presentation_cpu_ms=10.572381 scene_wall_ms=2.758581 publication_age_ms=37.447472 cpu_cores_equivalent=1.178860 dropped=0 queue_peak=1 resyncs=0 discarded_lag_ms=0.000000 worker_core_counts=575/296/153/876
+[P1B-VALVE] enabled=0 periods=2.000 activations=0 replaced=0
+[THREAD-PERIOD] start=38101.896717840 end=38138.246646607 total_dropped=0
+[THREAD-DETAIL] producer_cpu_ms=1.164952 includes_copy=1 record_overflow=0 simulation_core_counts=133/895/609/263 presentation_core_counts=575/296/153/876
+[PREP-RATE] prepared=1900 prep_cpu_ms=2.726880 hud_cpu_ms=0.037833 scene_wall_ms=2.758581 dropped_prepared=0 extra_hud_bytes=4915200
+[BOARD-STATE] fnv1a32=b79bb7e9
+[MEM-READER] implementation=split
+[MEM-READS] fast=on counters=off
+[SIM] ticks=101 from=1800 overflow=0 reconciliation_max_us=0.000000
+[SIM-STAGE] name=translated68k_inclusive_memory n=101 avg_ms=3.301377 median_ms=3.193911 p95_ms=4.012397 max_ms=4.605680 percent=30.842
+[SIM-STAGE] name=scheduler n=101 avg_ms=0.069854 median_ms=0.036669 p95_ms=0.064247 max_ms=3.019037 percent=0.653
+[SIM-STAGE] name=dsp_inclusive_pdp n=101 avg_ms=2.866939 median_ms=2.873123 p95_ms=3.191952 max_ms=3.470030 percent=26.783
+[SIM-STAGE] name=sound_inclusive_bus n=101 avg_ms=2.730042 median_ms=2.658709 p95_ms=3.430863 max_ms=3.990106 percent=25.504
+[SIM-STAGE] name=c352_mix n=101 avg_ms=1.481146 median_ms=1.457312 p95_ms=1.772598 max_ms=1.916511 percent=13.837
+[SIM-STAGE] name=serial n=101 avg_ms=0.003743 median_ms=0.003416 p95_ms=0.004832 max_ms=0.020331 percent=0.035
+[SIM-STAGE] name=board_io n=101 avg_ms=0.003608 median_ms=0.003583 p95_ms=0.004250 max_ms=0.006584 percent=0.034
+[SIM-STAGE] name=irq_inclusive_handlers n=101 avg_ms=0.247610 median_ms=0.241038 p95_ms=0.256246 max_ms=0.531700 percent=2.313
+[SIM-STAGE] name=simulation_wall n=101 avg_ms=10.704319 median_ms=10.538047 p95_ms=12.009565 max_ms=15.766884 percent=100.000
+[SIM-STAGE] name=simulation_thread_cpu n=101 avg_ms=10.549235 median_ms=10.374334 p95_ms=11.595125 max_ms=15.012040 percent=98.551
+[P1] native=101 unsupported_fallback=0 legacy_releases=0 legacy_recreates=0 gpu_ring_wait_ms=1.137229
+[P1B-WARM-SUMMARY] completed=3 expected=3
+TRACE_DRAIN mode=ram bytes=16054 wall_ms=0.058041 outside_race=1
+[GEOMETRY] skip=off effective=off test_present_every=0 ticks=1900 walks=1804 direct_consumed=11670 digest=1e905bf95e67aa75
+[PROFILE] total mode=textured frames=1..1900 samples=1900 avg_ms simulation=0.000 scene=2.759 lookup_decode=1.332 uploads=0.446 submission=5.088 swap=7.543 render_other=3.175 pacing=0.000 capture=0.000 vertex_upload=0.198 draw_call=3.883 avg_triangles=1244.8 avg_draws=528.2 avg_binds=525.5 avg_skipped_binds=0.0 flushes texture=988750 scissor=668 capacity=0 mutation=0 end=1691 same_texture=74376 empty_texture_flush=93723 vbo=frame avg_vertex_uploads=0.89 avg_vertex_bytes=133753.6 texture_barriers=0
+[PROFILE-CACHE] total mode=textured frames=1..1900 samples=1900 hits=1391599 misses=6617 evictions=4234 texture_uploads=6617 GPU_end=0 GPU_frame_end_peak=67108760
+[VIDEO] presentations=1903 full_layer_uploads=0
+[GPU-HUD] pictures=1903 verified=0 bytes=10313352 calls=1048 profile_bytes=0 profile_calls=0
+[GPU-HUD-TRANSFER] scope=profile glyph_bytes=0 vertex_bytes=0 palette_bytes=0 lut_bytes=0
+[TEX] decoded=6617 uploads=6617 GPU=46602852 peak=67108860 budget=67108864 live=1695 hits=1391599 misses=6617 evictions=4234 CPU_metadata=4456448 CPU_aux=310816 scratch=4202500 shadow=0 decoded_cache=0
+[TEX] CPU metadata=4456448 scratch=4202500 decoded_cache=0 atlas_shadow=0 bytes
+[RR] stop at frame 1900, 0 traps
+[REPLAY] completed_frames=1900 status=ok
+[P1B-IO] streams=6 reserved=12058624 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1
