@@ -1,0 +1,19 @@
+{
+  "status": "BLOCKED / STOPPED",
+  "gate_pass": false,
+  "report_lines": 135,
+  "HEAD_unchanged": "65028074a7d3393712d957c72725f36d56c26ec3",
+  "raw_telemetry_verified": 33,
+  "review_pngs_verified": 78,
+  "per_pixel_attributions": {
+    "palette_precision_counterfactual": 846527,
+    "unresolved_original": 5873,
+    "new_residual": 2
+  },
+  "layout_control_exact_images": 22,
+  "class_a_proven": 0,
+  "residual_classification_complete": false,
+  "scope_check": "PASS C1c-only sources/docs/evidence",
+  "device_contacted": false,
+  "no_commit_push_deployment": true
+}

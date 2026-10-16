@@ -1,0 +1,17 @@
+{
+  "branch": "feature/knulli-h700",
+  "initial_HEAD": "65028074a7d3393712d957c72725f36d56c26ec3",
+  "initial_worktree": "clean",
+  "sources": {
+    "raverace/native/c1c/README.md": "10a906b28e355ef8414ac95ebf23b35ddf492bee2d87d57ff5aab5d8656e4471",
+    "raverace/native/c1c/analyse_sampler.py": "ff37284c52f86039ecfa5eb655e8070433b1e8ef973127aaf479a7c8619be25c",
+    "raverace/native/c1c/build.py": "a7e569bbd2b2f2eeaad1bbfa294d524618fcf6a2c07474a14323f4b5390d2244",
+    "raverace/native/c1c/export_evidence.py": "4ed7b8bca17d9ace848b452a923001c54776b92d4f59bec6e091aa9a32175c66",
+    "raverace/native/c1c/prepare.py": "8fea808eb5dde642eeb831fb755e7e6c856c075bff016086f8e4566b32e7b8f5",
+    "raverace/native/c1c/prepare_sampler.py": "861ff9e52791102caf7289d889897be4b503b0063c3df957a22956a05497617f",
+    "raverace/native/c1c/review_sheets.py": "15896fabf6d8aefce53d9519fa2d930d7be7956e4605ebbc8f58b505e3755954",
+    "raverace/native/c1c/run_layout.py": "863d462e0a36e6cf4e3a7a5fb8cef7654105897998d0f7a96a299df3442303fa",
+    "raverace/native/c1c/run_sampler.py": "058b11483ccd65499bd0299e40a055d613bce7b1d674276e9671820080b8933d"
+  },
+  "input_materials_sha256": "faa40e405099ba6072f0d2606189cfb54145d2cc0e9fc06106c6f3fc438009c3"
+}

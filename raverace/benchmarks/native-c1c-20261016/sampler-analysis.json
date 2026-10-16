@@ -1,0 +1,9459 @@
+{
+  "images": 36,
+  "totals": {
+    "original_difference": 852400,
+    "normalised_highp_difference": 852400,
+    "normalised_lowp_difference": 5875,
+    "removed_by_normalised_sampler": 0,
+    "removed_after_lowp_precision": 846527,
+    "remaining_original_unclassified": 5873,
+    "new_after_changes": 2
+  },
+  "rows": [
+    {
+      "image": "tick-1800.composed.rgba",
+      "counts": {
+        "original_difference": 29184,
+        "normalised_highp_difference": 29184,
+        "normalised_lowp_difference": 88,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 29096,
+        "remaining_original_unclassified": 88,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 29184,
+          "max_channel_difference": 137,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 29184,
+          "max_channel_difference": 137,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 88,
+          "max_channel_difference": 137,
+          "example_xy": [
+            [
+              163,
+              49
+            ],
+            [
+              199,
+              51
+            ],
+            [
+              534,
+              51
+            ],
+            [
+              255,
+              55
+            ],
+            [
+              333,
+              64
+            ],
+            [
+              537,
+              67
+            ],
+            [
+              310,
+              72
+            ],
+            [
+              311,
+              72
+            ],
+            [
+              529,
+              81
+            ],
+            [
+              596,
+              82
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 29096,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 88,
+          "max_channel_difference": 137,
+          "example_xy": [
+            [
+              163,
+              49
+            ],
+            [
+              199,
+              51
+            ],
+            [
+              534,
+              51
+            ],
+            [
+              255,
+              55
+            ],
+            [
+              333,
+              64
+            ],
+            [
+              537,
+              67
+            ],
+            [
+              310,
+              72
+            ],
+            [
+              311,
+              72
+            ],
+            [
+              529,
+              81
+            ],
+            [
+              596,
+              82
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 137,
+      "normalised_max_difference": 137,
+      "lowp_max_difference": 137,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-1800.world.rgba",
+      "counts": {
+        "original_difference": 33563,
+        "normalised_highp_difference": 33563,
+        "normalised_lowp_difference": 95,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 33468,
+        "remaining_original_unclassified": 95,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 33563,
+          "max_channel_difference": 92,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 33563,
+          "max_channel_difference": 92,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 95,
+          "max_channel_difference": 92,
+          "example_xy": [
+            [
+              41,
+              34
+            ],
+            [
+              163,
+              49
+            ],
+            [
+              199,
+              51
+            ],
+            [
+              534,
+              51
+            ],
+            [
+              255,
+              55
+            ],
+            [
+              333,
+              64
+            ],
+            [
+              537,
+              67
+            ],
+            [
+              310,
+              72
+            ],
+            [
+              311,
+              72
+            ],
+            [
+              529,
+              81
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 33468,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              19,
+              0
+            ],
+            [
+              20,
+              0
+            ],
+            [
+              21,
+              0
+            ],
+            [
+              22,
+              0
+            ],
+            [
+              23,
+              0
+            ],
+            [
+              38,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 95,
+          "max_channel_difference": 92,
+          "example_xy": [
+            [
+              41,
+              34
+            ],
+            [
+              163,
+              49
+            ],
+            [
+              199,
+              51
+            ],
+            [
+              534,
+              51
+            ],
+            [
+              255,
+              55
+            ],
+            [
+              333,
+              64
+            ],
+            [
+              537,
+              67
+            ],
+            [
+              310,
+              72
+            ],
+            [
+              311,
+              72
+            ],
+            [
+              529,
+              81
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 92,
+      "normalised_max_difference": 92,
+      "lowp_max_difference": 92,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-1965.composed.rgba",
+      "counts": {
+        "original_difference": 29347,
+        "normalised_highp_difference": 29347,
+        "normalised_lowp_difference": 231,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 29116,
+        "remaining_original_unclassified": 231,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 29347,
+          "max_channel_difference": 108,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 29347,
+          "max_channel_difference": 108,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 231,
+          "max_channel_difference": 108,
+          "example_xy": [
+            [
+              329,
+              1
+            ],
+            [
+              93,
+              16
+            ],
+            [
+              395,
+              17
+            ],
+            [
+              325,
+              22
+            ],
+            [
+              213,
+              29
+            ],
+            [
+              399,
+              30
+            ],
+            [
+              523,
+              32
+            ],
+            [
+              533,
+              38
+            ],
+            [
+              50,
+              40
+            ],
+            [
+              51,
+              43
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 29116,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 231,
+          "max_channel_difference": 108,
+          "example_xy": [
+            [
+              329,
+              1
+            ],
+            [
+              93,
+              16
+            ],
+            [
+              395,
+              17
+            ],
+            [
+              325,
+              22
+            ],
+            [
+              213,
+              29
+            ],
+            [
+              399,
+              30
+            ],
+            [
+              523,
+              32
+            ],
+            [
+              533,
+              38
+            ],
+            [
+              50,
+              40
+            ],
+            [
+              51,
+              43
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 108,
+      "normalised_max_difference": 108,
+      "lowp_max_difference": 108,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-1965.world.rgba",
+      "counts": {
+        "original_difference": 35847,
+        "normalised_highp_difference": 35847,
+        "normalised_lowp_difference": 238,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 35609,
+        "remaining_original_unclassified": 238,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 35847,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 35847,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 238,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              329,
+              1
+            ],
+            [
+              93,
+              16
+            ],
+            [
+              395,
+              17
+            ],
+            [
+              325,
+              22
+            ],
+            [
+              213,
+              29
+            ],
+            [
+              399,
+              30
+            ],
+            [
+              523,
+              32
+            ],
+            [
+              533,
+              38
+            ],
+            [
+              614,
+              39
+            ],
+            [
+              50,
+              40
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 35609,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              48,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              54,
+              0
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              56,
+              0
+            ],
+            [
+              57,
+              0
+            ],
+            [
+              58,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 238,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              329,
+              1
+            ],
+            [
+              93,
+              16
+            ],
+            [
+              395,
+              17
+            ],
+            [
+              325,
+              22
+            ],
+            [
+              213,
+              29
+            ],
+            [
+              399,
+              30
+            ],
+            [
+              523,
+              32
+            ],
+            [
+              533,
+              38
+            ],
+            [
+              614,
+              39
+            ],
+            [
+              50,
+              40
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 87,
+      "normalised_max_difference": 87,
+      "lowp_max_difference": 88,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-2500.composed.rgba",
+      "counts": {
+        "original_difference": 11630,
+        "normalised_highp_difference": 11630,
+        "normalised_lowp_difference": 135,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 11495,
+        "remaining_original_unclassified": 135,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 11630,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 11630,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 135,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              470,
+              7
+            ],
+            [
+              164,
+              15
+            ],
+            [
+              553,
+              26
+            ],
+            [
+              516,
+              34
+            ],
+            [
+              341,
+              47
+            ],
+            [
+              511,
+              50
+            ],
+            [
+              465,
+              52
+            ],
+            [
+              408,
+              60
+            ],
+            [
+              338,
+              88
+            ],
+            [
+              117,
+              92
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 11495,
+          "max_channel_difference": 4,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 135,
+          "max_channel_difference": 88,
+          "example_xy": [
+            [
+              470,
+              7
+            ],
+            [
+              164,
+              15
+            ],
+            [
+              553,
+              26
+            ],
+            [
+              516,
+              34
+            ],
+            [
+              341,
+              47
+            ],
+            [
+              511,
+              50
+            ],
+            [
+              465,
+              52
+            ],
+            [
+              408,
+              60
+            ],
+            [
+              338,
+              88
+            ],
+            [
+              117,
+              92
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 88,
+      "normalised_max_difference": 88,
+      "lowp_max_difference": 88,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-2500.world.rgba",
+      "counts": {
+        "original_difference": 13060,
+        "normalised_highp_difference": 13060,
+        "normalised_lowp_difference": 140,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 12920,
+        "remaining_original_unclassified": 140,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 13060,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 13060,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 140,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              470,
+              7
+            ],
+            [
+              164,
+              15
+            ],
+            [
+              553,
+              26
+            ],
+            [
+              516,
+              34
+            ],
+            [
+              341,
+              47
+            ],
+            [
+              39,
+              49
+            ],
+            [
+              511,
+              50
+            ],
+            [
+              465,
+              52
+            ],
+            [
+              408,
+              60
+            ],
+            [
+              598,
+              72
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 12920,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              368,
+              0
+            ],
+            [
+              369,
+              0
+            ],
+            [
+              370,
+              0
+            ],
+            [
+              371,
+              0
+            ],
+            [
+              372,
+              0
+            ],
+            [
+              373,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 140,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              470,
+              7
+            ],
+            [
+              164,
+              15
+            ],
+            [
+              553,
+              26
+            ],
+            [
+              516,
+              34
+            ],
+            [
+              341,
+              47
+            ],
+            [
+              39,
+              49
+            ],
+            [
+              511,
+              50
+            ],
+            [
+              465,
+              52
+            ],
+            [
+              408,
+              60
+            ],
+            [
+              598,
+              72
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 48,
+      "normalised_max_difference": 48,
+      "lowp_max_difference": 48,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-2643.composed.rgba",
+      "counts": {
+        "original_difference": 33742,
+        "normalised_highp_difference": 33742,
+        "normalised_lowp_difference": 195,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 33547,
+        "remaining_original_unclassified": 195,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 33742,
+          "max_channel_difference": 138,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 33742,
+          "max_channel_difference": 138,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 195,
+          "max_channel_difference": 138,
+          "example_xy": [
+            [
+              559,
+              12
+            ],
+            [
+              383,
+              13
+            ],
+            [
+              385,
+              20
+            ],
+            [
+              537,
+              22
+            ],
+            [
+              377,
+              27
+            ],
+            [
+              37,
+              30
+            ],
+            [
+              121,
+              43
+            ],
+            [
+              393,
+              55
+            ],
+            [
+              362,
+              63
+            ],
+            [
+              31,
+              68
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 33547,
+          "max_channel_difference": 6,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 195,
+          "max_channel_difference": 138,
+          "example_xy": [
+            [
+              559,
+              12
+            ],
+            [
+              383,
+              13
+            ],
+            [
+              385,
+              20
+            ],
+            [
+              537,
+              22
+            ],
+            [
+              377,
+              27
+            ],
+            [
+              37,
+              30
+            ],
+            [
+              121,
+              43
+            ],
+            [
+              393,
+              55
+            ],
+            [
+              362,
+              63
+            ],
+            [
+              31,
+              68
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 138,
+      "normalised_max_difference": 138,
+      "lowp_max_difference": 138,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-2643.world.rgba",
+      "counts": {
+        "original_difference": 36861,
+        "normalised_highp_difference": 36861,
+        "normalised_lowp_difference": 199,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 36662,
+        "remaining_original_unclassified": 199,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 36861,
+          "max_channel_difference": 81,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 36861,
+          "max_channel_difference": 81,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 199,
+          "max_channel_difference": 80,
+          "example_xy": [
+            [
+              559,
+              12
+            ],
+            [
+              383,
+              13
+            ],
+            [
+              385,
+              20
+            ],
+            [
+              537,
+              22
+            ],
+            [
+              377,
+              27
+            ],
+            [
+              37,
+              30
+            ],
+            [
+              121,
+              43
+            ],
+            [
+              393,
+              55
+            ],
+            [
+              362,
+              63
+            ],
+            [
+              602,
+              67
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 36662,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              11,
+              0
+            ],
+            [
+              46,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              61,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 199,
+          "max_channel_difference": 80,
+          "example_xy": [
+            [
+              559,
+              12
+            ],
+            [
+              383,
+              13
+            ],
+            [
+              385,
+              20
+            ],
+            [
+              537,
+              22
+            ],
+            [
+              377,
+              27
+            ],
+            [
+              37,
+              30
+            ],
+            [
+              121,
+              43
+            ],
+            [
+              393,
+              55
+            ],
+            [
+              362,
+              63
+            ],
+            [
+              602,
+              67
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 81,
+      "normalised_max_difference": 81,
+      "lowp_max_difference": 80,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3000.composed.rgba",
+      "counts": {
+        "original_difference": 13310,
+        "normalised_highp_difference": 13310,
+        "normalised_lowp_difference": 169,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 13141,
+        "remaining_original_unclassified": 169,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 13310,
+          "max_channel_difference": 85,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 13310,
+          "max_channel_difference": 85,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 169,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              453,
+              10
+            ],
+            [
+              387,
+              15
+            ],
+            [
+              138,
+              17
+            ],
+            [
+              5,
+              21
+            ],
+            [
+              71,
+              24
+            ],
+            [
+              600,
+              25
+            ],
+            [
+              466,
+              27
+            ],
+            [
+              452,
+              36
+            ],
+            [
+              293,
+              47
+            ],
+            [
+              245,
+              52
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 13141,
+          "max_channel_difference": 6,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 169,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              453,
+              10
+            ],
+            [
+              387,
+              15
+            ],
+            [
+              138,
+              17
+            ],
+            [
+              5,
+              21
+            ],
+            [
+              71,
+              24
+            ],
+            [
+              600,
+              25
+            ],
+            [
+              466,
+              27
+            ],
+            [
+              452,
+              36
+            ],
+            [
+              293,
+              47
+            ],
+            [
+              245,
+              52
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 85,
+      "normalised_max_difference": 85,
+      "lowp_max_difference": 87,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3000.world.rgba",
+      "counts": {
+        "original_difference": 16211,
+        "normalised_highp_difference": 16211,
+        "normalised_lowp_difference": 176,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 16035,
+        "remaining_original_unclassified": 176,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 16211,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 16211,
+          "max_channel_difference": 48,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 176,
+          "max_channel_difference": 49,
+          "example_xy": [
+            [
+              453,
+              10
+            ],
+            [
+              387,
+              15
+            ],
+            [
+              138,
+              17
+            ],
+            [
+              5,
+              21
+            ],
+            [
+              71,
+              24
+            ],
+            [
+              600,
+              25
+            ],
+            [
+              466,
+              27
+            ],
+            [
+              452,
+              36
+            ],
+            [
+              293,
+              47
+            ],
+            [
+              245,
+              52
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 16035,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              23,
+              0
+            ],
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              58,
+              0
+            ],
+            [
+              59,
+              0
+            ],
+            [
+              60,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 176,
+          "max_channel_difference": 49,
+          "example_xy": [
+            [
+              453,
+              10
+            ],
+            [
+              387,
+              15
+            ],
+            [
+              138,
+              17
+            ],
+            [
+              5,
+              21
+            ],
+            [
+              71,
+              24
+            ],
+            [
+              600,
+              25
+            ],
+            [
+              466,
+              27
+            ],
+            [
+              452,
+              36
+            ],
+            [
+              293,
+              47
+            ],
+            [
+              245,
+              52
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 48,
+      "normalised_max_difference": 48,
+      "lowp_max_difference": 49,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3546.composed.rgba",
+      "counts": {
+        "original_difference": 37891,
+        "normalised_highp_difference": 37891,
+        "normalised_lowp_difference": 173,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 37718,
+        "remaining_original_unclassified": 173,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 37891,
+          "max_channel_difference": 94,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 37891,
+          "max_channel_difference": 94,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 173,
+          "max_channel_difference": 94,
+          "example_xy": [
+            [
+              421,
+              2
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              633,
+              10
+            ],
+            [
+              27,
+              12
+            ],
+            [
+              211,
+              12
+            ],
+            [
+              154,
+              16
+            ],
+            [
+              318,
+              21
+            ],
+            [
+              348,
+              23
+            ],
+            [
+              283,
+              32
+            ],
+            [
+              165,
+              33
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 37718,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 173,
+          "max_channel_difference": 94,
+          "example_xy": [
+            [
+              421,
+              2
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              633,
+              10
+            ],
+            [
+              27,
+              12
+            ],
+            [
+              211,
+              12
+            ],
+            [
+              154,
+              16
+            ],
+            [
+              318,
+              21
+            ],
+            [
+              348,
+              23
+            ],
+            [
+              283,
+              32
+            ],
+            [
+              165,
+              33
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 94,
+      "normalised_max_difference": 94,
+      "lowp_max_difference": 94,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3546.world.rgba",
+      "counts": {
+        "original_difference": 46565,
+        "normalised_highp_difference": 46565,
+        "normalised_lowp_difference": 180,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 46385,
+        "remaining_original_unclassified": 180,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 46565,
+          "max_channel_difference": 83,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 46565,
+          "max_channel_difference": 83,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 180,
+          "max_channel_difference": 83,
+          "example_xy": [
+            [
+              421,
+              2
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              633,
+              10
+            ],
+            [
+              27,
+              12
+            ],
+            [
+              211,
+              12
+            ],
+            [
+              154,
+              16
+            ],
+            [
+              318,
+              21
+            ],
+            [
+              348,
+              23
+            ],
+            [
+              283,
+              32
+            ],
+            [
+              165,
+              33
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 46385,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              35,
+              0
+            ],
+            [
+              49,
+              0
+            ],
+            [
+              50,
+              0
+            ],
+            [
+              51,
+              0
+            ],
+            [
+              52,
+              0
+            ],
+            [
+              60,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 180,
+          "max_channel_difference": 83,
+          "example_xy": [
+            [
+              421,
+              2
+            ],
+            [
+              13,
+              4
+            ],
+            [
+              633,
+              10
+            ],
+            [
+              27,
+              12
+            ],
+            [
+              211,
+              12
+            ],
+            [
+              154,
+              16
+            ],
+            [
+              318,
+              21
+            ],
+            [
+              348,
+              23
+            ],
+            [
+              283,
+              32
+            ],
+            [
+              165,
+              33
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 83,
+      "normalised_max_difference": 83,
+      "lowp_max_difference": 83,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3600.composed.rgba",
+      "counts": {
+        "original_difference": 36001,
+        "normalised_highp_difference": 36001,
+        "normalised_lowp_difference": 197,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 35804,
+        "remaining_original_unclassified": 197,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 36001,
+          "max_channel_difference": 63,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 36001,
+          "max_channel_difference": 63,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 197,
+          "max_channel_difference": 63,
+          "example_xy": [
+            [
+              589,
+              2
+            ],
+            [
+              323,
+              7
+            ],
+            [
+              416,
+              25
+            ],
+            [
+              501,
+              25
+            ],
+            [
+              305,
+              27
+            ],
+            [
+              276,
+              28
+            ],
+            [
+              253,
+              29
+            ],
+            [
+              278,
+              36
+            ],
+            [
+              295,
+              36
+            ],
+            [
+              279,
+              40
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 35804,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 197,
+          "max_channel_difference": 63,
+          "example_xy": [
+            [
+              589,
+              2
+            ],
+            [
+              323,
+              7
+            ],
+            [
+              416,
+              25
+            ],
+            [
+              501,
+              25
+            ],
+            [
+              305,
+              27
+            ],
+            [
+              276,
+              28
+            ],
+            [
+              253,
+              29
+            ],
+            [
+              278,
+              36
+            ],
+            [
+              295,
+              36
+            ],
+            [
+              279,
+              40
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 63,
+      "normalised_max_difference": 63,
+      "lowp_max_difference": 63,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-3600.world.rgba",
+      "counts": {
+        "original_difference": 41018,
+        "normalised_highp_difference": 41018,
+        "normalised_lowp_difference": 204,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 40814,
+        "remaining_original_unclassified": 204,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 41018,
+          "max_channel_difference": 57,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 41018,
+          "max_channel_difference": 57,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 204,
+          "max_channel_difference": 57,
+          "example_xy": [
+            [
+              589,
+              2
+            ],
+            [
+              323,
+              7
+            ],
+            [
+              416,
+              25
+            ],
+            [
+              501,
+              25
+            ],
+            [
+              305,
+              27
+            ],
+            [
+              276,
+              28
+            ],
+            [
+              253,
+              29
+            ],
+            [
+              278,
+              36
+            ],
+            [
+              295,
+              36
+            ],
+            [
+              279,
+              40
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 40814,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              23,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 204,
+          "max_channel_difference": 57,
+          "example_xy": [
+            [
+              589,
+              2
+            ],
+            [
+              323,
+              7
+            ],
+            [
+              416,
+              25
+            ],
+            [
+              501,
+              25
+            ],
+            [
+              305,
+              27
+            ],
+            [
+              276,
+              28
+            ],
+            [
+              253,
+              29
+            ],
+            [
+              278,
+              36
+            ],
+            [
+              295,
+              36
+            ],
+            [
+              279,
+              40
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 57,
+      "normalised_max_difference": 57,
+      "lowp_max_difference": 57,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-4200.composed.rgba",
+      "counts": {
+        "original_difference": 18993,
+        "normalised_highp_difference": 18993,
+        "normalised_lowp_difference": 182,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 18811,
+        "remaining_original_unclassified": 182,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 18993,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 18993,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 182,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              110,
+              1
+            ],
+            [
+              149,
+              2
+            ],
+            [
+              236,
+              3
+            ],
+            [
+              199,
+              6
+            ],
+            [
+              196,
+              8
+            ],
+            [
+              149,
+              9
+            ],
+            [
+              593,
+              14
+            ],
+            [
+              330,
+              18
+            ],
+            [
+              178,
+              28
+            ],
+            [
+              583,
+              28
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 18811,
+          "max_channel_difference": 4,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 182,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              110,
+              1
+            ],
+            [
+              149,
+              2
+            ],
+            [
+              236,
+              3
+            ],
+            [
+              199,
+              6
+            ],
+            [
+              196,
+              8
+            ],
+            [
+              149,
+              9
+            ],
+            [
+              593,
+              14
+            ],
+            [
+              330,
+              18
+            ],
+            [
+              178,
+              28
+            ],
+            [
+              583,
+              28
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 104,
+      "normalised_max_difference": 104,
+      "lowp_max_difference": 104,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-4200.world.rgba",
+      "counts": {
+        "original_difference": 21324,
+        "normalised_highp_difference": 21324,
+        "normalised_lowp_difference": 194,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 21130,
+        "remaining_original_unclassified": 194,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 21324,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 21324,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 194,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              110,
+              1
+            ],
+            [
+              149,
+              2
+            ],
+            [
+              236,
+              3
+            ],
+            [
+              199,
+              6
+            ],
+            [
+              196,
+              8
+            ],
+            [
+              149,
+              9
+            ],
+            [
+              593,
+              14
+            ],
+            [
+              330,
+              18
+            ],
+            [
+              178,
+              28
+            ],
+            [
+              583,
+              28
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 21130,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 194,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              110,
+              1
+            ],
+            [
+              149,
+              2
+            ],
+            [
+              236,
+              3
+            ],
+            [
+              199,
+              6
+            ],
+            [
+              196,
+              8
+            ],
+            [
+              149,
+              9
+            ],
+            [
+              593,
+              14
+            ],
+            [
+              330,
+              18
+            ],
+            [
+              178,
+              28
+            ],
+            [
+              583,
+              28
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 87,
+      "normalised_max_difference": 87,
+      "lowp_max_difference": 87,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-4800.composed.rgba",
+      "counts": {
+        "original_difference": 43443,
+        "normalised_highp_difference": 43443,
+        "normalised_lowp_difference": 175,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 43268,
+        "remaining_original_unclassified": 175,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 43443,
+          "max_channel_difference": 148,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 43443,
+          "max_channel_difference": 148,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 175,
+          "max_channel_difference": 148,
+          "example_xy": [
+            [
+              473,
+              7
+            ],
+            [
+              364,
+              8
+            ],
+            [
+              285,
+              15
+            ],
+            [
+              166,
+              17
+            ],
+            [
+              569,
+              17
+            ],
+            [
+              636,
+              23
+            ],
+            [
+              475,
+              25
+            ],
+            [
+              403,
+              28
+            ],
+            [
+              567,
+              31
+            ],
+            [
+              410,
+              34
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 43268,
+          "max_channel_difference": 7,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 175,
+          "max_channel_difference": 148,
+          "example_xy": [
+            [
+              473,
+              7
+            ],
+            [
+              364,
+              8
+            ],
+            [
+              285,
+              15
+            ],
+            [
+              166,
+              17
+            ],
+            [
+              569,
+              17
+            ],
+            [
+              636,
+              23
+            ],
+            [
+              475,
+              25
+            ],
+            [
+              403,
+              28
+            ],
+            [
+              567,
+              31
+            ],
+            [
+              410,
+              34
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 148,
+      "normalised_max_difference": 148,
+      "lowp_max_difference": 148,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-4800.world.rgba",
+      "counts": {
+        "original_difference": 51914,
+        "normalised_highp_difference": 51914,
+        "normalised_lowp_difference": 188,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 51726,
+        "remaining_original_unclassified": 188,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 51914,
+          "max_channel_difference": 139,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 51914,
+          "max_channel_difference": 139,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 188,
+          "max_channel_difference": 139,
+          "example_xy": [
+            [
+              473,
+              7
+            ],
+            [
+              364,
+              8
+            ],
+            [
+              285,
+              15
+            ],
+            [
+              166,
+              17
+            ],
+            [
+              569,
+              17
+            ],
+            [
+              636,
+              23
+            ],
+            [
+              475,
+              25
+            ],
+            [
+              403,
+              28
+            ],
+            [
+              567,
+              31
+            ],
+            [
+              410,
+              34
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 51726,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0
+            ],
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 188,
+          "max_channel_difference": 139,
+          "example_xy": [
+            [
+              473,
+              7
+            ],
+            [
+              364,
+              8
+            ],
+            [
+              285,
+              15
+            ],
+            [
+              166,
+              17
+            ],
+            [
+              569,
+              17
+            ],
+            [
+              636,
+              23
+            ],
+            [
+              475,
+              25
+            ],
+            [
+              403,
+              28
+            ],
+            [
+              567,
+              31
+            ],
+            [
+              410,
+              34
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 139,
+      "normalised_max_difference": 139,
+      "lowp_max_difference": 139,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5400.composed.rgba",
+      "counts": {
+        "original_difference": 13260,
+        "normalised_highp_difference": 13260,
+        "normalised_lowp_difference": 209,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 13051,
+        "remaining_original_unclassified": 209,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 13260,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 13260,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 209,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              272,
+              38
+            ],
+            [
+              349,
+              41
+            ],
+            [
+              145,
+              48
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 13051,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ],
+            [
+              30,
+              38
+            ],
+            [
+              31,
+              38
+            ],
+            [
+              28,
+              39
+            ],
+            [
+              29,
+              39
+            ],
+            [
+              30,
+              39
+            ],
+            [
+              31,
+              39
+            ],
+            [
+              30,
+              40
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 209,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              272,
+              38
+            ],
+            [
+              349,
+              41
+            ],
+            [
+              145,
+              48
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 104,
+      "normalised_max_difference": 104,
+      "lowp_max_difference": 104,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5400.world.rgba",
+      "counts": {
+        "original_difference": 15657,
+        "normalised_highp_difference": 15657,
+        "normalised_lowp_difference": 221,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 15436,
+        "remaining_original_unclassified": 221,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 15657,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 15657,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 221,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              272,
+              38
+            ],
+            [
+              349,
+              41
+            ],
+            [
+              604,
+              45
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 15436,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              27,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              29,
+              38
+            ],
+            [
+              30,
+              38
+            ],
+            [
+              31,
+              38
+            ],
+            [
+              32,
+              38
+            ],
+            [
+              28,
+              39
+            ],
+            [
+              29,
+              39
+            ],
+            [
+              30,
+              39
+            ],
+            [
+              31,
+              39
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 221,
+          "max_channel_difference": 104,
+          "example_xy": [
+            [
+              196,
+              1
+            ],
+            [
+              390,
+              1
+            ],
+            [
+              455,
+              8
+            ],
+            [
+              626,
+              19
+            ],
+            [
+              192,
+              22
+            ],
+            [
+              54,
+              24
+            ],
+            [
+              122,
+              29
+            ],
+            [
+              272,
+              38
+            ],
+            [
+              349,
+              41
+            ],
+            [
+              604,
+              45
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 104,
+      "normalised_max_difference": 104,
+      "lowp_max_difference": 104,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5639.composed.rgba",
+      "counts": {
+        "original_difference": 18233,
+        "normalised_highp_difference": 18233,
+        "normalised_lowp_difference": 186,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 18047,
+        "remaining_original_unclassified": 186,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 18233,
+          "max_channel_difference": 100,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 18233,
+          "max_channel_difference": 100,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 186,
+          "max_channel_difference": 100,
+          "example_xy": [
+            [
+              4,
+              2
+            ],
+            [
+              415,
+              2
+            ],
+            [
+              175,
+              3
+            ],
+            [
+              382,
+              6
+            ],
+            [
+              285,
+              35
+            ],
+            [
+              12,
+              46
+            ],
+            [
+              251,
+              47
+            ],
+            [
+              188,
+              48
+            ],
+            [
+              97,
+              52
+            ],
+            [
+              190,
+              52
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 18047,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 186,
+          "max_channel_difference": 100,
+          "example_xy": [
+            [
+              4,
+              2
+            ],
+            [
+              415,
+              2
+            ],
+            [
+              175,
+              3
+            ],
+            [
+              382,
+              6
+            ],
+            [
+              285,
+              35
+            ],
+            [
+              12,
+              46
+            ],
+            [
+              251,
+              47
+            ],
+            [
+              188,
+              48
+            ],
+            [
+              97,
+              52
+            ],
+            [
+              190,
+              52
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 100,
+      "normalised_max_difference": 100,
+      "lowp_max_difference": 100,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5639.world.rgba",
+      "counts": {
+        "original_difference": 21206,
+        "normalised_highp_difference": 21206,
+        "normalised_lowp_difference": 198,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 21008,
+        "remaining_original_unclassified": 198,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 21206,
+          "max_channel_difference": 99,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 21206,
+          "max_channel_difference": 99,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 198,
+          "max_channel_difference": 98,
+          "example_xy": [
+            [
+              4,
+              2
+            ],
+            [
+              415,
+              2
+            ],
+            [
+              175,
+              3
+            ],
+            [
+              382,
+              6
+            ],
+            [
+              285,
+              35
+            ],
+            [
+              12,
+              46
+            ],
+            [
+              251,
+              47
+            ],
+            [
+              188,
+              48
+            ],
+            [
+              97,
+              52
+            ],
+            [
+              190,
+              52
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 21008,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 198,
+          "max_channel_difference": 98,
+          "example_xy": [
+            [
+              4,
+              2
+            ],
+            [
+              415,
+              2
+            ],
+            [
+              175,
+              3
+            ],
+            [
+              382,
+              6
+            ],
+            [
+              285,
+              35
+            ],
+            [
+              12,
+              46
+            ],
+            [
+              251,
+              47
+            ],
+            [
+              188,
+              48
+            ],
+            [
+              97,
+              52
+            ],
+            [
+              190,
+              52
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 99,
+      "normalised_max_difference": 99,
+      "lowp_max_difference": 98,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5655.composed.rgba",
+      "counts": {
+        "original_difference": 5283,
+        "normalised_highp_difference": 5283,
+        "normalised_lowp_difference": 154,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 5129,
+        "remaining_original_unclassified": 154,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 5283,
+          "max_channel_difference": 112,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 5283,
+          "max_channel_difference": 112,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 154,
+          "max_channel_difference": 112,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              94,
+              55
+            ],
+            [
+              133,
+              64
+            ],
+            [
+              213,
+              65
+            ],
+            [
+              187,
+              71
+            ],
+            [
+              109,
+              87
+            ],
+            [
+              287,
+              89
+            ],
+            [
+              105,
+              92
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 5129,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ],
+            [
+              84,
+              48
+            ],
+            [
+              78,
+              49
+            ],
+            [
+              79,
+              49
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 154,
+          "max_channel_difference": 112,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              94,
+              55
+            ],
+            [
+              133,
+              64
+            ],
+            [
+              213,
+              65
+            ],
+            [
+              187,
+              71
+            ],
+            [
+              109,
+              87
+            ],
+            [
+              287,
+              89
+            ],
+            [
+              105,
+              92
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 112,
+      "normalised_max_difference": 112,
+      "lowp_max_difference": 112,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5655.world.rgba",
+      "counts": {
+        "original_difference": 6092,
+        "normalised_highp_difference": 6092,
+        "normalised_lowp_difference": 160,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 5932,
+        "remaining_original_unclassified": 160,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 6092,
+          "max_channel_difference": 54,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 6092,
+          "max_channel_difference": 54,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 160,
+          "max_channel_difference": 54,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              94,
+              55
+            ],
+            [
+              133,
+              64
+            ],
+            [
+              213,
+              65
+            ],
+            [
+              187,
+              71
+            ],
+            [
+              109,
+              87
+            ],
+            [
+              287,
+              89
+            ],
+            [
+              105,
+              92
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 5932,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              77,
+              48
+            ],
+            [
+              78,
+              48
+            ],
+            [
+              79,
+              48
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              81,
+              48
+            ],
+            [
+              82,
+              48
+            ],
+            [
+              83,
+              48
+            ],
+            [
+              84,
+              48
+            ],
+            [
+              78,
+              49
+            ],
+            [
+              79,
+              49
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 160,
+          "max_channel_difference": 54,
+          "example_xy": [
+            [
+              497,
+              14
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              304,
+              46
+            ],
+            [
+              94,
+              55
+            ],
+            [
+              133,
+              64
+            ],
+            [
+              213,
+              65
+            ],
+            [
+              187,
+              71
+            ],
+            [
+              109,
+              87
+            ],
+            [
+              287,
+              89
+            ],
+            [
+              105,
+              92
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 54,
+      "normalised_max_difference": 54,
+      "lowp_max_difference": 54,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5867.composed.rgba",
+      "counts": {
+        "original_difference": 14394,
+        "normalised_highp_difference": 14394,
+        "normalised_lowp_difference": 136,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 14258,
+        "remaining_original_unclassified": 136,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 14394,
+          "max_channel_difference": 135,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 14394,
+          "max_channel_difference": 135,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 136,
+          "max_channel_difference": 135,
+          "example_xy": [
+            [
+              80,
+              0
+            ],
+            [
+              535,
+              8
+            ],
+            [
+              450,
+              11
+            ],
+            [
+              107,
+              31
+            ],
+            [
+              394,
+              38
+            ],
+            [
+              484,
+              38
+            ],
+            [
+              536,
+              69
+            ],
+            [
+              431,
+              91
+            ],
+            [
+              221,
+              95
+            ],
+            [
+              270,
+              109
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 14258,
+          "max_channel_difference": 4,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 136,
+          "max_channel_difference": 135,
+          "example_xy": [
+            [
+              80,
+              0
+            ],
+            [
+              535,
+              8
+            ],
+            [
+              450,
+              11
+            ],
+            [
+              107,
+              31
+            ],
+            [
+              394,
+              38
+            ],
+            [
+              484,
+              38
+            ],
+            [
+              536,
+              69
+            ],
+            [
+              431,
+              91
+            ],
+            [
+              221,
+              95
+            ],
+            [
+              270,
+              109
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 135,
+      "normalised_max_difference": 135,
+      "lowp_max_difference": 135,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5867.world.rgba",
+      "counts": {
+        "original_difference": 15905,
+        "normalised_highp_difference": 15905,
+        "normalised_lowp_difference": 143,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 15762,
+        "remaining_original_unclassified": 143,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 15905,
+          "max_channel_difference": 89,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 15905,
+          "max_channel_difference": 89,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 143,
+          "max_channel_difference": 89,
+          "example_xy": [
+            [
+              80,
+              0
+            ],
+            [
+              535,
+              8
+            ],
+            [
+              450,
+              11
+            ],
+            [
+              107,
+              31
+            ],
+            [
+              394,
+              38
+            ],
+            [
+              484,
+              38
+            ],
+            [
+              613,
+              66
+            ],
+            [
+              536,
+              69
+            ],
+            [
+              431,
+              91
+            ],
+            [
+              221,
+              95
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 15762,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              61,
+              0
+            ],
+            [
+              62,
+              0
+            ],
+            [
+              63,
+              0
+            ],
+            [
+              64,
+              0
+            ],
+            [
+              65,
+              0
+            ],
+            [
+              66,
+              0
+            ],
+            [
+              67,
+              0
+            ],
+            [
+              68,
+              0
+            ],
+            [
+              69,
+              0
+            ],
+            [
+              70,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 143,
+          "max_channel_difference": 89,
+          "example_xy": [
+            [
+              80,
+              0
+            ],
+            [
+              535,
+              8
+            ],
+            [
+              450,
+              11
+            ],
+            [
+              107,
+              31
+            ],
+            [
+              394,
+              38
+            ],
+            [
+              484,
+              38
+            ],
+            [
+              613,
+              66
+            ],
+            [
+              536,
+              69
+            ],
+            [
+              431,
+              91
+            ],
+            [
+              221,
+              95
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 89,
+      "normalised_max_difference": 89,
+      "lowp_max_difference": 89,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5874.composed.rgba",
+      "counts": {
+        "original_difference": 15509,
+        "normalised_highp_difference": 15509,
+        "normalised_lowp_difference": 158,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 15351,
+        "remaining_original_unclassified": 158,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 15509,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 15509,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 158,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              549,
+              19
+            ],
+            [
+              465,
+              20
+            ],
+            [
+              311,
+              30
+            ],
+            [
+              444,
+              33
+            ],
+            [
+              304,
+              56
+            ],
+            [
+              304,
+              58
+            ],
+            [
+              304,
+              59
+            ],
+            [
+              336,
+              78
+            ],
+            [
+              71,
+              79
+            ],
+            [
+              108,
+              86
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 15351,
+          "max_channel_difference": 4,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 158,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              549,
+              19
+            ],
+            [
+              465,
+              20
+            ],
+            [
+              311,
+              30
+            ],
+            [
+              444,
+              33
+            ],
+            [
+              304,
+              56
+            ],
+            [
+              304,
+              58
+            ],
+            [
+              304,
+              59
+            ],
+            [
+              336,
+              78
+            ],
+            [
+              71,
+              79
+            ],
+            [
+              108,
+              86
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 87,
+      "normalised_max_difference": 87,
+      "lowp_max_difference": 87,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5874.world.rgba",
+      "counts": {
+        "original_difference": 16973,
+        "normalised_highp_difference": 16973,
+        "normalised_lowp_difference": 169,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 16804,
+        "remaining_original_unclassified": 169,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 16973,
+          "max_channel_difference": 51,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 16973,
+          "max_channel_difference": 51,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 169,
+          "max_channel_difference": 51,
+          "example_xy": [
+            [
+              549,
+              19
+            ],
+            [
+              465,
+              20
+            ],
+            [
+              311,
+              30
+            ],
+            [
+              444,
+              33
+            ],
+            [
+              304,
+              56
+            ],
+            [
+              304,
+              58
+            ],
+            [
+              304,
+              59
+            ],
+            [
+              36,
+              75
+            ],
+            [
+              36,
+              77
+            ],
+            [
+              336,
+              78
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 16804,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              265,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              0
+            ],
+            [
+              326,
+              0
+            ],
+            [
+              327,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 169,
+          "max_channel_difference": 51,
+          "example_xy": [
+            [
+              549,
+              19
+            ],
+            [
+              465,
+              20
+            ],
+            [
+              311,
+              30
+            ],
+            [
+              444,
+              33
+            ],
+            [
+              304,
+              56
+            ],
+            [
+              304,
+              58
+            ],
+            [
+              304,
+              59
+            ],
+            [
+              36,
+              75
+            ],
+            [
+              36,
+              77
+            ],
+            [
+              336,
+              78
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 51,
+      "normalised_max_difference": 51,
+      "lowp_max_difference": 51,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5878.composed.rgba",
+      "counts": {
+        "original_difference": 16048,
+        "normalised_highp_difference": 16048,
+        "normalised_lowp_difference": 115,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 15933,
+        "remaining_original_unclassified": 115,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 16048,
+          "max_channel_difference": 133,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 16048,
+          "max_channel_difference": 133,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 115,
+          "max_channel_difference": 133,
+          "example_xy": [
+            [
+              568,
+              8
+            ],
+            [
+              584,
+              10
+            ],
+            [
+              57,
+              11
+            ],
+            [
+              249,
+              34
+            ],
+            [
+              518,
+              43
+            ],
+            [
+              443,
+              52
+            ],
+            [
+              220,
+              70
+            ],
+            [
+              232,
+              72
+            ],
+            [
+              135,
+              74
+            ],
+            [
+              367,
+              110
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 15933,
+          "max_channel_difference": 4,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 115,
+          "max_channel_difference": 133,
+          "example_xy": [
+            [
+              568,
+              8
+            ],
+            [
+              584,
+              10
+            ],
+            [
+              57,
+              11
+            ],
+            [
+              249,
+              34
+            ],
+            [
+              518,
+              43
+            ],
+            [
+              443,
+              52
+            ],
+            [
+              220,
+              70
+            ],
+            [
+              232,
+              72
+            ],
+            [
+              135,
+              74
+            ],
+            [
+              367,
+              110
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 133,
+      "normalised_max_difference": 133,
+      "lowp_max_difference": 133,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5878.world.rgba",
+      "counts": {
+        "original_difference": 17157,
+        "normalised_highp_difference": 17157,
+        "normalised_lowp_difference": 122,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 17035,
+        "remaining_original_unclassified": 122,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 17157,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 17157,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 122,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              568,
+              8
+            ],
+            [
+              584,
+              10
+            ],
+            [
+              57,
+              11
+            ],
+            [
+              249,
+              34
+            ],
+            [
+              557,
+              40
+            ],
+            [
+              518,
+              43
+            ],
+            [
+              443,
+              52
+            ],
+            [
+              220,
+              70
+            ],
+            [
+              232,
+              72
+            ],
+            [
+              135,
+              74
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 17035,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              528,
+              0
+            ],
+            [
+              529,
+              0
+            ],
+            [
+              530,
+              0
+            ],
+            [
+              531,
+              0
+            ],
+            [
+              532,
+              0
+            ],
+            [
+              178,
+              1
+            ],
+            [
+              523,
+              1
+            ],
+            [
+              524,
+              1
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 122,
+          "max_channel_difference": 87,
+          "example_xy": [
+            [
+              568,
+              8
+            ],
+            [
+              584,
+              10
+            ],
+            [
+              57,
+              11
+            ],
+            [
+              249,
+              34
+            ],
+            [
+              557,
+              40
+            ],
+            [
+              518,
+              43
+            ],
+            [
+              443,
+              52
+            ],
+            [
+              220,
+              70
+            ],
+            [
+              232,
+              72
+            ],
+            [
+              135,
+              74
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 87,
+      "normalised_max_difference": 87,
+      "lowp_max_difference": 87,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5889.composed.rgba",
+      "counts": {
+        "original_difference": 15991,
+        "normalised_highp_difference": 15991,
+        "normalised_lowp_difference": 123,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 15868,
+        "remaining_original_unclassified": 123,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 15991,
+          "max_channel_difference": 91,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              296,
+              11
+            ],
+            [
+              297,
+              11
+            ],
+            [
+              44,
+              12
+            ],
+            [
+              296,
+              12
+            ],
+            [
+              297,
+              12
+            ],
+            [
+              298,
+              12
+            ],
+            [
+              44,
+              13
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 15991,
+          "max_channel_difference": 91,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              296,
+              11
+            ],
+            [
+              297,
+              11
+            ],
+            [
+              44,
+              12
+            ],
+            [
+              296,
+              12
+            ],
+            [
+              297,
+              12
+            ],
+            [
+              298,
+              12
+            ],
+            [
+              44,
+              13
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 123,
+          "max_channel_difference": 91,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              14,
+              38
+            ],
+            [
+              112,
+              41
+            ],
+            [
+              360,
+              58
+            ],
+            [
+              1,
+              60
+            ],
+            [
+              281,
+              67
+            ],
+            [
+              79,
+              75
+            ],
+            [
+              436,
+              91
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 15868,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              296,
+              11
+            ],
+            [
+              297,
+              11
+            ],
+            [
+              44,
+              12
+            ],
+            [
+              296,
+              12
+            ],
+            [
+              297,
+              12
+            ],
+            [
+              298,
+              12
+            ],
+            [
+              44,
+              13
+            ],
+            [
+              45,
+              13
+            ],
+            [
+              46,
+              13
+            ],
+            [
+              47,
+              13
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 123,
+          "max_channel_difference": 91,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              14,
+              38
+            ],
+            [
+              112,
+              41
+            ],
+            [
+              360,
+              58
+            ],
+            [
+              1,
+              60
+            ],
+            [
+              281,
+              67
+            ],
+            [
+              79,
+              75
+            ],
+            [
+              436,
+              91
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 91,
+      "normalised_max_difference": 91,
+      "lowp_max_difference": 91,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5889.world.rgba",
+      "counts": {
+        "original_difference": 17662,
+        "normalised_highp_difference": 17662,
+        "normalised_lowp_difference": 132,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 17530,
+        "remaining_original_unclassified": 132,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 17662,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              379,
+              0
+            ],
+            [
+              380,
+              0
+            ],
+            [
+              381,
+              0
+            ],
+            [
+              382,
+              0
+            ],
+            [
+              383,
+              0
+            ],
+            [
+              384,
+              0
+            ],
+            [
+              385,
+              0
+            ],
+            [
+              386,
+              0
+            ],
+            [
+              380,
+              1
+            ],
+            [
+              381,
+              1
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 17662,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              379,
+              0
+            ],
+            [
+              380,
+              0
+            ],
+            [
+              381,
+              0
+            ],
+            [
+              382,
+              0
+            ],
+            [
+              383,
+              0
+            ],
+            [
+              384,
+              0
+            ],
+            [
+              385,
+              0
+            ],
+            [
+              386,
+              0
+            ],
+            [
+              380,
+              1
+            ],
+            [
+              381,
+              1
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 132,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              14,
+              38
+            ],
+            [
+              112,
+              41
+            ],
+            [
+              43,
+              48
+            ],
+            [
+              360,
+              58
+            ],
+            [
+              1,
+              60
+            ],
+            [
+              281,
+              67
+            ],
+            [
+              79,
+              75
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 17530,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              379,
+              0
+            ],
+            [
+              380,
+              0
+            ],
+            [
+              381,
+              0
+            ],
+            [
+              382,
+              0
+            ],
+            [
+              383,
+              0
+            ],
+            [
+              384,
+              0
+            ],
+            [
+              385,
+              0
+            ],
+            [
+              386,
+              0
+            ],
+            [
+              380,
+              1
+            ],
+            [
+              381,
+              1
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 132,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              415,
+              5
+            ],
+            [
+              308,
+              8
+            ],
+            [
+              2,
+              9
+            ],
+            [
+              14,
+              38
+            ],
+            [
+              112,
+              41
+            ],
+            [
+              43,
+              48
+            ],
+            [
+              360,
+              58
+            ],
+            [
+              1,
+              60
+            ],
+            [
+              281,
+              67
+            ],
+            [
+              79,
+              75
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 60,
+      "normalised_max_difference": 60,
+      "lowp_max_difference": 60,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5921.composed.rgba",
+      "counts": {
+        "original_difference": 28534,
+        "normalised_highp_difference": 28534,
+        "normalised_lowp_difference": 141,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 28394,
+        "remaining_original_unclassified": 140,
+        "new_after_changes": 1
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 28534,
+          "max_channel_difference": 79,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 28534,
+          "max_channel_difference": 79,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 141,
+          "max_channel_difference": 79,
+          "example_xy": [
+            [
+              441,
+              1
+            ],
+            [
+              264,
+              2
+            ],
+            [
+              367,
+              4
+            ],
+            [
+              600,
+              4
+            ],
+            [
+              479,
+              12
+            ],
+            [
+              515,
+              18
+            ],
+            [
+              44,
+              20
+            ],
+            [
+              544,
+              20
+            ],
+            [
+              280,
+              28
+            ],
+            [
+              454,
+              28
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 28394,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 140,
+          "max_channel_difference": 79,
+          "example_xy": [
+            [
+              441,
+              1
+            ],
+            [
+              264,
+              2
+            ],
+            [
+              367,
+              4
+            ],
+            [
+              600,
+              4
+            ],
+            [
+              479,
+              12
+            ],
+            [
+              515,
+              18
+            ],
+            [
+              44,
+              20
+            ],
+            [
+              544,
+              20
+            ],
+            [
+              280,
+              28
+            ],
+            [
+              454,
+              28
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 1,
+          "max_channel_difference": 2,
+          "example_xy": [
+            [
+              285,
+              393
+            ]
+          ]
+        }
+      },
+      "original_max_difference": 79,
+      "normalised_max_difference": 79,
+      "lowp_max_difference": 79,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-5921.world.rgba",
+      "counts": {
+        "original_difference": 29225,
+        "normalised_highp_difference": 29225,
+        "normalised_lowp_difference": 152,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 29074,
+        "remaining_original_unclassified": 151,
+        "new_after_changes": 1
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 29225,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 29225,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 152,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              441,
+              1
+            ],
+            [
+              264,
+              2
+            ],
+            [
+              367,
+              4
+            ],
+            [
+              600,
+              4
+            ],
+            [
+              479,
+              12
+            ],
+            [
+              515,
+              18
+            ],
+            [
+              44,
+              20
+            ],
+            [
+              544,
+              20
+            ],
+            [
+              280,
+              28
+            ],
+            [
+              454,
+              28
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 29074,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              24,
+              0
+            ],
+            [
+              25,
+              0
+            ],
+            [
+              26,
+              0
+            ],
+            [
+              27,
+              0
+            ],
+            [
+              28,
+              0
+            ],
+            [
+              29,
+              0
+            ],
+            [
+              30,
+              0
+            ],
+            [
+              31,
+              0
+            ],
+            [
+              32,
+              0
+            ],
+            [
+              84,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 151,
+          "max_channel_difference": 60,
+          "example_xy": [
+            [
+              441,
+              1
+            ],
+            [
+              264,
+              2
+            ],
+            [
+              367,
+              4
+            ],
+            [
+              600,
+              4
+            ],
+            [
+              479,
+              12
+            ],
+            [
+              515,
+              18
+            ],
+            [
+              44,
+              20
+            ],
+            [
+              544,
+              20
+            ],
+            [
+              280,
+              28
+            ],
+            [
+              454,
+              28
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 1,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              285,
+              393
+            ]
+          ]
+        }
+      },
+      "original_max_difference": 60,
+      "normalised_max_difference": 60,
+      "lowp_max_difference": 60,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-6006.composed.rgba",
+      "counts": {
+        "original_difference": 17126,
+        "normalised_highp_difference": 17126,
+        "normalised_lowp_difference": 97,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 17029,
+        "remaining_original_unclassified": 97,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 17126,
+          "max_channel_difference": 162,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 17126,
+          "max_channel_difference": 162,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 97,
+          "max_channel_difference": 162,
+          "example_xy": [
+            [
+              485,
+              1
+            ],
+            [
+              31,
+              5
+            ],
+            [
+              302,
+              14
+            ],
+            [
+              94,
+              17
+            ],
+            [
+              393,
+              53
+            ],
+            [
+              460,
+              59
+            ],
+            [
+              633,
+              59
+            ],
+            [
+              417,
+              73
+            ],
+            [
+              468,
+              91
+            ],
+            [
+              629,
+              107
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 17029,
+          "max_channel_difference": 5,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 97,
+          "max_channel_difference": 162,
+          "example_xy": [
+            [
+              485,
+              1
+            ],
+            [
+              31,
+              5
+            ],
+            [
+              302,
+              14
+            ],
+            [
+              94,
+              17
+            ],
+            [
+              393,
+              53
+            ],
+            [
+              460,
+              59
+            ],
+            [
+              633,
+              59
+            ],
+            [
+              417,
+              73
+            ],
+            [
+              468,
+              91
+            ],
+            [
+              629,
+              107
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 162,
+      "normalised_max_difference": 162,
+      "lowp_max_difference": 162,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "image": "tick-6006.world.rgba",
+      "counts": {
+        "original_difference": 18241,
+        "normalised_highp_difference": 18241,
+        "normalised_lowp_difference": 100,
+        "removed_by_normalised_sampler": 0,
+        "removed_after_lowp_precision": 18141,
+        "remaining_original_unclassified": 100,
+        "new_after_changes": 0
+      },
+      "classes": {
+        "original_difference": {
+          "pixels": 18241,
+          "max_channel_difference": 101,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "normalised_highp_difference": {
+          "pixels": 18241,
+          "max_channel_difference": 101,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "normalised_lowp_difference": {
+          "pixels": 100,
+          "max_channel_difference": 101,
+          "example_xy": [
+            [
+              485,
+              1
+            ],
+            [
+              31,
+              5
+            ],
+            [
+              302,
+              14
+            ],
+            [
+              94,
+              17
+            ],
+            [
+              393,
+              53
+            ],
+            [
+              460,
+              59
+            ],
+            [
+              633,
+              59
+            ],
+            [
+              417,
+              73
+            ],
+            [
+              468,
+              91
+            ],
+            [
+              629,
+              107
+            ]
+          ]
+        },
+        "removed_by_normalised_sampler": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        },
+        "removed_after_lowp_precision": {
+          "pixels": 18141,
+          "max_channel_difference": 1,
+          "example_xy": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              4,
+              0
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              6,
+              0
+            ],
+            [
+              7,
+              0
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              9,
+              0
+            ]
+          ]
+        },
+        "remaining_original_unclassified": {
+          "pixels": 100,
+          "max_channel_difference": 101,
+          "example_xy": [
+            [
+              485,
+              1
+            ],
+            [
+              31,
+              5
+            ],
+            [
+              302,
+              14
+            ],
+            [
+              94,
+              17
+            ],
+            [
+              393,
+              53
+            ],
+            [
+              460,
+              59
+            ],
+            [
+              633,
+              59
+            ],
+            [
+              417,
+              73
+            ],
+            [
+              468,
+              91
+            ],
+            [
+              629,
+              107
+            ]
+          ]
+        },
+        "new_after_changes": {
+          "pixels": 0,
+          "max_channel_difference": 0,
+          "example_xy": []
+        }
+      },
+      "original_max_difference": 101,
+      "normalised_max_difference": 101,
+      "lowp_max_difference": 101,
+      "alpha_differences": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "boundary_class_a_proven": 0,
+  "classification_complete": false,
+  "reason": "Literal exact-layout control gives22/36 exact images and426 differences, with5244 unsatisfiable shared pen constraints. No adjacent-source GPU provenance classification performed beyond the failed control gate."
+}

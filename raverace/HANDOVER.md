@@ -12,6 +12,29 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone C1c — host attribution BLOCKED / STOPPED (2026-10-16)
+
+See [C1c report](NATIVE_C1C_REPORT.md) and
+[evidence](benchmarks/native-c1c-20261016/README.md). Normalised usampler texture()
+produces exactly the same36images as C1b integer-fetch/highp. Matching RGBA's
+lowp palette qualifier removes846527/852400 original differing pixels;5873 remain
+plus2new residuals. Residual adjacency is unproven; no pixel is waived as acceptable.
+
+Literal layout control:22/36images exact,426RGB differences/max145. All3 new host
+replays pass21sets/4207adjusted commands; control also4207original raw packets.
+Original RGBA colour dedup aliases incompatible pen indices:5244physical texels
+have no common pen satisfying shared palettes (3438inside at least one footprint).
+Witness page4/(1927,3897),RGB38/51/76: material635/group1 needs pen3;4664/group2
+needs pen4. A source-exact shared-layout pen control needs separated resources or
+remapping; current conflicted pack is diagnostic only. No redesign was implemented.
+
+All36compact side-by-sides/overlays and six reviewed contact sheets retained in
+native/generated/c1c/review; complete locations/classification limits in evidence.
+Gate NOT PASSED; do not proceed C1b devicePart2. Recommend a separately authorised
+control revision, then exact residual source-texel provenance; device targets unchanged.
+Host only: no SSH/device transfer/run/clock/service or production changes, no commit
+or push. P3/C1b sources remain intact. STOPPED pending explicit authorisation.
+
 ## Milestone C1b — sizing PASS / host fidelity NO-GO / STOPPED (2026-10-16)
 
 See [C1b report](NATIVE_C1B_REPORT.md) and

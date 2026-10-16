@@ -1,0 +1,62 @@
+{
+  "page": 4,
+  "xy": [
+    1927,
+    3897
+  ],
+  "target_rgb": [
+    38,
+    51,
+    76
+  ],
+  "materials": [
+    {
+      "material_id": 635,
+      "recipe": [
+        7,
+        1,
+        0,
+        3072,
+        1167,
+        11,
+        7
+      ],
+      "rect": [
+        1925,
+        3897,
+        15,
+        11
+      ],
+      "palette_group": 1,
+      "palette_sha256": "00a54d2d4234638dfd6a1ea6c920f1555fa787491f0ac47b46fc100d9cbd267a",
+      "allowed_pens": [
+        3
+      ]
+    },
+    {
+      "material_id": 4664,
+      "recipe": [
+        10,
+        2,
+        0,
+        3072,
+        1167,
+        11,
+        7
+      ],
+      "rect": [
+        1925,
+        3897,
+        15,
+        11
+      ],
+      "palette_group": 2,
+      "palette_sha256": "7f25fd106013934d397aa34668fa76775bd398c99ab62837a1d9f112db0cb2f4",
+      "allowed_pens": [
+        4
+      ]
+    }
+  ],
+  "common_allowed_pens": [],
+  "conclusion": "No single R8UI texel can satisfy all existing shared placements with original palettes."
+}

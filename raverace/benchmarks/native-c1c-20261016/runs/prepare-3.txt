@@ -1,0 +1,7 @@
+layout raw pen conflicts 6690 palette lookup differences 6690
+layout constraints 5244 unsatisfiable 5244
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1c/prepare.py", line 32, in <module>
+    assert not impossible,('No common pen under shared layout palettes',len(impossible))
+           ^^^^^^^^^^^^^^
+AssertionError: ('No common pen under shared layout palettes', 5244)

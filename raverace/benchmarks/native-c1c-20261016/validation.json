@@ -1,0 +1,36 @@
+{
+  "runs": [
+    {
+      "run": "texture-highp",
+      "ticks": 6006,
+      "checkpoint_sets": 21,
+      "domain_records": 63,
+      "adjusted_commands_equal": 4207,
+      "images": 36,
+      "binary_sha256": "de25fd36a5dbbcddcceb0c2039676a6befa3e262998f78f0b98d2b88af0b8667"
+    },
+    {
+      "run": "texture-lowp",
+      "ticks": 6006,
+      "checkpoint_sets": 21,
+      "domain_records": 63,
+      "adjusted_commands_equal": 4207,
+      "images": 36,
+      "binary_sha256": "de25fd36a5dbbcddcceb0c2039676a6befa3e262998f78f0b98d2b88af0b8667"
+    },
+    {
+      "run": "layout-lowp",
+      "ticks": 6006,
+      "checkpoint_sets": 21,
+      "domain_records": 63,
+      "adjusted_commands_equal": 4207,
+      "images": 36,
+      "binary_sha256": "de25fd36a5dbbcddcceb0c2039676a6befa3e262998f78f0b98d2b88af0b8667"
+    }
+  ],
+  "normalised_highp_identical_to_C1b_fetch_images": true,
+  "layout_control_replay_run": true,
+  "layout_control_reason": "Explicitly conflicted first-pen control:22/36 exact,426 differing pixels; unsatisfiable shared R8UI constraints at5244 texels.",
+  "device_contacted": false,
+  "layout_original_raw_packets_equal": 4207
+}

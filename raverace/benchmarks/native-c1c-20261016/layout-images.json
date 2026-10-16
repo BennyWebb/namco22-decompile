@@ -1,0 +1,702 @@
+{
+  "images": 36,
+  "exact_images": 22,
+  "different_pixels": 426,
+  "maximum_difference": 145,
+  "rows": [
+    {
+      "image": "tick-1800.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-1800.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-1965.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-1965.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-2500.composed.rgba",
+      "different_pixels": 20,
+      "max_difference": 134,
+      "examples_xy": [
+        [
+          405,
+          254
+        ],
+        [
+          405,
+          255
+        ],
+        [
+          406,
+          255
+        ],
+        [
+          406,
+          256
+        ],
+        [
+          414,
+          256
+        ],
+        [
+          415,
+          256
+        ],
+        [
+          416,
+          256
+        ],
+        [
+          415,
+          257
+        ],
+        [
+          423,
+          257
+        ],
+        [
+          424,
+          257
+        ]
+      ]
+    },
+    {
+      "image": "tick-2500.world.rgba",
+      "different_pixels": 20,
+      "max_difference": 130,
+      "examples_xy": [
+        [
+          405,
+          254
+        ],
+        [
+          405,
+          255
+        ],
+        [
+          406,
+          255
+        ],
+        [
+          406,
+          256
+        ],
+        [
+          414,
+          256
+        ],
+        [
+          415,
+          256
+        ],
+        [
+          416,
+          256
+        ],
+        [
+          415,
+          257
+        ],
+        [
+          423,
+          257
+        ],
+        [
+          424,
+          257
+        ]
+      ]
+    },
+    {
+      "image": "tick-2643.composed.rgba",
+      "different_pixels": 16,
+      "max_difference": 140,
+      "examples_xy": [
+        [
+          365,
+          278
+        ],
+        [
+          366,
+          279
+        ],
+        [
+          367,
+          279
+        ],
+        [
+          367,
+          280
+        ],
+        [
+          368,
+          280
+        ],
+        [
+          368,
+          281
+        ],
+        [
+          380,
+          283
+        ],
+        [
+          381,
+          283
+        ],
+        [
+          382,
+          283
+        ],
+        [
+          383,
+          283
+        ]
+      ]
+    },
+    {
+      "image": "tick-2643.world.rgba",
+      "different_pixels": 16,
+      "max_difference": 108,
+      "examples_xy": [
+        [
+          365,
+          278
+        ],
+        [
+          366,
+          279
+        ],
+        [
+          367,
+          279
+        ],
+        [
+          367,
+          280
+        ],
+        [
+          368,
+          280
+        ],
+        [
+          368,
+          281
+        ],
+        [
+          380,
+          283
+        ],
+        [
+          381,
+          283
+        ],
+        [
+          382,
+          283
+        ],
+        [
+          383,
+          283
+        ]
+      ]
+    },
+    {
+      "image": "tick-3000.composed.rgba",
+      "different_pixels": 42,
+      "max_difference": 145,
+      "examples_xy": [
+        [
+          286,
+          213
+        ],
+        [
+          287,
+          213
+        ],
+        [
+          288,
+          213
+        ],
+        [
+          289,
+          213
+        ],
+        [
+          290,
+          213
+        ],
+        [
+          304,
+          213
+        ],
+        [
+          305,
+          213
+        ],
+        [
+          306,
+          213
+        ],
+        [
+          307,
+          213
+        ],
+        [
+          308,
+          213
+        ]
+      ]
+    },
+    {
+      "image": "tick-3000.world.rgba",
+      "different_pixels": 42,
+      "max_difference": 138,
+      "examples_xy": [
+        [
+          286,
+          213
+        ],
+        [
+          287,
+          213
+        ],
+        [
+          288,
+          213
+        ],
+        [
+          289,
+          213
+        ],
+        [
+          290,
+          213
+        ],
+        [
+          304,
+          213
+        ],
+        [
+          305,
+          213
+        ],
+        [
+          306,
+          213
+        ],
+        [
+          307,
+          213
+        ],
+        [
+          308,
+          213
+        ]
+      ]
+    },
+    {
+      "image": "tick-3546.composed.rgba",
+      "different_pixels": 86,
+      "max_difference": 137,
+      "examples_xy": [
+        [
+          90,
+          169
+        ],
+        [
+          91,
+          169
+        ],
+        [
+          92,
+          169
+        ],
+        [
+          93,
+          169
+        ],
+        [
+          94,
+          170
+        ],
+        [
+          179,
+          184
+        ],
+        [
+          180,
+          184
+        ],
+        [
+          181,
+          184
+        ],
+        [
+          182,
+          184
+        ],
+        [
+          178,
+          185
+        ]
+      ]
+    },
+    {
+      "image": "tick-3546.world.rgba",
+      "different_pixels": 86,
+      "max_difference": 138,
+      "examples_xy": [
+        [
+          90,
+          169
+        ],
+        [
+          91,
+          169
+        ],
+        [
+          92,
+          169
+        ],
+        [
+          93,
+          169
+        ],
+        [
+          94,
+          170
+        ],
+        [
+          179,
+          184
+        ],
+        [
+          180,
+          184
+        ],
+        [
+          181,
+          184
+        ],
+        [
+          182,
+          184
+        ],
+        [
+          178,
+          185
+        ]
+      ]
+    },
+    {
+      "image": "tick-3600.composed.rgba",
+      "different_pixels": 41,
+      "max_difference": 73,
+      "examples_xy": [
+        [
+          339,
+          195
+        ],
+        [
+          336,
+          196
+        ],
+        [
+          337,
+          196
+        ],
+        [
+          338,
+          196
+        ],
+        [
+          339,
+          196
+        ],
+        [
+          319,
+          197
+        ],
+        [
+          320,
+          197
+        ],
+        [
+          321,
+          197
+        ],
+        [
+          322,
+          197
+        ],
+        [
+          323,
+          197
+        ]
+      ]
+    },
+    {
+      "image": "tick-3600.world.rgba",
+      "different_pixels": 41,
+      "max_difference": 49,
+      "examples_xy": [
+        [
+          339,
+          195
+        ],
+        [
+          336,
+          196
+        ],
+        [
+          337,
+          196
+        ],
+        [
+          338,
+          196
+        ],
+        [
+          339,
+          196
+        ],
+        [
+          319,
+          197
+        ],
+        [
+          320,
+          197
+        ],
+        [
+          321,
+          197
+        ],
+        [
+          322,
+          197
+        ],
+        [
+          323,
+          197
+        ]
+      ]
+    },
+    {
+      "image": "tick-4200.composed.rgba",
+      "different_pixels": 2,
+      "max_difference": 71,
+      "examples_xy": [
+        [
+          436,
+          215
+        ],
+        [
+          437,
+          215
+        ]
+      ]
+    },
+    {
+      "image": "tick-4200.world.rgba",
+      "different_pixels": 2,
+      "max_difference": 45,
+      "examples_xy": [
+        [
+          436,
+          215
+        ],
+        [
+          437,
+          215
+        ]
+      ]
+    },
+    {
+      "image": "tick-4800.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-4800.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5400.composed.rgba",
+      "different_pixels": 6,
+      "max_difference": 102,
+      "examples_xy": [
+        [
+          298,
+          233
+        ],
+        [
+          299,
+          233
+        ],
+        [
+          303,
+          234
+        ],
+        [
+          304,
+          234
+        ],
+        [
+          312,
+          234
+        ],
+        [
+          313,
+          234
+        ]
+      ]
+    },
+    {
+      "image": "tick-5400.world.rgba",
+      "different_pixels": 6,
+      "max_difference": 77,
+      "examples_xy": [
+        [
+          298,
+          233
+        ],
+        [
+          299,
+          233
+        ],
+        [
+          303,
+          234
+        ],
+        [
+          304,
+          234
+        ],
+        [
+          312,
+          234
+        ],
+        [
+          313,
+          234
+        ]
+      ]
+    },
+    {
+      "image": "tick-5639.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5639.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5655.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5655.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5867.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5867.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5874.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5874.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5878.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5878.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5889.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5889.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5921.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-5921.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-6006.composed.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    },
+    {
+      "image": "tick-6006.world.rgba",
+      "different_pixels": 0,
+      "max_difference": 0,
+      "examples_xy": []
+    }
+  ]
+}

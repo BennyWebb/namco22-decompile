@@ -1,0 +1,6 @@
+layout raw pen conflicts 6690 palette lookup differences 6690
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1c/prepare.py", line 19, in <module>
+    assert bad==0,('layout palette parity',bad)
+           ^^^^^^
+AssertionError: ('layout palette parity', 6690)

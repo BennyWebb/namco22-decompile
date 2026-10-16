@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED / NOT PASSED / STOPPED",
+  "layout_control_images_exact": 22,
+  "layout_control_images_total": 36,
+  "layout_control_different_pixels": 426,
+  "shared_layout_unsatisfiable_texels": 5244,
+  "original_precision_mismatch_explained_pixels": 846527,
+  "original_unclassified_pixels": 5873,
+  "revised_unclassified_pixels": 5875,
+  "class_a_adjacent_source_proven": 0,
+  "compact_classification_complete": false,
+  "device_part2_recommended_now": false,
+  "device_contacted": false,
+  "requires_decision": "Separate colour aliases in a revised control; then prove residual source-texel adjacency. Do not waive fidelity or change device acceptance targets."
+}
