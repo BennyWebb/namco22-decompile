@@ -1,0 +1,62 @@
+[
+  {
+    "run": "host-b1",
+    "full_ticks": 6006,
+    "authoritative_sets": 21,
+    "domain_records": 63,
+    "exact_native_packets": 4207,
+    "images_equal": 36,
+    "performance_timings_admissible": false,
+    "identities": {
+      "states.jsonl": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+      "command-sha256.csv": "e5f5e0e96833f3a000778f88b181ff225daa5d54afc2d96a129a3023fe49bcb3",
+      "image-sha256.csv": "e8c0b9f6acce43d70da2a469fd5932c5dc07d1e1644021c23cfea8dc9467db58"
+    },
+    "binary_sha256": "7ad930b2f38035cc8c3bdf5121decb6793287f352ebb2e408df79cfaf86a6009"
+  },
+  {
+    "run": "host-b2",
+    "full_ticks": 6006,
+    "authoritative_sets": 21,
+    "domain_records": 63,
+    "exact_native_packets": 4207,
+    "images_equal": 36,
+    "performance_timings_admissible": false,
+    "identities": {
+      "states.jsonl": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+      "command-sha256.csv": "e5f5e0e96833f3a000778f88b181ff225daa5d54afc2d96a129a3023fe49bcb3",
+      "image-sha256.csv": "e8c0b9f6acce43d70da2a469fd5932c5dc07d1e1644021c23cfea8dc9467db58"
+    },
+    "binary_sha256": "a1d4ef46fe38f6a52e415dd684233ccb9b2757bffa4c718d30072f9a01320b1c"
+  },
+  {
+    "run": "host-b1-native-only",
+    "full_ticks": 6006,
+    "authoritative_sets": 21,
+    "domain_records": 63,
+    "exact_native_packets": 4207,
+    "images_equal": 36,
+    "performance_timings_admissible": false,
+    "identities": {
+      "states.jsonl": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+      "command-sha256.csv": "e5f5e0e96833f3a000778f88b181ff225daa5d54afc2d96a129a3023fe49bcb3",
+      "image-sha256.csv": "e8c0b9f6acce43d70da2a469fd5932c5dc07d1e1644021c23cfea8dc9467db58"
+    },
+    "binary_sha256": "2cb8ed6dade983498754d7c35bea2fc594b907f6dca504c09b10f8ee9793640f"
+  },
+  {
+    "run": "host-b2-native-only",
+    "full_ticks": 6006,
+    "authoritative_sets": 21,
+    "domain_records": 63,
+    "exact_native_packets": 4207,
+    "images_equal": 36,
+    "performance_timings_admissible": false,
+    "identities": {
+      "states.jsonl": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b",
+      "command-sha256.csv": "e5f5e0e96833f3a000778f88b181ff225daa5d54afc2d96a129a3023fe49bcb3",
+      "image-sha256.csv": "e8c0b9f6acce43d70da2a469fd5932c5dc07d1e1644021c23cfea8dc9467db58"
+    },
+    "binary_sha256": "e7468e163dbb8852db8451473cdaac120efbd0d0db58be2107240b734e2a3e6e"
+  }
+]

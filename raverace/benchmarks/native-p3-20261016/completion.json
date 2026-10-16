@@ -1,0 +1,14 @@
+{
+  "elapsed_seconds": 773.010000000002,
+  "elapsed_minutes": 12.883500000000033,
+  "definition": "First successfully started P3 scheduler through final integrity checks; includes idle host analysis and reconnects",
+  "budget_target_seconds": 7200,
+  "under_budget": true,
+  "completed_device_replays": 3,
+  "valid_priority_comparisons": 0,
+  "device_validation_replays": 0,
+  "soak_seconds": 0,
+  "production_sha256": "6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e",
+  "protected_hashes_ok": 47,
+  "final_es_pid": "6823"
+}

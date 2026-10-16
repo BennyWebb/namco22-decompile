@@ -1,0 +1,13 @@
+{
+  "note": "Static quad_fixed disassembly only; counts are not runtime frequencies or performance evidence.",
+  "counts": {
+    "p2": {
+      "sdiv_instructions": 3,
+      "divti3_calls": 6
+    },
+    "b1": {
+      "sdiv_instructions": 9,
+      "divti3_calls": 6
+    }
+  }
+}

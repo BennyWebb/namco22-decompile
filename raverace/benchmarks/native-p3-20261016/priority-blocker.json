@@ -1,0 +1,13 @@
+{
+  "cause": "rr_headless.inc removes RR_* environment variables before presentation startup",
+  "lines": "raverace/src/rr_headless.inc:178-188",
+  "requested": [
+    "nice",
+    "rr"
+  ],
+  "observed": "Default policies and nice0 for all three game stages; no P3-PRIORITY records",
+  "corrected_source_switch": "ENG_P3_PRIORITY",
+  "corrected_switch_hardware_verified": false,
+  "additional_device_runs_authorised": false,
+  "decision": "STOP after configuration failure; no B device timing, final validation, repeats or soak"
+}

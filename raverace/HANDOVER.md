@@ -5,6 +5,29 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Milestone P3 — BLOCKED / STOPPED EARLY (2026-10-16)
+
+See [P3 report](NATIVE_P3_REPORT.md) and
+[evidence](benchmarks/native-p3-20261016/README.md). Three device replays completed
+in12.88min, but A1/A2 priority experiments are INVALID: replay startup strips
+`RR_*`, so `RR_P3_PRIORITY` vanished; actual main/prepare/present stayed at defaults.
+Thread census caught this. Source-only fix is `ENG_P3_PRIORITY`, defaultOFF,
+not transferred/hardware-validated. Per user stop-on-failure rule, no replacements,
+B device timing, final validation/repeats or15min soak were started. No final
+candidate adopted; P3 gate NOT MET (incomplete), not a scheduling conclusion.
+
+Private native/p3 B1 native-only checked64-bit projection passes128449792 UBSan
+comparisons; B2 conservative extrema passes1million differential quads. Both
+native-only host builds pass6006ticks/all21sets/exact4207packets/36host images;
+B2 checks old/new cull reason on every replay quad. No new Mali image validation.
+Legacy/fallback original projection retained; shared engine/production untouched.
+
+All3 device replays pass authoritative checkpoints. All47protected hashes pass;
+production SHA remains6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e.
+CPU schedutil480–1512MHz/GPU simple_ondemand and RT defaults restored, ES PID6823,
+no game/sampler/perf. No commit/push/deployment. P2/history gates unchanged.
+STOPPED. A resumed bounded hardware matrix requires explicit user authorisation.
+
 ## Milestone P2 — COMPLETE / performance FAIL / STOPPED (2026-10-16)
 
 See [P2 report](NATIVE_P2_REPORT.md) and

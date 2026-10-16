@@ -1,0 +1,88 @@
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c: In function ‘direct_quad’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:216:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:216:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:217:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:217:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c: In function ‘rr_gl_prepare_gles2’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:449:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:449:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:450:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:450:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:458:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:458:39: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                       ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:470:25: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/gl.c:470:45: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/presentation.c:5: warning: "_GNU_SOURCE" redefined
+    5 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+In file included from /home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/presentation.c:20:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h: In function ‘p3_priority’:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h:8:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+    8 |  if(applied||tick<1800)return;applied=1;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h:8:31: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+    8 |  if(applied||tick<1800)return;applied=1;
+      |                               ^~~~~~~
+In file included from /home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:231:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h: In function ‘p3_projection’:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:14:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   14 |  if(r>INT32_MAX)return INT32_MAX;if(r<INT32_MIN)return INT32_MIN;return (int32_t)r;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:14:34: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   14 |  if(r>INT32_MAX)return INT32_MAX;if(r<INT32_MIN)return INT32_MIN;return (int32_t)r;
+      |                                  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:18:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   18 |  if(res>INT32_MAX)return INT32_MAX;if(res<INT32_MIN)return INT32_MIN;return (int32_t)res;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:18:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   18 |  if(res>INT32_MAX)return INT32_MAX;if(res<INT32_MIN)return INT32_MIN;return (int32_t)res;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c: In function ‘quad_fixed’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:477:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  477 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:477:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  477 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:478:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  478 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:478:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  478 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:669:15: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  669 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/live.c:669:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  669 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |                                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/async_io.c:4: warning: "_GNU_SOURCE" redefined
+    4 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/p3/b1-play/arm/rr_p1b
