@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/size_atlas.py", line 110, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/size_atlas.py", line 90, in main
+    reference,mapping,pages=build(rom,rr,a.out/'reference','reference');mapping={tuple(m['recipe']):m for m in mapping}
+                            ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/size_atlas.py", line 38, in build
+    image=rom.pens(b,c,u-2,v-2,w+4,h+4);blob=image.tobytes();key=digest(struct.pack('<II',w+4,h+4)+blob)
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/assets/asset_tool.py", line 86, in pens
+    u = (u0 + np.arange(width, dtype=np.uint32)) & 4095
+         ~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+OverflowError: Python integer -2 out of bounds for uint32

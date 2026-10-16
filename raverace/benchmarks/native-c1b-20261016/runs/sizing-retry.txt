@@ -1,0 +1,256 @@
+reference decoded 5407 unique 5026 MiB 111.74681949615479
+reference merged 527 savedMiB 58.57573223114014
+whole decoded 21783 unique 19769 MiB 531.0611324310303
+whole merged 2043 savedMiB 421.680157661438
+{
+  "branch": "feature/knulli-h700",
+  "rom_sources": {
+    "rv1potl0.5b": {
+      "bytes": 524288,
+      "sha256": "f7e7a364c37043cb50f778a836f4fd04ecb1fa79c49be7be37ea0a6fc3a8b714"
+    },
+    "rv1potl1.4b": {
+      "bytes": 524288,
+      "sha256": "a2ed893ff7789763649d434a62a627266112e4213734788c01669180ae06b8ca"
+    },
+    "rv1potl2.3b": {
+      "bytes": 524288,
+      "sha256": "90933fbf8d33958faf84c4279acf4d165e87439bd5ad03ab16d062751a4423d9"
+    },
+    "rv1potl3.2b": {
+      "bytes": 524288,
+      "sha256": "bd579a2e713392a3b23695bc69a50a02b1d3cc9b97821aa6ec2691c125e87d12"
+    },
+    "rv1potm0.5c": {
+      "bytes": 524288,
+      "sha256": "6c79bded78635f3849be76f07e84720ada5dc7700e427f4185ef95f03b3262f5"
+    },
+    "rv1potm1.4c": {
+      "bytes": 524288,
+      "sha256": "6baf343f7d759d322d7d0f4352974f40606949f83e9371d5ba5267eb266bdd4d"
+    },
+    "rv1potm2.3c": {
+      "bytes": 524288,
+      "sha256": "1d903510644627dbb7c48bd80203010e3f2c59843b6ba1807947382658c71e32"
+    },
+    "rv1potm3.2c": {
+      "bytes": 524288,
+      "sha256": "73ae3e6ea51849287feceffcbf90273c0df11b0cc7c4699fa1592b5023e0eca4"
+    },
+    "rv1potu0.5d": {
+      "bytes": 524288,
+      "sha256": "192bbc3d37caeca608dc4c4d366118c535be4c0043d1647525fb1da92ff56f30"
+    },
+    "rv1potu1.4d": {
+      "bytes": 524288,
+      "sha256": "5dc7d20ce1917eabd044fbe74c47dd9716a4ae21c7921059363df483e3e8d794"
+    },
+    "rv1potu2.3d": {
+      "bytes": 524288,
+      "sha256": "74c0d441881f218fc1113f1b261ce14a218848aa9c0301a83592030a811ed9ab"
+    },
+    "rv1potu3.2d": {
+      "bytes": 524288,
+      "sha256": "1d5f00fbb638c9bb411f9f1f78f6aa103cca46e6b9d6dfe00be406a6133a3d96"
+    },
+    "rv1cg0.1a": {
+      "bytes": 2097152,
+      "sha256": "e8c39e37259d0a69332ac2a0909d460c1fedffa5896cafb2508e3fd05a5293cd"
+    },
+    "rv1cg1.1c": {
+      "bytes": 2097152,
+      "sha256": "8bb17af866e1a97421519405ebfedcc9c3a5ff6c32be51ca2247670a977db8a4"
+    },
+    "rv1cg2.1d": {
+      "bytes": 2097152,
+      "sha256": "ed89673d15b1e39f93c67a973bd5d70a7ac6b61f49b6e573fb686727e922e7ec"
+    },
+    "rv1cg3.1e": {
+      "bytes": 2097152,
+      "sha256": "2b669aa4102a879d7d26071c354038d00803055b43d9d53229d968e2602a865f"
+    },
+    "rv1cg4.1f": {
+      "bytes": 2097152,
+      "sha256": "daff8e4c5183edcb04fcc7b5cf3d2566d12681a7ca7dd6216dc415e194ac0443"
+    },
+    "rv1cg5.1j": {
+      "bytes": 2097152,
+      "sha256": "80214a88732d30500f0c3d1a6e54c414c2f49f40d8a5e9c2807bbdc0c0582658"
+    },
+    "rv1cg6.1k": {
+      "bytes": 2097152,
+      "sha256": "176c2b1ed8f9c5c403b0f73f2f0246097c879937fcc347ab1cb3ab6e8d013c38"
+    },
+    "rv1cg7.1n": {
+      "bytes": 2097152,
+      "sha256": "829d9d715711243346e8feca03299ad925c90e1f38f8ff54c19baabb72224186"
+    },
+    "rv1ccrl.5a": {
+      "bytes": 2097152,
+      "sha256": "c9f36979585457186304ccce2b7ee72b3f84cbc1c74560bfc5da08907297a99a"
+    },
+    "rv1ccrh.5c": {
+      "bytes": 524288,
+      "sha256": "c89ab12278e823b057d99091828576445f5617acf3347ea779de71f5b7a6eb4a"
+    }
+  },
+  "table_interval": [
+    69,
+    2490
+  ],
+  "static_models": 2421,
+  "static_quad_packets": 97116,
+  "excluded_models": [],
+  "reference": {
+    "label": "reference",
+    "recipes": 5407,
+    "unique_initial_contents": 5026,
+    "exact_duplicate_hits": 381,
+    "initial_padded_bytes": 117175033,
+    "overlap_merges": 4499,
+    "merged_rectangles": 527,
+    "merge_saved_padded_bytes": 61421107,
+    "unique_final_contents": 527,
+    "page_count": 4,
+    "page_dimensions": [
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        2736,
+        4096
+      ]
+    ],
+    "allocated_bytes": 61538304,
+    "full_4096_page_bytes": 67108864,
+    "content_bytes": 55753926,
+    "packed_pen_texels_verified": 120048149,
+    "packing_seconds": 10.405432552011916,
+    "files": {
+      "page-0.r8ui": {
+        "bytes": 16777216,
+        "sha256": "0afb6707934fb6679eb809bbef38831240bf6613b9104ae6fb09e5ef338c9739"
+      },
+      "page-1.r8ui": {
+        "bytes": 16777216,
+        "sha256": "2a0e36c92c0083e12f8887f758a240776782923f278cb04b6bddda5fcef61b8c"
+      },
+      "page-2.r8ui": {
+        "bytes": 16777216,
+        "sha256": "0000d7eb9d5f43821d4fa409763270200c5736ecce2dc5f7fb389e36b10d707f"
+      },
+      "page-3.r8ui": {
+        "bytes": 11206656,
+        "sha256": "81e8f0a1521c7a22e22d07a1113ccd7c720ba8ef34d1bdcd4069f2558747d554"
+      }
+    }
+  },
+  "whole_rom": {
+    "label": "whole",
+    "recipes": 21783,
+    "unique_initial_contents": 19769,
+    "exact_duplicate_hits": 2014,
+    "initial_padded_bytes": 556857958,
+    "overlap_merges": 17726,
+    "merged_rectangles": 2043,
+    "merge_saved_padded_bytes": 442163693,
+    "unique_final_contents": 2040,
+    "page_count": 7,
+    "page_dimensions": [
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ],
+      [
+        4096,
+        4096
+      ]
+    ],
+    "allocated_bytes": 117440512,
+    "full_4096_page_bytes": 117440512,
+    "content_bytes": 114690768,
+    "packed_pen_texels_verified": 564081621,
+    "packing_seconds": 115.42222438400495,
+    "files": {
+      "page-0.r8ui": {
+        "bytes": 16777216,
+        "sha256": "f525059e2d3f321521896396eeaf100109fd2c40929b6e2ec214920576bd3c19"
+      },
+      "page-1.r8ui": {
+        "bytes": 16777216,
+        "sha256": "6e3588b18fa29e7880ed9523f87e6f7a2b6c8001644a09290a0b5bcd2ba736ba"
+      },
+      "page-2.r8ui": {
+        "bytes": 16777216,
+        "sha256": "cfbde713da531f7578db6ac7107114e467b6a04311ad414136f8956f6f2a3b4d"
+      },
+      "page-3.r8ui": {
+        "bytes": 16777216,
+        "sha256": "df20bf98309e51b4ebac57feeb412d23f6013ce59264835d5cd113028cd1bc82"
+      },
+      "page-4.r8ui": {
+        "bytes": 16777216,
+        "sha256": "8951f4d1bac85553946256cb9c6c2a777f772c4cc75ebe9a2b21a54b7b1a93c8"
+      },
+      "page-5.r8ui": {
+        "bytes": 16777216,
+        "sha256": "6b039bf4cd550610a16d5753d6aa00e389e751f10824eae423b794b97b036aa7"
+      },
+      "page-6.r8ui": {
+        "bytes": 16777216,
+        "sha256": "bc97d460a8f50ee6ee1b0fdb6924c6b69295bbe9f25dd77d73fd5b5d0a90d969"
+      }
+    }
+  },
+  "parity": {
+    "materials": 5407,
+    "texels": 120048149,
+    "different_texels": 0,
+    "gutter_differences": 0,
+    "exact": true
+  },
+  "reference_rgba_bytes": 480614144,
+  "palette_bytes": 131072,
+  "reference_ratio_including_palette": 7.793400471572795,
+  "unresolved": {
+    "reference_footprints_not_in_static_ROM": 3,
+    "whole_game_dynamic_uv_states": "not statically enumerable",
+    "whole_game_point_RAM_models": "runtime code 5; count not statically enumerable",
+    "whole_game_direct_polygons": "runtime FIFO; count not statically enumerable"
+  },
+  "sizing_gate": {
+    "whole_le192MiB": true,
+    "reference_ge3_5x": true,
+    "exact_texel_parity": true
+  },
+  "pass": true
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/rr_p1b",
+    "/home/bwebb/dev/namco22-decompile/raverace/extracted",
+    "--presentation-thread",
+    "on",
+    "--timing",
+    "independent",
+    "--replay-input",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/milestone3/inputs/race-20261013-122242-25136.rec",
+    "--input-checkpoints",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/host-final-index/states.jsonl",
+    "--audio",
+    "off",
+    "--thread-profile",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/host-final-index/thread.csv"
+  ],
+  "mode": "index",
+  "binary_sha256": "539fef74c4260fcd21e7bed1cd18c8654b6ab4a53abae6368103beb571773d47",
+  "validation_only": true
+}

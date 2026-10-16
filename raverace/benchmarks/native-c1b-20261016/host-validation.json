@@ -1,0 +1,14 @@
+{
+  "ticks_per_path": 6006,
+  "checkpoint_sets_per_path": 21,
+  "domain_records_per_path": 63,
+  "rgba_original_packet_receipts": 4207,
+  "semantic_command_receipts_per_path": 4207,
+  "semantic_equal": true,
+  "rgba_matches_prior_P3_host_images": true,
+  "index_images_exact": false,
+  "images_per_path": 36,
+  "device_runs": 0,
+  "disposition": "STOP_CORRECTNESS_FAILURE",
+  "packet_method": "SHA256 of each complete pre-painter LiveCommand array, with only page zeroed; mesh/material IDs, transforms, scissors, priorities, brightness and culling flags retained. Repacked page groups/UV mapping intentionally differ; not raw packet identity for index."
+}

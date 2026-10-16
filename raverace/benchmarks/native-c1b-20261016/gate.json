@@ -1,0 +1,17 @@
+{
+  "disposition": "NO-GO current implementation / STOPPED on host fidelity",
+  "sizing_gate": {
+    "exact_texel_parity": true,
+    "reference_ge3_5x": true,
+    "whole_le192MiB": true
+  },
+  "host_checkpoint_sets": 21,
+  "host_rgba_original_packets": 4207,
+  "host_equal_adjusted_command_receipts": 4207,
+  "host_images_exact": false,
+  "unexplained_image_differences": true,
+  "device_runs": 0,
+  "device_performance_gate": null,
+  "measured_GPU_memory_gate": null,
+  "no_further_work_without_authorisation": true
+}

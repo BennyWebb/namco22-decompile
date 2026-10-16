@@ -1,0 +1,21 @@
+{
+  "branch": "feature/knulli-h700",
+  "starting_HEAD": "1482183fffd0e3ac2b17e8ff50111050f5c607c3",
+  "initial_worktree": "clean",
+  "host_binary_sha256": "539fef74c4260fcd21e7bed1cd18c8654b6ab4a53abae6368103beb571773d47",
+  "inputs": {
+    "roms/raverace.zip": "80a2b5253028c4df28a052cf430f3aa1220f5f1d2d7680c66ada199854e02964",
+    "raverace/native/generated/milestone4a-coverage/race-live-v2/materials.json": "faa40e405099ba6072f0d2606189cfb54145d2cc0e9fc06106c6f3fc438009c3",
+    "raverace/native/generated/milestone4a-coverage/lookup/live.lookup": "558fdf1c911cd670e33535be86706f78a224be1c731025b20891e1350026bacd"
+  },
+  "sources": {
+    "raverace/native/c1b/README.md": "5a88e6e44cac6e276f08a72d4f1dc0996e6297f16a0606ff8767b3f7a67a332d",
+    "raverace/native/c1b/build.py": "9249151b9d8eac9d2aca52608ba019cffd242f015f72f33dffa52d511c2c0f1a",
+    "raverace/native/c1b/compare_images.py": "e2c5657a0000f046e405a97642bf5efaf27d7e785efbfd4d59d27f8fab36185f",
+    "raverace/native/c1b/prepare_reference.py": "deef74c1d9b52fb8c2811e5f8b66713d9447fed5c85ddf2e11cc4520e021d7d8",
+    "raverace/native/c1b/size_atlas.py": "cc8ec0c1081a2502108c88c8efc50653d0501e53ff23cff2264a0089a7902e85",
+    "raverace/native/c1b/transform.py": "12ef7b77e7f4a5d0f7afc3deb09f4c7c16039bd49147e1a68d4b142ffec273fc",
+    "raverace/native/c1b/validate_host.py": "44e972628d7581290d1bc7ba051bc54664a43a71f1545c146fc86421120d44c8",
+    "raverace/native/c1b/warm.inc": "da1c9387f044c24959bd963118cee9d47c90b7144a5bc6d5ddb185aaad27a482"
+  }
+}

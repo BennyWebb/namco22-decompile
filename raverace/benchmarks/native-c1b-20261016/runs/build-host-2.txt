@@ -1,0 +1,106 @@
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c: In function ‘direct_quad’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:216:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:216:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  216 |         if ((int)v->u < u0) u0 = v->u;  if ((int)v->u > u1) u1 = v->u;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:217:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:217:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  217 |         if ((int)v->v < v0) v0 = v->v;  if ((int)v->v > v1) v1 = v->v;
+      |                                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c: In function ‘rr_gl_prepare_gles2’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:449:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:449:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  449 |                   if (x < ax0[b]) ax0[b] = x; if (x > ax1[b]) ax1[b] = x;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:450:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:450:47: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  450 |                   if (y < ay0[b]) ay0[b] = y; if (y > ay1[b]) ay1[b] = y;
+      |                                               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:458:19: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:458:39: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  458 |                   if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                       ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:470:25: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                         ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/gl.c:470:45: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  470 |                         if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
+      |                                             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/presentation.c:5:9: warning: ‘_GNU_SOURCE’ redefined
+    5 | #define _GNU_SOURCE
+      |         ^~~~~~~~~~~
+<command-line>: note: this is the location of the previous definition
+In file included from /home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/presentation.c:20:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h: In function ‘p3_priority’:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h:8:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+    8 |  if(applied||tick<1800)return;applied=1;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/priority.h:8:31: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+    8 |  if(applied||tick<1800)return;applied=1;
+      |                               ^~~~~~~
+In file included from /home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:238:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h: In function ‘p3_projection’:
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:14:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   14 |  if(r>INT32_MAX)return INT32_MAX;if(r<INT32_MIN)return INT32_MIN;return (int32_t)r;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:14:34: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   14 |  if(r>INT32_MAX)return INT32_MAX;if(r<INT32_MIN)return INT32_MIN;return (int32_t)r;
+      |                                  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:18:2: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   18 |  if(res>INT32_MAX)return INT32_MAX;if(res<INT32_MIN)return INT32_MIN;return (int32_t)res;
+      |  ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/p3/projection.h:18:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   18 |  if(res>INT32_MAX)return INT32_MAX;if(res<INT32_MIN)return INT32_MIN;return (int32_t)res;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c: In function ‘quad_fixed’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:484:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  484 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:484:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  484 |             if (uu < u0) u0 = uu;  if (uu > u1) u1 = uu;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:485:13: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  485 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |             ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:485:36: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  485 |             if (vv < v0) v0 = vv;  if (vv > v1) v1 = vv;
+      |                                    ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:676:15: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  676 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |               ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/live.c:676:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  676 |               if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      |                                   ^~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.c:4:9: warning: ‘_GNU_SOURCE’ redefined
+    4 | #define _GNU_SOURCE
+      |         ^~~~~~~~~~~
+<command-line>: note: this is the location of the previous definition
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.c: In function ‘rr_p1b_pixel’:
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.c:54:295: error: ‘c1_images’ undeclared (first use in this function)
+   54 | void rr_p1b_pixel(unsigned tick,const char*suffix,const void*bytes,size_t n){if(pixel_count>=64){atomic_fetch_add(&errors,1);return;}unsigned i=pixel_count++;pixels[i].tick=tick;snprintf(pixels[i].suffix,16,"%s",suffix);SHA256(bytes,n,pixels[i].digest);if(getenv("ENG_C1_IMAGES")){if(n!=sizeof c1_images[i])abort();memcpy(c1_images[i],bytes,n);}}
+      |                                                                                                                                                                                                                                                                                                       ^~~~~~~~~
+/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.c:54:295: note: each undeclared identifier is reported only once for each function it appears in
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/build.py", line 9, in <module>
+    sys.argv=['build.py',a.build,a.target,'b2']+(['--validation'] if a.validation else []);exec(compile(code,str(root/'raverace/native/p3/build.py'),'exec'),{'__file__':str(root/'raverace/native/p3/build.py'),'__name__':'__main__'})
+                                                                                           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/p3/build.py", line 11, in <module>
+    sys.argv=[str(old/'build.py'),a.build,a.target];exec(compile(code,str(old/'build.py'),'exec'),{'__file__':str(old/'build.py'),'__name__':'__main__'})
+                                                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/p1b/build.py", line 76, in <module>
+    cmd=[cc,'-D_GNU_SOURCE',*get('C_DEFINES'),*incs,*get('C_INCLUDES'),*get('C_FLAGS'),'-c',str(out/(n+'.c')),'-o',str(out/(n+'.o'))];commands.append(cmd);subprocess.run(cmd,check=True)
+                                                                                                                                                           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/usr/bin/cc', '-D_GNU_SOURCE', '-DRR_GLES2', '-DRR_GLES2_TEXTURE_BUDGET_KB=65536', '-DRR_GLES2_TEXTURE_MAX_BUDGET_KB=131072', '-DRR_GPU_HUD', '-DRR_GPU_HUD_DEFAULT', '-DRR_HEADLESS', '-DRR_PARALLEL_FRAME_PREP', '-DRR_THREADED_PRESENTATION', '-I/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host', '-I/home/bwebb/dev/namco22-decompile/raverace/native/p1b', '-I/home/bwebb/dev/namco22-decompile/raverace/src', '-I/home/bwebb/dev/namco22-decompile/raverace/native/live', '-I/home/bwebb/dev/namco22-decompile/raverace/include', '-I/home/bwebb/dev/namco22-decompile/raverace/gen', '-I/home/bwebb/dev/namco22-decompile/engine', '-I/home/bwebb/dev/namco22-decompile/engine/snd', '-I/home/bwebb/dev/namco22-decompile/engine/c25', '-I/home/bwebb/dev/namco22-decompile/tools/c25oracle', '-I/home/bwebb/dev/namco22-decompile/raverace/src/snd', '-isystem', '/usr/include/SDL2', '-O2', '-g', '-DNDEBUG', '-std=gnu11', '-fno-strict-aliasing', '-fwrapv', '-include', '/home/bwebb/dev/namco22-decompile/raverace/include/glibc_compat.h', '-Wall', '-Wno-unused-function', '-Wno-unused-variable', '-D_REENTRANT', '-c', '/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.c', '-o', '/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/b2-validation/host/async_io.o']' returned non-zero exit status 1.

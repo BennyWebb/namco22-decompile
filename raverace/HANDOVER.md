@@ -12,6 +12,32 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone C1b — sizing PASS / host fidelity NO-GO / STOPPED (2026-10-16)
+
+See [C1b report](NATIVE_C1B_REPORT.md) and
+[evidence](benchmarks/native-c1b-20261016/README.md). ROM-only compact pen atlas:
+2,421 models / 97,116 quad packets / 21,783 footprints; whole ROM seven pages,
+112 MiB, reference 58.69 MiB (7.79× including one palette versus458.35 MiB RGBA).
+All5,407 reference materials/120,048,149 texels match exactly including gutters.
+Sizing gate PASSES. Runtime point-RAM/direct/dynamic UV counts remain unknown;
+three reference footprint keys are absent from static ROM enumeration.
+
+Private native/c1b selectable prototype derives from P3 b2; production/shared
+engine unchanged. Both host6006-tick replays pass21sets; RGBA retains4207original
+packet hashes and36prior host images;4207pre-batch command hashes match after
+zeroing page. Index raw packets differ by atlas page grouping/material UV mapping.
+**Fidelity fails:0/36 exact,852400 differing RGB pixels,alpha exact,max error162.**
+All side-by-sides retained under native/generated/c1b/image-review with manifest.
+No per-pixel cause is proven, so STOP under the standing correctness rule.
+No ARM/device replay, smoke, timing, fence or420MHz run. Device performance and
+measured residency are unmeasured; do not treat sizing success as a renderer GO.
+
+Read-only final device check: production SHA
+`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`,
+ES PID14605, CPUs schedutil480–1512MHz/GPU simple_ondemand, no diagnostics running.
+No device changes needed restoration. No commit/push/deployment.
+STOPPED. Focused host fidelity attribution requires separate authorisation.
+
 ## Milestone C1 — BLOCKED / host design decision / STOPPED (2026-10-16)
 
 See [C1 report](NATIVE_C1_REPORT.md) and

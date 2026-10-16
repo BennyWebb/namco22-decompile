@@ -1,0 +1,16 @@
+rgba exit 0 seconds 48.398377905003144
+index exit 0 seconds 49.98456910898676
+Traceback (most recent call last):
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/validate_host.py", line 17, in <module>
+    for mode in ['rgba','index']:assert read(private/f'host-{mode}/states.jsonl')==read(reference/'states.jsonl')
+                                        ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bwebb/dev/namco22-decompile/raverace/native/c1b/validate_host.py", line 16, in <lambda>
+    read=lambda p:[json.loads(l) for l in p.read_text().splitlines()]
+                                          ~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 788, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/pathlib/__init__.py", line 772, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/bwebb/dev/namco22-decompile/raverace/native/generated/c1b/host-index/states.jsonl'
