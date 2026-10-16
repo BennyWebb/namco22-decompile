@@ -1,0 +1,15 @@
+{
+  "required_headline_runs": 3,
+  "actual_headline_runs": 3,
+  "all_zero_native_main_gaps50": true,
+  "all_handful_isolated_single_repeats": true,
+  "all_zero_native_audio_underruns": false,
+  "all_zero_log_drops": true,
+  "soak_trend": "No sustained median slowdown, but late repeat bursts and one unresolved >50ms gap; strict gate fails",
+  "performance_pass": false,
+  "soak_complete_seconds": 1867.3099999999995,
+  "soak_repeats": 11,
+  "soak_main_gaps50": 1,
+  "soak_audio_underrun_sample_frames": 45564,
+  "investigation_complete": true
+}

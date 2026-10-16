@@ -1,0 +1,131 @@
+{
+  "io": {
+    "streams": "2",
+    "reserved": "2097152",
+    "dropped_records": "0",
+    "dropped_bytes": "0",
+    "errors": "0",
+    "packets": "0",
+    "writer_idle_result": "0",
+    "nice_result": "0",
+    "fully_drained": "1\n"
+  },
+  "priority_banner": "P1B_OBSERVER interval_ms=100 PSI=OFF SCHED_IDLE_result=0 nice=19",
+  "samples": 1329,
+  "sample_interval_ms": {
+    "n": 1328,
+    "median": 100.00018549999368,
+    "p95": 100.17917700042744,
+    "p99": 101.54769099972327,
+    "worst": 110.3960990003543,
+    "minimum": 89.61461299986695,
+    "mean": 100.00005972439756
+  },
+  "slow_sample_gaps_over200ms": [],
+  "read_duration_ms": {
+    "n": 35559,
+    "median": 0.05978799981676275,
+    "p95": 0.3373990002728533,
+    "p99": 1.820741999836173,
+    "worst": 15.00623199990514,
+    "minimum": 0.023166000573837664,
+    "mean": 0.15316598728391298
+  },
+  "slow_reads_over50ms": [],
+  "observer_game_gap_coincidences": [],
+  "sampler_cpu_seconds": 6.312569446,
+  "sampler_cpu_core_equivalent": 0.047534380089293525,
+  "sampler_maxrss_kib": 5744,
+  "gpu_hz_counts": {
+    "240000000": 1329
+  },
+  "cpu_khz_counts": [
+    {
+      "1200000": 75,
+      "1416000": 77,
+      "792000": 58,
+      "480000": 139,
+      "1008000": 92,
+      "1512000": 820,
+      "1320000": 68
+    },
+    {
+      "1200000": 75,
+      "1416000": 78,
+      "792000": 58,
+      "480000": 139,
+      "1008000": 92,
+      "1512000": 819,
+      "1320000": 68
+    },
+    {
+      "1200000": 76,
+      "1416000": 78,
+      "792000": 58,
+      "480000": 139,
+      "1008000": 92,
+      "1512000": 819,
+      "1320000": 67
+    },
+    {
+      "1200000": 75,
+      "1416000": 79,
+      "792000": 58,
+      "480000": 139,
+      "1008000": 92,
+      "1512000": 819,
+      "1320000": 67
+    }
+  ],
+  "peak_temperature_c": 61.946,
+  "cooling_counts": {
+    "/sys/class/thermal/cooling_device0/cur_state": {
+      "0": 1329
+    },
+    "/sys/class/thermal/cooling_device1/cur_state": {
+      "0": 1329
+    }
+  },
+  "pressure_reads": 0,
+  "memory": {
+    "rss_kib": {
+      "n": 1328,
+      "median": 719152.0,
+      "p95": 775072,
+      "p99": 780072,
+      "worst": 780072,
+      "minimum": 8184,
+      "mean": 644279.9819277108
+    },
+    "available_kib": {
+      "n": 1329,
+      "median": 122008,
+      "p95": 674852,
+      "p99": 757944,
+      "worst": 789416,
+      "minimum": 117072,
+      "mean": 219843.28367193378
+    },
+    "cma_kib": {
+      "n": 1329,
+      "median": 30952,
+      "p95": 57624,
+      "p99": 57624,
+      "worst": 57744,
+      "minimum": 1784,
+      "mean": 32984.081264108354
+    },
+    "mali_pages": {
+      "n": 1329,
+      "median": 137636,
+      "p95": 152000,
+      "p99": 152777,
+      "worst": 152777,
+      "minimum": 0,
+      "mean": 122174.23852520692
+    }
+  },
+  "samples_with_game_thread_records": 1329,
+  "game_process_coverage_valid": true,
+  "process_coverage_warning": null
+}

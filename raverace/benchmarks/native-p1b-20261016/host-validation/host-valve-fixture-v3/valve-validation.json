@@ -1,0 +1,19 @@
+{
+  "full_replay_ticks": 6006,
+  "all21_checkpoint_sets_identical": true,
+  "all4207_packets_identical": true,
+  "forced_present_tick": 2500,
+  "forced_delay_ms": 150,
+  "activations": 1,
+  "replaced_ticks": [
+    2501,
+    2502,
+    2503,
+    2504,
+    2505,
+    2506,
+    2507,
+    2508
+  ],
+  "presented_once_in_order": true
+}

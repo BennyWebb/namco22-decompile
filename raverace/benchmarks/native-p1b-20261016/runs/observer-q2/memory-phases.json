@@ -1,0 +1,89 @@
+{
+  "legacy-last": {
+    "ticks": [
+      1700,
+      1799
+    ],
+    "samples": 23,
+    "metrics": {
+      "rss_kib": {
+        "minimum": 774268,
+        "median": 776440,
+        "maximum": 777584
+      },
+      "available_kib": {
+        "minimum": 120816,
+        "median": 122008,
+        "maximum": 123952
+      },
+      "cma_kib": {
+        "minimum": 30588,
+        "median": 30748,
+        "maximum": 30748
+      },
+      "mali_pages": {
+        "minimum": 151801,
+        "median": 152218,
+        "maximum": 152501
+      }
+    }
+  },
+  "native-release": {
+    "ticks": [
+      1800,
+      2112
+    ],
+    "samples": 53,
+    "metrics": {
+      "rss_kib": {
+        "minimum": 774740,
+        "median": 779292,
+        "maximum": 780072
+      },
+      "available_kib": {
+        "minimum": 117092,
+        "median": 119232,
+        "maximum": 119432
+      },
+      "cma_kib": {
+        "minimum": 30748,
+        "median": 30748,
+        "maximum": 30944
+      },
+      "mali_pages": {
+        "minimum": 151464,
+        "median": 152647,
+        "maximum": 152777
+      }
+    }
+  },
+  "native-stable": {
+    "ticks": [
+      2200,
+      6006
+    ],
+    "samples": 638,
+    "metrics": {
+      "rss_kib": {
+        "minimum": 718896,
+        "median": 719152.0,
+        "maximum": 729568
+      },
+      "available_kib": {
+        "minimum": 117516,
+        "median": 118188.0,
+        "maximum": 123032
+      },
+      "cma_kib": {
+        "minimum": 30364,
+        "median": 30944.0,
+        "maximum": 30952
+      },
+      "mali_pages": {
+        "minimum": 137626,
+        "median": 137636.0,
+        "maximum": 140362
+      }
+    }
+  }
+}

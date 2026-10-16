@@ -5,6 +5,30 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Milestone P1b — COMPLETE / performance FAIL / STOPPED (2026-10-16)
+
+See [P1b report](NATIVE_P1B_REPORT.md) and
+[evidence/methods](benchmarks/native-p1b-20261016/README.md). Private native-only
+asynchronous logging, offscreen three-copy warmup, gradual legacy cache retirement
+and default-OFF valve are implemented under native/p1b. Stock clocks, affinity OFF,
+O2, original gameplay/audio algorithms and fallback lookup/recreation are retained.
+
+All three headline q2 OFF runs have zero native main gaps >50 ms and 0/0/1 inferred
+repeats, but 1451/2364/1961 missing audio sample frames: zero-audio gate FAIL.
+The nine-run matrix, observer run, separate syscall trace and 1867.31-second,
+14-lap stock replay-loop soak are complete. All21 checkpoint sets/4207 packets
+pass every replay. Soak:11 inferred repeats,45564 missing audio frames,one~50ms
+main gap; peak64.862°C,no sampled cooling activity,GPU240MHz throughout.
+Dense preparation and handover audio carry-in remain limiting. Soak observer
+followed supervisor rather than child: global telemetry valid, game stacks absent;
+coincident reclaim is not a proven cause of the remaining stall. Correct and
+validate observer targeting before a future residual-stall reproduction.
+
+Final47 protected hashes pass; production SHA remains6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e.
+ES restored(PID14183),stock governors unchanged,no game/sampler/tracer running.
+No commit,push or production deployment. Historical P1/M3 gates are unchanged.
+P2/compiler/texture optimisation and further work require separate authorisation.
+
 ## Milestone P1 — COMPLETE under reduced scope / performance FAIL / STOPPED
 
 See [P1 report](NATIVE_P1_PIPELINE_REPORT.md) and

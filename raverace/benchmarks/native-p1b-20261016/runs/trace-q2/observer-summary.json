@@ -1,0 +1,128 @@
+{
+  "io": {
+    "streams": "2",
+    "reserved": "2097152",
+    "dropped_records": "0",
+    "dropped_bytes": "0",
+    "errors": "0",
+    "packets": "0",
+    "writer_idle_result": "0",
+    "nice_result": "0",
+    "fully_drained": "1\n"
+  },
+  "priority_banner": "P1B_OBSERVER interval_ms=100 PSI=OFF SCHED_IDLE_result=0 nice=19",
+  "samples": 3007,
+  "sample_interval_ms": {
+    "n": 3006,
+    "median": 100.00025599993023,
+    "p95": 102.75471599925368,
+    "p99": 108.04101100075059,
+    "worst": 126.78686199978983,
+    "minimum": 78.95674600058555,
+    "mean": 100.00002321124406
+  },
+  "slow_sample_gaps_over200ms": [],
+  "read_duration_ms": {
+    "n": 82516,
+    "median": 0.08795300072961254,
+    "p95": 0.559963999876345,
+    "p99": 2.118395999787026,
+    "worst": 30.956329999753507,
+    "minimum": 0.023831999897083733,
+    "mean": 0.23564119681115775
+  },
+  "slow_reads_over50ms": [],
+  "observer_game_gap_coincidences": [],
+  "sampler_cpu_seconds": 15.741148503,
+  "sampler_cpu_core_equivalent": 0.05236575132829159,
+  "sampler_maxrss_kib": 5692,
+  "gpu_hz_counts": {
+    "240000000": 3007
+  },
+  "cpu_khz_counts": [
+    {
+      "1200000": 164,
+      "792000": 1518,
+      "480000": 317,
+      "1512000": 345,
+      "1008000": 551,
+      "1416000": 48,
+      "1320000": 64
+    },
+    {
+      "1200000": 164,
+      "792000": 1518,
+      "480000": 315,
+      "1512000": 346,
+      "1008000": 552,
+      "1416000": 48,
+      "1320000": 64
+    },
+    {
+      "1200000": 164,
+      "792000": 1517,
+      "480000": 316,
+      "1512000": 347,
+      "1008000": 551,
+      "1416000": 48,
+      "1320000": 64
+    },
+    {
+      "1200000": 164,
+      "792000": 1514,
+      "480000": 316,
+      "1512000": 347,
+      "1008000": 554,
+      "1416000": 48,
+      "1320000": 64
+    }
+  ],
+  "peak_temperature_c": 54.818,
+  "cooling_counts": {
+    "/sys/class/thermal/cooling_device0/cur_state": {
+      "0": 3007
+    },
+    "/sys/class/thermal/cooling_device1/cur_state": {
+      "0": 3007
+    }
+  },
+  "pressure_reads": 0,
+  "memory": {
+    "rss_kib": {
+      "n": 3007,
+      "median": 715932,
+      "p95": 777044,
+      "p99": 780120,
+      "worst": 780120,
+      "minimum": 50096,
+      "mean": 684872.509477885
+    },
+    "available_kib": {
+      "n": 3007,
+      "median": 153764,
+      "p95": 509716,
+      "p99": 707876,
+      "worst": 758688,
+      "minimum": 117804,
+      "mean": 185933.45660126372
+    },
+    "cma_kib": {
+      "n": 3007,
+      "median": 28508,
+      "p95": 48084,
+      "p99": 58600,
+      "worst": 58600,
+      "minimum": 2288,
+      "mean": 29143.47189890256
+    },
+    "mali_pages": {
+      "n": 3007,
+      "median": 137726,
+      "p95": 152269,
+      "p99": 152802,
+      "worst": 152802,
+      "minimum": 0,
+      "mean": 132104.45493847688
+    }
+  }
+}

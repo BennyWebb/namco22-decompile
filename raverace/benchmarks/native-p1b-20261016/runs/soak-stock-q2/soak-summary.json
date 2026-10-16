@@ -1,0 +1,598 @@
+{
+  "continuous_wall_seconds": 1867.3099999999995,
+  "laps": 14,
+  "full_source_ticks": 84084,
+  "native_packet_count": 58898,
+  "all_checkpoints_and_packets_pass": true,
+  "native_exposure_seconds": 987.0345468500018,
+  "all_five_minute_buckets": [
+    {
+      "bucket": 0,
+      "start_seconds": 0,
+      "end_seconds": 300,
+      "native_exposure_seconds": 140.9749820269999,
+      "source_pictures": 8414,
+      "inferred_repeats": 0,
+      "audio_underrun_sample_frames": 5138,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 8414,
+        "median": 12.0545865,
+        "p95": 15.248249,
+        "p99": 17.574707,
+        "worst": 19.716668,
+        "minimum": 8.514756,
+        "mean": 12.234768991680532
+      },
+      "interval_ms": {
+        "n": 8414,
+        "median": 16.746360999604804,
+        "p95": 16.89247400008753,
+        "p99": 17.611156000384653,
+        "worst": 20.384194999678584,
+        "minimum": 13.126688000738795,
+        "mean": 16.754811270144984
+      },
+      "repeat_rate_per_native_minute": 0.0,
+      "underrun_frames_per_native_minute": 2186.7709828184793,
+      "temperature_c": {
+        "n": 3000,
+        "median": 56.843,
+        "p95": 59.759,
+        "p99": 60.569,
+        "worst": 61.46,
+        "minimum": 48.419,
+        "mean": 55.241495
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "1200000": 169,
+        "1512000": 1850,
+        "480000": 318,
+        "792000": 154,
+        "1320000": 143,
+        "1416000": 161,
+        "1008000": 205
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 1,
+      "start_seconds": 300,
+      "end_seconds": 600,
+      "native_exposure_seconds": 149.41127061600127,
+      "source_pictures": 8917,
+      "inferred_repeats": 0,
+      "audio_underrun_sample_frames": 5244,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 8917,
+        "median": 12.04607,
+        "p95": 15.278585000000001,
+        "p99": 17.561602,
+        "worst": 20.403714,
+        "minimum": 8.380584,
+        "mean": 12.223251263317259
+      },
+      "interval_ms": {
+        "n": 8917,
+        "median": 16.74637099949905,
+        "p95": 16.868215000613418,
+        "p99": 17.44448099998408,
+        "worst": 19.013408000319032,
+        "minimum": 14.573567999832449,
+        "mean": 16.754253000897286
+      },
+      "repeat_rate_per_native_minute": 0.0,
+      "underrun_frames_per_native_minute": 2105.86523160391,
+      "temperature_c": {
+        "n": 3000,
+        "median": 58.463,
+        "p95": 60.569,
+        "p99": 61.622,
+        "worst": 62.432,
+        "minimum": 51.011,
+        "mean": 56.887604
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "1200000": 160,
+        "1320000": 166,
+        "1512000": 1924,
+        "1416000": 138,
+        "480000": 224,
+        "1008000": 231,
+        "792000": 157
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 2,
+      "start_seconds": 600,
+      "end_seconds": 900,
+      "native_exposure_seconds": 173.2066973789997,
+      "source_pictures": 10337,
+      "inferred_repeats": 0,
+      "audio_underrun_sample_frames": 6555,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 10337,
+        "median": 12.044654999999999,
+        "p95": 15.754315000000002,
+        "p99": 17.553136000000002,
+        "worst": 20.024862000000002,
+        "minimum": 8.484221999999999,
+        "mean": 12.268858400212828
+      },
+      "interval_ms": {
+        "n": 10337,
+        "median": 16.745773999900848,
+        "p95": 16.873371999281517,
+        "p99": 17.637967000155186,
+        "worst": 19.737282000278356,
+        "minimum": 14.292571000623866,
+        "mean": 16.756406764148156
+      },
+      "repeat_rate_per_native_minute": 0.0,
+      "underrun_frames_per_native_minute": 2270.697415004723,
+      "temperature_c": {
+        "n": 3000,
+        "median": 59.354,
+        "p95": 61.46,
+        "p99": 62.27,
+        "worst": 62.918,
+        "minimum": 51.011,
+        "mean": 57.717476
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "1416000": 185,
+        "1512000": 1943,
+        "1320000": 163,
+        "1200000": 154,
+        "792000": 109,
+        "1008000": 173,
+        "480000": 273
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 3,
+      "start_seconds": 900,
+      "end_seconds": 1200,
+      "native_exposure_seconds": 170.97947106300035,
+      "source_pictures": 10195,
+      "inferred_repeats": 8,
+      "audio_underrun_sample_frames": 14510,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 10195,
+        "median": 12.153056000000001,
+        "p95": 14.952290999999999,
+        "p99": 17.786269,
+        "worst": 25.480951,
+        "minimum": 8.536007999999999,
+        "mean": 12.292726982246199
+      },
+      "interval_ms": {
+        "n": 10195,
+        "median": 16.74311900023895,
+        "p95": 16.864015999999538,
+        "p99": 17.929164000634046,
+        "worst": 36.800017999667034,
+        "minimum": 12.536197999907017,
+        "mean": 16.771828183227143
+      },
+      "repeat_rate_per_native_minute": 2.8073545731296345,
+      "underrun_frames_per_native_minute": 5091.839357013874,
+      "temperature_c": {
+        "n": 3000,
+        "median": 60.164,
+        "p95": 62.513,
+        "p99": 63.647,
+        "worst": 64.862,
+        "minimum": 52.307,
+        "mean": 58.579046
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "1200000": 134,
+        "1416000": 231,
+        "1512000": 1867,
+        "1320000": 173,
+        "792000": 132,
+        "480000": 293,
+        "1008000": 170
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 4,
+      "start_seconds": 1200,
+      "end_seconds": 1500,
+      "native_exposure_seconds": 140.96430873200006,
+      "source_pictures": 8414,
+      "inferred_repeats": 0,
+      "audio_underrun_sample_frames": 4682,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 8414,
+        "median": 12.069956000000001,
+        "p95": 15.107106,
+        "p99": 17.303004,
+        "worst": 20.296067,
+        "minimum": 8.555819,
+        "mean": 12.244551973734252
+      },
+      "interval_ms": {
+        "n": 8414,
+        "median": 16.74484549994304,
+        "p95": 16.83992899961595,
+        "p99": 17.300127999988035,
+        "worst": 20.4951309997341,
+        "minimum": 14.70659699953103,
+        "mean": 16.753542753981467
+      },
+      "repeat_rate_per_native_minute": 0.0,
+      "underrun_frames_per_native_minute": 1992.8448734784513,
+      "temperature_c": {
+        "n": 3000,
+        "median": 58.868,
+        "p95": 61.541,
+        "p99": 62.27,
+        "worst": 62.756,
+        "minimum": 51.578,
+        "mean": 57.245219
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "480000": 417,
+        "792000": 141,
+        "1512000": 1772,
+        "1200000": 169,
+        "1320000": 142,
+        "1416000": 181,
+        "1008000": 178
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 5,
+      "start_seconds": 1500,
+      "end_seconds": 1800,
+      "native_exposure_seconds": 145.257845000001,
+      "source_pictures": 8667,
+      "inferred_repeats": 3,
+      "audio_underrun_sample_frames": 7986,
+      "main_gaps50": 1,
+      "prepare_ms": {
+        "n": 8667,
+        "median": 12.086111,
+        "p95": 15.275331,
+        "p99": 17.709111999999998,
+        "worst": 19.590592,
+        "minimum": 8.290082,
+        "mean": 12.267617345448253
+      },
+      "interval_ms": {
+        "n": 8667,
+        "median": 16.74496800023917,
+        "p95": 16.865395000422723,
+        "p99": 17.621214000428154,
+        "worst": 50.18614900018292,
+        "minimum": 12.396355999953812,
+        "mean": 16.758961568939778
+      },
+      "repeat_rate_per_native_minute": 1.2391757567379493,
+      "underrun_frames_per_native_minute": 3298.685864436421,
+      "temperature_c": {
+        "n": 3000,
+        "median": 59.192,
+        "p95": 61.379,
+        "p99": 62.027,
+        "worst": 62.27,
+        "minimum": 51.497,
+        "mean": 57.522077
+      },
+      "gpu_hz_counts": {
+        "240000000": 3000
+      },
+      "cpu0_khz_counts": {
+        "1008000": 266,
+        "792000": 164,
+        "1320000": 168,
+        "1512000": 1773,
+        "1200000": 140,
+        "1416000": 191,
+        "480000": 298
+      },
+      "cpu_cooling_counts": {
+        "0": 3000
+      },
+      "gpu_cooling_counts": {
+        "0": 3000
+      }
+    },
+    {
+      "bucket": 6,
+      "start_seconds": 1800,
+      "end_seconds": 1867.3099999999995,
+      "native_exposure_seconds": 66.2399720329995,
+      "source_pictures": 3954,
+      "inferred_repeats": 0,
+      "audio_underrun_sample_frames": 1449,
+      "main_gaps50": 0,
+      "prepare_ms": {
+        "n": 3954,
+        "median": 12.029164000000002,
+        "p95": 15.00605,
+        "p99": 17.218826,
+        "worst": 19.986277,
+        "minimum": 8.198194,
+        "mean": 12.192403126707132
+      },
+      "interval_ms": {
+        "n": 3954,
+        "median": 16.745477000313258,
+        "p95": 16.859427999406762,
+        "p99": 17.497388000265346,
+        "worst": 18.880530000387807,
+        "minimum": 15.080838999892876,
+        "mean": 16.7546527857864
+      },
+      "repeat_rate_per_native_minute": 0.0,
+      "underrun_frames_per_native_minute": 1312.5005541470962,
+      "temperature_c": {
+        "n": 673,
+        "median": 60.326,
+        "p95": 61.946,
+        "p99": 62.27,
+        "worst": 62.27,
+        "minimum": 57.572,
+        "mean": 60.25583209509658
+      },
+      "gpu_hz_counts": {
+        "240000000": 673
+      },
+      "cpu0_khz_counts": {
+        "1512000": 517,
+        "1320000": 56,
+        "1416000": 74,
+        "1200000": 17,
+        "792000": 4,
+        "480000": 3,
+        "1008000": 2
+      },
+      "cpu_cooling_counts": {
+        "0": 673
+      },
+      "gpu_cooling_counts": {
+        "0": 673
+      }
+    }
+  ],
+  "per_lap": [
+    {
+      "lap": "lap-1",
+      "native_begin": 5342.633591856,
+      "native_end": 5413.130687354,
+      "native_seconds": 70.49709549799991,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 2124,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.041174999999999,
+      "prepare_p99_ms": 17.191753000000002,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-2",
+      "native_begin": 5475.06737658,
+      "native_end": 5545.59841042,
+      "native_seconds": 70.53103383999951,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 3014,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.065248,
+      "prepare_p99_ms": 17.772033,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-3",
+      "native_begin": 5607.437837117,
+      "native_end": 5677.967623223,
+      "native_seconds": 70.52978610600076,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 2977,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.079947,
+      "prepare_p99_ms": 17.91518,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-4",
+      "native_begin": 5740.122563164,
+      "native_end": 5810.621176062,
+      "native_seconds": 70.49861289799992,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 1512,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.108734,
+      "prepare_p99_ms": 17.283365,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-5",
+      "native_begin": 5872.6268649740005,
+      "native_end": 5943.191441338,
+      "native_seconds": 70.56457636399955,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 4489,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.071392,
+      "prepare_p99_ms": 17.766784,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-6",
+      "native_begin": 6004.8096834630005,
+      "native_end": 6075.308933721,
+      "native_seconds": 70.49925025799985,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 1566,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.083353,
+      "prepare_p99_ms": 17.17648,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-7",
+      "native_begin": 6140.429463142,
+      "native_end": 6210.898737593,
+      "native_seconds": 70.46927445100027,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 1255,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.019746,
+      "prepare_p99_ms": 17.010023999999998,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-8",
+      "native_begin": 6275.5005759509995,
+      "native_end": 6346.185299191,
+      "native_seconds": 70.6847232400005,
+      "repeats": 8,
+      "audio_underrun_sample_frames": 10606,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.06948,
+      "prepare_p99_ms": 18.153935,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-9",
+      "native_begin": 6408.816073237,
+      "native_end": 6479.354995069,
+      "native_seconds": 70.5389218320006,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 3904,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.103473,
+      "prepare_p99_ms": 17.930745,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-10",
+      "native_begin": 6541.66969368,
+      "native_end": 6612.195336414,
+      "native_seconds": 70.52564273400003,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 3185,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.066244000000001,
+      "prepare_p99_ms": 17.562668,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-11",
+      "native_begin": 6676.503914162,
+      "native_end": 6746.998246744,
+      "native_seconds": 70.49433258200042,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 1497,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.072253,
+      "prepare_p99_ms": 17.160024,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-12",
+      "native_begin": 6811.512559086001,
+      "native_end": 6882.037604107,
+      "native_seconds": 70.52504502099964,
+      "repeats": 2,
+      "audio_underrun_sample_frames": 2548,
+      "native_main_gaps50": 1,
+      "source_gaps50": 1,
+      "prepare_median_ms": 12.088401000000001,
+      "prepare_p99_ms": 17.442504,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-13",
+      "native_begin": 6943.838951527,
+      "native_end": 7014.382001467,
+      "native_seconds": 70.54304993999995,
+      "repeats": 1,
+      "audio_underrun_sample_frames": 4629,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.094924,
+      "prepare_p99_ms": 18.040596999999998,
+      "all_checkpoint_packets": true
+    },
+    {
+      "lap": "lap-14",
+      "native_begin": 7076.819469644,
+      "native_end": 7147.329972033,
+      "native_seconds": 70.51050238900007,
+      "repeats": 0,
+      "audio_underrun_sample_frames": 2258,
+      "native_main_gaps50": 0,
+      "source_gaps50": 0,
+      "prepare_median_ms": 12.029059,
+      "prepare_p99_ms": 17.206077,
+      "all_checkpoint_packets": true
+    }
+  ],
+  "total_repeats": 11,
+  "total_native_audio_underrun_sample_frames": 45564,
+  "total_native_main_gaps50": 1,
+  "single_process_leak_soak": false,
+  "method": "Continuous stock session with sequential complete reference-replay processes, no cooldown between laps; startup/legacy exposure retained separately."
+}

@@ -1,0 +1,131 @@
+{
+  "io": {
+    "streams": "2",
+    "reserved": "2097152",
+    "dropped_records": "0",
+    "dropped_bytes": "0",
+    "errors": "0",
+    "packets": "0",
+    "writer_idle_result": "0",
+    "nice_result": "0",
+    "fully_drained": "1\n"
+  },
+  "priority_banner": "P1B_OBSERVER interval_ms=100 PSI=OFF SCHED_IDLE_result=0 nice=19",
+  "samples": 18676,
+  "sample_interval_ms": {
+    "n": 18675,
+    "median": 100.001126999814,
+    "p95": 100.2530099995056,
+    "p99": 101.07243499987817,
+    "worst": 114.01914399993984,
+    "minimum": 85.95438999964244,
+    "mean": 100.00001038200801
+  },
+  "slow_sample_gaps_over200ms": [],
+  "read_duration_ms": {
+    "n": 354844,
+    "median": 0.06904000019858358,
+    "p95": 1.606322000043292,
+    "p99": 1.9097459999102284,
+    "worst": 47.60438700031955,
+    "minimum": 0.031708000278740656,
+    "mean": 0.18847364082138504
+  },
+  "slow_reads_over50ms": [],
+  "observer_game_gap_coincidences": [],
+  "sampler_cpu_seconds": 71.720460922,
+  "sampler_cpu_core_equivalent": 0.03840452662702906,
+  "sampler_maxrss_kib": 5800,
+  "gpu_hz_counts": {
+    "240000000": 18676
+  },
+  "cpu_khz_counts": [
+    {
+      "1200000": 943,
+      "1512000": 11646,
+      "480000": 1827,
+      "792000": 862,
+      "1320000": 1012,
+      "1416000": 1161,
+      "1008000": 1225
+    },
+    {
+      "1200000": 944,
+      "1512000": 11642,
+      "480000": 1826,
+      "792000": 866,
+      "1320000": 1009,
+      "1416000": 1165,
+      "1008000": 1224
+    },
+    {
+      "1200000": 944,
+      "1512000": 11632,
+      "480000": 1832,
+      "792000": 865,
+      "1320000": 1013,
+      "1416000": 1164,
+      "1008000": 1226
+    },
+    {
+      "1200000": 944,
+      "1512000": 11633,
+      "480000": 1833,
+      "792000": 866,
+      "1320000": 1011,
+      "1416000": 1163,
+      "1008000": 1226
+    }
+  ],
+  "peak_temperature_c": 64.862,
+  "cooling_counts": {
+    "/sys/class/thermal/cooling_device0/cur_state": {
+      "0": 18676
+    },
+    "/sys/class/thermal/cooling_device1/cur_state": {
+      "0": 18676
+    }
+  },
+  "pressure_reads": 0,
+  "memory": {
+    "rss_kib": {
+      "n": 18676,
+      "median": 1412.0,
+      "p95": 1432,
+      "p99": 1440,
+      "worst": 1440,
+      "minimum": 1412,
+      "mean": 1414.4433497536945
+    },
+    "available_kib": {
+      "n": 18676,
+      "median": 127556.0,
+      "p95": 677144,
+      "p99": 758404,
+      "worst": 792964,
+      "minimum": 118716,
+      "mean": 224483.2460912401
+    },
+    "cma_kib": {
+      "n": 18676,
+      "median": 38092.0,
+      "p95": 53148,
+      "p99": 56208,
+      "worst": 56960,
+      "minimum": 2200,
+      "mean": 36255.7958877704
+    },
+    "mali_pages": {
+      "n": 18676,
+      "median": 137628.0,
+      "p95": 151739,
+      "p99": 152631,
+      "worst": 152717,
+      "minimum": 0,
+      "mean": 121600.35312700793
+    }
+  },
+  "samples_with_game_thread_records": 0,
+  "game_process_coverage_valid": false,
+  "process_coverage_warning": "Observer followed supervisor, not replay child; process RSS, process I/O, thread states/stacks are not game evidence. Global VM/memory/clocks/thermal remain usable."
+}
