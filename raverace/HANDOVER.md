@@ -12,6 +12,27 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone G1 — ROM assets PASS / host integration BLOCKED / STOPPED (2026-10-16)
+
+See [G1 report](NATIVE_G1_REPORT.md) and [evidence](benchmarks/native-g1-20261016/README.md).
+**User decision:** compact palette-free index atlas ADOPTED; fenced≤14ms gate RETIRED
+for vsync-paced runs. Acceptance is pacing/audio/main gaps/preparation tails. C1e's
+historical measurements remain unchanged; this is a policy change, not a retroactive pass.
+
+Private native/g1 builds ROM-only2421models/97116quads/21783materials,112MiB atlas;
+564081621padded texels exact,115.553s host build. Cache ignored and ROM+builder keyed.
+Index exact-key cache and immutable RAM-state activation/live warmup implemented,
+but **not accepted**:6006host ticks/all21sets exact, all4207 native-window pictures
+fall back for direct materials absent from static point-ROM models.0/4207 native
+receipts,0/36images; native parity/provenance gate NOT PASSED. Three existing1×1
+reference recipes are absent; do not patch replay-derived asset exceptions.
+Stopped under standing host correctness rule: no ARM build/device transfer/run or
+attract test. Need a defined ROM-only static-direct catalog or bounded direct-material
+approach before rerunning host validation; then hardware gates remain outstanding.
+Actual≤200MiB GPU residency, preparation improvement, state/attract fidelity and
+course/reason coverage are unverified. No G2 work started. Production/47files exact,
+stock clocks and EmulationStation verified, no game running; no commit/push/deploy.
+
 ## Milestone C1e — device NO-GO / STOPPED (2026-10-16)
 
 See [C1e report](NATIVE_C1E_REPORT.md) and

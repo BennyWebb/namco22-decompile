@@ -1,0 +1,111 @@
+{
+  "status": "BLOCKED_HOST_NATIVE_PARITY",
+  "ticks": 6006,
+  "authoritative_checkpoint_sets": 21,
+  "checkpoint_domain_records": 63,
+  "checkpoints_exact": true,
+  "expected_adjusted_packets": 4207,
+  "actual_adjusted_packets": 0,
+  "raw_packets": 0,
+  "captured_images": 0,
+  "native_phase_pictures": 4207,
+  "native_phase_native": 0,
+  "native_phase_fallbacks": {
+    "direct material/palette absent from immutable M3 pack": 4207
+  },
+  "all_replay_reasons": {
+    "boot-state": 159,
+    "prewarm": 3,
+    "direct material/palette absent from immutable M3 pack": 5837,
+    "covered": 7
+  },
+  "unrepresented_reference_recipes": [
+    {
+      "old_material": 551,
+      "recipe": [
+        0,
+        0,
+        0,
+        4080,
+        4080,
+        1,
+        1
+      ]
+    },
+    {
+      "old_material": 771,
+      "recipe": [
+        9,
+        32,
+        1,
+        2304,
+        2304,
+        1,
+        1
+      ]
+    },
+    {
+      "old_material": 4879,
+      "recipe": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    }
+  ],
+  "tick1800_existing_control_direct_materials": [
+    {
+      "mesh": -65,
+      "material": 4879,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -9,
+      "material": 551,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -41,
+      "material": 551,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -33,
+      "material": 551,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -25,
+      "material": 551,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -17,
+      "material": 551,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -1,
+      "material": 4879,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -57,
+      "material": 771,
+      "absent_from_static_pack": true
+    },
+    {
+      "mesh": -49,
+      "material": 771,
+      "absent_from_static_pack": true
+    }
+  ],
+  "run_exit": 0,
+  "IO": "[P1B-IO] streams=7 reserved=13893632 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1",
+  "device_tests_started": false,
+  "stdout_stderr_interleaved_record_reassembly": 1
+}

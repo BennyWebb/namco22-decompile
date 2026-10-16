@@ -1,10 +1,20 @@
 # Rave Racer — Native H700 Renderer Roadmap
 
-**Status:** Milestones 1 and revised 2 COMPLETE. Focused M3 slow-picture/HUD/Mali investigation complete; BLOCKED at repeated 12/14 ms gate (candidate p95 15.489–16.139 ms). Controlled Milestone 4A live-integration experiment authorised; M3 remains performance-BLOCKED. Milestone 4A STOPPED/BLOCKED at live mesh coverage (tick 5655); no H700 deployment. Milestone 4B not authorised.
+**Status:** G1 STOPPED/BLOCKED at host native coverage validation; see NATIVE_G1_REPORT.md and HANDOVER.md for current state. ROM-only static asset sizing/texel parity pass. G2 is not authorised. Earlier milestone reports retain their historical results.
 **Target:** Anbernic RG40XX H / Allwinner H700 / Cortex-A53 ARM64 / Mali-G31 / Knulli.  
 **Approach:** A **separate native renderer and offline asset pipeline**, initially driven by the original Rave Racer simulation.  
 **Primary goal:** Original game handling and behaviour with visually faithful graphics at a consistently paced arcade-rate **59.9040599 Hz** (or an explicitly validated display-compatible presentation policy).  
 **Implementation policy:** Work on **one milestone at a time**. **Stop at its completion gate. Never start the next milestone without explicit user authorisation.**
+
+## Current acceptance policy — G1 user decision (2026-10-16)
+
+Compact palette-free index atlas (C1b–C1e) is ADOPTED. The≤14ms fenced-completion
+criterion is RETIRED for vsync-paced runs because it includes display-buffer
+dependency; use play-run repeats, settled audio underruns, main gaps and preparation
+tails. Historical fence results are not erased or retrospectively passed.
+Keep the accepted~59.7104Hz panel-paced strict FIFO, queue2, fixed1512MHz CPU,
+stock GPU, default priorities and provenance class(c)=0. Current gate details and
+outstanding coverage are in NATIVE_G1_REPORT.md. No production deployment is authorised.
 
 ## 1. Project contract
 

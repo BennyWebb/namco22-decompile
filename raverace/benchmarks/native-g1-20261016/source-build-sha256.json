@@ -1,0 +1,42 @@
+{
+  "raverace/native/g1/build.py": {
+    "bytes": 703,
+    "sha256": "a66f301289e81ef1d996ba139d8b72638790a24ccd0f4837a738a96ff08526ab"
+  },
+  "raverace/native/g1/reference_identity.py": {
+    "bytes": 1314,
+    "sha256": "32596f07e35048f7732df7f081d99576399e68da752b42047c3252a783ae79e6"
+  },
+  "raverace/native/g1/analyse_host.py": {
+    "bytes": 4177,
+    "sha256": "7334f95df510a43ecc02d1531860144b362e3407adbc5e300eeebfe4a91a3afc"
+  },
+  "raverace/native/g1/transform.py": {
+    "bytes": 4768,
+    "sha256": "1a60e2e67e33d0396af686a39cd0fd5669f2df5856abb71c7e28a48042380c44"
+  },
+  "raverace/native/g1/README.md": {
+    "bytes": 2183,
+    "sha256": "3910e197e098217273afbe99b5880624056cd71703b63b757a3873aaa65bbbb8"
+  },
+  "raverace/native/g1/assets.py": {
+    "bytes": 4773,
+    "sha256": "08c0f1bd3042dda772f03dec843e92456579738b28870cadbe176d1395f7556a"
+  },
+  "raverace/native/g1/host.py": {
+    "bytes": 2443,
+    "sha256": "a3d46c46f1468c063a85c4c32853f2cf4c8140b444ad68f5f4d03b6c3f06f457"
+  },
+  "raverace/native/generated/g1/reference-identity.bin": {
+    "bytes": 3196004,
+    "sha256": "5b581d94226f1a4f714daa84d9477c2520c227ffc298e38f546e778773a70b1f"
+  },
+  "raverace/native/generated/g1/b2-validation/host/build.json": {
+    "bytes": 16168,
+    "sha256": "6c5f00e9d62cdee6ab4364217f206edc4c3ec0761bb5e1f7a43b68a2062345af"
+  },
+  "raverace/native/generated/g1/b2-validation/host/rr_p1b": {
+    "bytes": 58994488,
+    "sha256": "fbd18fb15edccad7c9e9495629b971d56c40663071be9056c5f074492c73e7d7"
+  }
+}
