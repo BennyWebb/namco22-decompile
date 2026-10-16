@@ -1,0 +1,18 @@
+Raw kernel register-memory dump retained privately; this extract contains function traces and error/event summaries.
+Wi-Fi trace at12420 follows validation native end12366, before interrupted startup at12582; no native causal attribution.
+[12420.475480] [<ffffff8000b0168c>] rtw_lps_state_chk+0x64/0xb0 [8821cs]
+[12420.477588] [<ffffff8000b04814>] SetHwReg+0x90c/0x9c0 [8821cs]
+[12420.479689] [<ffffff8000b246bc>] rtl8821c_sethwreg+0xf3c/0x1070 [8821cs]
+[12420.481787] [<ffffff8000b29068>] sethwreg+0x34/0x40 [8821cs]
+[12420.483884] [<ffffff8000afa820>] rtw_hal_set_hwreg+0x10/0x18 [8821cs]
+[12420.485949] [<ffffff8000aa16c4>] rtw_set_ps_mode+0x12c/0x2c0 [8821cs]
+[12420.488013] [<ffffff8000aa1ba0>] LPS_Leave+0x98/0xf0 [8821cs]
+[12420.490047] [<ffffff8000a5fe80>] lps_ctrl_wk_hdl+0x114/0x1ec [8821cs]
+[12420.492082] [<ffffff8000a62630>] rtw_drvextra_cmd_hdl+0x98/0x3f0 [8821cs]
+[12420.494116] [<ffffff8000a5d290>] rtw_cmd_thread+0x414/0x724 [8821cs]
+[12420.494141] [<ffffff80080c0c98>] kthread+0xec/0xf4
+[12420.494162] [<ffffff80080834f0>] ret_from_fork+0x10/0x20
+[12421.537242] RTW: ERROR [RFK-CHK] RF-K not allowed due to ifaces under site-survey
+[12422.986139] RTW: ERROR [RFK-CHK] RF-K not allowed due to ifaces under site-survey
+[12425.059896] RTW: ERROR [RFK-CHK] RF-K not allowed due to ifaces under site-survey
+[12607.860180] [sound  165][CODEC sunxi_internal_codec_dai_set_pll] stream -> OUT, freq_in ->98304000, freq_out ->98304000

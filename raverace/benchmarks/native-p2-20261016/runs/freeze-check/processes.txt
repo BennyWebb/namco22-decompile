@@ -1,0 +1,157 @@
+  PID  PPID S COMMAND
+    1     0 S init [3]
+    2     0 S [kthreadd]
+    4     2 S [kworker/0:0H]
+    6     2 S [ksoftirqd/0]
+    7     2 S [rcu_preempt]
+    8     2 S [rcu_sched]
+    9     2 S [rcu_bh]
+   10     2 S [migration/0]
+   11     2 S [lru-add-drain]
+   12     2 S [cpuhp/0]
+   13     2 S [cpuhp/1]
+   14     2 S [migration/1]
+   15     2 S [ksoftirqd/1]
+   17     2 S [kworker/1:0H]
+   18     2 S [cpuhp/2]
+   19     2 S [migration/2]
+   20     2 S [ksoftirqd/2]
+   22     2 S [kworker/2:0H]
+   23     2 S [cpuhp/3]
+   24     2 S [migration/3]
+   25     2 S [ksoftirqd/3]
+   27     2 S [kworker/3:0H]
+   28     2 S [kdevtmpfs]
+   29     2 S [netns]
+  449     2 S [oom_reaper]
+  450     2 S [writeback]
+  452     2 S [kcompactd0]
+  453     2 S [crypto]
+  454     2 S [bioset]
+  456     2 S [kblockd]
+  511     2 S [sys_user]
+  514     2 S [devfreq_wq]
+  527     2 S [cfg80211]
+  539     2 S [irq/322-axp2202]
+  726     2 S [kswapd0]
+  727     2 S [vmstat]
+  805     2 S [SquashFS read w]
+  886     2 S [bioset]
+  887     2 S [bioset]
+  888     2 S [bioset]
+  889     2 S [bioset]
+  890     2 S [bioset]
+  891     2 S [bioset]
+  892     2 S [bioset]
+  893     2 S [bioset]
+  894     2 S [bioset]
+  895     2 S [bioset]
+  896     2 S [bioset]
+  897     2 S [bioset]
+  898     2 S [bioset]
+  899     2 S [bioset]
+  900     2 S [bioset]
+  901     2 S [bioset]
+  935     2 S [bioset]
+  938     2 S [bioset]
+  941     2 S [bioset]
+  944     2 S [bioset]
+  947     2 S [bioset]
+  950     2 S [bioset]
+  953     2 S [bioset]
+  956     2 S [bioset]
+  959     2 S [memory_wq]
+ 1048     2 S [dm_bufio_cache]
+ 1049     2 S [cfinteractive]
+ 1056     2 S [irq/295-sunxi-m]
+ 1059     2 S [irq/151-sdc0 cd]
+ 1061     2 S [irq/296-sunxi-m]
+ 1063     2 S [irq/297-sunxi-m]
+ 1066     2 S [bioset]
+ 1067     2 S [mmcqd/0]
+ 1167     2 S [kpktgend_0]
+ 1168     2 S [kpktgend_1]
+ 1169     2 S [kpktgend_2]
+ 1170     2 S [kpktgend_3]
+ 1190     2 S [ipv6_addrconf]
+ 1201     2 S [krfcommd]
+ 1209     2 S [hdcp22_workqueu]
+ 1212     2 S [hdmi proc]
+ 1213     2 S [cec thread]
+ 1218     2 D [usb_pmu_scan]
+ 1256     2 S [kworker/3:1H]
+ 1260     2 S [loop0]
+ 1262     2 S [kworker/2:1H]
+ 1263     2 S [kworker/0:1H]
+ 1264     2 S [kworker/1:1H]
+ 1266     2 S [bioset]
+ 1267     2 S [mmcqd/1]
+ 1344     2 S [mali-simple-pow]
+ 1347     2 S [kbase_job_fault]
+ 1382     1 S dbus-daemon --system
+ 1394     1 S /sbin/syslogd -m 0
+ 1455     2 S [ksdioirqd/mmc2]
+ 1456     1 S /sbin/udevd -d
+ 1515     1 S /usr/bin/pipewire
+ 1750     1 S /usr/bin/wireplumber
+ 1753     1 S /usr/bin/pipewire -c pipewire-pulse.conf
+ 1972     1 S /usr/sbin/wpa_supplicant -u
+ 2051     2 S [RTW_XMIT_THREAD]
+ 2052     2 S [RTW_RECV_THREAD]
+ 2053     2 S [RTW_CMD_THREAD]
+ 2054     2 S [RTWHALXT]
+ 2187     1 D mount.exfat /dev/mmcblk1p1 /var/knullifs -o noatime
+ 2193     2 S [RTWHALXT]
+ 2687     1 S /usr/bin/batteryplus
+ 2814     1 S avahi-daemon: running [KNULLI.local]
+ 2815  2814 S avahi-daemon: chroot helper
+ 2822     1 S /usr/sbin/thd --daemon --triggers /etc/triggerhappy/triggers.d/multimedia_keys.conf --socket /var/run/thd.socket --pidfile /var/run/thd.pid /dev/input/event0 /dev/input/event1
+ 2826     1 S /usr/sbin/ntpd -u ntp:ntp -g -p /var/run/ntpd.pid
+ 2832     1 S login -- root
+ 2833     1 S /bin/bash /usr/bin/knulli-mixer
+ 2834     1 S /sbin/getty 38400 tty5
+ 2861  2833 S /usr/bin/alsamixer -c0
+ 2890  2832 S -bash
+ 2918     1 S rpc.mountd
+ 2955     1 S /usr/sbin/dropbear -W 10485760 -R
+ 3193     1 S smbd -D --configfile=/etc/samba/smb.conf
+ 3197  3193 S smbd -D --configfile=/etc/samba/smb.conf
+ 3198  3193 S smbd -D --configfile=/etc/samba/smb.conf
+ 3200     1 S nmbd -D --configfile=/etc/samba/smb.conf
+ 3209     1 S python3 /usr/bin/wsdd -w WORKGROUP
+ 3318     1 S /usr/bin/python /usr/bin/knulli-rgb
+ 3361  3318 Z [knulli-settings] <defunct>
+ 4347  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+15042  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+17900  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+18093     2 S [kworker/u8:0]
+18581     2 S [kworker/3:5]
+19379     2 S [kworker/3:8]
+19397     2 S [kworker/1:7]
+20310     2 S [kworker/u8:1]
+21305     2 S [kworker/0:15]
+22409     2 S [kworker/u9:0]
+22453     2 S [kworker/2:1]
+22917     1 S /usr/sbin/connmand -n -r
+23046  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+23325     2 S [kworker/0:0]
+23415     2 S [kworker/0:1]
+23417     2 S [kworker/2:0]
+23505  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+24010     2 S [kworker/u8:2]
+24091     2 S [kworker/2:2]
+24213     1 S /usr/bin/idlewatcher
+24242     1 T sh v2_steps_h700.sh
+24290     2 S [kworker/3:0]
+24291     2 S [kworker/1:0]
+24365     2 S [kworker/u9:2]
+24374     2 S [kworker/u8:3]
+24484     2 S [kworker/3:1]
+24492 24242 S sh run_h700.sh v2-play-1 v2-play-play headline
+24576     2 S [kworker/0:2]
+24622 24492 D /userdata/system/rave-racer-native-p2-20261016/v2-play-play /userdata/roms/ports/rave-gles2/extracted --presentation-thread on --timing independent --audio on --thread-profile /userdata/system/rave-racer-native-p2-20261016/v2-play-1/thread.csv --profile-simulation --simulation-profile-from 1800 --replay-input /userdata/system/rave-racer-replays/race-20261013-122242-25136.rec --input-checkpoints /userdata/system/rave-racer-native-p2-20261016/v2-play-1/states.jsonl --replay-timing /userdata/system/rave-racer-native-p2-20261016/v2-play-1/ticks.csv
+24623 24492 S /userdata/system/rave-racer-native-p2-20261016/memory_sampler 24622 clocks
+24626     2 S [kbase_event]
+24637  2955 S /usr/sbin/dropbear -W 10485760 -R -2 9
+24641 24637 S bash -c cd /userdata/system/rave-racer-native-p2-20261016; kill -STOP $(cat v2-scheduler.pid); mkdir -p freeze-check; ps -e -o pid,ppid,state,args > freeze-check/processes.txt; cat v2-status.txt; cat v2-play-1/temperature.start v2-play-1/pid.txt v2-play-1/exit.txt 2>/dev/null; tail -3 v2-play-1/cooldown.txt; cat freeze-check/processes.txt | grep -E "run_h700|v2_steps|v2-play|emulationstation"; cat /sys/class/thermal/thermal_zone0/temp
+24644 24641 R ps -e -o pid,ppid,state,args

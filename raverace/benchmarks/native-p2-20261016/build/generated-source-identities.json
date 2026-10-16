@@ -1,0 +1,290 @@
+[
+  {
+    "variant": "a-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "c3a88de73ae9a199296bd31940c9c460bfef3d4f22c94d6896087e1ac033144b",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "a-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "c3a88de73ae9a199296bd31940c9c460bfef3d4f22c94d6896087e1ac033144b",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "a-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "230da4c5ad38a3cc60e5291a6ee4bb9b5749667c276af785bac49409df1d8a87",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "b-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "efa12cfb59c6177190a68018f6dd8986a40f6536dddf4c8f6f93f54b487b65bb",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "b-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "efa12cfb59c6177190a68018f6dd8986a40f6536dddf4c8f6f93f54b487b65bb",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "b-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "2fae63c8c9128ec1c2a0020f48c5152e0a90a5b018f2d1627adef8809e57d55f",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "c-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "c81cdb09b2c0f6bb712d284013bd28787a054b7e2e27b590b8a1915e75c3f2c0",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "c-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "c81cdb09b2c0f6bb712d284013bd28787a054b7e2e27b590b8a1915e75c3f2c0",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "c-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "07410a9d785058685b0a72382a7e4a9c41f5e21de964f4150c8f711eb191be65",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "d-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "03211dea2f0d49ae5b2d5d0c6139cf742abf5068faffaeb066428ce5e1525c27",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "d-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "03211dea2f0d49ae5b2d5d0c6139cf742abf5068faffaeb066428ce5e1525c27",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "d-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "716a26dc003d5cdf9580418a3d3a1d55ff4be70e4413df5b9885e3a0996bc95f",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "e-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "a6a8f233b18a36c0f1b376dc4588aa88063b3308e32b25ce4f5ed4a60f162e46",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "e-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "a6a8f233b18a36c0f1b376dc4588aa88063b3308e32b25ce4f5ed4a60f162e46",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "e-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "5f765af5c36711ccc162228cb383fb256856038279e5c884085c8c88f17eba46",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "play-play",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "ebb058efdad21e132cd0588604c31e2c82d7e322b2b2717926ecccdb0a8e9370",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "play-play-profile",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "87fac89bd33c3c39967c53d723e4d2d2a2c522227398376e839991781884e439",
+      "live.c": "ebb058efdad21e132cd0588604c31e2c82d7e322b2b2717926ecccdb0a8e9370",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  },
+  {
+    "variant": "play-validation",
+    "files": {
+      "layers.c": "18dbc701a889a005f18f3e7cd84e5a921c29be8a65088667d0540637ea30cb98",
+      "tex.c": "2b175c0e797f19da1f91f399fac70cd7bc7940f5bdc996b6be25ed7a51a4b65f",
+      "async_io.c": "3dccf147c870afcc917ed64a23d6bcae2756295a8ecab7be0db412863f88d7b0",
+      "live.c": "472720f15faa92c381deb3b38d0445c31c0eec1e4969d7614208b16611780b40",
+      "presentation.c": "16a4012d4dcd3f3fccbc0a0212c530df489d3cca45a7559b9a07267298ba3e60",
+      "audio.c": "0a389f724099fea65c0d4cfa1ccf7d04cbc44613e6450e87067d69b9c5a91e1f",
+      "rr_gpu_hud_geometry.inc": "d4959691f3ee11c6b18dc9ad5e52b6d6dd346b36b7fb725ae68da801ea481d96",
+      "rr_gpu_hud.inc": "c7f14c19cb5a6abdfd47c28083f7339df1284d6a9ae2126228f36288d9c80e71",
+      "gles.c": "cc4fee48031b1aeb6ed08ba09736816305a0793cf33909ad073c8a386cef051d",
+      "rr_presentation.h": "ed82821ce8a07578dba3335d83f176d441a04e348166977d8db0ac42ae5934b9",
+      "gl.c": "156f4e94198d79815539f82fc6c1f5d4672499165fe4a3c2e618a2a5356acaa9"
+    }
+  }
+]

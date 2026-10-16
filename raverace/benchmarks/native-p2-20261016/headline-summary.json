@@ -1,0 +1,236 @@
+{
+  "headlines": {
+    "baseline": {
+      "expected_runs": [
+        "baseline-1",
+        "baseline-2",
+        "baseline-3"
+      ],
+      "completed_runs": [
+        "baseline-1",
+        "baseline-2",
+        "baseline-3"
+      ],
+      "pooled_samples": {
+        "prep": {
+          "n": 12621,
+          "median": 11.830825999999998,
+          "p95": 15.013518999999999,
+          "p99": 17.693270000000002,
+          "worst": 22.305557
+        },
+        "compile": {
+          "n": 12621,
+          "median": 8.178964999,
+          "p95": 10.275198998,
+          "p99": 12.631183999,
+          "worst": 16.943859
+        },
+        "walk": {
+          "n": 12621,
+          "median": 3.457616,
+          "p95": 4.508477999,
+          "p99": 5.011683999,
+          "worst": 6.573315997
+        },
+        "dense_prep": {
+          "n": 123,
+          "median": 17.548188999999997,
+          "p95": 18.430183,
+          "p99": 19.12179,
+          "worst": 19.190298000000002
+        },
+        "dense_compile": {
+          "n": 123,
+          "median": 12.546310001,
+          "p95": 13.256907001,
+          "p99": 13.513286998,
+          "worst": 13.746664001
+        },
+        "dense_walk": {
+          "n": 123,
+          "median": 4.725899002,
+          "p95": 5.092795,
+          "p99": 5.293094,
+          "worst": 5.516805999
+        },
+        "interval": {
+          "n": 12621,
+          "median": 16.74602999992203,
+          "p95": 16.867234000528697,
+          "p99": 17.778725999960443,
+          "worst": 33.71857900128816
+        }
+      },
+      "native_underrun_frames": 10182,
+      "settled_underrun_frames": 7036,
+      "repeats": 1,
+      "main_gaps50": 0
+    },
+    "play": {
+      "expected_runs": [
+        "v2-play-1",
+        "v2-play-2",
+        "v2-play-3"
+      ],
+      "completed_runs": [
+        "v2-play-1",
+        "v2-play-2",
+        "v2-play-3"
+      ],
+      "pooled_samples": {
+        "prep": {
+          "n": 12621,
+          "median": 11.763985,
+          "p95": 14.768471,
+          "p99": 16.990134,
+          "worst": 20.154299
+        },
+        "compile": {
+          "n": 12621,
+          "median": 8.254736998,
+          "p95": 10.221243001,
+          "p99": 12.187212998,
+          "worst": 15.088458
+        },
+        "walk": {
+          "n": 12621,
+          "median": 3.470115,
+          "p95": 4.554198,
+          "p99": 5.033976002,
+          "worst": 7.198184001
+        },
+        "dense_prep": {
+          "n": 123,
+          "median": 17.056923,
+          "p95": 18.158372999999997,
+          "p99": 18.810304,
+          "worst": 20.154299
+        },
+        "dense_compile": {
+          "n": 123,
+          "median": 12.288184,
+          "p95": 13.202976003,
+          "p99": 13.667022,
+          "worst": 15.088458
+        },
+        "dense_walk": {
+          "n": 123,
+          "median": 4.649953,
+          "p95": 5.175489001,
+          "p99": 5.515871,
+          "worst": 5.821377999
+        },
+        "interval": {
+          "n": 12621,
+          "median": 16.74471400110633,
+          "p95": 16.84750099957455,
+          "p99": 17.219397999724606,
+          "worst": 20.987502997741103
+        }
+      },
+      "native_underrun_frames": 4418,
+      "settled_underrun_frames": 1791,
+      "repeats": 0,
+      "main_gaps50": 0
+    },
+    "final": {
+      "expected_runs": [
+        "final-1",
+        "final-2",
+        "final-3"
+      ],
+      "completed_runs": [
+        "final-1",
+        "final-2",
+        "final-3"
+      ],
+      "pooled_samples": {
+        "prep": {
+          "n": 12621,
+          "median": 9.588341,
+          "p95": 12.212252,
+          "p99": 13.999529,
+          "worst": 19.874181
+        },
+        "compile": {
+          "n": 12621,
+          "median": 6.032056001,
+          "p95": 7.643827001,
+          "p99": 8.790558,
+          "worst": 14.937643999
+        },
+        "walk": {
+          "n": 12621,
+          "median": 3.513965001,
+          "p95": 4.636747,
+          "p99": 5.249690999,
+          "worst": 7.595779
+        },
+        "dense_prep": {
+          "n": 123,
+          "median": 13.850626,
+          "p95": 14.61308,
+          "p99": 14.738530999999998,
+          "worst": 14.811308
+        },
+        "dense_compile": {
+          "n": 123,
+          "median": 8.676126999,
+          "p95": 9.092166001,
+          "p99": 9.261624,
+          "worst": 9.321498001
+        },
+        "dense_walk": {
+          "n": 123,
+          "median": 5.118974999,
+          "p95": 5.601295001,
+          "p99": 5.957632002,
+          "worst": 6.129234996
+        },
+        "interval": {
+          "n": 12621,
+          "median": 16.75009399696137,
+          "p95": 16.84118900084286,
+          "p99": 17.126786999142496,
+          "worst": 18.87852299842052
+        }
+      },
+      "native_underrun_frames": 2598,
+      "settled_underrun_frames": 0,
+      "repeats": 0,
+      "main_gaps50": 0
+    }
+  },
+  "final_run_gates": [
+    {
+      "run": "final-1",
+      "complete": true,
+      "dense_p99_le14": false,
+      "settled_audio_zero": true,
+      "main_gaps50_zero": true,
+      "at_most_one_single_repeat": true,
+      "clock_unflagged": true
+    },
+    {
+      "run": "final-2",
+      "complete": true,
+      "dense_p99_le14": false,
+      "settled_audio_zero": true,
+      "main_gaps50_zero": true,
+      "at_most_one_single_repeat": true,
+      "clock_unflagged": true
+    },
+    {
+      "run": "final-3",
+      "complete": true,
+      "dense_p99_le14": false,
+      "settled_audio_zero": true,
+      "main_gaps50_zero": true,
+      "at_most_one_single_repeat": true,
+      "clock_unflagged": true
+    }
+  ],
+  "headline_pass": false,
+  "soak_and_validation_require_separate_review": true
+}

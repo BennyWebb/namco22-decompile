@@ -1,0 +1,48 @@
+[
+  {
+    "library": "libc.so.6",
+    "device_sha256": "5aa9a4943fa51c71670dfe61d757fdfa2aab59370c138217c44beb27981d962a",
+    "toolchain_sha256": "9f8c83c3887efd6745de33d75587ad1678b0ea4bf1aaea7be11f9d5404932c3e",
+    "all_executable_sections_exact": true,
+    "executable_sections": {
+      ".plt": {
+        "address": 179184,
+        "bytes": 384,
+        "sha256": "de2e50f94197373edc11e1184d807007bd928c412587c6e45e5596d3bf49b05c"
+      },
+      ".text": {
+        "address": 179584,
+        "bytes": 1083248,
+        "sha256": "78870a6a6a1bb3c49d3a981466e2be95272731abc99063ae107b4c7e6d82f891"
+      }
+    }
+  },
+  {
+    "library": "libm.so.6",
+    "device_sha256": "e3f355d0734948abee5f8487dc65abd1676ec24360958da25b7c98fc5c964f41",
+    "toolchain_sha256": "5756261755354b40ae00d5c6b6b060d03a6fc1bdef189ce75edfe2aa83e45779",
+    "all_executable_sections_exact": true,
+    "executable_sections": {
+      ".init": {
+        "address": 62064,
+        "bytes": 24,
+        "sha256": "41d347b9825ae082af8970cb7ec261daccf526ec25970c50a7359b76b03ca7f3"
+      },
+      ".plt": {
+        "address": 62096,
+        "bytes": 192,
+        "sha256": "be0eef3b1ef9d5e813d14df14bef1e0782cecfe410336577e8b133bce4227289"
+      },
+      ".text": {
+        "address": 62288,
+        "bytes": 286832,
+        "sha256": "d68cdd411081bbed54ebfed1364b3d3647d66656ac0074b2db0e0956692f41e2"
+      },
+      ".fini": {
+        "address": 349120,
+        "bytes": 20,
+        "sha256": "7d39706b791b17f4e655c8b38aef56b5aede4b5bb0623dcb65a38d2f90ad64cf"
+      }
+    }
+  }
+]

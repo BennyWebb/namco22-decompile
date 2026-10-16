@@ -1,0 +1,70 @@
+make: Entering directory '/tmp/rr-p2-perf/tools/perf'
+  BUILD:   Doing 'make [33m-j16[m' parallel build
+Warning: arch/x86/include/asm/disabled-features.h differs from kernel
+Warning: arch/x86/include/asm/required-features.h differs from kernel
+Warning: arch/x86/include/asm/cpufeatures.h differs from kernel
+Warning: arch/arm/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/x86/include/uapi/asm/svm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/vmx.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/s390/include/uapi/asm/sie.h differs from kernel
+Warning: arch/arm/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/lib/memcpy_64.S differs from kernel
+Warning: arch/x86/lib/memset_64.S differs from kernel
+sh: 1: command: Illegal option -c
+
+Auto-detecting system features:
+...                         dwarf: [ [31mOFF[m ]
+...            dwarf_getlocations: [ [31mOFF[m ]
+...                         glibc: [ [32mon[m  ]
+...                          gtk2: [ [31mOFF[m ]
+...                      libaudit: [ [31mOFF[m ]
+...                        libbfd: [ [31mOFF[m ]
+...                        libelf: [ [31mOFF[m ]
+...                       libnuma: [ [31mOFF[m ]
+...        numa_num_possible_cpus: [ [31mOFF[m ]
+...                       libperl: [ [31mOFF[m ]
+...                     libpython: [ [31mOFF[m ]
+...                      libslang: [ [31mOFF[m ]
+...                     libcrypto: [ [31mOFF[m ]
+...                     libunwind: [ [31mOFF[m ]
+...            libdw-dwarf-unwind: [ [31mOFF[m ]
+...                          zlib: [ [32mon[m  ]
+...                          lzma: [ [32mon[m  ]
+...                     get_cpuid: [ [31mOFF[m ]
+...                           bpf: [ [32mon[m  ]
+
+Makefile.config:360: No sys/sdt.h found, no SDT events are defined, please install systemtap-sdt-devel or systemtap-sdt-dev
+Makefile.config:433: Disabling post unwind, no support found.
+Makefile.config:519: GTK2 not found, disables GTK2 support. Please install gtk2-devel or libgtk2.0-dev
+Makefile.config:569: Python support disabled by user
+make[3]: *** No rule to make target 'kernelversion'.  Stop.
+  GEN      perf-archive
+  GEN      perf-with-kcore
+  CC       perf.o
+In file included from /tmp/rr-p2-perf/tools/perf/util/../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/debug.h:8,
+                 from util/cpumap.h:9,
+                 from util/env.h:5,
+                 from perf.c:11:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: warning: redundant redeclaration of ‘strlcpy’ [-Wredundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from util/util.h:44,
+                 from builtin.h:4,
+                 from perf.c:9:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  LD       perf-in.o
+  LINK     perf
+make: Leaving directory '/tmp/rr-p2-perf/tools/perf'

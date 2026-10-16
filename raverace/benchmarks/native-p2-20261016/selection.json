@@ -1,0 +1,17 @@
+{
+  "final_binary": "v2-b-play",
+  "first_final_run": "v2-timing-b",
+  "first_final_alias": "final-1",
+  "selected_steps": [
+    "play split",
+    "a exact revision/material cache",
+    "b selective palette gather"
+  ],
+  "rejected_steps": {
+    "c metadata": "Measured native and dense compiler/preparation regression; exact output passed.",
+    "d guarded Z reuse": "No overall/compiler benefit; exact output passed.",
+    "e permutation sorting": "Measured native/dense compiler regression; exact output passed."
+  },
+  "unselected_host_only_variant": "e --no-metadata --no-z-reuse: host6006/21/4207/36 passes, no hardware run; not promoted after sorting regression.",
+  "rules": "First selected timing population reused once as final1 with identical SHA/protocol; no extra or omitted sample."
+}

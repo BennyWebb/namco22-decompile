@@ -1,0 +1,41 @@
+{
+  "main_event": {
+    "start": 20051.759466719,
+    "end": 20051.823534676998,
+    "stage": "main",
+    "frame": 3966
+  },
+  "simulation_wall_ms": 62.792694,
+  "simulation_queue_blocked_ms": 0,
+  "prepare_wall_ms": 7.49521,
+  "draw_wall_ms": 4.445417,
+  "swap_wall_ms": 0.085167,
+  "observations_bracket_only": true,
+  "main_states": [
+    "R",
+    "R"
+  ],
+  "no_sample_inside_gap": true,
+  "global_vm_counters_identical_across_bracketing_samples": true,
+  "process_block_read_delta_bytes": 8192,
+  "process_block_write_delta_bytes": 0,
+  "main_major_fault_counter_unchanged": 24,
+  "main_runtime_bracket_jiffies": 4,
+  "bracket_duration_ms": 99.495299,
+  "cpu_khz": 1512000,
+  "gpu_hz": 240000000,
+  "cpu_and_gpu_cooling_at_brackets": 0,
+  "attribution": "Main simulation/service gap underfed preparation/presentation; exact CPU or scheduling cause UNKNOWN. Bracketing main R states/stacks do not capture the blocked instant. No coincident sampled reclaim-counter increase; global per-lap reclaim cannot establish causality.",
+  "observer_gap_coincidences": 0,
+  "second_event": {
+    "lap": 13,
+    "tick": 3515,
+    "inferred_repeats": 1,
+    "interval_ms": 33.45337,
+    "simulation_ms": 13.908005,
+    "prepare_ms": 13.861298,
+    "draw_ms": 15.704375,
+    "swap_ms": 17.190417,
+    "attribution": "Presentation-side late event; no >50ms main gap, precise GPU/driver/scheduling cause not isolated."
+  }
+}

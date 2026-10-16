@@ -1,0 +1,15 @@
+[
+  {
+    "tick": 3515,
+    "repeats": 1,
+    "interval_ms": 33.45336999700521,
+    "simulation_ms": 13.908005003,
+    "simulation_blocked_ms": 1.650178998,
+    "native_walk_ms": 4.83704,
+    "native_compile_ms": 8.976050001,
+    "prep_wall": 0.013861298,
+    "prep_cpu": 0.013859542,
+    "draw_wall": 0.015704375,
+    "swap_wall": 0.017190417
+  }
+]

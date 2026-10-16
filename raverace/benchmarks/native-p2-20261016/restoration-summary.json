@@ -1,0 +1,289 @@
+{
+  "sessions": [
+    {
+      "session": "baseline-1",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "16807",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "baseline-2",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "32648",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "baseline-3",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "988",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "final-2",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "613",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "final-3",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "1617",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "interrupted-startup-play",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "24782",
+      "result": "143",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "play-1",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "17418",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "preflight-hot",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "21282",
+      "result": "preflight-only",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "profile-a-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "20406",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "profile-play-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "18540",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "soak-1512000",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "3285",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "timing-a",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "19786",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "timing-b",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "21282",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-play-1",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "25472",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-play-2",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "386",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-play-3",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "1387",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-profile-a-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "27097",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-profile-b-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "28148",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-profile-c-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "29166",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-profile-d-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "30286",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-profile-e-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "31457",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-profile-play-run",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "25976",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-timing-a",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "26603",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-timing-b",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "27637",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-timing-c",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "28664",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-timing-d",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "29791",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-timing-e",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "30964",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-validation-a",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "26360",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-validation-b",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "27409",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "v2-validation-c",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "28441",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-validation-d",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "29450",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-validation-e",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "30739",
+      "result": "0",
+      "explicit_restoration_status": "0"
+    },
+    {
+      "session": "v2-validation-play",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "24483",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "validation-a",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "19322",
+      "result": "0",
+      "explicit_restoration_status": null
+    },
+    {
+      "session": "validation-b",
+      "clocks_equal": true,
+      "production_equal": true,
+      "es_pid": "20836",
+      "result": "0",
+      "explicit_restoration_status": null
+    }
+  ],
+  "alias_excluded": "final-1 -> v2-timing-b, one identical population",
+  "restored_sessions": 35,
+  "final_es_pid": "3285",
+  "final_protected_ok": 47,
+  "no_games_at_final_check": true
+}

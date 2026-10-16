@@ -1,0 +1,4 @@
+Matched toolchain libc executable sections equal the device library (library-symbol-proof.json).
+Buildroot glibc-2.40-18-g5641780762723156b0d20a0b9f7df1d76831bab0/stdlib/qsort.c lines184,353,371..381 uses INDIRECT_SORT_SIZE_THRES32 and indirect_msort_with_tmp for128-byte records.
+Exact ELF symbols include indirect_msort_with_tmp at0x432d0 and __qsort_r at0x43410.
+Original libc sorting already sorts pointers before final record permutation, limiting avoided movement. The extra uint16 permutation/comparator indirection did not improve measured compiler cost. This source fact does not alone attribute the whole measured regression.

@@ -1,0 +1,53 @@
+Name:	v2-play-play
+Umask:	0022
+State:	S (sleeping)
+Tgid:	24622
+Ngid:	0
+Pid:	24622
+PPid:	24492
+TracerPid:	0
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+FDSize:	64
+Groups:	0 10 
+VmPeak:	 1623656 kB
+VmSize:	 1597424 kB
+VmLck:	     144 kB
+VmPin:	       0 kB
+VmHWM:	  677748 kB
+VmRSS:	  677748 kB
+RssAnon:	   92544 kB
+RssFile:	  585048 kB
+RssShmem:	     156 kB
+VmData:	  243872 kB
+VmStk:	     140 kB
+VmExe:	    6916 kB
+VmLib:	   56916 kB
+VmPTE:	    1516 kB
+VmPMD:	      28 kB
+VmSwap:	       0 kB
+Threads:	14
+SigQ:	1/3613
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000007
+SigCgt:	0000000900004000
+CapInh:	0000000000000000
+CapPrm:	0000003fffffffff
+CapEff:	0000003fffffffff
+CapBnd:	0000003fffffffff
+CapAmb:	0000000000000000
+Seccomp:	0
+Speculation_Store_Bypass:	unknown
+Cpus_allowed:	f
+Cpus_allowed_list:	0-3
+voluntary_ctxt_switches:	7324
+nonvoluntary_ctxt_switches:	2496
+rchar: 552641632
+wchar: 179649
+syscr: 8475
+syscw: 5883
+read_bytes: 500375552
+write_bytes: 0
+cancelled_write_bytes: 0

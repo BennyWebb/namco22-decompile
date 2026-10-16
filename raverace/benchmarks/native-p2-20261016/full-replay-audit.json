@@ -1,0 +1,416 @@
+[
+  {
+    "run": "baseline-1",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "baseline-2",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "baseline-3",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "final-2",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "final-3",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "play-1",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "profile-a-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "profile-play-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-1",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-10",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-11",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-12",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-13",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-14",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-2",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-3",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-4",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-5",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-6",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-7",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-8",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "soak-1512000/lap-9",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "timing-a",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "timing-b",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-play-1",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-play-2",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-play-3",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-a-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-b-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-c-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-d-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-e-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-profile-play-run",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-timing-a",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-timing-b",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-timing-c",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-timing-d",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-timing-e",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-a",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-b",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-c",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-d",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-e",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "v2-validation-play",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "validation-a",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "validation-b",
+    "ticks": 6006,
+    "checkpoint_sets": 21,
+    "checkpoint_domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  }
+]

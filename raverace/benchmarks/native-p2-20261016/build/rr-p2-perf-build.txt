@@ -1,0 +1,26 @@
+make: Entering directory '/tmp/rr-p2-perf/tools/perf'
+  BUILD:   Doing 'make [33m-j16[m' parallel build
+  HOSTCC   fixdep.o
+  HOSTLD   fixdep-in.o
+  LINK     fixdep
+Warning: arch/x86/include/asm/disabled-features.h differs from kernel
+Warning: arch/x86/include/asm/required-features.h differs from kernel
+Warning: arch/x86/include/asm/cpufeatures.h differs from kernel
+Warning: arch/arm/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/x86/include/uapi/asm/svm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/vmx.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/s390/include/uapi/asm/sie.h differs from kernel
+Warning: arch/arm/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/lib/memcpy_64.S differs from kernel
+Warning: arch/x86/lib/memset_64.S differs from kernel
+Makefile.config:133: *** Error: bison is missing on this system, please install it.  Stop.
+make[1]: *** [Makefile.perf:206: sub-make] Error 2
+make: *** [Makefile:69: all] Error 2
+make: Leaving directory '/tmp/rr-p2-perf/tools/perf'

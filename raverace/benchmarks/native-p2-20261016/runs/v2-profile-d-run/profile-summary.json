@@ -1,0 +1,421 @@
+{
+  "native": {
+    "window_monotonic": [
+      16038.809287393999,
+      16109.266956014
+    ],
+    "samples": 46314,
+    "unknown_self_samples": 590,
+    "top10": [
+      {
+        "function": "live_cull",
+        "samples": 8606,
+        "share": 0.18581854298916095
+      },
+      {
+        "function": "quad_fixed",
+        "samples": 6382,
+        "share": 0.13779850585136244
+      },
+      {
+        "function": "live_compile",
+        "samples": 5350,
+        "share": 0.11551582674785162
+      },
+      {
+        "function": "proj_sat",
+        "samples": 2610,
+        "share": 0.05635445005829771
+      },
+      {
+        "function": "__divti3",
+        "samples": 2576,
+        "share": 0.05562033078550762
+      },
+      {
+        "function": "eng_point_read",
+        "samples": 2504,
+        "share": 0.05406572526665803
+      },
+      {
+        "function": "__memcpy_generic",
+        "samples": 2112,
+        "share": 0.0456017618862547
+      },
+      {
+        "function": "memcmp",
+        "samples": 1752,
+        "share": 0.037828734292006734
+      },
+      {
+        "function": "p2_palettes",
+        "samples": 1656,
+        "share": 0.03575592693354061
+      },
+      {
+        "function": "live_mesh",
+        "samples": 1625,
+        "share": 0.03508658289070259
+      }
+    ],
+    "stages": {
+      "walk": {
+        "samples": 18607,
+        "top10": [
+          {
+            "function": "quad_fixed",
+            "samples": 6382,
+            "share": 0.34298919761380126
+          },
+          {
+            "function": "proj_sat",
+            "samples": 2610,
+            "share": 0.14026979093889397
+          },
+          {
+            "function": "__divti3",
+            "samples": 2576,
+            "share": 0.138442521631644
+          },
+          {
+            "function": "eng_point_read",
+            "samples": 2504,
+            "share": 0.13457301015746762
+          },
+          {
+            "function": "emit",
+            "samples": 1583,
+            "share": 0.08507550921696136
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 1072,
+            "share": 0.057612726393292846
+          },
+          {
+            "function": "pt_read",
+            "samples": 514,
+            "share": 0.02762401246842586
+          },
+          {
+            "function": "blit_quads",
+            "samples": 498,
+            "share": 0.02676412102972
+          },
+          {
+            "function": "eng_walk_list",
+            "samples": 255,
+            "share": 0.013704519804374697
+          },
+          {
+            "function": "geo_hw_object",
+            "samples": 228,
+            "share": 0.012253453001558553
+          }
+        ]
+      },
+      "other": {
+        "samples": 842,
+        "top10": [
+          {
+            "function": "[unknown:[kernel.kallsyms]]",
+            "samples": 147,
+            "share": 0.17458432304038005
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 118,
+            "share": 0.14014251781472684
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 101,
+            "share": 0.11995249406175772
+          },
+          {
+            "function": "rr_gl_video_cpu",
+            "samples": 82,
+            "share": 0.09738717339667459
+          },
+          {
+            "function": "mixer_b",
+            "samples": 64,
+            "share": 0.07600950118764846
+          },
+          {
+            "function": "[unknown:/userdata/system/rave-racer-native-p2-20261016/v2-profile-d]",
+            "samples": 35,
+            "share": 0.04156769596199525
+          },
+          {
+            "function": "pw",
+            "samples": 33,
+            "share": 0.039192399049881234
+          },
+          {
+            "function": "sext_n",
+            "samples": 27,
+            "share": 0.032066508313539195
+          },
+          {
+            "function": "scalbnf64",
+            "samples": 24,
+            "share": 0.028503562945368172
+          },
+          {
+            "function": "getenv",
+            "samples": 23,
+            "share": 0.027315914489311165
+          }
+        ]
+      },
+      "compiler": {
+        "samples": 26865,
+        "top10": [
+          {
+            "function": "live_cull",
+            "samples": 8606,
+            "share": 0.3203424530057696
+          },
+          {
+            "function": "live_compile",
+            "samples": 5350,
+            "share": 0.19914386748557603
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 1944,
+            "share": 0.07236180904522613
+          },
+          {
+            "function": "memcmp",
+            "samples": 1752,
+            "share": 0.06521496370742602
+          },
+          {
+            "function": "p2_palettes",
+            "samples": 1656,
+            "share": 0.06164154103852596
+          },
+          {
+            "function": "live_mesh",
+            "samples": 1625,
+            "share": 0.060487623301693653
+          },
+          {
+            "function": "live_batch",
+            "samples": 1534,
+            "share": 0.05710031639679881
+          },
+          {
+            "function": "msort_with_tmp.part.0",
+            "samples": 1419,
+            "share": 0.05281965382467895
+          },
+          {
+            "function": "live_material",
+            "samples": 1374,
+            "share": 0.05114461194863205
+          },
+          {
+            "function": "live_painter",
+            "samples": 460,
+            "share": 0.017122650288479434
+          }
+        ]
+      }
+    }
+  },
+  "dense": {
+    "window_monotonic": [
+      16068.128326572,
+      16068.811808641
+    ],
+    "samples": 608,
+    "unknown_self_samples": 7,
+    "top10": [
+      {
+        "function": "live_cull",
+        "samples": 114,
+        "share": 0.1875
+      },
+      {
+        "function": "quad_fixed",
+        "samples": 76,
+        "share": 0.125
+      },
+      {
+        "function": "live_compile",
+        "samples": 62,
+        "share": 0.10197368421052631
+      },
+      {
+        "function": "proj_sat",
+        "samples": 37,
+        "share": 0.06085526315789474
+      },
+      {
+        "function": "eng_point_read",
+        "samples": 36,
+        "share": 0.05921052631578947
+      },
+      {
+        "function": "__memcpy_generic",
+        "samples": 34,
+        "share": 0.05592105263157895
+      },
+      {
+        "function": "__divti3",
+        "samples": 28,
+        "share": 0.046052631578947366
+      },
+      {
+        "function": "msort_with_tmp.part.0",
+        "samples": 26,
+        "share": 0.04276315789473684
+      },
+      {
+        "function": "p2_palettes",
+        "samples": 23,
+        "share": 0.03782894736842105
+      },
+      {
+        "function": "emit",
+        "samples": 23,
+        "share": 0.03782894736842105
+      }
+    ],
+    "stages": {
+      "walk": {
+        "samples": 239,
+        "top10": [
+          {
+            "function": "quad_fixed",
+            "samples": 76,
+            "share": 0.3179916317991632
+          },
+          {
+            "function": "proj_sat",
+            "samples": 37,
+            "share": 0.15481171548117154
+          },
+          {
+            "function": "eng_point_read",
+            "samples": 36,
+            "share": 0.1506276150627615
+          },
+          {
+            "function": "__divti3",
+            "samples": 28,
+            "share": 0.11715481171548117
+          },
+          {
+            "function": "emit",
+            "samples": 23,
+            "share": 0.09623430962343096
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 15,
+            "share": 0.06276150627615062
+          },
+          {
+            "function": "blit_quads",
+            "samples": 8,
+            "share": 0.03347280334728033
+          },
+          {
+            "function": "pt_read",
+            "samples": 7,
+            "share": 0.029288702928870293
+          },
+          {
+            "function": "[unknown:[kernel.kallsyms]]",
+            "samples": 4,
+            "share": 0.016736401673640166
+          },
+          {
+            "function": "eng_walk_list",
+            "samples": 3,
+            "share": 0.012552301255230125
+          }
+        ]
+      },
+      "compiler": {
+        "samples": 366,
+        "top10": [
+          {
+            "function": "live_cull",
+            "samples": 114,
+            "share": 0.3114754098360656
+          },
+          {
+            "function": "live_compile",
+            "samples": 62,
+            "share": 0.16939890710382513
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 33,
+            "share": 0.09016393442622951
+          },
+          {
+            "function": "msort_with_tmp.part.0",
+            "samples": 26,
+            "share": 0.07103825136612021
+          },
+          {
+            "function": "p2_palettes",
+            "samples": 23,
+            "share": 0.06284153005464481
+          },
+          {
+            "function": "live_batch",
+            "samples": 22,
+            "share": 0.060109289617486336
+          },
+          {
+            "function": "live_mesh",
+            "samples": 21,
+            "share": 0.05737704918032787
+          },
+          {
+            "function": "live_material",
+            "samples": 16,
+            "share": 0.04371584699453552
+          },
+          {
+            "function": "memcmp",
+            "samples": 16,
+            "share": 0.04371584699453552
+          },
+          {
+            "function": "live_visible",
+            "samples": 14,
+            "share": 0.03825136612021858
+          }
+        ]
+      },
+      "other": {
+        "samples": 3,
+        "top10": [
+          {
+            "function": "rr_gl_video_prepare",
+            "samples": 1,
+            "share": 0.3333333333333333
+          },
+          {
+            "function": "_setjmp",
+            "samples": 1,
+            "share": 0.3333333333333333
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 1,
+            "share": 0.3333333333333333
+          }
+        ]
+      }
+    }
+  }
+}

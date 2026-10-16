@@ -1,0 +1,1136 @@
+[
+  {
+    "gap": {
+      "start": 20051.759466719,
+      "end": 20051.823534676998,
+      "stage": "main",
+      "frame": 3966
+    },
+    "observations": [
+      {
+        "time": 20051.732618647,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff80080d3ee4>] enqueue_task_fair+0x8f8/0x1338\n[<ffffff80083d90a4>] gic_raise_softirq+0x60/0xac\n[<ffffff800808f248>] smp_cross_call+0x14/0x1c\n[<ffffff800808fb54>] smp_send_reschedule+0x2c/0x34\n[<ffffff80080c717c>] resched_curr+0x44/0x50\n[<ffffff80080c794c>] check_preempt_curr+0x5c/0x8c\n[<ffffff80080c7994>] ttwu_do_wakeup.isra.17+0x18/0x7c\n[<ffffff80080c7a6c>] ttwu_do_activate.isra.18+0x74/0x84\n[<ffffff80080c8ca8>] try_to_wake_up+0x2a0/0x348\n[<ffffff80083c6660>] debug_smp_processor_id+0x1c/0x24\n[<ffffff8008089e9c>] unwind_frame+0x4c/0x154\n[<ffffff8008089fe0>] walk_stackframe+0x3c/0x50\n[<ffffff800808cfcc>] return_address+0x58/0x88\n[<ffffff80080c66b4>] preempt_count_add+0xd4/0x104\n[<ffffff80080e67ec>] cpuacct_charge+0x7c/0x9c\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.732648021,
+            "end": 20051.732760518,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.732773101,
+            "end": 20051.732822059,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.732830059,
+            "end": 20051.732898807,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.732908473,
+            "end": 20051.732965431,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.732973722,
+            "end": 20051.733021346,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733029679,
+            "end": 20051.733089803,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733098178,
+            "end": 20051.733142427,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733197217,
+            "end": 20051.733255757,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.733264216,
+            "end": 20051.733313423,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.733321839,
+            "end": 20051.733370422,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.733378463,
+            "end": 20051.73501026,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.73502551,
+            "end": 20051.73510455,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.735113133,
+            "end": 20051.735163257,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.735171507,
+            "end": 20051.735220381,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.735238839,
+            "end": 20051.73533367,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.735362878,
+            "end": 20051.735463334,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.735486208,
+            "end": 20051.735556873,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.735596956,
+            "end": 20051.735635621,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.735643288,
+            "end": 20051.735689745,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.735805993,
+            "end": 20051.735849783,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.735859242,
+            "end": 20051.735884824,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.735893199,
+            "end": 20051.736000238,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.736311065,
+            "end": 20051.736348856,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.736357772,
+            "end": 20051.736388438,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.736397021,
+            "end": 20051.736445645,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.736480269,
+            "end": 20051.73651681,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.736525268,
+            "end": 20051.736553101,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.736561434,
+            "end": 20051.7366081,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130000,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553727797\nwchar: 2134681\nsyscr: 63689\nsyscw: 76207\nread_bytes: 516647936\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      },
+      {
+        "time": 20051.832113946,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<00000000000409aa>] 0x409aa\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<0000000000000000>]           (null)\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.832154195,
+            "end": 20051.832288567,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.83230065,
+            "end": 20051.83235069,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.832358857,
+            "end": 20051.832428439,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.832438938,
+            "end": 20051.832499812,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832508187,
+            "end": 20051.832552978,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832561186,
+            "end": 20051.832605893,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832613935,
+            "end": 20051.832658475,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832727099,
+            "end": 20051.832802139,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.832810597,
+            "end": 20051.832874804,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.832883054,
+            "end": 20051.832936886,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.832945344,
+            "end": 20051.834630723,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.834646265,
+            "end": 20051.834735804,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.834744346,
+            "end": 20051.834794845,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.834803469,
+            "end": 20051.834853843,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.834876509,
+            "end": 20051.834975882,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.835006757,
+            "end": 20051.835143837,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.835166878,
+            "end": 20051.835244585,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.835284875,
+            "end": 20051.835327458,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.835335124,
+            "end": 20051.83538529,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.835512662,
+            "end": 20051.835561119,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.835570327,
+            "end": 20051.835595577,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.835604118,
+            "end": 20051.836019109,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.836507932,
+            "end": 20051.836578555,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.836590555,
+            "end": 20051.836640054,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.836648512,
+            "end": 20051.836705761,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.836743676,
+            "end": 20051.836781842,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.836790717,
+            "end": 20051.836814842,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.836822925,
+            "end": 20051.836856799,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130008,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553733029\nwchar: 2135473\nsyscr: 63760\nsyscw: 76306\nread_bytes: 516656128\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      }
+    ]
+  },
+  {
+    "gap": {
+      "start": 20051.760536195998,
+      "end": 20051.824044832,
+      "stage": "prepare",
+      "frame": 3966
+    },
+    "observations": [
+      {
+        "time": 20051.732618647,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff80080d3ee4>] enqueue_task_fair+0x8f8/0x1338\n[<ffffff80083d90a4>] gic_raise_softirq+0x60/0xac\n[<ffffff800808f248>] smp_cross_call+0x14/0x1c\n[<ffffff800808fb54>] smp_send_reschedule+0x2c/0x34\n[<ffffff80080c717c>] resched_curr+0x44/0x50\n[<ffffff80080c794c>] check_preempt_curr+0x5c/0x8c\n[<ffffff80080c7994>] ttwu_do_wakeup.isra.17+0x18/0x7c\n[<ffffff80080c7a6c>] ttwu_do_activate.isra.18+0x74/0x84\n[<ffffff80080c8ca8>] try_to_wake_up+0x2a0/0x348\n[<ffffff80083c6660>] debug_smp_processor_id+0x1c/0x24\n[<ffffff8008089e9c>] unwind_frame+0x4c/0x154\n[<ffffff8008089fe0>] walk_stackframe+0x3c/0x50\n[<ffffff800808cfcc>] return_address+0x58/0x88\n[<ffffff80080c66b4>] preempt_count_add+0xd4/0x104\n[<ffffff80080e67ec>] cpuacct_charge+0x7c/0x9c\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.732648021,
+            "end": 20051.732760518,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.732773101,
+            "end": 20051.732822059,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.732830059,
+            "end": 20051.732898807,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.732908473,
+            "end": 20051.732965431,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.732973722,
+            "end": 20051.733021346,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733029679,
+            "end": 20051.733089803,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733098178,
+            "end": 20051.733142427,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733197217,
+            "end": 20051.733255757,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.733264216,
+            "end": 20051.733313423,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.733321839,
+            "end": 20051.733370422,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.733378463,
+            "end": 20051.73501026,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.73502551,
+            "end": 20051.73510455,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.735113133,
+            "end": 20051.735163257,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.735171507,
+            "end": 20051.735220381,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.735238839,
+            "end": 20051.73533367,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.735362878,
+            "end": 20051.735463334,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.735486208,
+            "end": 20051.735556873,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.735596956,
+            "end": 20051.735635621,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.735643288,
+            "end": 20051.735689745,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.735805993,
+            "end": 20051.735849783,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.735859242,
+            "end": 20051.735884824,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.735893199,
+            "end": 20051.736000238,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.736311065,
+            "end": 20051.736348856,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.736357772,
+            "end": 20051.736388438,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.736397021,
+            "end": 20051.736445645,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.736480269,
+            "end": 20051.73651681,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.736525268,
+            "end": 20051.736553101,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.736561434,
+            "end": 20051.7366081,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130000,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553727797\nwchar: 2134681\nsyscr: 63689\nsyscw: 76207\nread_bytes: 516647936\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      },
+      {
+        "time": 20051.832113946,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<00000000000409aa>] 0x409aa\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<0000000000000000>]           (null)\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.832154195,
+            "end": 20051.832288567,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.83230065,
+            "end": 20051.83235069,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.832358857,
+            "end": 20051.832428439,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.832438938,
+            "end": 20051.832499812,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832508187,
+            "end": 20051.832552978,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832561186,
+            "end": 20051.832605893,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832613935,
+            "end": 20051.832658475,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832727099,
+            "end": 20051.832802139,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.832810597,
+            "end": 20051.832874804,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.832883054,
+            "end": 20051.832936886,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.832945344,
+            "end": 20051.834630723,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.834646265,
+            "end": 20051.834735804,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.834744346,
+            "end": 20051.834794845,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.834803469,
+            "end": 20051.834853843,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.834876509,
+            "end": 20051.834975882,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.835006757,
+            "end": 20051.835143837,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.835166878,
+            "end": 20051.835244585,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.835284875,
+            "end": 20051.835327458,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.835335124,
+            "end": 20051.83538529,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.835512662,
+            "end": 20051.835561119,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.835570327,
+            "end": 20051.835595577,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.835604118,
+            "end": 20051.836019109,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.836507932,
+            "end": 20051.836578555,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.836590555,
+            "end": 20051.836640054,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.836648512,
+            "end": 20051.836705761,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.836743676,
+            "end": 20051.836781842,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.836790717,
+            "end": 20051.836814842,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.836822925,
+            "end": 20051.836856799,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130008,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553733029\nwchar: 2135473\nsyscr: 63760\nsyscw: 76306\nread_bytes: 516656128\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      }
+    ]
+  },
+  {
+    "gap": {
+      "start": 20051.776236807,
+      "end": 20051.831580416,
+      "stage": "present",
+      "frame": 3966
+    },
+    "observations": [
+      {
+        "time": 20051.732618647,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff80080d3ee4>] enqueue_task_fair+0x8f8/0x1338\n[<ffffff80083d90a4>] gic_raise_softirq+0x60/0xac\n[<ffffff800808f248>] smp_cross_call+0x14/0x1c\n[<ffffff800808fb54>] smp_send_reschedule+0x2c/0x34\n[<ffffff80080c717c>] resched_curr+0x44/0x50\n[<ffffff80080c794c>] check_preempt_curr+0x5c/0x8c\n[<ffffff80080c7994>] ttwu_do_wakeup.isra.17+0x18/0x7c\n[<ffffff80080c7a6c>] ttwu_do_activate.isra.18+0x74/0x84\n[<ffffff80080c8ca8>] try_to_wake_up+0x2a0/0x348\n[<ffffff80083c6660>] debug_smp_processor_id+0x1c/0x24\n[<ffffff8008089e9c>] unwind_frame+0x4c/0x154\n[<ffffff8008089fe0>] walk_stackframe+0x3c/0x50\n[<ffffff800808cfcc>] return_address+0x58/0x88\n[<ffffff80080c66b4>] preempt_count_add+0xd4/0x104\n[<ffffff80080e67ec>] cpuacct_charge+0x7c/0x9c\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.732648021,
+            "end": 20051.732760518,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.732773101,
+            "end": 20051.732822059,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.732830059,
+            "end": 20051.732898807,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.732908473,
+            "end": 20051.732965431,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.732973722,
+            "end": 20051.733021346,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733029679,
+            "end": 20051.733089803,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733098178,
+            "end": 20051.733142427,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.733197217,
+            "end": 20051.733255757,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.733264216,
+            "end": 20051.733313423,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.733321839,
+            "end": 20051.733370422,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.733378463,
+            "end": 20051.73501026,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.73502551,
+            "end": 20051.73510455,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.735113133,
+            "end": 20051.735163257,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.735171507,
+            "end": 20051.735220381,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.735238839,
+            "end": 20051.73533367,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.735362878,
+            "end": 20051.735463334,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.735486208,
+            "end": 20051.735556873,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.735596956,
+            "end": 20051.735635621,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.735643288,
+            "end": 20051.735689745,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.735805993,
+            "end": 20051.735849783,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.735859242,
+            "end": 20051.735884824,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.735893199,
+            "end": 20051.736000238,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.736311065,
+            "end": 20051.736348856,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.736357772,
+            "end": 20051.736388438,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.736397021,
+            "end": 20051.736445645,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.736480269,
+            "end": 20051.73651681,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.736525268,
+            "end": 20051.736553101,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.736561434,
+            "end": 20051.7366081,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130000,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553727797\nwchar: 2134681\nsyscr: 63689\nsyscw: 76207\nread_bytes: 516647936\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      },
+      {
+        "time": 20051.832113946,
+        "pid": 2644,
+        "threads": {
+          "2644": {
+            "name": "v2-b-play",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<00000000000409aa>] 0x409aa\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2669": {
+            "name": "rr-present",
+            "state": "S",
+            "wchan": "futex_wait_queue_me",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<ffffff8008113f98>] futex_wait_queue_me+0xcc/0x134\n[<ffffff8008114804>] futex_wait+0xfc/0x1fc\n[<ffffff8008116474>] do_futex+0xe8/0xb68\n[<ffffff8008116fd0>] SyS_futex+0xdc/0x180\n[<ffffff8008083540>] el0_svc_naked+0x34/0x38\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          },
+          "2670": {
+            "name": "rr-prepare",
+            "state": "R",
+            "wchan": "0",
+            "stack": "[<ffffff8008085a14>] __switch_to+0xb0/0xcc\n[<0000000000000000>]           (null)\n[<ffffffffffffffff>] 0xffffffffffffffff"
+          }
+        },
+        "read_bounds": [
+          {
+            "start": 20051.832154195,
+            "end": 20051.832288567,
+            "path": "/sys/class/devfreq/gpu/cur_freq"
+          },
+          {
+            "start": 20051.83230065,
+            "end": 20051.83235069,
+            "path": "/sys/class/devfreq/gpu/governor"
+          },
+          {
+            "start": 20051.832358857,
+            "end": 20051.832428439,
+            "path": "/sys/class/devfreq/gpu/trans_stat"
+          },
+          {
+            "start": 20051.832438938,
+            "end": 20051.832499812,
+            "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832508187,
+            "end": 20051.832552978,
+            "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832561186,
+            "end": 20051.832605893,
+            "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832613935,
+            "end": 20051.832658475,
+            "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq"
+          },
+          {
+            "start": 20051.832727099,
+            "end": 20051.832802139,
+            "path": "/sys/class/thermal/thermal_zone3/temp"
+          },
+          {
+            "start": 20051.832810597,
+            "end": 20051.832874804,
+            "path": "/sys/class/thermal/thermal_zone1/temp"
+          },
+          {
+            "start": 20051.832883054,
+            "end": 20051.832936886,
+            "path": "/sys/class/thermal/cooling_device1/cur_state"
+          },
+          {
+            "start": 20051.832945344,
+            "end": 20051.834630723,
+            "path": "/sys/class/thermal/thermal_zone4/temp"
+          },
+          {
+            "start": 20051.834646265,
+            "end": 20051.834735804,
+            "path": "/sys/class/thermal/thermal_zone2/temp"
+          },
+          {
+            "start": 20051.834744346,
+            "end": 20051.834794845,
+            "path": "/sys/class/thermal/thermal_zone0/temp"
+          },
+          {
+            "start": 20051.834803469,
+            "end": 20051.834853843,
+            "path": "/sys/class/thermal/cooling_device0/cur_state"
+          },
+          {
+            "start": 20051.834876509,
+            "end": 20051.834975882,
+            "path": "/proc/2644/status"
+          },
+          {
+            "start": 20051.835006757,
+            "end": 20051.835143837,
+            "path": "/proc/meminfo"
+          },
+          {
+            "start": 20051.835166878,
+            "end": 20051.835244585,
+            "path": "/proc/vmstat"
+          },
+          {
+            "start": 20051.835284875,
+            "end": 20051.835327458,
+            "path": "/proc/2644/io"
+          },
+          {
+            "start": 20051.835335124,
+            "end": 20051.83538529,
+            "path": "/sys/kernel/debug/mali0/gpu_memory"
+          },
+          {
+            "start": 20051.835512662,
+            "end": 20051.835561119,
+            "path": "/proc/2644/task/2644/stat"
+          },
+          {
+            "start": 20051.835570327,
+            "end": 20051.835595577,
+            "path": "/proc/2644/task/2644/wchan"
+          },
+          {
+            "start": 20051.835604118,
+            "end": 20051.836019109,
+            "path": "/proc/2644/task/2644/stack"
+          },
+          {
+            "start": 20051.836507932,
+            "end": 20051.836578555,
+            "path": "/proc/2644/task/2669/stat"
+          },
+          {
+            "start": 20051.836590555,
+            "end": 20051.836640054,
+            "path": "/proc/2644/task/2669/wchan"
+          },
+          {
+            "start": 20051.836648512,
+            "end": 20051.836705761,
+            "path": "/proc/2644/task/2669/stack"
+          },
+          {
+            "start": 20051.836743676,
+            "end": 20051.836781842,
+            "path": "/proc/2644/task/2670/stat"
+          },
+          {
+            "start": 20051.836790717,
+            "end": 20051.836814842,
+            "path": "/proc/2644/task/2670/wchan"
+          },
+          {
+            "start": 20051.836822925,
+            "end": 20051.836856799,
+            "path": "/proc/2644/task/2670/stack"
+          }
+        ],
+        "rss_kib": 714268,
+        "available_kib": 130008,
+        "cma_kib": 30532,
+        "mali_pages": 137890,
+        "gpu_hz": 240000000,
+        "cpu_khz": [
+          1512000,
+          1512000,
+          1512000,
+          1512000
+        ],
+        "temperature_c": 64.862,
+        "cooling": {
+          "/sys/class/thermal/cooling_device1/cur_state": "0",
+          "/sys/class/thermal/cooling_device0/cur_state": "0"
+        },
+        "vm": "allocstall_dma 0\nallocstall_normal 6221\nallocstall_movable 1\npgmajfault 23929\npgsteal_kswapd 22473051\npgsteal_direct 295713\npgscan_kswapd 24276417\npgscan_direct 396041\npgscan_direct_throttle 0\n",
+        "io": "rchar: 553733029\nwchar: 2135473\nsyscr: 63760\nsyscw: 76306\nread_bytes: 516656128\nwrite_bytes: 0\ncancelled_write_bytes: 0\n"
+      }
+    ]
+  }
+]

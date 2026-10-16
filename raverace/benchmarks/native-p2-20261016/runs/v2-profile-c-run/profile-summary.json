@@ -1,0 +1,441 @@
+{
+  "native": {
+    "window_monotonic": [
+      15376.152183208,
+      15446.608752993
+    ],
+    "samples": 45998,
+    "unknown_self_samples": 570,
+    "top10": [
+      {
+        "function": "live_cull",
+        "samples": 8352,
+        "share": 0.18157311187442932
+      },
+      {
+        "function": "quad_fixed",
+        "samples": 6363,
+        "share": 0.13833210139571286
+      },
+      {
+        "function": "live_compile",
+        "samples": 5209,
+        "share": 0.11324405408930822
+      },
+      {
+        "function": "proj_sat",
+        "samples": 2708,
+        "share": 0.05887212487499457
+      },
+      {
+        "function": "eng_point_read",
+        "samples": 2581,
+        "share": 0.056111135266750725
+      },
+      {
+        "function": "__divti3",
+        "samples": 2529,
+        "share": 0.054980651332666636
+      },
+      {
+        "function": "__memcpy_generic",
+        "samples": 2069,
+        "share": 0.04498021653115353
+      },
+      {
+        "function": "memcmp",
+        "samples": 1830,
+        "share": 0.0397843384494978
+      },
+      {
+        "function": "live_mesh",
+        "samples": 1616,
+        "share": 0.03513196225922866
+      },
+      {
+        "function": "live_batch",
+        "samples": 1583,
+        "share": 0.034414539762598374
+      }
+    ],
+    "stages": {
+      "walk": {
+        "samples": 18602,
+        "top10": [
+          {
+            "function": "quad_fixed",
+            "samples": 6363,
+            "share": 0.34205999354908073
+          },
+          {
+            "function": "proj_sat",
+            "samples": 2708,
+            "share": 0.14557574454359745
+          },
+          {
+            "function": "eng_point_read",
+            "samples": 2581,
+            "share": 0.13874852166433715
+          },
+          {
+            "function": "__divti3",
+            "samples": 2529,
+            "share": 0.13595312332007312
+          },
+          {
+            "function": "emit",
+            "samples": 1535,
+            "share": 0.08251800881625632
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 1040,
+            "share": 0.05590796688528115
+          },
+          {
+            "function": "blit_quads",
+            "samples": 529,
+            "share": 0.028437802386840124
+          },
+          {
+            "function": "pt_read",
+            "samples": 503,
+            "share": 0.027040103214708094
+          },
+          {
+            "function": "eng_walk_list",
+            "samples": 250,
+            "share": 0.013439415116654124
+          },
+          {
+            "function": "geo_hw_object",
+            "samples": 212,
+            "share": 0.011396624018922696
+          }
+        ]
+      },
+      "other": {
+        "samples": 867,
+        "top10": [
+          {
+            "function": "[unknown:[kernel.kallsyms]]",
+            "samples": 133,
+            "share": 0.15340253748558247
+          },
+          {
+            "function": "rr_gl_video_cpu",
+            "samples": 124,
+            "share": 0.14302191464821223
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 116,
+            "share": 0.13379469434832755
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 110,
+            "share": 0.12687427912341406
+          },
+          {
+            "function": "mixer_b",
+            "samples": 85,
+            "share": 0.09803921568627451
+          },
+          {
+            "function": "pw",
+            "samples": 32,
+            "share": 0.03690888119953864
+          },
+          {
+            "function": "scalbnf64",
+            "samples": 30,
+            "share": 0.03460207612456748
+          },
+          {
+            "function": "sext_n",
+            "samples": 24,
+            "share": 0.02768166089965398
+          },
+          {
+            "function": "[unknown:/userdata/system/rave-racer-native-p2-20261016/v2-profile-c]",
+            "samples": 21,
+            "share": 0.02422145328719723
+          },
+          {
+            "function": "rr_p1_prepare",
+            "samples": 19,
+            "share": 0.02191464821222607
+          }
+        ]
+      },
+      "compiler": {
+        "samples": 26529,
+        "top10": [
+          {
+            "function": "live_cull",
+            "samples": 8352,
+            "share": 0.3148252855365826
+          },
+          {
+            "function": "live_compile",
+            "samples": 5209,
+            "share": 0.19635116287835952
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 1901,
+            "share": 0.07165743149006748
+          },
+          {
+            "function": "memcmp",
+            "samples": 1830,
+            "share": 0.0689811150062196
+          },
+          {
+            "function": "live_mesh",
+            "samples": 1616,
+            "share": 0.06091447095631196
+          },
+          {
+            "function": "live_batch",
+            "samples": 1583,
+            "share": 0.059670549210298164
+          },
+          {
+            "function": "p2_palettes",
+            "samples": 1581,
+            "share": 0.059595160013570056
+          },
+          {
+            "function": "msort_with_tmp.part.0",
+            "samples": 1437,
+            "share": 0.054167137849146216
+          },
+          {
+            "function": "live_material",
+            "samples": 1375,
+            "share": 0.05183007275057484
+          },
+          {
+            "function": "live_painter",
+            "samples": 508,
+            "share": 0.01914885596893965
+          }
+        ]
+      }
+    }
+  },
+  "dense": {
+    "window_monotonic": [
+      15405.46980994,
+      15406.153750181
+    ],
+    "samples": 603,
+    "unknown_self_samples": 6,
+    "top10": [
+      {
+        "function": "live_cull",
+        "samples": 107,
+        "share": 0.17744610281923714
+      },
+      {
+        "function": "quad_fixed",
+        "samples": 70,
+        "share": 0.11608623548922056
+      },
+      {
+        "function": "live_compile",
+        "samples": 60,
+        "share": 0.09950248756218906
+      },
+      {
+        "function": "proj_sat",
+        "samples": 42,
+        "share": 0.06965174129353234
+      },
+      {
+        "function": "eng_point_read",
+        "samples": 41,
+        "share": 0.06799336650082918
+      },
+      {
+        "function": "__memcpy_generic",
+        "samples": 40,
+        "share": 0.06633499170812604
+      },
+      {
+        "function": "__divti3",
+        "samples": 30,
+        "share": 0.04975124378109453
+      },
+      {
+        "function": "live_mesh",
+        "samples": 27,
+        "share": 0.04477611940298507
+      },
+      {
+        "function": "live_batch",
+        "samples": 24,
+        "share": 0.03980099502487562
+      },
+      {
+        "function": "p2_palettes",
+        "samples": 24,
+        "share": 0.03980099502487562
+      }
+    ],
+    "stages": {
+      "compiler": {
+        "samples": 350,
+        "top10": [
+          {
+            "function": "live_cull",
+            "samples": 107,
+            "share": 0.3057142857142857
+          },
+          {
+            "function": "live_compile",
+            "samples": 60,
+            "share": 0.17142857142857143
+          },
+          {
+            "function": "__memcpy_generic",
+            "samples": 37,
+            "share": 0.10571428571428572
+          },
+          {
+            "function": "live_mesh",
+            "samples": 27,
+            "share": 0.07714285714285714
+          },
+          {
+            "function": "live_batch",
+            "samples": 24,
+            "share": 0.06857142857142857
+          },
+          {
+            "function": "p2_palettes",
+            "samples": 24,
+            "share": 0.06857142857142857
+          },
+          {
+            "function": "msort_with_tmp.part.0",
+            "samples": 20,
+            "share": 0.05714285714285714
+          },
+          {
+            "function": "live_material",
+            "samples": 18,
+            "share": 0.05142857142857143
+          },
+          {
+            "function": "memcmp",
+            "samples": 16,
+            "share": 0.045714285714285714
+          },
+          {
+            "function": "live_painter",
+            "samples": 7,
+            "share": 0.02
+          }
+        ]
+      },
+      "other": {
+        "samples": 10,
+        "top10": [
+          {
+            "function": "__memcpy_generic",
+            "samples": 3,
+            "share": 0.3
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 2,
+            "share": 0.2
+          },
+          {
+            "function": "rr_gl_video_cpu",
+            "samples": 1,
+            "share": 0.1
+          },
+          {
+            "function": "prepare",
+            "samples": 1,
+            "share": 0.1
+          },
+          {
+            "function": "getenv",
+            "samples": 1,
+            "share": 0.1
+          },
+          {
+            "function": "pthread_cond_wait",
+            "samples": 1,
+            "share": 0.1
+          },
+          {
+            "function": "mixer_b",
+            "samples": 1,
+            "share": 0.1
+          }
+        ]
+      },
+      "walk": {
+        "samples": 243,
+        "top10": [
+          {
+            "function": "quad_fixed",
+            "samples": 70,
+            "share": 0.2880658436213992
+          },
+          {
+            "function": "proj_sat",
+            "samples": 42,
+            "share": 0.1728395061728395
+          },
+          {
+            "function": "eng_point_read",
+            "samples": 41,
+            "share": 0.16872427983539096
+          },
+          {
+            "function": "__divti3",
+            "samples": 30,
+            "share": 0.12345679012345678
+          },
+          {
+            "function": "emit",
+            "samples": 23,
+            "share": 0.09465020576131687
+          },
+          {
+            "function": "__memset_zva64",
+            "samples": 14,
+            "share": 0.05761316872427984
+          },
+          {
+            "function": "pt_read",
+            "samples": 9,
+            "share": 0.037037037037037035
+          },
+          {
+            "function": "eng_walk_list",
+            "samples": 5,
+            "share": 0.0205761316872428
+          },
+          {
+            "function": "[unknown:[kernel.kallsyms]]",
+            "samples": 4,
+            "share": 0.01646090534979424
+          },
+          {
+            "function": "blit_quads",
+            "samples": 3,
+            "share": 0.012345679012345678
+          }
+        ]
+      }
+    }
+  }
+}

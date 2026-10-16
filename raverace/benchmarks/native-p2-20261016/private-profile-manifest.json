@@ -1,0 +1,104 @@
+[
+  {
+    "file": "freeze-check/dmesg.txt",
+    "bytes": 7480,
+    "sha256": "c6302b58c0d017c0c77aa059aa63ddbb1d250932a2e752547266f9c1c61badbc",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/freeze-check/dmesg.txt"
+  },
+  {
+    "file": "profile-a-run/perf-script.txt",
+    "bytes": 31390448,
+    "sha256": "09428a447b994fb4c8c6b503e8cc1d13f5bff44f2b6903ba09381ea908406418",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/profile-a-run/perf-script.txt"
+  },
+  {
+    "file": "profile-a-run/perf.data",
+    "bytes": 6119480,
+    "sha256": "b1b2e9abd45708164c16b19e7fc7fcc34750268be017f18122e50c39a1fc7ae8",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/profile-a-run/perf.data"
+  },
+  {
+    "file": "profile-play-run/perf-script.txt",
+    "bytes": 35889494,
+    "sha256": "c72ee0bb8d802a1676d30b828b2ea55d84ce6362744aa33f6ae486e0b371eab8",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/profile-play-run/perf-script.txt"
+  },
+  {
+    "file": "profile-play-run/perf.data",
+    "bytes": 6993840,
+    "sha256": "7c6d00144fa852196b78a0c92c6bb2b5203803122291fc39c27cb766f6b84179",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/profile-play-run/perf.data"
+  },
+  {
+    "file": "v2-profile-a-run/perf-script.txt",
+    "bytes": 31944529,
+    "sha256": "e88cfed4747fb94d47f5c78ba63c42896c61cf39f339149ce223d0d7e2913f6a",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-a-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-a-run/perf.data",
+    "bytes": 6084860,
+    "sha256": "64c54411e78bf2cc1d77ee4bb9df32cff06962aa25615a780c2ce0034b0e32c0",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-a-run/perf.data"
+  },
+  {
+    "file": "v2-profile-b-run/perf-script.txt",
+    "bytes": 32095949,
+    "sha256": "63c552b1db266df663d2a37507414991bdc5bf8925c733a16b44c6a5d8e59ef7",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-b-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-b-run/perf.data",
+    "bytes": 6114284,
+    "sha256": "77b5297406c562c9aab9857cdd24a89a4b1fedfb05b5e36b2c98e52e30db440a",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-b-run/perf.data"
+  },
+  {
+    "file": "v2-profile-c-run/perf-script.txt",
+    "bytes": 32439452,
+    "sha256": "a77e8537ff3425e17fb4571fb7c0433ce207e03611224a6758c19759a76ecbac",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-c-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-c-run/perf.data",
+    "bytes": 6193652,
+    "sha256": "b5b227a568d5d1a1a007df66515e60d650001f25931187f78020811679092762",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-c-run/perf.data"
+  },
+  {
+    "file": "v2-profile-d-run/perf-script.txt",
+    "bytes": 32456410,
+    "sha256": "ef4d16b37291172f75d33feb1e478b8fabc021ace49c2a7073cd1ab14f45fb37",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-d-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-d-run/perf.data",
+    "bytes": 6201340,
+    "sha256": "5e20d94016767b08e94f1781303b5e31a386933472b9fb39ebceba76bd85a3d3",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-d-run/perf.data"
+  },
+  {
+    "file": "v2-profile-e-run/perf-script.txt",
+    "bytes": 33779477,
+    "sha256": "390e0aaa146cf5e1787ce15b22df9c76ebfe8c00dd1a0bb9720a124ddb358782",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-e-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-e-run/perf.data",
+    "bytes": 6459980,
+    "sha256": "da67efc85d34c181e62ae0f5292d508fd0f010f4d2b58362296a990b19935414",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-e-run/perf.data"
+  },
+  {
+    "file": "v2-profile-play-run/perf-script.txt",
+    "bytes": 36612104,
+    "sha256": "16b7bfaf31bb07db828d01d41c5acb2d97f8b62cd0f0dd24fb8f430764053da1",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-play-run/perf-script.txt"
+  },
+  {
+    "file": "v2-profile-play-run/perf.data",
+    "bytes": 6976628,
+    "sha256": "e3ec8075500f2414171161733ae5ea4a3dce29651a3a6a5204f760a3378489ee",
+    "retained_ignored_path": "raverace/native/generated/p2/hardware/v2-profile-play-run/perf.data"
+  }
+]

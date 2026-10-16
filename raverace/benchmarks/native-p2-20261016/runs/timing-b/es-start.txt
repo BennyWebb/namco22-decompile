@@ -1,0 +1,39 @@
+error: invalid command --screen
+/usr/bin/knulli-resolution listOutputs
+/usr/bin/knulli-resolution currentResolution
+/usr/bin/knulli-resolution setOutput
+error: invalid command --screen
+/usr/bin/knulli-resolution listOutputs
+/usr/bin/knulli-resolution currentResolution
+/usr/bin/knulli-resolution setOutput
+which: no xrandr in (/usr/bin:/bin:/usr/sbin:/sbin)
+which: no batocera-backglass in (/usr/bin:/bin:/usr/sbin:/sbin)
+2026-10-16 11:13:14	ERROR	System "amiga" is missing name, extension, or command!
+2026-10-16 11:13:14	ERROR	System "library" path does not exist !
+2026-10-16 11:13:14	ERROR	System "msx" is missing name, extension, or command!
+2026-10-16 11:13:14	ERROR	System "recordings" path does not exist !
+hooking /usr/share/emulationstation/hooks/preupdate-gamelists-scummvm.sh
+/userdata/roms/scummvm/_info.txt does not exist. Aborting.
+2026-10-16 11:13:15	ERROR	HttpReq::onError (3) : Error
+ping: google.com: Temporary failure in name resolution
+2026-10-16 11:28:25	ERROR	Error executing timeout 1 ping -c 1 -t 255 google.com
+ping: connect: Network is unreachable
+2026-10-16 11:28:25	ERROR	Error executing timeout 1 ping -c 1 -t 255 8.8.8.8
+ping: connect: Network is unreachable
+2026-10-16 11:28:25	ERROR	Error executing timeout 2 ping -c 1 -t 255 8.8.4.4
+Stopping connman: Disable wifi
+done.Starting connman: Disable wifi
+done.ping: google.com: Temporary failure in name resolution
+2026-10-16 11:28:30	ERROR	Error executing timeout 1 ping -c 1 -t 255 google.com
+ping: connect: Network is unreachable
+2026-10-16 11:28:30	ERROR	Error executing timeout 1 ping -c 1 -t 255 8.8.8.8
+ping: connect: Network is unreachable
+2026-10-16 11:28:30	ERROR	Error executing timeout 2 ping -c 1 -t 255 8.8.4.4
+Stopping connman: Disable wifi
+done.Starting connman: done.Scan completed for wifi
+PING google.com (172.217.76.113) 56(84) bytes of data.
+64 bytes from yulhrp-in-f113.1e100.net (172.217.76.113): icmp_seq=1 ttl=109 time=17.1 ms
+
+--- google.com ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 17.094/17.094/17.094/0.000 ms

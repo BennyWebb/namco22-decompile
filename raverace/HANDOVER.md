@@ -5,6 +5,44 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
+## Milestone P2 — COMPLETE / performance FAIL / STOPPED (2026-10-16)
+
+See [P2 report](NATIVE_P2_REPORT.md) and
+[evidence/methods](benchmarks/native-p2-20261016/README.md). Isolated final build
+is `native/generated/p2/b-play/arm/rr_p1b` (`v2-b-play` on the diagnostic device),
+SHA256 `7f313d01fd5c76c8a0af9babc4e60a794968a85f01fca086b829bf242fccf5c3`.
+Selected: complete play/validation split, exact palette revision/material cache,
+and selective palette gathering. Metadata, guarded Z reuse and permutation sorting
+preserve exact output but lack net measured benefit and are rejected for adoption.
+Private derivation/reproduction scripts are under `native/p2`; production unchanged.
+
+Fixed CPU1512MHz, GPU stock, queue2/valveOFF/O2/stack protection/no affinity.
+Nine headline runs and all five separate compiler experiments completed. Final
+headline dense prep p99 is14.310/14.739/14.811ms: all exceed14ms, gate FAIL.
+All three final runs have settled underruns0, main gaps>50ms0 and inferred repeats0;
+full-native carry-in remains776/898/924 audio sample frames. All corrected validation
+builds pass6006 ticks/all21 checkpoint sets/exact4207 packets/36 Mali images.
+All46 complete hardware replays (including attribution/preliminary/soak) independently
+pass authoritative state; play builds intentionally omit packet/image hashing.
+
+Continuous1852.85s/14-process replay-loop soak:986.39s native exposure,3 inferred
+repeats,2131 settled underrun frames and one64.068ms main gap at lap11/tick3966.
+Actual game PID/stacks captured; simulation62.793ms, no queue block, short prepare/draw.
+Bracketing samples miss the instant; exact CPU/scheduling cause UNKNOWN, with no
+sampled reclaim-counter increase. Lap13/tick3515 is a presentation-side late event.
+Peak67.778°C, CPU1512MHz/cooling0 throughout; GPU cooling active later. No CPU-triggered
+1416MHz repeat required. User: “Looks and sounds good.” Quantitative soak gate fails.
+No safe single-process reset exists; per-lap reload/reclaim counters are retained.
+
+All47 protected hashes pass; production SHA remains
+`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`.
+All35 independent sessions restore clocks/production hashes and ES. Final CPU
+schedutil480–1512MHz/GPU simple_ondemand restored, ES PID3285, no game/sampler/perf.
+No commits, pushes, production deployment, simulation/audio/fallback/coverage,
+texture-format or display-timing changes. Historical P1/P1b/M3 gates remain unchanged.
+STOPPED. Further optimisation, texture work, broader coverage and productisation
+require separate user authorisation.
+
 ## Milestone P1b — COMPLETE / performance FAIL / STOPPED (2026-10-16)
 
 See [P1b report](NATIVE_P1B_REPORT.md) and

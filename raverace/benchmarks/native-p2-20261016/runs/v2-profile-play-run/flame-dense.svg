@@ -1,0 +1,287 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+<style>text{font:11px monospace}rect{stroke:white;stroke-width:.5}</style>
+<text x="4" y="14">flame-dense; 723 samples; attribution only</text>
+<g><title>thread_start — 723 samples (100.00%)</title><rect x="0.000" y="360" width="1200.000" height="19" fill="rgb(245,182,99)"/>
+<text x="3.000" y="373">thread_start</text>
+</g>
+<g><title>start_thread — 723 samples (100.00%)</title><rect x="0.000" y="340" width="1200.000" height="19" fill="rgb(245,106,54)"/>
+<text x="3.000" y="353">start_thread</text>
+</g>
+<g><title>prepare — 723 samples (100.00%)</title><rect x="0.000" y="320" width="1200.000" height="19" fill="rgb(245,123,63)"/>
+<text x="3.000" y="333">prepare</text>
+</g>
+<g><title>pthread_cond_broadcast — 1 samples (0.14%)</title><rect x="0.000" y="300" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="280" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="260" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="240" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="220" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="200" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="180" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="160" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="0.000" y="140" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>rr_gl_video_cpu — 1 samples (0.14%)</title><rect x="1.660" y="300" width="1.660" height="19" fill="rgb(245,184,100)"/>
+</g>
+<g><title>rr_p1_prepare — 721 samples (99.72%)</title><rect x="3.320" y="300" width="1196.680" height="19" fill="rgb(245,175,95)"/>
+<text x="6.320" y="313">rr_p1_prepare</text>
+</g>
+<g><title>__memcpy_generic — 4 samples (0.55%)</title><rect x="3.320" y="280" width="6.639" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>__memset_zva64 — 1 samples (0.14%)</title><rect x="9.959" y="280" width="1.660" height="19" fill="rgb(245,110,56)"/>
+</g>
+<g><title>eng_walk_list — 222 samples (30.71%)</title><rect x="11.618" y="280" width="368.465" height="19" fill="rgb(245,109,55)"/>
+<text x="14.618" y="293">eng_walk_list</text>
+</g>
+<g><title>geo_hw_object — 222 samples (30.71%)</title><rect x="11.618" y="260" width="368.465" height="19" fill="rgb(245,164,88)"/>
+<text x="14.618" y="273">geo_hw_object</text>
+</g>
+<g><title>blit_quads — 216 samples (29.88%)</title><rect x="11.618" y="240" width="358.506" height="19" fill="rgb(245,174,94)"/>
+<text x="14.618" y="253">blit_quads</text>
+</g>
+<g><title>__memset_zva64 — 7 samples (0.97%)</title><rect x="11.618" y="220" width="11.618" height="19" fill="rgb(245,110,56)"/>
+</g>
+<g><title>eng_point_read — 20 samples (2.77%)</title><rect x="23.237" y="220" width="33.195" height="19" fill="rgb(245,113,58)"/>
+<text x="26.237" y="233">eng</text>
+</g>
+<g><title>proj_sat — 3 samples (0.41%)</title><rect x="56.432" y="220" width="4.979" height="19" fill="rgb(245,142,75)"/>
+</g>
+<g><title>pt_read — 3 samples (0.41%)</title><rect x="61.411" y="220" width="4.979" height="19" fill="rgb(245,166,89)"/>
+</g>
+<g><title>quad_fixed — 181 samples (25.03%)</title><rect x="66.390" y="220" width="300.415" height="19" fill="rgb(245,111,56)"/>
+<text x="69.390" y="233">quad_fixed</text>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="200" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="180" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="160" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="140" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="120" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="100" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="80" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="60" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="66.390" y="40" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>__divti3 — 34 samples (4.70%)</title><rect x="68.050" y="200" width="56.432" height="19" fill="rgb(245,113,58)"/>
+<text x="71.050" y="213">__divti</text>
+</g>
+<g><title>__memset_zva64 — 4 samples (0.55%)</title><rect x="124.481" y="200" width="6.639" height="19" fill="rgb(245,110,56)"/>
+</g>
+<g><title>emit — 23 samples (3.18%)</title><rect x="131.120" y="200" width="38.174" height="19" fill="rgb(245,150,80)"/>
+<text x="134.120" y="213">emit</text>
+</g>
+<g><title>eng_point_read — 11 samples (1.52%)</title><rect x="169.295" y="200" width="18.257" height="19" fill="rgb(245,113,58)"/>
+</g>
+<g><title>proj_sat — 35 samples (4.84%)</title><rect x="187.552" y="200" width="58.091" height="19" fill="rgb(245,142,75)"/>
+<text x="190.552" y="213">proj_sa</text>
+</g>
+<g><title>pt_read — 1 samples (0.14%)</title><rect x="245.643" y="200" width="1.660" height="19" fill="rgb(245,166,89)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="180" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="160" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="140" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="120" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="100" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="80" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="60" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="40" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="245.643" y="20" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>sext_n — 1 samples (0.14%)</title><rect x="366.805" y="220" width="1.660" height="19" fill="rgb(245,182,99)"/>
+</g>
+<g><title>eng_point_read — 6 samples (0.83%)</title><rect x="370.124" y="240" width="9.959" height="19" fill="rgb(245,113,58)"/>
+</g>
+<g><title>live_compile — 479 samples (66.25%)</title><rect x="380.083" y="280" width="795.021" height="19" fill="rgb(245,147,78)"/>
+<text x="383.083" y="293">live_compile</text>
+</g>
+<g><title>[unknown:/userdata/system/rave-racer-native-p2-20261016/v2-profile-play] — 2 samples (0.28%)</title><rect x="380.083" y="260" width="3.320" height="19" fill="rgb(245,121,62)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 3 samples (0.41%)</title><rect x="383.402" y="260" width="4.979" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 3 samples (0.41%)</title><rect x="383.402" y="240" width="4.979" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 3 samples (0.41%)</title><rect x="383.402" y="220" width="4.979" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 3 samples (0.41%)</title><rect x="383.402" y="200" width="4.979" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 2 samples (0.28%)</title><rect x="383.402" y="180" width="3.320" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="383.402" y="160" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="383.402" y="140" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="383.402" y="120" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>[unknown:[kernel.kallsyms]] — 1 samples (0.14%)</title><rect x="383.402" y="100" width="1.660" height="19" fill="rgb(245,161,87)"/>
+</g>
+<g><title>live_cull — 116 samples (16.04%)</title><rect x="388.382" y="260" width="192.531" height="19" fill="rgb(245,147,78)"/>
+<text x="391.382" y="273">live_cull</text>
+</g>
+<g><title>__scalbn — 1 samples (0.14%)</title><rect x="388.382" y="240" width="1.660" height="19" fill="rgb(245,146,77)"/>
+</g>
+<g><title>scalbnf64 — 1 samples (0.14%)</title><rect x="390.041" y="240" width="1.660" height="19" fill="rgb(245,155,83)"/>
+</g>
+<g><title>live_material — 20 samples (2.77%)</title><rect x="580.913" y="260" width="33.195" height="19" fill="rgb(245,102,51)"/>
+<text x="583.913" y="273">liv</text>
+</g>
+<g><title>live_recipe_compare — 42 samples (5.81%)</title><rect x="614.108" y="260" width="69.710" height="19" fill="rgb(245,108,55)"/>
+<text x="617.108" y="273">live_rec</text>
+</g>
+<g><title>memcmp — 59 samples (8.16%)</title><rect x="683.817" y="260" width="97.925" height="19" fill="rgb(245,115,59)"/>
+<text x="686.817" y="273">memcmp</text>
+</g>
+<g><title>qsort_r — 104 samples (14.38%)</title><rect x="781.743" y="260" width="172.614" height="19" fill="rgb(245,119,61)"/>
+<text x="784.743" y="273">qsort_r</text>
+</g>
+<g><title>__memcpy_generic — 24 samples (3.32%)</title><rect x="781.743" y="240" width="39.834" height="19" fill="rgb(245,165,89)"/>
+<text x="784.743" y="253">__me</text>
+</g>
+<g><title>indirect_msort_with_tmp — 47 samples (6.50%)</title><rect x="821.577" y="240" width="78.008" height="19" fill="rgb(245,175,95)"/>
+<text x="824.577" y="253">indirect_m</text>
+</g>
+<g><title>live_batch — 3 samples (0.41%)</title><rect x="821.577" y="220" width="4.979" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 42 samples (5.81%)</title><rect x="826.556" y="220" width="69.710" height="19" fill="rgb(245,112,57)"/>
+<text x="829.556" y="233">msort_wi</text>
+</g>
+<g><title>live_batch — 3 samples (0.41%)</title><rect x="826.556" y="200" width="4.979" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_painter — 1 samples (0.14%)</title><rect x="831.535" y="200" width="1.660" height="19" fill="rgb(245,109,55)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 35 samples (4.84%)</title><rect x="833.195" y="200" width="58.091" height="19" fill="rgb(245,112,57)"/>
+<text x="836.195" y="213">msort_w</text>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="833.195" y="180" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_batch — 2 samples (0.28%)</title><rect x="834.855" y="180" width="3.320" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_painter — 1 samples (0.14%)</title><rect x="838.174" y="180" width="1.660" height="19" fill="rgb(245,109,55)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 31 samples (4.29%)</title><rect x="839.834" y="180" width="51.452" height="19" fill="rgb(245,112,57)"/>
+<text x="842.834" y="193">msort_</text>
+</g>
+<g><title>live_batch — 2 samples (0.28%)</title><rect x="839.834" y="160" width="3.320" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 29 samples (4.01%)</title><rect x="843.154" y="160" width="48.133" height="19" fill="rgb(245,112,57)"/>
+<text x="846.154" y="173">msort</text>
+</g>
+<g><title>live_batch — 2 samples (0.28%)</title><rect x="843.154" y="140" width="3.320" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 26 samples (3.60%)</title><rect x="846.473" y="140" width="43.154" height="19" fill="rgb(245,112,57)"/>
+<text x="849.473" y="153">msort</text>
+</g>
+<g><title>msort_with_tmp.part.0 — 24 samples (3.32%)</title><rect x="846.473" y="120" width="39.834" height="19" fill="rgb(245,112,57)"/>
+<text x="849.473" y="133">msor</text>
+</g>
+<g><title>live_painter — 1 samples (0.14%)</title><rect x="846.473" y="100" width="1.660" height="19" fill="rgb(245,109,55)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 22 samples (3.04%)</title><rect x="848.133" y="100" width="36.515" height="19" fill="rgb(245,112,57)"/>
+<text x="851.133" y="113">msor</text>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="848.133" y="80" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_batch — 2 samples (0.28%)</title><rect x="849.793" y="80" width="3.320" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 19 samples (2.63%)</title><rect x="853.112" y="80" width="31.535" height="19" fill="rgb(245,112,57)"/>
+<text x="856.112" y="93">mso</text>
+</g>
+<g><title>live_batch — 3 samples (0.41%)</title><rect x="853.112" y="60" width="4.979" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_painter — 1 samples (0.14%)</title><rect x="858.091" y="60" width="1.660" height="19" fill="rgb(245,109,55)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 14 samples (1.94%)</title><rect x="859.751" y="60" width="23.237" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>__memcpy_generic — 3 samples (0.41%)</title><rect x="859.751" y="40" width="4.979" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 11 samples (1.52%)</title><rect x="864.730" y="40" width="18.257" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>live_batch — 3 samples (0.41%)</title><rect x="864.730" y="20" width="4.979" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_painter — 2 samples (0.28%)</title><rect x="869.710" y="20" width="3.320" height="19" fill="rgb(245,109,55)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 5 samples (0.69%)</title><rect x="873.029" y="20" width="8.299" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>live_visible — 1 samples (0.14%)</title><rect x="899.585" y="240" width="1.660" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 32 samples (4.43%)</title><rect x="901.245" y="240" width="53.112" height="19" fill="rgb(245,112,57)"/>
+<text x="904.245" y="253">msort_</text>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="901.245" y="220" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_visible — 1 samples (0.14%)</title><rect x="902.905" y="220" width="1.660" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 30 samples (4.15%)</title><rect x="904.564" y="220" width="49.793" height="19" fill="rgb(245,112,57)"/>
+<text x="907.564" y="233">msort_</text>
+</g>
+<g><title>live_visible — 1 samples (0.14%)</title><rect x="904.564" y="200" width="1.660" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 29 samples (4.01%)</title><rect x="906.224" y="200" width="48.133" height="19" fill="rgb(245,112,57)"/>
+<text x="909.224" y="213">msort</text>
+</g>
+<g><title>live_visible — 3 samples (0.41%)</title><rect x="906.224" y="180" width="4.979" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 24 samples (3.32%)</title><rect x="911.203" y="180" width="39.834" height="19" fill="rgb(245,112,57)"/>
+<text x="914.203" y="193">msor</text>
+</g>
+<g><title>live_visible — 2 samples (0.28%)</title><rect x="911.203" y="160" width="3.320" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 21 samples (2.90%)</title><rect x="914.523" y="160" width="34.855" height="19" fill="rgb(245,112,57)"/>
+<text x="917.523" y="173">mso</text>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="914.523" y="140" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_batch — 1 samples (0.14%)</title><rect x="916.183" y="140" width="1.660" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_visible — 1 samples (0.14%)</title><rect x="917.842" y="140" width="1.660" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 18 samples (2.49%)</title><rect x="919.502" y="140" width="29.876" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>live_batch — 1 samples (0.14%)</title><rect x="919.502" y="120" width="1.660" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 16 samples (2.21%)</title><rect x="921.162" y="120" width="26.556" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>live_visible — 4 samples (0.55%)</title><rect x="921.162" y="100" width="6.639" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 11 samples (1.52%)</title><rect x="927.801" y="100" width="18.257" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>live_visible — 2 samples (0.28%)</title><rect x="927.801" y="80" width="3.320" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 8 samples (1.11%)</title><rect x="931.120" y="80" width="13.278" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="931.120" y="60" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_batch — 1 samples (0.14%)</title><rect x="932.780" y="60" width="1.660" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>msort_with_tmp.part.0 — 5 samples (0.69%)</title><rect x="934.440" y="60" width="8.299" height="19" fill="rgb(245,112,57)"/>
+</g>
+<g><title>__memcpy_generic — 1 samples (0.14%)</title><rect x="934.440" y="40" width="1.660" height="19" fill="rgb(245,165,89)"/>
+</g>
+<g><title>live_batch — 1 samples (0.14%)</title><rect x="936.100" y="40" width="1.660" height="19" fill="rgb(245,171,92)"/>
+</g>
+<g><title>live_visible — 2 samples (0.28%)</title><rect x="937.759" y="40" width="3.320" height="19" fill="rgb(245,156,83)"/>
+</g>
+<g><title>live_mesh — 15 samples (2.07%)</title><rect x="1175.104" y="280" width="24.896" height="19" fill="rgb(245,122,63)"/>
+</g>
+</svg>

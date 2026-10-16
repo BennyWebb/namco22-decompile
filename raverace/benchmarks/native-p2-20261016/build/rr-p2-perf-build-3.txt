@@ -1,0 +1,392 @@
+make: Entering directory '/tmp/rr-p2-perf/tools/perf'
+  BUILD:   Doing 'make [33m-j16[m' parallel build
+Warning: arch/x86/include/asm/disabled-features.h differs from kernel
+Warning: arch/x86/include/asm/required-features.h differs from kernel
+Warning: arch/x86/include/asm/cpufeatures.h differs from kernel
+Warning: arch/arm/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/perf_regs.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/x86/include/uapi/asm/svm.h differs from kernel
+Warning: arch/x86/include/uapi/asm/vmx.h differs from kernel
+Warning: arch/powerpc/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/s390/include/uapi/asm/kvm_perf.h differs from kernel
+Warning: arch/s390/include/uapi/asm/sie.h differs from kernel
+Warning: arch/arm/include/uapi/asm/kvm.h differs from kernel
+Warning: arch/x86/lib/memcpy_64.S differs from kernel
+Warning: arch/x86/lib/memset_64.S differs from kernel
+sh: 1: command: Illegal option -c
+
+Auto-detecting system features:
+...                         dwarf: [ [31mOFF[m ]
+...            dwarf_getlocations: [ [31mOFF[m ]
+...                         glibc: [ [32mon[m  ]
+...                          gtk2: [ [31mOFF[m ]
+...                      libaudit: [ [31mOFF[m ]
+...                        libbfd: [ [31mOFF[m ]
+...                        libelf: [ [31mOFF[m ]
+...                       libnuma: [ [31mOFF[m ]
+...        numa_num_possible_cpus: [ [31mOFF[m ]
+...                       libperl: [ [31mOFF[m ]
+...                     libpython: [ [31mOFF[m ]
+...                      libslang: [ [31mOFF[m ]
+...                     libcrypto: [ [31mOFF[m ]
+...                     libunwind: [ [31mOFF[m ]
+...            libdw-dwarf-unwind: [ [31mOFF[m ]
+...                          zlib: [ [32mon[m  ]
+...                          lzma: [ [32mon[m  ]
+...                     get_cpuid: [ [31mOFF[m ]
+...                           bpf: [ [32mon[m  ]
+
+Makefile.config:360: No sys/sdt.h found, no SDT events are defined, please install systemtap-sdt-devel or systemtap-sdt-dev
+Makefile.config:433: Disabling post unwind, no support found.
+Makefile.config:519: GTK2 not found, disables GTK2 support. Please install gtk2-devel or libgtk2.0-dev
+Makefile.config:569: Python support disabled by user
+make[3]: *** No rule to make target 'kernelversion'.  Stop.
+  CC       cpu.o
+  CC       debug.o
+  CC       str_error_r.o
+  CC       fd/array.o
+  CC       exec-cmd.o
+  CC       fs/fs.o
+  CC       pmu-events/pmu-events.o
+  CC       help.o
+  CC       fs/tracing_path.o
+  CC       pager.o
+  CC       parse-options.o
+  CC       run-command.o
+  CC       event-parse.o
+  CC       util/alias.o
+  CC       plugin_jbd2.o
+  LD       pmu-events/pmu-events-in.o
+In file included from ../str_error_r.c:4:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/libc-header-start.h:33,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/string.h:26,
+                 from ../str_error_r.c:2:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       event-plugin.o
+  CC       builtin-bench.o
+cc1: all warnings being treated as errors
+In file included from fs/tracing_path.c:8:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/libc-header-start.h:33,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/stdio.h:28,
+                 from fs/tracing_path.c:5:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+mv: cannot stat './.str_error_r.o.tmp': No such file or directory
+make[4]: *** [Build:9: str_error_r.o] Error 1
+  CC       builtin-annotate.o
+make[4]: *** Waiting for unfinished jobs....
+In file included from run-command.c:6:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from run-command.c:1:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       builtin-config.o
+In file included from help.c:10:
+subcmd-util.h: In function ‘xrealloc’:
+subcmd-util.h:57:31: error: pointer ‘ptr’ may be used after ‘realloc’ [-Werror=use-after-free]
+   57 |                         ret = realloc(ptr, 1);
+      |                               ^~~~~~~~~~~~~~~
+subcmd-util.h:51:21: note: call to ‘realloc’ here
+   51 |         void *ret = realloc(ptr, size);
+      |                     ^~~~~~~~~~~~~~~~~~
+subcmd-util.h:55:23: error: pointer ‘ptr’ may be used after ‘realloc’ [-Werror=use-after-free]
+   55 |                 ret = realloc(ptr, size);
+      |                       ^~~~~~~~~~~~~~~~~~
+subcmd-util.h:51:21: note: call to ‘realloc’ here
+   51 |         void *ret = realloc(ptr, size);
+      |                     ^~~~~~~~~~~~~~~~~~
+In file included from util/cache.h:8,
+                 from util/alias.c:1:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/assert.h:35,
+                 from util/strbuf.h:41,
+                 from util/cache.h:4:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       trace-seq.o
+fs/fs.c: In function ‘fs__get_mountpoint’:
+fs/fs.c:206:9: error: ‘__builtin_strncpy’ specified bound 4096 equals destination size [-Werror=stringop-truncation]
+  206 |         strncpy(fs->path, override_path, sizeof(fs->path));
+      |         ^
+  LD       plugin_jbd2-in.o
+cc1: all warnings being treated as errors
+  CC       plugin_hrtimer.o
+mv: cannot stat 'fs/.tracing_path.o.tmp': No such file or directory
+make[5]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: fs/tracing_path.o] Error 1
+make[5]: *** Waiting for unfinished jobs....
+  CC       util/annotate.o
+  CC       arch/common.o
+  LD       fd/libapi-in.o
+  CC       ui/setup.o
+  LD       plugin_hrtimer-in.o
+  CC       ui/helpline.o
+  CC       plugin_kmem.o
+  CC       arch/arm64/util/../../arm/util/pmu.o
+In file included from util/cache.h:8,
+                 from builtin-config.c:11:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from util/util.h:44,
+                 from builtin.h:4,
+                 from builtin-config.c:7:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+cc1: all warnings being treated as errors
+In file included from util/cache.h:8,
+                 from builtin-annotate.c:13:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from util/util.h:44,
+                 from builtin.h:4,
+                 from builtin-annotate.c:8:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+mv: cannot stat './.run-command.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:101: run-command.o] Error 1
+make[4]: *** Waiting for unfinished jobs....
+  CC       arch/arm64/util/../../arm/util/auxtrace.o
+  GEN      perf-archive
+cc1: all warnings being treated as errors
+  CC       parse-filter.o
+mv: cannot stat 'util/.alias.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: util/alias.o] Error 1
+make[4]: *** Waiting for unfinished jobs....
+  CC       ui/progress.o
+In file included from ui/../util/cache.h:8,
+                 from ui/setup.c:4:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/lib/gcc/aarch64-buildroot-linux-gnu/13.3.0/include-fixed/pthread.h:30,
+                 from ui/setup.c:1:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+cc1: all warnings being treated as errors
+cc1: all warnings being treated as errors
+  LD       plugin_kmem-in.o
+In file included from util/cache.h:8,
+                 from util/sort.h:9,
+                 from util/annotate.c:12:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from util/util.h:44,
+                 from util/annotate.c:10:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       plugin_kvm.o
+mv: cannot stat './.builtin-config.o.tmp': No such file or directory
+make[3]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: builtin-config.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+mv: cannot stat './.help.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:101: help.o] Error 1
+  CC       plugin_mac80211.o
+  CC       arch/arm64/util/../../arm/util/cs-etm.o
+In file included from /tmp/rr-p2-perf/tools/perf/util/include/../cache.h:8,
+                 from ui/progress.c:1:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/assert.h:35,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../strbuf.h:41,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../cache.h:4:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+In file included from /tmp/rr-p2-perf/tools/perf/util/../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/debug.h:8,
+                 from arch/../util/cpumap.h:9,
+                 from arch/../util/env.h:5,
+                 from arch/common.h:4,
+                 from arch/common.c:3:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/libc-header-start.h:33,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/stdio.h:28,
+                 from arch/common.c:1:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       plugin_sched_switch.o
+cc1: all warnings being treated as errors
+mv: cannot stat 'fs/.fs.o.tmp': No such file or directory
+make[5]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: fs/fs.o] Error 1
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: fs] Error 2
+make[3]: *** [Makefile:43: libapi-in.o] Error 2
+cc1: all warnings being treated as errors
+make[2]: *** [Makefile.perf:516: /tmp/rr-p2-perf/tools/lib/api/libapi.a] Error 2
+make[2]: *** Waiting for unfinished jobs....
+  CC       parse-utils.o
+In file included from /tmp/rr-p2-perf/tools/perf/util/../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/debug.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/cpumap.h:9,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/env.h:5,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/header.h:10,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/session.h:6,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/auxtrace.h:28,
+                 from arch/arm64/util/../../arm/util/auxtrace.c:21:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/sys/types.h:25,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/auxtrace.h:19:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+mv: cannot stat 'ui/.progress.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: ui/progress.o] Error 1
+make[4]: *** Waiting for unfinished jobs....
+  CC       plugin_function.o
+In file included from /tmp/rr-p2-perf/tools/perf/util/../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/debug.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/cpumap.h:9,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/evsel.h:11,
+                 from arch/arm64/util/../../arm/util/cs-etm.h:21,
+                 from arch/arm64/util/../../arm/util/pmu.c:22:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/libc-header-start.h:33,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/string.h:26,
+                 from arch/arm64/util/../../arm/util/pmu.c:18:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  LD       plugin_mac80211-in.o
+  LD       plugin_kvm-in.o
+  CC       plugin_xen.o
+In file included from /tmp/rr-p2-perf/tools/perf/util/include/../../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../debug.h:8,
+                 from ui/helpline.c:5:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/libc-header-start.h:33,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/stdio.h:28,
+                 from ui/helpline.c:1:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+  CC       kbuffer-parse.o
+  LD       plugin_sched_switch-in.o
+cc1: all warnings being treated as errors
+  CC       plugin_scsi.o
+  CC       plugin_cfg80211.o
+  LD       plugin_function-in.o
+mv: cannot stat 'arch/arm64/util/../../arm/util/.pmu.o.tmp': No such file or directory
+make[6]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: arch/arm64/util/../../arm/util/pmu.o] Error 1
+make[6]: *** Waiting for unfinished jobs....
+  LD       plugin_xen-in.o
+  LINK     plugin_hrtimer.so
+  LINK     plugin_jbd2.so
+  LINK     plugin_kmem.so
+  LINK     plugin_kvm.so
+cc1: all warnings being treated as errors
+cc1: all warnings being treated as errors
+In file included from /tmp/rr-p2-perf/tools/perf/util/../ui/../util/cache.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/../ui/helpline.h:7,
+                 from /tmp/rr-p2-perf/tools/perf/util/debug.h:8,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/cpumap.h:9,
+                 from /tmp/rr-p2-perf/tools/perf/util/include/../../util/evsel.h:11,
+                 from arch/arm64/util/../../arm/util/cs-etm.h:21,
+                 from arch/arm64/util/../../arm/util/cs-etm.c:25:
+/tmp/rr-p2-perf/tools/include/linux/string.h:16:15: error: redundant redeclaration of ‘strlcpy’ [-Werror=redundant-decls]
+   16 | extern size_t strlcpy(char *dest, const char *src, size_t size);
+      |               ^~~~~~~
+In file included from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/features.h:511,
+                 from /home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/unistd.h:25,
+                 from /tmp/rr-p2-perf/tools/lib/api/fs/fs.h:5,
+                 from arch/arm64/util/../../arm/util/cs-etm.c:18:
+/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/bits/string_fortified.h:161:1: note: previous definition of ‘strlcpy’ with type ‘size_t(char * restrict,  const char * restrict,  size_t)’ {aka ‘long unsigned int(char * restrict,  const char * restrict,  long unsigned int)’}
+  161 | __NTH (strlcpy (__fortify_clang_overload_arg (char *, __restrict, __dest),
+      | ^~~~~
+mv: cannot stat 'arch/arm64/util/../../arm/util/.auxtrace.o.tmp': No such file or directory
+make[6]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: arch/arm64/util/../../arm/util/auxtrace.o] Error 1
+  LINK     plugin_mac80211.so
+cc1: all warnings being treated as errors
+mv: cannot stat 'arch/.common.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: arch/common.o] Error 1
+make[4]: *** Waiting for unfinished jobs....
+  LINK     plugin_sched_switch.so
+mv: cannot stat 'ui/.setup.o.tmp': No such file or directory
+  LINK     plugin_function.so
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: ui/setup.o] Error 1
+  LD       libtraceevent-in.o
+  LINK     plugin_xen.so
+  LINK     libtraceevent.a
+  LD       plugin_cfg80211-in.o
+  LINK     plugin_cfg80211.so
+cc1: all warnings being treated as errors
+cc1: all warnings being treated as errors
+mv: cannot stat 'ui/.helpline.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: ui/helpline.o] Error 1
+make[3]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: ui] Error 2
+make[3]: *** Waiting for unfinished jobs....
+mv: cannot stat './.builtin-annotate.o.tmp': No such file or directory
+make[3]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:101: builtin-annotate.o] Error 1
+make[2]: *** [Makefile.perf:391: perf-in.o] Error 2
+  LD       plugin_scsi-in.o
+  LINK     plugin_scsi.so
+make[3]: *** [Makefile:43: libsubcmd-in.o] Error 2
+make[2]: *** [Makefile.perf:530: /tmp/rr-p2-perf/tools/lib/subcmd/libsubcmd.a] Error 2
+cc1: all warnings being treated as errors
+mv: cannot stat 'arch/arm64/util/../../arm/util/.cs-etm.o.tmp': No such file or directory
+make[6]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: arch/arm64/util/../../arm/util/cs-etm.o] Error 1
+make[5]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: util] Error 2
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: arm64] Error 2
+make[3]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: arch] Error 2
+cc1: all warnings being treated as errors
+mv: cannot stat 'util/.annotate.o.tmp': No such file or directory
+make[4]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:102: util/annotate.o] Error 1
+make[3]: *** [/tmp/rr-p2-perf/tools/build/Makefile.build:144: util] Error 2
+make[2]: *** [Makefile.perf:492: libperf-in.o] Error 2
+make[1]: *** [Makefile.perf:206: sub-make] Error 2
+make: *** [Makefile:69: all] Error 2
+make: Leaving directory '/tmp/rr-p2-perf/tools/perf'
