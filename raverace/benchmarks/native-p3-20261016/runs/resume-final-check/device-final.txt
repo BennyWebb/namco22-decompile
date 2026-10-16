@@ -1,0 +1,262 @@
+Fri Oct 16 14:45:43 UTC 2026
+26937.54 82030.24
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 08:16 ?        00:00:01 init [3]
+root         2     0  0 08:16 ?        00:00:00 [kthreadd]
+root         4     2  0 08:16 ?        00:00:00 [kworker/0:0H]
+root         6     2  0 08:16 ?        00:00:02 [ksoftirqd/0]
+root         7     2  0 08:16 ?        00:00:37 [rcu_preempt]
+root         8     2  0 08:16 ?        00:00:02 [rcu_sched]
+root         9     2  0 08:16 ?        00:00:00 [rcu_bh]
+root        10     2  0 08:16 ?        00:00:00 [migration/0]
+root        11     2  0 08:16 ?        00:00:00 [lru-add-drain]
+root        12     2  0 08:16 ?        00:00:00 [cpuhp/0]
+root        13     2  0 08:16 ?        00:00:00 [cpuhp/1]
+root        14     2  0 08:16 ?        00:00:00 [migration/1]
+root        15     2  0 08:16 ?        00:00:01 [ksoftirqd/1]
+root        17     2  0 08:16 ?        00:00:00 [kworker/1:0H]
+root        18     2  0 08:16 ?        00:00:00 [cpuhp/2]
+root        19     2  0 08:16 ?        00:00:00 [migration/2]
+root        20     2  0 08:16 ?        00:00:01 [ksoftirqd/2]
+root        22     2  0 08:16 ?        00:00:00 [kworker/2:0H]
+root        23     2  0 08:16 ?        00:00:00 [cpuhp/3]
+root        24     2  0 08:16 ?        00:00:00 [migration/3]
+root        25     2  0 08:16 ?        00:00:01 [ksoftirqd/3]
+root        27     2  0 08:16 ?        00:00:00 [kworker/3:0H]
+root        28     2  0 08:16 ?        00:00:00 [kdevtmpfs]
+root        29     2  0 08:16 ?        00:00:00 [netns]
+root       449     2  0 08:16 ?        00:00:00 [oom_reaper]
+root       450     2  0 08:16 ?        00:00:00 [writeback]
+root       452     2  0 08:16 ?        00:00:00 [kcompactd0]
+root       453     2  0 08:16 ?        00:00:00 [crypto]
+root       454     2  0 08:16 ?        00:00:00 [bioset]
+root       456     2  0 08:16 ?        00:00:00 [kblockd]
+root       511     2  0 08:16 ?        00:00:00 [sys_user]
+root       514     2  0 08:16 ?        00:00:00 [devfreq_wq]
+root       527     2  0 08:16 ?        00:00:00 [cfg80211]
+root       539     2  0 08:16 ?        00:00:00 [irq/322-axp2202]
+root       726     2  0 08:16 ?        00:01:52 [kswapd0]
+root       727     2  0 08:16 ?        00:00:00 [vmstat]
+root       805     2  0 08:16 ?        00:00:00 [SquashFS read w]
+root       867  2955  0 13:17 ?        00:00:00 /usr/sbin/dropbear -W 10485760 -R -2 9
+root       886     2  0 08:16 ?        00:00:00 [bioset]
+root       887     2  0 08:16 ?        00:00:00 [bioset]
+root       888     2  0 08:16 ?        00:00:00 [bioset]
+root       889     2  0 08:16 ?        00:00:00 [bioset]
+root       890     2  0 08:16 ?        00:00:00 [bioset]
+root       891     2  0 08:16 ?        00:00:00 [bioset]
+root       892     2  0 08:16 ?        00:00:00 [bioset]
+root       893     2  0 08:16 ?        00:00:00 [bioset]
+root       894     2  0 08:16 ?        00:00:00 [bioset]
+root       895     2  0 08:16 ?        00:00:00 [bioset]
+root       896     2  0 08:16 ?        00:00:00 [bioset]
+root       897     2  0 08:16 ?        00:00:00 [bioset]
+root       898     2  0 08:16 ?        00:00:00 [bioset]
+root       899     2  0 08:16 ?        00:00:00 [bioset]
+root       900     2  0 08:16 ?        00:00:00 [bioset]
+root       901     2  0 08:16 ?        00:00:00 [bioset]
+root       935     2  0 08:16 ?        00:00:00 [bioset]
+root       938     2  0 08:16 ?        00:00:00 [bioset]
+root       941     2  0 08:16 ?        00:00:00 [bioset]
+root       944     2  0 08:16 ?        00:00:00 [bioset]
+root       947     2  0 08:16 ?        00:00:00 [bioset]
+root       950     2  0 08:16 ?        00:00:00 [bioset]
+root       953     2  0 08:16 ?        00:00:00 [bioset]
+root       956     2  0 08:16 ?        00:00:00 [bioset]
+root       959     2  0 08:16 ?        00:00:00 [memory_wq]
+root       991   867  0 13:18 pts/1    00:00:00 -bash
+root      1048     2  0 08:16 ?        00:00:00 [dm_bufio_cache]
+root      1049     2  0 08:16 ?        00:00:00 [cfinteractive]
+root      1056     2  0 08:16 ?        00:00:00 [irq/295-sunxi-m]
+root      1059     2  0 08:16 ?        00:00:00 [irq/151-sdc0 cd]
+root      1061     2  0 08:16 ?        00:00:10 [irq/296-sunxi-m]
+root      1063     2  0 08:16 ?        00:00:00 [irq/297-sunxi-m]
+root      1066     2  0 08:16 ?        00:00:00 [bioset]
+root      1067     2  0 08:16 ?        00:00:06 [mmcqd/0]
+root      1167     2  0 08:16 ?        00:00:10 [kpktgend_0]
+root      1168     2  0 08:16 ?        00:00:12 [kpktgend_1]
+root      1169     2  0 08:16 ?        00:00:10 [kpktgend_2]
+root      1170     2  0 08:16 ?        00:00:13 [kpktgend_3]
+root      1190     2  0 08:16 ?        00:00:00 [ipv6_addrconf]
+root      1201     2  0 08:16 ?        00:00:00 [krfcommd]
+root      1209     2  0 08:16 ?        00:00:00 [hdcp22_workqueu]
+root      1212     2  0 08:16 ?        00:00:41 [hdmi proc]
+root      1213     2  0 08:16 ?        00:01:00 [cec thread]
+root      1218     2  0 08:16 ?        00:00:05 [usb_pmu_scan]
+root      1256     2  0 08:16 ?        00:00:00 [kworker/3:1H]
+root      1260     2  0 08:16 ?        00:00:14 [loop0]
+root      1262     2  0 08:16 ?        00:00:00 [kworker/2:1H]
+root      1263     2  0 08:16 ?        00:00:00 [kworker/0:1H]
+root      1264     2  0 08:16 ?        00:00:00 [kworker/1:1H]
+root      1266     2  0 08:16 ?        00:00:00 [bioset]
+root      1267     2  0 08:16 ?        00:00:54 [mmcqd/1]
+root      1344     2  0 08:16 ?        00:00:06 [mali-simple-pow]
+root      1347     2  0 08:16 ?        00:00:00 [kbase_job_fault]
+dbus      1382     1  0 08:16 ?        00:00:01 dbus-daemon --system
+root      1394     1  0 08:16 ?        00:00:08 /sbin/syslogd -m 0
+root      1455     2  0 08:16 ?        00:01:18 [ksdioirqd/mmc2]
+root      1456     1  0 08:16 ?        00:00:10 /sbin/udevd -d
+root      1515     1  1 08:16 ?        00:06:48 /usr/bin/pipewire
+root      1750     1  0 08:16 ?        00:01:35 /usr/bin/wireplumber
+root      1753     1  0 08:16 ?        00:00:02 /usr/bin/pipewire -c pipewire-pulse.conf
+root      1972     1  0 08:16 ?        00:00:04 /usr/sbin/wpa_supplicant -u
+root      2051     2  0 08:16 ?        00:00:18 [RTW_XMIT_THREAD]
+root      2052     2  0 08:16 ?        00:01:05 [RTW_RECV_THREAD]
+root      2053     2  0 08:16 ?        00:00:18 [RTW_CMD_THREAD]
+root      2054     2  0 08:16 ?        00:00:09 [RTWHALXT]
+root      2187     1  1 08:16 ?        00:05:26 mount.exfat /dev/mmcblk1p1 /var/knullifs -o noatime
+root      2193     2  0 08:16 ?        00:00:00 [RTWHALXT]
+root      2687     1  0 08:16 ?        00:00:13 /usr/bin/batteryplus
+avahi     2814     1  0 08:16 ?        00:00:10 avahi-daemon: running [KNULLI.local]
+avahi     2815  2814  0 08:16 ?        00:00:00 avahi-daemon: chroot helper
+root      2822     1  0 08:16 ?        00:00:00 /usr/sbin/thd --daemon --triggers /etc/triggerhappy/triggers.d/multimedia_keys.conf --socket /var/run/thd.socket --pidfile /var/run/thd.pid /dev/input/event0 /dev/input/event1
+ntp       2826     1  0 08:16 ?        00:00:05 /usr/sbin/ntpd -u ntp:ntp -g -p /var/run/ntpd.pid
+root      2832     1  0 08:16 ?        00:00:00 login -- root
+root      2833     1  0 08:16 tty4     00:00:00 /bin/bash /usr/bin/knulli-mixer
+root      2834     1  0 08:16 tty5     00:00:00 /sbin/getty 38400 tty5
+root      2861  2833  0 08:16 tty4     00:00:00 /usr/bin/alsamixer -c0
+root      2890  2832  0 08:16 ttyS0    00:00:00 -bash
+root      2918     1  0 08:16 ?        00:00:00 rpc.mountd
+root      2955     1  0 08:16 ?        00:00:00 /usr/sbin/dropbear -W 10485760 -R
+root      3193     1  0 08:17 ?        00:00:00 smbd -D --configfile=/etc/samba/smb.conf
+root      3197  3193  0 08:17 ?        00:00:00 smbd -D --configfile=/etc/samba/smb.conf
+root      3198  3193  0 08:17 ?        00:00:00 smbd -D --configfile=/etc/samba/smb.conf
+root      3200     1  0 08:17 ?        00:00:12 nmbd -D --configfile=/etc/samba/smb.conf
+root      3209     1  0 08:17 ?        00:00:03 python3 /usr/bin/wsdd -w WORKGROUP
+root      3318     1  1 08:17 ?        00:08:38 /usr/bin/python /usr/bin/knulli-rgb
+root      3361  3318  0 08:17 ?        00:00:00 [knulli-settings] <defunct>
+root      4347  2955  0 08:27 ?        00:00:03 /usr/sbin/dropbear -W 10485760 -R -2 9
+root      5718     2  0 14:23 ?        00:00:00 [kworker/u8:1]
+root      8872  2955  0 14:53 ?        00:00:03 /usr/sbin/dropbear -W 10485760 -R -2 9
+root      8914  8872  0 14:54 pts/3    00:00:00 -bash
+root      9718     2  0 14:59 ?        00:00:02 [kworker/2:11]
+root     12636     2  0 15:18 ?        00:00:00 [kworker/u8:0]
+root     13329     2  0 15:24 ?        00:00:00 [kworker/1:1]
+root     13426     2  0 15:24 ?        00:00:03 [kworker/2:3]
+root     13465     2  0 15:25 ?        00:00:00 [kworker/0:10]
+root     13469     2  0 15:25 ?        00:00:00 [kworker/0:14]
+root     13473     2  0 15:25 ?        00:00:00 [kworker/3:3]
+root     13474     2  0 15:25 ?        00:00:00 [kworker/3:4]
+root     13482     2  0 15:25 ?        00:00:03 [kworker/2:5]
+root     13957     2  0 15:28 ?        00:00:07 [kworker/u9:2]
+root     14294     2  0 15:34 ?        00:00:00 [kworker/0:0]
+root     14318     2  0 15:36 ?        00:00:00 [kworker/3:0]
+root     14319     2  0 15:36 ?        00:00:00 [kworker/1:0]
+root     14368     2  0 15:38 ?        00:00:00 [kworker/u8:2]
+root     14391     2  0 15:38 ?        00:00:00 [kworker/0:1]
+root     14401     2  0 15:38 ?        00:00:03 [kworker/u9:0]
+root     14448     2  0 15:41 ?        00:00:01 [kworker/2:0]
+root     14486     2  0 15:43 ?        00:00:00 [kworker/1:2]
+root     14498     2  0 15:43 ?        00:00:00 [kworker/u9:1]
+root     14505     2  0 15:44 ?        00:00:00 [kworker/1:3]
+root     14512     2  0 15:44 ?        00:00:00 [sugov:0]
+root     14533     1  0 15:44 pts/3    00:00:00 /bin/bash /usr/bin/emulationstation-standalone
+root     14542     2  0 15:44 ?        00:00:00 [kworker/3:1]
+root     14605 14533 28 15:44 pts/3    00:00:12 emulationstation --exit-on-reboot-required
+root     14614     2  0 15:45 ?        00:00:00 [kbase_event]
+root     14624     2  0 15:45 ?        00:00:00 [kworker/1:4]
+root     14625     2  0 15:45 ?        00:00:00 [kworker/1:5]
+root     14626     2  0 15:45 ?        00:00:00 [kworker/1:6]
+root     14627     2  0 15:45 ?        00:00:00 [kworker/1:7]
+root     14628     2  0 15:45 ?        00:00:00 [kworker/1:8]
+root     14629     2  0 15:45 ?        00:00:00 [kworker/1:9]
+root     14630     2  0 15:45 ?        00:00:00 [kworker/1:10]
+root     14631     2  0 15:45 ?        00:00:00 [kworker/0:2]
+root     14632     2  0 15:45 ?        00:00:00 [kworker/0:3]
+root     14633     2  0 15:45 ?        00:00:00 [kworker/0:4]
+root     14634     2  0 15:45 ?        00:00:00 [kworker/0:5]
+root     14635     2  0 15:45 ?        00:00:00 [kworker/0:6]
+root     14636     2  0 15:45 ?        00:00:00 [kworker/0:7]
+root     14637     2  0 15:45 ?        00:00:00 [kworker/0:8]
+root     14638     2  0 15:45 ?        00:00:00 [kworker/3:2]
+root     14639     2  0 15:45 ?        00:00:00 [kworker/3:5]
+root     14640     2  0 15:45 ?        00:00:00 [kworker/3:6]
+root     14641     2  0 15:45 ?        00:00:00 [kworker/3:7]
+root     14642     2  0 15:45 ?        00:00:00 [kworker/3:8]
+root     14643     2  0 15:45 ?        00:00:00 [kworker/3:9]
+root     14644     2  0 15:45 ?        00:00:00 [kworker/3:10]
+root     14645     2  0 15:45 ?        00:00:00 [kworker/2:1]
+root     14647     2  0 15:45 ?        00:00:00 [kworker/2:2]
+root     14648     2  0 15:45 ?        00:00:00 [kworker/2:4]
+root     14649     2  1 15:45 ?        00:00:00 [kworker/2:6]
+root     14650     2  0 15:45 ?        00:00:00 [kworker/2:7]
+root     14651     2  0 15:45 ?        00:00:00 [kworker/2:8]
+root     14652     2  0 15:45 ?        00:00:00 [kworker/2:9]
+root     14896  8872  1 15:45 ?        00:00:00 sh -s
+root     14904 14896 99 15:45 ?        00:00:00 ps -ef
+root     17900  2955  0 10:50 ?        00:00:05 /usr/sbin/dropbear -W 10485760 -R -2 9
+root     22917     1  0 11:28 ?        00:00:00 /usr/sbin/connmand -n -r
+root     24213     1  0 11:39 ?        00:00:00 /usr/bin/idlewatcher
+root     25043  2955  0 11:47 ?        00:00:01 /usr/sbin/dropbear -W 10485760 -R -2 9
+root     25062 25043  0 11:47 pts/0    00:00:00 -bash
+cpu0
+schedutil
+480000
+1512000
+1512000
+cpu1
+schedutil
+480000
+1512000
+1512000
+cpu2
+schedutil
+480000
+1512000
+1512000
+cpu3
+schedutil
+480000
+1512000
+1512000
+GPU
+simple_ondemand
+0
+0
+240000000
+RT
+950000
+1000000
+52631
+0
+0
+Filesystem     1K-blocks     Used Available Use% Mounted on
+tmpfs             498316       16    498300   1% /tmp
+/dev/mmcblk1p1 124983296 66694272  58289024  54% /userdata
+16	/tmp
+MemTotal:         996632 kB
+MemFree:          282040 kB
+MemAvailable:     704608 kB
+Buffers:          133348 kB
+Cached:           295464 kB
+SwapCached:            0 kB
+Active:           295440 kB
+Inactive:         289376 kB
+Active(anon):     156508 kB
+Inactive(anon):     5916 kB
+Active(file):     138932 kB
+Inactive(file):   283460 kB
+Unevictable:         136 kB
+Mlocked:             136 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:               280 kB
+Writeback:             0 kB
+AnonPages:        156204 kB
+Mapped:            75760 kB
+Shmem:              6460 kB
+Slab:              34868 kB
+SReclaimable:      15548 kB
+SUnreclaim:        19320 kB
+KernelStack:        3568 kB
+PageTables:         2128 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:      498316 kB
+Committed_AS:     475136 kB
+VmallocTotal:   263061440 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+CmaTotal:          65536 kB
+CmaFree:           44592 kB

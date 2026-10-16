@@ -1,162 +1,235 @@
 # P3 — Scheduling robustness and preparation headroom
 
-**Status: BLOCKED / STOPPED EARLY. Exit gate NOT MET (required tests unperformed).**
+**COMPLETE / performance gate FAIL / STOPPED.** Both final dense p99 values meet
+14 ms, and the soak is clean; final-2 has one inferred repeat at the first native
+picture (tick 1800), failing the required zero-repeat headline gate.
 
-The priority switch used `RR_P3_PRIORITY`, which replay startup removes. The census
-caught this: A1/A2 actually ran with default priorities. This is an implementation
-configuration error, not evidence that nice or real-time scheduling failed to help.
-Per the user’s “if something fails, stop and report rather than extending the matrix”
-rule, no replacement scheduling runs or further device experiments were started.
+| Variant / step | Dense prep median / p99 ms | Inferred repeats | Settled underrun frames | Main gaps >50 ms |
+|---|---:|---:|---:|---:|
+| P2 control (reused) | 13.959 / 14.921 | 0 | 0 | 0 |
+| A1 nice (rejected) | 13.741 / 15.359 | 0 | 0 | 0 |
+| A2 RR (rejected) | 14.147 / 18.554 | 4 | 2657 | 0 |
+| B1 (kept) | 13.100 / 15.412 | 0 | 0 | 0 |
+| B1+B2 / final-1 | 12.587 / 13.705 | 0 | 0 | 0 |
+| Final-2 (same build) | 12.346 / 13.492 | 1 | 0 | 0 |
+| 15m29s soak, 7 laps | Per-lap p99 13.194–13.904 | 0 | 0 | 0 |
 
-| Run/step | Dense prep median / p99 ms | Repeats | Settled underrun frames | Main gaps >50ms | Status |
-|---|---:|---:|---:|---:|---|
-| control | 13.959 / 14.921 | 0 | 0 | 0 | P2 control |
-| a1 | 13.998 / 14.728 | 0 | 0 | 0 | INVALID: requested priority absent |
-| a2 | 13.739 / 14.544 | 1 | 0 | 0 | INVALID: requested priority absent |
-| B1 native projection | — | — | — | — | Host proofs/parity PASS; no device timing |
-| B2 conservative culling | — | — | — | — | Host proofs/parity PASS; no device timing |
-| Final validation / two timings | — | — | — | — | Not run; no final build selected |
-| 15-minute soak | — | — | — | — | Not run after blocker |
+Selected: **P2 b + B1 + B2, default priorities**. One final device validation passes
+all 21 sets, 4,207 packets and 36 Mali images. No criterion or analysis window is
+changed; tick 1800 remains inside native acceptance. Initial blocked work is history.
 
-## Scope and measurement
+## Method and scope
 
-Started clean `feature/knulli-h700` at `fdf4d15c44686b3f497b26d6ece47b3b7275ed2f`.
-P2 selected b control SHA256 is
-`7f313d01fd5c76c8a0af9babc4e60a794968a85f01fca086b829bf242fccf5c3`.
-Only private `native/p3` sources/build derivations were added; no shared engine,
-simulation, physics, audio algorithm, shaders, fallback or asset-format changes.
-Queue2 strict FIFO/panel pacing, valveOFF, O2/stack protection, no affinity,
-P1b asynchronous output/warmup/gradual release and GPU stock remain intact.
+The continuation started clean on `feature/knulli-h700` at
+`ea0e2ea6d7e83ec44d84dd197759fc8a6cdd9762`. The existing P3 `control` was reused,
+without another baseline replay. All changes remain private under `native/p3`.
+P2's play split, palette cache and selective gather, three-stage strict FIFO,
+queue 2, panel pacing, asynchronous logging, pre-warm, gradual legacy release,
+valve OFF, generated O2 with stack protection, affinity OFF and stock GPU remain.
+Original simulation, physics, AI, audio algorithms, assets, shaders and fallback
+are unchanged. No shared engine source, display timing or production file changed.
 
-Reference all6006ticks; native1800–6006, dense3550–3590 inclusive. Nearest-rank
-percentiles retain every sample;41dense pictures make per-run p99 equal maximum.
-Underruns are sample frames. Settled counter is6006 minus actual release tick2112.
-Inferred repeats use unchanged P1b rounded swap-return intervals at59.7104Hz;
-they are not direct scanout measurements. The full intervals and stage times remain.
+CPU is fixed at 1512 MHz with userspace during runs; original governor/min/max,
+GPU policy and kernel RT defaults are recorded and restored by EXIT traps.
+Cooldown uses SoC thermal zone 0 ≤55°C or 180 seconds idle, whichever occurs first.
+Every run records clocks/thermal at nominal 10 Hz and a 1 Hz all-thread census;
+headline process observation is OFF. The soak uses the existing low-impact,
+SCHED_IDLE/nice-19 observer following an explicit game PID for each lap.
+No game diagnostic output uses RAM-backed `/tmp`; preflight usage is retained.
+Transfers and archiving occur only while games are stopped.
 
-CPU fixed1512MHz userspace, GPU simple_ondemand. All three native runs are unflagged,
-with four CPUs1512MHz, GPU240MHz and both cooling states0 at every sampled point.
-Starts are48.743/53.360/52.226°C, within the new≤55°C rule;180s idle fallback unused.
-Every run retains preflight MemAvailable and/tmp usage. No game output goes to/tmp,
-and no transfers/archive overlap timed games. Clock sampler nominal10Hz plus1Hz
-all-thread census is identical across the three runs; process observer otherwiseOFF.
+Reference replay: all 6,006 ticks; native 1800–6006; dense 3550–3590 inclusive.
+Nearest-rank p95/p99 includes every sample; 41 dense samples make each run's p99
+its maximum. Underruns count missing sample frames, not events. Full native uses
+counter(6006)−counter(1799); settled uses counter(6006)−counter(actual release tick).
+Every measured release completes at tick 2112. Repeat inference is unchanged from
+P1b: max(0, round(swap-return interval / 16.7474996 ms)−1). It is a proxy, not a
+physical scanout measurement; complete intervals and snapshot→swap ages remain.
 
-## Part A — priority-switch failure
+## A — scheduling selection
 
-[Replay startup](src/rr_headless.inc) lines178–188 deliberately strips all`RR_*`
-and`SND_*`environment variables. The private switch therefore disappeared before
-native activation. There are no`P3-PRIORITY`receipt lines, and all three game
-stages remain SCHED_OTHER/nice0 throughout native census samples in A1/A2.
-The requested-mode text file alone is insufficient evidence of actual scheduling.
-The switch code exists in the tested executable; its entry branch correctly exits
-when the environment is unset. No nice/RT promotion actually occurred.
+`ENG_P3_PRIORITY=nice` and `=rr` were each smoke-tested to tick 1900 before timing.
+Application receipts and kernel census both confirm all three actual settings:
+nice main/present −10, prepare −5; RR main/present SCHED_RR 5, prepare nice −5.
+Mali workers retain SCHED_OTHER/nice 0, SDLAudioP2 retains nice −20, and PipeWire's
+existing data-loop retains SCHED_FIFO 83. Kernel RT limits stay 950000/1000000 µs.
+The B1/B2 binaries also pass default-priority smokes before their timings.
 
-The source-only correction uses **`ENG_P3_PRIORITY=nice|rr`**, defaultOFF. It is
-not transferred or hardware-validated. Private scripts and source now use that name;
-[tested original header](benchmarks/native-p3-20261016/build/priority-header-tested.txt)
-and binary identities preserve exactly what ran. Native-only activation after
-startup avoids unintentionally promoting newly created audio/driver threads.
-A future retry must verify three actual policy receipts and all-thread census
-before interpreting timings. No shared replay sanitisation is changed.
+Nice gives only 0.067 ms paired dense median saving, while native preparation
+median and dense p99 regress. It is not selected as a convincing overall gain.
+RR improves simulation and main/present access but regresses dense preparation,
+produces four inferred repeats and 2,657 settled underrun frames. Native-window
+cumulative run-queue wait, in ms (not exclusive service cost):
 
-All14census identities per run retain baseline policies, including Mali workers
-SCHED_OTHER/nice0, SDLAudioP2 SCHED_OTHER/nice−20 and existing PipeWire data-loop
-SCHED_FIFO83. Their CPU/runqueue/context-switch records are retained. There is
-no observed promotion-related starvation because promotion never happened;
-starvation under A1/A2 and interactive input responsiveness remain untested.
-RT defaults stay950000/1000000µs; snapshots match before/after every run.
+| Thread | Control | Nice | RR |
+|---|---:|---:|---:|
+| Main | 917 | 981 | 24 |
+| rr-present | 716 | 538 | 25 |
+| rr-prepare | 844 | 921 | 1077 |
+| Mali CMAR backend | 660 | 1003 | 1261 |
+| Audio callback | 250 | 253 | 786 |
+| PipeWire RT data-loop | 9 | 4 | 4 |
 
-Observed default-priority service distributions (median/p95/p99/worst ms):
+The audio callback's largest census-interval wait rises from 7.38 to 23.14 ms
+under RR. All threads continue making progress; no hang or prolonged starvation
+is observed. The increased driver/audio waiting and shortages are adverse
+scheduling signs, not evidence that raising game priorities improves delivery.
+RR is rejected. **Default priorities are retained.** Replay tests cannot prove
+interactive input responsiveness; no additional manual-control test is claimed.
+
+## B — exact-output preparation changes
+
+B1 uses checked 64-bit multiplication, shift/division and base add/subtract where
+representable, retaining the original exact 128-bit fallback for overflow or
+wide cases. UBSan passed 28,449,792 Cartesian boundary cases plus 100 million
+random inputs against the original function, covering all defined shifts 0–127,
+both signs, saturation, zero divisors and signed division overflow. The fast path
+is enabled only during the native walk; legacy/fallback uses original arithmetic.
+B1 is kept for its **0.812 ms paired dense median saving**, despite its tail miss.
+
+B2 preserves the original float32-error enclosure and reason precedence. With
+positive finite zoom and positive Z bounds, monotonic endpoint selection halves
+projection divisions; near-plane and negative/nonfinite-zoom cases retain their
+original handling. No reciprocal approximation or reassociation is introduced.
+One million synthetic differential quads pass under UBSan. Validation builds
+also compare original/candidate reason codes on every real replay quad.
+B2 is kept for another **0.568 ms paired dense median saving**. Combined paired
+saving versus control is **1.305 ms**; independent medians are not added.
+All signed paired samples, including regressions, are retained.
+
+Both native-only host builds pass all 21 authoritative sets, 4,207 packets and
+36 host image hashes. The **single final device validation** independently passes
+all 21 sets/63 domain records, all 4,207 packets (267,308,900 bytes) and all 36
+sampled Mali world/composed image hashes. Validation timings are retained but
+excluded from play comparisons: SHA, readbacks and dual culling checks are enabled.
+The final play build performs no packet/image digesting on preparation/presentation.
+
+## Final build and service costs
+
+Final is P2 selected b + B1 + B2, with default priorities (`ENG_P3_PRIORITY=off`).
+Binary SHA256: `0fdf81922672ee47be0c71cba245c5e6da841328de86a1d8b92310988ec40817`.
+`r-b2-timing` is final-1, counted once; `r-final-2` is the only repeat. The same
+verified binary/settings smoke gates both. No optional perf capture was needed.
+
+Preparation and simulation service distributions, median/p95/p99/worst ms:
 
 | Run | Window | Preparation | Simulation |
 |---|---|---|---|
-| control | native | 9.610 / 12.401 / 13.928 / 16.818 | 11.607 / 13.460 / 14.212 / 18.347 |
-| control | dense | 13.959 / 14.500 / 14.921 / 14.921 | 13.544 / 14.215 / 14.459 / 14.459 |
-| a1 | native | 9.605 / 12.297 / 13.998 / 16.807 | 11.516 / 13.436 / 14.198 / 17.623 |
-| a1 | dense | 13.998 / 14.576 / 14.728 / 14.728 | 13.420 / 14.310 / 14.551 / 14.551 |
-| a2 | native | 9.579 / 12.349 / 14.078 / 17.083 | 11.587 / 13.515 / 14.280 / 17.665 |
-| a2 | dense | 13.739 / 14.494 / 14.544 / 14.544 | 13.412 / 14.292 / 14.589 / 14.589 |
+| P2 control (reused) | native | 9.610/12.401/13.928/16.818 | 11.607/13.460/14.212/18.347 |
+| P2 control (reused) | dense | 13.959/14.500/14.921/14.921 | 13.544/14.215/14.459/14.459 |
+| A1 nice (rejected) | native | 9.700/12.364/13.895/16.744 | 11.566/13.434/14.110/17.723 |
+| A1 nice (rejected) | dense | 13.741/14.659/15.359/15.359 | 13.443/14.143/14.307/14.307 |
+| A2 RR (rejected) | native | 9.784/12.469/14.181/18.554 | 11.355/13.178/13.808/17.425 |
+| A2 RR (rejected) | dense | 14.147/14.770/18.554/18.554 | 13.233/13.836/14.225/14.225 |
+| B1 (kept) | native | 9.015/11.658/13.325/15.638 | 11.470/13.306/14.040/17.884 |
+| B1 (kept) | dense | 13.100/14.509/15.412/15.412 | 13.303/14.287/14.398/14.398 |
+| B1+B2 / final-1 | native | 8.651/11.062/12.640/15.474 | 11.523/13.421/14.099/19.541 |
+| B1+B2 / final-1 | dense | 12.587/13.360/13.705/13.705 | 13.487/14.433/14.615/14.615 |
+| Final-2 (same build) | native | 8.632/11.123/12.702/14.848 | 11.446/13.271/14.116/17.942 |
+| Final-2 (same build) | dense | 12.346/13.025/13.492/13.492 | 13.252/14.202/14.624/14.624 |
 
-| Run | Swap interval median/p95/p99/worst ms | Full native / settled underrun frames |
-|---|---|---:|
-| control | 16.746 / 16.836 / 17.124 / 18.990 | 898 / 0 |
-| a1 | 16.745 / 16.850 / 17.147 / 18.894 | 898 / 0 |
-| a2 | 16.745 / 16.863 / 17.181 / 32.570 | 1629 / 0 |
+Swap intervals (median/p95/p99/worst ms), full-native audio and thermal context:
 
-A2-labelled run repeats once at tick1857 (32.570ms interval; simulation12.413,
-prep11.146, draw14.048, swap17.855ms). This is a default-priority observation,
-not an RT-induced result. Signed paired differences are retained but must not
-be interpreted as nice/RT benefits. No priority variant is selected.
+| Run | Swap interval | Native / settled underruns | Start / peak native °C |
+|---|---|---:|---:|
+| P2 control (reused) | 16.746/16.836/17.124/18.990 | 898 / 0 | 48.74 / 61.95 |
+| A1 nice (rejected) | 16.746/16.840/17.137/18.224 | 824 / 0 | 49.39 / 61.22 |
+| A2 RR (rejected) | 16.747/16.828/16.989/33.486 | 3509 / 2657 | 53.20 / 61.95 |
+| B1 (kept) | 16.746/16.833/17.139/19.359 | 826 / 0 | 49.47 / 62.03 |
+| B1+B2 / final-1 | 16.746/16.832/17.049/19.127 | 880 / 0 | 48.66 / 60.89 |
+| Final-2 (same build) | 16.746/16.837/17.056/26.342 | 1289 / 0 | 48.34 / 61.22 |
 
-## Part B — host-validated, not adopted
+All headline sampled CPU clocks are 1512 MHz, GPU 240 MHz, cooling states 0;
+no run is clock-flagged. [All stage distributions](benchmarks/native-p3-20261016/resume-service-timings.csv)
+retain preparation CPU, walk, compiler, GL CPU/draw/swap and snapshot→swap age,
+native/dense mean/median/p95/p99/worst. Concurrent stage medians are not added.
 
-**B1:** checked64-bit multiplication and×16 range checks permit exact int64 shift,
-division and checked base add/subtract. Overflow, including INT64_MIN/−1 division,
-falls back to the original128-bit expression. Shifts64–127 preserve arithmetic
-sign-fill; original valid shifts0–127, unsigned left shift and final saturation
-semantics remain exact. UBSan passes **28,449,792 Cartesian boundary cases plus
-100,000,000 random inputs**; half the random population stresses geometry-size
-fast-path operands, half full-width operands. This covers both negate choices,
-zero/negative divisors, clamp/overflow boundaries and every defined shift.
-ARM disassembly confirms additional SDIV paths while retaining wide fallback calls;
-static instruction counts are not claimed as performance savings.
+## Remaining failure: first-native handover
 
-The fast path is gated strictly around the native scene walk, with a thread-local
-flag reset at function entry, normal completion and unsupported longjmp handling.
-Legacy/fallback uses the original projection function. Both the initial prototype
-and the tightened native-only guard have separate retained host replays; neither
-B build was transferred to the handheld.
+Final-2 tick 1800 has a **26.342 ms** swap-return interval (one inferred repeat).
+Preparation is 14.848 ms (walk 3.615, compiler 10.737), simulation 14.518 ms,
+draw service **25.779 ms**, swap 0.118 ms. Presentation-thread CPU is only
+**5.318 ms**; snapshot→swap age is 52.153 ms. The preceding legacy picture uses
+25.744 ms presentation-thread CPU. This locates the event at the handover's draw
+service with substantial non-CPU time; headline instrumentation cannot isolate
+the exact driver/GPU/scheduling wait. It is not a >50 ms main-thread gap.
 
-**B2:** retains exactly the original conservative float32 error enclosure. For
-positive finite zoom and positive Z bounds, numerator/divisor monotonicity selects
-the four extrema directly, halving corner divisions without reciprocals or
-reassociation. Initial±1e100 clamps and reason precedence remain. Near-plane
-returns are unchanged; negative/nonfinite zoom uses the original corner loop.
-UBSan differential testing passes one million quads, exercising all five reasons.
-Validation builds also run old/new reason functions on every real replay quad
-and abort on any disagreement. Exact packet parity checks flags/order as well.
+All three warmups completed at ticks 1740–1742. Legacy retirement starts after
+16 native pictures and completes at 2112, so its deletion work is not executed
+on tick 1800. The event is retained, with neighbouring samples and original
+[stage evidence](benchmarks/native-p3-20261016/runs/r-final-2/handover-event.json).
+No speculative handover fix or additional run is performed. A focused diagnostic
+of ticks 1795–1805 is the recommended separately authorised next investigation.
 
-Both native-only B host builds finish6006ticks with **all21sets/63domain records,
-4,207exact packets and36sampled images** matching the original host reference.
-These are host software-GL image checks, not newly captured Mali validation.
-[Host evidence](benchmarks/native-p3-20261016/host-parity.json) and test/source
-identities are retained. The unchanged projection helper’s unit proof remains
-applicable after adding the native-only guard. No step is kept as a measured
-optimisation: their required paired dense device measurements did not occur.
+## Fifteen-minute soak
 
-## Final and soak
+Seven complete process laps run for **929.43 s**, including load/boot/legacy;
+actual native exposure is **493.18 s (8.22 min)** across 29,449 native pictures.
+The original reset entry does not return and replay completion exits, so the
+existing per-process loop is retained without a simulation-reset rewrite.
+All seven laps pass all 21 authoritative sets. Every lap has zero settled
+underruns, inferred repeats and main gaps >50 ms. Full-native shortages total
+6,158 sample frames, including handover carry-in; those are not erased.
 
-No final build is selected. **Zero device validation-build replays** were run;
-exactly one remains required if work resumes. Final two timings and15-minute soak
-were not started. The intended fast protocol reuses the selected variant’s timing
-as final-1, then runs only one additional final timing, avoiding a third sample.
-No optional perf capture, extended matrix or thermal soak was started.
-P2 performance results and historical failed gates remain unchanged.
+| Wall-time bucket s | Native exposure s | Repeats | Settled underruns | Main gaps >50 ms | Peak °C | CPU/GPU cooling |
+|---|---:|---:|---:|---:|---:|---|
+| 0–300.00 | 140.91 | 0 | 0 | 0 | 62.837 | 0 / 0 |
+| 300–600.00 | 147.02 | 0 | 0 | 0 | 63.080 | 0 / 0 |
+| 600–900.00 | 176.61 | 0 | 0 | 0 | 64.133 | 0 / 0 |
+| 900–929.43 | 28.64 | 0 | 0 | 0 | 63.323 | 0 / 0 |
 
-## Remaining work and disposition
+All 9,271 session samples report four CPUs at 1512 MHz, GPU at 240 MHz and both
+cooling devices at 0; peak sampled temperature 64.133°C. No sampled throttling or
+rising repeat/settled-underrun trend occurs. The low-impact observer uses about
+4.52% of one core. Sample interval median/p99/worst is 100.011/123.608/3211.462 ms;
+coverage gaps are retained, with zero overlap with native game gaps. No >50 ms
+game gap remains to attribute. This bounded soak does not establish permanent
+elimination of P2's rare gap. The user answered **“Yes”** when asked whether settled motion and audio were
+clean during the P3 soak; no additional details were supplied.
 
-The immediate blocker is the switch namespace, not a diagnosed scheduling or
-preparation limitation. Source correction is reviewable under native/p3 but remains
-unmeasured. A separately authorised continuation should first verify actual nice/
-SCHED_RR policies, then perform the uncompleted bounded matrix. Current results
-cannot establish whether priority prevents the P2 main-service gap, whether either
-B step improves dense preparation, or whether the P3 presentation/audio gate passes.
-No claim of smoothness or14ms success is made.
+## History, limitations and remaining work
 
-All three completed device replays pass all21authoritative state/audio sets;
-play builds deliberately produce no packet/image receipts. No samples are removed.
-Setup-only name/exFAT extraction issues and invalid priority runs remain retained.
-Raw evidence, all service distributions, thread census summaries, build logs,
-unit proofs and host parity are in the [evidence README](benchmarks/native-p3-20261016/README.md).
+The initial attempt used `RR_P3_PRIORITY`; replay startup stripped it, so its
+A1/A2 timings are invalid priority comparisons. The complete blocked report and
+raw samples remain [history](benchmarks/native-p3-20261016/blocked-attempt-report.md).
+The continuation uses `ENG_*` and confirms actual receipts/census before timing.
+A smoke-checker setup error initially compared terminal tick 1900 with the full
+reference's next tick 2100 by row index. It was corrected to compare the 18 shared
+domain records and label the three terminal-1900 records; no same-tick mismatch
+occurred. This configuration error was fixed without repeating a device run.
 
-## Final integrity and stop
+One timing per A/B variant and exactly two final timings limit repeatability
+claims. Existing P2 profiling, host proofs and stage timers support these bounded
+changes; no new sampling profile is presented. Preparation gains do not establish
+the cause of P2's rare main-service gap. Simulation is now typically longer than
+preparation in dense scenes; intermittent scheduling/presentation remains a risk.
+Other courses, legacy fallback performance, broader asset coverage and product
+behaviour are outside this investigation. Historical M3/P1/P1b/P2 gates are unchanged.
 
-Device session elapsed **12.88minutes**, including host-analysis idle/reconnection,
-well below the2hour target; only3device replays occurred. All47protected hashes
-pass before and after. Production SHA256 remains
+Full timings, repeat-event ticks/stage costs, clock/cooling histories, thread
+census, checkpoint/packet/image receipts, source/build identities and every failed
+or rejected observation are in the [evidence README](benchmarks/native-p3-20261016/README.md).
+Percentiles are never pooled to replace a failed per-run gate. Further optimisation,
+texture formats, broader coverage and productisation require separate authorisation.
+
+## Exit gate and final state
+
+| Gate | Result |
+|---|---|
+| Both final dense preparation p99 ≤14 ms | PASS: 13.705 / 13.492 ms |
+| Both final settled underruns / main gaps >50 ms =0 | PASS: 0 / 0 |
+| Both final inferred repeats =0 | **FAIL: 0 / 1 (tick 1800)** |
+| Soak main gaps >50 ms / settled underruns =0 | PASS: 0 / 0 |
+| Exact device validation | PASS: 21 sets / 4,207 packets / 36 Mali images |
+
+The continuation completes in **48.94 minutes of device-session time**, within two hours.
+All 13 completed continuation full replays pass all 21 authoritative sets; the
+four short smokes have verified policies and matching shared/terminal states.
+Exactly one device validation and two selected-build timings are run. All 14 P3
+clock sessions (including original history) restore policies, RT defaults and ES.
+Final all-47 protected hashes pass. Production SHA256 remains
 `6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`.
-CPU governors/min/max restored to schedutil480000–1512000kHz; GPU simple_ondemand
-with original min/max0. RT defaults unchanged; EmulationStation PID6823 running,
-no game/sampler/perf remains. Archive hashes verify recovered evidence. Source
-branch/HEAD unchanged; only private P3 files/report/evidence and HANDOVER updated.
-No commit, push or production deployment. **STOPPED; continuation requires explicit approval.**
+All four CPUs are back to schedutil, min 480000/max 1512000 kHz; GPU
+simple_ondemand/min=max 0; RT limits 950000/1000000 µs. EmulationStation PID14605
+is restored; no diagnostic game, sampler or perf remains. Branch HEAD is unchanged.
+No commit, push or production deployment. **STOPPED. Further work requires approval.**

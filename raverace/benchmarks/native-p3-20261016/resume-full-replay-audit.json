@@ -1,0 +1,119 @@
+[
+  {
+    "run": "r-a1",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-a2",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-b1-timing",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-b2-timing",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-validation-final",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 4207,
+    "images": 36,
+    "log_drops": 0
+  },
+  {
+    "run": "r-final-2",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-1",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-2",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-3",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-4",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-5",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-6",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  },
+  {
+    "run": "r-soak-1512000/lap-7",
+    "ticks": 6006,
+    "sets": 21,
+    "domain_records": 63,
+    "packet_receipts": 0,
+    "images": 0,
+    "log_drops": 0
+  }
+]

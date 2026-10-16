@@ -1,0 +1,41 @@
+{
+  "final_first_alias": "r-b2-timing",
+  "final_source_steps": [
+    "P2 selected b",
+    "B1",
+    "B2"
+  ],
+  "priority": "off",
+  "final_runs": [
+    {
+      "run": "r-b2-timing",
+      "complete": true,
+      "dense_p99_le14": true,
+      "settled_audio_zero": true,
+      "repeats_zero": true,
+      "main_gaps_zero": true,
+      "clock_valid": true
+    },
+    {
+      "run": "r-final-2",
+      "complete": true,
+      "dense_p99_le14": true,
+      "settled_audio_zero": true,
+      "repeats_zero": false,
+      "main_gaps_zero": true,
+      "clock_valid": true
+    }
+  ],
+  "soak_complete": true,
+  "soak_pass": true,
+  "validation": {
+    "full_ticks": 6006,
+    "authoritative_sets": 21,
+    "domain_records": 63,
+    "exact_native_packets": 4207,
+    "images_equal": 36,
+    "performance_timings_admissible": false
+  },
+  "pass_gate": false,
+  "all_samples_retained": true
+}

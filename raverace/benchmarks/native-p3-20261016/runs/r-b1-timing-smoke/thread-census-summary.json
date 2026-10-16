@@ -1,0 +1,316 @@
+[
+  {
+    "tid": 10862,
+    "name": "r-b1",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 1,
+      "1": 1
+    },
+    "states": {
+      "R": 1,
+      "S": 1
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 806.209246,
+    "runqueue_ms": 11.834253,
+    "core_equivalent": 0.8061581992565053,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 61,
+      "nonvoluntary_ctxt_switches": 113
+    }
+  },
+  {
+    "tid": 10865,
+    "name": "rr-writer",
+    "samples": 2,
+    "policies": {
+      "5/0/nice19": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 4.196834,
+    "runqueue_ms": 13.739791,
+    "core_equivalent": 0.004196568269099802,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 97,
+      "nonvoluntary_ctxt_switches": 3
+    }
+  },
+  {
+    "tid": 10867,
+    "name": "mali-mem-purge",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "0": 1,
+      "2": 1
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.397542,
+    "runqueue_ms": 0.08825,
+    "core_equivalent": 0.00039751682883680257,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 10,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10868,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10869,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10870,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10871,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10872,
+    "name": "mali-cmar-backe",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 77.063761,
+    "runqueue_ms": 8.144116,
+    "core_equivalent": 0.07705888155454584,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 200,
+      "nonvoluntary_ctxt_switches": 31
+    }
+  },
+  {
+    "tid": 10882,
+    "name": "SDLHotplugALSA",
+    "samples": 2,
+    "policies": {
+      "0/0/nice19": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.712126,
+    "runqueue_ms": 0.376166,
+    "core_equivalent": 0.0007120809103245364,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 10,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10883,
+    "name": "alsa-pipewire",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10884,
+    "name": "data-loop.0",
+    "samples": 2,
+    "policies": {
+      "1/83/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 15.442083,
+    "runqueue_ms": 0.204333,
+    "core_equivalent": 0.01544110525377117,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 94,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "tid": 10885,
+    "name": "SDLAudioP2",
+    "samples": 2,
+    "policies": {
+      "0/0/nice-20": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 9.903659,
+    "runqueue_ms": 5.486834,
+    "core_equivalent": 0.009903031930113194,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 94,
+      "nonvoluntary_ctxt_switches": 46
+    }
+  },
+  {
+    "tid": 10886,
+    "name": "rr-present",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "1": 1,
+      "3": 1
+    },
+    "states": {
+      "S": 1,
+      "R": 1
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 393.754377,
+    "runqueue_ms": 5.241914,
+    "core_equivalent": 0.3937294456576936,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 63,
+      "nonvoluntary_ctxt_switches": 56
+    }
+  },
+  {
+    "tid": 10887,
+    "name": "rr-prepare",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 1,
+      "0": 1
+    },
+    "states": {
+      "R": 2
+    },
+    "observed_seconds": 1.000063321000198,
+    "runtime_ms": 599.494044,
+    "runqueue_ms": 13.562115,
+    "core_equivalent": 0.5994560858410698,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 121,
+      "nonvoluntary_ctxt_switches": 248
+    }
+  }
+]

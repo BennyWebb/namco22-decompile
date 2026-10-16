@@ -40,8 +40,19 @@ persistent buffered, no concurrent transfers/archives during games. One run per
 variant, one final device validation, final2timings,15-minute process-loop soak.
 
 
-P3 STOPPED EARLY / BLOCKED: initial RR_P3_PRIORITY was stripped by replay startup,
-so A1/A2 promotion did not occur. All3 device runs retained. ENG_P3_PRIORITY is a
-source-only correction, not hardware tested. No B timing/final validation/soak
-has run; no candidate is adopted. See ../../NATIVE_P3_REPORT.md. User explicitly
-requested stopping after failure rather than extending the matrix.
+P3 continuation COMPLETE / performance gate FAIL / STOPPED. Selected B1+B2 with
+priority OFF; nice lacks overall benefit and RR worsens delivery/audio. Both final
+dense p99 values pass (13.705/13.492 ms), but final-2 repeats at tick1800. Exactly
+one device validation passes all21 sets/4207 packets/36 Mali images; the seven-lap
+15-minute wall-time soak is clean. See ../../NATIVE_P3_REPORT.md and evidence README.
+
+The initial blocked RR_* attempt remains archived; corrected ENG_* modes were
+smoke-tested with actual kernel receipts before timing. `verify_smoke.py` compares
+shared reference checkpoints and labels the distinct terminal1900 checkpoint.
+`smokes_h700.sh` / `priority_timings_h700.sh` handle A experiments;
+`run_step_h700.sh` gates step timing on smoke receipts; `validate_final_h700.sh`
+performs the single validation; `finish_h700.sh` aliases B2 timing as final1 and
+runs final2 plus `soak_h700_resume.sh`. These are reproduction tools, not authority
+to launch further tests. `summarise_resume.py` produces current gate/distributions.
+All helpers use persistent diagnostic storage and restore device settings.
+No further runs or architectural changes without explicit user authorisation.

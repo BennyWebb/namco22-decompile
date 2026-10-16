@@ -1,54 +1,70 @@
-# P3 scheduling/preparation investigation — BLOCKED / STOPPED EARLY
+# P3 evidence — COMPLETE / performance gate FAIL / STOPPED
 
-Starting clean feature/knulli-h700 atfdf4d15c44686b3f497b26d6ece47b3b7275ed2f.
-Selected P2 b binary control SHA7f313d01fd5c76c8a0af9babc4e60a794968a85f01fca086b829bf242fccf5c3.
-Native race only. CPU1512MHz userspace, GPUstock; queue2FIFO/valveOFF/O2/stack
-protection/no affinity/P1b warmup/async logging/gradual release preserved.
-No production/shared engine/fallback/coverage/audio/display changes, commit or push.
+[Report](../../NATIVE_P3_REPORT.md) contains the result and unchanged exit gate.
+Continuation starts at `ea0e2ea6d7e83ec44d84dd197759fc8a6cdd9762` on
+`feature/knulli-h700`. No commits, pushes or production deployment.
 
-Reference all6006ticks; native1800–6006; dense3550–3590 inclusive. Nearest-rank
-p95/p99, no outlier removal.41dense samples⇒per-run p99=max. Underruns are sample
-frames: fullnative counter6006−1799; settled counter6006−actualrelease tick. Inferred
-repeats use unchangedP1b roundedinterval method withT1000/59.7104ms; no claim of
-physical scanout counts. Snapshot→swap is not physical scanout age.
+Selected: P2 b + B1 + B2, default priorities. Dense preparation p99 is
+13.705/13.492 ms; final-2 has one inferred repeat at tick 1800. Both final runs
+have zero settled audio underruns and main gaps >50 ms. The seven-lap soak is
+clean. This is a failed performance gate, not a waived transition criterion.
 
-Device budget≤2h target; cooldown≤55°C OR180s idle, temperature recorded. One timing
-run per control/A1/A2/B1/B2, only final gets2timings. Exactly one final validation
-ondevice; host validations for B steps.15min soak; no per-step profiles. All kernel
-RT defaults preserved; priority switches defaultoff/native-only. Thread census
-checks audio/driver policy and CPU progress. No game output toRAM-backed/tmp;
-preflight/tmp+MemAvailable checked; no transfer/archive alongside timedgames.
+## Current evidence index
 
-Private scripts/maths proof: ../../native/p3/README.md. UBSan projection boundary
-suite+100million random comparisons: projection-test.txt. Cull random differential:
-cull-differential-test.txt. Host fullreplay evidence:host-parity.json. Setup-only
-failures retained in setup-notes.txt; no replay or clockchange occurred there.
+- `resume-method.json`, `resume-setup-notes.txt`: scope, smoke gates and setup fixes.
+- `resume-results.json`, `resume-service-timings.csv`: all stage distributions.
+- `resume-selection.json`, `resume-gate.json`: priority/step selection and gate.
+- `paired/resume-*.{csv,json}`, `paired/r-a*.{csv,json}`: signed per-tick comparisons.
+- `resume-build-identities.json`: exact diagnostic binaries and build commands.
+- `resume-full-replay-audit.json`: all 13 completed continuation replays, including
+  seven soak laps. Exactly one device validation proves all 21 sets, 4,207 packets
+  and 36 Mali images; play timings exclude packet/image hashing.
+- `runs/r-smoke-*`, `runs/r-b*-timing-smoke`: four tick-1900 smokes and actual
+  thread policy receipts. `runs/r-a1`, `runs/r-a2`: corrected priority timings.
+- `runs/r-b1-timing`, `runs/r-b2-timing`, `runs/r-final-2`: step/final timings;
+  B2 timing is final-1, counted once. `runs/r-validation-final`: separate validation.
+- `runs/r-final-2/handover-event.json`: tick-1800 repeat and stage attribution.
+- `runs/r-soak-1512000`: 929.43 s wall time, seven full process laps, 493.18 s
+  native exposure; per-lap and five-minute buckets, clocks, census and observer.
+- `resume-manual-observation.json`: user answered “Yes” to clean settled motion/audio.
+- `resume-restoration-summary.json`, `runs/resume-final-check`,
+  `resume-completion.json`: all 47 protected hashes, clock/RT restoration,
+  EmulationStation restored, no game running, 48.94-minute continuation budget.
+- `telemetry-manifest.json`: every published raw artifact and lossless source hash;
+  large text is gzip-compressed. No ROM, assets or executable published.
 
+## Measurement
 
-## Disposition
+Full reference replay 6006 ticks; native 1800–6006, dense 3550–3590 inclusive.
+Nearest-rank p95/p99; all samples and failed attempts retained. Dense has 41
+samples, so its p99 is the maximum. Inferred repeats use the unchanged P1b
+rounded swap-return interval method, panel period 1000/59.7104 ms. They are not
+physical scanout measurements; snapshot-to-swap is not scanout age.
+Underruns are sample frames, reported separately over native and actual legacy
+release completion through 6006. Validation and smoke timings are excluded.
 
-[Report](../../NATIVE_P3_REPORT.md): priority RR_* switch was stripped by replay
-startup. A1/A2 requested-mode files do not prove applied policies; census shows
-all stages at defaults. These runs are INVALID scheduling comparisons, retained
-in full. Corrected source switch ENG_P3_PRIORITY is untested on hardware. Per user
-stop-on-failure rule, no replacement runs, B device timings, final validation,
-final repeats, optional perf or15min soak were started. No final build selected.
+CPU fixed 1512 MHz, GPU stock, queue 2, valve OFF, affinity OFF, O2 and stack
+protection. Cooldown ≤55°C or 180 seconds idle. Per-run EXIT traps restore clocks,
+RT defaults and EmulationStation and verify protected hashes. Clock/thermal
+sampling nominal 10 Hz, census 1 Hz; soak observer follows the game PID. No game
+output to RAM-backed /tmp and no concurrent transfer/archive during timing.
+Corrected A1/A2 each run once; B1 and B2 each once; final gets two timings total.
+Soak is a process-loop including legacy startup, not a single-process reset.
 
-`run-results.json` includes all native/dense service distributions and validity;
-`runs/{control,a1,a2}/` includes every timing/checkpoint/clock/census sample.
-`thread-census-summary.json` records actual policy/nice, CPU/runqueue and switches.
-All3 hardware replays pass21state/audio sets; play binaries do no packet/image SHA.
-`runs/host-*/` retains4host full validations (initial B1/B2 plus native-only guards),
-all21sets/4207packets/36host images; host software GL is not new Mali evidence.
-`host-parity.json`, unit test outputs and proof identities retain exact validation.
-`build/` includes failures/successes and tested original priority header;
-`source-identities-final.json` distinguishes corrected, untested source.
-`priority-blocker.json` records the cause and unperformed work. `paired/` signed
-samples are retained but do not establish priority benefit because none was applied.
-`runs/final-check/` retains all47protected hashes, policies/RT defaults and ES proof.
-No ROM/assets/executables published; ignored native/generated/p3 retains binaries.
+## Retained blocked history
 
-Final production unchanged, all47protected hashes PASS; all3 sessions restored
-clock policies/RT defaults/EmulationStation. No game/sampler/perf running.
-P3 gate NOT MET (incomplete), not a performance pass or rejection of real-time.
-STOPPED. A resumed hardware matrix requires explicit user authorisation.
+`blocked-attempt-report.md` preserves the initial stopped report. Unprefixed
+`run-results.json`, `completion.json`, `priority-blocker.json`, initial `a1/a2`
+and `runs/final-check` belong to that attempt: RR_* was stripped and priorities
+never applied. They are invalid scheduling comparisons, retained rather than
+replaced. Current continuation evidence uses `resume-*` and `runs/r-*` names.
+`control` is the original valid baseline, reused without another control run.
+The smoke checker terminal-1900 versus reference-2100 setup comparison was fixed;
+18 common periodic domain records and equivalent smoke terminals pass.
+
+Host proof remains in `projection-test.txt`, `cull-differential-test.txt`,
+`host-parity.json` and `runs/host-*`: 128449792 UBSan projection comparisons,
+one million cull comparisons, full host checkpoint/packet/image parity.
+Host software-GL images are distinct from final device Mali validation.
+Private reproduction helpers: [native/p3](../../native/p3/README.md).
+Production unchanged; clocks and EmulationStation restored. STOPPED.

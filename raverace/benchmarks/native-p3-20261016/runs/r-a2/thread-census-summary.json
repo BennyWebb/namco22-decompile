@@ -1,0 +1,361 @@
+[
+  {
+    "maximum_census_interval_runqueue_ms": 0.779504,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10335,
+    "name": "r-priority",
+    "samples": 70,
+    "policies": {
+      "2/5/nice0": 70
+    },
+    "cpu_counts": {
+      "1": 70
+    },
+    "states": {
+      "S": 19,
+      "R": 51
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 51364.935117,
+    "runqueue_ms": 24.245368,
+    "core_equivalent": 0.7444403455985684,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 5066,
+      "nonvoluntary_ctxt_switches": 54
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 28.679164,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10338,
+    "name": "rr-writer",
+    "samples": 70,
+    "policies": {
+      "5/0/nice19": 70
+    },
+    "cpu_counts": {
+      "0": 20,
+      "2": 11,
+      "3": 38,
+      "1": 1
+    },
+    "states": {
+      "S": 68,
+      "R": 2
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 261.351539,
+    "runqueue_ms": 463.55541,
+    "core_equivalent": 0.003787810294565815,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6808,
+      "nonvoluntary_ctxt_switches": 341
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 4.554915,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10340,
+    "name": "mali-mem-purge",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "0": 31,
+      "3": 19,
+      "2": 18,
+      "1": 2
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 46.892579,
+    "runqueue_ms": 19.227341,
+    "core_equivalent": 0.0006796217621467335,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 703,
+      "nonvoluntary_ctxt_switches": 39
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10341,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10342,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10343,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.302043,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10344,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "3": 27,
+      "0": 43
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 7.318126,
+    "runqueue_ms": 0.59921,
+    "core_equivalent": 0.00010606278847942712,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 11,
+      "nonvoluntary_ctxt_switches": 7
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 46.982867,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10345,
+    "name": "mali-cmar-backe",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 7,
+      "3": 40,
+      "0": 20,
+      "1": 3
+    },
+    "states": {
+      "R": 9,
+      "S": 61
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 5492.617471,
+    "runqueue_ms": 1260.796876,
+    "core_equivalent": 0.07960539693154763,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 17644,
+      "nonvoluntary_ctxt_switches": 5220
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 28.935583,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10354,
+    "name": "SDLHotplugALSA",
+    "samples": 70,
+    "policies": {
+      "0/0/nice19": 70
+    },
+    "cpu_counts": {
+      "0": 23,
+      "2": 19,
+      "3": 28
+    },
+    "states": {
+      "S": 69,
+      "R": 1
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 520.286081,
+    "runqueue_ms": 120.990288,
+    "core_equivalent": 0.0075405906591240815,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 732,
+      "nonvoluntary_ctxt_switches": 379
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10355,
+    "name": "alsa-pipewire",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.209375,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10356,
+    "name": "data-loop.0",
+    "samples": 70,
+    "policies": {
+      "1/83/nice0": 70
+    },
+    "cpu_counts": {
+      "0": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 970.249402,
+    "runqueue_ms": 4.205657,
+    "core_equivalent": 0.014061982138134359,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6469,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 23.134712,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10357,
+    "name": "SDLAudioP2",
+    "samples": 70,
+    "policies": {
+      "0/0/nice-20": 70
+    },
+    "cpu_counts": {
+      "0": 17,
+      "3": 25,
+      "2": 26,
+      "1": 2
+    },
+    "states": {
+      "S": 69,
+      "R": 1
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 639.102047,
+    "runqueue_ms": 786.385765,
+    "core_equivalent": 0.009262609748415083,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6469,
+      "nonvoluntary_ctxt_switches": 3986
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 1.038497,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10358,
+    "name": "rr-present",
+    "samples": 70,
+    "policies": {
+      "2/5/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 70
+    },
+    "states": {
+      "R": 12,
+      "S": 58
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 19325.743765,
+    "runqueue_ms": 25.353119,
+    "core_equivalent": 0.28009114261694895,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 5110,
+      "nonvoluntary_ctxt_switches": 263
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 26.977873,
+    "maximum_census_interval_ms": 1000.6279070003075,
+    "tid": 10359,
+    "name": "rr-prepare",
+    "samples": 70,
+    "policies": {
+      "0/0/nice-5": 70
+    },
+    "cpu_counts": {
+      "3": 25,
+      "0": 45
+    },
+    "states": {
+      "R": 40,
+      "S": 30
+    },
+    "observed_seconds": 68.99805393499992,
+    "runtime_ms": 39998.51086,
+    "runqueue_ms": 1076.682733,
+    "core_equivalent": 0.5797049130933587,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 8281,
+      "nonvoluntary_ctxt_switches": 8371
+    }
+  }
+]

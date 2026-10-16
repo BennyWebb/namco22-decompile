@@ -1,0 +1,11 @@
+{
+  "start_head": "ea0e2ea6d7e83ec44d84dd197759fc8a6cdd9762",
+  "initial_status": "clean",
+  "reused_control": "control",
+  "runtime_prefix": "ENG_",
+  "smoke_gate": "1900 ticks, actual policy/nice receipts+census before switch-dependent timing",
+  "device_budget_seconds": 7200,
+  "one_device_validation": true,
+  "final_first_alias": true,
+  "no_production_changes": true
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "session": "a1",
+    "restored": true,
+    "es_pid": "6540"
+  },
+  {
+    "session": "a2",
+    "restored": true,
+    "es_pid": "6823"
+  },
+  {
+    "session": "control",
+    "restored": true,
+    "es_pid": "6256"
+  },
+  {
+    "session": "r-a1",
+    "restored": true,
+    "es_pid": "10214"
+  },
+  {
+    "session": "r-a2",
+    "restored": true,
+    "es_pid": "10466"
+  },
+  {
+    "session": "r-b1-timing",
+    "restored": true,
+    "es_pid": "11632"
+  },
+  {
+    "session": "r-b1-timing-smoke",
+    "restored": true,
+    "es_pid": "11093"
+  },
+  {
+    "session": "r-b2-timing",
+    "restored": true,
+    "es_pid": "12732"
+  },
+  {
+    "session": "r-b2-timing-smoke",
+    "restored": true,
+    "es_pid": "12245"
+  },
+  {
+    "session": "r-final-2",
+    "restored": true,
+    "es_pid": "14059"
+  },
+  {
+    "session": "r-smoke-nice",
+    "restored": true,
+    "es_pid": "9423"
+  },
+  {
+    "session": "r-smoke-rr",
+    "restored": true,
+    "es_pid": "9695"
+  },
+  {
+    "session": "r-soak-1512000",
+    "restored": true,
+    "es_pid": "14605"
+  },
+  {
+    "session": "r-validation-final",
+    "restored": true,
+    "es_pid": "13425"
+  }
+]

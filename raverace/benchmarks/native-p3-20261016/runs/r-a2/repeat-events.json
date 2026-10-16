@@ -1,0 +1,54 @@
+[
+  {
+    "tick": 3565,
+    "repeats": 1,
+    "interval_ms": 33.472004000941524,
+    "simulation_ms": 13.510280001,
+    "simulation_blocked_ms": 2.160857002,
+    "native_walk_ms": 5.446538002,
+    "native_compile_ms": 9.17315,
+    "prep_wall": 0.01468169,
+    "prep_cpu": 0.014043292,
+    "draw_wall": 0.004472583,
+    "swap_wall": 0.028528333
+  },
+  {
+    "tick": 3623,
+    "repeats": 1,
+    "interval_ms": 33.470452999608824,
+    "simulation_ms": 12.958886,
+    "simulation_blocked_ms": 2.568451997,
+    "native_walk_ms": 4.875395,
+    "native_compile_ms": 8.764385999,
+    "prep_wall": 0.013693449,
+    "prep_cpu": 0.013339292,
+    "draw_wall": 0.004266542,
+    "swap_wall": 0.028694
+  },
+  {
+    "tick": 3628,
+    "repeats": 1,
+    "interval_ms": 33.462494997365866,
+    "simulation_ms": 13.034513002,
+    "simulation_blocked_ms": 2.444406004,
+    "native_walk_ms": 4.895187001,
+    "native_compile_ms": 8.226952999,
+    "prep_wall": 0.013173725,
+    "prep_cpu": 0.012758208,
+    "draw_wall": 0.004113625,
+    "swap_wall": 0.028857458
+  },
+  {
+    "tick": 3637,
+    "repeats": 1,
+    "interval_ms": 33.486203999927966,
+    "simulation_ms": 13.148308,
+    "simulation_blocked_ms": 2.299068001,
+    "native_walk_ms": 4.613346002,
+    "native_compile_ms": 8.959474999,
+    "prep_wall": 0.013628072,
+    "prep_cpu": 0.013009083,
+    "draw_wall": 0.004787917,
+    "swap_wall": 0.028164042
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "mode": "rr",
+  "ticks": 1900,
+  "checkpoint_domain_records": 21,
+  "original_reference_records_equal": 18,
+  "terminal_tick": 1900,
+  "receipts": [
+    {
+      "tick": "1800",
+      "role": "0",
+      "tid": "9567",
+      "mode": "rr",
+      "policy": "2",
+      "rt": "5",
+      "nice": "0",
+      "error": "0"
+    },
+    {
+      "tick": "1800",
+      "role": "1",
+      "tid": "9595",
+      "mode": "rr",
+      "policy": "0",
+      "rt": "0",
+      "nice": "-5",
+      "error": "0"
+    },
+    {
+      "tick": "1800",
+      "role": "2",
+      "tid": "9594",
+      "mode": "rr",
+      "policy": "2",
+      "rt": "5",
+      "nice": "0",
+      "error": "0"
+    }
+  ],
+  "census_applied": true,
+  "restored": true
+}

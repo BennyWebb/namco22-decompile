@@ -1,0 +1,29 @@
+{
+  "event": {
+    "tick": 1800,
+    "repeats": 1,
+    "interval_ms": 26.342090000980534,
+    "simulation_ms": 14.517989999,
+    "simulation_blocked_ms": 3.231409002,
+    "native_walk_ms": 3.614727,
+    "native_compile_ms": 10.736520002,
+    "prep_wall": 0.014847851,
+    "prep_cpu": 0.0144105,
+    "draw_wall": 0.025778916,
+    "swap_wall": 0.0001175
+  },
+  "presentation_thread_cpu_ms": 5.317709000000001,
+  "last_legacy_thread_cpu_ms": 25.74375,
+  "last_legacy_draw_wall_ms": 24.489957999999998,
+  "first_native_publication_to_swap_ms": 52.152785,
+  "warms_completed": 3,
+  "warm_ticks": [
+    1740,
+    1741,
+    1742
+  ],
+  "release_complete_tick": 2112,
+  "legacy_retirement_starts_after_16_native_pictures": true,
+  "attribution": "First native handover draw service has substantial non-CPU time. Exact driver/GPU/scheduling cause not isolated by headline instrumentation; no per-call diagnostic fence. Dense preparation passes; zero >50ms game gaps.",
+  "no_window_redefinition": "Tick1800 remains inside native acceptance window; the single inferred repeat fails the strict gate."
+}

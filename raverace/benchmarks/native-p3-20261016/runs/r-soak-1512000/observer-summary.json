@@ -1,0 +1,143 @@
+{
+  "io": {
+    "streams": "2",
+    "reserved": "2097152",
+    "dropped_records": "0",
+    "dropped_bytes": "0",
+    "errors": "0",
+    "packets": "0",
+    "writer_idle_result": "0",
+    "nice_result": "0",
+    "fully_drained": "1\n"
+  },
+  "priority_banner": "P1B_OBSERVER interval_ms=100 PSI=OFF SCHED_IDLE_result=0 nice=19",
+  "samples": 9271,
+  "sample_interval_ms": {
+    "n": 9270,
+    "median": 100.01078000095731,
+    "p95": 104.85418399912305,
+    "p99": 123.60846000228776,
+    "worst": 3211.462068000401,
+    "minimum": 37.759691000246676,
+    "mean": 100.67927917572815
+  },
+  "slow_sample_gaps_over200ms": [
+    {
+      "start": 26228.932509247,
+      "end": 26232.143971315,
+      "gap_ms": 3211.462068000401
+    },
+    {
+      "start": 26242.548235736,
+      "end": 26243.036976241,
+      "gap_ms": 488.7405049994413
+    },
+    {
+      "start": 26375.241212963,
+      "end": 26376.973440817,
+      "gap_ms": 1732.227854001394
+    },
+    {
+      "start": 26491.988003921,
+      "end": 26492.249011084,
+      "gap_ms": 261.0071630006132
+    },
+    {
+      "start": 26635.898264341,
+      "end": 26636.134705344,
+      "gap_ms": 236.44100299861748
+    },
+    {
+      "start": 26764.365437207,
+      "end": 26764.981720502,
+      "gap_ms": 616.2832949994481
+    },
+    {
+      "start": 26773.08596748,
+      "end": 26773.303584913,
+      "gap_ms": 217.61743299794034
+    }
+  ],
+  "read_duration_ms": {
+    "n": 282733,
+    "median": 0.04983100006938912,
+    "p95": 0.19957499898737296,
+    "p99": 1.7262220026168507,
+    "worst": 21.610272000543773,
+    "minimum": 0.023041000531520694,
+    "mean": 0.12212901179074774
+  },
+  "slow_reads_over50ms": [],
+  "observer_game_gap_coincidences": [],
+  "sampler_cpu_seconds": 42.225629942,
+  "sampler_cpu_core_equivalent": 0.04524351160865505,
+  "sampler_maxrss_kib": 5744,
+  "gpu_hz_counts": {
+    "240000000": 9271
+  },
+  "cpu_khz_counts": [
+    {
+      "1512000": 9271
+    },
+    {
+      "1512000": 9271
+    },
+    {
+      "1512000": 9271
+    },
+    {
+      "1512000": 9271
+    }
+  ],
+  "peak_temperature_c": 64.133,
+  "cooling_counts": {
+    "/sys/class/thermal/cooling_device0/cur_state": {
+      "0": 9271
+    },
+    "/sys/class/thermal/cooling_device1/cur_state": {
+      "0": 9271
+    }
+  },
+  "pressure_reads": 0,
+  "memory": {
+    "rss_kib": {
+      "n": 9214,
+      "median": 711424.0,
+      "p95": 767584,
+      "p99": 772620,
+      "worst": 775876,
+      "minimum": 4,
+      "mean": 637400.9876275234
+    },
+    "available_kib": {
+      "n": 9217,
+      "median": 116440,
+      "p95": 660352,
+      "p99": 742420,
+      "worst": 775784,
+      "minimum": 101008,
+      "mean": 206435.84854073994
+    },
+    "cma_kib": {
+      "n": 9217,
+      "median": 31124,
+      "p95": 50724,
+      "p99": 57160,
+      "worst": 57212,
+      "minimum": 2116,
+      "mean": 31591.048280351526
+    },
+    "mali_pages": {
+      "n": 9217,
+      "median": 137867,
+      "p95": 151997,
+      "p99": 152716,
+      "worst": 152758,
+      "minimum": 0,
+      "mean": 122461.39394596941
+    }
+  },
+  "samples_with_game_thread_records": 9217,
+  "game_process_coverage_valid": true,
+  "process_coverage_warning": null
+}

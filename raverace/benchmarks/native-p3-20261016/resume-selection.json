@@ -1,0 +1,26 @@
+{
+  "priority": "off",
+  "nice": "Paired dense median saving0.067ms, but native prep median and dense tail regress; no convincing overall benefit in one pair.",
+  "rr": "Reject: four repeats,2657 settled underrun frames; main/present runqueue improves but Mali/audio waits increase. All threads progressed; no prolonged stall/hang.",
+  "b_steps_pending": false,
+  "b1": {
+    "keep": true,
+    "paired_dense_median_saving_ms": 0.811736,
+    "paired_dense_mean_saving_ms": 0.6943854878,
+    "dense_p99_ms": 15.412331,
+    "host_parity": "21sets/4207packets/36images",
+    "device_state_sets": 21,
+    "final_device_packet_image_validation_pending": true
+  },
+  "b2": {
+    "keep": true,
+    "paired_dense_median_saving_ms": 0.567881,
+    "paired_dense_mean_saving_ms": 0.6493129024,
+    "dense_p99_ms": 13.704833
+  },
+  "final_binary": "r-b2",
+  "final_binary_sha256": "0fdf81922672ee47be0c71cba245c5e6da841328de86a1d8b92310988ec40817",
+  "final_first_source": "r-b2-timing",
+  "final_device_validation_pending": false,
+  "device_validation": "6006 ticks /21sets /4207packets /36Mali images exact"
+}

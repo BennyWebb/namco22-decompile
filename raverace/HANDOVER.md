@@ -5,28 +5,45 @@ repository state, then [state the new task].”** This file is a signpost, not a
 substitute for checking current source, Git status, device state and the cited
 reports. Update it when a milestone changes the active build or benchmark.
 
-## Milestone P3 — BLOCKED / STOPPED EARLY (2026-10-16)
+## Standing runtime and experiment rules
+
+Use `ENG_*` for new runtime environment switches: replay strips `RR_*`/`SND_*`.
+Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
+Correctness failures, safety problems or decisions: STOP/report. Routine setup or
+configuration errors: FIX AND CONTINUE within the user’s device-time budget.
+
+## Milestone P3 — COMPLETE / performance FAIL / STOPPED (2026-10-16)
 
 See [P3 report](NATIVE_P3_REPORT.md) and
-[evidence](benchmarks/native-p3-20261016/README.md). Three device replays completed
-in12.88min, but A1/A2 priority experiments are INVALID: replay startup strips
-`RR_*`, so `RR_P3_PRIORITY` vanished; actual main/prepare/present stayed at defaults.
-Thread census caught this. Source-only fix is `ENG_P3_PRIORITY`, defaultOFF,
-not transferred/hardware-validated. Per user stop-on-failure rule, no replacements,
-B device timing, final validation/repeats or15min soak were started. No final
-candidate adopted; P3 gate NOT MET (incomplete), not a scheduling conclusion.
+[evidence](benchmarks/native-p3-20261016/README.md). Selected isolated build is
+P2 b + B1 checked projection + B2 conservative extrema, default priorities:
+`native/generated/p3/b2-play/arm/rr_p1b`, SHA256
+`0fdf81922672ee47be0c71cba245c5e6da841328de86a1d8b92310988ec40817`.
+Corrected ENG_* smokes verify applied policies. Nice lacks convincing overall
+benefit; RR worsens worker waits, repeats and audio; both are rejected.
 
-Private native/p3 B1 native-only checked64-bit projection passes128449792 UBSan
-comparisons; B2 conservative extrema passes1million differential quads. Both
-native-only host builds pass6006ticks/all21sets/exact4207packets/36host images;
-B2 checks old/new cull reason on every replay quad. No new Mali image validation.
-Legacy/fallback original projection retained; shared engine/production untouched.
+Both final dense preparation p99 values pass: 13.705/13.492 ms. Both have zero
+settled underruns and main gaps >50 ms. Final-2 has one inferred repeat at tick
+1800, so the zero-repeat gate FAILS. First-native draw service is 25.779 ms versus
+5.318 ms presentation-thread CPU; the exact non-CPU wait remains unisolated.
+The transition stays inside acceptance. No further optimisation was attempted.
 
-All3 device replays pass authoritative checkpoints. All47protected hashes pass;
-production SHA remains6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e.
-CPU schedutil480–1512MHz/GPU simple_ondemand and RT defaults restored, ES PID6823,
-no game/sampler/perf. No commit/push/deployment. P2/history gates unchanged.
-STOPPED. A resumed bounded hardware matrix requires explicit user authorisation.
+Exactly one final device validation passes all 21 checkpoint sets, 4,207 packets
+and 36 Mali images. Host projection proof covers 128449792 UBSan comparisons;
+B2 has differential and full-replay parity. The 929.43-second, seven-process-lap
+soak has zero repeats, settled underruns or main gaps >50 ms, peak 64.133°C,
+CPU 1512 MHz, GPU 240 MHz and cooling states zero. Native exposure is 493.18 s;
+this is a 15-minute wall-time replay loop, not 15 minutes of native-only play.
+User confirms settled motion/audio clean. The old blocked attempt is retained
+as history in the report/evidence; its invalid A runs are not comparisons.
+
+Continuation used 48.94 minutes of device time. All 47 protected hashes pass;
+production SHA remains
+`6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e`.
+CPU schedutil 480–1512 MHz, stock GPU policy and RT defaults restored; EmulationStation
+PID 14605 restored, no game/sampler/perf running. No shared engine, gameplay,
+production, saves, replay or controller changes; no commit or push.
+STOPPED. Any further investigation or implementation requires explicit authorisation.
 
 ## Milestone P2 — COMPLETE / performance FAIL / STOPPED (2026-10-16)
 

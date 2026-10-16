@@ -1,0 +1,344 @@
+[
+  {
+    "maximum_census_interval_runqueue_ms": 3.120626,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12122,
+    "name": "r-b2",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 1,
+      "1": 1
+    },
+    "states": {
+      "R": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 808.936995,
+    "runqueue_ms": 3.120626,
+    "core_equivalent": 0.8089601223624638,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 61,
+      "nonvoluntary_ctxt_switches": 36
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 5.352833,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12125,
+    "name": "rr-writer",
+    "samples": 2,
+    "policies": {
+      "5/0/nice19": 2
+    },
+    "cpu_counts": {
+      "1": 1,
+      "0": 1
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 3.742124,
+    "runqueue_ms": 5.352833,
+    "core_equivalent": 0.0037422309866487345,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 99,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12127,
+    "name": "mali-mem-purge",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.276959,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.000276966918207747,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 10,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12128,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12129,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12130,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12131,
+    "name": "mali-utility-wo",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "0": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 9.626917,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12132,
+    "name": "mali-cmar-backe",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "1": 1,
+      "0": 1
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 78.03666,
+    "runqueue_ms": 9.626917,
+    "core_equivalent": 0.07803889105400351,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 201,
+      "nonvoluntary_ctxt_switches": 22
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.171125,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12141,
+    "name": "SDLHotplugALSA",
+    "samples": 2,
+    "policies": {
+      "0/0/nice19": 2
+    },
+    "cpu_counts": {
+      "1": 1,
+      "0": 1
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.256252,
+    "runqueue_ms": 0.171125,
+    "core_equivalent": 0.00025625932619835994,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 10,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12142,
+    "name": "alsa-pipewire",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "3": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12143,
+    "name": "data-loop.0",
+    "samples": 2,
+    "policies": {
+      "1/83/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 16.113414,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.016113874679593604,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 94,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 6.216837,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12144,
+    "name": "SDLAudioP2",
+    "samples": 2,
+    "policies": {
+      "0/0/nice-20": 2
+    },
+    "cpu_counts": {
+      "1": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 9.393456,
+    "runqueue_ms": 6.216837,
+    "core_equivalent": 0.00939372455720908,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 94,
+      "nonvoluntary_ctxt_switches": 51
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 14.353873,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12145,
+    "name": "rr-present",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "2": 2
+    },
+    "states": {
+      "S": 2
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 398.01817,
+    "runqueue_ms": 14.353873,
+    "core_equivalent": 0.39802954926753464,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 63,
+      "nonvoluntary_ctxt_switches": 181
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 11.273583,
+    "maximum_census_interval_ms": 999.9714109981142,
+    "tid": 12146,
+    "name": "rr-prepare",
+    "samples": 2,
+    "policies": {
+      "0/0/nice0": 2
+    },
+    "cpu_counts": {
+      "0": 1,
+      "3": 1
+    },
+    "states": {
+      "S": 1,
+      "R": 1
+    },
+    "observed_seconds": 0.9999714109981142,
+    "runtime_ms": 560.823882,
+    "runqueue_ms": 11.273583,
+    "core_equivalent": 0.560839915853412,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 119,
+      "nonvoluntary_ctxt_switches": 101
+    }
+  }
+]

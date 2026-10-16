@@ -1,5 +1,7 @@
 [
   {
+    "maximum_census_interval_runqueue_ms": 27.007907,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6115,
     "name": "p2-control",
     "samples": 70,
@@ -26,6 +28,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 21.486331,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6118,
     "name": "rr-writer",
     "samples": 70,
@@ -51,6 +55,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 4.246708,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6120,
     "name": "mali-mem-purge",
     "samples": 70,
@@ -76,6 +82,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6121,
     "name": "mali-utility-wo",
     "samples": 70,
@@ -98,6 +106,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6122,
     "name": "mali-utility-wo",
     "samples": 70,
@@ -120,6 +130,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6123,
     "name": "mali-utility-wo",
     "samples": 70,
@@ -142,6 +154,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.490917,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6124,
     "name": "mali-utility-wo",
     "samples": 70,
@@ -164,6 +178,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 28.034631,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6125,
     "name": "mali-cmar-backe",
     "samples": 70,
@@ -190,6 +206,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 16.972125,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6137,
     "name": "SDLHotplugALSA",
     "samples": 70,
@@ -216,6 +234,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6141,
     "name": "alsa-pipewire",
     "samples": 70,
@@ -238,6 +258,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 0.396915,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6142,
     "name": "data-loop.0",
     "samples": 70,
@@ -261,6 +283,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 7.379753,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6143,
     "name": "SDLAudioP2",
     "samples": 70,
@@ -286,6 +310,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 22.164371,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6144,
     "name": "rr-present",
     "samples": 70,
@@ -312,6 +338,8 @@
     }
   },
   {
+    "maximum_census_interval_runqueue_ms": 26.909127,
+    "maximum_census_interval_ms": 1000.6374200020218,
     "tid": 6145,
     "name": "rr-prepare",
     "samples": 70,

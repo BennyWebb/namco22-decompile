@@ -1,0 +1,369 @@
+[
+  {
+    "maximum_census_interval_runqueue_ms": 18.765827,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11498,
+    "name": "r-b1",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "3": 22,
+      "1": 28,
+      "2": 19,
+      "0": 1
+    },
+    "states": {
+      "R": 53,
+      "S": 17
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 51206.563258,
+    "runqueue_ms": 637.134501,
+    "core_equivalent": 0.7421250068272746,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 4352,
+      "nonvoluntary_ctxt_switches": 11180
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 51.563166,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11501,
+    "name": "rr-writer",
+    "samples": 70,
+    "policies": {
+      "5/0/nice19": 70
+    },
+    "cpu_counts": {
+      "0": 44,
+      "2": 5,
+      "3": 16,
+      "1": 5
+    },
+    "states": {
+      "S": 69,
+      "R": 1
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 262.683424,
+    "runqueue_ms": 592.245849,
+    "core_equivalent": 0.0038070107702249624,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6793,
+      "nonvoluntary_ctxt_switches": 209
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 2.030792,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11503,
+    "name": "mali-mem-purge",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "1": 15,
+      "3": 14,
+      "0": 33,
+      "2": 8
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 48.380803,
+    "runqueue_ms": 14.115747,
+    "core_equivalent": 0.000701171909854244,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 706,
+      "nonvoluntary_ctxt_switches": 22
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11504,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "1": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11505,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "0": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11506,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "1": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 2.021125,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11507,
+    "name": "mali-utility-wo",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "0": 10,
+      "2": 18,
+      "3": 42
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 8.096998,
+    "runqueue_ms": 3.804959,
+    "core_equivalent": 0.00011734793967239433,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 11,
+      "nonvoluntary_ctxt_switches": 10
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 18.370377,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11508,
+    "name": "mali-cmar-backe",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "0": 40,
+      "1": 7,
+      "3": 15,
+      "2": 8
+    },
+    "states": {
+      "S": 68,
+      "R": 2
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 5579.943233,
+    "runqueue_ms": 759.688992,
+    "core_equivalent": 0.08086884075820062,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 17015,
+      "nonvoluntary_ctxt_switches": 3952
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 28.06029,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11517,
+    "name": "SDLHotplugALSA",
+    "samples": 70,
+    "policies": {
+      "0/0/nice19": 70
+    },
+    "cpu_counts": {
+      "0": 34,
+      "3": 14,
+      "1": 13,
+      "2": 9
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 572.593147,
+    "runqueue_ms": 193.865845,
+    "core_equivalent": 0.008298461487946818,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 720,
+      "nonvoluntary_ctxt_switches": 771
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.0,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11518,
+    "name": "alsa-pipewire",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "3": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 0.0,
+    "runqueue_ms": 0.0,
+    "core_equivalent": 0.0,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 0,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 0.340752,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11519,
+    "name": "data-loop.0",
+    "samples": 70,
+    "policies": {
+      "1/83/nice0": 70
+    },
+    "cpu_counts": {
+      "3": 70
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 1005.441431,
+    "runqueue_ms": 7.64,
+    "core_equivalent": 0.014571632645718058,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6469,
+      "nonvoluntary_ctxt_switches": 0
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 9.406209,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11520,
+    "name": "SDLAudioP2",
+    "samples": 70,
+    "policies": {
+      "0/0/nice-20": 70
+    },
+    "cpu_counts": {
+      "0": 34,
+      "2": 14,
+      "1": 14,
+      "3": 8
+    },
+    "states": {
+      "S": 70
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 631.127519,
+    "runqueue_ms": 420.936316,
+    "core_equivalent": 0.009146786750496901,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 6469,
+      "nonvoluntary_ctxt_switches": 3656
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 19.765464,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11521,
+    "name": "rr-present",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "1": 20,
+      "3": 19,
+      "0": 14,
+      "2": 17
+    },
+    "states": {
+      "S": 55,
+      "R": 15
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 19729.350962,
+    "runqueue_ms": 684.836132,
+    "core_equivalent": 0.2859329700296667,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 4981,
+      "nonvoluntary_ctxt_switches": 6713
+    }
+  },
+  {
+    "maximum_census_interval_runqueue_ms": 27.783506,
+    "maximum_census_interval_ms": 1000.4866899980698,
+    "tid": 11522,
+    "name": "rr-prepare",
+    "samples": 70,
+    "policies": {
+      "0/0/nice0": 70
+    },
+    "cpu_counts": {
+      "2": 30,
+      "1": 15,
+      "3": 17,
+      "0": 8
+    },
+    "states": {
+      "R": 36,
+      "S": 34
+    },
+    "observed_seconds": 68.99991616899933,
+    "runtime_ms": 37461.206453,
+    "runqueue_ms": 789.233153,
+    "core_equivalent": 0.5429166951630411,
+    "context_switch_deltas": {
+      "voluntary_ctxt_switches": 8289,
+      "nonvoluntary_ctxt_switches": 9842
+    }
+  }
+]
