@@ -1,0 +1,25 @@
+{
+  "owner": 25904,
+  "owner_start": "5131886",
+  "original": {
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "schedutil",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq": "480000",
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq": "1512000",
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "schedutil",
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq": "480000",
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq": "1512000",
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "schedutil",
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq": "480000",
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq": "1512000",
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "schedutil",
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq": "480000",
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq": "1512000",
+    "/sys/class/devfreq/gpu/governor": "simple_ondemand",
+    "/sys/class/devfreq/gpu/min_freq": "0",
+    "/sys/class/devfreq/gpu/max_freq": "0"
+  },
+  "restored": true,
+  "game": 25921,
+  "game_start": "5134762",
+  "restore_errors": []
+}

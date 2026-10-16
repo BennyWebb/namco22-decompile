@@ -1,0 +1,6 @@
+/* Host adapter only: unchanged EEPROM state is snapshotted on the simulation
+ * thread; the low-priority supervisor persists it atomically in native saves. */
+static bool g2_save_enabled;static unsigned g2_save_ticks;static unsigned char g2_last_eeprom[RR_EEPROM_SIZE];
+static void g2_save_emit(void){if(!g2_save_enabled||!memcmp(g2_last_eeprom,g_rr.eeprom,RR_EEPROM_SIZE))return;static const char hex[]="0123456789abcdef";char line[32+RR_EEPROM_SIZE*2];unsigned at=0;const char*prefix="[G2-EEPROM] ";while(*prefix)line[at++]=*prefix++;for(unsigned i=0;i<RR_EEPROM_SIZE;i++){line[at++]=hex[g_rr.eeprom[i]>>4];line[at++]=hex[g_rr.eeprom[i]&15];}line[at++]='\n';fwrite(line,1,at,stderr);memcpy(g2_last_eeprom,g_rr.eeprom,RR_EEPROM_SIZE);}
+static void g2_save_tick(void){if(g2_save_enabled&&++g2_save_ticks%120==0)g2_save_emit();}
+static bool g2_save_open(bool enabled){g2_save_enabled=enabled;if(!enabled)return true;const char*p=getenv("ENG_G2_SAVE_PATH");if(!p)return false;FILE*f=fopen(p,"rb");if(!f)return false;bool ok=fread(g_rr.eeprom,1,RR_EEPROM_SIZE,f)==RR_EEPROM_SIZE&&fgetc(f)==EOF;fclose(f);if(!ok)return false;memcpy(g2_last_eeprom,g_rr.eeprom,RR_EEPROM_SIZE);fprintf(stderr,"[G2-SAVE] loaded=%s bytes=%u transport=async-supervisor\n",p,RR_EEPROM_SIZE);return true;}

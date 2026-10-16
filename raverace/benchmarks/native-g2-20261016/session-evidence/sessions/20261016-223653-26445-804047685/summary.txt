@@ -1,0 +1,22 @@
+Rave Racer Native session
+Exit: 0; clocks restored: True
+Pictures: 7170; incomplete telemetry records: 0
+Native EEPROM writes: 0
+Raw logs rotate; summaries retain all accumulated counts.
+unknown: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=0 sub=0 screen=0 course=0: native=0 legacy=145 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=0.22
+main=65535 sub=0 screen=0 course=0: native=0 legacy=2 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=0.07
+main=65535 sub=65535 screen=65535 course=65535: native=0 legacy=12 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=0.09
+main=1 sub=0 screen=0 course=0: native=0 legacy=3 repeats=1 settled_underruns=0 main_gaps50=0 prep_p99_ms=4.56
+main=1 sub=1 screen=0 course=0: native=1201 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=5.81
+main=1 sub=3 screen=0 course=0: native=1800 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=8.35
+main=1 sub=2 screen=0 course=0: native=1 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=0.37
+main=1 sub=5 screen=0 course=0: native=1201 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=5.8
+main=1 sub=4 screen=0 course=0: native=3 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=7.07
+main=1 sub=7 screen=0 course=1: native=1800 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=7.74
+main=1 sub=6 screen=0 course=0: native=1 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=0.39
+main=1 sub=9 screen=0 course=1: native=998 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=5.89
+main=1 sub=8 screen=0 course=1: native=3 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=5.41
+Exact fallback keys: 0; unretained key records: 0; clock/cooling flags: 0
+Resource ranges (KiB/pages/mC as labelled): {"CmaFree_KiB": {"max": 11300, "min": 2264}, "Mali_pages": {"max": 45207, "min": 0}, "MemAvailable_KiB": {"max": 754192, "min": 543056}, "VmHWM_KiB": {"max": 331912, "min": 33700}, "VmRSS_KiB": {"max": 331816, "min": 33700}, "cooling_device0": {"max": 0, "min": 0}, "cooling_device1": {"max": 0, "min": 0}, "cpu0_khz": {"max": 1512000, "min": 1512000}, "cpu1_khz": {"max": 1512000, "min": 1512000}, "cpu2_khz": {"max": 1512000, "min": 1512000}, "cpu3_khz": {"max": 1512000, "min": 1512000}, "gpu_hz": {"max": 240000000, "min": 240000000}, "thermal_zone0_mC": {"max": 56843, "min": 49634}, "thermal_zone1_mC": {"max": 53927, "min": 48419}, "thermal_zone2_mC": {"max": 54089, "min": 47285}, "thermal_zone3_mC": {"max": 53603, "min": 47366}, "thermal_zone4_mC": {"max": 30000, "min": 30000}}
+[P1B-IO] streams=3 reserved=3145728 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1

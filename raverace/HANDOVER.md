@@ -12,6 +12,26 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone G2 — separate playable Native entry / COMPLETE / STOPPED (2026-10-16)
+
+See [G2 report](NATIVE_G2_REPORT.md) and [evidence](benchmarks/native-g2-20261016/README.md).
+Private `native/g2/`: bounded-pool cache index512KiB and immutable-slot prefix reuse.
+Host21sets/4207packets/36provenance images pass,c=0. Single reference prepare median
+8.305ms (target≤8.54),dense p9912.735; pacing0repeats/settled underruns/main gaps.
+**Ports → Rave Racer (Native)** now runs the separate app at
+`/userdata/system/rave-racer-native-g2/`; production entry remains untouched.
+First-launch ROM-only cache compiler verified on host/device; cold22.024s,
+verified hit0.689s. Native EEPROM/config copies live in
+`/userdata/saves/rave-racer-native/`. Session summaries/logs in app `sessions/`
+and `latest-summary.{txt,json}`; bounded async transport,10Hz resources.
+CPU1512 session profile/watchdog restoration; GPUstock,q2,index,state activation,
+default priorities/fallback. Corrected7170-picture START+SELECT smoke passes;
+7008native,zero native repeats/settled underruns/main gaps; one boot/prewarm repeat.
+Initial setup failures retained/explained. All47production paths and30app hashes
+verify; stock clocks/EmulationStation restored,no game. No commit/push.
+Removal:`/userdata/system/rave-racer-native-g2/remove.sh` (saves/evidence retained).
+**STOPPED:** user can play from separate entry; no further milestone authorised.
+
 ## Milestone G1c — attract PASS / reference preparation regression / STOPPED (2026-10-16)
 
 See [G1c report](NATIVE_G1C_REPORT.md) and [evidence](benchmarks/native-g1c-20261016/README.md).

@@ -1,0 +1,731 @@
+{
+  "pass_checks": true,
+  "app_files": 30,
+  "protected_paths": 47,
+  "emulationstation_pid": "26586",
+  "production_sha256": "6e1cac0099a7fd9b5e7d705a2d3634dd387f7705b7ce36a8aa011742c07b5a1e",
+  "summary": {
+    "exit_code": 0,
+    "clock_restore_errors": [],
+    "groups": {
+      "unknown": {
+        "native": 0,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": null,
+        "preparation_worst_ms": 0,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 33700,
+            "max": 316652
+          },
+          "VmHWM_KiB": {
+            "min": 33700,
+            "max": 316652
+          },
+          "MemAvailable_KiB": {
+            "min": 556484,
+            "max": 754192
+          },
+          "CmaFree_KiB": {
+            "min": 4424,
+            "max": 5428
+          },
+          "Mali_pages": {
+            "min": 0,
+            "max": 44169
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 47366,
+            "max": 49310
+          },
+          "thermal_zone1_mC": {
+            "min": 48419,
+            "max": 49391
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 47285,
+            "max": 48905
+          },
+          "thermal_zone0_mC": {
+            "min": 49634,
+            "max": 51011
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=0 sub=0 screen=0 course=0": {
+        "native": 0,
+        "legacy": 145,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 0.22,
+        "preparation_worst_ms": 0.236864,
+        "fallback_reasons": {
+          "boot-state": 145
+        },
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=65535 sub=0 screen=0 course=0": {
+        "native": 0,
+        "legacy": 2,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 0.07,
+        "preparation_worst_ms": 0.061455,
+        "fallback_reasons": {
+          "boot-state": 2
+        },
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=65535 sub=65535 screen=65535 course=65535": {
+        "native": 0,
+        "legacy": 12,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 0.09,
+        "preparation_worst_ms": 0.08483,
+        "fallback_reasons": {
+          "boot-state": 12
+        },
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=0 screen=0 course=0": {
+        "native": 0,
+        "legacy": 3,
+        "repeats": 1,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 4.56,
+        "preparation_worst_ms": 4.554660999999999,
+        "fallback_reasons": {
+          "prewarm": 3
+        },
+        "dynamic_misses": 1,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 67600,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=1 screen=0 course=0": {
+        "native": 1201,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 5.81,
+        "preparation_worst_ms": 15.978834,
+        "fallback_reasons": {},
+        "dynamic_misses": 8,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 64863872,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 316732,
+            "max": 323600
+          },
+          "VmHWM_KiB": {
+            "min": 316732,
+            "max": 323600
+          },
+          "MemAvailable_KiB": {
+            "min": 548592,
+            "max": 556484
+          },
+          "CmaFree_KiB": {
+            "min": 2264,
+            "max": 10428
+          },
+          "Mali_pages": {
+            "min": 44169,
+            "max": 44586
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 48662,
+            "max": 51335
+          },
+          "thermal_zone1_mC": {
+            "min": 49229,
+            "max": 51497
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 49148,
+            "max": 51821
+          },
+          "thermal_zone0_mC": {
+            "min": 51173,
+            "max": 53441
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=3 screen=0 course=0": {
+        "native": 1800,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 8.35,
+        "preparation_worst_ms": 8.710178,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 323600,
+            "max": 326204
+          },
+          "VmHWM_KiB": {
+            "min": 323600,
+            "max": 326204
+          },
+          "MemAvailable_KiB": {
+            "min": 545700,
+            "max": 548724
+          },
+          "CmaFree_KiB": {
+            "min": 10428,
+            "max": 11024
+          },
+          "Mali_pages": {
+            "min": 44586,
+            "max": 45038
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 50849,
+            "max": 52793
+          },
+          "thermal_zone1_mC": {
+            "min": 50849,
+            "max": 52955
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 51335,
+            "max": 53360
+          },
+          "thermal_zone0_mC": {
+            "min": 52793,
+            "max": 55952
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=2 screen=0 course=0": {
+        "native": 1,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 0.37,
+        "preparation_worst_ms": 0.36065,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=5 screen=0 course=0": {
+        "native": 1201,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 5.8,
+        "preparation_worst_ms": 15.892558000000001,
+        "fallback_reasons": {},
+        "dynamic_misses": 7,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 71574096,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 326204,
+            "max": 330320
+          },
+          "VmHWM_KiB": {
+            "min": 326204,
+            "max": 330320
+          },
+          "MemAvailable_KiB": {
+            "min": 544468,
+            "max": 546180
+          },
+          "CmaFree_KiB": {
+            "min": 10900,
+            "max": 11024
+          },
+          "Mali_pages": {
+            "min": 45038,
+            "max": 45167
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 50687,
+            "max": 53198
+          },
+          "thermal_zone1_mC": {
+            "min": 51254,
+            "max": 52955
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 50768,
+            "max": 53441
+          },
+          "thermal_zone0_mC": {
+            "min": 51983,
+            "max": 55790
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=4 screen=0 course=0": {
+        "native": 3,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 7.07,
+        "preparation_worst_ms": 7.068339,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=7 screen=0 course=1": {
+        "native": 1800,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 7.74,
+        "preparation_worst_ms": 8.893217,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 330320,
+            "max": 330792
+          },
+          "VmHWM_KiB": {
+            "min": 330320,
+            "max": 330792
+          },
+          "MemAvailable_KiB": {
+            "min": 543860,
+            "max": 544892
+          },
+          "CmaFree_KiB": {
+            "min": 11024,
+            "max": 11188
+          },
+          "Mali_pages": {
+            "min": 45167,
+            "max": 45207
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 51497,
+            "max": 53603
+          },
+          "thermal_zone1_mC": {
+            "min": 51740,
+            "max": 53927
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 50849,
+            "max": 54008
+          },
+          "thermal_zone0_mC": {
+            "min": 52631,
+            "max": 56843
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=6 screen=0 course=0": {
+        "native": 1,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 0.39,
+        "preparation_worst_ms": 0.38377399999999995,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=9 screen=0 course=1": {
+        "native": 998,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 5.89,
+        "preparation_worst_ms": 15.621995,
+        "fallback_reasons": {},
+        "dynamic_misses": 6,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 67489904,
+        "resources": {
+          "VmRSS_KiB": {
+            "min": 135592,
+            "max": 331816
+          },
+          "VmHWM_KiB": {
+            "min": 330792,
+            "max": 331912
+          },
+          "MemAvailable_KiB": {
+            "min": 543056,
+            "max": 653332
+          },
+          "CmaFree_KiB": {
+            "min": 11188,
+            "max": 11300
+          },
+          "Mali_pages": {
+            "min": 0,
+            "max": 45207
+          },
+          "cpu0_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu1_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu2_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "cpu3_khz": {
+            "min": 1512000,
+            "max": 1512000
+          },
+          "gpu_hz": {
+            "min": 240000000,
+            "max": 240000000
+          },
+          "thermal_zone3_mC": {
+            "min": 52226,
+            "max": 53279
+          },
+          "thermal_zone1_mC": {
+            "min": 52712,
+            "max": 53684
+          },
+          "thermal_zone4_mC": {
+            "min": 30000,
+            "max": 30000
+          },
+          "thermal_zone2_mC": {
+            "min": 52631,
+            "max": 54089
+          },
+          "thermal_zone0_mC": {
+            "min": 53927,
+            "max": 56276
+          },
+          "cooling_device1": {
+            "min": 0,
+            "max": 0
+          },
+          "cooling_device0": {
+            "min": 0,
+            "max": 0
+          }
+        },
+        "clock_flagged_samples": 0
+      },
+      "main=1 sub=8 screen=0 course=1": {
+        "native": 3,
+        "legacy": 0,
+        "repeats": 0,
+        "native_repeats": 0,
+        "native_main_gaps_over50ms": 0,
+        "settled_native_underrun_frames": 0,
+        "settled_underrun_frames": 0,
+        "all_native_underrun_frames": 0,
+        "main_gaps_over50ms": 0,
+        "preparation_p99_ms_upper_0_01": 5.41,
+        "preparation_worst_ms": 5.404253000000001,
+        "fallback_reasons": {},
+        "dynamic_misses": 0,
+        "dynamic_evictions": 0,
+        "staging_copied_bytes": 0,
+        "resources": {},
+        "clock_flagged_samples": 0
+      }
+    },
+    "legacy_release_tick": 178,
+    "settled_audio_definition": "All pictures after actual legacy release; native-only settled and all-native counters also reported",
+    "processed_pictures": 7170,
+    "unmatched_records": 0,
+    "fallback_exact_keys": {},
+    "dropped_fallback_key_records": 0,
+    "events": [
+      {
+        "state": "main=1 sub=0 screen=0 course=0",
+        "tick": 160,
+        "native": 0,
+        "repeats": 1,
+        "underrun_frames": 0,
+        "main_gap_ms": 16.696091007864705,
+        "prepare_ms": 0.744507,
+        "compiler_ms": 0.454229004,
+        "simulation_ms": 4.605449998,
+        "swap_ms": 0.149375
+      }
+    ],
+    "save_writes": 0,
+    "io_receipts": [
+      "[P1B-IO] streams=3 reserved=3145728 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1"
+    ],
+    "smoke_start_select_seen": true,
+    "sample_count": 1220,
+    "retention": "Five log streams,2x2MiB each;128state groups;4096fallback keys;256recent problem events;8sessions. Prep p99 nearest-rank0.01ms upper bins,overflow>100ms.",
+    "asset_cache_built": false,
+    "asset_cache_seconds": 0.6894069219997618,
+    "cache": "/userdata/system/rave-racer-native-g2/cache/212a57ebd948f3069e66a418eca8fff8bfcdb6007fd0a9e6ac85d5bb53bc0112"
+  }
+}

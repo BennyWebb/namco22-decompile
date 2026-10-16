@@ -1,0 +1,855 @@
+{
+  "visits": [
+    {
+      "first_tick": 163,
+      "last_tick": 802,
+      "course": 0,
+      "complete": true,
+      "pictures": 640,
+      "native": 640,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 4831,
+      "probes_per_lookup": 1.0051777530682018,
+      "max_probe": 3,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 6,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 640,
+          "median": 4.168076,
+          "p95": 5.220616,
+          "p99": 5.782092,
+          "worst": 15.623141,
+          "minimum": 0.33444399999999996
+        },
+        "compiler_ms": {
+          "n": 640,
+          "median": 2.774863999,
+          "p95": 3.850006004,
+          "p99": 4.282155001,
+          "worst": 14.774135001,
+          "minimum": 0.263905997
+        },
+        "walk_ms": {
+          "n": 640,
+          "median": 1.277217001,
+          "p95": 1.629390004,
+          "p99": 1.772842996,
+          "worst": 1.952376995,
+          "minimum": 0.004999994
+        },
+        "simulation_ms": {
+          "n": 640,
+          "median": 7.080851003,
+          "p95": 8.072038996,
+          "p99": 8.268030004,
+          "worst": 9.996334004,
+          "minimum": 5.139827001
+        },
+        "blocked_ms": {
+          "n": 640,
+          "median": 8.5936215,
+          "p95": 10.543060998,
+          "p99": 10.644515001,
+          "worst": 12.766427004,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 640,
+          "median": 2.694896,
+          "p95": 4.9854579999999995,
+          "p99": 5.253417,
+          "worst": 12.521834,
+          "minimum": 0.984167
+        },
+        "swap_ms": {
+          "n": 640,
+          "median": 13.5379795,
+          "p95": 14.408083,
+          "p99": 14.564791000000001,
+          "worst": 14.641166,
+          "minimum": 0.047291
+        },
+        "interval_ms": {
+          "n": 640,
+          "median": 16.747156500059646,
+          "p95": 16.91571200353792,
+          "p99": 17.02708299853839,
+          "worst": 17.130244996224064,
+          "minimum": 1.4446900022448972
+        },
+        "age_ms": {
+          "n": 640,
+          "median": 33.343278,
+          "p95": 33.537895,
+          "p99": 33.656932,
+          "worst": 33.738052999999994,
+          "minimum": 16.833716
+        }
+      }
+    },
+    {
+      "first_tick": 803,
+      "last_tick": 1335,
+      "course": 0,
+      "complete": true,
+      "pictures": 533,
+      "native": 533,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 4950,
+      "probes_per_lookup": 1.0418932958503941,
+      "max_probe": 3,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 533,
+          "median": 0.763718,
+          "p95": 0.987334,
+          "p99": 1.1817419999999998,
+          "worst": 3.678513,
+          "minimum": 0.327528
+        },
+        "compiler_ms": {
+          "n": 533,
+          "median": 0.522144997,
+          "p95": 0.667264001,
+          "p99": 0.916087003,
+          "worst": 3.223406995,
+          "minimum": 0.262280002
+        },
+        "walk_ms": {
+          "n": 533,
+          "median": 0.17041,
+          "p95": 0.218948997,
+          "p99": 0.388024993,
+          "worst": 0.812132996,
+          "minimum": 0.004374
+        },
+        "simulation_ms": {
+          "n": 533,
+          "median": 7.033624002,
+          "p95": 7.900088,
+          "p99": 8.572517996,
+          "worst": 10.676847,
+          "minimum": 4.012167003
+        },
+        "blocked_ms": {
+          "n": 533,
+          "median": 8.730845002,
+          "p95": 10.501229001,
+          "p99": 11.406525002,
+          "worst": 11.801633002,
+          "minimum": 5.232365998
+        },
+        "draw_ms": {
+          "n": 533,
+          "median": 1.660375,
+          "p95": 2.1111250000000004,
+          "p99": 2.5117920000000002,
+          "worst": 3.2500839999999998,
+          "minimum": 1.1019999999999999
+        },
+        "swap_ms": {
+          "n": 533,
+          "median": 14.553292,
+          "p95": 14.924666,
+          "p99": 15.09125,
+          "worst": 15.186458,
+          "minimum": 12.94
+        },
+        "interval_ms": {
+          "n": 533,
+          "median": 16.74367699888535,
+          "p95": 16.953459999058396,
+          "p99": 17.05774800211657,
+          "worst": 17.20149199536536,
+          "minimum": 16.299529001116753
+        },
+        "age_ms": {
+          "n": 533,
+          "median": 33.331278999999995,
+          "p95": 33.544603,
+          "p99": 33.655432,
+          "worst": 33.826092,
+          "minimum": 32.916503999999996
+        }
+      }
+    },
+    {
+      "first_tick": 1336,
+      "last_tick": 1337,
+      "course": 0,
+      "complete": true,
+      "pictures": 2,
+      "native": 2,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 4950,
+      "probes_per_lookup": 1.0,
+      "max_probe": 1,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 2,
+          "median": 0.33563149999999997,
+          "p95": 0.338277,
+          "p99": 0.338277,
+          "worst": 0.338277,
+          "minimum": 0.332986
+        },
+        "compiler_ms": {
+          "n": 2,
+          "median": 0.2757799995,
+          "p95": 0.277154999,
+          "p99": 0.277154999,
+          "worst": 0.277154999,
+          "minimum": 0.274405
+        },
+        "walk_ms": {
+          "n": 2,
+          "median": 0.0051664975000000005,
+          "p95": 0.005499998,
+          "p99": 0.005499998,
+          "worst": 0.005499998,
+          "minimum": 0.004832997
+        },
+        "simulation_ms": {
+          "n": 2,
+          "median": 7.9275444985,
+          "p95": 10.454063995,
+          "p99": 10.454063995,
+          "worst": 10.454063995,
+          "minimum": 5.401025002
+        },
+        "blocked_ms": {
+          "n": 2,
+          "median": 7.7341364995,
+          "p95": 10.405317,
+          "p99": 10.405317,
+          "worst": 10.405317,
+          "minimum": 5.062955999
+        },
+        "draw_ms": {
+          "n": 2,
+          "median": 1.4025625,
+          "p95": 1.525458,
+          "p99": 1.525458,
+          "worst": 1.525458,
+          "minimum": 1.2796669999999999
+        },
+        "swap_ms": {
+          "n": 2,
+          "median": 14.858999999999998,
+          "p95": 14.977875,
+          "p99": 14.977875,
+          "worst": 14.977875,
+          "minimum": 14.740124999999999
+        },
+        "interval_ms": {
+          "n": 2,
+          "median": 16.77392650162801,
+          "p95": 16.83167499868432,
+          "p99": 16.83167499868432,
+          "worst": 16.83167499868432,
+          "minimum": 16.716178004571702
+        },
+        "age_ms": {
+          "n": 2,
+          "median": 33.302488499999995,
+          "p95": 33.394984,
+          "p99": 33.394984,
+          "worst": 33.394984,
+          "minimum": 33.209993
+        }
+      }
+    },
+    {
+      "first_tick": 1338,
+      "last_tick": 6006,
+      "course": 3,
+      "complete": false,
+      "pictures": 4669,
+      "native": 4669,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 10652,
+      "probes_per_lookup": 1.0450491638264776,
+      "max_probe": 4,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 1,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 4669,
+          "median": 8.483189000000001,
+          "p95": 13.586976,
+          "p99": 14.317445999999999,
+          "worst": 18.260697999999998,
+          "minimum": 0.31548600000000004
+        },
+        "compiler_ms": {
+          "n": 4669,
+          "median": 5.521686995,
+          "p95": 8.905128998,
+          "p99": 9.378525996,
+          "worst": 13.268406001,
+          "minimum": 0.247864002
+        },
+        "walk_ms": {
+          "n": 4669,
+          "median": 2.887712995,
+          "p95": 4.583267997,
+          "p99": 4.970460002,
+          "worst": 5.920878997,
+          "minimum": 0.004458001
+        },
+        "simulation_ms": {
+          "n": 4669,
+          "median": 11.179493005,
+          "p95": 12.979168001,
+          "p99": 13.672096997,
+          "worst": 16.957252003,
+          "minimum": 5.309986998
+        },
+        "blocked_ms": {
+          "n": 4669,
+          "median": 4.445815001,
+          "p95": 6.311028999,
+          "p99": 6.596808998,
+          "worst": 10.659639003,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 4669,
+          "median": 4.0925839999999996,
+          "p95": 6.2134160000000005,
+          "p99": 7.2030829999999995,
+          "worst": 18.432417,
+          "minimum": 1.306125
+        },
+        "swap_ms": {
+          "n": 4669,
+          "median": 12.101792,
+          "p95": 13.160834,
+          "p99": 13.465625,
+          "worst": 14.9085,
+          "minimum": 0.052125
+        },
+        "interval_ms": {
+          "n": 4669,
+          "median": 16.746428002079483,
+          "p95": 16.834840993396938,
+          "p99": 17.086371997720562,
+          "worst": 19.13487000274472,
+          "minimum": 14.383692992851138
+        },
+        "age_ms": {
+          "n": 4669,
+          "median": 33.357069,
+          "p95": 33.462649,
+          "p99": 33.688764000000006,
+          "worst": 35.773011000000004,
+          "minimum": 30.852799
+        }
+      }
+    }
+  ],
+  "full": {
+    "pictures": 6006,
+    "native": 5844,
+    "legacy": 162,
+    "repeats": 0,
+    "settled_underrun_frames": 0,
+    "main_gaps50": 0,
+    "peak_occupancy": 10652,
+    "probes_per_lookup": 1.0428722927172769,
+    "max_probe": 4,
+    "probe_bound_fallbacks": 0,
+    "generational_resets": 0,
+    "dynamic_misses": 8,
+    "dynamic_evictions": 0,
+    "stage_ms": {
+      "prepare_ms": {
+        "n": 5844,
+        "median": 8.024124,
+        "p95": 13.409775,
+        "p99": 14.28028,
+        "worst": 18.260697999999998,
+        "minimum": 0.31548600000000004
+      },
+      "compiler_ms": {
+        "n": 5844,
+        "median": 5.2035539995,
+        "p95": 8.766719002,
+        "p99": 9.344443999,
+        "worst": 14.774135001,
+        "minimum": 0.247864002
+      },
+      "walk_ms": {
+        "n": 5844,
+        "median": 2.7269284980000004,
+        "p95": 4.491187996,
+        "p99": 4.949459995,
+        "worst": 5.920878997,
+        "minimum": 0.004374
+      },
+      "simulation_ms": {
+        "n": 5844,
+        "median": 10.5418944985,
+        "p95": 12.864131,
+        "p99": 13.582142994,
+        "worst": 16.957252003,
+        "minimum": 4.012167003
+      },
+      "blocked_ms": {
+        "n": 5844,
+        "median": 5.024811995,
+        "p95": 10.056080995,
+        "p99": 10.535936999,
+        "worst": 12.766427004,
+        "minimum": 0.0
+      },
+      "draw_ms": {
+        "n": 5844,
+        "median": 3.84775,
+        "p95": 6.057125,
+        "p99": 7.110917,
+        "worst": 18.432417,
+        "minimum": 0.984167
+      },
+      "swap_ms": {
+        "n": 5844,
+        "median": 12.3484585,
+        "p95": 14.541375,
+        "p99": 14.842375,
+        "worst": 15.186458,
+        "minimum": 0.047291
+      },
+      "interval_ms": {
+        "n": 5844,
+        "median": 16.746365501603577,
+        "p95": 16.855132002092432,
+        "p99": 17.06679000199074,
+        "worst": 19.13487000274472,
+        "minimum": 1.4446900022448972
+      },
+      "age_ms": {
+        "n": 5844,
+        "median": 33.350736999999995,
+        "p95": 33.471814,
+        "p99": 33.669973999999996,
+        "worst": 35.773011000000004,
+        "minimum": 16.833716
+      }
+    }
+  },
+  "release_tick": 178,
+  "per_selector": {
+    "0": {
+      "pictures": 1325,
+      "native": 1175,
+      "legacy": 150,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 4950,
+      "probes_per_lookup": 1.0080546297360458,
+      "max_probe": 3,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 7,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 1175,
+          "median": 2.539435,
+          "p95": 5.025749,
+          "p99": 5.463855,
+          "worst": 15.623141,
+          "minimum": 0.327528
+        },
+        "compiler_ms": {
+          "n": 1175,
+          "median": 1.687096003,
+          "p95": 3.588266998,
+          "p99": 4.140952995,
+          "worst": 14.774135001,
+          "minimum": 0.262280002
+        },
+        "walk_ms": {
+          "n": 1175,
+          "median": 0.765551005,
+          "p95": 1.527728004,
+          "p99": 1.726261995,
+          "worst": 1.952376995,
+          "minimum": 0.004374
+        },
+        "simulation_ms": {
+          "n": 1175,
+          "median": 7.064038997,
+          "p95": 8.048789998,
+          "p99": 8.417525001,
+          "worst": 10.676847,
+          "minimum": 4.012167003
+        },
+        "blocked_ms": {
+          "n": 1175,
+          "median": 8.658055995,
+          "p95": 10.532061002,
+          "p99": 10.732136994,
+          "worst": 12.766427004,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 1175,
+          "median": 2.007583,
+          "p95": 4.861209,
+          "p99": 5.126584,
+          "worst": 12.521834,
+          "minimum": 0.984167
+        },
+        "swap_ms": {
+          "n": 1175,
+          "median": 14.227959,
+          "p95": 14.827375,
+          "p99": 15.013,
+          "worst": 15.186458,
+          "minimum": 0.047291
+        },
+        "interval_ms": {
+          "n": 1175,
+          "median": 16.745635999541264,
+          "p95": 16.9360029976815,
+          "p99": 17.0452899983502,
+          "worst": 17.20149199536536,
+          "minimum": 1.4446900022448972
+        },
+        "age_ms": {
+          "n": 1175,
+          "median": 33.338112,
+          "p95": 33.54327,
+          "p99": 33.656932,
+          "worst": 33.826092,
+          "minimum": 16.833716
+        }
+      }
+    },
+    "3": {
+      "pictures": 4669,
+      "native": 4669,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 10652,
+      "probes_per_lookup": 1.0450491638264776,
+      "max_probe": 4,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 1,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 4669,
+          "median": 8.483189000000001,
+          "p95": 13.586976,
+          "p99": 14.317445999999999,
+          "worst": 18.260697999999998,
+          "minimum": 0.31548600000000004
+        },
+        "compiler_ms": {
+          "n": 4669,
+          "median": 5.521686995,
+          "p95": 8.905128998,
+          "p99": 9.378525996,
+          "worst": 13.268406001,
+          "minimum": 0.247864002
+        },
+        "walk_ms": {
+          "n": 4669,
+          "median": 2.887712995,
+          "p95": 4.583267997,
+          "p99": 4.970460002,
+          "worst": 5.920878997,
+          "minimum": 0.004458001
+        },
+        "simulation_ms": {
+          "n": 4669,
+          "median": 11.179493005,
+          "p95": 12.979168001,
+          "p99": 13.672096997,
+          "worst": 16.957252003,
+          "minimum": 5.309986998
+        },
+        "blocked_ms": {
+          "n": 4669,
+          "median": 4.445815001,
+          "p95": 6.311028999,
+          "p99": 6.596808998,
+          "worst": 10.659639003,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 4669,
+          "median": 4.0925839999999996,
+          "p95": 6.2134160000000005,
+          "p99": 7.2030829999999995,
+          "worst": 18.432417,
+          "minimum": 1.306125
+        },
+        "swap_ms": {
+          "n": 4669,
+          "median": 12.101792,
+          "p95": 13.160834,
+          "p99": 13.465625,
+          "worst": 14.9085,
+          "minimum": 0.052125
+        },
+        "interval_ms": {
+          "n": 4669,
+          "median": 16.746428002079483,
+          "p95": 16.834840993396938,
+          "p99": 17.086371997720562,
+          "worst": 19.13487000274472,
+          "minimum": 14.383692992851138
+        },
+        "age_ms": {
+          "n": 4669,
+          "median": 33.357069,
+          "p95": 33.462649,
+          "p99": 33.688764000000006,
+          "worst": 35.773011000000004,
+          "minimum": 30.852799
+        }
+      }
+    },
+    "65535": {
+      "pictures": 12,
+      "native": 0,
+      "legacy": 12,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 0,
+      "probes_per_lookup": 0,
+      "max_probe": 0,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": null,
+        "compiler_ms": null,
+        "walk_ms": null,
+        "simulation_ms": null,
+        "blocked_ms": null,
+        "draw_ms": null,
+        "swap_ms": null,
+        "interval_ms": null,
+        "age_ms": null
+      }
+    }
+  },
+  "per_minute": {
+    "0": {
+      "pictures": 3585,
+      "native": 3423,
+      "legacy": 162,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 8810,
+      "probes_per_lookup": 1.0363292715467403,
+      "max_probe": 3,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 8,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 3423,
+          "median": 7.700596,
+          "p95": 13.785884,
+          "p99": 14.371527,
+          "worst": 18.260697999999998,
+          "minimum": 0.31548600000000004
+        },
+        "compiler_ms": {
+          "n": 3423,
+          "median": 5.048790001,
+          "p95": 8.998208999,
+          "p99": 9.440272996,
+          "worst": 14.774135001,
+          "minimum": 0.247864002
+        },
+        "walk_ms": {
+          "n": 3423,
+          "median": 2.556809995,
+          "p95": 4.680095997,
+          "p99": 5.005583,
+          "worst": 5.920878997,
+          "minimum": 0.004374
+        },
+        "simulation_ms": {
+          "n": 3423,
+          "median": 11.460106005,
+          "p95": 12.904338,
+          "p99": 13.556769001,
+          "worst": 16.957252003,
+          "minimum": 4.012167003
+        },
+        "blocked_ms": {
+          "n": 3423,
+          "median": 4.168159001,
+          "p95": 10.334737002,
+          "p99": 10.589058998,
+          "worst": 12.766427004,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 3423,
+          "median": 3.7751669999999997,
+          "p95": 6.481542,
+          "p99": 7.356916,
+          "worst": 18.432417,
+          "minimum": 0.984167
+        },
+        "swap_ms": {
+          "n": 3423,
+          "median": 12.420792,
+          "p95": 14.657167000000001,
+          "p99": 14.900792,
+          "worst": 15.186458,
+          "minimum": 0.047291
+        },
+        "interval_ms": {
+          "n": 3423,
+          "median": 16.746260997024365,
+          "p95": 16.882171999895945,
+          "p99": 17.067788998247124,
+          "worst": 19.13487000274472,
+          "minimum": 1.4446900022448972
+        },
+        "age_ms": {
+          "n": 3423,
+          "median": 33.35382,
+          "p95": 33.487314,
+          "p99": 33.694680999999996,
+          "worst": 35.773011000000004,
+          "minimum": 16.833716
+        }
+      }
+    },
+    "1": {
+      "pictures": 2421,
+      "native": 2421,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 10652,
+      "probes_per_lookup": 1.0505092913340628,
+      "max_probe": 4,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 2421,
+          "median": 8.383902,
+          "p95": 10.428316,
+          "p99": 11.379109999999999,
+          "worst": 12.469689,
+          "minimum": 5.946586
+        },
+        "compiler_ms": {
+          "n": 2421,
+          "median": 5.391942002,
+          "p95": 6.858547,
+          "p99": 7.523936998,
+          "worst": 8.760761004,
+          "minimum": 3.610933003
+        },
+        "walk_ms": {
+          "n": 2421,
+          "median": 2.880838001,
+          "p95": 3.562726997,
+          "p99": 3.947502002,
+          "worst": 5.016791001,
+          "minimum": 2.052538999
+        },
+        "simulation_ms": {
+          "n": 2421,
+          "median": 10.0265,
+          "p95": 12.763011,
+          "p99": 13.582142994,
+          "worst": 14.599975999,
+          "minimum": 8.813633001
+        },
+        "blocked_ms": {
+          "n": 2421,
+          "median": 5.562976999,
+          "p95": 6.455231996,
+          "p99": 6.665597997,
+          "worst": 7.002917002,
+          "minimum": 0.526811004
+        },
+        "draw_ms": {
+          "n": 2421,
+          "median": 3.90425,
+          "p95": 5.5274160000000006,
+          "p99": 6.207041,
+          "worst": 17.357292,
+          "minimum": 2.259083
+        },
+        "swap_ms": {
+          "n": 2421,
+          "median": 12.290958,
+          "p95": 13.165,
+          "p99": 13.465625,
+          "worst": 14.023916000000002,
+          "minimum": 0.055833
+        },
+        "interval_ms": {
+          "n": 2421,
+          "median": 16.746594999858644,
+          "p95": 16.829299995151814,
+          "p99": 17.0446650008671,
+          "worst": 17.93875399744138,
+          "minimum": 15.523770998697728
+        },
+        "age_ms": {
+          "n": 2421,
+          "median": 33.347737,
+          "p95": 33.454233,
+          "p99": 33.564853,
+          "worst": 34.613851000000004,
+          "minimum": 32.159245000000006
+        }
+      }
+    }
+  },
+  "repeat_events": [],
+  "main_gaps": [],
+  "definition": "All pictures, all transitions retained; settled audio after actual legacy release. Main gap is publication-to-publication. Inferred repeats nearest panel-period count, not hardware vblank events."
+}

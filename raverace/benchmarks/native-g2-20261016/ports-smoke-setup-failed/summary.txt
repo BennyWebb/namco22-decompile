@@ -1,0 +1,17 @@
+Rave Racer Native session
+Exit: 95; clocks restored: True
+Pictures: 2275; incomplete telemetry records: 10467
+Native EEPROM writes: 0
+Raw logs rotate; summaries retain all accumulated counts.
+unknown: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=1 screen=0 course=0: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=3 screen=0 course=0: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=5 screen=0 course=0: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=7 screen=0 course=1: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=9 screen=0 course=1: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=11 screen=0 course=2: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=13 screen=0 course=2: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+main=1 sub=15 screen=0 course=3: native=0 legacy=0 repeats=0 settled_underruns=0 main_gaps50=0 prep_p99_ms=None
+Exact fallback keys: 0; unretained key records: 0; clock/cooling flags: 0
+Resource ranges (KiB/pages/mC as labelled): {"CmaFree_KiB": {"max": 5292, "min": 2032}, "Mali_pages": {"max": 45572, "min": 0}, "MemAvailable_KiB": {"max": 803704, "min": 534224}, "VmHWM_KiB": {"max": 335496, "min": 3708}, "VmRSS_KiB": {"max": 335340, "min": 3708}, "cooling_device0": {"max": 0, "min": 0}, "cooling_device1": {"max": 0, "min": 0}, "cpu0_khz": {"max": 1512000, "min": 1512000}, "cpu1_khz": {"max": 1512000, "min": 1512000}, "cpu2_khz": {"max": 1512000, "min": 1512000}, "cpu3_khz": {"max": 1512000, "min": 1512000}, "gpu_hz": {"max": 240000000, "min": 240000000}, "thermal_zone0_mC": {"max": 57572, "min": 46799}, "thermal_zone1_mC": {"max": 54413, "min": 46475}, "thermal_zone2_mC": {"max": 54980, "min": 45503}, "thermal_zone3_mC": {"max": 53846, "min": 46394}, "thermal_zone4_mC": {"max": 30000, "min": 30000}}
+[P1B-IO] streams=3 reserved=3145728 dropped_records=0 dropped_bytes=0 errors=1 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1

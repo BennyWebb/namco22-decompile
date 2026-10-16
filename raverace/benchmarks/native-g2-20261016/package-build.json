@@ -1,0 +1,29 @@
+[
+  [
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/bin/aarch64-buildroot-linux-gnu-gcc",
+    "-O2",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/g2/asset_builder.c",
+    "-o",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g2/asset_builder-arm"
+  ],
+  [
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/bin/aarch64-buildroot-linux-gnu-gcc",
+    "-O2",
+    "-shared",
+    "-fPIC",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/g2/session_io.c",
+    "-o",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g2/session-io.so"
+  ],
+  [
+    "/home/bwebb/dev/knulli-scarab/output/h700/host/bin/aarch64-buildroot-linux-gnu-gcc",
+    "-O2",
+    "-shared",
+    "-fPIC",
+    "-I/home/bwebb/dev/knulli-scarab/output/h700/host/aarch64-buildroot-linux-gnu/sysroot/usr/include/SDL2",
+    "-ldl",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/g2/smoke_chord.c",
+    "-o",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g2/smoke-chord.so"
+  ]
+]
