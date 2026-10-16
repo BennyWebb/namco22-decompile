@@ -12,6 +12,10 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## First real Native play session — read-only review / STOPPED (2026-10-16)
+
+See [play-session report](NATIVE_PLAY_SESSION_REPORT.md) and [retrieved telemetry](benchmarks/native-play-20261016/README.md). One post-smoke session22:50:25–23:04:07 BST,48,876pictures,all four raw course selectors; user reports perfect look/feel/sound. Telemetry:48,714native/162boot-prewarm legacy,zero unsupported fallback keys;7inferred repeats (6native),1672settled audio-shortage frames (~34.8ms),one50.270ms main gap following47.200ms swap wait; cause unproven. Race prep p99 selectors0/1/2/3=12.92/12.94/14.14/14.24ms. Peak65.186°C,no cooling/clock flags; native EEPROM changed/persisted once. Transport errors/drops/incomplete joins0; bounded THREAD/SIM detailed profiler overflows40684/40685 documented. Retrieved text telemetry only; device access strictly read-only. Production SHA and47protected paths exact,clocks restored,ES running,no game; no commits/push or fixes. Recommend separately authorised rare-stall attribution/diagnostic retention only; no work begun.
+
 ## Milestone G2 — separate playable Native entry / COMPLETE / STOPPED (2026-10-16)
 
 See [G2 report](NATIVE_G2_REPORT.md) and [evidence](benchmarks/native-g2-20261016/README.md).

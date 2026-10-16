@@ -1,0 +1,224 @@
+[
+  {
+    "tick": 42068,
+    "samples": [
+      {
+        "monotonic": 53126.522978774,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441784,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 60002,
+          "thermal_zone1_mC": 61379,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 61055,
+          "thermal_zone0_mC": 63647,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53125.518520572,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441264,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 59759,
+          "thermal_zone1_mC": 60488,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 60407,
+          "thermal_zone0_mC": 63890,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53127.545656758,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441564,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 59354,
+          "thermal_zone1_mC": 60974,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 61784,
+          "thermal_zone0_mC": 63485,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      }
+    ]
+  },
+  {
+    "tick": 42070,
+    "samples": [
+      {
+        "monotonic": 53126.522978774,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441784,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 60002,
+          "thermal_zone1_mC": 61379,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 61055,
+          "thermal_zone0_mC": 63647,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53125.518520572,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441264,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 59759,
+          "thermal_zone1_mC": 60488,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 60407,
+          "thermal_zone0_mC": 63890,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53127.545656758,
+        "state": "main=3 sub=0 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 338792,
+          "VmHWM_KiB": 339692,
+          "MemAvailable_KiB": 441564,
+          "CmaFree_KiB": 15032,
+          "Mali_pages": 47567,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 59354,
+          "thermal_zone1_mC": 60974,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 61784,
+          "thermal_zone0_mC": 63485,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      }
+    ]
+  },
+  {
+    "tick": 48556,
+    "samples": [
+      {
+        "monotonic": 53234.515540534,
+        "state": "main=1 sub=1 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 340540,
+          "VmHWM_KiB": 340540,
+          "MemAvailable_KiB": 441252,
+          "CmaFree_KiB": 14616,
+          "Mali_pages": 47568,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 58463,
+          "thermal_zone1_mC": 58706,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 58868,
+          "thermal_zone0_mC": 61217,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53235.528416403,
+        "state": "main=1 sub=1 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 341120,
+          "VmHWM_KiB": 341124,
+          "MemAvailable_KiB": 440924,
+          "CmaFree_KiB": 14616,
+          "Mali_pages": 47696,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 58220,
+          "thermal_zone1_mC": 58787,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 58706,
+          "thermal_zone0_mC": 60407,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      },
+      {
+        "monotonic": 53233.51476645,
+        "state": "main=1 sub=1 screen=0 course=2",
+        "values": {
+          "VmRSS_KiB": 340300,
+          "VmHWM_KiB": 340300,
+          "MemAvailable_KiB": 439348,
+          "CmaFree_KiB": 14880,
+          "Mali_pages": 47568,
+          "cpu0_khz": 1512000,
+          "cpu1_khz": 1512000,
+          "cpu2_khz": 1512000,
+          "cpu3_khz": 1512000,
+          "gpu_hz": 240000000,
+          "thermal_zone3_mC": 58544,
+          "thermal_zone1_mC": 59030,
+          "thermal_zone4_mC": 30000,
+          "thermal_zone2_mC": 58949,
+          "thermal_zone0_mC": 60488,
+          "cooling_device1": 0,
+          "cooling_device0": 0
+        }
+      }
+    ]
+  }
+]

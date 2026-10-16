@@ -1,0 +1,386 @@
+{
+  "totals": {
+    "native": 48714,
+    "legacy": 162,
+    "repeats": 7,
+    "native_repeats": 6,
+    "settled_underrun_frames": 1672,
+    "settled_native_underrun_frames": 1672,
+    "main_gaps_over50ms": 1,
+    "native_main_gaps_over50ms": 1,
+    "clock_flagged_samples": 0
+  },
+  "pipeline_seconds": 818.5273695480064,
+  "pipeline_start_monotonic": 52421.810237677,
+  "pipeline_end_monotonic": 53240.337607225,
+  "nominal_picture_seconds": 818.5508722098663,
+  "retained_profile_first": 41123,
+  "retained_profile_last": 48876,
+  "state_groups": 60,
+  "resources": {
+    "VmRSS_KiB": {
+      "min": 33384,
+      "max": 341120
+    },
+    "VmHWM_KiB": {
+      "min": 33384,
+      "max": 341124
+    },
+    "MemAvailable_KiB": {
+      "min": 438808,
+      "max": 672448
+    },
+    "CmaFree_KiB": {
+      "min": 2368,
+      "max": 19084
+    },
+    "Mali_pages": {
+      "min": 838,
+      "max": 47823
+    },
+    "cpu0_khz": {
+      "min": 1512000,
+      "max": 1512000
+    },
+    "cpu1_khz": {
+      "min": 1512000,
+      "max": 1512000
+    },
+    "cpu2_khz": {
+      "min": 1512000,
+      "max": 1512000
+    },
+    "cpu3_khz": {
+      "min": 1512000,
+      "max": 1512000
+    },
+    "gpu_hz": {
+      "min": 240000000,
+      "max": 240000000
+    },
+    "thermal_zone3_mC": {
+      "min": 46232,
+      "max": 61055
+    },
+    "thermal_zone1_mC": {
+      "min": 46556,
+      "max": 61703
+    },
+    "thermal_zone4_mC": {
+      "min": 30000,
+      "max": 30000
+    },
+    "thermal_zone2_mC": {
+      "min": 46232,
+      "max": 62351
+    },
+    "thermal_zone0_mC": {
+      "min": 47447,
+      "max": 65186
+    },
+    "cooling_device1": {
+      "min": 0,
+      "max": 0
+    },
+    "cooling_device0": {
+      "min": 0,
+      "max": 0
+    }
+  },
+  "events": 16,
+  "fallback_exact_keys": {},
+  "log_io": [
+    "[P1B-IO] streams=3 reserved=3145728 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1"
+  ],
+  "save_writes": 1,
+  "record_overflow": 40684,
+  "simulation_profiler_overflow": 40685,
+  "per_main_sub_course": [
+    {
+      "main": 0,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 2.428387684557464,
+      "native": 0,
+      "legacy": 145,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 65535,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 0.03349500254562019,
+      "native": 0,
+      "legacy": 2,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 65535,
+      "sub": 65535,
+      "course": 65535,
+      "nominal_seconds": 0.20097001527372116,
+      "native": 0,
+      "legacy": 12,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 0.11723250890967067,
+      "native": 4,
+      "legacy": 3,
+      "repeats": 1,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 1,
+      "course": 0,
+      "nominal_seconds": 7.586618076582973,
+      "native": 453,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 2,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 15.474691176076528,
+      "native": 924,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 3,
+      "sub": 0,
+      "course": 3,
+      "nominal_seconds": 186.1317291460114,
+      "native": 11114,
+      "legacy": 0,
+      "repeats": 2,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 3,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 196.9338674669739,
+      "native": 11759,
+      "legacy": 0,
+      "repeats": 1,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 4,
+      "sub": 0,
+      "course": 3,
+      "nominal_seconds": 6.0625954607572545,
+      "native": 362,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 5,
+      "sub": 0,
+      "course": 3,
+      "nominal_seconds": 5.593665425118572,
+      "native": 334,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 1,
+      "course": 3,
+      "nominal_seconds": 16.278571237171413,
+      "native": 972,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 0,
+      "course": 3,
+      "nominal_seconds": 0.06699000509124038,
+      "native": 4,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 2,
+      "sub": 0,
+      "course": 3,
+      "nominal_seconds": 4.572067847477156,
+      "native": 273,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 4,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 9.127388193681503,
+      "native": 545,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 85,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 5,
+      "sub": 0,
+      "course": 0,
+      "nominal_seconds": 5.593665425118572,
+      "native": 334,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 3,
+      "sub": 0,
+      "course": 1,
+      "nominal_seconds": 132.80768509338407,
+      "native": 7930,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 4,
+      "sub": 0,
+      "course": 1,
+      "nominal_seconds": 6.0625954607572545,
+      "native": 362,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 5,
+      "sub": 0,
+      "course": 1,
+      "nominal_seconds": 5.627160427664192,
+      "native": 336,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 1,
+      "course": 1,
+      "nominal_seconds": 2.7633377100136656,
+      "native": 165,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 0,
+      "course": 1,
+      "nominal_seconds": 0.06699000509124038,
+      "native": 4,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 2,
+      "sub": 0,
+      "course": 1,
+      "nominal_seconds": 9.294863206409604,
+      "native": 555,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 3,
+      "sub": 0,
+      "course": 2,
+      "nominal_seconds": 175.0281358021383,
+      "native": 10451,
+      "legacy": 0,
+      "repeats": 2,
+      "settled_underrun_frames": 1214,
+      "main_gaps_over50ms": 1
+    },
+    {
+      "main": 4,
+      "sub": 0,
+      "course": 2,
+      "nominal_seconds": 6.0625954607572545,
+      "native": 362,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 5,
+      "sub": 0,
+      "course": 2,
+      "nominal_seconds": 5.627160427664192,
+      "native": 336,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 1,
+      "course": 2,
+      "nominal_seconds": 18.94142393954822,
+      "native": 1131,
+      "legacy": 0,
+      "repeats": 1,
+      "settled_underrun_frames": 373,
+      "main_gaps_over50ms": 0
+    },
+    {
+      "main": 1,
+      "sub": 0,
+      "course": 2,
+      "nominal_seconds": 0.06699000509124038,
+      "native": 4,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps_over50ms": 0
+    }
+  ]
+}
