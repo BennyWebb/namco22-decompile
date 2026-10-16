@@ -1,0 +1,39 @@
+{
+  "cmd": [
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/b2-play/host/rr_p1b",
+    "/home/bwebb/dev/namco22-decompile/raverace/extracted",
+    "--presentation-thread",
+    "on",
+    "--timing",
+    "independent",
+    "--audio",
+    "off",
+    "--thread-profile",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/attribution-clean/thread.csv",
+    "--input-checkpoints",
+    "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/attribution-clean/states.jsonl",
+    "--frames",
+    "13520"
+  ],
+  "env": {
+    "SDL_VIDEODRIVER": "offscreen",
+    "SDL_AUDIODRIVER": "dummy",
+    "LP_NUM_THREADS": "1",
+    "ENG_P1_VALIDATION": "1",
+    "ENG_P1_QUEUE": "2",
+    "ENG_P1B_VALVE": "0",
+    "ENG_P3_PRIORITY": "off",
+    "ENG_GPU_HUD": "1",
+    "ENG_GPU_HUD_GEOMETRY": "1",
+    "ENG_LIVE_PACK": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/pack",
+    "ENG_LIVE_LOOKUP": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/pack/live.lookup",
+    "ENG_LIVE_SHADERS": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/stage1b/hardware-shaders",
+    "ENG_P1B_RECEIPTS": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/attribution-clean/command-sha256.csv",
+    "ENG_C1_TEXTURES": "index",
+    "ENG_C1_ATLAS": "/home/bwebb/dev/namco22-decompile/raverace/native/generated/g1c/pack",
+    "ENG_C1_SAMPLER": "texture",
+    "ENG_G1C_CACHE_OBSERVE": "1",
+    "ENG_G1C_KEYS": "1",
+    "ENG_G1B_STREAM_TRACE": "1"
+  }
+}

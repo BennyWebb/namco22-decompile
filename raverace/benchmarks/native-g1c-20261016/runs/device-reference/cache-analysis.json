@@ -1,0 +1,481 @@
+{
+  "full": {
+    "pictures": 6006,
+    "native": 5844,
+    "legacy": 162,
+    "repeats": 0,
+    "settled_underrun_frames": 0,
+    "main_gaps50": 0,
+    "peak_occupancy": 10652,
+    "probes_per_lookup": 1.0011553101789448,
+    "max_probe": 2,
+    "probe_bound_fallbacks": 0,
+    "generational_resets": 0,
+    "dynamic_misses": 8,
+    "dynamic_evictions": 0,
+    "stage_ms": {
+      "prepare_ms": {
+        "n": 5844,
+        "median": 8.7540475,
+        "p95": 14.148737,
+        "p99": 15.072698,
+        "worst": 18.704003,
+        "minimum": 0.31756999999999996
+      },
+      "compiler_ms": {
+        "n": 5844,
+        "median": 5.902751502,
+        "p95": 9.426728,
+        "p99": 9.977454996,
+        "worst": 15.668547996,
+        "minimum": 0.238781999
+      },
+      "walk_ms": {
+        "n": 5844,
+        "median": 2.7373015,
+        "p95": 4.521851006,
+        "p99": 5.025372004,
+        "worst": 6.943874003,
+        "minimum": 0.004083005
+      },
+      "simulation_ms": {
+        "n": 5844,
+        "median": 10.7505049965,
+        "p95": 13.091572997,
+        "p99": 13.870624003,
+        "worst": 16.474306001,
+        "minimum": 4.055746002
+      },
+      "blocked_ms": {
+        "n": 5844,
+        "median": 4.827920999,
+        "p95": 9.839626997,
+        "p99": 10.336856001,
+        "worst": 12.189194,
+        "minimum": 0.0
+      },
+      "draw_ms": {
+        "n": 5844,
+        "median": 3.9891875,
+        "p95": 6.179708,
+        "p99": 6.992125,
+        "worst": 18.569291000000003,
+        "minimum": 0.93125
+      },
+      "swap_ms": {
+        "n": 5844,
+        "median": 12.199375,
+        "p95": 14.373000000000001,
+        "p99": 14.790334,
+        "worst": 15.200458,
+        "minimum": 0.048583
+      },
+      "interval_ms": {
+        "n": 5844,
+        "median": 16.746169498219388,
+        "p95": 16.874371998710558,
+        "p99": 17.08282199979294,
+        "worst": 19.19960699888179,
+        "minimum": 1.4675209968117997
+      },
+      "age_ms": {
+        "n": 5844,
+        "median": 33.352157,
+        "p95": 33.487837999999996,
+        "p99": 33.715287,
+        "worst": 35.814365,
+        "minimum": 17.040198
+      }
+    }
+  },
+  "release_tick": 178,
+  "per_selector": {
+    "0": {
+      "pictures": 1325,
+      "native": 1175,
+      "legacy": 150,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 4950,
+      "probes_per_lookup": 1.0000047887216028,
+      "max_probe": 2,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 7,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 1175,
+          "median": 4.360149,
+          "p95": 5.5761400000000005,
+          "p99": 6.111451000000001,
+          "worst": 16.569509999999998,
+          "minimum": 0.325069
+        },
+        "compiler_ms": {
+          "n": 1175,
+          "median": 3.156450002,
+          "p95": 4.410230002,
+          "p99": 4.743634003,
+          "worst": 15.668547996,
+          "minimum": 0.247197997
+        },
+        "walk_ms": {
+          "n": 1175,
+          "median": 0.765010001,
+          "p95": 1.535226998,
+          "p99": 1.733926998,
+          "worst": 2.011206998,
+          "minimum": 0.004291003
+        },
+        "simulation_ms": {
+          "n": 1175,
+          "median": 7.185864,
+          "p95": 8.197071002,
+          "p99": 8.720299003,
+          "worst": 10.922039,
+          "minimum": 4.055746002
+        },
+        "blocked_ms": {
+          "n": 1175,
+          "median": 8.533014996,
+          "p95": 10.336856001,
+          "p99": 10.584345,
+          "worst": 12.189194,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 1175,
+          "median": 2.129584,
+          "p95": 4.9722919999999995,
+          "p99": 5.42375,
+          "worst": 18.543167,
+          "minimum": 0.93125
+        },
+        "swap_ms": {
+          "n": 1175,
+          "median": 14.085624999999999,
+          "p95": 14.785625,
+          "p99": 15.060001,
+          "worst": 15.200458,
+          "minimum": 0.048583
+        },
+        "interval_ms": {
+          "n": 1175,
+          "median": 16.746251996664796,
+          "p95": 16.969076001259964,
+          "p99": 17.08282199979294,
+          "worst": 19.19960699888179,
+          "minimum": 1.4675209968117997
+        },
+        "age_ms": {
+          "n": 1175,
+          "median": 33.339178,
+          "p95": 33.597042,
+          "p99": 33.689080000000004,
+          "worst": 35.377133,
+          "minimum": 17.040198
+        }
+      }
+    },
+    "3": {
+      "pictures": 4669,
+      "native": 4669,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 10652,
+      "probes_per_lookup": 1.0012272431206346,
+      "max_probe": 2,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 1,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 4669,
+          "median": 9.216528,
+          "p95": 14.329437,
+          "p99": 15.212609,
+          "worst": 18.704003,
+          "minimum": 0.31756999999999996
+        },
+        "compiler_ms": {
+          "n": 4669,
+          "median": 6.207945997,
+          "p95": 9.551014002,
+          "p99": 10.113115,
+          "worst": 13.796543004,
+          "minimum": 0.238781999
+        },
+        "walk_ms": {
+          "n": 4669,
+          "median": 2.903836001,
+          "p95": 4.600139997,
+          "p99": 5.057328999,
+          "worst": 6.943874003,
+          "minimum": 0.004083005
+        },
+        "simulation_ms": {
+          "n": 4669,
+          "median": 11.391644999,
+          "p95": 13.177403001,
+          "p99": 13.990660002,
+          "worst": 16.474306001,
+          "minimum": 5.404646996
+        },
+        "blocked_ms": {
+          "n": 4669,
+          "median": 4.209781,
+          "p95": 6.123575004,
+          "p99": 6.524600001,
+          "worst": 10.255317,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 4669,
+          "median": 4.2065,
+          "p95": 6.326875,
+          "p99": 7.0558749999999995,
+          "worst": 18.569291000000003,
+          "minimum": 1.336042
+        },
+        "swap_ms": {
+          "n": 4669,
+          "median": 11.972874999999998,
+          "p95": 13.12,
+          "p99": 13.422417000000001,
+          "worst": 15.050083,
+          "minimum": 0.049416999999999996
+        },
+        "interval_ms": {
+          "n": 4669,
+          "median": 16.74616899981629,
+          "p95": 16.84037299855845,
+          "p99": 17.08794700243743,
+          "worst": 19.109653003397398,
+          "minimum": 14.196359996276442
+        },
+        "age_ms": {
+          "n": 4669,
+          "median": 33.35626,
+          "p95": 33.468798,
+          "p99": 33.720954,
+          "worst": 35.814365,
+          "minimum": 29.597127
+        }
+      }
+    },
+    "65535": {
+      "pictures": 12,
+      "native": 0,
+      "legacy": 12,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 0,
+      "probes_per_lookup": 0,
+      "max_probe": 0,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": null,
+        "compiler_ms": null,
+        "walk_ms": null,
+        "simulation_ms": null,
+        "blocked_ms": null,
+        "draw_ms": null,
+        "swap_ms": null,
+        "interval_ms": null,
+        "age_ms": null
+      }
+    }
+  },
+  "per_minute": {
+    "0": {
+      "pictures": 3584,
+      "native": 3422,
+      "legacy": 162,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 8810,
+      "probes_per_lookup": 1.0006784146872592,
+      "max_probe": 2,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 8,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 3422,
+          "median": 8.474601,
+          "p95": 14.483639,
+          "p99": 15.407100999999999,
+          "worst": 18.704003,
+          "minimum": 0.31756999999999996
+        },
+        "compiler_ms": {
+          "n": 3422,
+          "median": 5.7747570029999995,
+          "p95": 9.670009,
+          "p99": 10.263609001,
+          "worst": 15.668547996,
+          "minimum": 0.238781999
+        },
+        "walk_ms": {
+          "n": 3422,
+          "median": 2.5683714995,
+          "p95": 4.731926005,
+          "p99": 5.101243005,
+          "worst": 6.943874003,
+          "minimum": 0.004083005
+        },
+        "simulation_ms": {
+          "n": 3422,
+          "median": 11.653862999000001,
+          "p95": 13.121363001,
+          "p99": 13.996327005,
+          "worst": 16.474306001,
+          "minimum": 4.055746002
+        },
+        "blocked_ms": {
+          "n": 3422,
+          "median": 3.964186999,
+          "p95": 10.103323999,
+          "p99": 10.421810999,
+          "worst": 12.189194,
+          "minimum": 0.0
+        },
+        "draw_ms": {
+          "n": 3422,
+          "median": 3.9138754999999996,
+          "p95": 6.498709,
+          "p99": 7.099625,
+          "worst": 18.569291000000003,
+          "minimum": 0.93125
+        },
+        "swap_ms": {
+          "n": 3422,
+          "median": 12.2876665,
+          "p95": 14.530625,
+          "p99": 14.899083000000001,
+          "worst": 15.200458,
+          "minimum": 0.048583
+        },
+        "interval_ms": {
+          "n": 3422,
+          "median": 16.746023000450805,
+          "p95": 16.90049600438215,
+          "p99": 17.081154997867998,
+          "worst": 19.19960699888179,
+          "minimum": 1.4675209968117997
+        },
+        "age_ms": {
+          "n": 3422,
+          "median": 33.354469,
+          "p95": 33.513253999999996,
+          "p99": 33.71737,
+          "worst": 35.814365,
+          "minimum": 17.040198
+        }
+      }
+    },
+    "1": {
+      "pictures": 2422,
+      "native": 2422,
+      "legacy": 0,
+      "repeats": 0,
+      "settled_underrun_frames": 0,
+      "main_gaps50": 0,
+      "peak_occupancy": 10652,
+      "probes_per_lookup": 1.001711327074946,
+      "max_probe": 2,
+      "probe_bound_fallbacks": 0,
+      "generational_resets": 0,
+      "dynamic_misses": 0,
+      "dynamic_evictions": 0,
+      "stage_ms": {
+        "prepare_ms": {
+          "n": 2422,
+          "median": 9.0902005,
+          "p95": 11.386145,
+          "p99": 12.166321,
+          "worst": 13.088074,
+          "minimum": 6.655803
+        },
+        "compiler_ms": {
+          "n": 2422,
+          "median": 6.096347497,
+          "p95": 7.595429997,
+          "p99": 8.271068,
+          "worst": 9.539765,
+          "minimum": 4.306692994
+        },
+        "walk_ms": {
+          "n": 2422,
+          "median": 2.8852954965,
+          "p95": 3.610347994,
+          "p99": 4.010123004,
+          "worst": 4.826337994,
+          "minimum": 2.045413996
+        },
+        "simulation_ms": {
+          "n": 2422,
+          "median": 10.202903497,
+          "p95": 12.965577997,
+          "p99": 13.612342998,
+          "worst": 14.625465999,
+          "minimum": 8.828919999
+        },
+        "blocked_ms": {
+          "n": 2422,
+          "median": 5.369898998,
+          "p95": 6.284609997,
+          "p99": 6.577305998,
+          "worst": 7.869709996,
+          "minimum": 0.459689007
+        },
+        "draw_ms": {
+          "n": 2422,
+          "median": 4.0577085,
+          "p95": 5.580583,
+          "p99": 6.366499999999999,
+          "worst": 17.831584,
+          "minimum": 2.2022500000000003
+        },
+        "swap_ms": {
+          "n": 2422,
+          "median": 12.1158125,
+          "p95": 13.121167,
+          "p99": 13.416792000000001,
+          "worst": 14.017291,
+          "minimum": 0.049416999999999996
+        },
+        "interval_ms": {
+          "n": 2422,
+          "median": 16.74644000013359,
+          "p95": 16.840165997564327,
+          "p99": 17.08794700243743,
+          "worst": 18.45397199940635,
+          "minimum": 14.982660999521613
+        },
+        "age_ms": {
+          "n": 2422,
+          "median": 33.3491365,
+          "p95": 33.463505999999995,
+          "p99": 33.712120999999996,
+          "worst": 35.085395999999996,
+          "minimum": 31.487131
+        }
+      }
+    }
+  },
+  "repeat_events": [],
+  "main_gaps": [],
+  "definition": "All pictures, all transitions retained; settled audio after actual legacy release. Main gap is publication-to-publication. Inferred repeats nearest panel-period count, not hardware vblank events."
+}

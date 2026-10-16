@@ -1,0 +1,8 @@
+{
+  "logical_footprints": 23653,
+  "canonical_blocks": 39,
+  "padded_block_bytes": 5556848,
+  "exact_padded_logical_texels": 192647935,
+  "all_exact": true,
+  "rule": "Round footprint interior bounds outward to ROM-space multiples of256, then add original two-source-texel gutters; affine origins reference the canonical source origin; logical recipe/group unchanged."
+}

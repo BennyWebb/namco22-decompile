@@ -12,6 +12,26 @@ Before switch-dependent timing, smoke to~1900 and verify actual receipts/census.
 Correctness failures, safety problems or decisions: STOP/report. Routine setup or
 configuration errors: FIX AND CONTINUE within the user’s device-time budget.
 
+## Milestone G1c — attract PASS / reference preparation regression / STOPPED (2026-10-16)
+
+See [G1c report](NATIVE_G1C_REPORT.md) and [evidence](benchmarks/native-g1c-20261016/README.md).
+Private `native/g1c/` confirms and fixes recipe-cache saturation: old table fills
+at12839; bounded exact-key pool/generation/probe policy prevents full-table scans.
+3072² dynamic page shares ROM-aligned source rectangles; three copies cost27MiB
+(+24MiB), zero evictions. No replay recipes added to static assets.
+Host:21 sets/4207 packets/36 images pass, class(c)=0; raw packets/colour exactG1b.
+Device:one reference run state/pacing pass; 928.459s attract,55443pictures, all
+selectors≥4 complete visits, zero repeats/settled underruns/main gaps>50ms.
+Probes mean1.00175,max3; occupancy plateaus39946; total Mali peak178.863MiB.
+User reports looking/sounding great. **Overall no-regression condition remains
+BLOCKED:** reference preparation median9.032 versus8.334–8.343ms, densep99
+13.362 versus13.120–13.222ms, despite clean pacing. Do not call this an
+unqualified G1c pass. Next approved investigation should isolate sparse-cache
+access versus repeated enlarged slot-copy costs; no such work has started.
+Production/47 paths and22 runtime asset hashes exact; governors/RT restored,
+EmulationStation running, no game/sampler. No commit/push/production deployment.
+STOPPED; no G2 or further optimisation without separate authorisation.
+
 ## Milestone G1b — reference PASS / attract BLOCKED / STOPPED (2026-10-16)
 
 See [G1b report](NATIVE_G1B_REPORT.md) and [evidence](benchmarks/native-g1b-20261016/README.md).

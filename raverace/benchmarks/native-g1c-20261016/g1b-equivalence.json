@@ -1,0 +1,19 @@
+{
+  "reference": {
+    "command-sha256.csv": {
+      "exact": true,
+      "sha256": "b0c12231280f28f0b5ca7f55f3814da709ce876db01d517bbd8307215b4f239b"
+    },
+    "semantic-sha256.csv": {
+      "exact": true,
+      "sha256": "b166912b91cf6def5f3af876f18aa8d98dee24772adbac691391cb1324ee06a8"
+    },
+    "states.jsonl": {
+      "exact": true,
+      "sha256": "e095298d1b21d9508e8368515aa560a352617c2b4f9e8746d66c06c5592db20b"
+    }
+  },
+  "attract_periodic_domain_records": 135,
+  "attract_periodic_records_exact": true,
+  "terminal_records_not_compared": "Different requested final tick 13520 vs15000; every common periodic record exact"
+}

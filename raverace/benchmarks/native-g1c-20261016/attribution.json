@@ -1,0 +1,32 @@
+{
+  "first_full": {
+    "tick": 12839,
+    "occupancy": 32768,
+    "lookups": 417,
+    "probes": 245941,
+    "max_probe": 32768,
+    "full": 2
+  },
+  "last": {
+    "tick": 13520,
+    "occupancy": 32768,
+    "lookups": 496,
+    "probes": 1147523,
+    "max_probe": 32768,
+    "full": 35
+  },
+  "windows": {
+    "11000-12000": {
+      "probes_per_lookup": 11.636052293814803,
+      "full_fallbacks": 0,
+      "compiler_median_ms": 0.379227,
+      "walk_median_ms": 0.213863997
+    },
+    "13393-13520": {
+      "probes_per_lookup": 1940.4382753316945,
+      "full_fallbacks": 8230,
+      "compiler_median_ms": 1.6553980095,
+      "walk_median_ms": 0.2012600015
+    }
+  }
+}

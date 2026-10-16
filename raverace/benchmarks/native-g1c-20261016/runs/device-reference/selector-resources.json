@@ -1,0 +1,98 @@
+{
+  "method": "Each sample labelled by latest presented picture (up to one picture/queue latency around transitions); peaks/minima retain all in-run samples",
+  "per_selector": {
+    "0": {
+      "samples": 222,
+      "peak_RSS_MiB": 330.60546875,
+      "peak_Mali_MiB": 174.3984375,
+      "min_MemAvailable_MiB": 533.41796875,
+      "min_CmaFree_MiB": 2.171875,
+      "peak_temperature_c": 50.12,
+      "clock_cooling_counts": {
+        "/sys/class/devfreq/gpu/cur_freq": {
+          "240000000": 222
+        },
+        "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+          "1512000": 222
+        },
+        "/sys/class/thermal/cooling_device1/cur_state": {
+          "0": 222
+        },
+        "/sys/class/thermal/cooling_device0/cur_state": {
+          "0": 222
+        },
+        "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+          "1512000": 222
+        },
+        "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+          "1512000": 222
+        },
+        "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+          "1512000": 222
+        }
+      }
+    },
+    "3": {
+      "samples": 781,
+      "peak_RSS_MiB": 342.59375,
+      "peak_Mali_MiB": 176.06640625,
+      "min_MemAvailable_MiB": 520.65234375,
+      "min_CmaFree_MiB": 1.94921875,
+      "peak_temperature_c": 55.628,
+      "clock_cooling_counts": {
+        "/sys/class/devfreq/gpu/cur_freq": {
+          "240000000": 781
+        },
+        "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+          "1512000": 781
+        },
+        "/sys/class/thermal/cooling_device1/cur_state": {
+          "0": 781
+        },
+        "/sys/class/thermal/cooling_device0/cur_state": {
+          "0": 781
+        },
+        "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+          "1512000": 781
+        },
+        "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+          "1512000": 781
+        },
+        "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+          "1512000": 781
+        }
+      }
+    },
+    "65535": {
+      "samples": 2,
+      "peak_RSS_MiB": 303.1875,
+      "peak_Mali_MiB": 170.26171875,
+      "min_MemAvailable_MiB": 558.76953125,
+      "min_CmaFree_MiB": 7.32421875,
+      "peak_temperature_c": 47.366,
+      "clock_cooling_counts": {
+        "/sys/class/devfreq/gpu/cur_freq": {
+          "240000000": 2
+        },
+        "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+          "1512000": 2
+        },
+        "/sys/class/thermal/cooling_device1/cur_state": {
+          "0": 2
+        },
+        "/sys/class/thermal/cooling_device0/cur_state": {
+          "0": 2
+        },
+        "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+          "1512000": 2
+        },
+        "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+          "1512000": 2
+        },
+        "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+          "1512000": 2
+        }
+      }
+    }
+  }
+}

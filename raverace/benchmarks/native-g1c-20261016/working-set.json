@@ -1,0 +1,27 @@
+{
+  "events": 64205,
+  "unique": 23653,
+  "per_selector": {
+    "0": {
+      "unique": 9458,
+      "padded_area_bytes": 76998682,
+      "grid8_area_bytes": 82607744
+    },
+    "1": {
+      "unique": 4730,
+      "padded_area_bytes": 38499366,
+      "grid8_area_bytes": 41303936
+    },
+    "2": {
+      "unique": 4737,
+      "padded_area_bytes": 38597359,
+      "grid8_area_bytes": 41409216
+    },
+    "3": {
+      "unique": 4734,
+      "padded_area_bytes": 38552678,
+      "grid8_area_bytes": 41361536
+    }
+  },
+  "interpretation": "Unique sums include transient/one-use scrolling rectangles; not simultaneous residency or a measured GPU requirement."
+}

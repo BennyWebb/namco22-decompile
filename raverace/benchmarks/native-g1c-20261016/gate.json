@@ -1,0 +1,30 @@
+{
+  "overall": "BLOCKED: reference preparation no-regression condition not met",
+  "attract_gate": "PASS",
+  "reference_correctness_pacing": "PASS",
+  "reference_headroom": "REGRESSION",
+  "reference_preparation": {
+    "native_prepare_median_ms": 9.032119,
+    "g1b_native_prepare_medians_ms": [
+      8.333597,
+      8.342554999999999
+    ],
+    "dense_prepare_p99_ms": 13.36177,
+    "g1b_dense_prepare_p99_ms": [
+      13.120222,
+      13.222303
+    ]
+  },
+  "completed_visits": {
+    "0": 5,
+    "1": 4,
+    "2": 4,
+    "3": 4
+  },
+  "attract_seconds": 928.4591496739959,
+  "production_paths": 47,
+  "runtime_pack_files": 22,
+  "restoration": "PASS",
+  "user_observation": "It's looking and sounding great",
+  "next_work": "Separate authorisation to attribute/reduce reference preparation overhead; no further work started"
+}

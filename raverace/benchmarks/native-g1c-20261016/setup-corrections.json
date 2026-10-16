@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "issue": "Initial host combined stdout/stderr interleaved a few diagnostic lines",
+      "fix": "Retained initial attribution; repeated host attribution-clean with separate streams before working-set/counter analysis"
+    },
+    {
+      "issue": "Generated page divisor macro retained a numeric trailing dot (G1B_SIDE.)",
+      "fix": "Corrected generator to explicit double division before any correctness or device run; failed build log retained"
+    },
+    {
+      "issue": "Old allocator unit fixture expected a1021-pixel physical allocation to fail",
+      "fix": "Adjusted capacity-bound fixture to new side-minus3; logical input limit1020 stays guarded; ownership test then passes",
+      "receipt": "Assertion g1b_reserve(s,bad,&decode)==-1 failed in stale test; no implementation mismatch"
+    },
+    {
+      "issue": "Diagnostic userdata filesystem does not support symlinks",
+      "fix": "Copied unchanged predecessor assets/sampler instead; production unaffected"
+    },
+    {
+      "issue": "Initial transfer still running when unpack attempted",
+      "fix": "Waited for transfer, verified full executable SHA before first game launch; failed nohup receipt retained"
+    },
+    {
+      "issue": "exFAT cannot apply tar archive UID/GID",
+      "fix": "Re-extracted with --no-same-owner; complete hash verified before smoke"
+    }
+  ],
+  "correctness_gate_failures": 0,
+  "production_changes": 0
+}

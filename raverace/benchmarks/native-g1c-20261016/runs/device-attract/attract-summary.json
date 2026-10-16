@@ -1,0 +1,189 @@
+{
+  "pictures": 55443,
+  "elapsed_present_seconds": 928.4591496739959,
+  "exit_code": 124,
+  "memory_KiB_except_Mali_pages": {
+    "VmRSS": {
+      "n": 9303,
+      "median": 368488,
+      "p95": 369376,
+      "p99": 369376,
+      "worst": 369376,
+      "minimum": 34160
+    },
+    "VmHWM": {
+      "n": 9303,
+      "median": 368488,
+      "p95": 369376,
+      "p99": 369376,
+      "worst": 369572,
+      "minimum": 34160
+    },
+    "MemAvailable": {
+      "n": 9304,
+      "median": 517926.0,
+      "p95": 535472,
+      "p99": 557748,
+      "worst": 763128,
+      "minimum": 514176
+    },
+    "CmaFree": {
+      "n": 9304,
+      "median": 1056.0,
+      "p95": 3100,
+      "p99": 3224,
+      "worst": 25932,
+      "minimum": 0
+    },
+    "Mali_pages": {
+      "n": 9304,
+      "median": 45603.0,
+      "p95": 45789,
+      "p99": 45789,
+      "worst": 45789,
+      "minimum": 0
+    }
+  },
+  "clock_counts": {
+    "/sys/class/thermal/cooling_device1/cur_state": {
+      "0": 9304
+    },
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_cur_freq": {
+      "1512000": 9304
+    },
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq": {
+      "1512000": 9304
+    },
+    "/sys/class/thermal/cooling_device0/cur_state": {
+      "0": 9304
+    },
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq": {
+      "1512000": 9304
+    },
+    "/sys/class/devfreq/gpu/cur_freq": {
+      "240000000": 9304
+    },
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq": {
+      "1512000": 9304
+    }
+  },
+  "temperature_c": {
+    "/sys/class/thermal/thermal_zone1/temp": {
+      "n": 9304,
+      "median": 53.198,
+      "p95": 55.466,
+      "p99": 55.952,
+      "worst": 56.6,
+      "minimum": 43.721
+    },
+    "/sys/class/thermal/thermal_zone0/temp": {
+      "n": 9304,
+      "median": 55.142,
+      "p95": 57.653,
+      "p99": 58.301,
+      "worst": 58.787,
+      "minimum": 43.478
+    },
+    "/sys/class/thermal/thermal_zone4/temp": {
+      "n": 9304,
+      "median": 30.0,
+      "p95": 30.0,
+      "p99": 30.0,
+      "worst": 30.0,
+      "minimum": 30.0
+    },
+    "/sys/class/thermal/thermal_zone3/temp": {
+      "n": 9304,
+      "median": 52.712,
+      "p95": 54.98,
+      "p99": 55.385,
+      "worst": 56.195,
+      "minimum": 43.964
+    },
+    "/sys/class/thermal/thermal_zone2/temp": {
+      "n": 9304,
+      "median": 53.279,
+      "p95": 55.547,
+      "p99": 56.033,
+      "worst": 57.086,
+      "minimum": 43.316
+    }
+  },
+  "sampler_intervals_ms": {
+    "n": 9303,
+    "median": 100.00002900051186,
+    "p95": 100.12667100090766,
+    "p99": 100.95726099825697,
+    "worst": 106.90801100281533,
+    "minimum": 93.08842499740422
+  },
+  "writer_receipts": [
+    "streams=4 reserved=11534336 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1"
+  ],
+  "observer_receipts": [
+    "streams=2 reserved=2097152 dropped_records=0 dropped_bytes=0 errors=0 packets=0 writer_idle_result=0 nice_result=0 fully_drained=1"
+  ],
+  "trace_frames": 55281,
+  "load_receipts": [
+    "mode=index pages=8 page_bytes=117440512 cache_read_ms=200.457598 upload_submit_ms=300.346563 GL_ready_ms=907.350958 debug=0"
+  ],
+  "start_temperature_mC": "44774",
+  "native_stage_ms": {
+    "prep_wall": {
+      "n": 55281,
+      "median": 5.509269,
+      "p95": 9.154021,
+      "p99": 10.979081,
+      "worst": 21.409777000000002,
+      "minimum": 0.323028
+    },
+    "native_compile_ms": {
+      "n": 55281,
+      "median": 4.016540006,
+      "p95": 6.276027998,
+      "p99": 7.403350006,
+      "worst": 19.311326003,
+      "minimum": 0.230865
+    },
+    "native_walk_ms": {
+      "n": 55281,
+      "median": 1.610015999,
+      "p95": 2.921166,
+      "p99": 3.564933999,
+      "worst": 6.028154996,
+      "minimum": 0.004207999
+    },
+    "simulation_ms": {
+      "n": 55281,
+      "median": 8.103239001,
+      "p95": 9.712332001,
+      "p99": 10.293395004,
+      "worst": 23.467053004,
+      "minimum": 2.910998999
+    },
+    "draw_wall": {
+      "n": 55281,
+      "median": 2.693666,
+      "p95": 4.486625,
+      "p99": 5.22375,
+      "worst": 17.974041,
+      "minimum": 0.945
+    },
+    "swap_wall": {
+      "n": 55281,
+      "median": 13.492708,
+      "p95": 14.5875,
+      "p99": 14.876166,
+      "worst": 18.564500000000002,
+      "minimum": 0.049416999999999996
+    },
+    "publication_age": {
+      "n": 55281,
+      "median": 33.340768,
+      "p95": 33.579516,
+      "p99": 33.733413,
+      "worst": 38.439215,
+      "minimum": 16.170444
+    }
+  }
+}

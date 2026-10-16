@@ -1,0 +1,244 @@
+{
+  "pictures": 55443,
+  "native": 55281,
+  "fallback": 162,
+  "groups": [
+    {
+      "main": 0,
+      "course": 0,
+      "native": 0,
+      "fallback": 145,
+      "reasons": {
+        "boot-state": 145
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 0,
+      "native": 16231,
+      "fallback": 3,
+      "reasons": {
+        "prewarm": 3
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 1,
+      "native": 14994,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 2,
+      "native": 12024,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 3,
+      "native": 12032,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 65535,
+      "course": 0,
+      "native": 0,
+      "fallback": 2,
+      "reasons": {
+        "boot-state": 2
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 65535,
+      "course": 65535,
+      "native": 0,
+      "fallback": 12,
+      "reasons": {
+        "boot-state": 12
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    }
+  ],
+  "fallback_exact_records": [],
+  "cpu_dynamic": {
+    "hits": 327423,
+    "misses": 39,
+    "evictions": 0,
+    "pending_bytes": 13265054192
+  },
+  "gpu_dynamic_pen_bytes": 16670544,
+  "dynamic_UV_bytes": 4043248,
+  "native_window_cpu_dynamic": {
+    "hits": 317959,
+    "misses": 30,
+    "evictions": 0,
+    "pending_bytes": 12873026832
+  },
+  "native_window_gpu_pen_bytes": 12854688,
+  "native_window_dynamic_UV_bytes": 3922176,
+  "native_stretches": [
+    {
+      "first_tick": 163,
+      "last_tick": 4369,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 4370,
+      "last_tick": 7374,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 7375,
+      "last_tick": 10380,
+      "course": 2,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 10381,
+      "last_tick": 13388,
+      "course": 3,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 13389,
+      "last_tick": 16394,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 16395,
+      "last_tick": 19399,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 19400,
+      "last_tick": 22405,
+      "course": 2,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 22406,
+      "last_tick": 25413,
+      "course": 3,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 25414,
+      "last_tick": 28419,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 28420,
+      "last_tick": 31424,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 31425,
+      "last_tick": 34430,
+      "course": 2,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 34431,
+      "last_tick": 37438,
+      "course": 3,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 37439,
+      "last_tick": 40444,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 40445,
+      "last_tick": 43449,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 43450,
+      "last_tick": 46455,
+      "course": 2,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 46456,
+      "last_tick": 49463,
+      "course": 3,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 49464,
+      "last_tick": 52469,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 52470,
+      "last_tick": 55443,
+      "course": 1,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    }
+  ],
+  "repeat_events_native": [],
+  "main_gaps_actual_native": [],
+  "stream_reconstruction": "Remove separately retained shutdown stdout JSON/native trace and direct capture footer to rejoin intact stderr fragments; require every picture and every upload"
+}

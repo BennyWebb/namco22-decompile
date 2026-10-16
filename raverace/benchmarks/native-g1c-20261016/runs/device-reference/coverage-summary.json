@@ -1,0 +1,132 @@
+{
+  "pictures": 6006,
+  "native": 5844,
+  "fallback": 162,
+  "groups": [
+    {
+      "main": 0,
+      "course": 0,
+      "native": 0,
+      "fallback": 145,
+      "reasons": {
+        "boot-state": 145
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 1,
+      "course": 0,
+      "native": 640,
+      "fallback": 3,
+      "reasons": {
+        "prewarm": 3
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 2,
+      "course": 0,
+      "native": 533,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 3,
+      "course": 0,
+      "native": 2,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 3,
+      "course": 3,
+      "native": 4669,
+      "fallback": 0,
+      "reasons": {},
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 65535,
+      "course": 0,
+      "native": 0,
+      "fallback": 2,
+      "reasons": {
+        "boot-state": 2
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    },
+    {
+      "main": 65535,
+      "course": 65535,
+      "native": 0,
+      "fallback": 12,
+      "reasons": {
+        "boot-state": 12
+      },
+      "inferred_repeats_in_native": 0,
+      "underrun_frames_in_native": 0
+    }
+  ],
+  "fallback_exact_records": [],
+  "cpu_dynamic": {
+    "hits": 48493,
+    "misses": 8,
+    "evictions": 0,
+    "pending_bytes": 1215043472
+  },
+  "gpu_dynamic_pen_bytes": 2817408,
+  "dynamic_UV_bytes": 305328,
+  "native_window_cpu_dynamic": {
+    "hits": 37863,
+    "misses": 0,
+    "evictions": 0,
+    "pending_bytes": 853179600
+  },
+  "native_window_gpu_pen_bytes": 0,
+  "native_window_dynamic_UV_bytes": 201936,
+  "native_stretches": [
+    {
+      "first_tick": 163,
+      "last_tick": 802,
+      "course": 0,
+      "main": 1,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 803,
+      "last_tick": 1335,
+      "course": 0,
+      "main": 2,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 1336,
+      "last_tick": 1337,
+      "course": 0,
+      "main": 3,
+      "repeats": 0,
+      "underrun_frames": 0
+    },
+    {
+      "first_tick": 1338,
+      "last_tick": 6006,
+      "course": 3,
+      "main": 3,
+      "repeats": 0,
+      "underrun_frames": 0
+    }
+  ],
+  "repeat_events_native": [],
+  "main_gaps_actual_native": [],
+  "stream_reconstruction": "Remove separately retained shutdown stdout JSON/native trace and direct capture footer to rejoin intact stderr fragments; require every picture and every upload"
+}

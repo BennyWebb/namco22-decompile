@@ -1,0 +1,15 @@
+{
+  "ticks": 13520,
+  "first_full": {
+    "tick": 12839,
+    "occupancy": 32768,
+    "lookups": 417,
+    "probes": 245941,
+    "max_probe": 32768,
+    "full": 2
+  },
+  "late_window": "13393-13520",
+  "late_probes_per_lookup": 1940.4382753316945,
+  "late_full_scans": 8230,
+  "late_compiler_median_ms": 1.5819789985
+}

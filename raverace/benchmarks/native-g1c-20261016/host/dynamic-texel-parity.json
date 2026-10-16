@@ -1,0 +1,230 @@
+{
+  "decodes": [
+    {
+      "run": "colour-index",
+      "tick": 161,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "34fe723f3753498a3b8c04b7e643623ecd63e6c4a520276eef8e1ac41468543c"
+    },
+    {
+      "run": "colour-index",
+      "tick": 164,
+      "footprint": [
+        0,
+        0,
+        3840,
+        3840,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "57f903019f98e2848377e5a02b7fa85d2ac455933477b82b81597f07381b6ffa"
+    },
+    {
+      "run": "colour-index",
+      "tick": 285,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        512,
+        256
+      ],
+      "bytes": 134160,
+      "sha256": "49cbb24bf142b293fe4a56e3946bee5d134965bdc8ad571445ba4ba7d5bb955f"
+    },
+    {
+      "run": "colour-index",
+      "tick": 285,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        256,
+        512
+      ],
+      "bytes": 134160,
+      "sha256": "d5d6f89ffb9e839174ce0aef4a2a8512668f8af710cad36dc717196dedbf49f3"
+    },
+    {
+      "run": "colour-index",
+      "tick": 339,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        512,
+        512
+      ],
+      "bytes": 266256,
+      "sha256": "171fc3b7a2ed8965897b2757fb2d5bc7bbf4e5352aa385ce2cd2a3cd1da4342f"
+    },
+    {
+      "run": "colour-index",
+      "tick": 585,
+      "footprint": [
+        0,
+        0,
+        0,
+        256,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "e0cad3ff24838673dd81f1cc8c22ddd6946cff82c12cb522f82363b49cb9c4d6"
+    },
+    {
+      "run": "colour-index",
+      "tick": 621,
+      "footprint": [
+        0,
+        0,
+        0,
+        256,
+        512,
+        256
+      ],
+      "bytes": 134160,
+      "sha256": "85a38421c1271523b2993f71657083ff9d03190e3a9f45be5f18bc993e63da82"
+    },
+    {
+      "run": "colour-index",
+      "tick": 1584,
+      "footprint": [
+        9,
+        1,
+        2304,
+        2304,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "86c79cd73a44ded72f86074135dc7b4460102bc47529a25e3a0cfc84af8dd27f"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 161,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "34fe723f3753498a3b8c04b7e643623ecd63e6c4a520276eef8e1ac41468543c"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 164,
+      "footprint": [
+        0,
+        0,
+        3840,
+        3840,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "57f903019f98e2848377e5a02b7fa85d2ac455933477b82b81597f07381b6ffa"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 285,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        512,
+        256
+      ],
+      "bytes": 134160,
+      "sha256": "49cbb24bf142b293fe4a56e3946bee5d134965bdc8ad571445ba4ba7d5bb955f"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 285,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        256,
+        512
+      ],
+      "bytes": 134160,
+      "sha256": "d5d6f89ffb9e839174ce0aef4a2a8512668f8af710cad36dc717196dedbf49f3"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 339,
+      "footprint": [
+        0,
+        0,
+        0,
+        0,
+        512,
+        512
+      ],
+      "bytes": 266256,
+      "sha256": "171fc3b7a2ed8965897b2757fb2d5bc7bbf4e5352aa385ce2cd2a3cd1da4342f"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 585,
+      "footprint": [
+        0,
+        0,
+        0,
+        256,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "e0cad3ff24838673dd81f1cc8c22ddd6946cff82c12cb522f82363b49cb9c4d6"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 621,
+      "footprint": [
+        0,
+        0,
+        0,
+        256,
+        512,
+        256
+      ],
+      "bytes": 134160,
+      "sha256": "85a38421c1271523b2993f71657083ff9d03190e3a9f45be5f18bc993e63da82"
+    },
+    {
+      "run": "provenance-index",
+      "tick": 1584,
+      "footprint": [
+        9,
+        1,
+        2304,
+        2304,
+        256,
+        256
+      ],
+      "bytes": 67600,
+      "sha256": "86c79cd73a44ded72f86074135dc7b4460102bc47529a25e3a0cfc84af8dd27f"
+    }
+  ],
+  "unique_footprints": 8,
+  "all_exact": true
+}
