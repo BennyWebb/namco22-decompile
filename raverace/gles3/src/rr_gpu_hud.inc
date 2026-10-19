@@ -1,5 +1,4 @@
-/* Optional GLES2 packed character/tile compositor. State is selected by the
- * caller; caches compare against the last actual upload, never a skipped slot. */
+/* Glyph compositor. Caches compare against the last actual upload, never a skipped slot. */
 #ifdef RR_GPU_HUD
 #include "eng.h"
 static GLuint gpu_program, raw_tex, palette_tex;
@@ -49,7 +48,7 @@ static bool gpu_open(void)
     palette_tex = texture(256, 1);
     if (!geometry_open())
         return false;
-    fprintf(stderr, "[GPU-HUD] mode=%s GLES2; verify=%d\n", "glyph-quads", rr_video_layers_verify());
+    fprintf(stderr, "[GPU-HUD] mode=%s GLES3; verify=%d\n", "glyph-quads", rr_video_layers_verify());
     return error("initialise packed HUD");
 }
 

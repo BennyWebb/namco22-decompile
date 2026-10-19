@@ -361,7 +361,7 @@ static void scan_controllers(void)
         input_map_device(device);
         if (!SDL_IsGameController(device)) {
             fprintf(stderr,
-                    "[GLES2] unmapped joystick: %s (START+SELECT needs an SDL mapping)\n",
+                    "[GLES3-INPUT] unmapped joystick: %s (START+SELECT needs an SDL mapping)\n",
                     SDL_JoystickNameForIndex(device));
             SDL_JoystickID raw_id = SDL_JoystickGetDeviceInstanceID(device);
             int slot = -1;
@@ -400,7 +400,7 @@ static void scan_controllers(void)
                         SDL_JoystickNumButtons(js),
                         SDL_JoystickNumHats(js));
             } else
-                fprintf(stderr, "[GLES2] controller open: %s\n", SDL_GetError());
+                fprintf(stderr, "[GLES3-INPUT] controller open: %s\n", SDL_GetError());
         }
     }
 }

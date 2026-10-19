@@ -2206,7 +2206,7 @@ static void dynamic_cache_upload(const rr_presentation *s, unsigned copy)
         }
 #endif
     }
-    fprintf(stderr, "[G2-UV] tick=%u bytes=%u\n", s->frame, uv_bytes);
+    fprintf(stderr, "[MATERIAL-UV-UPLOAD] tick=%u bytes=%u\n", s->frame, uv_bytes);
     RENDER_CHECK(glGetError() == GL_NO_ERROR);
     glActiveTexture(GL_TEXTURE0);
     fprintf(stderr,

@@ -288,3 +288,13 @@ rr_p1_prepare,rr_renderer_prepare
 rr_p1b_packet,rr_readback_packet
 rr_p1b_pixel,rr_readback_pixel
 rr_video_p1b_output,rr_video_readback_output
+G2-UV,MATERIAL-UV-UPLOAD
+[GLES2],[GLES3-INPUT]
+rr_p1_audio_ratio,rr_audio_resampler_ratio
+p1_adj,resampler_ratio
+p1_adj_min,resampler_ratio_min
+p1_adj_max,resampler_ratio_max
+P1-AUDIO,AUDIO-RESAMPLER
+gles3/src/memory.c,src/rr_mem.c (shared)
+gles3/src/audio.c,src/rr_audio.c (shared)
+gles3/src/rr_headless.inc,src/rr_headless.inc (shared)

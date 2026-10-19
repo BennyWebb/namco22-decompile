@@ -4,8 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "geo_hw.h"
-/* Backing records; GLES2 consumes the last sort's eng_quad_index mapping.
- * Storage remains in emission order under RR_GEOMETRY_INDEX_ORDER. */
+/* Prepared geometry remains in emission order. */
 const geo_quad *rr_gles3_quads(int *count);
 void rr_gles3_background(float rgb[3]);
 bool rr_gles3_options(int *argc, char **argv);
