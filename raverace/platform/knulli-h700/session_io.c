@@ -7,4 +7,21 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/syscall.h>
-int open(const char*p,int flags,...){mode_t mode=0;if(flags&O_CREAT){va_list a;va_start(a,flags);mode=va_arg(a,int);va_end(a);}if(getenv("ENG_GLES3_SESSION")&&!strncmp(p,"/proc/self/fd/",14)){const char*s=p+14;char*end;long n=strtol(s,&end,10);if(*s&&!*end&&n>=0)return fcntl((int)n,F_DUPFD_CLOEXEC,3);}return syscall(SYS_openat,AT_FDCWD,p,flags,mode);}
+int open(const char *p, int flags, ...)
+{
+    mode_t mode = 0;
+    if (flags & O_CREAT) {
+        va_list a;
+        va_start(a, flags);
+        mode = va_arg(a, int);
+        va_end(a);
+    }
+    if (getenv("ENG_GLES3_SESSION") && !strncmp(p, "/proc/self/fd/", 14)) {
+        const char *s = p + 14;
+        char *end;
+        long n = strtol(s, &end, 10);
+        if (*s && !*end && n >= 0)
+            return fcntl((int)n, F_DUPFD_CLOEXEC, 3);
+    }
+    return syscall(SYS_openat, AT_FDCWD, p, flags, mode);
+}
