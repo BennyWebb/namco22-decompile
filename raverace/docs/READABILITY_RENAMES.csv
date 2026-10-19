@@ -6,8 +6,12 @@ C1E_FRAME,CAPTURE_FRAME
 C1E_SLOTS,CAPTURE_SLOTS
 C1eJob,CaptureJob
 CHECK3,RENDER_CHECK
+ENG_G1C_KEYS,ENG_GLES3_MATERIAL_KEYS
 FONT3,FONT_BYTES
+G1-COVERAGE,RENDER-COVERAGE
 G1B,DYNAMIC_CACHE
+G1B-MATERIAL,DYNAMIC-MATERIAL
+G1B-PREP,DYNAMIC-CACHE-PREP
 G1BEntry,DynamicCacheEntry
 G1BMaterial,DynamicCacheMaterial
 G1BSlot,DynamicCacheSlot
@@ -17,12 +21,18 @@ G1B_CELL,DYNAMIC_CACHE_CELL
 G1B_ENTRIES,DYNAMIC_CACHE_ENTRIES
 G1B_MATERIALS,DYNAMIC_CACHE_MATERIALS
 G1B_SIDE,DYNAMIC_CACHE_SIDE
-G1B_VALIDATION,DYNAMIC_CACHE_VALIDATION
+G1B_VALIDATION,GLES3_VALIDATION
 G1C,MATERIAL_CACHE
 G1CKey,MaterialCacheKey
 G1C_POOL,MATERIAL_CACHE_POOL
 G1C_PROBES,MATERIAL_CACHE_PROBES
-Gap3,FrameGap
+G2-EEPROM,SAVE-EEPROM
+G2-SAVE,SAVE
+G2-SMOKE,INPUT-SMOKE
+G2-STAGING,UPLOAD-STAGING
+G2-UV,MATERIAL-UV-UPLOAD
+GLES3_RECORD_DIAGNOSTICS,GLES3_VALIDATION
+Gap3,removed (unused trace type)
 Group3,DrawGroup
 Header3,RenderPacketHeader
 Instance3,RenderInstance
@@ -32,13 +42,19 @@ MAXI3,MAX_INSTANCES
 MAXM3,MAX_MATERIALS
 MAXQ3,MAX_QUADS
 Material3,RenderMaterial
+P1-AUDIO,AUDIO-RESAMPLER
 P1B,ASYNC_IO
+P1B-CLOCK,ASYNC-CLOCK
+P1B-IO,ASYNC-IO
 P1_VALID,RENDER_CHECK_VALID
 Quad3,RenderQuad
 RAW3,PACKET_CAPACITY
+RR_GL_H (GLES3 private header),RR_SCENE_ASSETS_H
 SLOTS3,GPU_COPY_COUNT
 STYLE3,STYLE_BYTES
 Slot3,RenderPacket
+[G1-COVERAGE],[RENDER-COVERAGE]
+[GLES2],[GLES3-INPUT]
 attribute_data3,attribute_data
 attributes3,attribute_buffer
 bb0003,bb000
@@ -46,7 +62,7 @@ before3,before
 blank3,blank
 c1_copy,semantic_commands
 c1_group,material_groups
-c1_index,gpu_copy_index
+c1_index,removed (unused test flag)
 c1_nt,semantic_count
 c1_palettes,palette_textures
 c1_revision,palette_revision
@@ -78,9 +94,9 @@ c1e_groups,capture_groups
 c1e_head,capture_head
 c1e_job,capture_job
 c1e_jobs,capture_jobs
-c1e_page_bytes,capture_page_bytes
-c1e_page_read,capture_page_read
-c1e_page_upload,capture_page_upload
+c1e_page_bytes,removed (unused upload telemetry)
+c1e_page_read,removed (unused upload telemetry)
+c1e_page_upload,removed (unused upload telemetry)
 c1e_started,capture_started
 c1e_stop,capture_stop
 c1e_tail,capture_tail
@@ -100,10 +116,10 @@ end_cpu3,end_cpu
 end_usage3,end_usage
 file3,read_asset
 first_gles3,first_gles
-fold_lut3,fold_lut
-fold_mix3,fold_mix
-fold_palette3,fold_palette
-fold_valid3,fold_valid
+fold_lut3,removed (unused compositor field)
+fold_mix3,removed (unused compositor field)
+fold_palette3,removed (unused compositor field)
+fold_valid3,removed (unused compositor field)
 front_indices3,front_indices
 g1_course,state_course
 g1_main,state_main
@@ -116,8 +132,8 @@ g1b_cells,dynamic_cache_cells
 g1b_drawing,dynamic_cache_drawing
 g1b_dynamic,dynamic_cache_dynamic
 g1b_entries,dynamic_cache_entries
-g1b_fail_code,dynamic_cache_fail_code
-g1b_fail_packet,dynamic_cache_fail_packet
+g1b_fail_code,removed (unused failure field)
+g1b_fail_packet,removed (unused failure field)
 g1b_generation,dynamic_cache_generation
 g1b_group,dynamic_cache_group
 g1b_key_valid,dynamic_cache_key_valid
@@ -152,7 +168,7 @@ g1c_next,material_cache_next
 g1c_occupancy,material_cache_occupancy
 g1c_pool,material_cache_pool
 g1c_probes,material_cache_probes
-g1c_rgba_material,material_cache_rgba_material
+g1c_rgba_material,removed (unused test wrapper)
 g2_last_eeprom,save_last_eeprom
 g2_save_emit,save_emit
 g2_save_enabled,save_enabled
@@ -165,14 +181,18 @@ g2_uv,material_uv
 g2_uv_valid,material_uv_valid
 g3,group
 gaps3,gaps
-gaps_count3,gaps_count
+gaps_count3,removed (unused trace counter)
 gc3,gc
 gcc3,gcc
 gi3,group_index
+gles3/shaders/provenance*,gles3/tests/shaders/provenance*
+gles3/src/audio.c,src/rr_audio.c (shared)
+gles3/src/memory.c,src/rr_mem.c (shared)
+gles3/src/rr_headless.inc,src/rr_headless.inc (shared)
 gles3_blank3,gles3_blank
 gles3_flush3,gles3_flush
-gles3_fold3,gles3_fold
-gles3_fold_fs3,gles3_fold_fs
+gles3_fold3,removed (unused compositor option)
+gles3_fold_fs3,removed (unused compositor shader)
 gles3_front3,gles3_front
 gles3_printf3,gles3_printf
 gles3_ram3,gles3_ram
@@ -200,6 +220,9 @@ mesh_height3,mesh_height
 mesh_width3,mesh_width
 open3,open_asset
 original3,original
+p1_adj,resampler_ratio
+p1_adj_max,resampler_ratio_max
+p1_adj_min,resampler_ratio_min
 p1_attributes,frame_attributes
 p1_audio,frame_audio
 p1_audio_ratio,frame_audio_ratio
@@ -223,23 +246,40 @@ p1_underruns,frame_underruns
 p1b_color,readback_color
 p1b_fbo,readback_fbo
 p1b_output,readback_output
+p2_palettes,update_palette_versions
+p2_planar,palette_shadow
+p2_ready,palette_initialized
+p2_revision,palette_generations
 p3,path
+p3_cull,cull_projected_bounds
+p3_cull_original,cull_reference
+p3_gles3_projection,use_exact_projection
+p3_original_projection,project_saturated_general
+p3_projection,project_saturated_exact
 page_count3,page_count
 pages3,page_textures
 payload_gles3,payload_gles
 pixels3,capture_pixels
 programs3,shader_programs
-provenance_race_v3,provenance_race_v
-race_v3,race_v
+provenance_race_v3,provenance_world
+provenance_race_v3.vert,provenance_world.vert
+provenance_race_v3_near.vert,provenance_world_near.vert
+race_v3,world
+race_v3.vert,world.vert
+race_v3_near.vert,world_near.vert
 read3,read_exact
+reference-semantic-legacy.csv,reference-semantic-historical-identities.csv
 rr_c1b_semantic,rr_validation_semantic
 rr_c1d_frame,rr_validation_provenance
+rr_gl_p1_select,rr_gl_renderer_select
+rr_p1_audio_ratio,rr_audio_resampler_ratio
 rr_p1_close,rr_renderer_close
 rr_p1_draw,rr_renderer_draw
 rr_p1_open,rr_renderer_open
 rr_p1_prepare,rr_renderer_prepare
 rr_p1b_packet,rr_validation_packet
 rr_p1b_pixel,rr_validation_image
+rr_video_p1b_output,rr_video_readback_output
 save3,capture_image
 shader3,compile_shader
 stage_sync3,stage_sync
@@ -253,48 +293,3 @@ transparent3,transparent
 v3,packet
 vao3,vertex_array
 widths3,widths
-G1-COVERAGE,RENDER-COVERAGE
-G1B-MATERIAL,DYNAMIC-MATERIAL
-G1B-PREP,DYNAMIC-CACHE-PREP
-G2-EEPROM,SAVE-EEPROM
-G2-SAVE,SAVE
-G2-SMOKE,INPUT-SMOKE
-G2-STAGING,UPLOAD-STAGING
-P1B-CLOCK,ASYNC-CLOCK
-P1B-IO,ASYNC-IO
-[G1-COVERAGE],[RENDER-COVERAGE]
-provenance_race_v3.vert,provenance_world.vert
-provenance_race_v3_near.vert,provenance_world_near.vert
-race_v3.vert,world.vert
-race_v3_near.vert,world_near.vert
-reference-semantic-legacy.csv,reference-semantic-historical-identities.csv
-ENG_G1C_KEYS,ENG_GLES3_MATERIAL_KEYS
-gles3/shaders/provenance*,gles3/tests/shaders/provenance*
-p3_cull_original,cull_reference
-p3_cull,cull_projected_bounds
-p3_projection,project_saturated_exact
-p3_original_projection,project_saturated_general
-p3_gles3_projection,use_exact_projection
-p2_planar,palette_shadow
-p2_revision,palette_generations
-p2_ready,palette_initialized
-p2_palettes,update_palette_versions
-rr_gl_p1_select,rr_gl_renderer_select
-rr_p1_audio_ratio,rr_renderer_audio_ratio
-rr_p1_close,rr_renderer_close
-rr_p1_draw,rr_renderer_draw
-rr_p1_open,rr_renderer_open
-rr_p1_prepare,rr_renderer_prepare
-rr_p1b_packet,rr_readback_packet
-rr_p1b_pixel,rr_readback_pixel
-rr_video_p1b_output,rr_video_readback_output
-G2-UV,MATERIAL-UV-UPLOAD
-[GLES2],[GLES3-INPUT]
-rr_p1_audio_ratio,rr_audio_resampler_ratio
-p1_adj,resampler_ratio
-p1_adj_min,resampler_ratio_min
-p1_adj_max,resampler_ratio_max
-P1-AUDIO,AUDIO-RESAMPLER
-gles3/src/memory.c,src/rr_mem.c (shared)
-gles3/src/audio.c,src/rr_audio.c (shared)
-gles3/src/rr_headless.inc,src/rr_headless.inc (shared)

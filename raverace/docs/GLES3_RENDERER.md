@@ -3,7 +3,16 @@
 `gles3/src` is a direct C implementation built by CMake, with no Python relinkers,
 private source rewriting, cached objects or captured-pack build dependencies.
 The board/simulation interfaces remain shared with desktop and the other games.
+The GLES3 scheduler contains only its headless path; desktop's entry point is main's
+implementation after formatting. Both compositions use src/rr_mem.c and src/rr_audio.c.
+RR_AUDIO_RESAMPLER_TELEMETRY gates the three GLES3 audio-metric additions; desktop
+keeps its original audio behavior. One src/rr_headless.inc uses small platform hooks.
+The GLES3 composition contains lifted execution only, with strict compatibility hooks
+for inactive checker seams; desktop retains its readable replacements/checker.
 The lifted 68K and C25 compile at O2; the sole strict C74 translation compiles at O1.
+Hand-written GLES3/platform/test sources compile with -Wall -Wextra, without -w.
+Only the three generated CPU/DSP/sound sources retain -w. .clang-format and the
+Black configuration set120 columns; READABILITY_RENAMES.csv lists all renames/removals.
 Only test executables link the sound interpreter. CE5B/CEF4 dispatch targets come
 from their two ten-entry ROM tables; missing translation or guarded-RAM mismatch
 traps loudly. tests/fixtures/sound-dispatch.json lists51 unresolved indirect
@@ -47,3 +56,9 @@ Direct ROM provenance is a separate pen/U/V/palette proof, class(c)=0.
 The bonus compiler tail remains a follow-up: one17.413ms preparation sample at
 11906 contained12.690ms compilation and4.647ms walking, with no panel repeat.
 This cleanup changes composition/naming, not that algorithm or its geometry.
+
+Validation has a separate core and test-only shaders. Product rr_gles3 excludes
+provenance/palette capture, command dumps/receipts/image hashes, fixed capture ticks,
+object/cull dumps, batching diagnostics and the forced-unsupported fixture.
+Strict unsupported exit86 remains in the product. tests/audit_product.py checks
+both link maps and symbols/strings/compile flags against the validation executable.

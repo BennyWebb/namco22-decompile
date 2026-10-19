@@ -1,89 +1,103 @@
-# GLES3 cleanup review — 2026-10-19
+# Cleanup and GLES3 readability review — 2026-10-19
 
-Status: local cleanup/gles3-main from main0837a39; no merge/cherry-pick, push or installation.
-Review worktree: /tmp/rr-gles3-main. Original feature/main refs and feature worktree unchanged.
-Source of truth is the deployed cone-fixed N1; full binary identities are in HISTORY.md.
-This branch contains accepted source contents, never feature history or development payloads.
+Branch: cleanup/gles3-main, from main 0837a39; readability baseline a583ac3.
+Worktree: /tmp/rr-cleanup-push-scan. Main and feature/knulli-h700 are unchanged.
+No merge/cherry-pick, PR or deployment. Installed applications and Ports entries are unchanged.
+The deployed cone-fixed N1 remains behavioral ground truth; identities and private archive: HISTORY.md.
 
-Local commits, in dependency order:
-- 5af0693 sound: one strict ROM-resolved translation and test oracle.
-- 965221f assets: deterministic ROM compiler and checked-in shader text.
+Original cleanup commits:
+- 5af0693 sound: single strict ROM-resolved translation and interpreter test oracle.
+- 965221f assets: deterministic ROM compiler and shader text.
 - a848d0b platform: recording, sessions, clocks, watchdog, profile and packaging.
-- 53401e9 runtime: direct GLES3 source tree, exact paths and shared interfaces.
-- f981cd7 tests: hash-only replay/image/sound/semantic fixtures and retained tools.
-- f0b7bea docs: operation, architecture, history and short handover.
-- 42d2341 retirement: history/tree payload and legacy-composition audit.
-- afbfa00 validation: desktop exact-option wiring and isolated device runner.
+- 53401e9 runtime: direct GLES3 tree and preserved shared interfaces.
+- f981cd7 tests: hash-only replay/image/sound/semantic fixtures and retained tooling.
+- f0b7bea docs: operation, architecture, history and handover signpost.
+- 42d2341 retirement: history/tree exclusion audit.
+- afbfa00 validation: exact desktop options and isolated device runner.
 - b6d21de platform: first-install rollback and acceptance instructions.
-- HEAD final report/audit: corrected smoke mapping requirement and audit byte accounting.
+- a583ac3 docs: completed cleanup validation and review report.
 
-Composition and retirement:
-- Direct rr_gles3 target; gles3/src, assets, shaders, tools and tests; platform/knulli-h700.
-- Presets gles3-host, knulli-h700 and existing desktop; lifted68K/C25 O2, sound O1.
-- No Python relinkers, milestone chains, private source rewriting, object caches or captured packs.
-- No legacy H700 viewer/preset, world-atlas/multitexture/P-series variants, overload valve,
-  RGBA pages, legacy world cache, per-picture fallback or shipped interpreter fallback.
-- ARM symbol/link-map audit excludes legacy world renderer, tex_bake and sound interpreter.
-- Neutral engine/render_stats.h owns renderer value types; desktop's backend remains independent.
-- Exact B1/B2, WRAM and C352 fast paths remain; shared interfaces and other games are preserved.
-- No changes under top-level include/, tools/ or other game folders; desktop rr builds/links.
-- Other games were not rebuilt: their ROM inputs are unavailable, as accepted by the user.
-- New sources include 75 GLES3 files, 11 platform files and four condensed documentation files.
+Readability commits:
+- 89354cc remove dormant scheduler branches and consolidate memory/audio/headless implementations.
+- a60b2d4 apply clang-format/Black and commit the C style.
+- a979686 descriptive renderer names, validation separation and warning fixes.
+- 687f5dc reusable product audit, Python style and palette names.
+- 4d7c1c7 remove stale legacy declarations and milestone log labels.
+- 2a2d2f2 gate the three resampler telemetry additions to GLES3; stripped ARM executable unchanged.
+- HEAD final documentation: this report, operating instructions and complete rename/removal mapping.
 
-Assets and fixtures:
-- Whole-ROM compiler enumerates2421 models/97116 meshes/21783 materials, independent of captures.
-- Asset layout/lookup/plan/texels/XYZ and all six shader texts match the deployed source of truth.
-- ROM payloads exist only in ignored build/package/cache directories, never Git.
-- Recordings use configurable local paths and mandatory input/EEPROM SHA256 checks.
-- Reference input SHA256 d76551345170fbbe0b4700dfe91cebf36d2c1a408dda69de6c2b043a95043216.
-- Cone input SHA256 de71c87454f1ddcbae69c71c6ca00ef48386964d55832abaea628a76c63320b4.
-- Fixtures contain checkpoint/final/image/PCM/voice hashes and counters, no packet or sample bodies.
-- Stable ROM IDs replace capture-specific validation IDs only after exact full command equality.
+Source and composition:
+- gles3/src/main.c contains only the GLES3/headless path: no desktop/legacy conditional branches,
+  tex_bake perflog, RR_GL_DRAWALL, RR_TEST_VIEW, RR_POKE, RR_DUMP_* or RR_DEBUG.
+- Desktop src/rr_main.c is exactly main after stable formatting; no GLES3 calls or branches.
+- Deleted gles3/src/memory.c, audio.c and rr_headless.inc. Both builds use shared rr_mem.c/rr_audio.c;
+  one src/rr_headless.inc uses platform hooks. RR_AUDIO_RESAMPLER_TELEMETRY gates GLES3 audio metrics.
+- GLES3 no longer links disabled readable-replacement/checker modules; compatibility hooks preserve
+  lifted execution and abort on unexpected checker activity. Desktop retains its existing modules.
+- Removed unused HUD/trace/cache fields and helpers; exact projection/culling/WRAM/C352 paths remain.
+- clang-format 23.1.3 and Black 26.10.1 applied; .clang-format/pyproject.toml commit the 120-column style.
+- One statement per line; all scoped C/H/inc/Python/GLSL sources satisfy the 120-column bound.
+- Hand-written GLES3/platform/test sources build with -Wall -Wextra, zero warnings, no suppression flags.
+  Only generated rr_lifted.c, rr_c25.c and snd_driver.c retain -w; 68K/C25 O2 and sound O1 remain.
+- READABILITY_RENAMES.csv lists 294 explicit identifier, log, filename and removal mappings.
+  Examples: c1d_*→provenance_*, g1b_*→dynamic_cache_*, g1c_*→material_cache_*, g2_save_*→save_*;
+  packet *3 types now Render*/Draw*; race_v3 shaders now world/world_near; historical semantic CSV renamed.
 
-Clean host validation:
-- Fresh single-branch clone /tmp/rr-clean-checkout, separate fresh host/ARM/desktop build directories.
-- Runtime sources match the committed runtime; subsequent commits change tests/docs/audit only.
-- Empty ROM build cache: compiler144.432s; empty first-launch cache: C decoder0.407s on host.
-- Every regenerated asset verified; device also started with an empty candidate cache.
-- Reference6006: all21 sets/63 records,4207 normalized and semantic packets,36 images exact.
-- Normalization expands draw state per command; every command/order/transform/material/depth stays.
-- Cone13808: all141 records, final state and26 images exact, including11822–11828 and11936.
-- Attract36000: all360 records,20 sampled images exact; zero unsupported/sound traps.
-- ROM provenance:36 images,5,529,600 decoded pixels, class(c)=0; boot159 CPU-oracle pictures exact.
-- Unsupported fixture: exit86, loud message and identical top summary line.
-- Sound PCM/voice and checkpoint state exactly equal interpreter every tick, zero traps:
-  reference6006, attract36000, cone13808, fixture1700 and three dense1700 runs.
-- Record/replay:600-tick state/board/audio checkpoints exact; overwrite and malformed cases rejected.
-- CTest4/4: projection100M, culling1M, cache/reset/wrap and staging200 checks.
-- Shared C352 general/fast transcript4615 states exact; texture decoder666144 sampled cases pass.
-- Evidence: /tmp/rr-clean-final-host/, /tmp/rr-clean-record-replay.txt and fresh build link maps.
+Product/test separation:
+- rr_gles3_validation has a separate core and tests/shaders; GLES3_RECORD_DIAGNOSTICS is gone.
+- Provenance/palette capture, command dumps, receipts, image hashes, fixed capture ticks,
+  ENG_OBJLOG, PROPCYCL_CULLDUMP, batching diagnostics and forced-unsupported injection are validation only.
+- Product link map/symbols/strings/compile flags contain none of those hooks; validation contains them.
+  tests/audit_product.py passes on host and ARM and checks both link maps and target definitions.
+- Strict unsupported logging, top summary line and exit 86 remain in the product; no fallback added.
+- Product asset kits contain only product shaders; rr_validation_asset_kit supplies test shaders locally.
 
-Device validation (isolated package; installed apps/Ports entries untouched):
-- Candidate rr_gles3 SHA256520dafc912099b0761ba3fabd008c399fb350f8e70307cb3467286894e0a1656.
-- Reference6006 and cone13808 checkpoint records exact; both pacing0/0/0.
-- Reference race4207 pictures: render CPU p993.938ms, preparation p9911.626ms.
-- Cone state5/0:1628 pictures, max18 draws (11936=17), render CPU p993.394ms.
-- Bonus preparation p9915.415ms, max18.018ms; compiler p9910.482ms, walk p995.108ms.
-- Two bonus preparation samples exceed panel period; no repeats. Known compiler/walk tail remains.
-- Attract smoke:125s/7468 pictures, pacing0/0/0; mapped START+SELECT exits to EmulationStation.
-- Initial smoke omitted the saved mapping; its synthetic chord was ignored. That run is excluded.
-- Runner now requires GLES3_TEST_CONTROLLER_CONFIG before smoke; product input behavior unchanged.
-- All final watchdog journals confirm restoration; CPU schedutil/GPU simple_ondemand restored.
-- All47 protected paths, three installed binaries and both existing Ports entries unchanged.
-- Evidence directory: /userdata/system/rave-racer-gles3-cleanup-test-20261019/.
+Source counts (C/H/inc/Python/GLSL; GLES3/platform plus seven shared runtime sources):
+- Shared scope: src/rr_main.c, rr_mem.c, rr_audio.c, rr_headless.inc, rr_replay_session.inc,
+  rr_overlay.c and rr_sim_profile.c.
+- Files: 69 → 68; lines: 7,840 → 13,168; bytes: 470,664 → 499,592. Formatting expands whitespace/line counts.
+- GLES3 main.c: 689 → 285 lines; 36,440 → 10,192 bytes. No generated source or fixtures in these counts.
+- Stripped ARM product: 6,967,352 → 6,402,000 bytes versus the cleanup candidate.
+- New rr_gles3 SHA256: 84f2a3970087ee3b56eddfae0d4310b8c38d953d6eb1da49c616322477c85700.
 
-Archive created and verified before cleanup, outside the repository:
-/home/bwebb/rave-racer-archive/20261019-fdfd350/ (private; includes ROM-derived evidence).
+Final host acceptance — exact, no image/state tolerances:
+- Reference 6006: 21 checkpoint sets/63 records, 4207 normalized+semantic receipts and 36 images unchanged.
+- Cone 13808: 141 records, final state and 26 bonus images unchanged, including 11822–11828 and11936.
+- Attract 36000: 360 records and 20 sampled images unchanged; zero unsupported/sound traps.
+- Provenance 36 images: 5,529,600 ROM-decoded pixels, class(c)=0; boot 159 CPU-oracle pictures exact.
+- Sound PCM/voices and checkpoint state equal interpreter on every tick, zero traps:
+  reference 6006, attract 36000, cone 13808, fixture 1700 and dense1/2/3 each 1700.
+- Record/replay 600: state, board and audio exact twice; overwrite/malformed/mismatch checks pass.
+- CTest 4/4 passes; desktop rr builds/links. Shared-engine/other-game interfaces unchanged by this pass.
+- Fresh host/ARM/desktop build directories and fresh ROM-compiled caches; all final build logs warning-free.
+- Final binary evidence: /tmp/rr-readable-final-host/, /tmp/rr-readable-final-record-replay.log;
+  /tmp/rr-readable-{host,arm}/gles3/*.map and audit_product.py. Earlier runs retained separately.
+
+Device acceptance — one reference and one cone replay, isolated package, CPU 1512 MHz throughout:
+
+| Section | Render CPU p99, baseline→new ms | Preparation p99, baseline→new ms | Pacing | Max draws |
+|---|---|---|---|---|
+| Reference race 4207 pictures |3.938→3.887|11.626→11.534|0/0/0|39|
+| Cone 5/0, 1628 pictures |3.394→3.392|15.415→15.707|0/0/0|18|
+
+- All four p99 changes are within ±0.3 ms; largest is cone preparation +0.291457 ms using raw baseline.
+- Reference 6006/cone 13808 checkpoints exact. All sampled cores fixed 1512000 kHz; zero clock flags.
+- Both journals restored clocks; final policies CPU schedutil/GPU simple_ondemand; EmulationStation restored.
+- All 47 protected paths, three installed binary hashes and both existing Ports entries unchanged.
+- Device budget 47.4 minutes including network interruptions; actual replay-driver span 6.52 minutes (<2 hours).
+- Results: /userdata/system/rave-racer-gles3-readability-test-20261019/ and /tmp/rr-readable-device-results/.
+- Local results tar SHA256: 9d9aa1193629a6e1e9255b218d86e29ed716139c890c58515bef351a26895915.
+
+History/tree hygiene and follow-ups:
+- 682 tracked files; 143 paths changed/121 added across history versus main; 17 local commits including this report.
+- Full history/tree scan: zero violations, no new ROM payload/recording/benchmark path or file over 1 MiB.
+- All 25 protected main artwork/font/BIOS paths unchanged. Inherited 69 large files/157 blob versions unchanged.
+- All asset payloads, recordings, EEPROM snapshots, image bodies and packet bodies remain local, outside Git.
+- Known follow-ups remain 51 unresolved sound indirect variants plus CB49, and the bonus compiler/walk tail.
+- No further optimization, PR or installation. Build/deploy/rollback: KNULLI_H700.md; user review before installation.
+
+Offline private archive, created before cleanup: /home/bwebb/rave-racer-archive/20261019-fdfd350/.
 - feature-all-refs.bundle: d786f8ada93055a404214564a82424126d0ffcf7b5682f907601ce163185b9b9
 - benchmarks.tar.gz: 5d14809a40df060828a4d06119f535dfa7bcf9acc20dd1d90fcae42a157866c1
 - regressions-and-goldens.tar.gz: 6637c0d0020a6a609856da775c460499e3949507afe546b5acd6f58f32057da6
-Bundle contains all22 original refs; history and regression/benchmark tarballs are checksummed.
-
-History/tree hygiene:
-- 680 tracked files;132 changed/110 added versus main;10 local commits, all reachable history scanned.
-- No newly introduced ROM payload, recording, benchmark/evidence path or file over1MiB.
-- All25 protected main artwork/font/BIOS paths unchanged.
-- All69 current files over1MiB and157 reachable large blob versions are unchanged main inheritance.
-- Source sound dispatch manifest retains51 unresolved indirect variants plus CB49 as follow-ups.
-- No installed replacement; future explicit installation and one-step restore are documented.
-STOP for user review; no push or deployment authorized by this report.
+Bundle includes all 22 original refs. Keep ROM-derived archives private; never push their contents.

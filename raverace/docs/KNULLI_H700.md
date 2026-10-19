@@ -52,3 +52,8 @@ CASE of reference, cone, attract, provenance, unsupported and sound. Then run
 `ctest --test-dir BUILD --output-on-failure` checks the renderer components.
 Tests reject mismatched recording/EEPROM hashes; fixtures contain hashes only.
 Device smoke requires `GLES3_TEST_CONTROLLER_CONFIG` pointing at that saved mapping.
+
+For local validation, build rr_validation_asset_kit and pass the build directory's
+validation-assets cache to the host gates. rr_asset_kit and packaged apps contain
+only product shaders. Run gles3/tests/audit_product.py --build BUILD (add
+--nm aarch64-linux-gnu-nm for an ARM build) to prove validation/product separation.
