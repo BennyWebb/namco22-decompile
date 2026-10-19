@@ -19,6 +19,8 @@ typedef struct rr_hw {
 extern rr_hw_t g_hw;
 
 bool rr_hw_init(const char *rom_dir);
+/* Explicit test/session seed bypasses any EEPROM file in rom_dir. */
+bool rr_hw_init_with_eeprom(const char *rom_dir, const uint8_t *initial_eeprom);
 void rr_hw_vblank(void);
 void rr_hw_sci_irq(void);            /* C139 link chip: a frame arrived / a transmit finished */
 int  rr_hw_irq_level(void);

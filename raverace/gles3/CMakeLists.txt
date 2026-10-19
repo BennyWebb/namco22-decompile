@@ -85,3 +85,6 @@ endforeach()
 add_custom_target(rr_validation_asset_kit
  COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/assets/compile.py ${RR_ROM_DIR} ${CMAKE_BINARY_DIR}/validation-assets --validation
  COMMENT "Compile ROM-only validation assets into the build directory")
+
+add_test(NAME recording_inputs
+ COMMAND ${Python3_EXECUTABLE} -O ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_recording_inputs.py)

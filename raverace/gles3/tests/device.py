@@ -5,10 +5,11 @@ from pathlib import Path
 import argparse, hashlib, json, os, shutil, subprocess, sys, time
 
 p = argparse.ArgumentParser()
-p.add_argument("case", choices=["reference", "cone", "smoke"])
+p.add_argument("case", choices=["reference", "smoke"])
 p.add_argument("--app", type=Path, required=True)
 p.add_argument("--output", type=Path, required=True)
 p.add_argument("--recordings", type=Path, required=True)
+p.add_argument("--eeprom", type=Path, required=True, help="Verified host-generated factory EEPROM")
 p.add_argument("--fixtures", type=Path, required=True)
 p.add_argument("--protected", type=Path, required=True)
 p.add_argument("--roms", type=Path, required=True)
@@ -25,12 +26,18 @@ out = a.output.resolve()
 out.mkdir()
 nv = out / "eeprom.nv"
 identity = json.loads((a.fixtures / "recordings.json").read_text())
-name = "cone" if a.case == "cone" else "reference"
+name = "reference"
 rec = a.recordings / (name + ".rec")
-seed = Path(str(rec) + ".eeprom")
+seed = a.eeprom
 assert hashlib.sha256(rec.read_bytes()).hexdigest() == identity[name]["input_sha256"]
 assert hashlib.sha256(seed.read_bytes()).hexdigest() == identity[name]["eeprom_sha256"]
 shutil.copyfile(seed, nv)
+# The host has already generated and verified this EEPROM; no seed is committed.
+runtime_rec = out / rec.name
+for suffix in ("", ".meta", ".end"):
+    shutil.copyfile(Path(str(rec) + suffix), Path(str(runtime_rec) + suffix))
+shutil.copyfile(seed, Path(str(runtime_rec) + ".eeprom"))
+rec = runtime_rec
 assert subprocess.run(["pidof", "rr_gles3", "rr_gles2"], stdout=subprocess.DEVNULL).returncode != 0, "game active"
 
 

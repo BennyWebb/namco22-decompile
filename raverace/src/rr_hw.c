@@ -96,7 +96,7 @@ static bool io_write(vaddr_t a, int size, uint32_t v)
     return false;
 }
 
-bool rr_hw_init(const char *rom_dir)
+bool rr_hw_init_with_eeprom(const char *rom_dir, const uint8_t *initial_eeprom)
 {
     memset(&g_hw, 0, sizeof g_hw);
     g_hw.lcg = 0x2545F491u;
@@ -105,8 +105,10 @@ bool rr_hw_init(const char *rom_dir)
     g_hw.steer = 0x800; g_hw.gas = 0; g_hw.brake = 0; g_hw.adc[0] = g_hw.adc[1] = g_hw.adc[2] = g_hw.adc[3] = 0x7F; g_hw.inputs = g_rr_game->inputs_idle;   /* MAME default: active-low bits 1 (Rave Racer: cabinet field 0x2100 = 0x2000, Standard) */
     char p[1024];
     snprintf(p, sizeof p, "%s/%s", rom_dir, g_rr_game->eeprom ? g_rr_game->eeprom : "");
-    FILE *f = g_rr_game->eeprom ? fopen(p, "rb") : NULL;
-    if (!g_rr_game->eeprom) { const char *fe = getenv("RR_EEPROM_FILL"); memset(g_rr.eeprom, fe ? (int)strtol(fe, NULL, 0) : 0xFF, RR_EEPROM_SIZE); }   /* no default image: a blank EEPROM (MAME: all ones) the game initialises itself */
+    FILE *f = !initial_eeprom && g_rr_game->eeprom ? fopen(p, "rb") : NULL;
+    if (initial_eeprom)
+        memcpy(g_rr.eeprom, initial_eeprom, RR_EEPROM_SIZE);
+    else if (!g_rr_game->eeprom) { const char *fe = getenv("RR_EEPROM_FILL"); memset(g_rr.eeprom, fe ? (int)strtol(fe, NULL, 0) : 0xFF, RR_EEPROM_SIZE); }   /* no default image: a blank EEPROM (MAME: all ones) the game initialises itself */
     else if (f) { if (fread(g_rr.eeprom, 1, RR_EEPROM_SIZE, f) != RR_EEPROM_SIZE) fprintf(stderr, "[HW] short eeprom\n"); fclose(f); }
     else fprintf(stderr, "[HW] no %s -- EEPROM blank\n", p);
     /* io_read handles only device ranges; WRAM/mirror rejection is pure.
@@ -122,6 +124,11 @@ bool rr_hw_init(const char *rom_dir)
     const char *kf = getenv("RR_KEYCUS_FILE");      /* replay MAME's random keycus reads */
     if (kf && !(keycus_replay = fopen(kf, "r"))) fprintf(stderr, "[HW] cannot open %s\n", kf);
     return true;
+}
+
+bool rr_hw_init(const char *rom_dir)
+{
+    return rr_hw_init_with_eeprom(rom_dir, NULL);
 }
 
 static void shared_w16(uint32_t off, uint16_t v)

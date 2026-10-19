@@ -268,6 +268,19 @@ void rr_tick(void)
         }
     }
     if (frame >= max_frames) {
+#ifdef GLES3_VALIDATION
+        const char *factory_output = getenv("ENG_GLES3_FACTORY_EEPROM");
+        if (factory_output) {
+            FILE *f = fopen(factory_output, "wx");
+            bool ok = f && fwrite(g_rr.eeprom, 1, sizeof g_rr.eeprom, f) == sizeof g_rr.eeprom;
+            if (f && fclose(f))
+                ok = false;
+            if (!ok) {
+                fprintf(stderr, "[EEPROM] factory output failed\n");
+                exit(2);
+            }
+        }
+#endif
         rr_headless_summary();
         rr_audio_close();
         rr_gles3_close();
