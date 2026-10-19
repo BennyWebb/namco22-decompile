@@ -8,7 +8,7 @@ from recordings import DEFAULT_RECORDINGS, IDENTITIES, generate_eeprom, prepare_
 
 FIX = Path(__file__).resolve().parent / "fixtures"
 p = argparse.ArgumentParser()
-p.add_argument("case", choices=["reference", "fixture", "attract", "provenance", "unsupported", "sound"])
+p.add_argument("case", choices=["reference", "fixture", "attract", "provenance", "unsupported", "sound", "full-race"])
 p.add_argument("--build", type=Path, required=True)
 p.add_argument("--roms", type=Path, required=True)
 p.add_argument("--cache", type=Path, required=True)
@@ -17,7 +17,9 @@ p.add_argument("--output", type=Path, required=True)
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 out = a.output.resolve()
-eeprom = generate_eeprom(a.build / "gles3/rr_gles3_validation", a.roms, a.cache, out / "factory.eeprom")
+eeprom = generate_eeprom(
+    a.build / "gles3/rr_gles3_validation", a.roms, a.cache, out / "factory.eeprom", calibrated=a.case == "full-race"
+)
 
 
 def sha(p):
@@ -71,12 +73,17 @@ def run(case, binary, *, sound=False):
             ENG_GLES3_IMAGES=str(d / "images"),
             ENG_GLES3_IMAGE_HASH=str(d / "images.csv"),
         )
-        if mode in ("reference", "provenance"):
+        if mode in ("reference", "provenance", "full-race"):
             env.update(
                 ENG_GLES3_RECEIPTS=str(d / "commands.csv"),
                 ENG_GLES3_NORMALIZED_RECEIPTS=str(d / "normalized.csv"),
                 ENG_GLES3_SEMANTIC=str(d / "semantic.csv"),
             )
+        if mode == "full-race":
+            env["ENG_GLES3_CAPTURE_TICKS"] = (
+                "500,800,1320,1800,3000,4500,6006,8000,10000,11000,11721,11800,12000,12500,13000,13263,13300,13896"
+            )
+            env["ENG_GLES3_RECEIPTS_FROM"] = "1"
         if mode == "fixture":
             env["ENG_GLES3_CAPTURE_TICKS"] = "1,159,300,435,600,900,1200,1500,1700"
             env["ENG_GLES3_RECEIPTS_FROM"] = "1"
@@ -130,14 +137,31 @@ def run(case, binary, *, sound=False):
         if mode == "provenance":
             expected = json.loads((FIX / "provenance-images.json").read_text())
             assert {p.name: sha(p) for p in (d / "images").iterdir()} == expected, "provenance images"
-        else:
+        elif mode != "full-race":
             assert (d / "images.csv").read_bytes() == (FIX / (mode + "-images.csv")).read_bytes(), "images"
         if mode == "reference":
             boot = re.findall(r"GLES3-BOOT-ORACLE\] tick=(\d+).*differences=(\d+)", log)
             assert len(boot) == 159 and all(int(x[1]) == 0 for x in boot)
+    if mode == "full-race":
+        expected = json.loads((FIX / "full-race.json").read_text())
+        assert records == expected["checkpoints"], "full-race checkpoints"
+        coverage = re.findall(r"RENDER-COVERAGE\] tick=(\d+) main=(\d+) sub=(\d+)", log)
+        counts = {}
+        for tick, main, sub in coverage:
+            key = main + "/" + sub
+            counts[key] = counts.get(key, 0) + 1
+        assert counts == expected["state_pictures"], "full-race coverage"
+        assert counts.get("3/0", 0) == 10674 and counts.get("4/0", 0) > 0
+        assert counts.get("5/0", 0) == 1543, "bonus stage not reached"
+        for filename in (["audio.jsonl"] if sound else ["normalized.csv", "semantic.csv", "images.csv"]):
+            assert sha(d / filename) == expected["files"][filename], filename
+        if not sound:
+            for filename, count in expected["receipt_rows"].items():
+                assert len(list(csv.DictReader((d / filename).open()))) == count, filename
     final = [json.loads(s) for s in (d / "stdout.jsonl").read_text().splitlines() if s.startswith('{"schema":')][-1]
     final_digest = hashlib.sha256(json.dumps(final, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-    assert final_digest == (FIX / (mode + "-final.sha256")).read_text().strip(), ("final state", mode)
+    expected_final = expected["final"] if mode == "full-race" else (FIX / (mode + "-final.sha256")).read_text().strip()
+    assert final_digest == expected_final, ("final state", mode)
     return d
 
 
@@ -164,6 +188,17 @@ if a.case == "sound":
         results[name] = len(x)
         print("EXACT SOUND", name, len(x), flush=True)
     (out / "result.json").write_text(json.dumps(results, indent=2))
+elif a.case == "full-race":
+    run("full-race", a.build / "gles3/rr_gles3_validation")
+    paths = [
+        run("full-race-" + tag, a.build / "gles3" / binary, sound=True)
+        for tag, binary in [("translated", "rr_gles3"), ("oracle", "rr_gles3_sound_oracle")]
+    ]
+    assert (paths[0] / "audio.jsonl").read_bytes() == (paths[1] / "audio.jsonl").read_bytes()
+    audio = [json.loads(line) for line in (paths[0] / "audio.jsonl").read_text().splitlines()]
+    assert [row["audio_frame"] for row in audio] == list(range(1, 13938))
+    (out / "result.json").write_text(json.dumps(dict(case=a.case, exact=True, sound_ticks=len(audio))))
+    print("EXACT FULL RACE", len(audio), flush=True)
 else:
     d = run(a.case, a.build / "gles3/rr_gles3_validation")
     (out / "result.json").write_text(json.dumps(dict(case=a.case, exact=True)))

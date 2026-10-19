@@ -1,7 +1,7 @@
 # Hash-only acceptance fixtures
 
 Controller input recordings and text metadata are stored in Git at ../recordings/:
-reference.rec (12,660 bytes, 6,006 ticks) and fixture.rec (214 bytes, 1,700 ticks).
+reference.rec (12,660 bytes, 6,006 ticks) fixture.rec (214 bytes, 1,700 ticks), and full-race.rec (25,066 bytes, 13,937 ticks).
 They contain only F controller events, descriptive comments and input markers.
 No EEPROM, checkpoint bodies, images, packet bodies or audio are stored in Git.
 GLES3_TEST_RECORDINGS or --recordings overrides the default input directory;
@@ -51,3 +51,33 @@ The 600-tick record/replay round trip and malformed/mismatch checks pass;
 CTest is 5/5, compilation has zero warnings, and product link/symbol audit passes.
 The new-commit history scan allows only the two SHA-pinned controller inputs and
 finds no EEPROM, ROM/binary payloads or files over 1 MiB. No device/deployment used.
+
+## Full-race addition
+
+full-race.rec contains only controller events/comments/markers. SHA256:
+`b7ea9c4e76e17e0b3e93ebe19659e296397e965d469e5ebaa48adc2ce71b972e`.
+It reaches race (10,674 pictures), results, and bonus 5/0 (1,543 pictures).
+The original 141 device checkpoint records are retained only as line hashes in
+full-race.json. Complete normalized/semantic receipt files and sampled image
+manifests are accepted by SHA256; their game-derived bodies remain local.
+Sound is compared translated versus oracle on all 13,937 ticks, additionally
+pinned by SHA256 of the oracle's complete hash/counter JSONL stream.
+
+This recording uses a second generated seed: start all 8,192 bytes at 0xff;
+TEST at tick 1, TEST+SERVICE at 1000, release SERVICE at 1100, release TEST at 1200
+to idle; export at tick 1600. The ROM adjustment samples centred
+steering/released pedals and its EEPROM writer persists the calibration.
+Expected SHA256: `81e19e9ce2fca04dbbd487b12e85cc473e30e61f2797c703743c9b86373721c7`.
+No saved bytes are used. The older 08a9266d seed has incompatible analogue zero
+points and its reference replay remains a historical determinism gate, not a
+full-race acceptance test. Existing fixtures and recordings are unchanged.
+
+Full-race acceptance: generated calibrated EEPROM matched; all 141 device
+checkpoint records and final state exact in validation, product and oracle;
+13,937 normalized receipts, 13,937 semantic receipts and 36 sampled image hashes
+exact on a repeated run. Translated sound equals the oracle on all 13,937 ticks;
+zero sound traps, unsupported stops or dropped diagnostic records. Existing
+reference/fixture gates remain exact; calibrated record/replay, CTest (5/5) and
+product symbol audit pass. Hand-written build sources produced zero warnings.
+Only controller text, safe metadata and hash manifests are added; the working-tree
+payload/size scan finds no EEPROM, ROM payload or file over 1 MiB. No deployment.

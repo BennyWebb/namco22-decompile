@@ -18,6 +18,8 @@
 extern unsigned char *SHA256(const unsigned char *, size_t, unsigned char *);
 #define POOL (16u * 1024 * 1024)
 #define STREAMS 32
+/* Hold a complete long race plus bonus-stage receipts without truncation. */
+#define RECEIPT_CAPACITY 32768
 static unsigned char pool[POOL];
 static size_t used;
 typedef struct {
@@ -45,7 +47,7 @@ static struct {
     unsigned tick, bytes;
     unsigned char digest[32], normalized[32];
     unsigned normalized_bytes;
-} packets[8192];
+} packets[RECEIPT_CAPACITY];
 FILE *__real_fopen(const char *, const char *);
 FILE *__real_fopen64(const char *, const char *);
 static void output(Stream *s)
@@ -178,7 +180,7 @@ FILE *__wrap_fopen64(const char *p, const char *m)
 }
 void rr_validation_packet(unsigned tick, const void *bytes, size_t n)
 {
-    if (packet_count >= 8192) {
+    if (packet_count >= RECEIPT_CAPACITY) {
         atomic_fetch_add(&errors, 1);
         return;
     }
@@ -238,10 +240,10 @@ static struct {
     unsigned tick;
     size_t n;
     unsigned char hash[32];
-} semantic_receipts[8192];
+} semantic_receipts[RECEIPT_CAPACITY];
 void rr_validation_semantic(unsigned t, const void *p, size_t n)
 {
-    if (semantic_count >= 8192)
+    if (semantic_count >= RECEIPT_CAPACITY)
         abort();
     unsigned i = semantic_count++;
     semantic_receipts[i].tick = t;
