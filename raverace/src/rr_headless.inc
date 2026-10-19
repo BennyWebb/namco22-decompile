@@ -252,33 +252,36 @@ static int rr_headless_main(int argc, char **argv)
             e++;
     }
     setenv("RR_RD", "0", 1); /* translated baseline, no readable substitutions */
-    /* Require the same EEPROM seed rather than silently starting with zeros. */
-    char seed[1024];
-    snprintf(seed, sizeof seed, "%s/%s", rom_dir, g_rr_game->eeprom);
-    FILE *fp = fopen(seed, "rb");
-    if (!fp) {
-        fprintf(stderr, "[HEADLESS] missing EEPROM seed: %s\n", seed);
+    const char *explicit_seed = getenv("ENG_GLES3_INITIAL_EEPROM");
+    uint8_t initial_eeprom[RR_EEPROM_SIZE];
+    bool blank_eeprom = false;
+#ifdef GLES3_VALIDATION
+    blank_eeprom = getenv("ENG_GLES3_FACTORY_EEPROM") != NULL;
+#endif
+    if (blank_eeprom && explicit_seed) {
+        fprintf(stderr, "[HEADLESS] blank boot and explicit EEPROM are mutually exclusive\n");
         return 2;
     }
-    bool seed_ok = fseek(fp, 0, SEEK_END) == 0 && ftell(fp) == RR_EEPROM_SIZE;
-    fclose(fp);
-    if (!seed_ok) {
-        fprintf(stderr, "[HEADLESS] invalid EEPROM seed: %s\n", seed);
-        return 2;
-    }
-    if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) || !rr_sound_init(rom_dir) || !rr_hw_init(rom_dir))
-        return 2;
-    const char *gles3_seed = getenv("ENG_GLES3_INITIAL_EEPROM");
-    if (gles3_seed) {
-        FILE *f = fopen(gles3_seed, "rb");
-        bool ok = f && fread(g_rr.eeprom, 1, sizeof g_rr.eeprom, f) == sizeof g_rr.eeprom && fgetc(f) == EOF;
+    if (blank_eeprom)
+        memset(initial_eeprom, 0xFF, sizeof initial_eeprom);
+    else {
+        char seed[2048];
+        if (explicit_seed)
+            snprintf(seed, sizeof seed, "%s", explicit_seed);
+        else
+            snprintf(seed, sizeof seed, "%s/%s", rom_dir, g_rr_game->eeprom);
+        FILE *f = fopen(seed, "rb");
+        bool ok = f && fread(initial_eeprom, 1, sizeof initial_eeprom, f) == sizeof initial_eeprom && fgetc(f) == EOF;
         if (f)
             fclose(f);
         if (!ok) {
-            fprintf(stderr, "[RECORD] invalid starting EEPROM\n");
+            fprintf(stderr, "[HEADLESS] missing/invalid EEPROM seed: %s\n", seed);
             return 2;
         }
     }
+    if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) || !rr_sound_init(rom_dir) ||
+        !rr_hw_init_with_eeprom(rom_dir, initial_eeprom))
+        return 2;
     if (!rr_audio_diagnostics(audio_check_first, activity_first) || !replay_session_open(rom_dir))
         return 2;
     if (!headless_platform_open(rom_dir))

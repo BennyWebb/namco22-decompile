@@ -2353,7 +2353,9 @@ static void live_compile(void)
     memcpy(semantic_commands, live_cmd, n * sizeof *live_cmd);
     for (unsigned k = 0; k < n; k++)
         semantic_commands[k].page = 0;
-    if (live_frame >= 1800 && getenv("ENG_GLES3_SEMANTIC"))
+    if (live_frame >=
+            (getenv("ENG_GLES3_RECEIPTS_FROM") ? strtoul(getenv("ENG_GLES3_RECEIPTS_FROM"), NULL, 10) : 1800) &&
+        getenv("ENG_GLES3_SEMANTIC"))
         rr_validation_semantic(live_frame, semantic_commands, n * sizeof *live_cmd);
 
 #endif
@@ -2635,7 +2637,8 @@ bool rr_renderer_prepare(rr_presentation *s)
     s->gles3_compile_ms = live_compile_ms;
     s->gles3_tag = 1;
 #ifdef GLES3_VALIDATION
-    if (s->frame >= 1800 && getenv("ENG_GLES3_RECEIPTS"))
+    if (s->frame >= (getenv("ENG_GLES3_RECEIPTS_FROM") ? strtoul(getenv("ENG_GLES3_RECEIPTS_FROM"), NULL, 10) : 1800) &&
+        getenv("ENG_GLES3_RECEIPTS"))
         rr_validation_packet(
             s->frame, ((RenderPacket *)s->gles3_payload)->bytes, ((RenderPacket *)s->gles3_payload)->size);
 #endif

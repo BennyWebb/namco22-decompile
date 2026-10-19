@@ -2,7 +2,7 @@
 """Audit reachable history and source tree; inherited main artifacts stay unchanged."""
 
 from pathlib import Path
-import argparse, subprocess, json, re
+import argparse, subprocess, json, re, hashlib
 
 p = argparse.ArgumentParser()
 p.add_argument("--base", default="0837a39")
@@ -24,6 +24,27 @@ def tree(ref):
     return out
 
 
+# These two reviewed blobs are controller text, never game-state payloads.
+INPUT_RECORDINGS = {
+    "raverace/gles3/tests/recordings/reference.rec": "d76551345170fbbe0b4700dfe91cebf36d2c1a408dda69de6c2b043a95043216",
+    "raverace/gles3/tests/recordings/fixture.rec": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
+}
+
+
+def controller_input(path, oid):
+    if path not in INPUT_RECORDINGS:
+        return False
+    body = git("cat-file", "blob", oid)
+    if hashlib.sha256(body).hexdigest() != INPUT_RECORDINGS[path]:
+        return False
+    return all(
+        re.fullmatch(rb"F [0-9]+ [0-9A-F]{4} [0-9A-F]{3} [0-9A-F]{3} [0-9A-F]{3}", line)
+        or re.fullmatch(rb"# MARK [0-9]+ [0-9]+", line)
+        or line == b"# Rave Racer input recording: F frame inputs steer gas brake (hex), on change"
+        for line in body.splitlines()
+    )
+
+
 base = tree(a.base)
 head = tree("HEAD")
 commits = git("rev-list", a.base + "..HEAD").decode().splitlines()
@@ -43,14 +64,24 @@ for commit in commits:
             ".vertices",
             ".indices",
             ".rec",
+            ".eeprom",
+            ".nv",
+            ".9e",
             ".tgz",
             ".png",
             ".jpg",
             ".wav",
             ".pcm",
             ".bin",
-        ):
+        ) and not controller_input(path, oid):
             violations.append((commit, path, "payload extension"))
+        body = git("cat-file", "blob", oid)
+        try:
+            body.decode("utf-8")
+            if b"\0" in body:
+                raise UnicodeError("NUL in text")
+        except UnicodeError:
+            violations.append((commit, path, "new binary payload"))
         if size > 1024 * 1024:
             violations.append((commit, path, "new blob over1MiB"))
         if path.startswith(
@@ -67,15 +98,20 @@ for row in all_objects:
     if " " not in row:
         continue
     oid, path = row.split(" ", 1)
-    if "/benchmarks/" in "/" + path or Path(path).suffix.lower() in (
-        ".rgba",
-        ".r8ui",
-        ".f32",
-        ".vertices",
-        ".rec",
-        ".tgz",
-        ".wav",
-        ".pcm",
+    if (
+        "/benchmarks/" in "/" + path
+        or Path(path).suffix.lower()
+        in (
+            ".rgba",
+            ".r8ui",
+            ".f32",
+            ".vertices",
+            ".rec",
+            ".tgz",
+            ".wav",
+            ".pcm",
+        )
+        and not controller_input(path, oid)
     ):
         historical_payloads.append(dict(path=path, oid=oid))
 # Main artwork, font and BIOS are intentionally unchanged.
@@ -110,6 +146,7 @@ result = dict(
     added_paths=sum(x not in base for x in introduced),
     new_bytes=sum(size for _, size in introduced.values()),
     violations=violations,
+    reviewed_controller_recordings=[x for x in INPUT_RECORDINGS if x in head],
     inherited_historical_payload_findings=historical_payloads,
     inherited_large_files=[dict(path=x, bytes=size) for x, (oid, size) in head.items() if size > 1024 * 1024],
     protected_main_paths_unchanged=len(protected),

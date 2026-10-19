@@ -20,7 +20,7 @@ assert not re.search(
 )
 strings = subprocess.check_output(["strings", str(product)], text=True)
 assert not re.search(
-    r"provenance|ENG_GLES3_(?:CAPTURE|PALETTE_REFERENCE|COMMAND_DUMP|RECEIPTS|IMAGE_HASH|SEMANTIC|FORCE_UNSUPPORTED)"
+    r"provenance|ENG_GLES3_(?:CAPTURE|PALETTE_REFERENCE|COMMAND_DUMP|RECEIPTS|IMAGE_HASH|SEMANTIC|FORCE_UNSUPPORTED|FACTORY_EEPROM)"
     r"|ENG_OBJLOG|PROPCYCL_CULLDUMP|GLES3_RECORD_DIAGNOSTICS",
     strings,
 )

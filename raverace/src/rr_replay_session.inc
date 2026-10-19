@@ -111,7 +111,13 @@ static bool replay_session_open(const char *rom_dir)
             ok = ok && replay_rom_hash(m, rom_dir, g_rr_game->wav[i].file);
         for (int i = 0; i < 3; i++)
             ok = ok && replay_rom_hash(m, rom_dir, g_rr_game->gamma[i]);
-        ok = ok && replay_rom_hash(m, rom_dir, g_rr_game->eeprom);
+        /* EEPROM metadata describes the initial bytes, not a ROM-directory seed file. */
+        if (g_rr_game->eeprom)
+            ok = ok && fprintf(m,
+                               "ROM %s %zu %016" PRIx64 "\n",
+                               g_rr_game->eeprom,
+                               sizeof g_rr.eeprom,
+                               replay_hash(g_rr.eeprom, sizeof g_rr.eeprom)) > 0;
         char path[2048];
         if (snprintf(path, sizeof path, "%s.meta", base) >= (int)sizeof path)
             ok = false;

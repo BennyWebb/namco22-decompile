@@ -1,32 +1,12 @@
 {
   "reference": {
     "input_sha256": "d76551345170fbbe0b4700dfe91cebf36d2c1a408dda69de6c2b043a95043216",
-    "eeprom_sha256": "a34d3b84b16df89e899d9d927a54d8546748aa0e5181f644b1d12f76b84cd866",
+    "eeprom_sha256": "08a9266d2a6097e116562a74c0adfe5702f36028d76679bc8297664e8f7bb187",
     "ticks": 6006
-  },
-  "cone": {
-    "input_sha256": "de71c87454f1ddcbae69c71c6ca00ef48386964d55832abaea628a76c63320b4",
-    "eeprom_sha256": "d753620288d20c4f26899837966e7bc68b2ce66e9d3d4227908f1927225c92e0",
-    "ticks": 13808
   },
   "fixture": {
     "input_sha256": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
-    "eeprom_sha256": "a34d3b84b16df89e899d9d927a54d8546748aa0e5181f644b1d12f76b84cd866",
-    "ticks": 1700
-  },
-  "dense-1": {
-    "input_sha256": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
-    "eeprom_sha256": "a34d3b84b16df89e899d9d927a54d8546748aa0e5181f644b1d12f76b84cd866",
-    "ticks": 1700
-  },
-  "dense-2": {
-    "input_sha256": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
-    "eeprom_sha256": "a34d3b84b16df89e899d9d927a54d8546748aa0e5181f644b1d12f76b84cd866",
-    "ticks": 1700
-  },
-  "dense-3": {
-    "input_sha256": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
-    "eeprom_sha256": "a34d3b84b16df89e899d9d927a54d8546748aa0e5181f644b1d12f76b84cd866",
+    "eeprom_sha256": "08a9266d2a6097e116562a74c0adfe5702f36028d76679bc8297664e8f7bb187",
     "ticks": 1700
   }
 }

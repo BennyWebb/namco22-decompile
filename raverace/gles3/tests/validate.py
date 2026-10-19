@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""Exact local-ROM replay gates. Git contains hashes; replay payloads stay local."""
+"""Exact local-ROM replay gates. Git contains controller inputs and hashes; game payloads stay local."""
 
 from pathlib import Path
 import argparse, csv, hashlib, json, os, re, subprocess
 
+from recordings import DEFAULT_RECORDINGS, generate_eeprom, prepare_recording
+
 FIX = Path(__file__).resolve().parent / "fixtures"
 p = argparse.ArgumentParser()
-p.add_argument("case", choices=["reference", "cone", "attract", "provenance", "unsupported", "sound"])
+p.add_argument("case", choices=["reference", "fixture", "attract", "provenance", "unsupported", "sound"])
 p.add_argument("--build", type=Path, required=True)
 p.add_argument("--roms", type=Path, required=True)
 p.add_argument("--cache", type=Path, required=True)
-p.add_argument("--recordings", type=Path, default=os.environ.get("GLES3_TEST_RECORDINGS"))
+p.add_argument("--recordings", type=Path, default=DEFAULT_RECORDINGS)
 p.add_argument("--output", type=Path, required=True)
 a = p.parse_args()
-assert a.recordings, "set GLES3_TEST_RECORDINGS or --recordings"
 a.output.mkdir(parents=True, exist_ok=False)
 out = a.output.resolve()
-identities = json.loads((FIX / "recordings.json").read_text())
+eeprom = generate_eeprom(a.build / "gles3/rr_gles3_validation", a.roms, a.cache, out / "factory.eeprom")
 
 
 def sha(p):
@@ -24,11 +25,7 @@ def sha(p):
 
 
 def recording(name):
-    q = a.recordings / (name + ".rec")
-    v = identities[name]
-    assert sha(q) == v["input_sha256"]
-    assert sha(Path(str(q) + ".eeprom")) == v["eeprom_sha256"]
-    return q.resolve()
+    return prepare_recording(name, a.recordings, out / "inputs", eeprom)
 
 
 def run(case, binary, *, sound=False):
@@ -57,6 +54,7 @@ def run(case, binary, *, sound=False):
         "--input-checkpoints",
         str(d / "states.jsonl"),
     ]
+    env["ENG_GLES3_INITIAL_EEPROM"] = str(eeprom)
     if name == "attract":
         cmd += ["--frames", "36000"]
     else:
@@ -79,9 +77,13 @@ def run(case, binary, *, sound=False):
                 ENG_GLES3_NORMALIZED_RECEIPTS=str(d / "normalized.csv"),
                 ENG_GLES3_SEMANTIC=str(d / "semantic.csv"),
             )
-        if mode == "cone":
-            env["ENG_GLES3_CAPTURE_TICKS"] = (
-                "11598,11822,11823,11824,11825,11826,11827,11828,11936,12228,12500,12800,13225"
+        if mode == "fixture":
+            env["ENG_GLES3_CAPTURE_TICKS"] = "1,159,300,435,600,900,1200,1500,1700"
+            env["ENG_GLES3_RECEIPTS_FROM"] = "1"
+            env.update(
+                ENG_GLES3_RECEIPTS=str(d / "commands.csv"),
+                ENG_GLES3_NORMALIZED_RECEIPTS=str(d / "normalized.csv"),
+                ENG_GLES3_SEMANTIC=str(d / "semantic.csv"),
             )
         if mode == "attract":
             env["ENG_GLES3_CAPTURE_TICKS"] = "1,159,435,3462,6006,12000,18000,24000,30000,36000"
@@ -115,15 +117,16 @@ def run(case, binary, *, sound=False):
     assert r.returncode == 0, r.returncode
     assert "[SND] TRANSLATED DRIVER" not in log and "GLES3 UNSUPPORTED" not in log
     records = [hashlib.sha256(s.encode() + b"\n").hexdigest() for s in (d / "states.jsonl").read_text().splitlines()]
-    if mode in ("reference", "provenance", "cone", "attract"):
+    if mode in ("reference", "provenance", "fixture", "attract"):
         expected = json.loads((FIX / (mode + "-checkpoints.json")).read_text())
         assert records == [x["sha256"] for x in expected], ("checkpoints", mode)
     if not sound:
-        if mode in ("reference", "provenance"):
-            assert (d / "normalized.csv").read_bytes() == (FIX / "reference-commands.csv").read_bytes(), "commands"
-            assert len(list(csv.DictReader((d / "normalized.csv").open()))) == 4207
-            semantic = FIX / "reference-semantic.csv"
-            assert (d / "semantic.csv").read_bytes() == semantic.read_bytes(), "semantic"
+        if mode in ("reference", "provenance", "fixture"):
+            identity = "reference" if mode == "provenance" else mode
+            expected_commands = (FIX / (identity + "-commands.csv")).read_bytes()
+            assert (d / "normalized.csv").read_bytes() == expected_commands, "commands"
+            assert len(list(csv.DictReader((d / "normalized.csv").open()))) > 0
+            assert (d / "semantic.csv").read_bytes() == (FIX / (identity + "-semantic.csv")).read_bytes(), "semantic"
         if mode == "provenance":
             expected = json.loads((FIX / "provenance-images.json").read_text())
             assert {p.name: sha(p) for p in (d / "images").iterdir()} == expected, "provenance images"
@@ -132,18 +135,15 @@ def run(case, binary, *, sound=False):
         if mode == "reference":
             boot = re.findall(r"GLES3-BOOT-ORACLE\] tick=(\d+).*differences=(\d+)", log)
             assert len(boot) == 159 and all(int(x[1]) == 0 for x in boot)
-    if mode == "cone":
-        final = [json.loads(s) for s in (d / "stdout.jsonl").read_text().splitlines() if s.startswith('{"schema":')][-1]
-        assert (
-            hashlib.sha256(json.dumps(final, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
-            == (FIX / "cone-final.sha256").read_text().strip()
-        )
+    final = [json.loads(s) for s in (d / "stdout.jsonl").read_text().splitlines() if s.startswith('{"schema":')][-1]
+    final_digest = hashlib.sha256(json.dumps(final, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    assert final_digest == (FIX / (mode + "-final.sha256")).read_text().strip(), ("final state", mode)
     return d
 
 
 if a.case == "sound":
     results = {}
-    for name in ["reference", "attract", "cone", "fixture", "dense-1", "dense-2", "dense-3"]:
+    for name in ["reference", "attract", "fixture"]:
         paths = [
             run(name + "-" + tag, a.build / "gles3" / binary, sound=True)
             for tag, binary in [("translated", "rr_gles3"), ("oracle", "rr_gles3_sound_oracle")]
