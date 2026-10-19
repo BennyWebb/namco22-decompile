@@ -81,6 +81,11 @@ static bool slurp_mirror(const char *dir, const char *n, uint8_t *dst, size_t le
     return true;
 }
 
+#ifdef RR_HEADLESS
+uint64_t rr_headless_sound_cycles(void) { return cpu.cycles; }
+bool rr_headless_sound_fault(void) { return cpu.unimpl_hit != 0; }
+#endif
+
 bool rr_sound_init(const char *dir)
 {
     g_snd_data = calloc(1, 0x80000);

@@ -1,0 +1,459 @@
+{
+  "resolved": [
+    {
+      "site": "00CE50",
+      "kind": "push-pointer / RTS",
+      "table": "00CE5B",
+      "mx": 0,
+      "entries": [
+        "00CE6F",
+        "00CE78",
+        "00CE7E",
+        "00CE8B",
+        "00CE98",
+        "00CEAD",
+        "00CEB9",
+        "00CECC",
+        "00CED1",
+        "00CED6"
+      ],
+      "reserved_selectors": "10..15 are not table entries"
+    },
+    {
+      "site": "00CEF3",
+      "kind": "push-pointer / RTS",
+      "table": "00CEF4",
+      "mx": 0,
+      "entries": [
+        "00CF08",
+        "00CF10",
+        "00CF18",
+        "00CF2C",
+        "00CF34",
+        "00CF22",
+        "00CF3C",
+        "00CF44",
+        "00CF4C",
+        "00CF55"
+      ],
+      "reserved_selectors": "10..15 are not table entries"
+    }
+  ],
+  "unresolved": [
+    {
+      "pc": "00BB56",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "015A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C09E",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01F4",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C09E",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01F4",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C0A4",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0200",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C0EC",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01FC",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C0F2",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01EE",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C10E",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01FE",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C114",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01F4",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C21A",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0200",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C501",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AXI",
+      "operand": "4110",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C6A9",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01D6",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C6AF",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01DA",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C71A",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "01F8",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C74F",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0102",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C755",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0100",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C814",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0104",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C854",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0106",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C86C",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "010A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C897",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0126",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00C8E7",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0116",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00CC8E",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "00F0",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D25C",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0112",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D25C",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0112",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D262",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "010E",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D26D",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0114",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D387",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0128",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D39F",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0110",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D3A5",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "010E",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D3B9",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0108",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D461",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0124",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D46B",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "010C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D46B",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "010C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D53D",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0118",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D5E5",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "012E",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D60C",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "012C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D819",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "012A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D835",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "011A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D835",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "011A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D83B",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "011E",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D83B",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "011E",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D841",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0120",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D841",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0120",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D847",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "0122",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D896",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "011C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00D8EF",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AXI",
+      "operand": "005A",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DBB6",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AXI",
+      "operand": "0060",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DBD9",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AI",
+      "operand": "012C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DC2D",
+      "mx": 2,
+      "instruction": "JML",
+      "mode": "AI",
+      "operand": "384C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DC37",
+      "mx": 2,
+      "instruction": "JML",
+      "mode": "AI",
+      "operand": "6295",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DDBC",
+      "mx": 0,
+      "instruction": "JMP",
+      "mode": "AXI",
+      "operand": "005C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    },
+    {
+      "pc": "00DDBC",
+      "mx": 2,
+      "instruction": "JMP",
+      "mode": "AXI",
+      "operand": "005C",
+      "resolution": "mutable RAM pointer / DPR-indexed callback; executed targets covered, unresolved statically"
+    }
+  ],
+  "pushed_RAM_dispatches": [
+    {
+      "site": "00CB49",
+      "table": "DPR+$0130",
+      "resolution": "mutable RAM dispatch, not a ROM-backed table"
+    }
+  ]
+}
