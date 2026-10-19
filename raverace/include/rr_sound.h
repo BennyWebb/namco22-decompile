@@ -36,3 +36,5 @@ void rr_audio_output_status(rr_audio_output_stats *out);
 void rr_audio_checkpoint(FILE *out, unsigned frame);
 
 #endif
+
+double rr_audio_resampler_ratio(void);

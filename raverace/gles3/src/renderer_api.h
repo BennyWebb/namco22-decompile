@@ -2,7 +2,7 @@
 #define ENG_GLES3_API_H
 #include "rr_presentation.h"
 #include "render_stats.h"
-double rr_p1_audio_ratio(void);
+double rr_audio_resampler_ratio(void);
 bool rr_p1_open(void);
 bool rr_p1_prepare(rr_presentation *s);
 bool rr_p1_draw(const rr_presentation *s,eng_render_stats *stats);

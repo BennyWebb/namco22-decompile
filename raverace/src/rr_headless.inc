@@ -69,9 +69,7 @@ static void headless_fatal(const char *why)
 {
     fprintf(stderr, "[HEADLESS] fatal before requested frame limit: %s\n", why);
     rr_headless_summary();
-#ifdef RR_THREADED_PRESENTATION
-    if(rr_presentation_enabled()) { rr_audio_close(); rr_gles3_close(); }
-#endif
+    headless_platform_close();
 }
 
 static bool headless_number(const char *text, uint32_t max, uint32_t *value)
@@ -90,30 +88,14 @@ static int rr_headless_main(int argc, char **argv)
     const char *rom_dir = "extracted";
     uint32_t audio_check_first=0,activity_first=0;
     bool frames_explicit=false;
-#ifdef RR_GLES3
-    if (!rr_gles3_options(&argc, argv)) return 2;
-    if (rr_gles3_interactive()) max_frames = INT32_MAX;
-#endif
+    if (!headless_platform_options(&argc, argv)) return 2;
+    if (headless_platform_interactive()) max_frames = INT32_MAX;
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--help")) {
-#ifdef RR_GLES3
-            fprintf(stderr, "Usage: rr_gles3 [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
-                            "                [--unpaced] [--diagnostic-colours] [--capture FILE.ppm --capture-frame N]\n"
-                            "                [--profile-simulation] [--sample-simulation FILE] [--simulation-profile-from N] [--skip-geometry-on-dropped-frames on|off] [--profile-stages] [--profile-memory] [--timing independent|coupled] [--render-hz N] [--texture-budget-mib N] [--interactive] [--es-input FILE] [--controller-db FILE] [--input-log]\n"
-                            "                [--render-mode MODE] [--vbo-upload frame|legacy] [--profile-from FRAME]\n"
-                            "                [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n"
-#ifdef RR_THREADED_PRESENTATION
-                            "                [--presentation-thread on|off] [--snapshot-reference] [--thread-profile FILE] [--thread-sync-profile]\n"
-#endif
-                            "                [--record-input FILE | --replay-input FILE] [--input-checkpoints FILE]\n"
-                            "                [--replay-checks on|off] [--replay-timing FILE]\n"
-                            "Quit: controller START+SELECT (SDL START+BACK), Escape, or frame limit.\n");
-#else
-            fprintf(stderr, "Usage: rr_headless [ROM_DIR] [--frames N] [--coin F] [--gas F] [--steer F:V] [--dump DIR]\n"
-                            "                   [--audio-checksum-from FRAME] [--c352-activity-from FRAME]\n"
-                            "                   [--record-input FILE | --replay-input FILE] [--input-checkpoints FILE]\n"
-                            "                   [--replay-checks on|off] [--replay-timing FILE]\n");
-#endif
+            fprintf(stderr,"Usage: rr_gles3 ROM_DIR [--frames N] [--interactive] [--audio on|off] [--overlay off|on]\n"
+              " [--replay-input FILE | --record-input FILE] [--input-checkpoints FILE] [--thread-profile FILE]\n"
+              " [--profile-simulation] [--simulation-profile-from N] [--es-input FILE] [--controller-db FILE]\n"
+              " Quit: START+SELECT, Escape, or frame limit.\n");
             return 0;
         }
         if(!strcmp(argv[i],"--replay-checks") && i+1<argc) {
@@ -128,7 +110,6 @@ static int rr_headless_main(int argc, char **argv)
             else replay_timing_path=argv[i];
             continue;
         }
-        if (!strcmp(argv[i], "--dump") && i + 1 < argc) { dump_dir = argv[++i]; continue; }
         uint32_t v;
         if ((!strcmp(argv[i],"--audio-checksum-from") || !strcmp(argv[i],"--c352-activity-from")) && i+1<argc) {
             const char *option=argv[i++];
@@ -159,18 +140,14 @@ invalid:
         fprintf(stderr, "Invalid/missing argument near %s; use --help\n", argv[i]);
         return 2;
     }
-#ifdef RR_GLES3
-    if (rr_gles3_interactive() && (n_test_coins || test_gas >= 0 || n_steer)) {
+    if (headless_platform_interactive() && (n_test_coins || test_gas >= 0 || n_steer)) {
         fprintf(stderr,"[INPUT] --interactive cannot be combined with scripted coin/gas/steer\n"); return 2;
     }
-#endif
     if(input_replay_path && !frames_explicit)max_frames=INT32_MAX;
     if ((input_record_path && input_replay_path) || (input_replay_path && (n_test_coins || test_gas>=0 || n_steer))) {
         fprintf(stderr,"[REPLAY] recording/replay mutually exclusive; replay cannot combine scripted inputs\n");return 2;
     }
-#ifdef RR_GLES3
-    if(input_replay_path && rr_gles3_interactive()){fprintf(stderr,"[REPLAY] playback excludes --interactive\n");return 2;}
-#endif
+    if(input_replay_path && headless_platform_interactive()){fprintf(stderr,"[REPLAY] playback excludes --interactive\n");return 2;}
     if(!replay_checks && (input_record_path || checkpoint_path)){fprintf(stderr,"[REPLAY] recording/checkpoints require checks on\n");return 2;}
     if(input_record_path || (input_replay_path && replay_checks) || checkpoint_path) {
         if(audio_check_first && audio_check_first!=1){fprintf(stderr,"[REPLAY] checksum must start at 1\n");return 2;}
@@ -196,10 +173,10 @@ invalid:
     if (!seed_ok) { fprintf(stderr, "[HEADLESS] invalid EEPROM seed: %s\n", seed); return 2; }
     if (!rr_load_program(rom_dir) || !rr_audio_init(rom_dir) ||
         !rr_sound_init(rom_dir) || !rr_hw_init(rom_dir)) return 2;
+    const char *gles3_seed=getenv("ENG_GLES3_INITIAL_EEPROM");
+    if(gles3_seed){FILE*f=fopen(gles3_seed,"rb");bool ok=f&&fread(g_rr.eeprom,1,sizeof g_rr.eeprom,f)==sizeof g_rr.eeprom&&fgetc(f)==EOF;if(f)fclose(f);if(!ok){fprintf(stderr,"[RECORD] invalid starting EEPROM\n");return 2;}}
     if (!rr_audio_diagnostics(audio_check_first,activity_first) || !replay_session_open(rom_dir)) return 2;
-#ifdef RR_GLES3
-    if (!rr_gl_init(rom_dir) || !rr_gles3_open()) return 2;
-#endif
+    if (!headless_platform_open(rom_dir)) return 2;
     memset(R, 0, sizeof R);
     RS4(REG_SP, rr_read(0, 4));
     set_sr(0x2700);
@@ -209,10 +186,7 @@ invalid:
     rd_init();
     rr_fatal_hook = headless_fatal;
     fprintf(stderr, "[HEADLESS] translated baseline; stop after %u frames\n", max_frames);
-#ifdef RR_GLES3
-    rr_memory_profile_range(rr_gles3_profile_from(),max_frames);
-    if (!rr_sim_start()) return 2;
-#endif
+    if (!headless_platform_start()) return 2;
     g_rr_game->entry();
     fprintf(stderr, "[HEADLESS] reset entry unexpectedly returned\n");
     return 1;

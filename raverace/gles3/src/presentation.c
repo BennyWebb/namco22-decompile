@@ -496,7 +496,7 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         double copy_cpu = stamp(CLOCK_THREAD_CPUTIME_ID);
         rr_presentation *snapshot = &slots[slot];
         snapshot->p1_sim_ms=(p1_sim_end-wall_last)*1000;snapshot->p1_block_ms=p1_block*1000;
-        snapshot->p1_audio_ratio=rr_p1_audio_ratio();rr_audio_output_stats p1_audio;rr_audio_output_status(&p1_audio);snapshot->p1_underruns=p1_audio.underruns;
+        snapshot->p1_audio_ratio=rr_audio_resampler_ratio();rr_audio_output_stats p1_audio;rr_audio_output_status(&p1_audio);snapshot->p1_underruns=p1_audio.underruns;
         snapshot->g1_main=(g_rr.wram[0x8da0]<<8)|g_rr.wram[0x8da1];snapshot->g1_sub=(g_rr.wram[0xa32e]<<8)|g_rr.wram[0xa32f];snapshot->g1_screen=(g_rr.wram[0xa332]<<8)|g_rr.wram[0xa333];snapshot->g1_course=(g_rr.wram[0xa046]<<8)|g_rr.wram[0xa047];
         snapshot->g1b_major=(g_rr.wram[0xa048]<<8)|g_rr.wram[0xa049];snapshot->gles3_tag=0; snapshot->frame = frame; snapshot->walk = walk;
         snapshot->direct_count = direct; snapshot->produced = now();

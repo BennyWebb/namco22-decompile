@@ -15,7 +15,7 @@ set_source_files_properties(${GENERATED}/rr_lifted.c PROPERTIES COMPILE_OPTIONS 
 set_source_files_properties(${GENERATED}/snd_driver.c PROPERTIES COMPILE_OPTIONS "-O1;-w")
 set_source_files_properties(${GENERATED}/rr_c25.c PROPERTIES COMPILE_OPTIONS "-O2;-w")
 set_source_files_properties(${GENERATED}/rr_c25.c ${GENERATED}/snd_driver.c PROPERTIES GENERATED TRUE)
-set(COMMON src/main.c src/memory.c src/scene.c src/presentation.c src/hud.c src/audio.c src/unsupported.c
+set(COMMON src/main.c ${RR_ROOT}/src/rr_mem.c src/scene.c src/presentation.c src/hud.c ${RR_ROOT}/src/rr_audio.c src/unsupported.c
  ${RR_ROOT}/src/rr_input_stream.c ${RR_ROOT}/src/rr_hw.c ${RR_ROOT}/src/rr_game.c
  ${RR_ROOT}/src/rr_env.c ${RR_ROOT}/src/rr_link.c ${RR_ROOT}/src/rr_dsp.c
  ${RR_ROOT}/src/rr_overlay.c ${RR_ROOT}/src/rr_sim_profile.c ${RR_ROOT}/src/snd/snd_board.c

@@ -34,6 +34,7 @@
 static int16_t ring[RING * 2];
 static atomic_uint r_head, r_tail;            /* written by producer / consumer */
 static SDL_AudioDeviceID dev;
+static double resampler_ratio=1,resampler_ratio_min=1,resampler_ratio_max=1;double rr_audio_resampler_ratio(void){return resampler_ratio;}
 static double rs_pos;                         /* resampler: position in input samples */
 static int16_t rs_prev[2];
 static float g_volume = 1.0f;
@@ -125,6 +126,7 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
     double adj = 1.0 + err * 0.005 * ((err > 1.0 || err < -1.0) ? 4 : 1);
     if (adj > 1.0 + lim) adj = 1.0 + lim;
     if (adj < 1.0 - lim) adj = 1.0 - lim;
+    resampler_ratio=adj;if(adj<resampler_ratio_min)resampler_ratio_min=adj;if(adj>resampler_ratio_max)resampler_ratio_max=adj;
     const double step = 85333.333 / OUT_HZ / adj;       /* input samples per output sample */
     while (rs_pos < n) {
         int i = (int)rs_pos; double f = rs_pos - i;
@@ -288,6 +290,7 @@ void rr_audio_close(void)
     }
 #if !defined(RR_HEADLESS) || defined(RR_GLES3)
     if (dev) {
+        fprintf(stderr,"[AUDIO-RESAMPLER] resampler_ratio_min=%.9f max=%.9f final=%.9f\n",resampler_ratio_min,resampler_ratio_max,resampler_ratio);
         SDL_CloseAudioDevice(dev); atomic_store(&output_active,false); dev=0;
         rr_audio_output_stats out; rr_audio_output_status(&out);
         fprintf(stderr,"[AUDIO-OUTPUT] underrun_samples=%u overrun_samples=%u latency_resets=%u queued_frames=%u\n",out.underruns,out.overruns,out.resets,out.queued);
