@@ -109,9 +109,16 @@ bool rr_hw_init(const char *rom_dir)
     if (!g_rr_game->eeprom) { const char *fe = getenv("RR_EEPROM_FILL"); memset(g_rr.eeprom, fe ? (int)strtol(fe, NULL, 0) : 0xFF, RR_EEPROM_SIZE); }   /* no default image: a blank EEPROM (MAME: all ones) the game initialises itself */
     else if (f) { if (fread(g_rr.eeprom, 1, RR_EEPROM_SIZE, f) != RR_EEPROM_SIZE) fprintf(stderr, "[HW] short eeprom\n"); fclose(f); }
     else fprintf(stderr, "[HW] no %s -- EEPROM blank\n", p);
-    rr_set_io_hooks(io_read, io_write);
+    /* io_read handles only device ranges; WRAM/mirror rejection is pure.
+     * Keep arbitrary/oracle hooks on rr_set_io_hooks (no bypass certification). */
+    rr_set_plain_wram_io_hooks(io_read, io_write);
     rr_link_init();                                     /* the C139 SCI link chip (cabinet network) */
-    if (!rr_dsp_init(rom_dir)) fprintf(stderr, "[HW] master DSP unavailable\n");
+    if (!rr_dsp_init(rom_dir)) {
+        fprintf(stderr, "[HW] master DSP unavailable\n");
+#ifdef RR_HEADLESS
+        return false;
+#endif
+    }
     const char *kf = getenv("RR_KEYCUS_FILE");      /* replay MAME's random keycus reads */
     if (kf && !(keycus_replay = fopen(kf, "r"))) fprintf(stderr, "[HW] cannot open %s\n", kf);
     return true;
@@ -240,7 +247,7 @@ void rr_hw_set_steering_motor(bool on)
 
 /* CABINET NUMBER is group 3 (EEPROM 0x2C0, backup 0x2E0; WRAM 0x10001060) byte 0:
  * rd_link_number (FUN_00026e24) reads it as & 7 for this cabinet's link id, and
- * LATCHES it into the link state -- A6W(0x11A0) and its *2/*16/*64 offsets
+ * LATCHES it into the link state -- A6W(0x11A0) and its 2x/16x/64x offsets
  * (0x1158/0x115A/0x115C; A6W(x) = WRAM 0x10008000+x) -- but only when the
  * settings reload runs (boot, test-menu exit). A post-boot change (the online
  * lobby's GO) must restate the latches itself or the game keeps staging the

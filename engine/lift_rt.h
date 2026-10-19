@@ -208,7 +208,11 @@ int  rr_irq_push(void);
 /* Time is counted in 68K instructions: every instruction spends one unit of
  * rr_budget; RR_POLL (calls, backward branches) hands over to the scheduler
  * once it runs out. */
-#ifdef RR_TRACE
+#if defined(RR_HEADLESS)
+extern uint64_t rr_headless_instructions;
+extern uint32_t rr_headless_pc;
+#define RR_INS(a) (rr_headless_pc = (a), ++rr_headless_instructions, --rr_budget)
+#elif defined(RR_TRACE)
 void rr_trace_ins(uint32_t pc);
 #define RR_INS(a) (rr_trace_ins(a), --rr_budget)
 #else

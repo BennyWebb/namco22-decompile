@@ -30,6 +30,10 @@ uint32_t  g_pointrom_words;
 static c71_t *m;
 static uint8_t ctrl;          /* last syscon 0x1A value */
 static bool running, irq_on, faulted, slave_on;
+#ifdef RR_HEADLESS
+uint64_t rr_headless_dsp_steps(void) { return m ? m->steps : 0; }
+bool rr_headless_dsp_fault(void) { return faulted; }
+#endif
 static uint16_t rbuf[0x1C];
 static int rbuf_n, upload_state;            /* MAME m_RenderBufSize, m_dsp_upload_state */
 
@@ -151,6 +155,17 @@ bool rr_dsp_render_done(void) { bool r = m && m->pdp_begins != seen_begins; if (
 uint16_t rr_dsp_pdp_base(void) { return m ? m->pdp_base : 0; }
 
 bool rr_dsp_slave_active(void) { return slave_on; }
+#ifdef RR_THREADED_PRESENTATION
+#include "rr_presentation.h"
+_Static_assert(C71_PTRAM_WORDS==RR_PRESENT_POINT_WORDS,"snapshot point RAM size");
+_Static_assert(C71_PTRAM_S22==0xf00000,"snapshot point RAM address");
+bool rr_dsp_copy_point(uint32_t *out)
+{
+    if (!m) return false;
+    memcpy(out,m->ptram,sizeof m->ptram);
+    return true;
+}
+#endif
 int32_t rr_dsp_pointram_read(uint32_t a)
 {
     if (m && a >= C71_PTRAM_S22 && a < C71_PTRAM_S22 + C71_PTRAM_WORDS)

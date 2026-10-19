@@ -62,6 +62,16 @@ typedef struct {
 /* Sort far to near; ties draw in REVERSE submission order (q->order), which
  * is MAME's radix bucket behaviour. tie_emit = 1: emission order (A/B only). */
 void eng_quad_sort(geo_quad *buf, int n, int tie_emit);
+/* Last sort's logical position -> backing slot. Identity in the default path.
+ * The GLES2 experiment retains emission-order storage until the next sort. */
+int eng_quad_index(int position);
+/* Optional coarse attribution, reset by each sort; subsets of scene/sort time. */
+typedef struct {
+    double keys_wall, keys_cpu, permutation_wall, permutation_cpu;
+    unsigned long long moved_bytes;
+    unsigned allocations;
+} eng_quad_sort_stats;
+const eng_quad_sort_stats *eng_quad_sort_statistics(void);
 
 void eng_draw_begin(void);          /* client vertex arrays on, and the viewport read for the batch */
 void eng_draw_resume(void);         /* arrays back on after a break in the same batch (the viewport has not changed) */

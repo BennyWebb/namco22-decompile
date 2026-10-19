@@ -72,6 +72,12 @@ static inline void vwr32(vaddr_t a, uint32_t v) { rr_write(a, 4, v); }
 typedef bool (*rr_io_read_fn)(vaddr_t a, int size, uint32_t *out);
 typedef bool (*rr_io_write_fn)(vaddr_t a, int size, uint32_t v);
 void rr_set_io_hooks(rr_io_read_fn r, rr_io_write_fn w);
+/* Certified board hook: WRAM/mirror rejection leaves *out and emulated state unchanged.
+ * Generic setters revoke certification; never use this for arbitrary hooks. */
+void rr_set_plain_wram_io_hooks(rr_io_read_fn r, rr_io_write_fn w);
+void rr_memory_profile_range(uint32_t first, uint32_t last);
+void rr_memory_profile_frame(uint32_t frame);
+void rr_memory_profile_report(void);
 
 bool rr_load_program(const char *rom_dir);       /* the four rv2_prg* chips */
 

@@ -1,0 +1,15 @@
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(KNULLI_HOST "$ENV{HOME}/dev/knulli-scarab/output/h700/host" CACHE PATH "H700 Buildroot host directory")
+set(CMAKE_C_COMPILER "${KNULLI_HOST}/bin/aarch64-buildroot-linux-gnu-gcc")
+set(CMAKE_SYSROOT "${KNULLI_HOST}/aarch64-buildroot-linux-gnu/sysroot")
+set(CMAKE_FIND_ROOT_PATH "${CMAKE_SYSROOT}")
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+# Keep pkg-config from resolving desktop SDL/graphics packages when cross compiling.
+set(ENV{PKG_CONFIG_PATH} "")
+set(ENV{PKG_CONFIG_SYSROOT_DIR} "${CMAKE_SYSROOT}")
+set(ENV{PKG_CONFIG_LIBDIR} "${CMAKE_SYSROOT}/usr/lib/pkgconfig:${CMAKE_SYSROOT}/usr/share/pkgconfig")

@@ -1,0 +1,45 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "desktop",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/desktop",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "gles3-host",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/gles3-host",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "RR_BUILD_GLES3": "ON"
+      }
+    },
+    {
+      "name": "knulli-h700",
+      "inherits": "gles3-host",
+      "binaryDir": "${sourceDir}/build/knulli-h700",
+      "toolchainFile": "${sourceDir}/platform/knulli-h700/toolchain.cmake"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "desktop",
+      "configurePreset": "desktop",
+      "jobs": 2
+    },
+    {
+      "name": "gles3-host",
+      "configurePreset": "gles3-host",
+      "jobs": 2
+    },
+    {
+      "name": "knulli-h700",
+      "configurePreset": "knulli-h700",
+      "jobs": 2
+    }
+  ]
+}

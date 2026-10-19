@@ -14,14 +14,18 @@ m377_exec() with the opcode as a constant -- folded by gcc to that instruction's
 semantics (engine/snd/m377_sem.h, the same source the oracle executes). The loop
 mirrors the oracle's m37710_run() exactly (64-cycle chunks, service, then
 execute) so the translation can be gated as equal to the oracle, cycle for
-cycle. A PC with no translation, or RAM code whose bytes are not the ROM's,
-TRAPS LOUDLY (the sound stops and says where) -- never silently skipped.
+cycle. Missing translations and changed guarded RAM trap loudly. The test-only
+interpreter is never linked into shipped builds. CE5B and CEF4 are ROM-resolved.
 """
-import sys, os, collections
+import sys, os, collections, argparse
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument("coverage",nargs="?",default="tools/gen/snd.cov")
+parser.add_argument("--out",default="build/generated/snd_driver.c")
+args=parser.parse_args()
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from snd_rom import source
 from m7700_decode import decode
-cov_path = sys.argv[1] if len(sys.argv) > 1 else 'tools/gen/snd.cov'
+cov_path = args.coverage
 
 ins = collections.defaultdict(dict)                 # pc -> {mx: len}
 for l in open(cov_path):
@@ -36,6 +40,8 @@ covered = sum(len(v) for v in ins.values())
 
 # ---- static walk: extend coverage along control flow with known M/X ----
 COND = {'BPL', 'BMI', 'BVC', 'BVS', 'BCC', 'BCS', 'BNE', 'BEQ', 'BBC', 'BBS'}
+# RTS can also dispatch through a pushed table target (C74 CE3F..CE50,
+# table CE5B; entry CE69 -> CECC). Those edges require interpreter coverage.
 STOP = {'RTS', 'RTL', 'RTI', 'STP', 'BRK', 'COP', 'UNK', 'PLP', 'PUL', 'WDM'}
 def successors(pc, mx):
     b, _ = source(pc, 6)
@@ -65,6 +71,20 @@ def successors(pc, mx):
         if ea == 'AL': out.append((int.from_bytes(b[1:4], 'little'), mx))
         return out
     return [(nxt, mx)]
+
+# ROM table dispatches ending in PUSH/RTS, rather than ordinary returns.
+# CE5B: ten arithmetic handlers (selector AND #$000F at CE3B).
+# CEF4: ten comparison handlers (AND #$000F at CEE6).
+# The tables end where their first handler begins; do not interpret its opcodes
+# as additional pointers for reserved selector values 10..15.
+for table, count in ((0xCE5B, 10), (0xCEF4, 10)):
+    raw, ram = source(table, count * 2)
+    assert not ram and len(raw) == count * 2
+    for k in range(count):
+        target = int.from_bytes(raw[k*2:k*2+2], 'little')
+        b, _ = source(target, 6)
+        assert b is not None and 0xC000 <= target < 0x10000
+        ins[target][0] = decode(b, 0)[2]
 
 work = [(pc, mx) for pc in ins for mx in ins[pc]]
 seen = set(work)
@@ -156,7 +176,7 @@ w('        uint64_t rem = end - c->cycles;')
 w('        run_chunk(c, c->cycles + (rem < 64 ? rem : 64));')
 w('    }')
 w('}')
-os.makedirs('gen', exist_ok=True)
-open('gen/snd_driver.c', 'w').write('\n'.join(out) + '\n')
+os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
+open(args.out, 'w').write('\n'.join(out) + '\n')
 print(f'translated {sum(len(v) for v in ins.values())} instructions at {len(ins)} addresses: {covered} executed by the oracle '
-      f'+ {static} reached statically; {nram} from RAM (guarded) -> gen/snd_driver.c')
+      f'+ {static} reached statically; {nram} from RAM (guarded) -> {args.out}')

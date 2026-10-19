@@ -84,3 +84,10 @@ __pycache__/
 /cybsled/screenshots/
 *.log
 *.ppm
+
+/raverace/build/
+/raverace/.cache/
+/raverace/gles3/.cache/
+
+__pycache__/
+*.pyc
