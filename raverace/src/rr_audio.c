@@ -18,6 +18,7 @@
 #include "rr_game.h"
 #include "c352.h"
 #include "rr_sound.h"
+#if !defined(RR_HEADLESS) || defined(RR_GLES3)
 #include <SDL.h>
 #include <stdatomic.h>
 #include <math.h>
@@ -52,9 +53,10 @@ static inline double soft_limit(double v)
     a = knee + room * (1.0 - 1.0 / (1.0 + (a - knee) / room));   /* approaches 32767, never passes */
     return v < 0 ? -a : a;
 }
-static uint32_t underruns;
+static atomic_uint underruns, overruns, latency_resets;
+static atomic_bool output_active;
 static atomic_int primed;
-static uint32_t per_sec_ur, cb_samples, latency_resets;           /* RR_AUDIOLOG: underruns per second of output */                     /* 0 until the ring first reaches TARGET: start-up silence is not an underrun */
+static uint32_t per_sec_ur, cb_samples;           /* RR_AUDIOLOG: underruns per second of output */                     /* 0 until the ring first reaches TARGET: start-up silence is not an underrun */
 
 static void audio_cb(void *u, Uint8 *stream, int len)
 {
@@ -92,9 +94,21 @@ bool rr_audio_output_open(void)
     dev = SDL_OpenAudioDevice(NULL, 0, &want, &have, 0);
     if (!dev) { fprintf(stderr, "[AUDIO] no audio device: %s\n", SDL_GetError()); return false; }
     if (getenv("RR_OUTPUT_GAIN")) { g_out_gain = atof(getenv("RR_OUTPUT_GAIN")); if (g_out_gain < 0) g_out_gain = 0; }
+    atomic_store(&r_head,0); atomic_store(&r_tail,0); atomic_store(&primed,0);
+    atomic_store(&underruns,0); atomic_store(&overruns,0); atomic_store(&latency_resets,0);
+    rs_pos=0; rs_prev[0]=rs_prev[1]=0;
+    atomic_store(&output_active,true);
     SDL_PauseAudioDevice(dev, 0);
-    fprintf(stderr, "[AUDIO] output %d Hz stereo, %d-sample buffer, gain x%.2f\n", have.freq, have.samples, g_out_gain);
+    fprintf(stderr, "[AUDIO] driver=%s output %d Hz stereo, %d-sample buffer, gain x%.2f\n", SDL_GetCurrentAudioDriver(), have.freq, have.samples, g_out_gain);
     return true;
+}
+void rr_audio_output_status(rr_audio_output_stats *out)
+{
+    unsigned t=atomic_load_explicit(&r_tail,memory_order_acquire);
+    unsigned h=atomic_load_explicit(&r_head,memory_order_acquire);
+    unsigned queued=h-t; /* Both counters can advance during this observation. */
+    *out=(rr_audio_output_stats){queued<=RING?queued:0,atomic_load(&underruns),
+        atomic_load(&overruns),atomic_load(&latency_resets),atomic_load(&output_active)};
 }
 void rr_audio_set_volume(int percent) { g_volume = (percent < 0 ? 0 : percent > 100 ? 100 : percent) / 100.0f; }
 
@@ -119,7 +133,7 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
             double v = soft_limit((a + (b - a) * f) * g_volume * g_out_gain);
             if (h - t < RING) ring[(h & (RING - 1)) * 2 + ch] = (int16_t)lrint(v);
         }
-        if (h - t < RING) h++;
+        if (h - t < RING) h++; else atomic_fetch_add(&overruns,1);
         rs_pos += step;
     }
     rs_pos -= n;
@@ -127,12 +141,57 @@ static void push_out(const int16_t *in4, int n)        /* in: n frames of the ch
     atomic_store_explicit(&r_head, h, memory_order_release);
 }
 
+#else
+/* Keep the C352 clocks/status, discard only host output. */
+static void push_out(const int16_t *samples, int n) { (void)samples; (void)n; }
+void rr_audio_output_status(rr_audio_output_stats *out) { memset(out,0,sizeof *out); }
+#endif
+
 static c352_t chip;
 static uint8_t *wave;
 static bool ready;
 static FILE *dump;
 static uint32_t dump_frames;
 static uint64_t acc;                         /* samples owed, x (59906 * 16) */
+extern uint32_t rr_frame;
+static uint32_t checksum_from, activity_from;
+static uint64_t checked_samples, checked_intervals;
+static uint64_t pcm_hash, voice_hash;
+#define FNV64_OFFSET UINT64_C(14695981039346656037)
+static uint64_t hash_byte(uint64_t h, uint8_t b) { return (h ^ b) * UINT64_C(1099511628211); }
+static uint64_t hash_u32(uint64_t h, uint32_t v)
+{
+    for (int b=3;b>=0;b--) h=hash_byte(h,(uint8_t)(v>>(b*8)));
+    return h;
+}
+static uint64_t hash_voices(uint64_t h)
+{
+    for (int j=0;j<32;j++) {
+        const c352_voice_t *v=&chip.voice[j];
+#define H(field) h=hash_u32(h,(uint32_t)v->field)
+        H(pos);H(counter);H(sample);H(last_sample);H(vol_f);H(vol_r);
+        for (int ch=0;ch<4;ch++) h=hash_u32(h,v->curr_vol[ch]);
+        H(freq);H(flags);H(wave_bank);H(wave_start);H(wave_end);H(wave_loop);
+#undef H
+    }
+    h=hash_u32(h,chip.random_state);h=hash_u32(h,chip.control);
+    h=hash_u32(h,(uint32_t)(acc>>32));return hash_u32(h,(uint32_t)acc);
+}
+bool rr_audio_diagnostics(uint32_t checksum_first, uint32_t activity_first)
+{
+    if (activity_first && !c352_profile_available()) {
+        fprintf(stderr,"[C352] activity requires RR_C352_VOICE_COUNTERS=ON\n");
+        return false;
+    }
+    checksum_from=checksum_first;activity_from=activity_first;
+    checked_samples=checked_intervals=0;pcm_hash=voice_hash=FNV64_OFFSET;
+    c352_profile_reset();c352_profile_enable(false);
+    return true;
+}
+static void activity_enable(void)
+{
+    if (activity_from) c352_profile_enable(rr_frame+1>=activity_from);
+}
 #define RATE_NUM  85333333ull                /* samples/s x 1000 */
 #define SLICE_DEN (59906ull * RR_SND_SLICES)  /* slices/s x 1000 */
 
@@ -170,12 +229,13 @@ bool rr_audio_init(const char *dir)
     return true;
 }
 
-void rr_audio_c352_write(unsigned word, uint16_t v) { if (ready) c352_write(&chip, word, v, 0xffff); }
+void rr_audio_c352_write(unsigned word, uint16_t v) { if (ready) { activity_enable();c352_write(&chip, word, v, 0xffff); } }
 uint16_t rr_audio_c352_read(unsigned word) { return ready ? c352_read(&chip, word) : 0; }
 
 void rr_audio_slice(void)
 {
     if (!ready) return;
+    activity_enable();
     acc += RATE_NUM;
     int n = (int)(acc / SLICE_DEN);
     acc -= (uint64_t)n * SLICE_DEN;
@@ -183,6 +243,16 @@ void rr_audio_slice(void)
     while (n > 0) {
         int k = n > 256 ? 256 : n;
         c352_generate(&chip, buf, k);
+        if (checksum_from && rr_frame+1>=checksum_from) {
+            for (int i=0;i<k*4;i++) {
+                uint16_t sample=(uint16_t)buf[i];
+                pcm_hash=hash_byte(pcm_hash,(uint8_t)sample);
+                pcm_hash=hash_byte(pcm_hash,(uint8_t)(sample>>8));
+            }
+            voice_hash=hash_u32(voice_hash,(uint32_t)k);
+            voice_hash=hash_voices(voice_hash);
+            checked_samples+=(unsigned)k;checked_intervals++;
+        }
         push_out(buf, k);
         if (dump) {
             for (int i = 0; i < k; i++) { fwrite(&buf[i * 4], 2, 2, dump); }
@@ -194,7 +264,42 @@ void rr_audio_slice(void)
 
 void rr_audio_close(void)
 {
-    if (dev) { SDL_CloseAudioDevice(dev); dev = 0; if (underruns) fprintf(stderr, "[AUDIO] %u output underrun samples\n", underruns); }
+    fprintf(stderr,"[C352] inactive_fastpath=%s counters=%s\n",
+        c352_inactive_fastpath_enabled()?"on":"off",c352_profile_available()?"on":"off");
+    if (checksum_from) fprintf(stderr,"[AUDIO-CHECK] from=%u samples=%llu intervals=%llu pcm_fnv1a64=%016llx voice_fnv1a64=%016llx final_fnv1a64=%016llx acc=%llu\n",
+        checksum_from,(unsigned long long)checked_samples,(unsigned long long)checked_intervals,
+        (unsigned long long)pcm_hash,(unsigned long long)voice_hash,
+        (unsigned long long)hash_voices(FNV64_OFFSET),(unsigned long long)acc);
+    if (activity_from) {
+        c352_profile_t p;c352_profile_get(&p);
+        fprintf(stderr,"[C352-ACTIVITY] from=%u intervals=%llu samples=%llu iterations=%llu active=%llu inactive=%llu mix_iterations=%llu zero_source_iterations=%llu active_zero_source=%llu activations=%llu deactivations=%llu keyon=%llu keyoff=%llu natural_ends=%llu\n",
+            activity_from,(unsigned long long)p.intervals,(unsigned long long)p.samples,
+            (unsigned long long)(p.samples*32),(unsigned long long)p.active_iterations,
+            (unsigned long long)(p.samples*32-p.active_iterations),
+            (unsigned long long)(c352_inactive_fastpath_enabled()?p.active_iterations:p.samples*32),
+            (unsigned long long)(p.samples*32-p.active_iterations+p.active_zero_source),(unsigned long long)p.active_zero_source,
+            (unsigned long long)p.activations,(unsigned long long)p.deactivations,
+            (unsigned long long)p.keyon,(unsigned long long)p.keyoff,(unsigned long long)p.natural_ends);
+        fprintf(stderr,"[C352-HIST] entry_active=");
+        for (int i=0;i<=32;i++) fprintf(stderr,"%s%llu",i?",":"",(unsigned long long)p.entry_active[i]);
+        fprintf(stderr," sample_active=");
+        for (int i=0;i<=32;i++) fprintf(stderr,"%s%llu",i?",":"",(unsigned long long)p.sample_active[i]);
+        fprintf(stderr,"\n");
+    }
+#if !defined(RR_HEADLESS) || defined(RR_GLES3)
+    if (dev) {
+        SDL_CloseAudioDevice(dev); atomic_store(&output_active,false); dev=0;
+        rr_audio_output_stats out; rr_audio_output_status(&out);
+        fprintf(stderr,"[AUDIO-OUTPUT] underrun_samples=%u overrun_samples=%u latency_resets=%u queued_frames=%u\n",out.underruns,out.overruns,out.resets,out.queued);
+    }
+#endif
     if (dump) { wav_header(dump, dump_frames); fclose(dump); dump = NULL;
                 fprintf(stderr, "[AUDIO] wrote %u samples (%.1f s)\n", dump_frames, dump_frames / 85333.0); }
+}
+
+void rr_audio_checkpoint(FILE *out,unsigned frame)
+{
+    fprintf(out,"{\"audio_frame\":%u,\"samples\":%llu,\"intervals\":%llu,\"pcm\":\"%016llx\",\"voices\":\"%016llx\",\"acc\":%llu}\n",
+        frame,(unsigned long long)checked_samples,(unsigned long long)checked_intervals,
+        (unsigned long long)pcm_hash,(unsigned long long)voice_hash,(unsigned long long)acc);
 }

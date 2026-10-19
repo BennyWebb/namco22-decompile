@@ -14,7 +14,9 @@
  *
  *   rr <rom_dir> [--frames N] [--dump DIR]    headless run
  */
+#ifndef RR_HEADLESS
 #include <SDL.h>
+#endif
 #include "rr_romzip.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,18 +26,28 @@
 #include "rr_dsp.h"
 #include "rr_video.h"
 #include "rr_gl.h"
+#ifndef RR_HEADLESS
 #include <GL/gl.h>
+#endif
 #include "rr_scene.h"
 #include "rr_lift_rt.h"
 #include "lift_cpu.h"
 #include "rr_game.h"
+#ifndef RR_HEADLESS
 #include "rr_ui.h"
+#endif
 #include "rr_lifted.h"
+#ifndef RR_HEADLESS
 #include "rr_input.h"
+#endif
 #include "rr_sound.h"
+#include "rr_input_stream.h"
 #include "rr_link.h"
+#ifndef RR_HEADLESS
 #include "rr_net.h"
+#endif
 
+#ifndef RR_HEADLESS
 bool rr_host_open(int scale);
 bool rr_host_frame(void);
 bool rr_host_paused(void);
@@ -51,11 +63,14 @@ int g_rr_gl = 1;
 static int gl_w = 640, gl_h = 480;             /* headless picture size (RR_RENDER_SIZE) */
 static bool gl_ok;                             /* a GL context and the video ROMs: there is a picture */
 
+#endif
 /* --perf: per-frame emulation time (68K + DSP + render, host sleep excluded) and
  * render time, reported as percentiles at exit. Quote these, never one run's fps. */
 #include <time.h>
+#ifndef RR_HEADLESS
 #include "tex_bake.h"
 #include "win_gpu.h"          /* Windows: run on the discrete GPU of a two-GPU laptop (Optimus / PowerXpress) */
+#endif
 static FILE *perflog;                         /* RR_PERFLOG=<file>: one line per frame -- see the perf block */
 static double perflog_texels;
 static int perf_on;
@@ -212,7 +227,9 @@ static void debug_boundary(void)
     if (debug_pending < 0 || rr_in_irq) return;
     if (!debug_test_at) {
         g_hw.inputs &= (uint16_t)~0x0400;               /* the Test switch ON (headless; a window's host keeps it on) */
+        #ifndef RR_HEADLESS
         if (windowed) rr_host_set_test(true);
+#endif
         debug_test_at = frame;
         debug_slot_was = rr_read(g_rr_game->task_slot, 4);
         return;
@@ -225,11 +242,35 @@ static void debug_boundary(void)
     fprintf(stderr, "[DEBUG] \"%s\" installed in the mode task at frame %u\n", d->name, frame);
 }
 
+#ifdef RR_HEADLESS
+#ifdef RR_GLES3
+#include "rr_gles3.h"
+#ifdef RR_THREADED_PRESENTATION
+#include "rr_presentation.h"
+#endif
+#include "rr_sim_profile.h"
+#endif
+#include "rr_headless.inc"
+#endif
+
 void rr_tick(void)
 {
+#ifdef RR_GLES3
+    rr_sim_stage sim_parent=rr_sim_enter(SIM_SCHEDULER);
+#endif
     rd_budget_out();
     rr_budget = polls_per_frame / SLICES;
-    if (rr_in_irq) { rr_budget = 1000; return; }      /* finish the handler first */
+    if (rr_in_irq) { rr_budget = 1000;
+#ifdef RR_GLES3
+        rr_sim_leave(sim_parent);
+#endif
+        return; }      /* finish the handler first */
+#ifdef RR_GLES3
+    double stage_start=rr_gles3_stage_begin();
+#endif
+#ifdef RR_GLES3
+    rr_sim_enter(SIM_DSP);
+#endif
     g_rr_in_vblank = vblank_slices > 0;
     if (vblank_slices > 0) {                       /* split the vblank slice at VBEND */
         long vb = DSP_STEPS_PER_FRAME * 45 / 525 - (long)(2 - vblank_slices) * (DSP_STEPS_PER_FRAME / SLICES);
@@ -242,13 +283,37 @@ void rr_tick(void)
         vblank_slices--;
     } else
         rr_dsp_run(DSP_STEPS_PER_FRAME / SLICES);
+#ifdef RR_GLES3
+    rr_gles3_stage_end(RR_STAGE_DSP,stage_start); stage_start=rr_gles3_stage_begin();
+    rr_sim_enter(SIM_SOUND);
+#endif
     rr_sound_slice();                              /* the sound program's share of this slice */
+#ifdef RR_GLES3
+    rr_gles3_stage_end(RR_STAGE_SOUND,stage_start); stage_start=rr_gles3_stage_begin();
+    rr_sim_enter(SIM_AUDIO);
+#endif
     rr_audio_slice();                              /* and the mixer's samples */
+#ifdef RR_GLES3
+    rr_gles3_stage_end(RR_STAGE_AUDIO,stage_start); stage_start=rr_gles3_stage_begin();
+    rr_sim_enter(SIM_SERIAL);
+#endif
     serial_acc += 100;                             /* 100 Hz serial pulse */
     if (serial_acc >= 60 * SLICES) { serial_acc -= 60 * SLICES; rr_dsp_serial(); }
-    if (++slice % SLICES) return;
+#ifdef RR_GLES3
+    rr_gles3_stage_end(RR_STAGE_SERIAL,stage_start);
+#endif
+#ifdef RR_GLES3
+    rr_sim_enter(SIM_SCHEDULER);
+#endif
+    if (++slice % SLICES) {
+#ifdef RR_GLES3
+        rr_sim_leave(sim_parent);
+#endif
+        return;
+    }
     frame++;
     sweep_tick();
+#ifndef RR_HEADLESS
     double tv0 = perf_on ? now_ms() : 0;
     if (g_rr_gl && gl_ok) {                        /* screen update at the end of the frame */
         rr_gl_prepare(rr_dsp_slave_active());
@@ -273,6 +338,38 @@ void rr_tick(void)
             perflog_texels = g_bake_texels;
         }
     }
+#elif defined(RR_GLES3)
+#ifdef RR_THREADED_PRESENTATION
+    if(rr_presentation_enabled()) {
+        rr_sim_pause(frame);
+        if(!rr_presentation_video(frame,rr_dsp_slave_active())) {
+            rr_headless_summary();rr_audio_close();rr_gles3_close();
+            exit(rr_gles3_failed()?2:0);
+        }
+    } else {
+#endif
+    bool geometry;
+    if (!rr_gles3_prepare_begin(frame, &geometry)) {
+        rr_headless_summary(); rr_audio_close(); rr_gles3_close();
+        exit(rr_gles3_failed() ? 2 : 0);
+    }
+    rr_gl_prepare_gles2(rr_dsp_slave_active(), geometry);
+    int count; const geo_quad *quads = rr_gles3_quads(&count);
+    float background[3]; rr_gles3_background(background);
+    if (!rr_gles3_frame(frame, quads, count, background)) {
+        rr_headless_summary();
+        rr_audio_close();
+        rr_gles3_close();
+        exit(rr_gles3_failed() ? 2 : 0);
+    }
+#ifdef RR_THREADED_PRESENTATION
+    }
+#endif
+    rr_sim_resume(frame+1);
+#else
+    rr_scene_frame(rr_dsp_slave_active());
+    rr_scene_consume(); /* discard display output; retain board/DSP handshakes */
+#endif
     for (int c = 0; c < n_test_coins; c++) {       /* scripted inputs for headless captures */
         if (frame == (uint32_t)test_coins[c]) g_hw.inputs &= (uint16_t)~0x1000;
         if (frame == (uint32_t)test_coins[c] + 6) g_hw.inputs |= 0x1000;
@@ -288,7 +385,16 @@ void rr_tick(void)
               pa[np] = a; ps[np] = s; pv[np] = v; np++; e = q + n; if (*e == ',') e++; else break; } }
       for (int i = 0; i < np; i++) if (frame >= pf[i] && frame <= pt[i]) rr_write(pa[i], ps[i], pv[i]); }
     for (int i = 0; i < n_steer; i++) if (frame >= (uint32_t)test_steer[i].at) g_hw.steer = (uint16_t)test_steer[i].value;
+    /* Interactive input lands at the same frame boundary as desktop controls. */
+#ifdef RR_GLES3
+    if(!rr_gles3_record_exit_pending())rr_gles3_apply_input();
+#endif
+#ifdef RR_HEADLESS
+    if(replay_session)rr_input_frame(frame);
+    if(replay_session && !rr_input_stream_ok()){fprintf(stderr,"[REPLAY] input stream error\n");exit(2);}
+#endif
     for (int i = 0; i < n_adc; i++) if (frame >= (uint32_t)test_adc[i].at) g_hw.adc[test_adc[i].idx & 3] = (uint8_t)test_adc[i].value;
+#ifndef RR_HEADLESS
     if (windowed) {
         if (frame % 120 == 0) rr_hw_eeprom_save();     /* the test menu's settings and the records, once the game has changed them */
         do {
@@ -320,11 +426,24 @@ void rr_tick(void)
         else if (!g_rr_gl) rr_video_write_ppm(p);
 #endif
     }
+#endif
+#ifdef RR_GLES3
+    stage_start=rr_gles3_stage_begin();
+#endif
+#ifdef RR_GLES3
+    rr_sim_enter(SIM_BOARD);
+#endif
     vblank_slices = 2;
     rr_dsp_vblank();
     if (!rr_env_active()) rr_hw_vblank();      /* (a trace oracle refreshes at MAME's own vblank interrupt: rr_env.c) */
+#ifndef RR_HEADLESS
     rr_net_poll();                       /* online play: peer FRAMEs into the link queue before the poll injects one */
+#endif
     rr_link_poll();                      /* a received link packet's SCI IRQ lands at this frame edge */
+#ifdef RR_GLES3
+    rr_gles3_stage_end(RR_STAGE_IO,stage_start);
+    rr_sim_enter(SIM_IRQ);
+#endif
     if (!rr_env_active()) {                  /* a trace oracle lands the interrupts itself */
         rr_deliver_irqs(rr_hw_irq_level);
         /* online: the other pending rivals' packets, each through the game's own SCI handler (offline nothing is pending) */
@@ -334,10 +453,15 @@ void rr_tick(void)
             rr_deliver_irqs(rr_hw_irq_level);
         }
     }
+#ifdef RR_GLES3
+    rr_sim_enter(SIM_SCHEDULER);
+#endif
     /* a Debug-menu launch leaves the lifted call stack here (never returns if one is pending): AFTER the vblank interrupt,
      * whose handler rewinds the program's cooperative task list (Ace Driver: the pointer at A6-0x7FD0) -- launched before it,
      * the screen's first yield (0x4C6E) read past the end of the list and jumped to 0 */
+#ifndef RR_HEADLESS
     debug_boundary();
+#endif
     if (dump_dir) {             /* RR_DUMP_EVERY=n (default 60), RR_DUMP_FROM=f: dump cadence */
         static unsigned every, from; static int init;
         if (!init) { const char *e = getenv("RR_DUMP_EVERY"), *f = getenv("RR_DUMP_FROM");
@@ -349,14 +473,56 @@ void rr_tick(void)
                 frame, rr_n_traps, g_rr.n_unmapped, g_rr.n_romwrite, rr_n_irq[1], rr_n_irq[2], rr_n_irq[3], rr_n_irq[4], rr_n_irq[5], rr_n_irq[6], rr_n_irq[7],
                 g_hw.irq_enabled, (unsigned)get_sr());
     if (frame % 60 == 0) { char b[256]; rr_dsp_debug(b, sizeof b); fprintf(stderr, "     %s\n", b); }
+#ifdef RR_HEADLESS
+#ifdef RR_GLES3
+    /* Finish a recording's last tick instead of terminating inside input polling. */
+    if(rr_gles3_record_exit_pending())max_frames=frame;
+#endif
+    /* Optional per-tick audio evidence, independent of the historical sidecar. */
+    { static FILE *audio_reference; static bool opened;
+      if (!opened) {
+        const char *p=getenv("ENG_SOUND_REFERENCE"); opened=true;
+        if (p && *p) { audio_reference=fopen(p,"wx"); if(!audio_reference){perror(p);exit(2);} }
+      }
+      if(audio_reference) { rr_audio_checkpoint(audio_reference,frame);
+        if(fflush(audio_reference)){perror("audio reference");exit(2);} }
+    }
+    completed_replay_frame=frame;
+    if(replay_timing_file) {
+        struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);
+        fprintf(replay_timing_file,"%u,%.9f\n",frame,t.tv_sec+t.tv_nsec/1e9);
+        if(ferror(replay_timing_file))exit(2);
+    }
+    if(checkpoint_file && (frame%300==0 || frame==max_frames)) {
+        rr_headless_state(checkpoint_file);
+        rr_replay_board_checkpoint(checkpoint_file);
+        rr_audio_checkpoint(checkpoint_file,frame);
+        if(ferror(checkpoint_file)){fprintf(stderr,"[REPLAY] checkpoint write failed\n");exit(2);}
+    }
+#endif
     if (frame >= max_frames) {
         dump_state();
         perf_report();
+#ifndef RR_HEADLESS
         rr_input_record_stop();
+#else
+        rr_headless_summary();
+#endif
         rr_audio_close();
+#ifdef RR_GLES3
+        rr_gles3_close();
+        if (rr_gles3_failed()) exit(2);
+#endif
         fprintf(stderr, "[RR] stop at frame %u, %u traps\n", frame, rr_n_traps);
+#ifdef RR_HEADLESS
+        exit(rr_n_traps || rr_headless_dsp_fault() || rr_headless_sound_fault() ? 3 : 0);
+#else
         exit(rr_n_traps ? 3 : 0);
+#endif
     }
+#ifdef RR_GLES3
+    rr_sim_leave(sim_parent);
+#endif
 }
 
 #ifdef _WIN32
@@ -364,6 +530,9 @@ void rr_win_startup(void);          /* src/rr_win.c */
 #endif
 int main(int argc, char **argv)
 {
+#ifdef RR_HEADLESS
+    return rr_headless_main(argc, argv);
+#else
 #ifdef _WIN32
     rr_win_startup();               /* the program's folder, raveracer.log, DPI */
 #endif
@@ -537,4 +706,5 @@ int main(int argc, char **argv)
     g_rr_game->entry();                         /* entry_reset (this game's reset PC): never returns */
     fprintf(stderr, "[RR] entry_reset returned?!\n");
     return 1;
+#endif
 }

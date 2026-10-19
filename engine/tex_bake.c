@@ -89,6 +89,10 @@ uint8_t texture_pen_lookup(int u, int v, int texbank) {
     return g_texture_data[pixel_offset];
 }
 
+#ifdef RR_TEXTURE_TILE_RUNS
+#include "texture_tile_runs.inc"
+#endif
+
 /* When set, every texel is opaque and pen 0 resolves through the palette
  * like any other pen. This is what the hardware polygon path does: the
  * reference pixel chain (pc_raster_model.py) is
@@ -907,6 +911,12 @@ static GLuint bake_impl(int min_u, int min_v, int range_u, int range_v,
         int vrow = (v & 0xFFF0) << 4;            /* tilemap row base */
         int local_y0 = v & 0xF;
         uint8_t *dst = bake_dst + (size_t)py * bake_stride;
+#ifdef RR_TEXTURE_TILE_RUNS
+        if (!g_tex_pow2sample && !atlas_on() && tmap && tdata) {
+            texture_decode_tile_runs(dst,bw,min_u,step_u,vrow,local_y0,lut,cm_offset,cm_shift,cm_mask);
+            continue;
+        }
+#endif
         int last_idx = -1; uint32_t tile = 0; int attr = 0;
         for (int px = 0; px < bw; px++) {
             uint8_t fetch = 0;

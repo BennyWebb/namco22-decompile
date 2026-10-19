@@ -30,7 +30,7 @@ int g_cfg_ffb_strength = 100, g_cfg_ffb_invert = 0;   /* the wheel motor on a fo
 int g_cfg_fullscreen = 0, g_cfg_scale = 2, g_cfg_scaling = 0;
 /* display, matching Prop Cycle's Display menu: window mode 0 windowed / 1 desktop
  * fullscreen / 2 exclusive (-1 = not set: follow `fullscreen`); the RENDER size
- * (0x0 = native, the window's own pixels; 640x480 = the board, the default);
+ * (0x0 = gles3, the window's own pixels; 640x480 = the board, the default);
  * widescreen; and the picture aspect when widescreen is off (0 stretch, 1 4:3,
  * 2 8:7, 3 16:9) */
 int g_cfg_draw = 0;          /* draw distance level 0..3 (rr_host_set_draw) */
@@ -121,7 +121,7 @@ void rr_input_load(const char *path)
         if (!strcmp(k, "fullscreen")) { g_cfg_fullscreen = atoi(v) ? 1 : 0; continue; }
         if (!strcmp(k, "window_mode")) { int x = atoi(v); if (x >= 0 && x <= 2) g_cfg_winmode = x; continue; }
         if (!strcmp(k, "resolution")) { int w, h;
-            if (!strcmp(v, "native")) { g_cfg_res_w = g_cfg_res_h = 0; }
+            if (!strcmp(v, "gles3")) { g_cfg_res_w = g_cfg_res_h = 0; }
             else if (sscanf(v, "%dx%d", &w, &h) == 2 && w >= 320 && h >= 240) { g_cfg_res_w = w; g_cfg_res_h = h; }
             continue; }
         if (!strcmp(k, "frame_rate")) { g_cfg_fps = atoi(v); continue; }
@@ -203,7 +203,7 @@ bool rr_input_write(const char *path)
     fprintf(f, "pad_deadzone = %d  # of 32767\n", g_pad_deadzone);
     fprintf(f, "fullscreen = 0      # F11 / Alt+Enter toggle\nwindow_scale = 2    # 1..4 x 640x480\n"
                "window_mode = 0     # 0 windowed | 1 fullscreen (desktop) | 2 fullscreen (exclusive)\n"
-               "resolution = 640x480  # render size: 640x480 (the board) | native (window) | WxH\n"
+               "resolution = 640x480  # render size: 640x480 (the board) | gles3 (window) | WxH\n"
                "widescreen = 0      # 1: fill a wide window with more track at the sides\n"
                "draw_distance = original  # original | far | farther | maximum: track pieces drawn ahead\n"
                "aspect = 4:3        # widescreen off: stretch | 4:3 | 8:7 | 16:9\n"
@@ -251,68 +251,10 @@ bool rr_input_set_option(const char *path, const char *key, const char *val)
     return true;
 }
 
-/* ---------------------------------------------------------- recorder ---- */
-static FILE *rec_f, *rep_f;
-static uint32_t rep_next_frame = UINT32_MAX;
-static unsigned rep_in, rep_st, rep_gas, rep_br;
-static uint16_t last[4];
-static bool rec_first;
-
-static void rep_read(void)
-{
-    char line[160];
-    rep_next_frame = UINT32_MAX;
-    while (rep_f && fgets(line, sizeof line, rep_f))          /* skip '#' comments and blank lines */
-        if (sscanf(line, " F %u %x %x %x %x", &rep_next_frame, &rep_in, &rep_st, &rep_gas, &rep_br) == 5) return;
-        else rep_next_frame = UINT32_MAX;
-}
-
-bool rr_input_replay_open(const char *path)
-{
-    rep_f = fopen(path, "r");
-    if (!rep_f) { fprintf(stderr, "[INPUT] cannot open %s\n", path); return false; }
-    rep_read();
-    if (rep_next_frame == UINT32_MAX) { fprintf(stderr, "[INPUT] %s holds no input events\n", path); return false; }
-    fprintf(stderr, "[INPUT] replaying %s\n", path);
-    return true;
-}
-bool rr_input_replaying(void) { return rep_f != NULL; }
-
-bool rr_input_record_start(const char *path)
-{
-    if (rec_f) return true;
-    rec_f = fopen(path, "w");
-    if (!rec_f) { fprintf(stderr, "[INPUT] cannot write %s\n", path); return false; }
-    fprintf(rec_f, "# %s input recording: F frame inputs steer gas brake (hex), on change\n", g_rr_game->title);
-    rec_first = true;
-    fprintf(stderr, "[INPUT] recording to %s\n", path);
-    return true;
-}
-void rr_input_record_stop(void)
-{
-    if (rec_f) { fclose(rec_f); rec_f = NULL; fprintf(stderr, "[INPUT] recording stopped\n"); }
-}
-bool rr_input_recording(void) { return rec_f != NULL; }
-
-/* once per frame, after the host has polled: replay overrides, recorder logs */
-void rr_input_frame(uint32_t frame)
-{
-    if (rep_f) {
-        while (rep_next_frame <= frame) {
-            g_hw.inputs = (uint16_t)rep_in; g_hw.steer = (uint16_t)rep_st;
-            g_hw.gas = (uint16_t)rep_gas; g_hw.brake = (uint16_t)rep_br;
-            rep_read();
-        }
-    }
-    if (rec_f) {
-        uint16_t cur[4] = { g_hw.inputs, g_hw.steer, g_hw.gas, g_hw.brake };
-        if (rec_first || memcmp(cur, last, sizeof cur)) {
-            fprintf(rec_f, "F %u %04X %03X %03X %03X\n", frame, cur[0], cur[1], cur[2], cur[3]);
-            memcpy(last, cur, sizeof cur);
-            rec_first = false;
-        }
-    }
-}
+/* Compile the same SDL-free stream implementation here for desktop games.
+ * Other System22 games already build rr_input.c; their build lists stay valid. */
+#include <limits.h>
+#include "rr_input_stream.inc"
 
 /* the menu's Controls page: an action's name, and binding one key to it
  * (replaces the action's keys, keeps its pad button, and saves the line) */

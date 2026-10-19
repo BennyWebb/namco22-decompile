@@ -42,11 +42,6 @@ extern char g_joy_button_guid[RR_ACT_N][40];
 void rr_input_load(const char *path);          /* defaults, then the file if present */
 bool rr_input_write(const char *path);         /* write the defaults as a template */
 
-bool rr_input_replay_open(const char *path);
-bool rr_input_replaying(void);
-bool rr_input_record_start(const char *path);
-void rr_input_record_stop(void);
-bool rr_input_recording(void);
-void rr_input_frame(uint32_t frame);           /* apply replay / log recording */
+#include "rr_input_stream.h"
 
 #endif

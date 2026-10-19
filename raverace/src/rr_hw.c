@@ -109,9 +109,16 @@ bool rr_hw_init(const char *rom_dir)
     if (!g_rr_game->eeprom) { const char *fe = getenv("RR_EEPROM_FILL"); memset(g_rr.eeprom, fe ? (int)strtol(fe, NULL, 0) : 0xFF, RR_EEPROM_SIZE); }   /* no default image: a blank EEPROM (MAME: all ones) the game initialises itself */
     else if (f) { if (fread(g_rr.eeprom, 1, RR_EEPROM_SIZE, f) != RR_EEPROM_SIZE) fprintf(stderr, "[HW] short eeprom\n"); fclose(f); }
     else fprintf(stderr, "[HW] no %s -- EEPROM blank\n", p);
-    rr_set_io_hooks(io_read, io_write);
+    /* io_read handles only device ranges; WRAM/mirror rejection is pure.
+     * Keep arbitrary/oracle hooks on rr_set_io_hooks (no bypass certification). */
+    rr_set_plain_wram_io_hooks(io_read, io_write);
     rr_link_init();                                     /* the C139 SCI link chip (cabinet network) */
-    if (!rr_dsp_init(rom_dir)) fprintf(stderr, "[HW] master DSP unavailable\n");
+    if (!rr_dsp_init(rom_dir)) {
+        fprintf(stderr, "[HW] master DSP unavailable\n");
+#ifdef RR_HEADLESS
+        return false;
+#endif
+    }
     const char *kf = getenv("RR_KEYCUS_FILE");      /* replay MAME's random keycus reads */
     if (kf && !(keycus_replay = fopen(kf, "r"))) fprintf(stderr, "[HW] cannot open %s\n", kf);
     return true;

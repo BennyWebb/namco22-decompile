@@ -11,7 +11,76 @@ rr_sys_t g_rr;
 
 static rr_io_read_fn  s_io_r;
 static rr_io_write_fn s_io_w;
-void rr_set_io_hooks(rr_io_read_fn r, rr_io_write_fn w) { s_io_r = r; s_io_w = w; }
+static bool s_wram_plain;
+void rr_set_io_hooks(rr_io_read_fn r, rr_io_write_fn w)
+{ s_io_r = r; s_io_w = w; s_wram_plain = false; }
+void rr_set_plain_wram_io_hooks(rr_io_read_fn r, rr_io_write_fn w)
+{ rr_set_io_hooks(r,w); s_wram_plain = true; }
+
+#ifdef RR_MEMORY_READ_COUNTERS
+static struct { uint64_t widths[4], regions[5], hits, general_paths, callbacks; } read_stats;
+static uint32_t read_from=UINT32_MAX, read_to, read_frame;
+static bool count_reads;
+#define READ_COUNT(field) do { if(count_reads) read_stats.field++; } while(0)
+#define READ_IO(a,n,p) ((count_reads ? (++read_stats.callbacks,0) : 0),s_io_r(a,n,p))
+static void count_read(vaddr_t a,int size)
+{
+    if(!count_reads) return;
+    read_stats.widths[size==1?0:size==2?1:size==4?2:3]++;
+    unsigned bucket=a<RR_ROM_SIZE?0:
+        (a & 0xF7FE0000u)==0x10000000u?1:
+        a>=0x70000000u && a<0x70000000u+RR_POLY_WORDS*4?2:
+        (a>=0x20000000u && a<0x20000010u) ||
+        (a>=0x20020000u && a<0x20020010u) ||
+        (a>=0x50000000u && a<0x5000000cu)?3:4;
+    read_stats.regions[bucket]++;
+}
+#else
+#define READ_COUNT(field) ((void)0)
+#define READ_IO(a,n,p) s_io_r(a,n,p)
+#endif
+void rr_memory_profile_range(uint32_t first,uint32_t last)
+{
+#ifdef RR_MEMORY_READ_COUNTERS
+    read_from=first;read_to=last;memset(&read_stats,0,sizeof read_stats);
+    count_reads=read_frame>=first && read_frame<=last;
+#else
+    (void)first;(void)last;
+#endif
+}
+void rr_memory_profile_frame(uint32_t frame)
+{
+#ifdef RR_MEMORY_READ_COUNTERS
+    read_frame=frame;count_reads=frame>=read_from && frame<=read_to;
+#else
+    (void)frame;
+#endif
+}
+void rr_memory_profile_report(void)
+{
+#ifdef RR_SPLIT_MEMORY_READER
+    fprintf(stderr,"[MEM-READER] implementation=split\n");
+#elif defined(RR_FAST_MEMORY_READS)
+    fprintf(stderr,"[MEM-READER] implementation=existing\n");
+#else
+    fprintf(stderr,"[MEM-READER] implementation=original\n");
+#endif
+#ifdef RR_FAST_MEMORY_READS
+    const char *fast="on";
+#else
+    const char *fast="off";
+#endif
+#ifdef RR_MEMORY_READ_COUNTERS
+    fprintf(stderr,"[MEM-READS] fast=%s counters=on from=%u to=%u byte=%llu word=%llu long=%llu other_width=%llu ROM=%llu WRAM=%llu POLY=%llu IO_bucket=%llu other_bucket=%llu hits=%llu general_paths=%llu callbacks=%llu\n",
+        fast,read_from,read_to,(unsigned long long)read_stats.widths[0],(unsigned long long)read_stats.widths[1],
+        (unsigned long long)read_stats.widths[2],(unsigned long long)read_stats.widths[3],
+        (unsigned long long)read_stats.regions[0],(unsigned long long)read_stats.regions[1],
+        (unsigned long long)read_stats.regions[2],(unsigned long long)read_stats.regions[3],(unsigned long long)read_stats.regions[4],
+        (unsigned long long)read_stats.hits,(unsigned long long)read_stats.general_paths,(unsigned long long)read_stats.callbacks);
+#else
+    fprintf(stderr,"[MEM-READS] fast=%s counters=off\n",fast);
+#endif
+}
 
 /* A big-endian byte region: returns the base and the byte offset, or NULL. */
 static uint8_t *region(vaddr_t a, uint32_t *off, uint32_t *len, bool *ro)
@@ -82,8 +151,54 @@ void rd_dict_byte(uint8_t v);
 #ifdef RR_TRACE
 void (*rr_read_probe)(vaddr_t, int);                  /* the trace oracle (engine/lift_env.c): sees every read */
 #endif
+#if defined(RR_SPLIT_MEMORY_READER) && defined(RR_FAST_MEMORY_READS)
+/* GCC 13.3 at -O3 inlines the plain split and recreates the 112-byte frame.
+ * Preserve this boundary, without marking ordinary ROM/device reads cold. */
+static uint32_t rr_read_general_path(vaddr_t a, int size) __attribute__((noinline));
+#endif
 uint32_t rr_read(vaddr_t a, int size)
 {
+#ifdef RR_MEMORY_READ_COUNTERS
+    count_read(a,size);
+#endif
+#ifdef RR_FAST_MEMORY_READS
+    /* Precisely the two original 128-KiB WRAM windows. No extra aliases.
+     * Unsupported/checker/custom-hook/boundary cases retain original ordering. */
+    if((a & 0xF7FE0000u)==0x10000000u &&
+       (size==1 || size==2 || size==4) &&
+       (uint32_t)size<=RR_WRAM_SIZE-(a & 0x07FFFFFFu) &&
+       (!s_io_r || s_wram_plain) && !rd_journal_on && !rd_read_log
+#ifdef RR_TRACE
+       && !rr_read_probe
+#endif
+       ) {
+        const uint8_t *p=g_rr.wram+(a & 0x07FFFFFFu);
+        READ_COUNT(hits);
+        if(size==1) return *p;
+        if(size==2) {
+            uint16_t value;memcpy(&value,p,sizeof value);
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+            value=__builtin_bswap16(value);
+#endif
+            return value;
+        }
+        uint32_t value;memcpy(&value,p,sizeof value);
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+        value=__builtin_bswap32(value);
+#endif
+        return value;
+    }
+#endif
+#if defined(RR_SPLIT_MEMORY_READER) && defined(RR_FAST_MEMORY_READS)
+    return rr_read_general_path(a, size);
+}
+
+/* Keep the original callback/checker/mapping sequence in one place. The common
+ * WRAM entry needs none of its address-taken locals or callback saved state. */
+static uint32_t rr_read_general_path(vaddr_t a, int size)
+{
+#endif
+    READ_COUNT(general_paths);
     uint32_t v = 0;
 #ifdef RR_TRACE
     if (rr_read_probe) rr_read_probe(a, size);
@@ -92,7 +207,7 @@ uint32_t rr_read(vaddr_t a, int size)
         uint32_t o_, l_; bool r_;
         if (!region(a, &o_, &l_, &r_)) {           /* an I/O read during a check (src/rd) */
             if (rd_ior_replay) return rd_ior_serve(a, size);   /* the readable run: the lifted run's value */
-            if (s_io_r(a, size, &v)) {                          /* the lifted run: real, once, logged */
+            if (READ_IO(a, size, &v)) {                          /* the lifted run: real, once, logged */
                 if (rd_io_written) rd_io_touched = 1;           /* a captured write came first */
                 rd_ior_log(a, size, v);
                 return v;
@@ -100,7 +215,7 @@ uint32_t rr_read(vaddr_t a, int size)
             rd_ior_log(a, size, 0);        /* unmapped (a fuzzed pointer): logged too, reads 0 below */
         }
     }
-    if (s_io_r && s_io_r(a, size, &v)) return v;
+    if (s_io_r && READ_IO(a, size, &v)) return v;
     if (poly_access(a, size, false, &v)) return v;
     uint32_t off, len; bool ro;
     uint8_t *m = region(a, &off, &len, &ro);

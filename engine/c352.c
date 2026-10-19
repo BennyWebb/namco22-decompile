@@ -2,6 +2,52 @@
 #include "c352.h"
 #include <string.h>
 
+#ifdef C352_VOICE_COUNTERS
+static c352_profile_t profile;
+static bool profile_on;
+#define COUNT(field) do { if (profile_on) profile.field++; } while (0)
+#else
+#define COUNT(field) ((void)0)
+#endif
+bool c352_profile_available(void)
+{
+#ifdef C352_VOICE_COUNTERS
+    return true;
+#else
+    return false;
+#endif
+}
+void c352_profile_enable(bool enabled)
+{
+#ifdef C352_VOICE_COUNTERS
+    profile_on = enabled;
+#else
+    (void)enabled;
+#endif
+}
+void c352_profile_reset(void)
+{
+#ifdef C352_VOICE_COUNTERS
+    memset(&profile, 0, sizeof profile);
+#endif
+}
+void c352_profile_get(c352_profile_t *out)
+{
+#ifdef C352_VOICE_COUNTERS
+    *out = profile;
+#else
+    memset(out, 0, sizeof *out);
+#endif
+}
+bool c352_inactive_fastpath_enabled(void)
+{
+#ifdef C352_INACTIVE_FASTPATH
+    return true;
+#else
+    return false;
+#endif
+}
+
 static uint8_t rom_read_byte(const c352_t *c, uint32_t addr)
 {
     addr &= 0xFFFFFF; /* device_rom_interface<24> */
@@ -34,6 +80,10 @@ void c352_init(c352_t *c, const uint8_t *rom, uint32_t rom_size)
 
 void c352_reset(c352_t *c)
 {
+#ifdef C352_VOICE_COUNTERS
+    if (profile_on) for (int j=0;j<32;j++)
+        if (c->voice[j].flags & C352_FLG_BUSY) profile.deactivations++;
+#endif
     memset(c->voice, 0, sizeof(c->voice));
     c->random_state = 0x1234;
     c->control = 0;
@@ -81,6 +131,12 @@ void c352_write(c352_t *c, uint32_t offset, uint16_t data, uint16_t mem_mask)
         /* COMBINE_DATA: *var = (*var & ~mem_mask) | (data & mem_mask) */
         uint16_t cur = c352_read(c, offset);
         uint16_t newval = (uint16_t)((cur & ~mem_mask) | (data & mem_mask));
+#ifdef C352_VOICE_COUNTERS
+        if (offset % 8 == 3) {
+            if (!(cur & C352_FLG_BUSY) && (newval & C352_FLG_BUSY)) COUNT(activations);
+            if ((cur & C352_FLG_BUSY) && !(newval & C352_FLG_BUSY)) COUNT(deactivations);
+        }
+#endif
         reg_store(&c->voice[offset / 8], offset % 8, newval);
     } else if (offset == 0x200) {
         c->control = (uint16_t)((c->control & ~mem_mask) | (data & mem_mask));
@@ -90,6 +146,8 @@ void c352_write(c352_t *c, uint32_t offset, uint16_t data, uint16_t mem_mask)
         for (int i = 0; i < 32; i++) {
             c352_voice_t *v = &c->voice[i];
             if (v->flags & C352_FLG_KEYON) {
+                COUNT(keyon);
+                if (!(v->flags & C352_FLG_BUSY)) COUNT(activations);
                 v->pos = ((uint32_t)v->wave_bank << 16) | v->wave_start;
 
                 v->sample = 0;
@@ -103,6 +161,8 @@ void c352_write(c352_t *c, uint32_t offset, uint16_t data, uint16_t mem_mask)
                 v->curr_vol[2] = v->curr_vol[3] = 0;
             }
             if (v->flags & C352_FLG_KEYOFF) {
+                COUNT(keyoff);
+                if (v->flags & C352_FLG_BUSY) COUNT(deactivations);
                 v->flags &= (uint16_t)~(C352_FLG_BUSY | C352_FLG_KEYOFF);
                 v->counter = 0xffff;
             }
@@ -143,6 +203,8 @@ static void fetch_sample(c352_t *c, c352_voice_t *v)
                 v->pos = (v->pos & 0xff0000) | v->wave_loop;
                 v->flags |= C352_FLG_LOOPHIST;
             } else {
+                COUNT(natural_ends);
+                COUNT(deactivations);
                 v->flags |= C352_FLG_KEYOFF;
                 v->flags &= (uint16_t)~C352_FLG_BUSY;
                 v->sample = 0;
@@ -171,14 +233,38 @@ static int16_t clamp_s16(int32_t v)
 
 void c352_generate(c352_t *c, int16_t *out, int n)
 {
+#ifdef C352_VOICE_COUNTERS
+    if (profile_on && n > 0) {
+        unsigned active = 0;
+        for (int j = 0; j < 32; j++) active += !!(c->voice[j].flags & C352_FLG_BUSY);
+        profile.intervals++;
+        profile.samples += (unsigned)n;
+        profile.entry_active[active]++;
+    }
+#endif
     for (int i = 0; i < n; i++) {
         int32_t outv[4] = {0, 0, 0, 0};
+#ifdef C352_VOICE_COUNTERS
+        unsigned active = 0;
+#endif
 
         for (int j = 0; j < 32; j++) {
             c352_voice_t *v = &c->voice[j];
             int16_t s = 0;
+#ifdef C352_VOICE_COUNTERS
+            bool active_at_entry = !!(v->flags & C352_FLG_BUSY);
+#endif
+#ifdef C352_INACTIVE_FASTPATH
+            /* Only entry-inactive voices have s=0 and no state updates below.
+             * A fetch that clears BUSY can still produce interpolated audio
+             * this sample: never re-test BUSY after entering the active path. */
+            if (!(v->flags & C352_FLG_BUSY)) continue;
+#endif
 
             if (v->flags & C352_FLG_BUSY) {
+#ifdef C352_VOICE_COUNTERS
+                active++;
+#endif
                 uint32_t next_counter = v->counter + v->freq;
 
                 if (next_counter & 0x10000)
@@ -202,11 +288,23 @@ void c352_generate(c352_t *c, int16_t *out, int n)
                 }
             }
 
+#ifdef C352_VOICE_COUNTERS
+            if (profile_on && active_at_entry &&
+                (s == 0 || !(v->curr_vol[0] | v->curr_vol[1] | v->curr_vol[2] | v->curr_vol[3])))
+                profile.active_zero_source++;
+#endif
+
             outv[0] += (((v->flags & C352_FLG_PHASEFL) ? -s : s) * v->curr_vol[0]) >> 8;
             outv[2] += (((v->flags & C352_FLG_PHASERL) ? -s : s) * v->curr_vol[2]) >> 8;
             outv[1] += (((v->flags & C352_FLG_PHASEFR) ? -s : s) * v->curr_vol[1]) >> 8;
             outv[3] += (((v->flags & C352_FLG_PHASEFR) ? -s : s) * v->curr_vol[3]) >> 8;
         }
+#ifdef C352_VOICE_COUNTERS
+        if (profile_on) {
+            profile.sample_active[active]++;
+            profile.active_iterations += active;
+        }
+#endif
 
         out[i * 4 + 0] = clamp_s16(outv[0] >> 3);
         out[i * 4 + 1] = clamp_s16(outv[1] >> 3);

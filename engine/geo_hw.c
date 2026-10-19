@@ -41,12 +41,18 @@
 #include <stdio.h>
 #include "eng.h"
 #include "geo_hw.h"
+#include "geo_projection_profile.inc"
 int g_objlog_on;                                   /* ENG_OBJLOG: set by slave_list.c while it logs an object; here because every game links geo_hw.c (a weak extern fails to link on Windows) */
 
 /* ---- point data ----------------------------------------------------------
  * The board's point ROM (sign-extended 24-bit at load time, which matches the
  * oracle's pt.read()) and, on System 22, point RAM past it (eng.h). */
-static inline int32_t pt_read(uint32_t addr) { return eng_point_read(addr); }
+static inline int32_t pt_read(uint32_t addr) {
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (GP_ACTIVE) gp_reads[addr >= g_eng_pointrom_n]++;
+#endif
+    return eng_point_read(addr);
+}
 
 /* Truncating signed division. C already truncates toward zero, which is
  * what the oracle's sdiv() reimplements because Python's // floors. */
@@ -75,7 +81,7 @@ static inline int64_t fshr64(int64_t v, int n) { return v >> n; }
  * arbitrary values. Doing the wide steps in __int128 restores parity.
  *
  * Shifts must FLOOR (Python >>) and the divide must TRUNCATE (the oracle
- * defines sdiv with C semantics); __int128 gives both natively. */
+ * defines sdiv with C semantics); __int128 gives both gles3ly. */
 static inline int64_t mulshr128(int64_t a, int64_t b, int n)
 {
     return (int64_t)(((__int128)a * (__int128)b) >> n);
@@ -85,6 +91,12 @@ static inline int64_t mulshr128(int64_t a, int64_t b, int n)
 static inline int32_t proj_sat(int64_t base16, int64_t v, int32_t mant,
                                int shift, int64_t z, int negate)
 {
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_trace && g_eng_frame == 1500) {
+        if (gp_records_n < 32768) gp_records[gp_records_n++] = (gp_record){base16,v,z,mant,shift,negate,0};
+        else gp_records_overflow++;
+    }
+#endif
     /* Shift through unsigned: v*mant is routinely negative and shifting a
      * negative value left is undefined behaviour (UBSan flags it). The
      * two's-complement bit pattern is identical, so the result is
@@ -182,6 +194,10 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
                        int32_t flags, int32_t packetformat,
                        geo_quad_cb cb, void *user)
 {
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    int gp_active = GP_ACTIVE;
+    double gp_start = gp_active ? gp_clock() : 0;
+#endif
     const int32_t (*m)[3] = g_view.m;
     const int32_t *t = g_view.t;
 
@@ -198,6 +214,9 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
                            (int64_t)z * m[2][2]) >> 15) + t[2];
     }
 
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_active) { gp_transform += gp_clock() - gp_start; gp_transforms++; }
+#endif
     int32_t zmax = vz[0], zmin = vz[0];
     for (int i = 1; i < 4; i++) {
         if (vz[i] > zmax) zmax = vz[i];
@@ -305,9 +324,15 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
         q.cz_value = zc >> 8;
     }
 
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_active) gp_start = gp_clock();
+#endif
     /* raw per-vertex projection -- parity with the oracle's scr16 */
     for (int i = 0; i < 4; i++) {
         if (vz[i] <= 0) { q.v[i].valid = 0; q.behind = 1; continue; }
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+        if (gp_active) gp_raw_calls += 2;
+#endif
         q.v[i].sx16 = proj_sat((int64_t)cx * 16, vx[i], mant, shift, vz[i], 0);
         q.v[i].sy16 = proj_sat((int64_t)cy * 16, vy[i], mant, shift, vz[i], 1);
         q.v[i].z    = vz[i];
@@ -317,6 +342,12 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
         q.v[i].valid = 1;
     }
 
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_active) {
+        gp_raw += gp_clock() - gp_start;
+        gp_quads++; gp_reusable += !q.behind;
+    }
+#endif
     {   /* whole-quad UV box, for the live texture cache (see geo_hw.h) */
         int u0 = 0xfff, u1 = 0, v0 = 0xfff, v1 = 0;
         for (int i = 0; i < 4; i++) {
@@ -328,6 +359,9 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
         q.uvbox[2] = (uint16_t)v0; q.uvbox[3] = (uint16_t)v1;
     }
 
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_active) gp_start = gp_clock();
+#endif
     double pre_x[6], pre_y[6];   /* the near-clipped polygon, before projection */
     int n_pre = 0;
     /* ---- near-plane clip, then project ---------------------------------
@@ -378,8 +412,30 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
         n_pre = n;
         for (int i = 0; i < n && i < 6; i++) { pre_x[i] = (double)cx_[i]; pre_y[i] = (double)cy_[i]; }
         for (int i = 0; i < n && i < 6; i++) {
-            q.rv[i].sx16 = proj_sat((int64_t)cx * 16, cx_[i], mant, shift, cz_[i], 0);
-            q.rv[i].sy16 = proj_sat((int64_t)cy * 16, cy_[i], mant, shift, cz_[i], 1);
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+            if (gp_active) {
+#ifndef RR_GEOMETRY_REUSE_PROJECTION
+                gp_near_calls += 2;
+#else
+                if (q.behind) gp_near_calls += 2;
+#endif
+            }
+#endif
+#ifdef RR_GEOMETRY_REUSE_PROJECTION
+            /* No raw vertex behind the eye means every integer Z >= 1.
+             * The near clip therefore emits exactly the four original vertices
+             * in order, with identical X/Y/Z and projection parameters. Reuse
+             * only screen coordinates; all clipped attributes/bookkeeping stay.
+             * Partial clips retain the wide-arithmetic oracle path below. */
+            if (!q.behind) {
+                q.rv[i].sx16 = q.v[i].sx16;
+                q.rv[i].sy16 = q.v[i].sy16;
+            } else
+#endif
+            {
+                q.rv[i].sx16 = proj_sat((int64_t)cx * 16, cx_[i], mant, shift, cz_[i], 0);
+                q.rv[i].sy16 = proj_sat((int64_t)cy * 16, cy_[i], mant, shift, cz_[i], 1);
+            }
             q.rv[i].z    = (int32_t)cz_[i];
             q.rv[i].u    = (uint32_t)(cu_[i] >> UF) & 0xfff;
             q.rv[i].v    = (uint32_t)(cv_[i] >> UF) & 0xfff;
@@ -390,6 +446,9 @@ static void quad_fixed(int32_t color, uint32_t addr, int32_t polyshift,
             q.rv[i].valid = 1;
         }
     }
+#ifdef RR_GEOMETRY_PROJECTION_PROFILE
+    if (gp_active) gp_near += gp_clock() - gp_start;
+#endif
     /* ---- guard-band clip (register row 187) ------------------------------
      * A vertex put ON the near plane (z = 1) projects to billions of 1/16 px,
      * and proj_sat clamps x and y to +-2^31 INDEPENDENTLY -- which bends the
