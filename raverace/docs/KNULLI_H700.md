@@ -40,4 +40,13 @@ same top summary line and exits86. The supervisor/watchdog restore clocks on fai
 
 Before later installation, retain the previous app. The generated restore.sh is
 one-step rollback while idle; saves and retained recordings remain separate.
+For a first installation it disables the two new entries, leaving the prior
+installed entries available and retaining the new app's files for inspection.
 This cleanup has not replaced the installed build. See CLEANUP_REPORT.md for gates.
+
+Host acceptance uses `gles3/tests/validate.py CASE --build BUILD --roms ROMS
+--cache CACHE --recordings LOCAL_RECORDINGS --output NEW_DIRECTORY`, for each
+CASE of reference, cone, attract, provenance, unsupported and sound. Then run
+`gles3/tests/provenance.py OUTPUT/provenance --roms ROMS --cache CACHE`.
+`ctest --test-dir BUILD --output-on-failure` checks the renderer components.
+Tests reject mismatched recording/EEPROM hashes; fixtures contain hashes only.
