@@ -25,6 +25,7 @@ It creates **Rave Racer (GLES3)** and **Rave Racer (GLES3, record)** Ports entri
 Production and its Ports entry are independent. Existing save migration paths and
 source-of-truth hashes are recorded in HISTORY.md; back up/copy the chosen EEPROM
 before switching to the new save directory, `/userdata/saves/rave-racer-gles3/`.
+Copy the chosen `controller-input.cfg` there too; the launcher passes it to SDL.
 
 Controls follow the saved controller configuration; quit with START+SELECT.
 For a slowdown recording, choose the record entry, play through the event, then quit.
@@ -50,3 +51,4 @@ CASE of reference, cone, attract, provenance, unsupported and sound. Then run
 `gles3/tests/provenance.py OUTPUT/provenance --roms ROMS --cache CACHE`.
 `ctest --test-dir BUILD --output-on-failure` checks the renderer components.
 Tests reject mismatched recording/EEPROM hashes; fixtures contain hashes only.
+Device smoke requires `GLES3_TEST_CONTROLLER_CONFIG` pointing at that saved mapping.

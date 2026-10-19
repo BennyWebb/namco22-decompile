@@ -13,7 +13,7 @@ base=tree(a.base);head=tree('HEAD');commits=git('rev-list',a.base+'..HEAD').deco
 for commit in commits:
  for path,(oid,size) in tree(commit).items():
   if path in base and base[path][0]==oid:continue
-  introduced[path]=(oid,size)
+  introduced.setdefault(path,(oid,size)) # rev-list visits newest versions first
   if '/benchmarks/' in '/'+path or '/native/' in '/'+path or 'knulli-gles-test' in path:violations.append((commit,path,'retired/evidence path'))
   if Path(path).suffix.lower() in ('.rgba','.r8ui','.f32','.vertices','.indices','.rec','.tgz','.png','.jpg','.wav','.pcm','.bin'):violations.append((commit,path,'payload extension'))
   if size>1024*1024:violations.append((commit,path,'new blob over1MiB'))
