@@ -13,7 +13,7 @@ there is no stored-seed fallback. Runtime sidecars are created in the output
 folder from that verified EEPROM and the committed text metadata.
 A fresh clone plus the ROMs is sufficient for the complete regression suite:
 `python3 raverace/gles3/tests/suite.py --roms /absolute/path/to/roms`.
-Build dependencies are listed in ../../../docs/KNULLI_H700.md.
+Build dependencies are listed in [KNULLI_H700.md](../../../docs/KNULLI_H700.md).
 The former dense variants had identical input bytes to fixture.rec and are
 covered by that single gate. The cone fix is closed; see HISTORY.md.
 Checkpoints are represented by SHA256 of each complete original JSONL record;
@@ -37,3 +37,17 @@ then a cold reset for every test. Generated SHA256:
 The old `a34d3b84…d866` identifies the supplied EEPROM image, not this blank-boot
 result. The user approved rebaselining to the generated EEPROM; input SHA256s
 remain unchanged. No settings or bytes are copied from the old image.
+
+## Acceptance (2026-10-19)
+
+Fresh clone, fresh build and empty asset cache; ROM directory excluded EEPROM.
+The generated EEPROM matched the full SHA256 above on every setup boot.
+Reference: 6,006 ticks, 21 checkpoint sets, 4,207 command/semantic receipts and
+36 image hashes exact. Fixture: 1,700 ticks, six sets, 1,700 receipts and 18 images
+exact. Attract: 36,000 ticks, 120 sets and 20 images exact; zero traps/stops.
+ROM provenance: 36 images, 5,529,600 pixels, class (c) = 0. Boot oracle: 159 exact.
+Sound: translated == interpreter on all 43,706 ticks across the three cases.
+The 600-tick record/replay round trip and malformed/mismatch checks pass;
+CTest is 5/5, compilation has zero warnings, and product link/symbol audit passes.
+The new-commit history scan allows only the two SHA-pinned controller inputs and
+finds no EEPROM, ROM/binary payloads or files over 1 MiB. No device/deployment used.
