@@ -57,7 +57,7 @@ for commit in commits:
             ("raverace/gles3/", "raverace/platform/knulli-h700/", "raverace/docs/")
         ) and not path.endswith(("/HISTORY.md", "/hygiene.py")):
             body = git("cat-file", "blob", oid)
-            if re.search(rb"ENG_(?:NATIVE|N1|P1B?|G2)_|RR_GLES2\b|rr_native\b|native/generated", body):
+            if re.search(rb"ENG_(?:NATIVE|N1|ASYNC_IO?|G2)_|RR_GLES2\b|rr_native\b|native/generated", body):
                 violations.append((commit, path, "retired runtime dependency/name"))
 # The audit tool quotes rejected names solely as blacklist patterns.
 # Inspect every reachable historical path as well; report inherited findings.

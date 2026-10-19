@@ -40,7 +40,7 @@ bool rr_gl_init(const char *dir)
     g_eng_pointram = point_read;
     return g_eng_pointrom != NULL;
 }
-void rr_gl_p1_select(const rr_presentation *s)
+void rr_gl_renderer_select(const rr_presentation *s)
 {
     selected = s;
 }

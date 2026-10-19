@@ -17,7 +17,7 @@ int SDL_PollEvent(SDL_Event *event)
     if (event && s && now - began >= atof(s) && phase < 2) {
         SDL_JoystickID id = SDL_JoystickGetDeviceInstanceID(0);
         if (id < 0) {
-            fprintf(stderr, "[G2-SMOKE] no physical controller; chord not injected\n");
+            fprintf(stderr, "[INPUT-SMOKE] no physical controller; chord not injected\n");
             phase = 2;
         } else {
             SDL_zero(*event);
@@ -27,7 +27,7 @@ int SDL_PollEvent(SDL_Event *event)
             event->cbutton.state = SDL_PRESSED;
             phase++;
             if (phase == 2)
-                fprintf(stderr, "[G2-SMOKE] START+SELECT instance=%d elapsed=%.3f\n", id, now - began);
+                fprintf(stderr, "[INPUT-SMOKE] START+SELECT instance=%d elapsed=%.3f\n", id, now - began);
             return 1;
         }
     }

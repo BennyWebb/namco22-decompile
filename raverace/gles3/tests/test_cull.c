@@ -5,8 +5,8 @@
 #include <stdlib.h>
 typedef struct {
     int32_t meta[36], local[24], oracle[28];
-} M3Quad;
-static unsigned original(const M3Quad *r)
+} ObjectQuad;
+static unsigned original(const ObjectQuad *r)
 {
     double low[4][3], high[4][3], zoom = ldexp((double)r->meta[24], -r->meta[25]);
     for (int v = 0; v < 4; v++)
@@ -49,9 +49,9 @@ static unsigned original(const M3Quad *r)
     return 0;
 }
 #include "culling.h"
-static unsigned live_cull(const M3Quad *r)
+static unsigned live_cull(const ObjectQuad *r)
 {
-    return p3_cull(r);
+    return cull_projected_bounds(r);
 }
 static uint64_t seed = 0x9852dbab147c6a31ULL;
 static uint64_t next(void)
@@ -65,7 +65,7 @@ int main(void)
 {
     unsigned counts[5] = {0};
     for (unsigned i = 0; i < 1000000; i++) {
-        M3Quad r = {0};
+        ObjectQuad r = {0};
         for (int k = 0; k < 36; k++)
             r.meta[k] = (int32_t)next();
         for (int k = 0; k < 24; k++)

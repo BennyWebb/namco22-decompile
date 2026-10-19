@@ -1,8 +1,8 @@
 #define _GNU_SOURCE 1
-static int gles3_fold3 = 0, hud_control3 = 0, hud_fences3 = 0;
-static double hud_pen_wall3, hud_pen_cpu3;
+static int hud_control = 0, hud_fences = 0;
+static double hud_pen_wall, hud_pen_cpu;
 #include <time.h>
-static double hud_stamp3(clockid_t k)
+static double hud_stamp(clockid_t k)
 {
     struct timespec t;
     clock_gettime(k, &t);
@@ -52,16 +52,15 @@ void rr_video_layers_decode_time(double elapsed)
     decode_cpu += elapsed;
     decode_frames++;
 }
-static unsigned p1b_output;
-void rr_video_p1b_output(unsigned f)
+static unsigned readback_output;
+void rr_video_readback_output(unsigned f)
 {
-    p1b_output = f;
+    readback_output = f;
 }
-static GLuint target, depth, scene, text_tex, shadow_tex, lut_tex, program, vbo;
+static GLuint target, depth, scene, lut_tex, vbo;
 static uint8_t last_lut[256][4];
 static bool lut_valid;
-static GLint sampler_uniform[4], text_uniform, shadow_uniform;
-static unsigned frames, uploads;
+static unsigned frames;
 void rr_video_layers_enable(bool on)
 {
     enabled = on;

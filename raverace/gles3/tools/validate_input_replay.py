@@ -34,5 +34,6 @@ assert reference.keys() == observed.keys(), "Missing playback checkpoints"
 for key, expected_row in reference.items():
     assert expected_row == observed[key], f"Divergence at {key}: {expected_row} != {observed[key]}"
 print(
-    f"PASS: {len(frames)} completed checkpoints, through tick {max(frames)}; CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
+    f"PASS: {len(frames)} completed checkpoints, through tick {max(frames)}; "
+    "CPU/RAM, board/video RAM, raw PCM and C352 voice hashes identical"
 )

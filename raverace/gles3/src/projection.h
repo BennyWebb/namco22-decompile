@@ -1,6 +1,6 @@
 /* Exact int64 fast path; the original int128 expression remains the general path.
  * Valid original shifts are 0..127. No signed overflow/left shift is introduced. */
-static inline int32_t p3_projection(int64_t base16, int64_t v, int32_t mant, int shift, int64_t z, int negate)
+static inline int32_t project_saturated_exact(int64_t base16, int64_t v, int32_t mant, int shift, int64_t z, int negate)
 {
     int64_t product, num, q, r;
     if (__builtin_mul_overflow(v, (int64_t)mant, &product) || product < INT64_MIN / 16 || product > INT64_MAX / 16)

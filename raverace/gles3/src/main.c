@@ -94,6 +94,14 @@ static bool headless_platform_start(void)
     rr_memory_profile_range(rr_gles3_profile_from(), max_frames);
     return rr_sim_start();
 }
+static void headless_platform_help(void)
+{
+    fprintf(stderr,
+            "Usage: rr_gles3 ROM_DIR [--frames N] [--interactive] [--audio on|off] [--overlay off|on]\n"
+            " [--replay-input FILE | --record-input FILE] [--input-checkpoints FILE] [--thread-profile FILE]\n"
+            " [--profile-simulation] [--simulation-profile-from N] [--es-input FILE] [--controller-db FILE]\n"
+            " Quit: START+SELECT, Escape, or frame limit.\n");
+}
 #include "rr_headless.inc"
 
 void rr_tick(void)

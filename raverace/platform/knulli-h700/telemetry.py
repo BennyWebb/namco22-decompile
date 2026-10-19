@@ -147,7 +147,7 @@ class Collector:
         self.logs["problems"].write((json.dumps(obj) + "\n").encode())
 
     def line(self, kind, line):
-        if kind == "stderr" and line.startswith("[G2-EEPROM] "):
+        if kind == "stderr" and line.startswith("[SAVE-EEPROM] "):
             data = bytes.fromhex(line.split(" ", 1)[1].strip())
             assert len(data) == 8192
             temp = self.save.with_suffix(".new")
@@ -157,7 +157,7 @@ class Collector:
                 os.fsync(f.fileno())
             os.replace(temp, self.save)
             self.save_writes += 1
-            line = "[G2-EEPROM] persisted bytes=8192 sha256=" + hashlib.sha256(data).hexdigest() + "\n"
+            line = "[SAVE-EEPROM] persisted bytes=8192 sha256=" + hashlib.sha256(data).hexdigest() + "\n"
         self.logs[kind].write(line.encode(errors="replace"))
         if kind == "profile":
             values = next(csv.reader([line]))
@@ -188,7 +188,8 @@ class Collector:
                 self.unsupported = line.strip()
                 self.problem(dict(unsupported=self.unsupported))
             m = re.search(
-                r"\[G1-COVERAGE\] tick=(\d+) main=(\d+) sub=(\d+) screen=(\d+) course=(\d+) major=(\d+) walk=\d+ direct=\d+ gles3=(\d+) reason=(.*)",
+                r"\[RENDER-COVERAGE\] tick=(\d+) main=(\d+) sub=(\d+) screen=(\d+) course=(\d+) "
+                r"major=(\d+) walk=\d+ direct=\d+ gles3=(\d+) reason=(.*)",
                 line,
             )
             if m:
@@ -197,15 +198,15 @@ class Collector:
                 key = f"main={main} sub={sub} screen={screen} course={course}"
                 self.current = key
                 self.pending.setdefault(int(t), {})["key"] = key
-            m = re.search(r"G2-STAGING\] tick=(\d+) copied_bytes=(\d+)", line)
+            m = re.search(r"UPLOAD-STAGING\] tick=(\d+) copied_bytes=(\d+)", line)
             if m:
                 self.pending.setdefault(int(m[1]), {})["copied"] = int(m[2])
-            m = re.search(r"G1B-PREP\] tick=(\d+) hits=\d+ misses=(\d+) evictions=(\d+)", line)
+            m = re.search(r"DYNAMIC-CACHE-PREP\] tick=(\d+) hits=\d+ misses=(\d+) evictions=(\d+)", line)
             if m:
                 self.pending.setdefault(int(m[1]), {})["dynamic"] = (int(m[2]), int(m[3]))
-            if "[P1B-IO]" in line:
+            if "[ASYNC-IO]" in line:
                 self.io.append(line.strip())
-            if "[G2-SMOKE] START+SELECT" in line:
+            if "[INPUT-SMOKE] START+SELECT" in line:
                 self.smoke_chord = True
         while self.next in self.pending and "row" in self.pending[self.next] and "key" in self.pending[self.next]:
             p = self.pending.pop(self.next)
@@ -296,7 +297,9 @@ class Collector:
         ]
         for key, g in out["groups"].items():
             text.append(
-                f'{key}: gles3={g["gles3"]} repeats={g["repeats"]} settled_underruns={g["settled_underrun_frames"]} main_gaps50={g["main_gaps_over50ms"]} prep_p99_ms={g["preparation_p99_ms_upper_0_01"]}'
+                f'{key}: gles3={g["gles3"]} repeats={g["repeats"]} '
+                f'settled_underruns={g["settled_underrun_frames"]} main_gaps50={g["main_gaps_over50ms"]} '
+                f'prep_p99_ms={g["preparation_p99_ms_upper_0_01"]}'
             )
         text.extend(self.io)
         (self.run / "summary.json").write_text(json.dumps(out, indent=2) + "\n")

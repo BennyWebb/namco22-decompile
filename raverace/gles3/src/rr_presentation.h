@@ -18,17 +18,17 @@ typedef struct {
     uint8_t cgram[RR_CGRAM_SIZE], text[RR_TEXT_SIZE], tilemapattr[0x10];
     uint16_t generation[128], direct[RR_PRESENT_DIRECT_MAX][0x1c];
 #ifdef RR_PARALLEL_FRAME_PREP
-    double p1_sim_ms, p1_block_ms, p1_audio_ratio;
-    unsigned p1_underruns, p1_depth;
-    uint16_t g1_main, g1_sub, g1_screen, g1_course;
-    unsigned g1_reason;
-    uint64_t c1_revision[128];
-    unsigned g1b_major;
-    void *g1b_dynamic;
+    double frame_sim_ms, frame_block_ms, frame_audio_ratio;
+    unsigned frame_underruns, frame_depth;
+    uint16_t state_main, state_sub, state_screen, state_course;
+    unsigned state_reason;
+    uint64_t palette_revision[128];
+    unsigned dynamic_cache_major;
+    void *dynamic_cache_dynamic;
     void *gles3_payload;
     unsigned gles3_tag;
     double gles3_walk_ms, gles3_compile_ms;
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
     unsigned record_splits[4], record_protected_visible;
 #endif
     rr_video_cpu_frame video;

@@ -1,7 +1,6 @@
 /* Diagnostic-only bounded stdio transport. Game threads write memory cookies;
  * only rr-writer opens/writes persistent output. No writer owns a game FILE lock.
  * Checkpoint streams are reserved until shutdown, never dropped. */
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -16,7 +15,6 @@
 #include <sys/resource.h>
 #include <time.h>
 /* One-shot SHA256 ABI from the toolchain OpenSSL sha.h; no opaque context layout. */
-extern unsigned char *SHA256(const unsigned char *, size_t, unsigned char *);
 #define POOL (16u * 1024 * 1024)
 #define STREAMS 32
 static unsigned char pool[POOL];
@@ -36,16 +34,6 @@ static pthread_t writer;
 static _Atomic int stopping, errors;
 static int out_fd, err_fd, summary_fd;
 static int idle_result, nice_result;
-static unsigned packet_count, pixel_count;
-static struct {
-    unsigned tick;
-    char suffix[16];
-    unsigned char digest[32];
-} pixels[64];
-static struct {
-    unsigned tick, bytes;
-    unsigned char digest[32];
-} packets[8192];
 FILE *__real_fopen(const char *, const char *);
 FILE *__real_fopen64(const char *, const char *);
 static void output(Stream *s)
@@ -152,11 +140,7 @@ static FILE *memory_file(const char *path, const char *mode, int fd)
     s->flags = O_WRONLY | O_CREAT | (strchr(mode, 'a') ? O_APPEND : O_TRUNC) | (strchr(mode, 'x') ? O_EXCL : 0);
     /* Diagnostic recordings stream checkpoints to disk through rr-writer too:
      * retaining a long recording must not hit the old 256KiB reserved limit. */
-#ifdef GLES3_RECORD_DIAGNOSTICS
     s->checkpoint = 0;
-#else
-    s->checkpoint = strstr(path, "states.jsonl") != NULL;
-#endif
     s->cap = strstr(path, "thread.csv")                   ? 8u * 1024 * 1024
              : strstr(path, "ticks.csv") || s->checkpoint ? 256u * 1024
                                                           : 1024u * 1024;
@@ -182,58 +166,8 @@ FILE *__wrap_fopen64(const char *p, const char *m)
 {
     return strchr(m, 'w') || strchr(m, 'a') ? memory_file(p, m, -1) : __real_fopen64(p, m);
 }
-void rr_p1b_packet(unsigned t, const void *p, size_t n)
-{
-    (void)t;
-    (void)p;
-    (void)n;
-}
-void rr_p1b_pixel(unsigned t, const char *s, const void *p, size_t n)
-{
-    (void)t;
-    (void)s;
-    (void)p;
-    (void)n;
-}
-void rr_c1d_frame(unsigned t, const void *m, const void *c, const void *r)
-{
-    (void)t;
-    (void)m;
-    (void)c;
-    (void)r;
-}
 static void finish(void)
 {
-    const char *path = getenv("ENG_GLES3_RECEIPTS");
-    if (path) {
-        FILE *f = __wrap_fopen(path, "wx");
-        if (f) {
-            fputs("tick,bytes,sha256\n", f);
-            for (unsigned i = 0; i < packet_count; i++) {
-                fprintf(f, "%u,%u,", packets[i].tick, packets[i].bytes);
-                for (int j = 0; j < 32; j++)
-                    fprintf(f, "%02x", packets[i].digest[j]);
-                fputc('\n', f);
-            }
-            fclose(f);
-        } else
-            atomic_fetch_add(&errors, 1);
-    }
-    const char *image = getenv("ENG_GLES3_IMAGE_HASH");
-    if (image) {
-        FILE *f = __wrap_fopen(image, "wx");
-        if (f) {
-            fputs("tick,suffix,sha256\n", f);
-            for (unsigned i = 0; i < pixel_count; i++) {
-                fprintf(f, "%u,%s,", pixels[i].tick, pixels[i].suffix);
-                for (int j = 0; j < 32; j++)
-                    fprintf(f, "%02x", pixels[i].digest[j]);
-                fputc('\n', f);
-            }
-            fclose(f);
-        } else
-            atomic_fetch_add(&errors, 1);
-    }
     fflush(NULL);
     atomic_store(&stopping, 1);
     pthread_join(writer, NULL);
@@ -243,14 +177,13 @@ static void finish(void)
         bytes += atomic_load(&streams[i].drop_bytes);
     }
     dprintf(summary_fd,
-            "[P1B-IO] streams=%u reserved=%zu dropped_records=%u dropped_bytes=%u errors=%d packets=%u "
+            "[ASYNC-IO] streams=%u reserved=%zu dropped_records=%u dropped_bytes=%u errors=%d "
             "writer_idle_result=%d nice_result=%d fully_drained=1\n",
             count,
             used,
             drops,
             bytes,
             atomic_load(&errors),
-            packet_count,
             idle_result,
             nice_result);
     if (atomic_load(&errors))
@@ -277,7 +210,7 @@ __attribute__((constructor)) static void init(void)
     clock_gettime(CLOCK_MONOTONIC, &mt);
     clock_gettime(CLOCK_REALTIME, &rt);
     fprintf(stderr,
-            "[P1B-CLOCK] monotonic=%.9f realtime=%.9f\n",
+            "[ASYNC-CLOCK] monotonic=%.9f realtime=%.9f\n",
             mt.tv_sec + mt.tv_nsec * 1e-9,
             rt.tv_sec + rt.tv_nsec * 1e-9);
 }

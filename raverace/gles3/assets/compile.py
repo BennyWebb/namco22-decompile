@@ -10,6 +10,7 @@ from atlas import build
 p = argparse.ArgumentParser()
 p.add_argument("roms", type=Path)
 p.add_argument("output", type=Path)
+p.add_argument("--validation", action="store_true")
 a = p.parse_args()
 out = a.output.resolve()
 rom = ROM(a.roms.resolve())
@@ -17,6 +18,8 @@ t = time.monotonic()
 source_files = sorted(Path(__file__).resolve().parent.glob("*.py")) + sorted(
     (Path(__file__).resolve().parents[1] / "shaders").iterdir()
 )
+if a.validation:
+    source_files += sorted((Path(__file__).resolve().parents[1] / "tests/shaders").iterdir())
 compiler_sources = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source_files if p.is_file()}
 if out.exists():
     recipe = json.loads((out / "asset-kit/recipe.json").read_text())
@@ -133,7 +136,7 @@ for name in [
     files[name] = dict(bytes=q.stat().st_size, sha256=hashlib.sha256(q.read_bytes()).hexdigest())
     if name != "meshes.f32" and not name.startswith("page-"):
         shutil.copyfile(q, template / name)
-for q in (Path(__file__).resolve().parents[1] / "shaders").iterdir():
+for q in source_files:
     if q.suffix not in (".frag", ".vert"):
         continue
     shutil.copyfile(q, template / q.name)

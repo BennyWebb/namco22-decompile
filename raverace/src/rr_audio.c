@@ -4,7 +4,7 @@
  *
  * Wave ROM layout is NOT file order (namcos22.cpp raverace):
  *   rv1wav0.10r @ 0x000000, rv1wav2.10n @ 0x100000,
- *   rv1wav1.10p @ 0x200000, rv1wav3.10l @ 0x300000.
+ *   rv1wav1.10p @ 0x200000, rv1wav.10l @ 0x300000.
  * Clock 24.576 MHz / 288 = 85333.3 samples/s, four outputs (front L/R, rear L/R;
  * this cabinet routes only 0/1 to the speakers). The video frame is 59.906 Hz, so
  * a frame is 1424.45 samples -- carried as a fraction so nothing drifts.
@@ -63,8 +63,8 @@ static atomic_uint underruns, overruns, latency_resets;
 static atomic_bool output_active;
 static atomic_int primed;
 static uint32_t per_sec_ur, cb_samples;
-    /* RR_AUDIOLOG: underruns per second of output */ /* 0 until the ring first reaches TARGET: start-up silence is not
-                                                         an underrun */
+/* RR_AUDIOLOG: underruns per second of output */ /* 0 until the ring first reaches TARGET: start-up silence is not
+                                                     an underrun */
 
 static void audio_cb(void *u, Uint8 *stream, int len)
 {

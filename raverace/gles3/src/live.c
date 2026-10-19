@@ -1,10 +1,12 @@
-#define G1B_VALIDATION 1
+#ifdef GLES3_VALIDATION
 extern unsigned char *SHA256(const unsigned char *, unsigned long, unsigned char *);
+#endif
+
 #include "renderer_api.h"
 
 static void live_fail(const char *, int, int);
 #define _GNU_SOURCE 1
-/* Revised M3: resident original meshes, compact commands and bounded prefetch.
+/* Revised OBJECT: resident original meshes, compact commands and bounded prefetch.
  * No simulator, ROM decoder or audio linked. Repository MIT licence. */
 #include <SDL2/SDL.h>
 #include <GLES3/gl3.h>
@@ -20,96 +22,86 @@ static void live_fail(const char *, int, int);
 #define RR_GPU_HUD 1
 #define RR_GPU_HUD_DEFAULT 1
 #include "depth_lut_support.inc"
-static int hud_control3;
-static int hud_fences3;
-static double hud_pen_wall3, hud_pen_cpu3;
-static double hud_stamp3(clockid_t k)
-{
-    struct timespec t;
-    clock_gettime(k, &t);
-    return t.tv_sec + t.tv_nsec / 1e9;
-}
 #include "rr_video_layers.h"
 #include "rr_gl.h"
 extern unsigned g_eng_frame;
 
-#define CHECK3(x)                                                                                                      \
+#define RENDER_CHECK(x)                                                                                                \
     do {                                                                                                               \
         if (!(x)) {                                                                                                    \
-            fprintf(stderr, "v3 failure line=%d %s SDL=%s\n", __LINE__, #x, SDL_GetError());                           \
+            fprintf(stderr, "packet failure line=%d %s SDL=%s\n", __LINE__, #x, SDL_GetError());                       \
             exit(2);                                                                                                   \
         }                                                                                                              \
     } while (0)
-#define MAXQ3 4096
-#define MAXI3 512
-#define MAXM3 65535
-#define RAW3 524288
-#define SLOTS3 3
-#define FONT3 122880
-#define STYLE3 2073
+#define MAX_QUADS 4096
+#define MAX_INSTANCES 512
+#define MAX_MATERIALS 65535
+#define PACKET_CAPACITY 524288
+#define GPU_COPY_COUNT 3
+#define FONT_BYTES 122880
+#define STYLE_BYTES 2073
 typedef struct {
     uint32_t magic, version, tick, n, visible, groups, instances, dynamic, font, style, palette, reserved;
     float bg[3];
-} Header3;
+} RenderPacketHeader;
 typedef struct {
     float data[16];
     int32_t box[4];
-} Instance3;
+} RenderInstance;
 typedef struct {
     int32_t mesh;
     uint16_t instance, material;
     float depth;
     uint16_t brightness[4], source_instance, order, flags, reserved;
     uint32_t zsort;
-} Quad3;
+} RenderQuad;
 typedef struct {
     uint32_t first, count, page, mode;
     int32_t box[4];
-} Group3;
+} DrawGroup;
 typedef struct {
     float uv[4];
     uint32_t page, pad[3];
-} Material3;
+} RenderMaterial;
 typedef struct {
     float state[4], brightness[4];
-} Attribute3;
-_Static_assert(sizeof(Header3) == 60 && sizeof(Instance3) == 80 && sizeof(Quad3) == 32 && sizeof(Group3) == 32 &&
-                   sizeof(Material3) == 32,
-               "v3 ABI");
+} DrawAttribute;
+_Static_assert(sizeof(RenderPacketHeader) == 60 && sizeof(RenderInstance) == 80 && sizeof(RenderQuad) == 32 &&
+                   sizeof(DrawGroup) == 32 && sizeof(RenderMaterial) == 32,
+               "packet ABI");
 typedef struct {
-    uint8_t bytes[RAW3];
+    uint8_t bytes[PACKET_CAPACITY];
     size_t size;
     int state;
     unsigned tick;
     double read_ms, inflate_ms, worker_cpu_ms;
-} Slot3;
-static GLuint p1_instances[3], p1_dynamic[3], p1_attributes[3];
-static GLsync p1_fences[3];
-static unsigned p1_gpu_index;
-static const rr_video_cpu_frame *p1_hud;
+} RenderPacket;
+static GLuint frame_instances[3], frame_dynamic[3], frame_attributes[3];
+static GLsync frame_fences[3];
+static unsigned frame_gpu_index;
+static const rr_video_cpu_frame *frame_hud;
 static const rr_presentation *gles3_drawing;
-static bool p1_diagnostic;
-static double c1e_upload_wall, c1e_upload_cpu, c1e_page_read, c1e_page_upload;
-static unsigned c1e_groups;
-static size_t c1e_page_bytes;
-static unsigned c1_group[MAXM3];
-static GLuint c1_palettes[3];
-static uint64_t c1_uploaded[3][128];
-static bool c1_valid[3][128];
+static bool frame_diagnostic;
+static double capture_upload_wall, capture_upload_cpu;
+static unsigned capture_groups;
+static unsigned material_groups[MAX_MATERIALS];
+static GLuint palette_textures[3];
+static uint64_t uploaded_palette_revision[3][128];
+static bool palette_valid[3][128];
 /* CPU allocator owns immutable ROM pens. Slot copies sever cache lifetime from GL. */
 #include "dynamic_types.h"
-static G1BEntry g1b_entries[G1B_ENTRIES];
-static uint16_t g1b_cells[384 * 384];
-static uint8_t g1b_page[G1B_BYTES];
-static uint64_t g1b_generation, g1b_serial;
-static void g1b_mark(unsigned id, bool fill)
+static DynamicCacheEntry dynamic_cache_entries[DYNAMIC_CACHE_ENTRIES];
+static uint16_t dynamic_cache_cells[384 * 384];
+static uint8_t dynamic_cache_page[DYNAMIC_CACHE_BYTES];
+static uint64_t dynamic_cache_generation, dynamic_cache_serial;
+static void dynamic_cache_mark(unsigned id, bool fill)
 {
-    G1BEntry *e = g1b_entries + id;
+    DynamicCacheEntry *e = dynamic_cache_entries + id;
     for (unsigned y = e->y / 8; y < (e->y + e->h + 7) / 8; y++)
         for (unsigned x = e->x / 8; x < (e->x + e->w + 7) / 8; x++)
-            g1b_cells[y * 384 + x] = fill ? id + 1 : 0;
+            dynamic_cache_cells[y * 384 + x] = fill ? id + 1 : 0;
 }
-static bool g1b_place(unsigned w, unsigned h, unsigned *x, unsigned *y)
+static bool dynamic_cache_place(unsigned w, unsigned h, unsigned *x, unsigned *y)
 {
     unsigned cw = (w + 7) / 8, ch = (h + 7) / 8;
     for (unsigned yy = 0; yy + ch <= 384; yy++)
@@ -117,7 +109,7 @@ static bool g1b_place(unsigned w, unsigned h, unsigned *x, unsigned *y)
             bool empty = true;
             for (unsigned j = 0; j < ch && empty; j++)
                 for (unsigned i = 0; i < cw; i++)
-                    if (g1b_cells[(yy + j) * 384 + xx + i]) {
+                    if (dynamic_cache_cells[(yy + j) * 384 + xx + i]) {
                         empty = false;
                         break;
                     }
@@ -129,114 +121,122 @@ static bool g1b_place(unsigned w, unsigned h, unsigned *x, unsigned *y)
         }
     return false;
 }
-static bool g1b_pinned(const G1BSlot *s, unsigned i)
+static bool dynamic_cache_pinned(const DynamicCacheSlot *s, unsigned i)
 {
     for (unsigned j = 0; j < s->uploads; j++)
         if (s->upload[j].entry == i)
             return true;
     return false;
 }
-static unsigned g1b_lru(const G1BSlot *s)
+static unsigned dynamic_cache_lru(const DynamicCacheSlot *s)
 {
-    unsigned best = G1B_ENTRIES;
-    for (unsigned i = 0; i < G1B_ENTRIES; i++)
-        if (g1b_entries[i].occupied && !g1b_pinned(s, i) &&
-            (best == G1B_ENTRIES || g1b_entries[i].last < g1b_entries[best].last))
+    unsigned best = DYNAMIC_CACHE_ENTRIES;
+    for (unsigned i = 0; i < DYNAMIC_CACHE_ENTRIES; i++)
+        if (dynamic_cache_entries[i].occupied && !dynamic_cache_pinned(s, i) &&
+            (best == DYNAMIC_CACHE_ENTRIES || dynamic_cache_entries[i].last < dynamic_cache_entries[best].last))
             best = i;
     return best;
 }
 /* Returns an existing or freshly allocated footprint. Palette is deliberately absent. */
-static int g1b_reserve(G1BSlot *s, const int key[6], bool *decode)
+static int dynamic_cache_reserve(DynamicCacheSlot *s, const int key[6], bool *decode)
 {
     if (key[0] < 0 || key[0] > 15 || key[1] < 0 || key[1] > 15 || key[2] < 0 || key[2] > 4095 || key[3] < 0 ||
-        key[3] > 4095 || key[4] < 1 || key[5] < 1 || key[4] > G1B_SIDE - 4 || key[5] > G1B_SIDE - 4)
+        key[3] > 4095 || key[4] < 1 || key[5] < 1 || key[4] > DYNAMIC_CACHE_SIDE - 4 || key[5] > DYNAMIC_CACHE_SIDE - 4)
         return -1;
-    for (unsigned i = 0; i < G1B_ENTRIES; i++)
-        if (g1b_entries[i].occupied && !memcmp(g1b_entries[i].key, key, 24)) {
+    for (unsigned i = 0; i < DYNAMIC_CACHE_ENTRIES; i++)
+        if (dynamic_cache_entries[i].occupied && !memcmp(dynamic_cache_entries[i].key, key, 24)) {
             s->hits++;
-            g1b_entries[i].last = ++g1b_serial;
+            dynamic_cache_entries[i].last = ++dynamic_cache_serial;
             *decode = false;
             return i;
         }
     s->misses++;
     unsigned x, y, id;
     for (;;) {
-        for (id = 0; id < G1B_ENTRIES && g1b_entries[id].occupied; id++)
+        for (id = 0; id < DYNAMIC_CACHE_ENTRIES && dynamic_cache_entries[id].occupied; id++)
             ;
-        if (id < G1B_ENTRIES && g1b_place(key[4] + 4, key[5] + 4, &x, &y))
+        if (id < DYNAMIC_CACHE_ENTRIES && dynamic_cache_place(key[4] + 4, key[5] + 4, &x, &y))
             break;
-        unsigned old = g1b_lru(s);
-        if (old == G1B_ENTRIES)
+        unsigned old = dynamic_cache_lru(s);
+        if (old == DYNAMIC_CACHE_ENTRIES)
             return -1;
-        g1b_mark(old, false);
-        g1b_entries[old].occupied = false;
+        dynamic_cache_mark(old, false);
+        dynamic_cache_entries[old].occupied = false;
         s->evictions++;
     }
-    G1BEntry *e = g1b_entries + id;
+    DynamicCacheEntry *e = dynamic_cache_entries + id;
     memcpy(e->key, key, 24);
     e->x = x;
     e->y = y;
     e->w = key[4] + 4;
     e->h = key[5] + 4;
-    e->generation = ++g1b_generation;
-    e->last = ++g1b_serial;
+    e->generation = ++dynamic_cache_generation;
+    e->last = ++dynamic_cache_serial;
     e->occupied = true;
-    g1b_mark(id, true);
+    dynamic_cache_mark(id, true);
     *decode = true;
     return id;
 }
 
 #include "staging.h"
-static G1BSlot *g1b_slot;
-static const G1BSlot *g1b_drawing;
-static unsigned g1b_page_index;
-static GLuint g1b_pages[3], g1b_uv[3], g1b_mapping[3];
-static uint64_t g1b_resident[3][G1B_ENTRIES];
-static int g1b_last_recipe[7], g1b_fail_code, g1b_fail_packet;
-static bool g1b_key_valid;
-extern uint8_t gles3_texture_pen(int, int, int);
-static unsigned g1b_group(unsigned);
-static unsigned g1b_material_page(unsigned);
-static void g1b_upload(const rr_presentation *, unsigned);
-static GLuint pages3[16], mesh3, instances3, dynamic3, materials3, programs3[2], vao3, attributes3;
-static unsigned page_count3, mesh_width3, mesh_height3, material_count3;
-static int widths3[16], heights3[16];
-static Material3 material_data3[MAXM3];
+static DynamicCacheSlot *dynamic_cache_slot;
+static const DynamicCacheSlot *dynamic_cache_drawing;
+static unsigned dynamic_cache_page_index;
+static GLuint dynamic_cache_pages[3], dynamic_cache_uv[3];
+#ifdef GLES3_VALIDATION
+static GLuint dynamic_cache_mapping[3];
+#endif
 
-static float instance_data3[MAXI3 * 16];
-static Attribute3 attribute_data3[MAXQ3];
-static uint8_t pixels3[640 * 480 * 4];
-static size_t static_bytes3;
-static bool stage_sync3;
-static double clock3(clockid_t kind)
+static uint64_t dynamic_cache_resident[3][DYNAMIC_CACHE_ENTRIES];
+static int dynamic_cache_last_recipe[7];
+static bool dynamic_cache_key_valid;
+extern uint8_t gles3_texture_pen(int, int, int);
+static unsigned dynamic_cache_group(unsigned);
+static unsigned dynamic_cache_material_page(unsigned);
+static void dynamic_cache_upload(const rr_presentation *, unsigned);
+static GLuint page_textures[16], mesh_texture, instance_texture, dynamic_mesh_texture, material_texture,
+    shader_programs[2], vertex_array, attribute_buffer;
+static unsigned page_count, mesh_width, mesh_height, material_count;
+static int widths[16], heights[16];
+static RenderMaterial material_data[MAX_MATERIALS];
+
+static float instance_data[MAX_INSTANCES * 16];
+static DrawAttribute attribute_data[MAX_QUADS];
+#ifdef GLES3_VALIDATION
+static uint8_t capture_pixels[640 * 480 * 4];
+#endif
+
+static size_t static_bytes;
+static bool stage_sync;
+static double clock_seconds(clockid_t kind)
 {
     struct timespec t;
     clock_gettime(kind, &t);
     return t.tv_sec + t.tv_nsec / 1e9;
 }
-static FILE *open3(const char *dir, const char *name)
+static FILE *open_asset(const char *dir, const char *name)
 {
     char path[4096];
-    CHECK3(snprintf(path, sizeof path, "%s/%s", dir, name) > 0);
+    RENDER_CHECK(snprintf(path, sizeof path, "%s/%s", dir, name) > 0);
     FILE *f = fopen(path, "rb");
-    CHECK3(f);
+    RENDER_CHECK(f);
     return f;
 }
-static void read3(FILE *f, void *data, size_t size)
+static void read_exact(FILE *f, void *data, size_t size)
 {
-    CHECK3(fread(data, 1, size, f) == size);
+    RENDER_CHECK(fread(data, 1, size, f) == size);
 }
-static void *file3(const char *dir, const char *name, size_t size)
+static void *read_asset(const char *dir, const char *name, size_t size)
 {
-    FILE *f = open3(dir, name);
+    FILE *f = open_asset(dir, name);
     void *p = malloc(size ? size : 1);
-    CHECK3(p);
-    read3(f, p, size);
-    CHECK3(fgetc(f) == EOF && !ferror(f));
+    RENDER_CHECK(p);
+    read_exact(f, p, size);
+    RENDER_CHECK(fgetc(f) == EOF && !ferror(f));
     fclose(f);
     return p;
 }
-static GLuint texture3(unsigned w, unsigned h, GLenum format, const void *data)
+static GLuint create_texture(unsigned w, unsigned h, GLenum format, const void *data)
 {
     GLuint t;
     glGenTextures(1, &t);
@@ -246,19 +246,19 @@ static GLuint texture3(unsigned w, unsigned h, GLenum format, const void *data)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexImage2D(GL_TEXTURE_2D, 0, format, w, h, 0, GL_RGBA, format == GL_RGBA32F ? GL_FLOAT : GL_UNSIGNED_BYTE, data);
-    CHECK3(glGetError() == GL_NO_ERROR);
+    RENDER_CHECK(glGetError() == GL_NO_ERROR);
     return t;
 }
-static GLuint shader3(const char *dir, const char *name, GLenum kind)
+static GLuint compile_shader(const char *dir, const char *name, GLenum kind)
 {
-    FILE *f = open3(dir, name);
-    CHECK3(!fseek(f, 0, SEEK_END));
+    FILE *f = open_asset(dir, name);
+    RENDER_CHECK(!fseek(f, 0, SEEK_END));
     long n = ftell(f);
-    CHECK3(n > 0 && n < 65536);
+    RENDER_CHECK(n > 0 && n < 65536);
     rewind(f);
     char *s = calloc(n + 1, 1);
-    CHECK3(s);
-    read3(f, s, n);
+    RENDER_CHECK(s);
+    read_exact(f, s, n);
     fclose(f);
     GLuint shader_ = glCreateShader(kind);
     glShaderSource(shader_, 1, (const char **)&s, NULL);
@@ -271,18 +271,20 @@ static GLuint shader3(const char *dir, const char *name, GLenum kind)
         glGetShaderInfoLog(shader_, sizeof log, NULL, log);
         fprintf(stderr, "%s\n", log);
     }
-    CHECK3(ok);
+    RENDER_CHECK(ok);
     return shader_;
 }
-static bool c1d_debug;
-static GLuint c1d_fbo, c1d_target, c1d_proof, c1d_texel, c1d_depth, c1d_coordinates[16], c1d_mapping;
-static uint32_t c1d_pixels[640 * 480 * 4];
-static uint8_t c1d_proof_pixels[640 * 480 * 4], c1d_texel_pixels[640 * 480 * 4];
-extern void rr_c1d_frame(unsigned, const void *, const void *, const void *);
+#ifdef GLES3_VALIDATION
+static bool provenance_debug;
+static GLuint provenance_fbo, provenance_target, provenance_proof, provenance_texel, provenance_depth,
+    provenance_coordinates[16], provenance_mapping;
+static uint32_t provenance_pixels[640 * 480 * 4];
+static uint8_t provenance_proof_pixels[640 * 480 * 4], provenance_texel_pixels[640 * 480 * 4];
+extern void rr_validation_provenance(unsigned, const void *, const void *, const void *);
 /* Nearest filtering is separable. Match each source axis's physical size and
  * sampler type/precision, with one 1D-in-2D coordinate texture per axis. */
-static GLuint c1e_ygrids[16];
-static GLuint c1e_axis(unsigned n, bool vertical)
+static GLuint capture_ygrids[16];
+static GLuint capture_axis(unsigned n, bool vertical)
 {
     uint8_t bytes[4096 * 4];
     for (unsigned x = 0; x < n; x++) {
@@ -302,47 +304,47 @@ static GLuint c1e_axis(unsigned n, bool vertical)
         GL_TEXTURE_2D, 0, GL_RGBA8UI, vertical ? 1 : n, vertical ? n : 1, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, bytes);
     return texture;
 }
-static void c1d_init(const char *dir)
+static void provenance_init(const char *dir)
 {
-    if (!c1d_debug)
+    if (!provenance_debug)
         return;
-    for (unsigned p = 0; p < page_count3; p++) {
-        c1d_coordinates[p] = c1e_axis(widths3[p], false);
-        c1e_ygrids[p] = c1e_axis(heights3[p], true);
+    for (unsigned p = 0; p < page_count; p++) {
+        provenance_coordinates[p] = capture_axis(widths[p], false);
+        capture_ygrids[p] = capture_axis(heights[p], true);
     }
-    unsigned mh = ((material_count3 + G1B_MATERIALS + 1023) / 1024) * 2;
-    void *m = file3(dir, "provenance-mapping.i32", 1024 * mh * 16);
-    glGenTextures(1, &c1d_mapping);
-    glBindTexture(GL_TEXTURE_2D, c1d_mapping);
+    unsigned mh = ((material_count + DYNAMIC_CACHE_MATERIALS + 1023) / 1024) * 2;
+    void *m = read_asset(dir, "provenance-mapping.i32", 1024 * mh * 16);
+    glGenTextures(1, &provenance_mapping);
+    glBindTexture(GL_TEXTURE_2D, provenance_mapping);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32I, 1024, mh, 0, GL_RGBA_INTEGER, GL_INT, m);
     free(m);
-    glGenFramebuffers(1, &c1d_fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, c1d_fbo);
-    glGenTextures(1, &c1d_target);
-    glBindTexture(GL_TEXTURE_2D, c1d_target);
+    glGenFramebuffers(1, &provenance_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, provenance_fbo);
+    glGenTextures(1, &provenance_target);
+    glBindTexture(GL_TEXTURE_2D, provenance_target);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32UI, 640, 480, 0, GL_RGBA_INTEGER, GL_UNSIGNED_INT, NULL);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, c1d_target, 0);
-    c1d_proof = texture3(640, 480, GL_RGBA8, NULL);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, c1d_proof, 0);
-    c1d_texel = texture3(640, 480, GL_RGBA8, NULL);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, c1d_texel, 0);
-    glGenRenderbuffers(1, &c1d_depth);
-    glBindRenderbuffer(GL_RENDERBUFFER, c1d_depth);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, provenance_target, 0);
+    provenance_proof = create_texture(640, 480, GL_RGBA8, NULL);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, provenance_proof, 0);
+    provenance_texel = create_texture(640, 480, GL_RGBA8, NULL);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, provenance_texel, 0);
+    glGenRenderbuffers(1, &provenance_depth);
+    glBindRenderbuffer(GL_RENDERBUFFER, provenance_depth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, 640, 480);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, c1d_depth);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, provenance_depth);
     GLenum buffers[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
     glDrawBuffers(3, buffers);
-    CHECK3(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+    RENDER_CHECK(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    CHECK3(glGetError() == GL_NO_ERROR);
+    RENDER_CHECK(glGetError() == GL_NO_ERROR);
 }
-static void c1d_begin(const Header3 *h)
+static void provenance_begin(const RenderPacketHeader *h)
 {
-    if (!c1d_debug)
+    if (!provenance_debug)
         return;
-    glBindFramebuffer(GL_FRAMEBUFFER, c1d_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, provenance_fbo);
     GLenum bufs[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2};
     glDrawBuffers(3, bufs);
     GLuint zero[4] = {0};
@@ -352,239 +354,270 @@ static void c1d_begin(const Header3 *h)
     glClearBufferfv(GL_COLOR, 2, clear);
     glClearBufferfv(GL_DEPTH, 0, &z);
 }
-static void c1d_capture(unsigned tick)
+static void provenance_capture(unsigned tick)
 {
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, c1d_fbo);
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, provenance_fbo);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
-    glReadPixels(0, 0, 640, 480, GL_RGBA_INTEGER, GL_UNSIGNED_INT, c1d_pixels);
+    glReadPixels(0, 0, 640, 480, GL_RGBA_INTEGER, GL_UNSIGNED_INT, provenance_pixels);
     glReadBuffer(GL_COLOR_ATTACHMENT1);
-    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, c1d_proof_pixels);
+    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, provenance_proof_pixels);
     glReadBuffer(GL_COLOR_ATTACHMENT2);
-    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, c1d_texel_pixels);
+    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, provenance_texel_pixels);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
-    rr_c1d_frame(tick, c1d_pixels, c1d_proof_pixels, c1d_texel_pixels);
-    CHECK3(glGetError() == GL_NO_ERROR);
+    rr_validation_provenance(tick, provenance_pixels, provenance_proof_pixels, provenance_texel_pixels);
+    RENDER_CHECK(glGetError() == GL_NO_ERROR);
 }
-static void load3(const char *dir, const char *unused)
+#endif
+static void load_render_assets(const char *dir, const char *unused)
 {
     (void)unused;
-    c1d_debug = getenv("ENG_GLES3_PROVENANCE") != NULL;
-    FILE *f = open3(dir, "gles3.meta");
+#ifdef GLES3_VALIDATION
+    provenance_debug = getenv("ENG_GLES3_PROVENANCE") != NULL;
+#endif
+
+    FILE *f = open_asset(dir, "gles3.meta");
     char magic[8];
-    CHECK3(fscanf(f, "%7s %u %u %u %u", magic, &page_count3, &mesh_width3, &mesh_height3, &material_count3) == 5);
-    CHECK3(!strcmp(magic, "GLES3") && page_count3 > 0 && page_count3 < 16 && mesh_width3 == 1024 && mesh_height3 > 0 &&
-           mesh_height3 <= 8192 && material_count3 > 0 && material_count3 <= MAXM3);
+    RENDER_CHECK(fscanf(f, "%7s %u %u %u %u", magic, &page_count, &mesh_width, &mesh_height, &material_count) == 5);
+    RENDER_CHECK(!strcmp(magic, "GLES3") && page_count > 0 && page_count < 16 && mesh_width == 1024 &&
+                 mesh_height > 0 && mesh_height <= 8192 && material_count > 0 && material_count <= MAX_MATERIALS);
     fclose(f);
-    f = open3(dir, "atlas.meta");
+    f = open_asset(dir, "atlas.meta");
     unsigned pages;
-    CHECK3(fscanf(f, "%u", &pages) == 1 && pages == page_count3);
+    RENDER_CHECK(fscanf(f, "%u", &pages) == 1 && pages == page_count);
     for (unsigned i = 0; i < pages; i++)
-        CHECK3(fscanf(f, "%d %d", widths3 + i, heights3 + i) == 2);
+        RENDER_CHECK(fscanf(f, "%d %d", widths + i, heights + i) == 2);
     fclose(f);
     for (unsigned i = 0; i < pages; i++) {
-        CHECK3(widths3[i] > 0 && widths3[i] <= 4096 && heights3[i] > 0 && heights3[i] <= 4096);
-        size_t n = (size_t)widths3[i] * heights3[i];
-        static_bytes3 += n;
+        RENDER_CHECK(widths[i] > 0 && widths[i] <= 4096 && heights[i] > 0 && heights[i] <= 4096);
+        size_t n = (size_t)widths[i] * heights[i];
+        static_bytes += n;
         char name[64];
         snprintf(name, sizeof name, "page-%u.r8ui", i);
-        void *p = file3(dir, name, n);
-        glGenTextures(1, pages3 + i);
-        glBindTexture(GL_TEXTURE_2D, pages3[i]);
+        void *p = read_asset(dir, name, n);
+        glGenTextures(1, page_textures + i);
+        glBindTexture(GL_TEXTURE_2D, page_textures[i]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, widths3[i], heights3[i], 0, GL_RED_INTEGER, GL_UNSIGNED_BYTE, p);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, widths[i], heights[i], 0, GL_RED_INTEGER, GL_UNSIGNED_BYTE, p);
         free(p);
-        CHECK3(glGetError() == GL_NO_ERROR);
+        RENDER_CHECK(glGetError() == GL_NO_ERROR);
     }
-    size_t n = (size_t)mesh_width3 * mesh_height3 * 16;
-    void *p = file3(dir, "meshes.f32", n);
-    mesh3 = texture3(mesh_width3, mesh_height3, GL_RGBA32F, p);
+    size_t n = (size_t)mesh_width * mesh_height * 16;
+    void *p = read_asset(dir, "meshes.f32", n);
+    mesh_texture = create_texture(mesh_width, mesh_height, GL_RGBA32F, p);
     free(p);
-    static_bytes3 += n;
-    p = file3(dir, "materials.bin", material_count3 * sizeof(Material3));
-    memcpy(material_data3, p, material_count3 * sizeof(Material3));
+    static_bytes += n;
+    p = read_asset(dir, "materials.bin", material_count * sizeof(RenderMaterial));
+    memcpy(material_data, p, material_count * sizeof(RenderMaterial));
     free(p);
-    p = file3(dir, "groups.bin", material_count3 * 4);
-    memcpy(c1_group, p, material_count3 * 4);
+    p = read_asset(dir, "groups.bin", material_count * 4);
+    memcpy(material_groups, p, material_count * 4);
     free(p);
     for (unsigned k = 0; k < 3; k++)
-        c1_palettes[k] = texture3(256, 128, GL_RGBA8, NULL);
-    unsigned mh = (material_count3 + G1B_MATERIALS + 1023) / 1024;
+        palette_textures[k] = create_texture(256, 128, GL_RGBA8, NULL);
+    unsigned mh = (material_count + DYNAMIC_CACHE_MATERIALS + 1023) / 1024;
     float *uv = calloc(1024 * mh * 4, 4);
-    CHECK3(uv);
-    for (unsigned i = 0; i < material_count3; i++) {
-        CHECK3(material_data3[i].page < pages);
-        memcpy(uv + i * 4, material_data3[i].uv, 16);
+    RENDER_CHECK(uv);
+    for (unsigned i = 0; i < material_count; i++) {
+        RENDER_CHECK(material_data[i].page < pages);
+        memcpy(uv + i * 4, material_data[i].uv, 16);
     }
     for (unsigned k = 0; k < 3; k++)
-        g1b_uv[k] = texture3(1024, mh, GL_RGBA32F, uv);
-    materials3 = g1b_uv[0];
+        dynamic_cache_uv[k] = create_texture(1024, mh, GL_RGBA32F, uv);
+    material_texture = dynamic_cache_uv[0];
     free(uv);
-    instances3 = texture3(4, MAXI3, GL_RGBA32F, NULL);
-    dynamic3 = texture3(4096, 1, GL_RGBA32F, NULL);
-    const char *names[] = {"race_v3.vert", "race_v3_near.vert"};
+    instance_texture = create_texture(4, MAX_INSTANCES, GL_RGBA32F, NULL);
+    dynamic_mesh_texture = create_texture(4096, 1, GL_RGBA32F, NULL);
+    const char *names[] = {"world.vert", "world_near.vert"};
     for (unsigned i = 0; i < 2; i++) {
-        GLuint v = shader3(dir,
-                           c1d_debug ? (i ? "provenance_race_v3_near.vert" : "provenance_race_v3.vert") : names[i],
-                           GL_VERTEX_SHADER),
-               fs = shader3(dir, c1d_debug ? "provenance.frag" : "index_texture_lowp.frag", GL_FRAGMENT_SHADER);
-        programs3[i] = glCreateProgram();
-        glAttachShader(programs3[i], v);
-        glAttachShader(programs3[i], fs);
-        glLinkProgram(programs3[i]);
+        const char *vertex_name = names[i];
+        const char *fragment_name = "index_texture_lowp.frag";
+#ifdef GLES3_VALIDATION
+#ifdef GLES3_VALIDATION
+        if (provenance_debug) {
+            vertex_name = i ? "provenance_world_near.vert" : "provenance_world.vert";
+            fragment_name = "provenance.frag";
+        }
+#endif
+
+#endif
+        GLuint v = compile_shader(dir, vertex_name, GL_VERTEX_SHADER);
+        GLuint fs = compile_shader(dir, fragment_name, GL_FRAGMENT_SHADER);
+        shader_programs[i] = glCreateProgram();
+        glAttachShader(shader_programs[i], v);
+        glAttachShader(shader_programs[i], fs);
+        glLinkProgram(shader_programs[i]);
         GLint ok;
-        glGetProgramiv(programs3[i], GL_LINK_STATUS, &ok);
-        CHECK3(ok);
+        glGetProgramiv(shader_programs[i], GL_LINK_STATUS, &ok);
+        RENDER_CHECK(ok);
         glDeleteShader(v);
         glDeleteShader(fs);
-        glUseProgram(programs3[i]);
+        glUseProgram(shader_programs[i]);
         const char *samplers[] = {"image", "meshes", "instances", "dynamic_mesh", "materials", "palette"};
         for (unsigned k = 0; k < 6; k++)
-            glUniform1i(glGetUniformLocation(programs3[i], samplers[k]), k);
-        if (c1d_debug) {
-            glUniform1i(glGetUniformLocation(programs3[i], "coordinate_image"), 6);
-            glUniform1i(glGetUniformLocation(programs3[i], "coordinate_y"), 8);
-            glUniform1i(glGetUniformLocation(programs3[i], "source_mapping"), 7);
+            glUniform1i(glGetUniformLocation(shader_programs[i], samplers[k]), k);
+#ifdef GLES3_VALIDATION
+        if (provenance_debug) {
+            glUniform1i(glGetUniformLocation(shader_programs[i], "coordinate_image"), 6);
+            glUniform1i(glGetUniformLocation(shader_programs[i], "coordinate_y"), 8);
+            glUniform1i(glGetUniformLocation(shader_programs[i], "source_mapping"), 7);
         }
+#endif
     }
-    glGenVertexArrays(1, &vao3);
-    glGenBuffers(1, &attributes3);
-    glBindBuffer(GL_ARRAY_BUFFER, attributes3);
-    glBufferData(GL_ARRAY_BUFFER, sizeof attribute_data3, NULL, GL_STREAM_DRAW);
-    glBindVertexArray(vao3);
+    glGenVertexArrays(1, &vertex_array);
+    glGenBuffers(1, &attribute_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, attribute_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof attribute_data, NULL, GL_STREAM_DRAW);
+    glBindVertexArray(vertex_array);
     for (unsigned i = 0; i < 2; i++) {
         glEnableVertexAttribArray(i);
         glVertexAttribDivisor(i, 1);
     }
     glBindVertexArray(0);
 
-    p1_instances[0] = instances3;
-    p1_dynamic[0] = dynamic3;
-    p1_attributes[0] = attributes3;
+    frame_instances[0] = instance_texture;
+    frame_dynamic[0] = dynamic_mesh_texture;
+    frame_attributes[0] = attribute_buffer;
     for (int i = 1; i < 3; i++) {
-        p1_instances[i] = texture3(4, MAXI3, GL_RGBA32F, NULL);
-        p1_dynamic[i] = texture3(4096, 1, GL_RGBA32F, NULL);
-        glGenBuffers(1, &p1_attributes[i]);
-        glBindBuffer(GL_ARRAY_BUFFER, p1_attributes[i]);
-        glBufferData(GL_ARRAY_BUFFER, sizeof attribute_data3, NULL, GL_STREAM_DRAW);
+        frame_instances[i] = create_texture(4, MAX_INSTANCES, GL_RGBA32F, NULL);
+        frame_dynamic[i] = create_texture(4096, 1, GL_RGBA32F, NULL);
+        glGenBuffers(1, &frame_attributes[i]);
+        glBindBuffer(GL_ARRAY_BUFFER, frame_attributes[i]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof attribute_data, NULL, GL_STREAM_DRAW);
     }
-    g1b_page_index = page_count3++;
-    CHECK3(page_count3 <= 16);
-    widths3[g1b_page_index] = heights3[g1b_page_index] = G1B_SIDE;
+    dynamic_cache_page_index = page_count++;
+    RENDER_CHECK(page_count <= 16);
+    widths[dynamic_cache_page_index] = heights[dynamic_cache_page_index] = DYNAMIC_CACHE_SIDE;
     for (unsigned k = 0; k < 3; k++) {
-        glGenTextures(1, g1b_pages + k);
-        glBindTexture(GL_TEXTURE_2D, g1b_pages[k]);
+        glGenTextures(1, dynamic_cache_pages + k);
+        glBindTexture(GL_TEXTURE_2D, dynamic_cache_pages[k]);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_R8UI, G1B_SIDE, G1B_SIDE, 0, GL_RED_INTEGER, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D,
+                     0,
+                     GL_R8UI,
+                     DYNAMIC_CACHE_SIDE,
+                     DYNAMIC_CACHE_SIDE,
+                     0,
+                     GL_RED_INTEGER,
+                     GL_UNSIGNED_BYTE,
+                     NULL);
     }
-    pages3[g1b_page_index] = g1b_pages[0];
-    c1d_init(dir);
-    if (c1d_debug) {
-        g1b_mapping[0] = c1d_mapping;
-        unsigned mh = ((material_count3 + G1B_MATERIALS + 1023) / 1024) * 2;
-        void *m = file3(dir, "provenance-mapping.i32", 1024 * mh * 16);
+    page_textures[dynamic_cache_page_index] = dynamic_cache_pages[0];
+#ifdef GLES3_VALIDATION
+    provenance_init(dir);
+#endif
+
+#ifdef GLES3_VALIDATION
+    if (provenance_debug) {
+        dynamic_cache_mapping[0] = provenance_mapping;
+        unsigned mh = ((material_count + DYNAMIC_CACHE_MATERIALS + 1023) / 1024) * 2;
+        void *m = read_asset(dir, "provenance-mapping.i32", 1024 * mh * 16);
         for (unsigned k = 1; k < 3; k++) {
-            glGenTextures(1, g1b_mapping + k);
-            glBindTexture(GL_TEXTURE_2D, g1b_mapping[k]);
+            glGenTextures(1, dynamic_cache_mapping + k);
+            glBindTexture(GL_TEXTURE_2D, dynamic_cache_mapping[k]);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32I, 1024, mh, 0, GL_RGBA_INTEGER, GL_INT, m);
         }
         free(m);
     }
+#endif
+
     glFinish();
     fprintf(stderr,
             "[GLES3-LOAD] pages=%u static_bytes=%zu dynamic_bytes=%u copies=3 index_only=1\n",
-            page_count3 - 1,
-            static_bytes3,
-            3 * G1B_BYTES);
+            page_count - 1,
+            static_bytes,
+            3 * DYNAMIC_CACHE_BYTES);
 }
-extern void rr_p1b_pixel(unsigned, const char *, const void *, size_t);
-static void save3(const char *out, unsigned tick, const char *suffix)
+#ifdef GLES3_VALIDATION
+extern void rr_validation_image(unsigned, const char *, const void *, size_t);
+static void capture_image(const char *out, unsigned tick, const char *suffix)
 {
     (void)out;
-    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, pixels3);
-    rr_p1b_pixel(tick, suffix, pixels3, 640 * 480 * 4);
+    glReadPixels(0, 0, 640, 480, GL_RGBA, GL_UNSIGNED_BYTE, capture_pixels);
+    rr_validation_image(tick, suffix, capture_pixels, 640 * 480 * 4);
 }
-static uint16_t front_indices3[MAXQ3];
-static double last_end3;
-static GLuint p1b_fbo, p1b_color;
-static void draw3(const Slot3 *s, int pass, const char *out, double start, double waited)
+#endif
+static uint16_t front_indices[MAX_QUADS];
+static double last_end;
+static GLuint readback_fbo, readback_color;
+static void draw_render_packet(const RenderPacket *s, int pass, const char *out, double start, double waited)
 {
-    double cpu = clock3(CLOCK_THREAD_CPUTIME_ID);
-    CHECK3(s->size >= sizeof(Header3));
-    const Header3 *h = (const Header3 *)s->bytes;
-    CHECK3(h->magic == 0x33504e52 && h->version == 3 && h->tick == s->tick && h->n <= MAXQ3 && h->visible <= h->n &&
-           h->groups <= MAXQ3 && h->instances <= MAXI3 && h->dynamic <= 4096);
+    (void)out; /* Image output is compiled only in validation. */
+    double cpu = clock_seconds(CLOCK_THREAD_CPUTIME_ID);
+    RENDER_CHECK(s->size >= sizeof(RenderPacketHeader));
+    const RenderPacketHeader *h = (const RenderPacketHeader *)s->bytes;
+    RENDER_CHECK(h->magic == 0x33504e52 && h->version == 3 && h->tick == s->tick && h->n <= MAX_QUADS &&
+                 h->visible <= h->n && h->groups <= MAX_QUADS && h->instances <= MAX_INSTANCES && h->dynamic <= 4096);
     size_t offset = sizeof *h;
-    const Instance3 *ins = (const Instance3 *)(s->bytes + offset);
+    const RenderInstance *ins = (const RenderInstance *)(s->bytes + offset);
     offset += h->instances * sizeof *ins;
-    const Quad3 *q = (const Quad3 *)(s->bytes + offset);
+    const RenderQuad *q = (const RenderQuad *)(s->bytes + offset);
     offset += h->n * sizeof *q;
     const uint16_t *visible = (const uint16_t *)(s->bytes + offset);
     offset += (h->visible * 2 + 3) & ~3u;
-    const Group3 *groups = (const Group3 *)(s->bytes + offset);
+    const DrawGroup *groups = (const DrawGroup *)(s->bytes + offset);
     offset += h->groups * sizeof *groups;
     const float *dynamic = (const float *)(s->bytes + offset);
     offset += h->dynamic * 16;
-    const uint8_t *text = s->bytes + offset;
     offset += 8192;
-    CHECK3(offset == s->size);
-    if (gles3_front3) {
-        memcpy(front_indices3, visible, h->visible * 2);
-        for (unsigned gi3 = 0; gi3 < h->groups; gi3++) {
-            const Group3 *g3 = groups + gi3;
-            if (g3->mode)
+    RENDER_CHECK(offset == s->size);
+    if (gles3_front) {
+        memcpy(front_indices, visible, h->visible * 2);
+        for (unsigned group_index = 0; group_index < h->groups; group_index++) {
+            const DrawGroup *group = groups + group_index;
+            if (group->mode)
                 continue;
-            CHECK3(g3->first + g3->count <= h->visible);
-            for (unsigned j3 = 0; j3 < g3->count; j3++) {
-                unsigned original3 = visible[g3->first + j3];
-                CHECK3(original3 < h->n);
-                if (j3) {
-                    unsigned before3 = visible[g3->first + j3 - 1];
-                    CHECK3(q[before3].depth - q[original3].depth > .0003f);
+            RENDER_CHECK(group->first + group->count <= h->visible);
+            for (unsigned instance_index = 0; instance_index < group->count; instance_index++) {
+                unsigned original = visible[group->first + instance_index];
+                RENDER_CHECK(original < h->n);
+                if (instance_index) {
+                    unsigned before = visible[group->first + instance_index - 1];
+                    RENDER_CHECK(q[before].depth - q[original].depth > .0003f);
                 }
-                front_indices3[g3->first + g3->count - 1 - j3] = original3;
+                front_indices[group->first + group->count - 1 - instance_index] = original;
             }
         }
-        visible = front_indices3;
+        visible = front_indices;
     }
     unsigned culled = 0;
     for (unsigned i = 0; i < h->n; i++) {
-        CHECK3(q[i].instance < h->instances && q[i].material < material_count3 + G1B_MATERIALS);
+        RENDER_CHECK(q[i].instance < h->instances && q[i].material < material_count + DYNAMIC_CACHE_MATERIALS);
         culled += (q[i].flags >> 8) != 0;
     }
-    CHECK3(culled + h->visible == h->n);
+    RENDER_CHECK(culled + h->visible == h->n);
     for (unsigned i = 0; i < h->instances; i++)
-        memcpy(instance_data3 + i * 16, ins[i].data, 64);
+        memcpy(instance_data + i * 16, ins[i].data, 64);
     for (unsigned i = 0; i < h->visible; i++) {
-        CHECK3(visible[i] < h->n);
-        const Quad3 *r = q + visible[i];
-        CHECK3(!(r->flags >> 8));
-        Attribute3 *a = attribute_data3 + i;
+        RENDER_CHECK(visible[i] < h->n);
+        const RenderQuad *r = q + visible[i];
+        RENDER_CHECK(!(r->flags >> 8));
+        DrawAttribute *a = attribute_data + i;
         a->state[0] = r->mesh;
         a->state[1] = r->instance;
         a->state[2] = r->depth;
-        a->state[3] = ((r->material + 1) * 128 + g1b_group(r->material)) * (r->flags & 1 ? -1.f : 1.f);
+        a->state[3] = ((r->material + 1) * 128 + dynamic_cache_group(r->material)) * (r->flags & 1 ? -1.f : 1.f);
         for (unsigned j = 0; j < 4; j++)
             a->brightness[j] = r->brightness[j] / 64.f;
     }
-    double prepared = clock3(CLOCK_MONOTONIC);
+    double prepared = clock_seconds(CLOCK_MONOTONIC);
     glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, instances3);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 4, h->instances, GL_RGBA, GL_FLOAT, instance_data3);
+    glBindTexture(GL_TEXTURE_2D, instance_texture);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 4, h->instances, GL_RGBA, GL_FLOAT, instance_data);
     glActiveTexture(GL_TEXTURE3);
-    glBindTexture(GL_TEXTURE_2D, dynamic3);
+    glBindTexture(GL_TEXTURE_2D, dynamic_mesh_texture);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, h->dynamic, 1, GL_RGBA, GL_FLOAT, dynamic);
-    glBindBuffer(GL_ARRAY_BUFFER, attributes3);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, h->visible * sizeof(Attribute3), attribute_data3);
-    double uploaded = clock3(CLOCK_MONOTONIC);
+    glBindBuffer(GL_ARRAY_BUFFER, attribute_buffer);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, h->visible * sizeof(DrawAttribute), attribute_data);
+    double uploaded = clock_seconds(CLOCK_MONOTONIC);
     rr_video_layers_begin();
     glViewport(0, 0, 640, 480);
     glDisable(GL_BLEND);
@@ -596,9 +629,12 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
     glClearColor(h->bg[0], h->bg[1], h->bg[2], 0);
     glClearDepthf(1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    c1d_begin(h);
-    glBindVertexArray(vao3);
-    GLuint textures[] = {0, mesh3, instances3, dynamic3, materials3};
+#ifdef GLES3_VALIDATION
+    provenance_begin(h);
+#endif
+
+    glBindVertexArray(vertex_array);
+    GLuint textures[] = {0, mesh_texture, instance_texture, dynamic_mesh_texture, material_texture};
     for (unsigned i = 1; i < 5; i++) {
         glActiveTexture(GL_TEXTURE0 + i);
         glBindTexture(GL_TEXTURE_2D, textures[i]);
@@ -607,39 +643,43 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
     glEnable(GL_SCISSOR_TEST);
     unsigned accounted = 0, vertices = 0;
     for (unsigned i = 0; i < h->groups; i++) {
-        const Group3 *g = groups + i;
-        CHECK3(g->first == accounted && g->count > 0 && g->first + g->count <= h->visible && g->page < page_count3 &&
-               g->mode <= 3 && g->box[2] >= 0 && g->box[3] >= 0);
+        const DrawGroup *g = groups + i;
+        RENDER_CHECK(g->first == accounted && g->count > 0 && g->first + g->count <= h->visible &&
+                     g->page < page_count && g->mode <= 3 && g->box[2] >= 0 && g->box[3] >= 0);
         accounted += g->count;
         unsigned near = g->mode & 1;
-        glUseProgram(programs3[near]);
-        glBindTexture(GL_TEXTURE_2D, pages3[g->page]);
-        if (c1d_debug) {
+        glUseProgram(shader_programs[near]);
+        glBindTexture(GL_TEXTURE_2D, page_textures[g->page]);
+#ifdef GLES3_VALIDATION
+        if (provenance_debug) {
             glActiveTexture(GL_TEXTURE6);
-            glBindTexture(GL_TEXTURE_2D, c1d_coordinates[g->page]);
+            glBindTexture(GL_TEXTURE_2D, provenance_coordinates[g->page]);
             glActiveTexture(GL_TEXTURE8);
-            glBindTexture(GL_TEXTURE_2D, c1e_ygrids[g->page]);
+            glBindTexture(GL_TEXTURE_2D, capture_ygrids[g->page]);
             glActiveTexture(GL_TEXTURE7);
-            glBindTexture(GL_TEXTURE_2D, c1d_mapping);
+            glBindTexture(GL_TEXTURE_2D, provenance_mapping);
             glActiveTexture(GL_TEXTURE0);
         }
+#endif
+
         glScissor(g->box[0], g->box[1], g->box[2], g->box[3]);
-        glBindBuffer(GL_ARRAY_BUFFER, attributes3);
+        glBindBuffer(GL_ARRAY_BUFFER, attribute_buffer);
         for (unsigned k = 0; k < 2; k++)
             glVertexAttribPointer(k,
                                   4,
                                   GL_FLOAT,
                                   GL_FALSE,
-                                  sizeof(Attribute3),
-                                  (void *)(uintptr_t)(g->first * sizeof(Attribute3) + k * 16));
+                                  sizeof(DrawAttribute),
+                                  (void *)(uintptr_t)(g->first * sizeof(DrawAttribute) + k * 16));
         glDrawArraysInstanced(GL_TRIANGLES, 0, near ? 12 : 6, g->count);
         vertices += (near ? 12 : 6) * g->count;
     }
-    CHECK3(accounted == h->visible);
-    double world_submit = clock3(CLOCK_MONOTONIC);
-    if (stage_sync3)
+    RENDER_CHECK(accounted == h->visible);
+    double world_submit = clock_seconds(CLOCK_MONOTONIC);
+    if (stage_sync)
         glFinish();
-    double world_done = clock3(CLOCK_MONOTONIC);
+    double world_done = clock_seconds(CLOCK_MONOTONIC);
+#ifdef GLES3_VALIDATION
     bool capture = strcmp(out, "-") && pass == 0 &&
                    (getenv("ENG_GLES3_SEQUENCE") || h->tick == 1800 || h->tick == 1965 || h->tick == 2500 ||
                     h->tick == 2643 || h->tick == 3000 || h->tick == 3546 || h->tick == 3600 || h->tick == 4200 ||
@@ -660,41 +700,42 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
             samples = *end == ',' ? end + 1 : end;
         }
     }
-    if (capture && c1d_debug) {
+    if (capture && provenance_debug) {
         static FILE *f;
         const char *p = getenv("ENG_GLES3_PALETTE_REFERENCE");
         if (p) {
             if (!f)
                 f = fopen(p, "wx");
-            CHECK3(f);
+            RENDER_CHECK(f);
             uint32_t tick = h->tick;
-            CHECK3(fwrite(&tick, 4, 1, f) == 1 && fwrite(gles3_drawing->pal, 1, RR_PAL_SIZE, f) == RR_PAL_SIZE);
+            RENDER_CHECK(fwrite(&tick, 4, 1, f) == 1 && fwrite(gles3_drawing->pal, 1, RR_PAL_SIZE, f) == RR_PAL_SIZE);
         }
     }
 #endif
     if (capture) {
-        if (c1d_debug)
-            c1d_capture(h->tick);
+        if (provenance_debug)
+            provenance_capture(h->tick);
         else
-            save3(out, h->tick, "world");
+            capture_image(out, h->tick, "world");
     }
+#endif
     glBindVertexArray(0);
-    CHECK3(rr_gl_video_submit(p1_hud));
-    double hud_submit = clock3(CLOCK_MONOTONIC);
-    if (p1_diagnostic)
+    RENDER_CHECK(rr_gl_video_submit(frame_hud));
+    double hud_submit = clock_seconds(CLOCK_MONOTONIC);
+    if (frame_diagnostic)
         glFinish();
-    double end = clock3(CLOCK_MONOTONIC);
-    double interval = last_end3 ? end - last_end3 : end - start;
+    double end = clock_seconds(CLOCK_MONOTONIC);
+    double interval = last_end ? end - last_end : end - start;
     if (pass >= 0)
-        last_end3 = end;
-    end_cpu3 = clock3(CLOCK_THREAD_CPUTIME_ID);
-    getrusage(RUSAGE_THREAD, &end_usage3);
-    double gc3 = clock3(CLOCK_MONOTONIC), gcc3 = clock3(CLOCK_THREAD_CPUTIME_ID);
-    CHECK3(glGetError() == GL_NO_ERROR);
-    check_wall3 = clock3(CLOCK_MONOTONIC) - gc3;
-    check_cpu3 = clock3(CLOCK_THREAD_CPUTIME_ID) - gcc3;
-    trace_wall3 = trace_cpu3 = 0;
-    if (p1_diagnostic) {
+        last_end = end;
+    end_cpu = clock_seconds(CLOCK_THREAD_CPUTIME_ID);
+    getrusage(RUSAGE_THREAD, &end_usage);
+    double gc = clock_seconds(CLOCK_MONOTONIC), gcc = clock_seconds(CLOCK_THREAD_CPUTIME_ID);
+    RENDER_CHECK(glGetError() == GL_NO_ERROR);
+    check_wall = clock_seconds(CLOCK_MONOTONIC) - gc;
+    check_cpu = clock_seconds(CLOCK_THREAD_CPUTIME_ID) - gcc;
+    trace_wall = trace_cpu = 0;
+    if (frame_diagnostic) {
         printf("%s pass=%d tick=%u primitives=%u visible=%u culled=%u draws=%u vertices=%u instances=%u "
                "dynamic_bytes=%zu wait_ms=%.6f read_ms=%.6f inflate_ms=%.6f worker_cpu_ms=%.6f prepare_ms=%.6f "
                "upload_ms=%.6f world_submit_ms=%.6f world_sync_ms=%.6f hud_submit_ms=%.6f finish_ms=%.6f total_ms=%.6f "
@@ -708,7 +749,7 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
                h->groups,
                vertices,
                h->instances,
-               h->visible * sizeof(Attribute3) + h->instances * 64 + h->dynamic * 16,
+               h->visible * sizeof(DrawAttribute) + h->instances * 64 + h->dynamic * 16,
                waited,
                s->read_ms,
                s->inflate_ms,
@@ -720,21 +761,23 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
                (hud_submit - world_done) * 1000,
                (end - hud_submit) * 1000,
                (end - start) * 1000,
-               (clock3(CLOCK_THREAD_CPUTIME_ID) - cpu) * 1000,
+               (clock_seconds(CLOCK_THREAD_CPUTIME_ID) - cpu) * 1000,
                interval * 1000);
     }
 
-    if (capture && !c1d_debug)
-        save3(out, h->tick, "composed");
-    if (pass >= 0 && p1_diagnostic)
-        printf("C1E_FRAME tick=%u upload_ms=%.6f upload_cpu_ms=%.6f groups=%u bytes=%u render_ms=%.6f fence=%d\n",
+#ifdef GLES3_VALIDATION
+    if (capture && !provenance_debug)
+        capture_image(out, h->tick, "composed");
+#endif
+    if (pass >= 0 && frame_diagnostic)
+        printf("CAPTURE_FRAME tick=%u upload_ms=%.6f upload_cpu_ms=%.6f groups=%u bytes=%u render_ms=%.6f fence=%d\n",
                h->tick,
-               c1e_upload_wall,
-               c1e_upload_cpu,
-               c1e_groups,
-               c1e_groups * 1024,
-               (end - start) * 1000 + c1e_upload_wall,
-               p1_diagnostic);
+               capture_upload_wall,
+               capture_upload_cpu,
+               capture_groups,
+               capture_groups * 1024,
+               (end - start) * 1000 + capture_upload_wall,
+               frame_diagnostic);
 }
 /* Diagnostic only, compiled against private geometry source. MIT. */
 #include <stdio.h>
@@ -744,8 +787,8 @@ static void draw3(const Slot3 *s, int pass, const char *out, double start, doubl
 #include "rr_mem.h"
 #include "rr_dsp.h"
 #include "rr_scene.h"
-static unsigned m3_packet, m3_instance;
-static int m3_brightness[4];
+static unsigned object_packet, object_instance;
+static int object_brightness[4];
 /*
  * geo_hw.c — the SS22 geometry stage, ported from a validated oracle.
  *
@@ -790,8 +833,10 @@ static int m3_brightness[4];
 #include "eng.h"
 #include "geo_hw.h"
 #include "geo_projection_profile.inc"
+#ifdef GLES3_VALIDATION
 int g_objlog_on; /* ENG_OBJLOG: set by slave_list.c while it logs an object; here because every game links geo_hw.c (a
                     weak extern fails to link on Windows) */
+#endif
 
 /* ---- point data ----------------------------------------------------------
  * The board's point ROM (sign-extended 24-bit at load time, which matches the
@@ -844,7 +889,8 @@ static inline int64_t mulshr128(int64_t a, int64_t b, int n)
 }
 
 /* base16 +/- ((v * mant) << 4 >> shift) / z, saturated to int32. */
-static inline int32_t p3_original_projection(int64_t base16, int64_t v, int32_t mant, int shift, int64_t z, int negate)
+static inline int32_t
+project_saturated_general(int64_t base16, int64_t v, int32_t mant, int shift, int64_t z, int negate)
 {
 #ifdef RR_GEOMETRY_PROJECTION_PROFILE
     if (gp_trace && g_eng_frame == 1500) {
@@ -869,11 +915,12 @@ static inline int32_t p3_original_projection(int64_t base16, int64_t v, int32_t 
     return (int32_t)r;
 }
 
-static _Thread_local bool p3_gles3_projection;
+static _Thread_local bool use_exact_projection;
 #include "projection.h"
 static inline int32_t proj_sat(int64_t b, int64_t v, int32_t m, int s, int64_t z, int n)
 {
-    return p3_gles3_projection ? p3_projection(b, v, m, s, z, n) : p3_original_projection(b, v, m, s, z, n);
+    return use_exact_projection ? project_saturated_exact(b, v, m, s, z, n)
+                                : project_saturated_general(b, v, m, s, z, n);
 }
 
 static inline int32_t sat32(int64_t v)
@@ -936,7 +983,7 @@ static void register_normals(uint32_t addr)
 geo_stats g_geo_stats;
 unsigned g_eng_frame;
 int g_bbox_cur = -1;
-    /* the object code being walked (pickers, probes) */ /* the game's frame count, for diagnostics only */
+/* the object code being walked (pickers, probes) */ /* the game's frame count, for diagnostics only */
 
 int g_zord_ap = 0, g_zord_os = 0; /* last view's priority fields, for PROPCYCL_ZORD */
 
@@ -1009,6 +1056,7 @@ static void quad_fixed(
                      (int64_t)vz[0] * ((int64_t)vy[2] * vx[3] - (int64_t)vx[2] * vy[3]);
         if ((g_view.cullflip && c1 <= 0 && c2 <= 0) || (!g_view.cullflip && c1 >= 0 && c2 >= 0)) {
             g_geo_stats.rej_cull++;
+#ifdef GLES3_VALIDATION
             /* PROPCYCL_CULLDUMP=<code>: name every back-face-culled quad of one
              * object, with its projected corners -- a hole INSIDE one model is
              * either a quad culled here or one lost to the near clip. Diagnostic
@@ -1045,6 +1093,8 @@ static void quad_fixed(
                     fprintf(stderr, "\n");
                 }
             }
+#endif
+
             return;
         }
     }
@@ -1087,7 +1137,7 @@ static void quad_fixed(
     q.behind = 0;
 
     uint32_t uv_raw[8];
-    m3_packet = addr;
+    object_packet = addr;
     for (int k = 0; k < 8; k++)
         uv_raw[k] = (uint32_t)pt_read(k + addr) & 0xffffff;
 
@@ -1107,7 +1157,7 @@ static void quad_fixed(
             briv[i] = (int)((color >> 16) & 0xff); /* flat */
         }
     }
-    memcpy(m3_brightness, briv, sizeof briv);
+    memcpy(object_brightness, briv, sizeof briv);
     q.cmode = (uv_raw[0] >> 12) & 0xf; /* oracle: same fields */
     q.texbank = (uv_raw[1] >> 12) & 0xf;
     q.cz_type = (flags >> 10) & 3; /* pc_geo_fixed.py line 290 */
@@ -1406,6 +1456,7 @@ static void quad_fixed(
         g_geo_stats.zmin_seen = zmin;
     if (zmax > g_geo_stats.zmax_seen)
         g_geo_stats.zmax_seen = zmax;
+#ifdef GLES3_VALIDATION
     { /* ENG_OBJLOG: slave_list.c sets g_objlog_on (defined here: every game links geo_hw.c, Cyber Sled no slave list)
        */
         if (g_objlog_on) {
@@ -1432,6 +1483,8 @@ static void quad_fixed(
                     y1);
         }
     }
+#endif
+
     cb(&q, user);
 }
 
@@ -1496,7 +1549,7 @@ void geo_hw_object(int32_t code, geo_quad_cb cb, void *user)
  *
  * One walker for both boards (namcos22_v.cpp simulate_slavedsp). Record
  * layout, from tools/pc_geo_fixed.py (byte-exact vs MAME):
- *   len 0x15  bb0003  viewport: zoom = dspfloat(src[6]),
+ *   len 0x15  bb000  viewport: zoom = dspfloat(src[6]),
  *                     view[row][col] = q15(src[0x0c + col*3 + row])
  *   len 0x10  233002  object shift / cz adjust (System 22: + object flags)
  *   len 0x0a  300000  view transform: view[row][col] = q15(src[1+col*3+row])
@@ -1514,7 +1567,10 @@ void geo_hw_object(int32_t code, geo_quad_cb cb, void *user)
 #include "geo_hw.h"
 #include "slave_list.h"
 
+#ifdef GLES3_VALIDATION
 extern int g_objlog_on; /* ENG_OBJLOG: geo_hw.c prints the quads while it is set (defined in geo_hw.c) */
+#endif
+
 static int32_t sext_n(uint32_t v, int bits)
 {
     uint32_t m = 1u << (bits - 1);
@@ -1577,7 +1633,7 @@ int eng_walk_list(eng_word_fn pw, const eng_list_cfg *cfg, geo_quad_cb cb, void 
         uint32_t len = pw(src + 1) & 0xFFFF;
         const int p = src + 2; /* payload base */
 
-        if (len == 0x15) { /* bb0003: viewport */
+        if (len == 0x15) { /* bb000: viewport */
             absolute_priority = (int32_t)((pw(p + 3) >> 16) & 0xffff);
             vx = sext_n((pw(p + 5) >> 16) & 0xffff, 12);
             vy = sext_n(pw(p + 5) & 0xffff, 12);
@@ -1672,7 +1728,8 @@ int eng_walk_list(eng_word_fn pw, const eng_list_cfg *cfg, geo_quad_cb cb, void 
                 gv.objectflags = objectflags;
                 geo_hw_set_view(&gv);
                 g_bbox_cur = (int)code;
-                m3_instance = src;
+                object_instance = src;
+#ifdef GLES3_VALIDATION
                 {
                     static int olog = -2;
                     if (olog == -2) {
@@ -1694,8 +1751,13 @@ int eng_walk_list(eng_word_fn pw, const eng_list_cfg *cfg, geo_quad_cb cb, void 
                         g_objlog_on = 1;
                     }
                 }
+#endif
+
                 geo_hw_object((int32_t)code, cb, user);
+#ifdef GLES3_VALIDATION
                 g_objlog_on = 0;
+#endif
+
                 g_bbox_cur = -1;
                 objectflags &= ~2; /* blit_polyobject: per object */
                 prims++;
@@ -1727,24 +1789,24 @@ extern uint32_t g_pointrom_words;
 /* Fixed little-endian protocol record. Metadata layout is documented separately. */
 typedef struct {
     int32_t meta[36], local[24], oracle[28];
-} M3Quad;
-_Static_assert(sizeof(M3Quad) == 352, "capture ABI");
-static M3Quad records[32768];
+} ObjectQuad;
+_Static_assert(sizeof(ObjectQuad) == 352, "capture ABI");
+static ObjectQuad records[32768];
 static unsigned count;
-static const rr_presentation *p1_source;
+static const rr_presentation *frame_source;
 static uint32_t pw(int i)
 {
-    return p1_source->poly[i & 0x7fff];
+    return frame_source->poly[i & 0x7fff];
 }
 static void emit(const geo_quad *q, void *unused)
 {
     (void)unused;
     if (count >= 32768)
         live_fail("geometry capture capacity", -1, -1);
-    M3Quad *r = records + count;
+    ObjectQuad *r = records + count;
     memset(r, 0, sizeof *r);
     int32_t m[] = {g_bbox_cur,
-                   (int32_t)m3_packet,
+                   (int32_t)object_packet,
                    q->zsort,
                    (int32_t)q->color,
                    q->flags_raw,
@@ -1766,13 +1828,13 @@ static void emit(const geo_quad *q, void *unused)
     r->meta[32] = q->nrv;
     r->meta[33] = q->ndv;
     r->meta[34] = q->behind;
-    r->meta[35] = m3_instance;
+    r->meta[35] = object_instance;
     for (int i = 0; i < 4; i++) {
         for (int c = 0; c < 3; c++)
-            r->local[i * 6 + c] = pt_read(m3_packet + 8 + i * 3 + c);
-        r->local[i * 6 + 3] = pt_read(m3_packet + i * 2) & 4095;
-        r->local[i * 6 + 4] = pt_read(m3_packet + i * 2 + 1) & 4095;
-        r->local[i * 6 + 5] = m3_brightness[i];
+            r->local[i * 6 + c] = pt_read(object_packet + 8 + i * 3 + c);
+        r->local[i * 6 + 3] = pt_read(object_packet + i * 2) & 4095;
+        r->local[i * 6 + 4] = pt_read(object_packet + i * 2 + 1) & 4095;
+        r->local[i * 6 + 5] = object_brightness[i];
         const geo_vert *v = q->v + i;
         int32_t a[] = {v->sx16, v->sy16, v->z, (int32_t)v->u, (int32_t)v->v, v->bri, v->valid};
         memcpy(r->oracle + i * 7, a, sizeof a);
@@ -1780,13 +1842,13 @@ static void emit(const geo_quad *q, void *unused)
     count++;
 }
 
-#define P1_VALID(x)                                                                                                    \
+#define RENDER_CHECK_VALID(x)                                                                                          \
     do {                                                                                                               \
         if (!(x))                                                                                                      \
             live_fail("unsupported command layout", -1, -1);                                                           \
     } while (0)
-/* Live adapter for the proven M3 command contract; original simulation untouched.
- * Included after private M3 backend and original geometry/list implementation. */
+/* Live adapter for the proven OBJECT command contract; original simulation untouched.
+ * Included after private OBJECT backend and original geometry/list implementation. */
 #include "rr_mem.h"
 #include "rr_dsp.h"
 #include "rr_scene.h"
@@ -1799,7 +1861,7 @@ typedef struct {
     int32_t recipe[7], material;
 } LiveMaterial;
 typedef struct {
-    Quad3 q;
+    RenderQuad q;
     float transform[16];
     int32_t box[4];
     unsigned page, protected_, reason;
@@ -1808,20 +1870,23 @@ typedef struct {
 static LiveMesh *live_meshes;
 static LiveMaterial *live_materials;
 static uint32_t live_nm, live_nt, live_frame;
-static LiveCommand live_cmd[MAXQ3];
-static Slot3 *p1_output;
-#define live_slot (*p1_output)
+static LiveCommand live_cmd[MAX_QUADS];
+static RenderPacket *frame_output;
+#define live_slot (*frame_output)
 static bool live_prepared, live_loaded;
 
-static uint8_t live_pal[128][768];
-static double live_walk_ms, live_compile_ms;
-static unsigned live_gles3_pictures;
+static double live_compile_ms;
 
 static void live_fail(const char *why, int code, int packet)
 {
-    const rr_presentation *s = p1_source;
-    gles3_unsupported(
-        live_frame, s ? s->g1_main : 0, s ? s->g1_sub : 0, code, packet, g1b_key_valid ? g1b_last_recipe : NULL, why);
+    const rr_presentation *s = frame_source;
+    gles3_unsupported(live_frame,
+                      s ? s->state_main : 0,
+                      s ? s->state_sub : 0,
+                      code,
+                      packet,
+                      dynamic_cache_key_valid ? dynamic_cache_last_recipe : NULL,
+                      why);
 }
 static int live_recipe_compare(const int32_t *a, const int32_t *b)
 {
@@ -1838,10 +1903,10 @@ static void p2_palettes(void)
     for (unsigned g = 0; g < 128; g++) {
         bool changed = !p2_ready[g];
         for (unsigned c = 0; c < 3; c++)
-            changed |= memcmp(p2_planar[g] + c * 256, p1_source->pal + g * 256 + c * 32768, 256) != 0;
+            changed |= memcmp(p2_planar[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256) != 0;
         if (changed) {
             for (unsigned c = 0; c < 3; c++)
-                memcpy(p2_planar[g] + c * 256, p1_source->pal + g * 256 + c * 32768, 256);
+                memcpy(p2_planar[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256);
             if (++p2_revision[g] == 0)
                 p2_revision[g] = 1;
             p2_ready[g] = true;
@@ -1849,7 +1914,7 @@ static void p2_palettes(void)
     }
 }
 
-static int g1_uncached(const int32_t *recipe)
+static int state_uncached(const int32_t *recipe)
 {
     unsigned lo = 0, hi = live_nt;
     while (lo < hi) {
@@ -1911,7 +1976,8 @@ static int live_visible(const void *a, const void *b)
     return c ? c : (x > y) - (x < y);
 }
 /* Same conservative float32 projection-error enclosure as compact_race.py. */
-static unsigned p3_cull_original(const M3Quad *r)
+#ifdef GLES3_VALIDATION
+static unsigned cull_reference(const ObjectQuad *r)
 {
     double low[4][3], high[4][3], zoom = ldexp((double)r->meta[24], -r->meta[25]);
     for (int v = 0; v < 4; v++)
@@ -1953,21 +2019,23 @@ static unsigned p3_cull_original(const M3Quad *r)
             return i + 1;
     return 0;
 }
+#endif
+
 #include "culling.h"
-static unsigned live_cull(const M3Quad *r)
+static unsigned live_cull(const ObjectQuad *r)
 {
 #ifdef GLES3_VALIDATION
-    unsigned a = p3_cull_original(r), b = p3_cull(r);
+    unsigned a = cull_reference(r), b = cull_projected_bounds(r);
     if (a != b) {
         fprintf(stderr, "GLES3 cull mismatch %u %u\n", a, b);
         abort();
     }
     return b;
 #else
-    return p3_cull(r);
+    return cull_projected_bounds(r);
 #endif
 }
-static uint8_t g1b_pen(int bank, int cm, int u, int v)
+static uint8_t dynamic_cache_pen(int bank, int cm, int u, int v)
 {
     unsigned p = gles3_texture_pen(u, v, bank);
     if (cm & 4)
@@ -1976,31 +2044,33 @@ static uint8_t g1b_pen(int bank, int cm, int u, int v)
         return (0xe0 + ((cm & 8) << 1) + ((p >> (4 * (~cm & 1))) & 15)) & 255;
     return p;
 }
-static unsigned g1b_group(unsigned material)
+static unsigned dynamic_cache_group(unsigned material)
 {
-    return material < material_count3 ? c1_group[material] : g1b_drawing->material[material - material_count3].group;
+    return material < material_count ? material_groups[material]
+                                     : dynamic_cache_drawing->material[material - material_count].group;
 }
-static unsigned g1b_material_page(unsigned m)
+static unsigned dynamic_cache_material_page(unsigned m)
 {
-    return m < material_count3 ? material_data3[m].page : g1b_page_index;
+    return m < material_count ? material_data[m].page : dynamic_cache_page_index;
 }
-static int g1b_material(const int *r)
+static int dynamic_cache_material(const int *r)
 {
-    memcpy(g1b_last_recipe, r, 28);
-    g1b_key_valid = true;
-    for (unsigned i = 0; i < g1b_slot->materials; i++)
-        if (!memcmp(g1b_slot->material[i].recipe, r, 28)) {
-            g1b_slot->hits++;
-            return material_count3 + i;
+    memcpy(dynamic_cache_last_recipe, r, 28);
+    dynamic_cache_key_valid = true;
+    for (unsigned i = 0; i < dynamic_cache_slot->materials; i++)
+        if (!memcmp(dynamic_cache_slot->material[i].recipe, r, 28)) {
+            dynamic_cache_slot->hits++;
+            return material_count + i;
         }
     if (r[3] < 0 || r[3] > 4095 || r[4] < 0 || r[4] > 4095 || r[5] < 1 || r[6] < 1 || r[5] > 1020 || r[6] > 1020)
         live_fail("dynamic footprint dimensions/capacity", -1, -1);
     int key[] = {r[0], r[2], (r[3] / 256) * 256, (r[4] / 256) * 256, 0, 0};
     key[4] = ((r[3] + r[5] + 255) / 256) * 256 - key[2];
     key[5] = ((r[4] + r[6] + 255) / 256) * 256 - key[3];
-    if (getenv("ENG_G1C_KEYS"))
+#ifdef GLES3_VALIDATION
+    if (getenv("ENG_GLES3_MATERIAL_KEYS"))
         fprintf(stderr,
-                "[G1C-KEY] tick=%u key=%d,%d,%d,%d,%d,%d\n",
+                "[MATERIAL_CACHE-KEY] tick=%u key=%d,%d,%d,%d,%d,%d\n",
                 live_frame,
                 key[0],
                 key[1],
@@ -2008,41 +2078,42 @@ static int g1b_material(const int *r)
                 key[3],
                 key[4],
                 key[5]);
+#endif
     bool decode = false;
-    int id = g1b_reserve(g1b_slot, key, &decode);
+    int id = dynamic_cache_reserve(dynamic_cache_slot, key, &decode);
     if (id < 0)
         live_fail("dynamic footprint dimensions/capacity", -1, -1);
-    G1BEntry *e = g1b_entries + id;
+    DynamicCacheEntry *e = dynamic_cache_entries + id;
     if (decode) {
         for (unsigned y = 0; y < e->h; y++)
             for (unsigned x = 0; x < e->w; x++)
-                g1b_page[(e->y + y) * G1B_SIDE + e->x + x] = g1b_pen(key[0], key[1], key[2] - 2 + x, key[3] - 2 + y);
+                dynamic_cache_page[(e->y + y) * DYNAMIC_CACHE_SIDE + e->x + x] =
+                    dynamic_cache_pen(key[0], key[1], key[2] - 2 + x, key[3] - 2 + y);
     }
     unsigned u;
-    for (u = 0; u < g1b_slot->uploads; u++)
-        if (g1b_slot->upload[u].entry == (unsigned)id)
+    for (u = 0; u < dynamic_cache_slot->uploads; u++)
+        if (dynamic_cache_slot->upload[u].entry == (unsigned)id)
             break;
-    if (u == g1b_slot->uploads) {
-        if (u >= G1B_MATERIALS || g1b_slot->bytes + e->w * e->h > G1B_BYTES)
+    if (u == dynamic_cache_slot->uploads) {
+        if (u >= DYNAMIC_CACHE_MATERIALS || dynamic_cache_slot->bytes + e->w * e->h > DYNAMIC_CACHE_BYTES)
             live_fail("dynamic slot capacity", -1, -1);
-        G1BUpload next = {.entry = id,
-                          .x = e->x,
-                          .y = e->y,
-                          .w = e->w,
-                          .h = e->h,
-                          .offset = g1b_slot->bytes,
-                          .generation = e->generation};
+        DynamicCacheUpload next = {.entry = id,
+                                   .x = e->x,
+                                   .y = e->y,
+                                   .w = e->w,
+                                   .h = e->h,
+                                   .offset = dynamic_cache_slot->bytes,
+                                   .generation = e->generation};
         memcpy(next.key, key, 24);
-        g2_stage(g1b_slot, u, &next, g1b_page);
-        G1BUpload *p = g1b_slot->upload + u;
-        g1b_slot->bytes += e->w * e->h;
-        g1b_slot->uploads++;
-#ifdef G1B_VALIDATION
+        preparation_stage(dynamic_cache_slot, u, &next, dynamic_cache_page);
+        dynamic_cache_slot->bytes += e->w * e->h;
+        dynamic_cache_slot->uploads++;
+#ifdef GLES3_VALIDATION
         if (decode) {
             unsigned char hash[32];
-            SHA256(g1b_slot->pens + p->offset, e->w * e->h, hash);
+            SHA256(dynamic_cache_slot->pens + dynamic_cache_slot->upload[u].offset, e->w * e->h, hash);
             fprintf(stderr,
-                    "[G1B-DECODE] tick=%u key=%d,%d,%d,%d,%d,%d bytes=%u sha256=",
+                    "[DYNAMIC_CACHE-DECODE] tick=%u key=%d,%d,%d,%d,%d,%d bytes=%u sha256=",
                     live_frame,
                     key[0],
                     key[1],
@@ -2057,40 +2128,44 @@ static int g1b_material(const int *r)
         }
 #endif
     }
-    unsigned m = g1b_slot->materials++;
-    if (m >= G1B_MATERIALS)
+    unsigned m = dynamic_cache_slot->materials++;
+    if (m >= DYNAMIC_CACHE_MATERIALS)
         live_fail("dynamic material capacity", -1, -1);
-    G1BMaterial *v = g1b_slot->material + m, value = {.uv = {1.f / G1B_SIDE,
-                                                             1.f / G1B_SIDE,
-                                                             (e->x + 2.5 - e->key[2]) / (double)G1B_SIDE,
-                                                             (e->y + 2.5 - e->key[3]) / (double)G1B_SIDE},
-                                                      .group = r[1],
-                                                      .upload = u};
+    DynamicCacheMaterial *v = dynamic_cache_slot->material + m,
+                         value = {.uv = {1.f / DYNAMIC_CACHE_SIDE,
+                                         1.f / DYNAMIC_CACHE_SIDE,
+                                         (e->x + 2.5 - e->key[2]) / (double)DYNAMIC_CACHE_SIDE,
+                                         (e->y + 2.5 - e->key[3]) / (double)DYNAMIC_CACHE_SIDE},
+                                  .group = r[1],
+                                  .upload = u};
     memcpy(value.recipe, r, 28);
     if (memcmp(v, &value, sizeof value)) {
         *v = value;
-        g1b_slot->metadata_bytes += sizeof value;
+        dynamic_cache_slot->metadata_bytes += sizeof value;
     }
-    return material_count3 + m;
+    return material_count + m;
 }
-static float g2_uv[3][G1B_MATERIALS][4];
-static bool g2_uv_valid[3][G1B_MATERIALS];
-static void g1b_upload(const rr_presentation *s, unsigned copy)
+static float material_uv[3][DYNAMIC_CACHE_MATERIALS][4];
+static bool material_uv_valid[3][DYNAMIC_CACHE_MATERIALS];
+static void dynamic_cache_upload(const rr_presentation *s, unsigned copy)
 {
     unsigned uv_bytes = 0;
-    g1b_drawing = s->g1b_dynamic;
-    CHECK3(g1b_drawing);
-    pages3[g1b_page_index] = g1b_pages[copy];
-    materials3 = g1b_uv[copy];
-    if (c1d_debug)
-        c1d_mapping = g1b_mapping[copy];
+    dynamic_cache_drawing = s->dynamic_cache_dynamic;
+    RENDER_CHECK(dynamic_cache_drawing);
+    page_textures[dynamic_cache_page_index] = dynamic_cache_pages[copy];
+    material_texture = dynamic_cache_uv[copy];
+#ifdef GLES3_VALIDATION
+    if (provenance_debug)
+        provenance_mapping = dynamic_cache_mapping[copy];
+#endif
+
     unsigned bytes = 0;
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, g1b_pages[copy]);
+    glBindTexture(GL_TEXTURE_2D, dynamic_cache_pages[copy]);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (unsigned j = 0; j < g1b_drawing->uploads; j++) {
-        const G1BUpload *p = g1b_drawing->upload + j;
-        if (g1b_resident[copy][p->entry] != p->generation) {
+    for (unsigned j = 0; j < dynamic_cache_drawing->uploads; j++) {
+        const DynamicCacheUpload *p = dynamic_cache_drawing->upload + j;
+        if (dynamic_cache_resident[copy][p->entry] != p->generation) {
             glTexSubImage2D(GL_TEXTURE_2D,
                             0,
                             p->x,
@@ -2099,23 +2174,24 @@ static void g1b_upload(const rr_presentation *s, unsigned copy)
                             p->h,
                             GL_RED_INTEGER,
                             GL_UNSIGNED_BYTE,
-                            g1b_drawing->pens + p->offset);
-            g1b_resident[copy][p->entry] = p->generation;
+                            dynamic_cache_drawing->pens + p->offset);
+            dynamic_cache_resident[copy][p->entry] = p->generation;
             bytes += p->w * p->h;
         }
     }
-    for (unsigned j = 0; j < g1b_drawing->materials; j++) {
-        const G1BMaterial *m = g1b_drawing->material + j;
-        unsigned id = material_count3 + j;
-        if (!g2_uv_valid[copy][j] || memcmp(g2_uv[copy][j], m->uv, 16)) {
-            glBindTexture(GL_TEXTURE_2D, g1b_uv[copy]);
+    for (unsigned j = 0; j < dynamic_cache_drawing->materials; j++) {
+        const DynamicCacheMaterial *m = dynamic_cache_drawing->material + j;
+        unsigned id = material_count + j;
+        if (!material_uv_valid[copy][j] || memcmp(material_uv[copy][j], m->uv, 16)) {
+            glBindTexture(GL_TEXTURE_2D, dynamic_cache_uv[copy]);
             glTexSubImage2D(GL_TEXTURE_2D, 0, id % 1024, id / 1024, 1, 1, GL_RGBA, GL_FLOAT, m->uv);
-            memcpy(g2_uv[copy][j], m->uv, 16);
-            g2_uv_valid[copy][j] = true;
+            memcpy(material_uv[copy][j], m->uv, 16);
+            material_uv_valid[copy][j] = true;
             uv_bytes += 16;
         }
-        if (c1d_debug) {
-            const G1BUpload *p = g1b_drawing->upload + m->upload;
+#ifdef GLES3_VALIDATION
+        if (provenance_debug) {
+            const DynamicCacheUpload *p = dynamic_cache_drawing->upload + m->upload;
             int map[] = {m->recipe[0],
                          m->recipe[3],
                          m->recipe[4],
@@ -2125,42 +2201,43 @@ static void g1b_upload(const rr_presentation *s, unsigned copy)
                          m->recipe[6],
                          m->recipe[1]};
             unsigned at = id * 2;
-            glBindTexture(GL_TEXTURE_2D, g1b_mapping[copy]);
+            glBindTexture(GL_TEXTURE_2D, dynamic_cache_mapping[copy]);
             glTexSubImage2D(GL_TEXTURE_2D, 0, at % 1024, at / 1024, 2, 1, GL_RGBA_INTEGER, GL_INT, map);
         }
+#endif
     }
     fprintf(stderr, "[G2-UV] tick=%u bytes=%u\n", s->frame, uv_bytes);
-    CHECK3(glGetError() == GL_NO_ERROR);
+    RENDER_CHECK(glGetError() == GL_NO_ERROR);
     glActiveTexture(GL_TEXTURE0);
     fprintf(stderr,
-            "[G1B-UPLOAD] tick=%u copy=%u bytes=%u materials=%u hits=%u misses=%u evictions=%u\n",
+            "[DYNAMIC_CACHE-UPLOAD] tick=%u copy=%u bytes=%u materials=%u hits=%u misses=%u evictions=%u\n",
             s->frame,
             copy,
             bytes,
-            g1b_drawing->materials,
-            g1b_drawing->hits,
-            g1b_drawing->misses,
-            g1b_drawing->evictions);
+            dynamic_cache_drawing->materials,
+            dynamic_cache_drawing->hits,
+            dynamic_cache_drawing->misses,
+            dynamic_cache_drawing->evictions);
 }
 
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
 static unsigned record_splits[4], record_protected_visible;
 #endif
 static void live_compile(void)
 {
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
     memset(record_splits, 0, sizeof record_splits);
     record_protected_visible = 0;
 #endif
-    double start = clock3(CLOCK_MONOTONIC);
-    unsigned direct = p1_source->direct_count, n = count + direct;
-    if (n > MAXQ3 || direct > 512)
+    double start = clock_seconds(CLOCK_MONOTONIC);
+    unsigned direct = frame_source->direct_count, n = count + direct;
+    if (n > MAX_QUADS || direct > 512)
         live_fail("command/dynamic capacity", -1, -1);
     p2_palettes();
     float dynamic[4096][4];
     memset(dynamic, 0, sizeof dynamic);
     for (unsigned i = 0; i < count; i++) {
-        const M3Quad *r = records + i;
+        const ObjectQuad *r = records + i;
         LiveCommand *c = live_cmd + direct + i;
         memset(c, 0, sizeof *c);
         if (r->meta[0] == 5 || r->meta[7])
@@ -2175,16 +2252,16 @@ static void live_compile(void)
             u1 = u > u1 ? u : u1;
             v0 = v < v0 ? v : v0;
             v1 = v > v1 ? v : v1;
-            P1_VALID(r->local[j * 6 + 5] >= 0 && r->local[j * 6 + 5] <= 65535);
+            RENDER_CHECK_VALID(r->local[j * 6 + 5] >= 0 && r->local[j * 6 + 5] <= 65535);
             c->q.brightness[j] = r->local[j * 6 + 5];
         }
         int32_t recipe[] = {r->meta[5], (r->meta[3] >> 8) & 127, r->meta[6], u0, v0, u1 - u0 + 1, v1 - v0 + 1};
-        memcpy(g1b_last_recipe, recipe, 28);
-        g1b_key_valid = true;
+        memcpy(dynamic_cache_last_recipe, recipe, 28);
+        dynamic_cache_key_valid = true;
         int material = live_material(recipe);
         if (material < 0)
             live_fail("material absent from ROM catalogue", r->meta[0], r->meta[1]);
-        c->page = g1b_material_page(material);
+        c->page = dynamic_cache_material_page(material);
         c->q.mesh = mesh;
         c->q.material = material;
         c->q.source_instance = r->meta[35];
@@ -2225,7 +2302,7 @@ static void live_compile(void)
         c->q.flags = ((r->meta[6] & 7) == 1) | ((r->meta[34] != 0) << 1) | (c->protected_ << 2) | (c->reason << 8);
     }
     for (unsigned i = 0; i < direct; i++) {
-        const uint16_t *w = p1_source->direct[i];
+        const uint16_t *w = frame_source->direct[i];
         LiveCommand *c = live_cmd + i;
         memset(c, 0, sizeof *c);
         int u0 = 4096, u1 = 0, v0 = 4096, v1 = 0;
@@ -2250,13 +2327,13 @@ static void live_compile(void)
             c->q.brightness[j] = s[4] >> 8;
         }
         int32_t recipe[] = {w[5] >> 12, (w[2] >> 8) & 127, w[4] >> 12, u0, v0, u1 - u0 + 1, v1 - v0 + 1};
-        memcpy(g1b_last_recipe, recipe, 28);
-        g1b_key_valid = true;
+        memcpy(dynamic_cache_last_recipe, recipe, 28);
+        dynamic_cache_key_valid = true;
         int material = live_material(recipe);
         if (material < 0)
-            material = g1b_material(recipe);
+            material = dynamic_cache_material(recipe);
         c->q.material = material;
-        c->page = g1b_material_page(material);
+        c->page = dynamic_cache_material_page(material);
         c->q.mesh = -1 - i * 8;
         c->q.source_instance = 65535;
         c->source_key = -1 - (int)i;
@@ -2271,26 +2348,26 @@ static void live_compile(void)
     }
 
 #ifdef GLES3_VALIDATION
-    extern void rr_c1b_semantic(unsigned, const void *, size_t);
-    static LiveCommand c1_copy[MAXQ3];
-    memcpy(c1_copy, live_cmd, n * sizeof *live_cmd);
+    extern void rr_validation_semantic(unsigned, const void *, size_t);
+    static LiveCommand semantic_commands[MAX_QUADS];
+    memcpy(semantic_commands, live_cmd, n * sizeof *live_cmd);
     for (unsigned k = 0; k < n; k++)
-        c1_copy[k].page = 0;
+        semantic_commands[k].page = 0;
     if (live_frame >= 1800 && getenv("ENG_GLES3_SEMANTIC"))
-        rr_c1b_semantic(live_frame, c1_copy, n * sizeof *live_cmd);
+        rr_validation_semantic(live_frame, semantic_commands, n * sizeof *live_cmd);
 
 #endif
     qsort(live_cmd, n, sizeof *live_cmd, live_painter);
     for (unsigned i = 0; i < n; i++)
         live_cmd[i].q.depth = .9 - 1.8 * (i + 1) / (n + 1.);
     qsort(live_cmd, n, sizeof *live_cmd, live_batch);
-    Instance3 ins[MAXI3];
-    int32_t ins_source[MAXI3];
+    RenderInstance ins[MAX_INSTANCES];
+    int32_t ins_source[MAX_INSTANCES];
     unsigned ni = 0;
-    Quad3 quads[MAXQ3];
-    uint16_t visible[MAXQ3];
+    RenderQuad quads[MAX_QUADS];
+    uint16_t visible[MAX_QUADS];
     unsigned nv = 0;
-    Group3 groups[MAXQ3];
+    DrawGroup groups[MAX_QUADS];
     unsigned ng = 0;
     for (unsigned i = 0; i < n; i++) {
         LiveCommand *c = live_cmd + i;
@@ -2301,7 +2378,7 @@ static void live_compile(void)
                 break;
         }
         if (k == ni) {
-            if (ni >= MAXI3)
+            if (ni >= MAX_INSTANCES)
                 live_fail("instance capacity", -1, -1);
             ins_source[ni] = c->source_key;
             memcpy(ins[ni].data, c->transform, 64);
@@ -2317,13 +2394,13 @@ static void live_compile(void)
     for (unsigned i = 0; i < nv; i++) {
         LiveCommand *c = live_cmd + visible[i];
         unsigned mode = (c->q.flags >> 1) & 3;
-        Group3 *g = ng ? groups + ng - 1
-                       : NULL; /* Adjacent instances share program/layout through mode. Keep protection in
-                                * sorting, depth and mode (including the no-reversal rule); only join draws. */
+        DrawGroup *g = ng ? groups + ng - 1
+                          : NULL; /* Adjacent instances share program/layout through mode. Keep protection in
+                                   * sorting, depth and mode (including the no-reversal rule); only join draws. */
         if (g && g->page == c->page && g->mode == mode && !memcmp(g->box, c->box, 16))
             g->count++;
         else {
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
             if (g) { /* Protection is no longer a draw boundary. */
                 record_splits[1] += g->page != c->page;
                 record_splits[2] += memcmp(g->box, c->box, 16) != 0;
@@ -2337,22 +2414,22 @@ static void live_compile(void)
             g->mode = mode;
             memcpy(g->box, c->box, 16);
         }
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
         record_protected_visible += !!(mode & 2);
 #endif
     }
 #ifdef GLES3_VALIDATION
-    if (c1d_debug &&
+    if (provenance_debug &&
         (live_frame == 1800 || live_frame == 1965 || live_frame == 2500 || live_frame == 2643 || live_frame == 3000 ||
          live_frame == 3546 || live_frame == 3600 || live_frame == 4200 || live_frame == 4800 || live_frame == 5400 ||
          live_frame == 5639 || live_frame == 5655 || live_frame == 5867 || live_frame == 5874 || live_frame == 5878 ||
          live_frame == 5889 || live_frame == 5921 || live_frame == 6006)) {
-        for (unsigned j = 0; j < g1b_slot->materials; j++) {
-            int *r = g1b_slot->material[j].recipe;
+        for (unsigned j = 0; j < dynamic_cache_slot->materials; j++) {
+            int *r = dynamic_cache_slot->material[j].recipe;
             fprintf(stderr,
                     "[GLES3-MATERIAL] tick=%u id=%u recipe=%d,%d,%d,%d,%d,%d,%d\n",
                     live_frame,
-                    material_count3 + j,
+                    material_count + j,
                     r[0],
                     r[1],
                     r[2],
@@ -2363,22 +2440,22 @@ static void live_compile(void)
         }
     }
 #endif
-    Header3 h = {.magic = 0x33504e52,
-                 .version = 3,
-                 .tick = live_frame,
-                 .n = n,
-                 .visible = nv,
-                 .groups = ng,
-                 .instances = ni,
-                 .dynamic = direct * 8};
-    unsigned bgbase = (p1_source->mixer[4] << 8) & 0x7f00;
+    RenderPacketHeader h = {.magic = 0x33504e52,
+                            .version = 3,
+                            .tick = live_frame,
+                            .n = n,
+                            .visible = nv,
+                            .groups = ng,
+                            .instances = ni,
+                            .dynamic = direct * 8};
+    unsigned bgbase = (frame_source->mixer[4] << 8) & 0x7f00;
     for (unsigned c = 0; c < 3; c++)
-        h.bg[c] = p1_source->pal[bgbase + 255 + c * 32768] / 255.f;
+        h.bg[c] = frame_source->pal[bgbase + 255 + c * 32768] / 255.f;
     size_t at = 0;
 #define LIVE_COPY(p, n)                                                                                                \
     do {                                                                                                               \
         size_t bytes_ = (n);                                                                                           \
-        P1_VALID(at + bytes_ <= RAW3);                                                                                 \
+        RENDER_CHECK_VALID(at + bytes_ <= PACKET_CAPACITY);                                                            \
         memcpy(live_slot.bytes + at, (p), bytes_);                                                                     \
         at += bytes_;                                                                                                  \
     } while (0)
@@ -2392,56 +2469,58 @@ static void live_compile(void)
     }
     LIVE_COPY(groups, ng * sizeof *groups);
     LIVE_COPY(dynamic, direct * 8 * 16);
-    LIVE_COPY(p1_source->text, 8192);
+    LIVE_COPY(frame_source->text, 8192);
 #undef LIVE_COPY
     live_slot.size = at;
     live_slot.tick = live_frame;
     live_prepared = true;
-    live_compile_ms = (clock3(CLOCK_MONOTONIC) - start) * 1000;
+    live_compile_ms = (clock_seconds(CLOCK_MONOTONIC) - start) * 1000;
+#ifdef GLES3_VALIDATION
     const char *dir = getenv("ENG_GLES3_COMMAND_DUMP");
     if (dir) {
         char path[4096];
         snprintf(path, sizeof path, "%s/tick-%u.live", dir, live_frame);
         FILE *f = fopen(path, "wbx");
-        P1_VALID(f && fwrite(live_slot.bytes, 1, at, f) == at && !fclose(f));
+        RENDER_CHECK_VALID(f && fwrite(live_slot.bytes, 1, at, f) == at && !fclose(f));
     }
+#endif
 }
 
 /* Convert only page-group runs in the offscreen warm packet. */
-bool rr_p1_open(void)
+bool rr_renderer_open(void)
 {
     const char *pack = getenv("ENG_GLES3_ASSETS");
-    CHECK3(pack);
-    FILE *f = open3(pack, "gles3.lookup");
+    RENDER_CHECK(pack);
+    FILE *f = open_asset(pack, "gles3.lookup");
     uint32_t h[4];
-    read3(f, h, 16);
-    CHECK3(h[0] == 0x4b4c314e && h[1] == 1 && h[2] <= 131072 && h[3] <= MAXM3);
+    read_exact(f, h, 16);
+    RENDER_CHECK(h[0] == 0x4b4c314e && h[1] == 1 && h[2] <= 131072 && h[3] <= MAX_MATERIALS);
     live_nm = h[2];
     live_nt = h[3];
-    g1c_init();
+    material_cache_init();
     live_meshes = malloc(live_nm * sizeof *live_meshes);
     live_materials = malloc(live_nt * sizeof *live_materials);
-    CHECK3(live_meshes && live_materials);
-    read3(f, live_meshes, live_nm * sizeof *live_meshes);
-    read3(f, live_materials, live_nt * sizeof *live_materials);
-    CHECK3(fgetc(f) == EOF && !fclose(f));
+    RENDER_CHECK(live_meshes && live_materials);
+    read_exact(f, live_meshes, live_nm * sizeof *live_meshes);
+    read_exact(f, live_materials, live_nt * sizeof *live_materials);
+    RENDER_CHECK(fgetc(f) == EOF && !fclose(f));
 #ifdef GLES3_VALIDATION
 
 #endif
-    p1_diagnostic = false;
-    gles3_front3 = 1;
-    gles3_ram3 = 0;
-    stage_sync3 = false;
-    load3(pack, NULL);
-    glGenTextures(1, &p1b_color);
-    glBindTexture(GL_TEXTURE_2D, p1b_color);
+    frame_diagnostic = false;
+    gles3_front = 1;
+    gles3_ram = 0;
+    stage_sync = false;
+    load_render_assets(pack, NULL);
+    glGenTextures(1, &readback_color);
+    glBindTexture(GL_TEXTURE_2D, readback_color);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 640, 480, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glGenFramebuffers(1, &p1b_fbo);
-    glBindFramebuffer(GL_FRAMEBUFFER, p1b_fbo);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, p1b_color, 0);
-    CHECK3(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
+    glGenFramebuffers(1, &readback_fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, readback_fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, readback_color, 0);
+    RENDER_CHECK(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     live_loaded = true;
     gles3_pre_warm();
@@ -2452,79 +2531,84 @@ bool rr_p1_open(void)
 /* All compiler scratch is owned by rr-prepare. Source data is a const slot;
  * GL state and GPU resource copies are exclusively owned by rr-present. */
 
-extern void rr_video_p1b_output(unsigned);
-extern void rr_p1b_packet(unsigned, const void *, size_t);
-static unsigned p1_gles3_count;
-static double p1_ring_wait;
-static void g1_receipt(rr_presentation *s, const char *why)
+extern void rr_video_readback_output(unsigned);
+#ifdef GLES3_VALIDATION
+extern void rr_validation_packet(unsigned, const void *, size_t);
+#endif
+
+static unsigned frame_gles3_count;
+static double frame_ring_wait;
+static void state_receipt(rr_presentation *s, const char *why)
 {
-    if (s->g1b_dynamic && ((G1BSlot *)s->g1b_dynamic)->tick == s->frame) {
-        const G1BSlot *d = s->g1b_dynamic;
+    if (s->dynamic_cache_dynamic && ((DynamicCacheSlot *)s->dynamic_cache_dynamic)->tick == s->frame) {
+        const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
         fprintf(stderr,
-                "[G2-STAGING] tick=%u copied_bytes=%llu metadata_bytes=%llu\n",
+                "[UPLOAD-STAGING] tick=%u copied_bytes=%llu metadata_bytes=%llu\n",
                 s->frame,
                 (unsigned long long)d->copied_bytes,
                 (unsigned long long)d->metadata_bytes);
     }
     fprintf(stderr,
-            "[G1C-CACHE] tick=%u occupancy=%u lookups=%llu probes=%llu max_probe=%u full=%llu clears=%u generation=%u "
+            "[MATERIAL_CACHE-CACHE] tick=%u occupancy=%u lookups=%llu probes=%llu max_probe=%u full=%llu clears=%u "
+            "generation=%u "
             "capacity=%u pool_limit=65535\n",
             s->frame,
-            g1c_occupancy,
-            (unsigned long long)g1c_lookups,
-            (unsigned long long)g1c_probes,
-            g1c_maxprobe,
-            (unsigned long long)g1c_full,
-            g1c_clears,
-            g1c_generation,
-            g1c_capacity);
-    g1c_clears = 0;
-    g1c_lookups = g1c_probes = g1c_full = g1c_maxprobe = 0;
-    const G1BSlot *d = s->g1b_dynamic;
+            material_cache_occupancy,
+            (unsigned long long)material_cache_lookups,
+            (unsigned long long)material_cache_probes,
+            material_cache_maxprobe,
+            (unsigned long long)material_cache_full,
+            material_cache_clears,
+            material_cache_generation,
+            material_cache_capacity);
+    material_cache_clears = 0;
+    material_cache_lookups = material_cache_probes = material_cache_full = material_cache_maxprobe = 0;
+    const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
     if (d && d->tick == s->frame)
         fprintf(stderr,
-                "[G1B-PREP] tick=%u hits=%u misses=%u evictions=%u pending_bytes=%u\n",
+                "[DYNAMIC-CACHE-PREP] tick=%u hits=%u misses=%u evictions=%u pending_bytes=%u\n",
                 s->frame,
                 d->hits,
                 d->misses,
                 d->evictions,
                 d->bytes);
-    fprintf(stderr,
-            "[G1-COVERAGE] tick=%u main=%u sub=%u screen=%u course=%u major=%u walk=%u direct=%u gles3=%u reason=%s\n",
-            s->frame,
-            s->g1_main,
-            s->g1_sub,
-            s->g1_screen,
-            s->g1_course,
-            s->g1b_major,
-            s->walk,
-            s->direct_count,
-            s->gles3_tag,
-            why);
+    fprintf(
+        stderr,
+        "[RENDER-COVERAGE] tick=%u main=%u sub=%u screen=%u course=%u major=%u walk=%u direct=%u gles3=%u reason=%s\n",
+        s->frame,
+        s->state_main,
+        s->state_sub,
+        s->state_screen,
+        s->state_course,
+        s->dynamic_cache_major,
+        s->walk,
+        s->direct_count,
+        s->gles3_tag,
+        why);
 }
-bool rr_p1_prepare(rr_presentation *s)
+bool rr_renderer_prepare(rr_presentation *s)
 {
     s->gles3_walk_ms = s->gles3_compile_ms = 0;
-    p1_source = s;
+    frame_source = s;
     live_frame = s->frame;
-    rr_gl_p1_select(s);
-    g1b_key_valid = false;
+    rr_gl_renderer_select(s);
+    dynamic_cache_key_valid = false;
     if (!live_loaded)
         live_fail("gles3 resources unavailable", -1, -1);
     if (!s->gles3_payload) {
-        s->gles3_payload = calloc(1, sizeof(Slot3));
+        s->gles3_payload = calloc(1, sizeof(RenderPacket));
         if (!s->gles3_payload)
             live_fail("command slot allocation", -1, -1);
     }
-    if (!s->g1b_dynamic) {
-        s->g1b_dynamic = calloc(1, sizeof(G1BSlot));
-        if (!s->g1b_dynamic)
+    if (!s->dynamic_cache_dynamic) {
+        s->dynamic_cache_dynamic = calloc(1, sizeof(DynamicCacheSlot));
+        if (!s->dynamic_cache_dynamic)
             live_fail("dynamic slot allocation", -1, -1);
     }
-    g1b_slot = s->g1b_dynamic;
-    g2_stage_begin(g1b_slot);
-    g1b_slot->tick = s->frame;
-    p1_output = s->gles3_payload;
+    dynamic_cache_slot = s->dynamic_cache_dynamic;
+    preparation_stage_begin(dynamic_cache_slot);
+    dynamic_cache_slot->tick = s->frame;
+    frame_output = s->gles3_payload;
 #ifdef GLES3_VALIDATION
     const char *force = getenv("ENG_GLES3_FORCE_UNSUPPORTED");
     if (force && s->frame == (unsigned)atoi(force)) {
@@ -2534,96 +2618,97 @@ bool rr_p1_prepare(rr_presentation *s)
     }
 #endif
     count = 0;
-    double t = clock3(CLOCK_MONOTONIC);
-    p3_gles3_projection = true;
+    double t = clock_seconds(CLOCK_MONOTONIC);
+    use_exact_projection = true;
     if (s->walk) {
         eng_list_cfg cfg = {ENG_LIST_HEAD_S22, 1, NULL, NULL, NULL, NULL};
         eng_walk_list(pw, &cfg, emit, NULL);
     }
-    p3_gles3_projection = false;
-    s->gles3_walk_ms = (clock3(CLOCK_MONOTONIC) - t) * 1000;
+    use_exact_projection = false;
+    s->gles3_walk_ms = (clock_seconds(CLOCK_MONOTONIC) - t) * 1000;
     live_compile();
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
     memcpy(s->record_splits, record_splits, sizeof record_splits);
     s->record_protected_visible = record_protected_visible;
 #endif
-    memcpy(s->c1_revision, p2_revision, sizeof s->c1_revision);
+    memcpy(s->palette_revision, p2_revision, sizeof s->palette_revision);
     s->gles3_compile_ms = live_compile_ms;
     s->gles3_tag = 1;
 #ifdef GLES3_VALIDATION
     if (s->frame >= 1800 && getenv("ENG_GLES3_RECEIPTS"))
-        rr_p1b_packet(s->frame, ((Slot3 *)s->gles3_payload)->bytes, ((Slot3 *)s->gles3_payload)->size);
+        rr_validation_packet(
+            s->frame, ((RenderPacket *)s->gles3_payload)->bytes, ((RenderPacket *)s->gles3_payload)->size);
 #endif
-    g1_receipt(s, "covered");
+    state_receipt(s, "covered");
     return true;
 }
-bool rr_p1_draw(const rr_presentation *s, eng_render_stats *stats)
+bool rr_renderer_draw(const rr_presentation *s, eng_render_stats *stats)
 {
-    unsigned i = p1_gpu_index++ % 3;
-    double start = clock3(CLOCK_MONOTONIC);
-    if (p1_fences[i]) {
+    unsigned i = frame_gpu_index++ % 3;
+    double start = clock_seconds(CLOCK_MONOTONIC);
+    if (frame_fences[i]) {
         GLenum r;
         do {
-            r = glClientWaitSync(p1_fences[i], GL_SYNC_FLUSH_COMMANDS_BIT, 100000000);
+            r = glClientWaitSync(frame_fences[i], GL_SYNC_FLUSH_COMMANDS_BIT, 100000000);
         } while (r == GL_TIMEOUT_EXPIRED);
-        CHECK3(r != GL_WAIT_FAILED);
-        glDeleteSync(p1_fences[i]);
-        p1_fences[i] = 0;
+        RENDER_CHECK(r != GL_WAIT_FAILED);
+        glDeleteSync(frame_fences[i]);
+        frame_fences[i] = 0;
     }
-    p1_ring_wait += clock3(CLOCK_MONOTONIC) - start;
-    instances3 = p1_instances[i];
-    dynamic3 = p1_dynamic[i];
-    attributes3 = p1_attributes[i];
-    p1_hud = &s->video;
+    frame_ring_wait += clock_seconds(CLOCK_MONOTONIC) - start;
+    instance_texture = frame_instances[i];
+    dynamic_mesh_texture = frame_dynamic[i];
+    attribute_buffer = frame_attributes[i];
+    frame_hud = &s->video;
     gles3_drawing = s;
-    double c1e_up = clock3(CLOCK_MONOTONIC), c1e_ucpu = clock3(CLOCK_THREAD_CPUTIME_ID);
-    c1e_groups = 0;
+    double capture_up = clock_seconds(CLOCK_MONOTONIC), capture_ucpu = clock_seconds(CLOCK_THREAD_CPUTIME_ID);
+    capture_groups = 0;
     {
         glActiveTexture(GL_TEXTURE5);
-        glBindTexture(GL_TEXTURE_2D, c1_palettes[i]);
+        glBindTexture(GL_TEXTURE_2D, palette_textures[i]);
         uint8_t row[256 * 4];
         for (unsigned g = 0; g < 128; g++)
-            if (!c1_valid[i][g] || c1_uploaded[i][g] != s->c1_revision[g]) {
-                c1e_groups++;
+            if (!palette_valid[i][g] || uploaded_palette_revision[i][g] != s->palette_revision[g]) {
+                capture_groups++;
                 for (unsigned p = 0; p < 256; p++) {
                     for (unsigned c = 0; c < 3; c++)
                         row[p * 4 + c] = s->pal[g * 256 + p + c * 32768];
                     row[p * 4 + 3] = 255;
                 }
                 glTexSubImage2D(GL_TEXTURE_2D, 0, 0, g, 256, 1, GL_RGBA, GL_UNSIGNED_BYTE, row);
-                c1_valid[i][g] = true;
-                c1_uploaded[i][g] = s->c1_revision[g];
+                palette_valid[i][g] = true;
+                uploaded_palette_revision[i][g] = s->palette_revision[g];
             }
         glActiveTexture(GL_TEXTURE0);
     }
-    c1e_upload_wall = (clock3(CLOCK_MONOTONIC) - c1e_up) * 1000;
-    c1e_upload_cpu = (clock3(CLOCK_THREAD_CPUTIME_ID) - c1e_ucpu) * 1000;
-    g1b_upload(s, i);
-    draw3(s->gles3_payload,
-          0,
-          getenv("ENG_GLES3_CAPTURE") ? getenv("ENG_GLES3_CAPTURE") : "-",
-          clock3(CLOCK_MONOTONIC),
-          0);
-    p1_fences[i] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-    CHECK3(p1_fences[i]);
-    const Header3 *h = (const Header3 *)((const Slot3 *)s->gles3_payload)->bytes;
+    capture_upload_wall = (clock_seconds(CLOCK_MONOTONIC) - capture_up) * 1000;
+    capture_upload_cpu = (clock_seconds(CLOCK_THREAD_CPUTIME_ID) - capture_ucpu) * 1000;
+    dynamic_cache_upload(s, i);
+    const char *capture_output = "-";
+#ifdef GLES3_VALIDATION
+    capture_output = getenv("ENG_GLES3_CAPTURE") ? getenv("ENG_GLES3_CAPTURE") : "-";
+#endif
+    draw_render_packet(s->gles3_payload, 0, capture_output, clock_seconds(CLOCK_MONOTONIC), 0);
+    frame_fences[i] = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+    RENDER_CHECK(frame_fences[i]);
+    const RenderPacketHeader *h = (const RenderPacketHeader *)((const RenderPacket *)s->gles3_payload)->bytes;
     memset(stats, 0, sizeof *stats);
     stats->draws = h->groups;
     stats->triangles = h->visible * 2;
-    p1_gles3_count++;
+    frame_gles3_count++;
     return true;
 }
-void rr_p1_close(void)
+void rr_renderer_close(void)
 {
     if (!live_loaded)
         return;
     for (int i = 0; i < 3; i++)
-        if (p1_fences[i]) {
-            glDeleteSync(p1_fences[i]);
-            p1_fences[i] = 0;
+        if (frame_fences[i]) {
+            glDeleteSync(frame_fences[i]);
+            frame_fences[i] = 0;
         }
-    fprintf(stderr, "[GLES3] pictures=%u first_gles3=1 ring_wait_ms=%.6f\n", p1_gles3_count, p1_ring_wait * 1000);
-    gles3_flush3();
+    fprintf(stderr, "[GLES3] pictures=%u first_gles=1 ring_wait_ms=%.6f\n", frame_gles3_count, frame_ring_wait * 1000);
+    gles3_flush();
     live_loaded = false;
 }
 
@@ -2632,27 +2717,27 @@ void rr_p1_close(void)
 void gles3_pre_warm(void)
 {
     rr_presentation *s = calloc(1, sizeof *s);
-    Slot3 *slot = calloc(1, sizeof *slot);
-    G1BSlot *d = calloc(1, sizeof *d);
-    CHECK3(s && slot && d);
-    s->g1b_dynamic = d;
+    RenderPacket *slot = calloc(1, sizeof *slot);
+    DynamicCacheSlot *d = calloc(1, sizeof *d);
+    RENDER_CHECK(s && slot && d);
+    s->dynamic_cache_dynamic = d;
     s->gles3_payload = slot;
-    rr_gl_p1_select(s);
-    CHECK3(rr_gl_video_prepare(&s->video));
-    p1_hud = &s->video;
+    rr_gl_renderer_select(s);
+    RENDER_CHECK(rr_gl_video_prepare(&s->video));
+    frame_hud = &s->video;
     gles3_drawing = s;
 #ifdef GLES3_VALIDATION
-    if (c1d_debug &&
+    if (provenance_debug &&
         (live_frame == 1800 || live_frame == 1965 || live_frame == 2500 || live_frame == 2643 || live_frame == 3000 ||
          live_frame == 3546 || live_frame == 3600 || live_frame == 4200 || live_frame == 4800 || live_frame == 5400 ||
          live_frame == 5639 || live_frame == 5655 || live_frame == 5867 || live_frame == 5874 || live_frame == 5878 ||
          live_frame == 5889 || live_frame == 5921 || live_frame == 6006)) {
-        for (unsigned j = 0; j < g1b_slot->materials; j++) {
-            int *r = g1b_slot->material[j].recipe;
+        for (unsigned j = 0; j < dynamic_cache_slot->materials; j++) {
+            int *r = dynamic_cache_slot->material[j].recipe;
             fprintf(stderr,
                     "[GLES3-MATERIAL] tick=%u id=%u recipe=%d,%d,%d,%d,%d,%d,%d\n",
                     live_frame,
-                    material_count3 + j,
+                    material_count + j,
                     r[0],
                     r[1],
                     r[2],
@@ -2663,11 +2748,12 @@ void gles3_pre_warm(void)
         }
     }
 #endif
-    Header3 h = {.magic = 0x33504e52, .version = 3, .n = 3, .visible = 3, .groups = 3, .instances = 1, .dynamic = 8};
-    Instance3 ins = {.data = {32768, 0, 0, 0, 0, 32768, 0, 0, 0, 0, 32768, 4096, 0, 0, 1, 1}};
-    Quad3 q[3] = {0};
+    RenderPacketHeader h = {
+        .magic = 0x33504e52, .version = 3, .n = 3, .visible = 3, .groups = 3, .instances = 1, .dynamic = 8};
+    RenderInstance ins = {.data = {32768, 0, 0, 0, 0, 32768, 0, 0, 0, 0, 32768, 4096, 0, 0, 1, 1}};
+    RenderQuad q[3] = {0};
     uint16_t indices[4] = {0, 1, 2, 0};
-    Group3 groups[3] = {0};
+    DrawGroup groups[3] = {0};
     float dynamic[8][4] = {
         {-16, -16, 4096}, {0, 0}, {16, -16, 4096}, {1, 0}, {16, 16, 4096}, {1, 1}, {-16, 16, 4096}, {0, 1}};
     uint8_t text[8192] = {0};
@@ -2678,7 +2764,7 @@ void gles3_pre_warm(void)
         for (unsigned k = 0; k < 4; k++)
             q[j].brightness[k] = 64;
         groups[j] =
-            (Group3){.first = j, .count = 1, .page = material_data3[0].page, .mode = j == 1, .box = {0, 0, 640, 480}};
+            (DrawGroup){.first = j, .count = 1, .page = material_data[0].page, .mode = j == 1, .box = {0, 0, 640, 480}};
     }
     size_t at = 0;
 #define WARM_COPY(p, n)                                                                                                \
@@ -2696,18 +2782,18 @@ void gles3_pre_warm(void)
 #undef WARM_COPY
     slot->size = at;
     slot->tick = 0;
-    rr_video_p1b_output(p1b_fbo);
+    rr_video_readback_output(readback_fbo);
     for (unsigned i = 0; i < 3; i++) {
-        instances3 = p1_instances[i];
-        dynamic3 = p1_dynamic[i];
-        attributes3 = p1_attributes[i];
-        g1b_upload(s, i);
+        instance_texture = frame_instances[i];
+        dynamic_mesh_texture = frame_dynamic[i];
+        attribute_buffer = frame_attributes[i];
+        dynamic_cache_upload(s, i);
         glActiveTexture(GL_TEXTURE5);
-        glBindTexture(GL_TEXTURE_2D, c1_palettes[i]);
-        draw3(slot, -1, "-", clock3(CLOCK_MONOTONIC), 0);
+        glBindTexture(GL_TEXTURE_2D, palette_textures[i]);
+        draw_render_packet(slot, -1, "-", clock_seconds(CLOCK_MONOTONIC), 0);
     }
     glFinish();
-    rr_video_p1b_output(0);
+    rr_video_readback_output(0);
     rr_gl_presentation_release();
     free(d);
     free(slot);

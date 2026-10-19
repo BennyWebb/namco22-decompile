@@ -1,13 +1,4 @@
-static const char *gles3_fold_fs3 =
-    "#version 100\nprecision highp float;\nvarying highp vec2 uv;\nuniform sampler2D "
-    "scene_tex,raw_tex,palette_tex,lut_tex;\nuniform bool shadow_on;\nvoid main(){\n vec4 "
-    "base=texture2D(scene_tex,uv);vec3 c=floor(base.rgb*255.+.5);float row=.125;\n if(base.a<.5){vec4 "
-    "t=texture2D(raw_tex,uv);if(t.a>.5){float idx=floor(t.r*255.+.5);\n  "
-    "if(shadow_on&&idx>=252.&&idx<=254.)row=(idx-251.+.5)/4.;\n  else "
-    "{gl_FragColor=texture2D(palette_tex,vec2((idx+.5)/256.,.5));return;}\n }}\n vec3 "
-    "o;o.r=texture2D(lut_tex,vec2((c.r+.5)/256.,row)).r;\n o.g=texture2D(lut_tex,vec2((c.g+.5)/256.,row)).g;\n "
-    "o.b=texture2D(lut_tex,vec2((c.b+.5)/256.,row)).b;\n gl_FragColor=vec4(o,1.);\n}\n";
-static bool gles3_blank3[1024];
+static bool gles3_blank[1024];
 /* Alternate HUD representation: glyph quads produce an 8-bit pen + coverage
  * image. Palette, shadow and world priority remain in the final compositor. */
 static GLuint glyph_texture, pen_target, glyph_program, glyph_vbo;
@@ -16,10 +7,7 @@ static bool glyph_valid[1024], mesh_valid;
 static uint8_t mesh_tilemap[8192], needed_glyphs[1024];
 static int mesh_scroll_x, mesh_scroll_y, glyph_vertex_count;
 static float glyph_vertices[41 * 31 * 6 * 5];
-static bool gpu_geometry(void)
-{
-    return true;
-}
+
 static const char *glyph_final_fs =
     "#version 100\nprecision highp float;varying highp vec2 uv;"
     "uniform sampler2D scene_tex,raw_tex,palette_tex,lut_tex;uniform bool shadow_on;uniform vec3 mix0,mix1,mix2;"
@@ -87,18 +75,19 @@ static bool geometry_open(void)
 }
 static bool geometry_prepare(const rr_video_cpu_frame *frame)
 {
-    double hp_start = hud_stamp3(CLOCK_MONOTONIC), hp_cpu = hud_stamp3(CLOCK_THREAD_CPUTIME_ID);
-    bool blank3[1024];
-    bool changed3 = false;
-    uint8_t transparent3[128];
-    memset(transparent3, 255, 128);
-    for (unsigned k3 = 0; k3 < 1024; k3++) {
-        const uint8_t *p3 = k3 < 960 ? frame->characters + k3 * 128 : frame->tilemap + (k3 - 960) * 128;
-        blank3[k3] = !memcmp(p3, transparent3, 128);
-        changed3 |= blank3[k3] != gles3_blank3[k3];
+    double hp_start = hud_stamp(CLOCK_MONOTONIC), hp_cpu = hud_stamp(CLOCK_THREAD_CPUTIME_ID);
+    bool blank[1024];
+    bool changed = false;
+    uint8_t transparent[128];
+    memset(transparent, 255, 128);
+    for (unsigned component_index = 0; component_index < 1024; component_index++) {
+        const uint8_t *path = component_index < 960 ? frame->characters + component_index * 128
+                                                    : frame->tilemap + (component_index - 960) * 128;
+        blank[component_index] = !memcmp(path, transparent, 128);
+        changed |= blank[component_index] != gles3_blank[component_index];
     }
-    memcpy(gles3_blank3, blank3, sizeof blank3);
-    bool rebuild = changed3 || !mesh_valid || mesh_scroll_x != frame->scroll_x || mesh_scroll_y != frame->scroll_y ||
+    memcpy(gles3_blank, blank, sizeof blank);
+    bool rebuild = changed || !mesh_valid || mesh_scroll_x != frame->scroll_x || mesh_scroll_y != frame->scroll_y ||
                    memcmp(mesh_tilemap, frame->tilemap, sizeof mesh_tilemap);
     if (rebuild) {
         memset(needed_glyphs, 0, sizeof needed_glyphs);
@@ -107,7 +96,7 @@ static bool geometry_prepare(const rr_video_cpu_frame *frame)
             for (int x = -(frame->scroll_x & 15); x < W; x += 16) {
                 unsigned index = (((y + frame->scroll_y) & 1023) / 16 * 64 + ((x + frame->scroll_x) & 1023) / 16) * 2;
                 unsigned word = (frame->tilemap[index] << 8) | frame->tilemap[index + 1], code = word & 1023;
-                if (blank3[code])
+                if (blank[code])
                     continue;
                 needed_glyphs[code] = 1;
                 float u0 = (code & 31) * 16 / 512.f, u1 = u0 + 16 / 512.f, v0 = (code >> 5) * 16 / 512.f,
@@ -185,11 +174,11 @@ static bool geometry_prepare(const rr_video_cpu_frame *frame)
         if (dither)
             glEnable(GL_DITHER);
     }
-    if (hud_fences3) {
+    if (hud_fences) {
         glFinish();
     }
-    hud_pen_wall3 = (hud_stamp3(CLOCK_MONOTONIC) - hp_start) * 1000;
-    hud_pen_cpu3 = (hud_stamp3(CLOCK_THREAD_CPUTIME_ID) - hp_cpu) * 1000;
+    hud_pen_wall = (hud_stamp(CLOCK_MONOTONIC) - hp_start) * 1000;
+    hud_pen_cpu = (hud_stamp(CLOCK_THREAD_CPUTIME_ID) - hp_cpu) * 1000;
     return error("glyph HUD update");
 }
 static void geometry_close(void)

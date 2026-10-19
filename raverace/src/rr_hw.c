@@ -247,7 +247,7 @@ void rr_hw_set_steering_motor(bool on)
 
 /* CABINET NUMBER is group 3 (EEPROM 0x2C0, backup 0x2E0; WRAM 0x10001060) byte 0:
  * rd_link_number (FUN_00026e24) reads it as & 7 for this cabinet's link id, and
- * LATCHES it into the link state -- A6W(0x11A0) and its *2/*16/*64 offsets
+ * LATCHES it into the link state -- A6W(0x11A0) and its 2x/16x/64x offsets
  * (0x1158/0x115A/0x115C; A6W(x) = WRAM 0x10008000+x) -- but only when the
  * settings reload runs (boot, test-menu exit). A post-boot change (the online
  * lobby's GO) must restate the latches itself or the game keeps staging the

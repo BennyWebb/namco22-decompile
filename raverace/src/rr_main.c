@@ -117,12 +117,12 @@ static struct {
     int32_t at, idx, value;
 } test_adc[32];
 static int n_adc;
-    /* --adc F:I:V (repeatable): twin-stick ADC.I at V (0x47..0xB7, centre 0x7F) from frame F */ /* --steer F:V
-                                                                                                    (repeatable): the
-                                                                                                    wheel at V
-                                                                                                    (0..0xFFF, centre
-                                                                                                    0x800) from frame F
-                                                                                                  */
+/* --adc F:I:V (repeatable): twin-stick ADC.I at V (0x47..0xB7, centre 0x7F) from frame F */ /* --steer F:V
+                                                                                                (repeatable): the
+                                                                                                wheel at V
+                                                                                                (0..0xFFF, centre
+                                                                                                0x800) from frame F
+                                                                                              */
 
 #define REG_SP RR_REG_SP
 #define REG_SR RR_REG_SR
@@ -888,7 +888,7 @@ int main(int argc, char **argv)
     {
         extern void rd_init(void);
         rd_init();
-    }                   /* readable-C replacements (src/rd) */
+    } /* readable-C replacements (src/rd) */
     g_rr_game->entry(); /* entry_reset (this game's reset PC): never returns */
     fprintf(stderr, "[RR] entry_reset returned?!\n");
     return 1;

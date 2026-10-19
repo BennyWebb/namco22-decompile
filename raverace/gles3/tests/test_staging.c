@@ -9,25 +9,26 @@
 #include "staging.h"
 int main(void)
 {
-    G1BSlot *s[2] = {calloc(1, sizeof(G1BSlot)), calloc(1, sizeof(G1BSlot))};
-    uint8_t *src = calloc(1, G1B_BYTES), *expected[2] = {calloc(1, G1B_BYTES), calloc(1, G1B_BYTES)};
+    DynamicCacheSlot *s[2] = {calloc(1, sizeof(DynamicCacheSlot)), calloc(1, sizeof(DynamicCacheSlot))};
+    uint8_t *src = calloc(1, DYNAMIC_CACHE_BYTES),
+            *expected[2] = {calloc(1, DYNAMIC_CACHE_BYTES), calloc(1, DYNAMIC_CACHE_BYTES)};
     unsigned lastbytes[2] = {0};
     uint64_t copied = 0, pending = 0;
     for (unsigned frame = 0; frame < 200; frame++) {
         unsigned at = frame % 2;
         assert(!memcmp(s[at]->pens, expected[at], lastbytes[at]));
-        g2_stage_begin(s[at]);
+        preparation_stage_begin(s[at]);
         for (unsigned u = 0; u < 3; u++) {
             unsigned id = (u + (frame / 20) % 3) % 3;
             unsigned gen = frame / 40 + 1, w = 16 + (frame / 20) % 2 * 7, h = 19;
-            G1BUpload p = {
+            DynamicCacheUpload p = {
                 .entry = id, .x = id * 100, .y = id * 128, .w = w, .h = h, .offset = s[at]->bytes, .generation = gen};
             for (unsigned y = 0; y < h; y++)
                 for (unsigned x = 0; x < w; x++)
-                    src[(p.y + y) * G1B_SIDE + p.x + x] = (id + gen + x + y) & 255;
-            g2_stage(s[at], u, &p, src);
+                    src[(p.y + y) * DYNAMIC_CACHE_SIDE + p.x + x] = (id + gen + x + y) & 255;
+            preparation_stage(s[at], u, &p, src);
             for (unsigned y = 0; y < h; y++)
-                memcpy(expected[at] + p.offset + y * w, src + (p.y + y) * G1B_SIDE + p.x, w);
+                memcpy(expected[at] + p.offset + y * w, src + (p.y + y) * DYNAMIC_CACHE_SIDE + p.x, w);
             s[at]->bytes += w * h;
             s[at]->uploads++;
         }

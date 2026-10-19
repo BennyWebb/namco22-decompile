@@ -1,4 +1,4 @@
-static unsigned p3_cull(const M3Quad *r)
+static unsigned cull_projected_bounds(const ObjectQuad *r)
 {
     double low[4][3], high[4][3], zoom = ldexp((double)r->meta[24], -r->meta[25]);
     for (int v = 0; v < 4; v++)

@@ -146,11 +146,7 @@ static int rr_headless_main(int argc, char **argv)
         max_frames = INT32_MAX;
     for (int i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "--help")) {
-            fprintf(stderr,
-                    "Usage: rr_gles3 ROM_DIR [--frames N] [--interactive] [--audio on|off] [--overlay off|on]\n"
-                    " [--replay-input FILE | --record-input FILE] [--input-checkpoints FILE] [--thread-profile FILE]\n"
-                    " [--profile-simulation] [--simulation-profile-from N] [--es-input FILE] [--controller-db FILE]\n"
-                    " Quit: START+SELECT, Escape, or frame limit.\n");
+            headless_platform_help();
             return 0;
         }
         if (!strcmp(argv[i], "--replay-checks") && i + 1 < argc) {

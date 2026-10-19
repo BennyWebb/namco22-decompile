@@ -3,11 +3,9 @@
 #ifdef RR_GPU_HUD
 #include "eng.h"
 static GLuint gpu_program, raw_tex, palette_tex;
-static bool fold_valid3;
-static uint8_t fold_palette3[1024], fold_lut3[1024], fold_mix3[9];
 static GLint gpu_samplers[4], gpu_scroll, gpu_shadow, gpu_mix[3];
 static uint8_t uploaded_raw[0x20000], uploaded_palette[256][4];
-static bool raw_valid, palette_valid;
+static bool palette_valid;
 static uint64_t gpu_bytes, gpu_calls, gpu_pictures, gpu_verified;
 static uint64_t gpu_profile_bytes, gpu_profile_calls;
 static uint64_t gpu_profile_glyph_bytes, gpu_profile_vertex_bytes, gpu_profile_palette_bytes, gpu_profile_lut_bytes;
@@ -47,38 +45,12 @@ static bool gpu_open(void)
     const char *mixes[] = {"mix0", "mix1", "mix2"};
     for (int i = 0; i < 3; i++)
         gpu_mix[i] = glGetUniformLocation(gpu_program, mixes[i]);
-    raw_tex = gpu_geometry() ? texture(W, H) : texture(256, 128);
+    raw_tex = texture(W, H);
     palette_tex = texture(256, 1);
-    if (gpu_geometry() && !geometry_open())
+    if (!geometry_open())
         return false;
-    fprintf(stderr,
-            "[GPU-HUD] mode=%s GLES2; verify=%d\n",
-            gpu_geometry() ? "glyph-quads" : "packed-tilemap",
-            rr_video_layers_verify());
+    fprintf(stderr, "[GPU-HUD] mode=%s GLES2; verify=%d\n", "glyph-quads", rr_video_layers_verify());
     return error("initialise packed HUD");
-}
-static void gpu_upload_rows(const uint8_t *source, int first, int rows)
-{
-    int end = first + rows;
-    for (int row = first; row < end;) {
-        if (raw_valid && !memcmp(uploaded_raw + row * 1024, source + (row - first) * 1024, 1024)) {
-            row++;
-            continue;
-        }
-        int begin = row++;
-        while (row < end && (!raw_valid || memcmp(uploaded_raw + row * 1024, source + (row - first) * 1024, 1024)))
-            row++;
-        size_t bytes = (size_t)(row - begin) * 1024;
-        glTexSubImage2D(
-            GL_TEXTURE_2D, 0, 0, begin, 256, row - begin, GL_RGBA, GL_UNSIGNED_BYTE, source + (begin - first) * 1024);
-        memcpy(uploaded_raw + begin * 1024, source + (begin - first) * 1024, bytes);
-        gpu_bytes += bytes;
-        gpu_calls++;
-        if (rr_video_layers_profile_enabled()) {
-            gpu_profile_bytes += bytes;
-            gpu_profile_calls++;
-        }
-    }
 }
 
 bool rr_video_layers_compose_gpu(const rr_video_cpu_frame *frame)
@@ -123,7 +95,7 @@ bool rr_video_layers_compose_gpu(const rr_video_cpu_frame *frame)
         cpu = rr_video_layers_cpu_time();
         wall = stamp(CLOCK_MONOTONIC);
     }
-    glBindFramebuffer(GL_FRAMEBUFFER, p1b_output);
+    glBindFramebuffer(GL_FRAMEBUFFER, readback_output);
     glViewport(0, 0, W, H);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_SCISSOR_TEST);
@@ -138,7 +110,7 @@ bool rr_video_layers_compose_gpu(const rr_video_cpu_frame *frame)
         glUniform1i(gpu_samplers[i], i);
     }
     glUniform2f(gpu_scroll, frame->scroll_x, frame->scroll_y);
-    glUniform1i(gpu_shadow, hud_control3 == 1 ? 0 : frame->shadow_enabled);
+    glUniform1i(gpu_shadow, hud_control == 1 ? 0 : frame->shadow_enabled);
     for (int i = 0; i < 3; i++)
         glUniform3f(gpu_mix[i], frame->multipliers[i][0], frame->multipliers[i][1], frame->multipliers[i][2]);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

@@ -1,7 +1,6 @@
 /* Diagnostic-only bounded stdio transport. Game threads write memory cookies;
  * only rr-writer opens/writes persistent output. No writer owns a game FILE lock.
  * Checkpoint streams are reserved until shutdown, never dropped. */
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -177,7 +176,7 @@ FILE *__wrap_fopen64(const char *p, const char *m)
 {
     return strchr(m, 'w') || strchr(m, 'a') ? memory_file(p, m, -1) : __real_fopen64(p, m);
 }
-void rr_p1b_packet(unsigned tick, const void *bytes, size_t n)
+void rr_validation_packet(unsigned tick, const void *bytes, size_t n)
 {
     if (packet_count >= 8192) {
         atomic_fetch_add(&errors, 1);
@@ -187,7 +186,7 @@ void rr_p1b_packet(unsigned tick, const void *bytes, size_t n)
     packets[i].tick = tick;
     packets[i].bytes = n;
     SHA256(bytes, n, packets[i].digest);
-    /* Packet v3: preserve every byte except group boundaries; expand draw state
+    /* Packet packet: preserve every byte except group boundaries; expand draw state
      * per visible command, so different state or order cannot pass this gate. */
     if (getenv("ENG_GLES3_NORMALIZED_RECEIPTS")) {
         const uint32_t *h = bytes;
@@ -220,8 +219,8 @@ void rr_p1b_packet(unsigned tick, const void *bytes, size_t n)
         free(out);
     }
 }
-static void c1e_colour(unsigned, const char *, const void *, size_t);
-void rr_p1b_pixel(unsigned tick, const char *suffix, const void *bytes, size_t n)
+static void capture_colour(unsigned, const char *, const void *, size_t);
+void rr_validation_image(unsigned tick, const char *suffix, const void *bytes, size_t n)
 {
     if (pixel_count >= 64) {
         atomic_fetch_add(&errors, 1);
@@ -232,53 +231,53 @@ void rr_p1b_pixel(unsigned tick, const char *suffix, const void *bytes, size_t n
     snprintf(pixels[i].suffix, 16, "%s", suffix);
     SHA256(bytes, n, pixels[i].digest);
     if (getenv("ENG_GLES3_IMAGES"))
-        c1e_colour(tick, suffix, bytes, n);
+        capture_colour(tick, suffix, bytes, n);
 }
-static unsigned c1_nt;
+static unsigned semantic_count;
 static struct {
     unsigned tick;
     size_t n;
     unsigned char hash[32];
-} c1_sem[8192];
-void rr_c1b_semantic(unsigned t, const void *p, size_t n)
+} semantic_receipts[8192];
+void rr_validation_semantic(unsigned t, const void *p, size_t n)
 {
-    if (c1_nt >= 8192)
+    if (semantic_count >= 8192)
         abort();
-    unsigned i = c1_nt++;
-    c1_sem[i].tick = t;
-    c1_sem[i].n = n;
-    SHA256(p, n, c1_sem[i].hash);
+    unsigned i = semantic_count++;
+    semantic_receipts[i].tick = t;
+    semantic_receipts[i].n = n;
+    SHA256(p, n, semantic_receipts[i].hash);
 }
 /* Validation only. Bounded transport; rr-present only copies to memory. */
-#define C1E_SLOTS 4
-#define C1E_BYTES (640 * 480 * 24)
+#define CAPTURE_SLOTS 4
+#define CAPTURE_BYTES (640 * 480 * 24)
 typedef struct {
     unsigned kind, tick;
     char suffix[16];
-    uint8_t bytes[C1E_BYTES];
-} C1eJob;
-static C1eJob c1e_jobs[C1E_SLOTS];
-static _Atomic unsigned c1e_head, c1e_tail, c1e_stop, c1e_drops, c1e_errors;
-static pthread_t c1e_writer;
-static bool c1e_started;
-static void *c1e_drain(void *unused)
+    uint8_t bytes[CAPTURE_BYTES];
+} CaptureJob;
+static CaptureJob capture_jobs[CAPTURE_SLOTS];
+static _Atomic unsigned capture_head, capture_tail, capture_stop, capture_drops, capture_errors;
+static pthread_t capture_writer;
+static bool capture_started;
+static void *capture_drain(void *unused)
 {
     (void)unused;
-    pthread_setname_np(pthread_self(), "c1e-capture");
+    pthread_setname_np(pthread_self(), "capture-capture");
     struct sched_param sp = {0};
     pthread_setschedparam(pthread_self(), SCHED_IDLE, &sp);
     setpriority(PRIO_PROCESS, 0, 19);
     for (;;) {
-        unsigned t = atomic_load_explicit(&c1e_tail, memory_order_relaxed),
-                 h = atomic_load_explicit(&c1e_head, memory_order_acquire);
+        unsigned t = atomic_load_explicit(&capture_tail, memory_order_relaxed),
+                 h = atomic_load_explicit(&capture_head, memory_order_acquire);
         if (t == h) {
-            if (atomic_load(&c1e_stop))
+            if (atomic_load(&capture_stop))
                 break;
             struct timespec d = {0, 2000000};
             nanosleep(&d, NULL);
             continue;
         }
-        C1eJob *j = c1e_jobs + (t % C1E_SLOTS);
+        CaptureJob *j = capture_jobs + (t % CAPTURE_SLOTS);
         const char *dir = getenv(j->kind == 1 ? "ENG_GLES3_IMAGES" : "ENG_GLES3_PROVENANCE_DIR");
         for (unsigned k = 0; k < (j->kind == 1 ? 1 : 3); k++) {
             char path[4096];
@@ -291,73 +290,73 @@ static void *c1e_drain(void *unused)
             size_t n = j->kind == 1 || k ? 640 * 480 * 4 : 640 * 480 * 16;
             FILE *f = __real_fopen(path, "wbx");
             if (!f) {
-                atomic_fetch_add(&c1e_errors, 1);
+                atomic_fetch_add(&capture_errors, 1);
                 continue;
             }
             if (fwrite(j->bytes + offset, 1, n, f) != n || fclose(f))
-                atomic_fetch_add(&c1e_errors, 1);
+                atomic_fetch_add(&capture_errors, 1);
         }
-        atomic_store_explicit(&c1e_tail, t + 1, memory_order_release);
+        atomic_store_explicit(&capture_tail, t + 1, memory_order_release);
     }
     return NULL;
 }
-static C1eJob *c1e_job(unsigned kind, unsigned tick, const char *suffix)
+static CaptureJob *capture_job(unsigned kind, unsigned tick, const char *suffix)
 {
-    if (!c1e_started) {
-        c1e_started = true;
-        if (pthread_create(&c1e_writer, NULL, c1e_drain, NULL))
+    if (!capture_started) {
+        capture_started = true;
+        if (pthread_create(&capture_writer, NULL, capture_drain, NULL))
             abort();
     }
-    unsigned h = atomic_load_explicit(&c1e_head, memory_order_relaxed),
-             t = atomic_load_explicit(&c1e_tail, memory_order_acquire);
-    if (h - t == C1E_SLOTS) {
-        atomic_fetch_add(&c1e_drops, 1);
+    unsigned h = atomic_load_explicit(&capture_head, memory_order_relaxed),
+             t = atomic_load_explicit(&capture_tail, memory_order_acquire);
+    if (h - t == CAPTURE_SLOTS) {
+        atomic_fetch_add(&capture_drops, 1);
         return NULL;
     }
-    C1eJob *j = c1e_jobs + (h % C1E_SLOTS);
+    CaptureJob *j = capture_jobs + (h % CAPTURE_SLOTS);
     j->kind = kind;
     j->tick = tick;
     if (suffix)
         snprintf(j->suffix, sizeof j->suffix, "%s", suffix);
     return j;
 }
-static void c1e_colour(unsigned tick, const char *suffix, const void *p, size_t n)
+static void capture_colour(unsigned tick, const char *suffix, const void *p, size_t n)
 {
-    C1eJob *j = c1e_job(1, tick, suffix);
+    CaptureJob *j = capture_job(1, tick, suffix);
     if (j) {
         memcpy(j->bytes, p, n);
-        atomic_fetch_add_explicit(&c1e_head, 1, memory_order_release);
+        atomic_fetch_add_explicit(&capture_head, 1, memory_order_release);
     }
 }
-void rr_c1d_frame(unsigned tick, const void *m, const void *c, const void *r)
+void rr_validation_provenance(unsigned tick, const void *m, const void *c, const void *r)
 {
-    C1eJob *j = c1e_job(2, tick, NULL);
+    CaptureJob *j = capture_job(2, tick, NULL);
     if (j) {
         memcpy(j->bytes, m, 640 * 480 * 16);
         memcpy(j->bytes + 640 * 480 * 16, c, 640 * 480 * 4);
         memcpy(j->bytes + 640 * 480 * 20, r, 640 * 480 * 4);
-        atomic_fetch_add_explicit(&c1e_head, 1, memory_order_release);
+        atomic_fetch_add_explicit(&capture_head, 1, memory_order_release);
     }
 }
-static void c1e_capture_finish(void)
+static void capture_capture_finish(void)
 {
-    if (c1e_started) {
-        atomic_store(&c1e_stop, 1);
-        pthread_join(c1e_writer, NULL);
+    if (capture_started) {
+        atomic_store(&capture_stop, 1);
+        pthread_join(capture_writer, NULL);
     }
     dprintf(summary_fd,
-            "[C1E-CAPTURE] frames=%u drops=%u errors=%u slots=%u bytes=%u fully_drained=1\n",
-            atomic_load(&c1e_head),
-            atomic_load(&c1e_drops),
-            atomic_load(&c1e_errors),
-            C1E_SLOTS,
-            C1E_SLOTS * C1E_BYTES);
-    if (atomic_load(&c1e_errors) || atomic_load(&c1e_drops))
+            "[CAPTURE-CAPTURE] frames=%u drops=%u errors=%u slots=%u bytes=%u fully_drained=1\n",
+            atomic_load(&capture_head),
+            atomic_load(&capture_drops),
+            atomic_load(&capture_errors),
+            CAPTURE_SLOTS,
+            CAPTURE_SLOTS * CAPTURE_BYTES);
+    if (atomic_load(&capture_errors) || atomic_load(&capture_drops))
         _exit(96);
 }
 static void finish(void)
 {
-    c1e_capture_finish();
+    capture_capture_finish();
     const char *path = getenv("ENG_GLES3_RECEIPTS");
     if (path) {
         FILE *f = __wrap_fopen(path, "wx");
@@ -394,10 +393,10 @@ static void finish(void)
         if (!f)
             abort();
         fprintf(f, "tick,bytes,sha256\n");
-        for (unsigned i = 0; i < c1_nt; i++) {
-            fprintf(f, "%u,%zu,", c1_sem[i].tick, c1_sem[i].n);
+        for (unsigned i = 0; i < semantic_count; i++) {
+            fprintf(f, "%u,%zu,", semantic_receipts[i].tick, semantic_receipts[i].n);
             for (int j = 0; j < 32; j++)
-                fprintf(f, "%02x", c1_sem[i].hash[j]);
+                fprintf(f, "%02x", semantic_receipts[i].hash[j]);
             fputc(10, f);
         }
         fclose(f);
@@ -426,7 +425,7 @@ static void finish(void)
         bytes += atomic_load(&streams[i].drop_bytes);
     }
     dprintf(summary_fd,
-            "[P1B-IO] streams=%u reserved=%zu dropped_records=%u dropped_bytes=%u errors=%d packets=%u "
+            "[ASYNC-IO] streams=%u reserved=%zu dropped_records=%u dropped_bytes=%u errors=%d packets=%u "
             "writer_idle_result=%d nice_result=%d fully_drained=1\n",
             count,
             used,
@@ -462,7 +461,7 @@ __attribute__((constructor)) static void init(void)
     clock_gettime(CLOCK_MONOTONIC, &mt);
     clock_gettime(CLOCK_REALTIME, &rt);
     fprintf(stderr,
-            "[P1B-CLOCK] monotonic=%.9f realtime=%.9f\n",
+            "[ASYNC-CLOCK] monotonic=%.9f realtime=%.9f\n",
             mt.tv_sec + mt.tv_nsec * 1e-9,
             rt.tv_sec + rt.tv_nsec * 1e-9);
 }

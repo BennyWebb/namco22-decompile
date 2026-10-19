@@ -2,7 +2,6 @@
 #include "renderer_api.h"
 /* Simulation-owned video capture and renderer-owned immutable snapshots.
  * Only mailbox ownership/metrics are shared; no lock spans copying or GL. */
-#define _GNU_SOURCE
 #include "rr_presentation.h"
 #include "rr_scene.h"
 #include "rr_gles3.h"
@@ -17,8 +16,8 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 
-static int p1_slots = GLES3_QUEUE_DEPTH;
-#define SLOTS p1_slots
+static unsigned frame_slots = GLES3_QUEUE_DEPTH;
+#define SLOTS frame_slots
 #define RECORDS 8192
 
 enum {
@@ -92,9 +91,9 @@ static void free_slots(void)
     if (!slots)
         return;
 #ifdef RR_PARALLEL_FRAME_PREP
-    for (int i = 0; i < SLOTS; i++) {
+    for (unsigned i = 0; i < SLOTS; i++) {
         free(slots[i].gles3_payload);
-        free(slots[i].g1b_dynamic);
+        free(slots[i].dynamic_cache_dynamic);
     }
 #endif
     free(slots);
@@ -175,7 +174,7 @@ static bool render(const rr_presentation *snapshot)
     metadata_lock();
     unsigned age = last_frame - snapshot->frame;
     unsigned ready_depth = 0;
-    for (int i = 0; i < SLOTS; i++)
+    for (unsigned i = 0; i < SLOTS; i++)
         ready_depth += state[i] == READY || state[i] == PREPARED;
     unsigned observed_drops = dropped;
     unsigned core = (unsigned)sched_getcpu();
@@ -249,14 +248,14 @@ static bool render(const rr_presentation *snapshot)
             fprintf(profile_csv,
                     ",%u,%.9f,%.9f,%.9f,%.9f,%.9f,%u,%u",
                     snapshot->gles3_tag,
-                    snapshot->p1_sim_ms,
+                    snapshot->frame_sim_ms,
                     snapshot->gles3_walk_ms,
                     snapshot->gles3_compile_ms,
-                    snapshot->p1_block_ms,
-                    snapshot->p1_audio_ratio,
-                    snapshot->p1_underruns,
-                    snapshot->p1_depth);
-#ifdef GLES3_RECORD_DIAGNOSTICS
+                    snapshot->frame_block_ms,
+                    snapshot->frame_audio_ratio,
+                    snapshot->frame_underruns,
+                    snapshot->frame_depth);
+#ifdef GLES3_VALIDATION
             fprintf(profile_csv,
                     ",%u,%u,%u,%u,%u",
                     snapshot->record_splits[0],
@@ -277,7 +276,7 @@ static bool render(const rr_presentation *snapshot)
 static int newest(int wanted)
 {
     int best = -1;
-    for (int i = 0; i < SLOTS; i++)
+    for (unsigned i = 0; i < SLOTS; i++)
         if (state[i] == wanted && (best < 0 || slots[i].frame < slots[best].frame))
             best = i;
     return best;
@@ -332,8 +331,8 @@ static void *prepare(void *unused)
         rr_presentation *s = &slots[slot];
         double wall = now(), cpu = stamp(CLOCK_THREAD_CPUTIME_ID);
         s->prep_started_at = wall;
-        bool ok = rr_p1_prepare(s);
-        rr_gl_p1_select(s);
+        bool ok = rr_renderer_prepare(s);
+        rr_gl_renderer_select(s);
         s->scene_wall = now() - wall;
         double hud_start = stamp(CLOCK_THREAD_CPUTIME_ID);
         rr_video_layers_profile_gate(s->frame >= rr_gles3_profile_from());
@@ -444,8 +443,8 @@ static void *consume(void *unused)
 
 bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot, unsigned hz, unsigned from)
 {
-    p1_slots = 2;
-    if (p1_slots != 2 && p1_slots != 3)
+    frame_slots = 2;
+    if (frame_slots != 2 && frame_slots != 3)
         return false;
     sync_owner = &producer_sync;
     memset(&producer_sync, 0, sizeof producer_sync);
@@ -498,10 +497,10 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot, un
         fputs(",direct_cpu,list_cpu,sort_cpu", profile_csv);
 #endif
 #endif
-        fputs(",payload_gles3,simulation_ms,gles3_walk_ms,gles3_compile_ms,simulation_blocked_ms,resampler_ratio,audio_"
+        fputs(",payload_gles,simulation_ms,gles3_walk_ms,gles3_compile_ms,simulation_blocked_ms,resampler_ratio,audio_"
               "underruns,occupied_slots",
               profile_csv);
-#ifdef GLES3_RECORD_DIAGNOSTICS
+#ifdef GLES3_VALIDATION
         fputs(",split_protected,split_page,split_scissor,split_mode,protected_visible", profile_csv);
 #endif
         fputc('\n', profile_csv);
@@ -583,7 +582,7 @@ bool rr_presentation_start(void *w, void *c, unsigned cadence, unsigned shot, un
 
 bool rr_presentation_video(uint32_t frame, bool slave)
 {
-    double p1_sim_end = now();
+    double frame_sim_end = now();
     double cpu = stamp(CLOCK_THREAD_CPUTIME_ID);
     double serial_cpu_before = serial ? render_cpu : 0;
     if (frame >= first) {
@@ -617,13 +616,13 @@ bool rr_presentation_video(uint32_t frame, bool slave)
                           NULL,
                           "snapshot direct capacity");
 
-    double p1_block = 0;
+    double frame_block = 0;
     metadata_lock();
     last_frame = frame;
     bool failed = worker_failed;
     int slot = -1;
     if (selected && !failed) {
-        for (int i = 0; i < SLOTS; i++)
+        for (unsigned i = 0; i < SLOTS; i++)
             if (state[i] == FREE) {
                 slot = i;
                 break;
@@ -631,8 +630,8 @@ bool rr_presentation_video(uint32_t frame, bool slave)
         while (slot < 0 && !worker_failed) {
             double b = now();
             metadata_wait();
-            p1_block += now() - b;
-            for (int i = 0; i < SLOTS; i++)
+            frame_block += now() - b;
+            for (unsigned i = 0; i < SLOTS; i++)
                 if (state[i] == FREE) {
                     slot = i;
                     break;
@@ -657,17 +656,17 @@ bool rr_presentation_video(uint32_t frame, bool slave)
     if (slot >= 0) {
         double copy_cpu = stamp(CLOCK_THREAD_CPUTIME_ID);
         rr_presentation *snapshot = &slots[slot];
-        snapshot->p1_sim_ms = (p1_sim_end - wall_last) * 1000;
-        snapshot->p1_block_ms = p1_block * 1000;
-        snapshot->p1_audio_ratio = rr_audio_resampler_ratio();
-        rr_audio_output_stats p1_audio;
-        rr_audio_output_status(&p1_audio);
-        snapshot->p1_underruns = p1_audio.underruns;
-        snapshot->g1_main = (g_rr.wram[0x8da0] << 8) | g_rr.wram[0x8da1];
-        snapshot->g1_sub = (g_rr.wram[0xa32e] << 8) | g_rr.wram[0xa32f];
-        snapshot->g1_screen = (g_rr.wram[0xa332] << 8) | g_rr.wram[0xa333];
-        snapshot->g1_course = (g_rr.wram[0xa046] << 8) | g_rr.wram[0xa047];
-        snapshot->g1b_major = (g_rr.wram[0xa048] << 8) | g_rr.wram[0xa049];
+        snapshot->frame_sim_ms = (frame_sim_end - wall_last) * 1000;
+        snapshot->frame_block_ms = frame_block * 1000;
+        snapshot->frame_audio_ratio = rr_audio_resampler_ratio();
+        rr_audio_output_stats frame_audio;
+        rr_audio_output_status(&frame_audio);
+        snapshot->frame_underruns = frame_audio.underruns;
+        snapshot->state_main = (g_rr.wram[0x8da0] << 8) | g_rr.wram[0x8da1];
+        snapshot->state_sub = (g_rr.wram[0xa32e] << 8) | g_rr.wram[0xa32f];
+        snapshot->state_screen = (g_rr.wram[0xa332] << 8) | g_rr.wram[0xa333];
+        snapshot->state_course = (g_rr.wram[0xa046] << 8) | g_rr.wram[0xa047];
+        snapshot->dynamic_cache_major = (g_rr.wram[0xa048] << 8) | g_rr.wram[0xa049];
         snapshot->gles3_tag = 0;
         snapshot->frame = frame;
         snapshot->walk = walk;
@@ -693,12 +692,12 @@ bool rr_presentation_video(uint32_t frame, bool slave)
 #endif
         state[slot] = READY;
         unsigned depth = 0;
-        for (int i = 0; i < SLOTS; i++)
+        for (unsigned i = 0; i < SLOTS; i++)
             depth += state[i] == READY || state[i] == PREPARED;
         unsigned occupied = 0;
-        for (int i = 0; i < SLOTS; i++)
+        for (unsigned i = 0; i < SLOTS; i++)
             occupied += state[i] != FREE;
-        snapshot->p1_depth = occupied;
+        snapshot->frame_depth = occupied;
         if (depth > queue_peak)
             queue_peak = depth;
         pthread_cond_broadcast(&changed);
@@ -885,7 +884,7 @@ void rr_presentation_overlay(unsigned *frame, unsigned *drops, unsigned *queued,
     *frame = last_frame;
     *drops = dropped;
     *queued = 0;
-    for (int i = 0; i < SLOTS; i++) {
+    for (unsigned i = 0; i < SLOTS; i++) {
         if (state[i] == READY || state[i] == PREPARED)
             (*queued)++;
         if (state[i] == READING)

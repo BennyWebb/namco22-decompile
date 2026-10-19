@@ -22,7 +22,7 @@ static uint64_t random64(void)
 static uint64_t cases;
 static void check(int64_t b, int64_t v, int32_t m, int s, int64_t z, int n)
 {
-    int32_t x = reference(b, v, m, s, z, n), y = p3_projection(b, v, m, s, z, n);
+    int32_t x = reference(b, v, m, s, z, n), y = project_saturated_exact(b, v, m, s, z, n);
     cases++;
     if (x != y) {
         fprintf(stderr,

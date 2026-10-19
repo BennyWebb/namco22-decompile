@@ -19,19 +19,26 @@ set(COMMON src/main.c ${RR_ROOT}/src/rr_mem.c src/scene.c src/presentation.c src
  ${RR_ROOT}/src/rr_input_stream.c ${RR_ROOT}/src/rr_hw.c ${RR_ROOT}/src/rr_game.c
  ${RR_ROOT}/src/rr_env.c ${RR_ROOT}/src/rr_link.c ${RR_ROOT}/src/rr_dsp.c
  ${RR_ROOT}/src/rr_overlay.c ${RR_ROOT}/src/rr_sim_profile.c ${RR_ROOT}/src/snd/snd_board.c
- ${GENERATED}/rr_lifted.c ${GENERATED}/rr_c25.c ${RD_SRC}
+ src/lifted_only.c
  ${NAMCO22_ENGINE_LIFT_SRC} ${NAMCO22_ENGINE_C25_SRC}
  ${NAMCO22_ENGINE_DIR}/eng.c ${NAMCO22_ENGINE_DIR}/c352.c ${NAMCO22_ENGINE_DIR}/snd/m377_periph.c)
-add_library(gles3_core OBJECT ${COMMON})
-add_dependencies(gles3_core rr_generated)
-target_compile_definitions(gles3_core PUBLIC _GNU_SOURCE RR_HEADLESS RR_GLES3 RR_GPU_HUD RR_GPU_HUD_DEFAULT
- RR_THREADED_PRESENTATION RR_PARALLEL_FRAME_PREP RR_FAST_MEMORY_READS RR_SPLIT_MEMORY_READER C352_INACTIVE_FASTPATH GLES3_RECORD_DIAGNOSTICS GLES3_QUEUE_DEPTH=${GLES3_QUEUE_DEPTH})
-target_include_directories(gles3_core PUBLIC src ${RR_ROOT}/src ${RR_ROOT}/src/snd ${RR_ROOT}/include ${RR_ROOT}/gen ${GENERATED} ${NAMCO22_ENGINE_DIR} ${NAMCO22_ENGINE_DIR}/snd ${NAMCO22_ENGINE_DIR}/c25)
-target_compile_options(gles3_core PRIVATE -O2 -fno-strict-aliasing -fwrapv -w)
-target_link_libraries(gles3_core PUBLIC PkgConfig::SDL2 Threads::Threads ZLIB::ZLIB ${GLES_LIBRARY} ${EGL_LIBRARY} ${CRYPTO_LIBRARY} m)
-if(MALI_LIBRARY)
- target_link_libraries(gles3_core PUBLIC ${MALI_LIBRARY})
-endif()
+add_library(gles3_generated OBJECT ${GENERATED}/rr_lifted.c ${GENERATED}/rr_c25.c)
+add_dependencies(gles3_generated rr_generated)
+target_compile_definitions(gles3_generated PRIVATE RR_HEADLESS RR_GLES3)
+target_include_directories(gles3_generated PRIVATE ${RR_ROOT}/include ${RR_ROOT}/gen ${GENERATED} ${NAMCO22_ENGINE_DIR} ${NAMCO22_ENGINE_DIR}/c25)
+foreach(core gles3_core gles3_validation_core)
+ add_library(${core} OBJECT ${COMMON})
+ add_dependencies(${core} rr_generated)
+ target_compile_definitions(${core} PUBLIC _GNU_SOURCE RR_HEADLESS RR_GLES3 RR_GPU_HUD RR_GPU_HUD_DEFAULT
+  RR_THREADED_PRESENTATION RR_PARALLEL_FRAME_PREP RR_FAST_MEMORY_READS RR_SPLIT_MEMORY_READER C352_INACTIVE_FASTPATH GLES3_QUEUE_DEPTH=${GLES3_QUEUE_DEPTH})
+ target_include_directories(${core} PUBLIC src ${RR_ROOT}/src ${RR_ROOT}/src/snd ${RR_ROOT}/include ${RR_ROOT}/gen ${GENERATED} ${NAMCO22_ENGINE_DIR} ${NAMCO22_ENGINE_DIR}/snd ${NAMCO22_ENGINE_DIR}/c25)
+ target_compile_options(${core} PRIVATE -O2 -fno-strict-aliasing -fwrapv -Wall -Wextra)
+ target_link_libraries(${core} PUBLIC PkgConfig::SDL2 Threads::Threads ZLIB::ZLIB ${GLES_LIBRARY} ${EGL_LIBRARY} ${CRYPTO_LIBRARY} m)
+ if(MALI_LIBRARY)
+  target_link_libraries(${core} PUBLIC ${MALI_LIBRARY})
+ endif()
+endforeach()
+target_compile_definitions(gles3_validation_core PUBLIC GLES3_VALIDATION)
 foreach(target rr_gles3 rr_gles3_validation rr_gles3_sound_oracle)
  set(driver ${GENERATED}/snd_driver.c)
  if(target STREQUAL rr_gles3_sound_oracle)
@@ -42,8 +49,12 @@ foreach(target rr_gles3 rr_gles3_validation rr_gles3_sound_oracle)
   set(io tests/async_io.c tests/boot_oracle.c)
  endif()
  add_executable(${target} src/live.c src/gles.c src/layers.c ${io} ${driver})
- target_link_libraries(${target} PRIVATE gles3_core)
- target_compile_options(${target} PRIVATE -O2 -fno-strict-aliasing -fwrapv -w)
+ if(target STREQUAL rr_gles3_validation)
+  target_link_libraries(${target} PRIVATE gles3_validation_core gles3_generated)
+ else()
+  target_link_libraries(${target} PRIVATE gles3_core gles3_generated)
+ endif()
+ target_compile_options(${target} PRIVATE -O2 -fno-strict-aliasing -fwrapv -Wall -Wextra)
  target_link_options(${target} PRIVATE -Wl,--wrap=fopen -Wl,--wrap=fopen64 -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/${target}.map)
  if(target STREQUAL rr_gles3_validation)
   target_compile_definitions(${target} PRIVATE GLES3_VALIDATION)
@@ -63,7 +74,14 @@ add_custom_target(rr_asset_kit
 foreach(test projection cull cache staging)
  add_executable(test_${test} tests/test_${test}.c)
  target_include_directories(test_${test} PRIVATE src)
- target_compile_options(test_${test} PRIVATE -O2 -UNDEBUG -fwrapv -fno-strict-aliasing)
+ target_compile_options(test_${test} PRIVATE -O2 -UNDEBUG -fwrapv -fno-strict-aliasing -Wall -Wextra)
  target_link_libraries(test_${test} PRIVATE m)
  add_test(NAME ${test} COMMAND test_${test})
 endforeach()
+
+foreach(target rr_asset_builder gles3_session_io gles3_smoke_chord)
+ target_compile_options(${target} PRIVATE -Wall -Wextra)
+endforeach()
+add_custom_target(rr_validation_asset_kit
+ COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/assets/compile.py ${RR_ROM_DIR} ${CMAKE_BINARY_DIR}/validation-assets --validation
+ COMMENT "Compile ROM-only validation assets into the build directory")

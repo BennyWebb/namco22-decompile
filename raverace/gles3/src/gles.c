@@ -19,17 +19,17 @@ static SDL_Joystick *raw_joysticks[16];
 #include "rr_hw.h"
 /* Host adapter only: unchanged EEPROM state is snapshotted on the simulation
  * thread; the low-priority supervisor persists it atomically in gles3 saves. */
-static bool g2_save_enabled;
-static unsigned g2_save_ticks;
-static unsigned char g2_last_eeprom[RR_EEPROM_SIZE];
-static void g2_save_emit(void)
+static bool save_enabled;
+static unsigned save_ticks;
+static unsigned char save_last_eeprom[RR_EEPROM_SIZE];
+static void save_emit(void)
 {
-    if (!g2_save_enabled || !memcmp(g2_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE))
+    if (!save_enabled || !memcmp(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE))
         return;
     static const char hex[] = "0123456789abcdef";
     char line[32 + RR_EEPROM_SIZE * 2];
     unsigned at = 0;
-    const char *prefix = "[G2-EEPROM] ";
+    const char *prefix = "[SAVE-EEPROM] ";
     while (*prefix)
         line[at++] = *prefix++;
     for (unsigned i = 0; i < RR_EEPROM_SIZE; i++) {
@@ -38,16 +38,16 @@ static void g2_save_emit(void)
     }
     line[at++] = '\n';
     fwrite(line, 1, at, stderr);
-    memcpy(g2_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
+    memcpy(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
 }
-static void g2_save_tick(void)
+static void save_tick(void)
 {
-    if (g2_save_enabled && ++g2_save_ticks % 120 == 0)
-        g2_save_emit();
+    if (save_enabled && ++save_ticks % 120 == 0)
+        save_emit();
 }
-static bool g2_save_open(bool enabled)
+static bool save_open(bool enabled)
 {
-    g2_save_enabled = enabled;
+    save_enabled = enabled;
     if (!enabled)
         return true;
     const char *p = getenv("ENG_GLES3_SAVE_PATH");
@@ -60,8 +60,8 @@ static bool g2_save_open(bool enabled)
     fclose(f);
     if (!ok)
         return false;
-    memcpy(g2_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
-    fprintf(stderr, "[G2-SAVE] loaded=%s bytes=%u transport=async-supervisor\n", p, RR_EEPROM_SIZE);
+    memcpy(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
+    fprintf(stderr, "[SAVE] loaded=%s bytes=%u transport=async-supervisor\n", p, RR_EEPROM_SIZE);
     return true;
 }
 
@@ -274,7 +274,7 @@ static void input_ramp(uint16_t *value, int target, int delta)
 }
 void rr_gles3_apply_input(void)
 {
-    g2_save_tick();
+    save_tick();
     if (!interactive)
         return;
     bool coin = input_coin;
@@ -406,7 +406,7 @@ static void scan_controllers(void)
 }
 static bool input_exit(void)
 {
-    g2_save_emit();
+    save_emit();
     if (rr_input_recording()) {
         deferred_record_exit = true;
         return true;
@@ -498,7 +498,7 @@ bool rr_gles3_options(int *argc, char **argv)
 }
 bool rr_gles3_open(void)
 {
-    if (!g2_save_open(getenv("ENG_GLES3_SESSION") && interactive))
+    if (!save_open(getenv("ENG_GLES3_SESSION") && interactive))
         return false;
     bool mali = false;
     for (int i = 0; i < SDL_GetNumVideoDrivers(); i++)
@@ -526,7 +526,7 @@ bool rr_gles3_open(void)
     fprintf(stderr, "[GLES3-GL] %s; %s\n", glGetString(GL_RENDERER), glGetString(GL_VERSION));
     if (SDL_GL_SetSwapInterval(1) && !getenv("ENG_GLES3_HOST"))
         return false;
-    if (!rr_video_layers_open() || !rr_p1_open())
+    if (!rr_video_layers_open() || !rr_renderer_open())
         return false;
     if (controller_db && SDL_GameControllerAddMappingsFromFile(controller_db) < 0)
         return false;
@@ -541,7 +541,7 @@ bool rr_gles3_present_prepared(const rr_presentation *s)
 {
     eng_render_stats stats;
     double start = seconds();
-    if (!rr_p1_draw(s, &stats)) {
+    if (!rr_renderer_draw(s, &stats)) {
         failed = true;
         return false;
     }
@@ -569,7 +569,7 @@ void rr_gles3_close(void)
         failed = true;
     rr_sim_report();
     rr_memory_profile_report();
-    rr_p1_close();
+    rr_renderer_close();
     rr_overlay_close();
     rr_video_layers_close();
     for (int i = 0; i < 16; i++) {

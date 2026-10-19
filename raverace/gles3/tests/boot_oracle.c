@@ -59,5 +59,5 @@ void gles3_check_boot(const rr_presentation *s)
             shadow,
             differences);
     if (differences)
-        gles3_unsupported(s->frame, s->g1_main, s->g1_sub, -1, -1, NULL, "boot CPU text/palette oracle mismatch");
+        gles3_unsupported(s->frame, s->state_main, s->state_sub, -1, -1, NULL, "boot CPU text/palette oracle mismatch");
 }
