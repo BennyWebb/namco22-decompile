@@ -61,8 +61,12 @@ def prepare_recording(name, source, output, eeprom):
         raise RuntimeError("Generated initial EEPROM SHA256 mismatch")
     output.mkdir(exist_ok=True)
     target = output / recording.name
-    for suffix in ("", ".meta", ".end"):
-        shutil.copyfile(Path(str(recording) + suffix), Path(str(target) + suffix))
+    shutil.copyfile(recording, target)
+    # SHA-pinned inputs always use the committed, generated-EEPROM reset recipe.
+    # An override directory needs controller files only, never old seed sidecars.
+    for suffix in (".meta", ".end"):
+        metadata = HERE / "recordings" / (name + ".rec" + suffix)
+        shutil.copyfile(metadata, Path(str(target) + suffix))
     if Path(str(target) + ".end").read_text().strip() != str(identity["ticks"]):
         raise RuntimeError("Recording length metadata mismatch")
     shutil.copyfile(eeprom, Path(str(target) + ".eeprom"))

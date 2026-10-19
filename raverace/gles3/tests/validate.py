@@ -4,7 +4,7 @@
 from pathlib import Path
 import argparse, csv, hashlib, json, os, re, subprocess
 
-from recordings import DEFAULT_RECORDINGS, generate_eeprom, prepare_recording
+from recordings import DEFAULT_RECORDINGS, IDENTITIES, generate_eeprom, prepare_recording
 
 FIX = Path(__file__).resolve().parent / "fixtures"
 p = argparse.ArgumentParser()
@@ -156,6 +156,8 @@ if a.case == "sound":
 
         x, y = map(audio, paths)
         assert x == y and x, "PCM/voices"
+        ticks = 36000 if name == "attract" else IDENTITIES[name]["ticks"]
+        assert [row["audio_frame"] for row in x] == list(range(1, ticks + 1)), "missing audio ticks"
         assert (paths[0] / "states.jsonl").read_bytes() == (paths[1] / "states.jsonl").read_bytes()
         if name == "reference":
             assert x == [json.loads(s) for s in (FIX / "sound-reference.jsonl").read_text().splitlines()]

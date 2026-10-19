@@ -5,8 +5,9 @@ from pathlib import Path
 import re
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from recordings import HERE, IDENTITIES, prepare_recording, sha
+from recordings import HERE, IDENTITIES, generate_eeprom, prepare_recording, sha
 
 
 class ControllerInputs(unittest.TestCase):
@@ -39,6 +40,20 @@ class ControllerInputs(unittest.TestCase):
                     )
                 self.assertEqual(Path(str(path) + ".end").read_text().strip(), str(identity["ticks"]))
                 self.assertFalse(Path(str(path) + ".eeprom").exists())
+
+    def test_factory_hash_is_mandatory(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work)
+            output = root / "factory.eeprom"
+
+            def wrong_boot(command, *, env, **kwargs):
+                self.assertNotIn("ENG_GLES3_INITIAL_EEPROM", env)
+                self.assertEqual(env["ENG_GLES3_FACTORY_EEPROM"], str(output))
+                output.write_bytes(bytes(8192))
+
+            with patch("recordings.subprocess.run", side_effect=wrong_boot):
+                with self.assertRaisesRegex(RuntimeError, "Factory EEPROM mismatch.*no stored seed allowed"):
+                    generate_eeprom(root / "binary", root / "roms", root / "cache", output)
 
     def test_corrupt_override_is_rejected(self):
         with tempfile.TemporaryDirectory() as work:

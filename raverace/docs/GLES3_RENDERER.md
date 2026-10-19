@@ -44,8 +44,9 @@ Boot/ROM-check pictures use the GPU text/palette/LUT compositor over the clear
 world. Shaders, atlas, buffers and all three GPU copies pre-warm off-screen before
 the first presentation. Validation checks159 boot pictures against CPU decoding.
 
-Tests use configurable local recordings, verified by SHA256. Hash-only fixtures
-cover21 reference sets,141 cone records, final states,4207 adjusted command
+Tests use committed controller recordings, verified by SHA256, and a ROM-booted
+factory EEPROM. Hash-only fixtures cover21 reference sets, fixture states,
+final states,4207 adjusted command
 packets, semantic receipts,36 reference images,26 bonus images and20 attract
 samples. Normalized commands expand group state per visible command; only draw
 boundaries are ignored. Stable ROM identities replace capture-era validation

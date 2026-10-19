@@ -21,7 +21,10 @@ fallback was rejected for shipped builds; the interpreter remains a test oracle.
 Cone Fix A preserves protected geometry and batches only adjacent identical-state
 instances. State5/0 max draws1480→18 (tick11936:17), CPU p9965.807→3.442ms,
 repeats1545→0, missing settled samples1178356→0 and gaps>50ms451→0.
-Host/Mali images and checkpoint state remained exact. Compiler tail remains known.
+Host/Mali images and checkpoint state remained exact. The cone fix is validated
+and closed. Its recording requires a non-default saved EEPROM, so the public
+regression suite no longer carries the cone entry or its hash fixtures; the
+private archive retains the original evidence. Compiler tail remains known.
 Source of truth: deployed N1 normal SHA256
 `a624fe906556c5625ec26ba5e3749d7f25c8cc0ae09fd39241ad97aad338d029`;
 recording SHA256 `6008dd12d5d064a98d9a3b05ded1facd5124b90c40b7df09eac0d52cfc970556`.
@@ -49,3 +52,15 @@ Pre-existing main images/icons, engine/c25/c71_bios.inc and font_data.h were lef
 unchanged. History hygiene reports inherited large translated source separately
 from newly introduced files. No feature benchmark/recording/payload ancestry is
 carried by this branch. Full validation and commit inventory: CLEANUP_REPORT.md.
+
+## Controller-only regression fixtures
+
+Reference (6,006 ticks, 12,660 bytes) and fixture (1,700 ticks, 214 bytes) inputs
+are now committed as reviewed ASCII controller events and safe text metadata.
+The user approved a blank-EEPROM rebaseline after the 600-tick all-ones boot
+produced `08a9266d2a6097e116562a74c0adfe5702f36028d76679bc8297664e8f7bb187`,
+rather than the supplied image's `a34d3b84…d866`. Every replay cold-boots with
+that generated EEPROM. No EEPROM payload or stored-seed fallback is included.
+The retained hash-only checkpoints, commands, images and sound oracle reference
+are rebaselined for that reset state. Old results above describe their original
+seed. The public cone gate is retired; its fix remains validated and closed.

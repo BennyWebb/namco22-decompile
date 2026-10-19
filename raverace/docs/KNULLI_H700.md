@@ -45,12 +45,25 @@ For a first installation it disables the two new entries, leaving the prior
 installed entries available and retaining the new app's files for inspection.
 This cleanup has not replaced the installed build. See CLEANUP_REPORT.md for gates.
 
-Host acceptance uses `gles3/tests/validate.py CASE --build BUILD --roms ROMS
---cache CACHE --recordings LOCAL_RECORDINGS --output NEW_DIRECTORY`, for each
-CASE of reference, cone, attract, provenance, unsupported and sound. Then run
-`gles3/tests/provenance.py OUTPUT/provenance --roms ROMS --cache CACHE`.
-`ctest --test-dir BUILD --output-on-failure` checks the renderer components.
-Tests reject mismatched recording/EEPROM hashes; fixtures contain hashes only.
+The full host regression suite needs only a fresh clone and the ROMs (plus the
+host build dependencies above):
+
+```sh
+python3 raverace/gles3/tests/suite.py --roms /absolute/path/to/extracted
+```
+
+Run that command from the repository root. It configures/builds a fresh host
+build and ROM asset cache, generates the factory-default EEPROM by booting from
+empty EEPROM, verifies its SHA256, and runs reference (6,006 ticks), fixture
+(1,700), attract, provenance/boot oracle, strict unsupported, sound oracle,
+record/replay and CTest gates. No stored EEPROM is read or used as a fallback.
+Controller input recordings and their text metadata are stored in Git under
+`gles3/tests/recordings/`; checkpoints, semantic packets and images retain
+hash-only fixtures. `GLES3_TEST_RECORDINGS` or `--recordings DIR` overrides the
+inputs; SHA256 checks remain mandatory.
+Individual gates use `gles3/tests/validate.py CASE --build BUILD --roms ROMS
+--cache CACHE --output NEW_DIRECTORY`; cases are reference, fixture, attract,
+provenance, unsupported and sound. Generated EEPROM/runtime sidecars stay local.
 Device smoke requires `GLES3_TEST_CONTROLLER_CONFIG` pointing at that saved mapping.
 
 For local validation, build rr_validation_asset_kit and pass the build directory's
