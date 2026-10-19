@@ -55,6 +55,23 @@ class ControllerInputs(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, "Factory EEPROM mismatch.*no stored seed allowed"):
                     generate_eeprom(root / "binary", root / "roms", root / "cache", output)
 
+    def test_calibrated_factory_hash_is_mandatory(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work)
+            output = root / "factory.eeprom"
+
+            def wrong_boot(command, *, env, **kwargs):
+                self.assertNotIn("ENG_GLES3_INITIAL_EEPROM", env)
+                self.assertIn("--replay-input", command)
+                rec = Path(command[-1])
+                self.assertEqual(Path(str(rec) + ".eeprom").read_bytes(), bytes([255]) * 8192)
+                self.assertIn("F 1000 F2FF", rec.read_text())
+                output.write_bytes(bytes(8192))
+
+            with patch("recordings.subprocess.run", side_effect=wrong_boot):
+                with self.assertRaisesRegex(RuntimeError, "Factory EEPROM mismatch.*no stored seed allowed"):
+                    generate_eeprom(root / "binary", root / "roms", root / "cache", output, calibrated=True)
+
     def test_corrupt_override_is_rejected(self):
         with tempfile.TemporaryDirectory() as work:
             root = Path(work)

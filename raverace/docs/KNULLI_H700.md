@@ -55,7 +55,7 @@ python3 raverace/gles3/tests/suite.py --roms /absolute/path/to/extracted
 Run that command from the repository root. It configures/builds a fresh host
 build and ROM asset cache, generates the factory-default EEPROM by booting from
 empty EEPROM, verifies its SHA256, and runs reference (6,006 ticks), fixture
-(1,700), attract, provenance/boot oracle, strict unsupported, sound oracle,
+(1,700), full-race (13,937), attract, provenance/boot oracle, strict unsupported, sound oracle,
 record/replay and CTest gates. No stored EEPROM is read or used as a fallback.
 Controller input recordings and their text metadata are stored in Git under
 `gles3/tests/recordings/`; checkpoints, semantic packets and images retain
@@ -63,10 +63,18 @@ hash-only fixtures. `GLES3_TEST_RECORDINGS` or `--recordings DIR` overrides the
 inputs; SHA256 checks remain mandatory.
 Individual gates use `gles3/tests/validate.py CASE --build BUILD --roms ROMS
 --cache CACHE --output NEW_DIRECTORY`; cases are reference, fixture, attract,
-provenance, unsupported and sound. Generated EEPROM/runtime sidecars stay local.
+provenance, unsupported, sound and full-race. Generated EEPROM/runtime sidecars stay local.
 Device smoke requires `GLES3_TEST_CONTROLLER_CONFIG` pointing at that saved mapping.
 
 For local validation, build rr_validation_asset_kit and pass the build directory's
 validation-assets cache to the host gates. rr_asset_kit and packaged apps contain
 only product shaders. Run gles3/tests/audit_product.py --build BUILD (add
 --nm aarch64-linux-gnu-nm for an ARM build) to prove validation/product separation.
+
+The full-race gate generates its calibrated EEPROM from blank bytes using the
+ROM's TEST/SERVICE adjustment (1,600 ticks), then cold-starts the replay. Its
+SHA256 is pinned in recordings.json; it never reads a stored seed. It checks
+race/results/bonus coverage, 141 checkpoint records, complete packet/image hash
+manifests and translated/interpreter sound on every tick. The older reference
+and fixture retain their 600-tick blank-boot seed for historical regression;
+their deterministic results alone do not establish full-race coverage.

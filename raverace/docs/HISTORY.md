@@ -64,3 +64,17 @@ that generated EEPROM. No EEPROM payload or stored-seed fallback is included.
 The retained hash-only checkpoints, commands, images and sound oracle reference
 are rebaselined for that reset state. Old results above describe their original
 seed. The public cone gate is retired; its fix remains validated and closed.
+
+## Calibrated full-race regression
+
+The 600-tick blank boot leaves analogue zero points incompatible with the
+emulated cabinet. Its reference hashes prove determinism but not a completed
+race. Preserve those earlier tests; add full-race.rec (13,937 ticks, 25,066
+bytes, input SHA256 b7ea9c4e…71b972e). Generate its calibrated seed from all-ones
+EEPROM through the ROM TEST/SERVICE adjustment and EEPROM writer, exporting at
+1,600 ticks; expected SHA256 81e19e9c…73721c7. No saved EEPROM bytes are stored.
+The user capture covers 10,674 race pictures, results and 1,543 bonus 5/0
+pictures, with device pacing 0/0/0. All 141 device checkpoint records match host
+translated and interpreter runs; sound agrees on every tick. Retain only hashes
+of checkpoints, packet/image manifests and oracle audio accounting. The old
+standalone cone recording remains excluded; this new input covers that stage.

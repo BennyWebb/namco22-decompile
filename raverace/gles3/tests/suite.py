@@ -59,7 +59,7 @@ run(
     ],
 )
 run("assets", ["cmake", "--build", build, "--target", "rr_validation_asset_kit"])
-for case in ("reference", "fixture", "attract", "provenance", "unsupported", "sound"):
+for case in ("reference", "fixture", "attract", "provenance", "unsupported", "sound", "full-race"):
     run(
         case,
         [
@@ -87,6 +87,11 @@ run(
     [sys.executable, HERE / "test_input_replay.py", build / "gles3/rr_gles3", roms, work / "reference/factory.eeprom"],
     env=host_environment(cache),
 )
+run(
+    "record-replay-calibrated",
+    [sys.executable, HERE / "test_input_replay.py", build / "gles3/rr_gles3", roms, work / "full-race/factory.eeprom"],
+    env=host_environment(cache),
+)
 run("ctest", ["ctest", "--test-dir", build, "--output-on-failure"])
 run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", build])
 (work / "result.json").write_text(
@@ -100,7 +105,9 @@ run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", buil
                 "provenance",
                 "unsupported",
                 "sound",
+                "full-race",
                 "record-replay",
+                "record-replay-calibrated",
                 "ctest",
                 "product-audit",
             ],

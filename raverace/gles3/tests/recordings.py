@@ -4,6 +4,7 @@ from pathlib import Path
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 
@@ -30,13 +31,33 @@ def host_environment(cache):
     return env
 
 
-def generate_eeprom(binary, roms, cache, output):
-    """No seed file is read: the validation executable starts from all ones."""
+def generate_eeprom(binary, roms, cache, output, *, calibrated=False):
+    """Boot all-ones EEPROM; optionally let the ROM calibrate the analogue inputs."""
     env = host_environment(cache)
     env["ENG_GLES3_FACTORY_EEPROM"] = str(output.resolve())
+    command = [str(binary.resolve()), str(roms.resolve()), "--frames", "600", "--audio", "off", "--overlay", "off"]
+    expected = FACTORY_SHA256
+    if calibrated:
+        # The ROM service adjustment samples centred steering and released pedals.
+        # Leave TEST to let the game's own EEPROM writer persist calibration.
+        rec = output.with_suffix(".calibration.rec")
+        rec.write_text(
+            "F 1 FEFF 800 000 000\nF 1000 F2FF 800 000 000\n" "F 1100 FAFF 800 000 000\nF 1200 FEFF 800 000 000\n"
+        )
+        blank = bytes([255]) * 8192
+        checksum = 14695981039346656037
+        for byte in blank:
+            checksum = ((checksum ^ byte) * 1099511628211) & ((1 << 64) - 1)
+        Path(str(rec) + ".eeprom").write_bytes(blank)
+        Path(str(rec) + ".end").write_text("1600\n")
+        metadata = (HERE / "recordings/full-race.rec.meta").read_text()
+        old = re.search(r"EEPROM ([0-9a-f]{16})", metadata)[1]
+        Path(str(rec) + ".meta").write_text(metadata.replace(old, f"{checksum:016x}"))
+        command = [str(binary.resolve()), str(roms.resolve()), "--replay-input", str(rec.resolve())]
+        expected = IDENTITIES["full-race"]["eeprom_sha256"]
     with output.with_suffix(".log").open("w") as log:
         subprocess.run(
-            [str(binary.resolve()), str(roms.resolve()), "--frames", "600", "--audio", "off", "--overlay", "off"],
+            command,
             env=env,
             check=True,
             stdout=log,
@@ -46,8 +67,8 @@ def generate_eeprom(binary, roms, cache, output):
     if "[SND] TRANSLATED DRIVER" in log_text or "GLES3 UNSUPPORTED" in log_text:
         raise RuntimeError("Factory boot trapped; see factory log")
     actual = sha(output)
-    if actual != FACTORY_SHA256:
-        raise RuntimeError(f"Factory EEPROM mismatch: expected {FACTORY_SHA256}, got {actual}; no stored seed allowed")
+    if actual != expected:
+        raise RuntimeError(f"Factory EEPROM mismatch: expected {expected}, got {actual}; no stored seed allowed")
     return output.resolve()
 
 

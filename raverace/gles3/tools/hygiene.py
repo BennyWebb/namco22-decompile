@@ -24,8 +24,9 @@ def tree(ref):
     return out
 
 
-# These two reviewed blobs are controller text, never game-state payloads.
+# These reviewed blobs are controller text, never game-state payloads.
 INPUT_RECORDINGS = {
+    "raverace/gles3/tests/recordings/full-race.rec": "b7ea9c4e76e17e0b3e93ebe19659e296397e965d469e5ebaa48adc2ce71b972e",
     "raverace/gles3/tests/recordings/reference.rec": "d76551345170fbbe0b4700dfe91cebf36d2c1a408dda69de6c2b043a95043216",
     "raverace/gles3/tests/recordings/fixture.rec": "0c28a955220aeec70dfed30989c6f8f9c1f7dcaa2a106729c4839deba169b4d9",
 }

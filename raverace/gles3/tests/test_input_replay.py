@@ -9,9 +9,9 @@ import tempfile
 import os
 
 binary, roms, seed = [str(pathlib.Path(x).resolve()) for x in sys.argv[1:4]]
-from recordings import FACTORY_SHA256, sha
+from recordings import FACTORY_SHA256, IDENTITIES, sha
 
-assert sha(pathlib.Path(seed)) == FACTORY_SHA256
+assert sha(pathlib.Path(seed)) in {FACTORY_SHA256, IDENTITIES["full-race"]["eeprom_sha256"]}
 os.environ["ENG_GLES3_INITIAL_EEPROM"] = seed
 with tempfile.TemporaryDirectory(prefix="rr-replay-test-") as work:
     root = pathlib.Path(work)
