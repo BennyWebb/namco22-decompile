@@ -30,7 +30,7 @@ foreach(core gles3_core gles3_validation_core)
  add_library(${core} OBJECT ${COMMON})
  add_dependencies(${core} rr_generated)
  target_compile_definitions(${core} PUBLIC _GNU_SOURCE RR_HEADLESS RR_GLES3 RR_GPU_HUD RR_GPU_HUD_DEFAULT
-  RR_THREADED_PRESENTATION RR_PARALLEL_FRAME_PREP RR_FAST_MEMORY_READS RR_SPLIT_MEMORY_READER C352_INACTIVE_FASTPATH GLES3_QUEUE_DEPTH=${GLES3_QUEUE_DEPTH})
+  RR_THREADED_PRESENTATION RR_PARALLEL_FRAME_PREP RR_FAST_MEMORY_READS RR_SPLIT_MEMORY_READER C352_INACTIVE_FASTPATH RR_AUDIO_RESAMPLER_TELEMETRY GLES3_QUEUE_DEPTH=${GLES3_QUEUE_DEPTH})
  target_include_directories(${core} PUBLIC src ${RR_ROOT}/src ${RR_ROOT}/src/snd ${RR_ROOT}/include ${RR_ROOT}/gen ${GENERATED} ${NAMCO22_ENGINE_DIR} ${NAMCO22_ENGINE_DIR}/snd ${NAMCO22_ENGINE_DIR}/c25)
  target_compile_options(${core} PRIVATE -O2 -fno-strict-aliasing -fwrapv -Wall -Wextra)
  target_link_libraries(${core} PUBLIC PkgConfig::SDL2 Threads::Threads ZLIB::ZLIB ${GLES_LIBRARY} ${EGL_LIBRARY} ${CRYPTO_LIBRARY} m)
