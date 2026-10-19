@@ -1895,21 +1895,21 @@ static int live_recipe_compare(const int32_t *a, const int32_t *b)
             return a[i] < b[i] ? -1 : 1;
     return 0;
 }
-static uint8_t p2_planar[128][768];
-static uint64_t p2_revision[128];
-static bool p2_ready[128];
-static void p2_palettes(void)
+static uint8_t palette_shadow[128][768];
+static uint64_t palette_generations[128];
+static bool palette_initialized[128];
+static void update_palette_versions(void)
 {
     for (unsigned g = 0; g < 128; g++) {
-        bool changed = !p2_ready[g];
+        bool changed = !palette_initialized[g];
         for (unsigned c = 0; c < 3; c++)
-            changed |= memcmp(p2_planar[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256) != 0;
+            changed |= memcmp(palette_shadow[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256) != 0;
         if (changed) {
             for (unsigned c = 0; c < 3; c++)
-                memcpy(p2_planar[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256);
-            if (++p2_revision[g] == 0)
-                p2_revision[g] = 1;
-            p2_ready[g] = true;
+                memcpy(palette_shadow[g] + c * 256, frame_source->pal + g * 256 + c * 32768, 256);
+            if (++palette_generations[g] == 0)
+                palette_generations[g] = 1;
+            palette_initialized[g] = true;
         }
     }
 }
@@ -2233,7 +2233,7 @@ static void live_compile(void)
     unsigned direct = frame_source->direct_count, n = count + direct;
     if (n > MAX_QUADS || direct > 512)
         live_fail("command/dynamic capacity", -1, -1);
-    p2_palettes();
+    update_palette_versions();
     float dynamic[4096][4];
     memset(dynamic, 0, sizeof dynamic);
     for (unsigned i = 0; i < count; i++) {
@@ -2631,7 +2631,7 @@ bool rr_renderer_prepare(rr_presentation *s)
     memcpy(s->record_splits, record_splits, sizeof record_splits);
     s->record_protected_visible = record_protected_visible;
 #endif
-    memcpy(s->palette_revision, p2_revision, sizeof s->palette_revision);
+    memcpy(s->palette_revision, palette_generations, sizeof s->palette_revision);
     s->gles3_compile_ms = live_compile_ms;
     s->gles3_tag = 1;
 #ifdef GLES3_VALIDATION

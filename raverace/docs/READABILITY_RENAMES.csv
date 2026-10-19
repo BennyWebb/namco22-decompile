@@ -268,8 +268,6 @@ provenance_race_v3_near.vert,provenance_world_near.vert
 race_v3.vert,world.vert
 race_v3_near.vert,world_near.vert
 reference-semantic-legacy.csv,reference-semantic-historical-identities.csv
-* _p1b_*,* _readback_*
-* _p1_*,* _renderer_*
 ENG_G1C_KEYS,ENG_GLES3_MATERIAL_KEYS
 gles3/shaders/provenance*,gles3/tests/shaders/provenance*
 p3_cull_original,cull_reference
@@ -277,3 +275,16 @@ p3_cull,cull_projected_bounds
 p3_projection,project_saturated_exact
 p3_original_projection,project_saturated_general
 p3_gles3_projection,use_exact_projection
+p2_planar,palette_shadow
+p2_revision,palette_generations
+p2_ready,palette_initialized
+p2_palettes,update_palette_versions
+rr_gl_p1_select,rr_gl_renderer_select
+rr_p1_audio_ratio,rr_renderer_audio_ratio
+rr_p1_close,rr_renderer_close
+rr_p1_draw,rr_renderer_draw
+rr_p1_open,rr_renderer_open
+rr_p1_prepare,rr_renderer_prepare
+rr_p1b_packet,rr_readback_packet
+rr_p1b_pixel,rr_readback_pixel
+rr_video_p1b_output,rr_video_readback_output
