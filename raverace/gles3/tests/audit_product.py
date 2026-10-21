@@ -32,4 +32,10 @@ assert "-Wall" in flags and "-Wextra" in flags and "-w" not in flags.split()
 assert "GLES3_VALIDATION" not in flags
 validation_flags = (build / "CMakeFiles/gles3_validation_core.dir/flags.make").read_text()
 assert "GLES3_VALIDATION" in validation_flags
+assert "operator_settings.c.o" in link and "rr_operator_commit" in symbols
+for target in ("rr_gles3_validation", "rr_gles3_setup", "rr_gles3_sound_oracle"):
+    target_symbols = subprocess.check_output([a.nm, str(build / target)], text=True)
+    target_map = (build / (target + ".map")).read_text()
+    assert "rr_operator_" not in target_symbols and "operator_settings.c.o" not in target_map, target
 print("PASS product link map/symbols/strings/flags; validation absent, strict unsupported path retained")
+print("PASS operator settings linked only into product; absent from validation/setup/sound oracle")

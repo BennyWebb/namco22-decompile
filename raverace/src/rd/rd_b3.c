@@ -2643,7 +2643,7 @@ static const uint16_t race_clear_words[57] = {
 
 /* FUN_0001b0c2: race start. Place the player (FUN_0001b308, FUN_0001b2e2),
  * set the lap mark (course table 0x1BA0A) and the time limit (0x1BA20 by the
- * EEPROM difficulty byte 0x10001065 + course/attract), clear the race state,
+ * EEPROM lap preset starting at 0x10001065; difficulty is 0x10001062..64), clear the race state,
  * ask the sound CPU for the engine start (unless 0x10001071), and load the
  * course's car parameters (0x1B4CA, 16 bytes per course/mode) and the 48-word
  * handling table (0x1B58A, or 0x1B5EA for the manual gearbox) into 0x4144. */

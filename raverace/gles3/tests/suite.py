@@ -58,9 +58,26 @@ run(
         "test_staging",
         "rr_asset_codec",
         "rr_gles3_setup",
+        "rr_operator_oracle",
+        "test_operator_settings",
     ],
 )
 run("assets", ["cmake", "--build", build, "--target", "rr_validation_asset_kit"])
+run(
+    "operator-settings",
+    [
+        sys.executable,
+        HERE / "test_operator_settings.py",
+        "--build",
+        build,
+        "--roms",
+        roms,
+        "--cache",
+        cache,
+        "--output",
+        work / "operator-settings",
+    ],
+)
 for case in ("reference", "fixture", "attract", "provenance", "unsupported", "sound", "full-race"):
     run(
         case,
@@ -143,6 +160,7 @@ run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", buil
                 "logging",
                 "first-launch",
                 "ctest",
+                "operator-settings",
                 "product-audit",
             ],
         },

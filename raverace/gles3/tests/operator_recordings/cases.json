@@ -1,0 +1,134 @@
+[
+  {
+    "name": "solo-E",
+    "field": 1,
+    "value": 5,
+    "change": "D -> E",
+    "ticks": 1172,
+    "input_sha256": "ae55fc6af8947cfc2736ab16d883a8b3fb26fb71ca4a6b166ca0c78eafbd7b52"
+  },
+  {
+    "name": "solo-A",
+    "field": 1,
+    "value": 1,
+    "change": "D -> A",
+    "ticks": 1220,
+    "input_sha256": "75b75a55c1ab2bcc0c5b5af17e35ee06fb4959c86dc79cf6e81bca5cebe6a6fa"
+  },
+  {
+    "name": "solo-H",
+    "field": 1,
+    "value": 8,
+    "change": "D -> H",
+    "ticks": 1244,
+    "input_sha256": "e3ba7147e7da3d294599a4b45fb8d33d44492c5c1884700d403a36bc0458b180"
+  },
+  {
+    "name": "time-trial-E",
+    "field": 2,
+    "value": 5,
+    "change": "D -> E",
+    "ticks": 1196,
+    "input_sha256": "83c8a77fa8357e9a0307e690b4b0c45894c0b05bb5b8f314d830601a694fd47e"
+  },
+  {
+    "name": "time-trial-A",
+    "field": 2,
+    "value": 1,
+    "change": "D -> A",
+    "ticks": 1244,
+    "input_sha256": "302c5bcb5cf02ddaad9c0c2f52b8c94b253e79d95c8a63a88fb67a42310dc195"
+  },
+  {
+    "name": "time-trial-H",
+    "field": 2,
+    "value": 8,
+    "change": "D -> H",
+    "ticks": 1268,
+    "input_sha256": "54862b38887399c7778074a396bd5b9be336e99a787a52c82af9bccfc5e6d952"
+  },
+  {
+    "name": "car-7",
+    "field": 0,
+    "value": 7,
+    "change": "0 -> 7",
+    "ticks": 1124,
+    "input_sha256": "fc3d02e3576a0878d23000bfccd3d7e559e61b66297fd8d1407a13b408f7043b"
+  },
+  {
+    "name": "right-volume-63",
+    "field": 3,
+    "value": 63,
+    "change": "32 -> 63",
+    "ticks": 1844,
+    "input_sha256": "7d785e11e3e22a6467c6dac035648fa02364d9f65d8bdc7c7edf7f77cd6d3812"
+  },
+  {
+    "name": "right-volume-0",
+    "field": 3,
+    "value": 0,
+    "change": "63 -> 0",
+    "ticks": 1124,
+    "input_sha256": "a79a38510f489964fb9a5772143feaf932823a8059195961ac538d51266c7440",
+    "initial_case": "right-volume-63"
+  },
+  {
+    "name": "right-volume-32",
+    "field": 3,
+    "value": 32,
+    "change": "63 -> 32",
+    "ticks": 1844,
+    "input_sha256": "c7a401103c4e04478cad0311d128b0ab01c7d9dbc1faa04717994bb8e787c2a4",
+    "initial_case": "right-volume-63"
+  },
+  {
+    "name": "left-volume-63",
+    "field": 4,
+    "value": 63,
+    "change": "32 -> 63",
+    "ticks": 1868,
+    "input_sha256": "e428bade055e730142b51744a9129c6b3224bc98735418eb2a794669f128f1cb"
+  },
+  {
+    "name": "left-volume-0",
+    "field": 4,
+    "value": 0,
+    "change": "63 -> 0",
+    "ticks": 1148,
+    "input_sha256": "9238c2d37c02f11adeba9d76d424181c36b9bcb387129a24ffe5845644592ec7",
+    "initial_case": "left-volume-63"
+  },
+  {
+    "name": "left-volume-32",
+    "field": 4,
+    "value": 32,
+    "change": "63 -> 32",
+    "ticks": 1868,
+    "input_sha256": "f623296feef04d2617bdd1762fd73e2cba35c6b445d09ee45142185170924805",
+    "initial_case": "left-volume-63"
+  },
+  {
+    "name": "units",
+    "field": 5,
+    "value": 1,
+    "change": "km/h -> mph",
+    "ticks": 1184,
+    "input_sha256": "7227763ac7f710355e5a1bbc2d12b82930d3fd30de0d509398e8cd057f179860"
+  },
+  {
+    "name": "attract",
+    "field": 6,
+    "value": 1,
+    "change": "on -> off",
+    "ticks": 1208,
+    "input_sha256": "5d7811736dcdf70caf0f93e86b564ac189fcb2d24a1337a98c4c30c2154f8e9b"
+  },
+  {
+    "name": "free-play",
+    "field": 7,
+    "value": 1,
+    "change": "off -> on",
+    "ticks": 1100,
+    "input_sha256": "ec667c743b7c4c971c55d0abd01bc4fb6d1b5feadc867e95639748ea4015e131"
+  }
+]
