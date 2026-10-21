@@ -8,7 +8,7 @@ Branch: `tests/fresh-install`, from main `605d5e4`; no new package installed.
 - SHA256: `51c02f94fbaec95ebabaad6d68b79c87ea44bd8903b1984afdce30bd1bb55695`.
 - Guide: [INSTALL.md](INSTALL.md), including all 36 required ROM names, CRC32s and SHA256s.
 - ZIP has only `Rave Racer.sh` and `rave-racer/{bin,launcher,roms,cache,saves,logs}` plus documentation.
-- ROM/cache/save/log folders ship empty; no plans, decoded assets, EEPROM images, recordings or goldens.
+- ROM/cache/save/log folders ship empty; no ROMs, plans, decoded assets, EEPROM images, recordings or goldens.
 - Package and source content disclosure: [INSTALL.md](INSTALL.md).
 - Python standard library plus the shipped C codec; no NumPy, pip or device Internet access.
 - Product ELF: `193c620ad9a61c636e9f8fb080af72e84efba2f577c92b6dd3feada9a7dc3ce6`.

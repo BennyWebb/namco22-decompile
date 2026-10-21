@@ -103,21 +103,26 @@ then refresh the game list. There are no separate system or save directories.
 
 ## Troubleshooting
 
-| Error or symptom | What to do |
+Braces mark variable values; ROM errors can list multiple files. The display
+adds the title "Rave Racer" and "Press a button to return to Ports." to errors.
+
+| On-screen message | What to do |
 |---|---|
-| ROM check failed: Missing / Wrong | Copy the named file from your own correct dump. Compare the identities below. ZIPs must be extracted. |
-| Package file damaged | Extract a fresh copy of the same local build, preserving your ROMs and saves. |
-| Asset compiler failed (stage named) | Read `logs/setup.log`; check free space, correct Knulli/Python version and intact package files. |
-| Asset cache damaged | Exit, delete cache contents, and relaunch to compile again. Keep ROMs and saves. |
-| EEPROM calibration failed | Read `logs/calibration.log`. Check ROMs and package integrity; do not substitute an uncalibrated EEPROM. |
-| EEPROM damaged | Restore your personal save. For a deliberate factory reset, move the damaged EEPROM aside and relaunch. |
-| Rave Racer is already running | Exit the other session. If no game is running, restart the handheld. |
-| Clock watchdog unavailable / Clock restoration failed | Restart the handheld; check the package and writable storage before retrying. |
-| Setup cancelled or display unavailable | Relaunch from Ports to restart setup. Check the package if its setup screen cannot open. |
-| Save write failed | Check free space and card health; preserve your last good save backup. |
-| Game stopped (exit 86) | Unsupported content was detected. Retain `logs/latest-summary.txt` and report it. There is no substitute rendering path. |
-| Game stopped (other exit) | Read `logs/play.log`, or the full session logs if enabled. Report any sound translation trap. |
-| Other operating-system error | See `logs/last-error.txt`; check writable storage and the supported Knulli version. |
+| ROM check failed<br>Missing: {name} | Copy the named file from your own correct dump. Compare the identities below. ZIPs must be extracted. |
+| ROM check failed<br>Wrong: {name} (CRC {crc32}) | Copy the named file from your own correct dump. Compare the identities below. ZIPs must be extracted. |
+| Package file damaged: {error}<br>Extract a fresh copy of the same package; keep saves and ROMs. | Extract a fresh copy of the same local build, preserving your ROMs and saves. |
+| Asset compiler failed: {stage}<br>See logs/setup.log. | Read `logs/setup.log`; check free space, correct Knulli/Python version and intact package files. |
+| Asset cache damaged: {cache key}<br>Delete cache contents and launch again. | Exit, delete cache contents, and relaunch to compile again. Keep ROMs and saves. |
+| EEPROM calibration failed. See logs/calibration.log.<br>No uncalibrated game was started. | Read `logs/calibration.log`. Check ROMs and package integrity; do not substitute an uncalibrated EEPROM. |
+| EEPROM damaged. Restore your personal save backup.<br>To reset, move saves/rr_eeprom.nv aside and relaunch. | Restore your personal save. For a deliberate factory reset, move the damaged EEPROM aside and relaunch. |
+| Rave Racer is already running. Exit the other session first. | Exit the other session. If no game is running, restart the handheld. |
+| Clock watchdog unavailable. Restart the handheld. | Restart the handheld; check the package and writable storage before retrying. |
+| Clock restoration failed. Restart the handheld. | Restart the handheld; check the package and writable storage before retrying. |
+| Setup cancelled or display unavailable. Launch again to restart setup. | Relaunch from Ports to restart setup. Check the package if its setup screen cannot open. |
+| Save write failed: invalid EEPROM size. | Check free space and card health; preserve your last good save backup. |
+| Game stopped (exit 86).<br>See logs/play.log or logs/latest-summary.txt.<br>No substitute renderer or sound driver was used. | Unsupported content was detected. Retain `logs/latest-summary.txt` and report it. There is no substitute rendering path. |
+| Game stopped (exit {result}).<br>See logs/play.log or logs/latest-summary.txt.<br>No substitute renderer or sound driver was used. | Read `logs/play.log`, or the full session logs if enabled. Report any sound translation trap. |
+| {error} | Other exceptions appear verbatim, without a generic heading. See `logs/last-error.txt`; check writable storage and the supported Knulli version. |
 
 If setup cannot open its display, the launcher exits instead of starting the game;
 inspect `logs/last-error.txt` and try from EmulationStation, not a second graphical

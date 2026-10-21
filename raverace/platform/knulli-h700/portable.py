@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Self-contained Knulli release launcher: strict setup, summary-only normal play."""
+"""Self-contained Knulli launcher: strict setup, summary-only normal play."""
 
 import argparse
 import hashlib
@@ -39,7 +39,7 @@ def close_screen(child):
     child.wait(timeout=5)
 
 
-def verify_release(app):
+def verify_package(app):
     try:
         expected = json.loads((app / "package-hashes.json").read_text())
         for name, value in expected.items():
@@ -47,7 +47,7 @@ def verify_release(app):
                 raise ValueError(name)
     except (OSError, ValueError) as error:
         raise SetupError(
-            f"Release file damaged: {error}\nCopy a fresh release package; keep saves and ROMs."
+            f"Package file damaged: {error}\nExtract a fresh copy of the same package; keep saves and ROMs."
         ) from error
 
 
@@ -95,7 +95,7 @@ def run(app=APP, *, full=False, frames=0):
     started = time.monotonic()
     timings = {}
     try:
-        verify_release(app)
+        verify_package(app)
         original = clocks.snapshot()
         state = dict(owner=os.getpid(), owner_start=clocks.identity(os.getpid()), original=original, restored=False)
         clocks.atomic(journal, state)
