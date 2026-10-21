@@ -46,9 +46,9 @@ compiling textures, meshes and material tables from your ROMs on the handheld.
 The streaming compiler uses system Python and the included C library; it does
 not need NumPy or downloads. Progress shows the stage and percentage.
 Do not switch it off during preparation. START+SELECT cancels the build;
-the next launch discards incomplete output and starts again. The measured asset build takes about 3 minutes at 1,512 MHz, including
-verification. Automatic calibration takes another 90 seconds; first play is
-ready after about 4 minutes 30 seconds.
+the next launch discards incomplete output and starts again. The measured asset build takes 3–4 minutes at 1,512 MHz, including
+verification. Automatic calibration takes another 90 seconds; allow about
+5–6 minutes before first play.
 
 Next, the game's own TEST/SERVICE adjustment runs automatically for 1,600 ticks
 with centred steering and released pedals. This creates a calibrated EEPROM
