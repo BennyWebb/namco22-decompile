@@ -63,6 +63,24 @@ foreach(target rr_gles3 rr_gles3_validation rr_gles3_sound_oracle rr_gles3_setup
   target_compile_definitions(${target} PRIVATE GLES3_VALIDATION)
  endif()
 endforeach()
+target_sources(rr_gles3 PRIVATE src/operator_settings.c)
+
+# Test-only EEPROM capture: the same lifted setup core, without changing its
+# seed/reset rules or adding an export hook to the product.
+if(NOT CMAKE_CROSSCOMPILING)
+ add_executable(rr_operator_oracle src/live.c src/gles.c src/layers.c src/async_play.c
+  ${GENERATED}/snd_driver.c tests/operator_oracle_export.c)
+ target_link_libraries(rr_operator_oracle PRIVATE gles3_setup_core gles3_generated)
+ target_compile_options(rr_operator_oracle PRIVATE -O2 -fno-strict-aliasing -fwrapv -Wall -Wextra)
+ target_link_options(rr_operator_oracle PRIVATE -Wl,--wrap=fopen -Wl,--wrap=fopen64)
+
+ add_executable(test_operator_settings tests/test_operator_settings.c tests/test_operator_io.c src/operator_settings.c)
+ target_include_directories(test_operator_settings PRIVATE src)
+ target_compile_options(test_operator_settings PRIVATE -O2 -UNDEBUG -Wall -Wextra)
+ target_link_options(test_operator_settings PRIVATE -Wl,--wrap=fsync -Wl,--wrap=write
+  -Wl,--wrap=read -Wl,--wrap=__read_chk -Wl,--wrap=renameat)
+endif()
+
 add_executable(rr_asset_builder assets/asset_builder.c)
 add_library(gles3_session_io SHARED ../platform/knulli-h700/session_io.c)
 set_target_properties(gles3_session_io PROPERTIES PREFIX "" OUTPUT_NAME "session-io")

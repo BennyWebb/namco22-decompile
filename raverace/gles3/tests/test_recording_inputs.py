@@ -2,6 +2,7 @@
 """Audit controller-only fixtures and mandatory SHA checks, including under -O."""
 
 from pathlib import Path
+import json
 import re
 import tempfile
 import unittest
@@ -11,6 +12,32 @@ from recordings import HERE, IDENTITIES, generate_eeprom, prepare_recording, sha
 
 
 class ControllerInputs(unittest.TestCase):
+    def test_operator_content(self):
+        directory = HERE / "operator_recordings"
+        seen = set()
+        cases = json.loads((directory / "cases.json").read_text())
+        self.assertEqual(len(cases), 16)
+        for case in cases:
+            with self.subTest(operator=case["name"]):
+                path = directory / (case["name"] + ".rec")
+                self.assertEqual(sha(path), case["input_sha256"])
+                previous = 0
+                for line in path.read_text(encoding="ascii").splitlines():
+                    if line.startswith("#"):
+                        self.assertEqual(line, "# Controller inputs only: TEST held; steering navigates, gas confirms.")
+                        continue
+                    match = re.fullmatch(r"F (\d+) [0-9A-F]{4} [0-9A-F]{3} [0-9A-F]{3} [0-9A-F]{3}", line)
+                    self.assertIsNotNone(match)
+                    tick = int(match[1])
+                    self.assertGreater(tick, previous)
+                    self.assertLessEqual(tick, case["ticks"])
+                    previous = tick
+                if "initial_case" in case:
+                    self.assertIn(case["initial_case"], seen)
+                seen.add(case["name"])
+                for suffix in (".eeprom", ".meta", ".end"):
+                    self.assertFalse(Path(str(path) + suffix).exists())
+
     def test_content(self):
         for name, identity in IDENTITIES.items():
             with self.subTest(name=name):
