@@ -3,6 +3,7 @@ extern unsigned char *SHA256(const unsigned char *, unsigned long, unsigned char
 #endif
 
 #include "renderer_api.h"
+#include "rr_gles3.h"
 
 static void live_fail(const char *, int, int);
 #define _GNU_SOURCE 1
@@ -2206,18 +2207,21 @@ static void dynamic_cache_upload(const rr_presentation *s, unsigned copy)
         }
 #endif
     }
-    fprintf(stderr, "[MATERIAL-UV-UPLOAD] tick=%u bytes=%u\n", s->frame, uv_bytes);
+    if (rr_gles3_full_telemetry())
+        fprintf(stderr, "[MATERIAL-UV-UPLOAD] tick=%u bytes=%u\n", s->frame, uv_bytes);
     RENDER_CHECK(glGetError() == GL_NO_ERROR);
     glActiveTexture(GL_TEXTURE0);
-    fprintf(stderr,
-            "[DYNAMIC_CACHE-UPLOAD] tick=%u copy=%u bytes=%u materials=%u hits=%u misses=%u evictions=%u\n",
-            s->frame,
-            copy,
-            bytes,
-            dynamic_cache_drawing->materials,
-            dynamic_cache_drawing->hits,
-            dynamic_cache_drawing->misses,
-            dynamic_cache_drawing->evictions);
+    if (rr_gles3_full_telemetry()) {
+        fprintf(stderr,
+                "[DYNAMIC_CACHE-UPLOAD] tick=%u copy=%u bytes=%u materials=%u hits=%u misses=%u evictions=%u\n",
+                s->frame,
+                copy,
+                bytes,
+                dynamic_cache_drawing->materials,
+                dynamic_cache_drawing->hits,
+                dynamic_cache_drawing->misses,
+                dynamic_cache_drawing->evictions);
+    }
 }
 
 #ifdef GLES3_VALIDATION
@@ -2542,51 +2546,55 @@ static unsigned frame_gles3_count;
 static double frame_ring_wait;
 static void state_receipt(rr_presentation *s, const char *why)
 {
-    if (s->dynamic_cache_dynamic && ((DynamicCacheSlot *)s->dynamic_cache_dynamic)->tick == s->frame) {
-        const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
+    if (rr_gles3_full_telemetry()) {
+        if (s->dynamic_cache_dynamic && ((DynamicCacheSlot *)s->dynamic_cache_dynamic)->tick == s->frame) {
+            const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
+            fprintf(stderr,
+                    "[UPLOAD-STAGING] tick=%u copied_bytes=%llu metadata_bytes=%llu\n",
+                    s->frame,
+                    (unsigned long long)d->copied_bytes,
+                    (unsigned long long)d->metadata_bytes);
+        }
         fprintf(stderr,
-                "[UPLOAD-STAGING] tick=%u copied_bytes=%llu metadata_bytes=%llu\n",
+                "[MATERIAL_CACHE-CACHE] tick=%u occupancy=%u lookups=%llu probes=%llu max_probe=%u full=%llu clears=%u "
+                "generation=%u "
+                "capacity=%u pool_limit=65535\n",
                 s->frame,
-                (unsigned long long)d->copied_bytes,
-                (unsigned long long)d->metadata_bytes);
+                material_cache_occupancy,
+                (unsigned long long)material_cache_lookups,
+                (unsigned long long)material_cache_probes,
+                material_cache_maxprobe,
+                (unsigned long long)material_cache_full,
+                material_cache_clears,
+                material_cache_generation,
+                material_cache_capacity);
     }
-    fprintf(stderr,
-            "[MATERIAL_CACHE-CACHE] tick=%u occupancy=%u lookups=%llu probes=%llu max_probe=%u full=%llu clears=%u "
-            "generation=%u "
-            "capacity=%u pool_limit=65535\n",
-            s->frame,
-            material_cache_occupancy,
-            (unsigned long long)material_cache_lookups,
-            (unsigned long long)material_cache_probes,
-            material_cache_maxprobe,
-            (unsigned long long)material_cache_full,
-            material_cache_clears,
-            material_cache_generation,
-            material_cache_capacity);
     material_cache_clears = 0;
     material_cache_lookups = material_cache_probes = material_cache_full = material_cache_maxprobe = 0;
-    const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
-    if (d && d->tick == s->frame)
+    if (rr_gles3_full_telemetry()) {
+        const DynamicCacheSlot *d = s->dynamic_cache_dynamic;
+        if (d && d->tick == s->frame)
+            fprintf(stderr,
+                    "[DYNAMIC-CACHE-PREP] tick=%u hits=%u misses=%u evictions=%u pending_bytes=%u\n",
+                    s->frame,
+                    d->hits,
+                    d->misses,
+                    d->evictions,
+                    d->bytes);
         fprintf(stderr,
-                "[DYNAMIC-CACHE-PREP] tick=%u hits=%u misses=%u evictions=%u pending_bytes=%u\n",
+                "[RENDER-COVERAGE] tick=%u main=%u sub=%u screen=%u course=%u major=%u walk=%u direct=%u gles3=%u "
+                "reason=%s\n",
                 s->frame,
-                d->hits,
-                d->misses,
-                d->evictions,
-                d->bytes);
-    fprintf(
-        stderr,
-        "[RENDER-COVERAGE] tick=%u main=%u sub=%u screen=%u course=%u major=%u walk=%u direct=%u gles3=%u reason=%s\n",
-        s->frame,
-        s->state_main,
-        s->state_sub,
-        s->state_screen,
-        s->state_course,
-        s->dynamic_cache_major,
-        s->walk,
-        s->direct_count,
-        s->gles3_tag,
-        why);
+                s->state_main,
+                s->state_sub,
+                s->state_screen,
+                s->state_course,
+                s->dynamic_cache_major,
+                s->walk,
+                s->direct_count,
+                s->gles3_tag,
+                why);
+    }
 }
 bool rr_renderer_prepare(rr_presentation *s)
 {

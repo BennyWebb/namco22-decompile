@@ -300,6 +300,10 @@ bool rr_gles3_interactive(void)
 
 static bool failed, audio_enabled, deferred_record_exit;
 static const char *thread_csv;
+bool rr_gles3_full_telemetry(void)
+{
+    return thread_csv != NULL;
+}
 static uint32_t profile_from = 1;
 static double last_presentation;
 static rr_presentation_metrics last_metrics;

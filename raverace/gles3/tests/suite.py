@@ -56,6 +56,8 @@ run(
         "test_cull",
         "test_cache",
         "test_staging",
+        "rr_asset_codec",
+        "rr_gles3_setup",
     ],
 )
 run("assets", ["cmake", "--build", build, "--target", "rr_validation_asset_kit"])
@@ -92,6 +94,36 @@ run(
     [sys.executable, HERE / "test_input_replay.py", build / "gles3/rr_gles3", roms, work / "full-race/factory.eeprom"],
     env=host_environment(cache),
 )
+run(
+    "first-launch",
+    [
+        sys.executable,
+        HERE / "test_first_launch.py",
+        "--build",
+        build,
+        "--roms",
+        roms,
+        "--output",
+        work / "first-launch",
+    ],
+)
+run(
+    "logging",
+    [
+        sys.executable,
+        HERE / "test_logging.py",
+        "--build",
+        build,
+        "--roms",
+        roms,
+        "--cache",
+        cache,
+        "--eeprom",
+        work / "reference/factory.eeprom",
+        "--output",
+        work / "logging",
+    ],
+)
 run("ctest", ["ctest", "--test-dir", build, "--output-on-failure"])
 run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", build])
 (work / "result.json").write_text(
@@ -108,6 +140,8 @@ run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", buil
                 "full-race",
                 "record-replay",
                 "record-replay-calibrated",
+                "logging",
+                "first-launch",
                 "ctest",
                 "product-audit",
             ],

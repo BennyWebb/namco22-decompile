@@ -255,7 +255,7 @@ static int rr_headless_main(int argc, char **argv)
     const char *explicit_seed = getenv("ENG_GLES3_INITIAL_EEPROM");
     uint8_t initial_eeprom[RR_EEPROM_SIZE];
     bool blank_eeprom = false;
-#ifdef GLES3_VALIDATION
+#if defined(GLES3_VALIDATION) || defined(GLES3_EEPROM_SETUP)
     blank_eeprom = getenv("ENG_GLES3_FACTORY_EEPROM") != NULL;
 #endif
     if (blank_eeprom && explicit_seed) {

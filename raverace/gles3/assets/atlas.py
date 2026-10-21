@@ -167,7 +167,7 @@ def build(rom, recipes, out, label):
         "full_4096_page_bytes": len(pages) * 4096**2,
         "content_bytes": sum(map(len, contents.values())),
         "packed_pen_texels_verified": checked,
-        "packing_seconds": time.monotonic() - start,
+        "packing_seconds": 0,  # Wall time belongs in the build log, not content-addressed assets.
         "files": {f"page-{i}.r8ui": {"bytes": p.nbytes, "sha256": digest(p.tobytes())} for i, p in enumerate(pages)},
     }
     (out / "mapping.json").write_bytes(encode(mappings))
