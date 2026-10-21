@@ -2,18 +2,24 @@
 
 You need an Anbernic RG40XX H running Knulli (tested with scarab 2026/05/11,
 Python 3.12), a computer to copy files, and at least 1 GiB free on the games card.
-This package is for this device, not other handhelds. No ROMs, decoded assets,
-saves, recordings or game screenshots are included.
+This build supports this device, not other handhelds. No public binary package
+is provided; build the installation ZIP from source using your own dumps.
+The executables contain Game ROM-derived code, the complete C71 BIOS, C71
+BIOS-derived code, and C74 sound BIOS-derived code and instruction bytes.
+The source tree also includes Game ROM-derived code and C71 BIOS content.
+The ZIP contains no Rave Racer graphics assets, sound samples, EEPROM images,
+saves, recordings or game screenshots.
 
 Use your own legally obtained board dumps: Rave Racer World revision B
 (MAME `raverace`) and the Namco C74 sound BIOS (`namcoc74`). This project does
-not provide ROM downloads. Extract the files on your computer; do not rename
+not provide ROM files. Extract the files on your computer; do not rename
 a different revision to match. The exact filenames and identities are below.
 
-## Download and copy
+## Build and copy
 
-1. Download `rave-racer-knulli-h700-<version>.zip` from the project's release
-   or PR build artifacts. Compare its SHA256 with the published checksum.
+1. Build `rave-racer-knulli-h700-<version>.zip` on your computer using
+   **Build an installation ZIP on a Linux PC** below. Record the SHA256 printed
+   by the packaging command so you can verify the copied ZIP.
 2. Extract the ZIP **into the card's `roms/ports/` directory**. Do not create
    another enclosing directory. You should have these two items:
 
@@ -42,9 +48,10 @@ Everything the game creates stays inside `rave-racer/`. It does not use
 The launcher checks all ROM sizes, CRC32s and SHA256s. A missing or incorrect
 file is named on screen; press a button to return to Ports. Multiple error
 pages are advanced with a button. It then displays a preparation screen while
-compiling textures, meshes and material tables from your ROMs on the handheld.
+compiling only Rave Racer textures, meshes and material tables from your ROMs
+on the handheld. Sound samples are read from your wave ROMs at run time.
 The streaming compiler uses system Python and the included C library; it does
-not need NumPy or downloads. Progress shows the stage and percentage.
+not need NumPy or Internet access. Progress shows the stage and percentage.
 Do not switch it off during preparation. START+SELECT cancels the build;
 the next launch discards incomplete output and starts again. The measured asset build takes 3–4 minutes at 1,512 MHz, including
 verification. Automatic calibration takes another 90 seconds; allow about
@@ -57,7 +64,7 @@ SHA256 must be `81e19e9ce2fca04dbbd487b12e85cc473e30e61f2797c703743c9b86373721c7
 Interactive play starts only after that check passes. Do not press controls
 while the automatic adjustment screens are visible.
 
-Later launches verify the release, ROMs and existing asset cache, and reuse your
+Later launches verify the package, ROMs and existing asset cache, and reuse your
 saved EEPROM. They do not repeat compilation or reset your calibration, scores
 or settings. A damaged cache is reported, never silently replaced by a different
 renderer. To rebuild it deliberately, exit and delete the contents of `cache/`.
@@ -86,7 +93,7 @@ Saves are persisted locally; back up `saves/` before updating or removing the ga
 ## Update or uninstall
 
 Exit first. Back up the entire old `rave-racer/` folder to your computer for
-rollback. Extract the new release over the old files, keeping `roms/` and
+rollback. Extract the new package over the old files, keeping `roms/` and
 `saves/`. Existing cache generations can be deleted while idle to reclaim space.
 To roll back, restore your entire backup and its matching `Rave Racer.sh`.
 Do not copy a generated test EEPROM over a personal save.
@@ -96,17 +103,17 @@ then refresh the game list. There are no separate system or save directories.
 
 ## Troubleshooting
 
-| On-screen message | What to do |
+| Error or symptom | What to do |
 |---|---|
 | ROM check failed: Missing / Wrong | Copy the named file from your own correct dump. Compare the identities below. ZIPs must be extracted. |
-| Release file damaged | Extract a fresh copy of the same release, preserving your ROMs and saves. |
-| Asset compiler failed (stage named) | Read `logs/setup.log`; check free space, correct Knulli/Python version and intact release files. |
+| Package file damaged | Extract a fresh copy of the same local build, preserving your ROMs and saves. |
+| Asset compiler failed (stage named) | Read `logs/setup.log`; check free space, correct Knulli/Python version and intact package files. |
 | Asset cache damaged | Exit, delete cache contents, and relaunch to compile again. Keep ROMs and saves. |
-| EEPROM calibration failed | Read `logs/calibration.log`. Check ROMs and release integrity; do not substitute an uncalibrated EEPROM. |
+| EEPROM calibration failed | Read `logs/calibration.log`. Check ROMs and package integrity; do not substitute an uncalibrated EEPROM. |
 | EEPROM damaged | Restore your personal save. For a deliberate factory reset, move the damaged EEPROM aside and relaunch. |
 | Rave Racer is already running | Exit the other session. If no game is running, restart the handheld. |
-| Clock watchdog unavailable / Clock restoration failed | Restart the handheld; check the release and writable storage before retrying. |
-| Setup cancelled or display unavailable | Relaunch from Ports to restart setup. Check the release if its setup screen cannot open. |
+| Clock watchdog unavailable / Clock restoration failed | Restart the handheld; check the package and writable storage before retrying. |
+| Setup cancelled or display unavailable | Relaunch from Ports to restart setup. Check the package if its setup screen cannot open. |
 | Save write failed | Check free space and card health; preserve your last good save backup. |
 | Game stopped (exit 86) | Unsupported content was detected. Retain `logs/latest-summary.txt` and report it. There is no substitute rendering path. |
 | Game stopped (other exit) | Read `logs/play.log`, or the full session logs if enabled. Report any sound translation trap. |
@@ -159,20 +166,22 @@ SHA256s and CRC32s identify the dump; these hashes contain no ROM payload.
 | `rv2_prgumb.8d` | 524288 | `6414a800` | `e3a0d90407d1bb9724ac310ca24775937ec389d830a626d4b48da66dddbba0e2` |
 | `rv2_prguub.6d` | 524288 | `a9f18714` | `63f25d1d4af12885552ac46674a95aea82438af8bdbb80af897150b28d961c89` |
 
-## Build a release on a Linux PC
+## Build an installation ZIP on a Linux PC
 
 Install the repository's documented host build dependencies and the Knulli
-H700 cross SDK. These commands are run from `raverace/`, with your ROMs available
-only to the build tools. Nothing generated from them is copied into the ZIP.
+H700 cross SDK. Run these commands from `raverace/`, with your own ROMs available
+to the build tools. The resulting executables contain the content described
+above and are copied into the installation ZIP.
 
 ```sh
 cmake --preset knulli-h700 -DRR_ROM_DIR=/absolute/path/to/your/extracted-ROMs
 cmake --build --preset knulli-h700 --target rr_gles3 rr_gles3_setup rr_message rr_asset_codec gles3_session_io
-python3 gles3/tools/release.py --build build/knulli-h700 --output build/releases --version 0.1.0
-python3 gles3/tests/test_release.py build/releases/rave-racer-knulli-h700-0.1.0.zip
+python3 gles3/tools/release.py --build build/knulli-h700 --output build/packages --version 0.1.0
+python3 gles3/tests/test_release.py build/packages/rave-racer-knulli-h700-0.1.0.zip
 ```
 
-The packaging command is offline and uses only compiled executables/libraries,
-compiler source, text shaders, device configuration, hashes and this guide. It
-never takes an asset kit, ROM directory or user data directory as input. There
-is no NumPy dependency in the release. Build outputs remain ignored.
+The packaging command is offline. It copies compiled executables/libraries,
+asset compiler source, text shaders, device configuration, hashes and this guide.
+It does not read a ROM directory directly; it packages the executables with the
+content described above. There is no NumPy dependency in the package. Build
+outputs remain ignored.

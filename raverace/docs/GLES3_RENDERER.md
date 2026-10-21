@@ -27,7 +27,7 @@ WRAM and C352 inactive-voice fast paths preserve their general-path results.
 
 The whole-ROM compiler owns deterministic pen deduplication, overlap merging and
 page packing. The checked-in files are compiler/shader source, never texels, XYZ,
-layout witnesses or baked packets. The host NumPy compiler is the output oracle. The release uses system Python
+layout witnesses or baked packets. The host NumPy compiler is the output oracle. The package uses system Python
 plus `assets/stream_codec.c`: bounded pen rows, SHA256 deduplication with exact
 collision comparisons, deterministic C merging/packing, and streamed pages and
 meshes. Both compilers share `finish.py` for metadata. Every output file's hash
@@ -69,7 +69,7 @@ object/cull dumps, batching diagnostics and the forced-unsupported fixture.
 Strict unsupported exit86 remains in the product. tests/audit_product.py checks
 both link maps and symbols/strings/compile flags against the validation executable.
 
-The portable release stores all game-owned files under `ports/rave-racer/`.
+The locally built package stores all game-owned files under `ports/rave-racer/`.
 Normal mode logs summaries; per-picture renderer diagnostics require an explicit
 thread-profile request, which the launcher's `--telemetry full` option supplies.
 The diagnostic gate preserves all per-picture cache-counter resets. Quiet/full

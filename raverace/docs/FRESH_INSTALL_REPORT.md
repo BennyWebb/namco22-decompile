@@ -8,8 +8,9 @@ Branch: `tests/fresh-install`, from main `605d5e4`; no new package installed.
 - SHA256: `51c02f94fbaec95ebabaad6d68b79c87ea44bd8903b1984afdce30bd1bb55695`.
 - Guide: [INSTALL.md](INSTALL.md), including all 36 required ROM names, CRC32s and SHA256s.
 - ZIP has only `Rave Racer.sh` and `rave-racer/{bin,launcher,roms,cache,saves,logs}` plus documentation.
-- ROM/cache/save/log folders ship empty; no ROMs, plans, decoded assets, EEPROMs, recordings or goldens.
-- Python standard library plus the shipped C codec; no NumPy, pip or device downloads.
+- ROM/cache/save/log folders ship empty; no plans, decoded assets, EEPROM images, recordings or goldens.
+- Package and source content disclosure: [INSTALL.md](INSTALL.md).
+- Python standard library plus the shipped C codec; no NumPy, pip or device Internet access.
 - Product ELF: `193c620ad9a61c636e9f8fb080af72e84efba2f577c92b6dd3feada9a7dc3ce6`.
 - Product C change is diagnostic gating only; quiet/full state and pixels match exactly.
 - Dedicated setup binary enables blank EEPROM export without linking validation/provenance hooks into the game.
@@ -93,4 +94,5 @@ Branch: `tests/fresh-install`, from main `605d5e4`; no new package installed.
 - Deleted remote `cleanup/gles3-main`, `tests/full-race`, `feature/knulli-h700`; confirmed absent.
 - Remote main remains `605d5e4cc318186aef9d19166e07da7940da59c1`.
 - New history scan: source/hash text only, no payload/recording/benchmark paths, no blob over 1 MiB.
-- Release ZIP is ignored and is not committed. No ROM-derived payload was committed or shipped.
+- Installation ZIP is ignored and is not committed. See [INSTALL.md](INSTALL.md)
+  for the package and source content disclosure.
