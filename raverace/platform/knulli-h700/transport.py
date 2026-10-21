@@ -17,7 +17,25 @@ def child_guard():
         os._exit(96)
 
 
-def monitor(child, profile, collector):
+def persist_eeprom(path, data):
+    if len(data) != 8192:
+        raise RuntimeError("Save write failed: invalid EEPROM size.")
+    temporary = path.with_suffix(".tmp")
+    with temporary.open("xb") as stream:
+        stream.write(data)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, path)
+    directory = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+    if path.read_bytes() != data:
+        raise RuntimeError(f"Save readback failed: {path}")
+
+
+def monitor(child, profile, collector, *, ack=None):
     sel = selectors.DefaultSelector()
     buffers = {}
     for kind, fd in [("stderr", child.stderr.fileno()), ("stdout", child.stdout.fileno()), ("profile", profile)]:
@@ -37,7 +55,13 @@ def monitor(child, profile, collector):
             buffers[key.fd] += data
             while b"\n" in buffers[key.fd]:
                 line, buffers[key.fd] = buffers[key.fd].split(b"\n", 1)
-                collector.line(key.data, line.decode(errors="replace") + "\n")
+                decoded = line.decode(errors="replace") + "\n"
+                collector.line(key.data, decoded)
+                if key.data == "stderr" and decoded.startswith("[SAVE-FLUSH] "):
+                    if ack is None or decoded != "[SAVE-FLUSH] return-title\n":
+                        raise RuntimeError("Invalid save acknowledgement request")
+                    if os.write(ack, b"OK return-title\n") != len(b"OK return-title\n"):
+                        raise RuntimeError("Save acknowledgement failed")
             if len(buffers[key.fd]) > 1048576:
                 collector.unmatched += 1
                 buffers[key.fd] = b""

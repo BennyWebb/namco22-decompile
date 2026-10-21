@@ -60,6 +60,9 @@ run(
         "rr_gles3_setup",
         "rr_operator_oracle",
         "test_operator_settings",
+        "test_title",
+        "test_title_runtime",
+        "title_open_audit",
     ],
 )
 run("assets", ["cmake", "--build", build, "--target", "rr_validation_asset_kit"])
@@ -76,6 +79,21 @@ run(
         cache,
         "--output",
         work / "operator-settings",
+    ],
+)
+run(
+    "title-options",
+    [
+        sys.executable,
+        HERE / "test_title_host.py",
+        "--build",
+        build,
+        "--roms",
+        roms,
+        "--cache",
+        cache,
+        "--output",
+        work / "title-options",
     ],
 )
 for case in ("reference", "fixture", "attract", "provenance", "unsupported", "sound", "full-race"):
@@ -161,6 +179,7 @@ run("product-audit", [sys.executable, HERE / "audit_product.py", "--build", buil
                 "first-launch",
                 "ctest",
                 "operator-settings",
+                "title-options",
                 "product-audit",
             ],
         },

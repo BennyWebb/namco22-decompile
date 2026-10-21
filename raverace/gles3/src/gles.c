@@ -11,20 +11,34 @@
 #include "rr_video_layers.h"
 #include "rr_overlay.h"
 #include "rr_sound.h"
+#ifdef RR_TITLE_OPTIONS
+#include "title.h"
+#include <poll.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
+static SDL_Joystick *title_pad;
+static ti_profile title_profile;
+static ti_hold return_hold;
+static bool return_requested, overlay_held;
+static int save_ack = -1;
+#endif
 static SDL_Window *window;
 static SDL_GLContext context;
-static SDL_GameController *controllers[16];
-static SDL_Joystick *raw_joysticks[16];
 #include "rr_input_stream.h"
 #include "rr_hw.h"
 /* Host adapter only: unchanged EEPROM state is snapshotted on the simulation
  * thread; the low-priority supervisor persists it atomically in gles3 saves. */
-static bool save_enabled;
+static bool save_enabled, failed;
 static unsigned save_ticks;
 static unsigned char save_last_eeprom[RR_EEPROM_SIZE];
 static void save_emit(void)
 {
-    if (!save_enabled || !memcmp(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE))
+    bool force = false;
+#ifdef RR_TITLE_OPTIONS
+    force = return_requested;
+#endif
+    if (!save_enabled || (!force && !memcmp(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE)))
         return;
     static const char hex[] = "0123456789abcdef";
     char line[32 + RR_EEPROM_SIZE * 2];
@@ -37,7 +51,10 @@ static void save_emit(void)
         line[at++] = hex[g_rr.eeprom[i] & 15];
     }
     line[at++] = '\n';
-    fwrite(line, 1, at, stderr);
+    if (fwrite(line, 1, at, stderr) != at) {
+        failed = true;
+        return;
+    }
     memcpy(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
 }
 static void save_tick(void)
@@ -45,44 +62,33 @@ static void save_tick(void)
     if (save_enabled && ++save_ticks % 120 == 0)
         save_emit();
 }
-static bool save_open(bool enabled)
+static void save_begin(bool enabled)
 {
     save_enabled = enabled;
-    if (!enabled)
-        return true;
-    const char *p = getenv("ENG_GLES3_SAVE_PATH");
-    if (!p)
-        return false;
-    FILE *f = fopen(p, "rb");
-    if (!f)
-        return false;
-    bool ok = fread(g_rr.eeprom, 1, RR_EEPROM_SIZE, f) == RR_EEPROM_SIZE && fgetc(f) == EOF;
-    fclose(f);
-    if (!ok)
-        return false;
-    memcpy(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
-    fprintf(stderr, "[SAVE] loaded=%s bytes=%u transport=async-supervisor\n", p, RR_EEPROM_SIZE);
-    return true;
+    save_ticks = 0;
+    if (enabled) {
+        memcpy(save_last_eeprom, g_rr.eeprom, RR_EEPROM_SIZE);
+        fprintf(stderr, "[SAVE] baseline bytes=%u transport=async-supervisor\n", RR_EEPROM_SIZE);
+    }
 }
 
 /* Small SDL input bridge. No desktop UI, audio or simulation timing changes. */
 #include "rr_hw.h"
 #include "rr_game.h"
 static bool interactive, input_log;
-static const char *controller_db, *es_input = "/userdata/system/configs/emulationstation/es_input.cfg";
+static const char *controller_db, *es_input;
 static bool input_coin, input_gas, input_brake, input_view, input_up, input_down;
 static int input_wheel;
 static unsigned coin_edges, start_ticks;
+#ifdef RR_TITLE_OPTIONS
 static bool chord_start[16], chord_select[16];
+#endif
 /* Event edges survive DOWN+UP in one queue drain (including a slow swap).
  * Only consume them when an emulated input sample is applied. */
 static bool input_event(const SDL_Event *event)
 {
-#ifdef RR_GLES3
-    if ((event->type == SDL_KEYDOWN && !event->key.repeat && event->key.keysym.scancode == SDL_SCANCODE_F3) ||
-        (event->type == SDL_CONTROLLERBUTTONDOWN && event->cbutton.button == SDL_CONTROLLER_BUTTON_Y))
+    if (event->type == SDL_KEYDOWN && !event->key.repeat && event->key.keysym.scancode == SDL_SCANCODE_F3)
         rr_overlay_toggle();
-#endif
     if (!interactive)
         return true;
     if (event->type == SDL_KEYDOWN && !event->key.repeat) {
@@ -91,124 +97,25 @@ static bool input_event(const SDL_Event *event)
         if (event->key.keysym.scancode == SDL_SCANCODE_RETURN)
             start_ticks = 10;
     }
-    if (event->type == SDL_CONTROLLERBUTTONDOWN || event->type == SDL_CONTROLLERBUTTONUP) {
-        bool down = event->type == SDL_CONTROLLERBUTTONDOWN;
-        for (int i = 0; i < 16; i++)
-            if (controllers[i] &&
-                SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i])) == event->cbutton.which) {
-                if (event->cbutton.button == SDL_CONTROLLER_BUTTON_START) {
-                    chord_start[i] = down;
-                    if (down)
-                        start_ticks = 10;
-                }
-                if (event->cbutton.button == SDL_CONTROLLER_BUTTON_BACK) {
-                    chord_select[i] = down;
-                    if (down && coin_edges < 8)
-                        coin_edges++;
-                }
-                if (chord_start[i] && chord_select[i])
-                    return false;
-            }
-    }
-    return true;
-}
-
-/* Read only the simple attribute-per-line format emitted by EmulationStation.
- * Unsupported/truncated input is ignored; an explicit SDL mapping is available. */
-static bool input_attr(const char *line, const char *name, char *out, size_t capacity)
-{
-    char key[64];
-    snprintf(key, sizeof key, " %s=\"", name);
-    const char *p = strstr(line, key);
-    if (!p)
-        return false;
-    p += strlen(key);
-    const char *end = strchr(p, '"');
-    if (!end || (size_t)(end - p) >= capacity)
-        return false;
-    memcpy(out, p, (size_t)(end - p));
-    out[end - p] = 0;
-    return true;
-}
-static void input_map_device(int device)
-{
-    if (SDL_IsGameController(device))
-        return;
-    FILE *fp = fopen(es_input, "r");
-    char guid[33];
-    SDL_JoystickGetGUIDString(SDL_JoystickGetDeviceGUID(device), guid, sizeof guid);
-    const char *name = SDL_JoystickNameForIndex(device);
-    if (!fp) {
-        fprintf(stderr,
-                "[INPUT] unmapped %s GUID=%s; configure --es-input FILE or --controller-db FILE\n",
-                name ? name : "unknown",
-                guid);
-        return;
-    }
-    char line[2048], mapping[2048] = "";
-    bool match = false;
-    while (fgets(line, sizeof line, fp)) {
-        if (strstr(line, "<inputConfig ")) {
-            char id[64] = "", device_name[256] = "";
-            input_attr(line, "deviceGUID", id, sizeof id);
-            input_attr(line, "deviceName", device_name, sizeof device_name);
-            match = !strcmp(id, guid) || (name && !strcmp(name, device_name));
-            /* SDL mapping names may not contain commas; use a fixed label. */
-            if (match)
-                snprintf(mapping, sizeof mapping, "%s,Knulli saved controller,", guid);
-        } else if (match && strstr(line, "</inputConfig>")) {
-            if (SDL_GameControllerAddMapping(mapping) < 0)
-                fprintf(stderr, "[INPUT] mapping rejected: %s\n", SDL_GetError());
-            else
-                fprintf(stderr, "[INPUT] mapping from %s: %s\n", es_input, mapping);
-            break;
-        } else if (match && strstr(line, "<input ")) {
-            char action[64], type[32], id[16], value[16];
-            if (!input_attr(line, "name", action, sizeof action) || !input_attr(line, "type", type, sizeof type) ||
-                !input_attr(line, "id", id, sizeof id) || !input_attr(line, "value", value, sizeof value))
-                continue;
-            const char *sdl = NULL;
-            const char *pairs[][2] = {{"a", "b"},
-                                      {"b", "a"},
-                                      {"x", "y"},
-                                      {"y", "x"},
-                                      {"start", "start"},
-                                      {"select", "back"},
-                                      {"pageup", "leftshoulder"},
-                                      {"pagedown", "rightshoulder"},
-                                      {"left", "dpleft"},
-                                      {"right", "dpright"},
-                                      {"up", "dpup"},
-                                      {"down", "dpdown"},
-                                      {"joystick1left", "leftx"}};
-            for (size_t i = 0; i < sizeof pairs / sizeof *pairs; i++)
-                if (!strcmp(action, pairs[i][0]))
-                    sdl = pairs[i][1];
-            if (!sdl)
-                continue;
-            char binding[96];
-            int index = atoi(id), direction = atoi(value);
-            if (index < 0 || index > 255)
-                continue;
-            if (!strcmp(type, "button"))
-                snprintf(binding, sizeof binding, "%s:b%d,", sdl, index);
-            else if (!strcmp(type, "hat"))
-                snprintf(binding, sizeof binding, "%s:h%d.%d,", sdl, index, direction);
-            else if (!strcmp(type, "axis") && !strcmp(sdl, "leftx"))
-                snprintf(binding, sizeof binding, "leftx:a%d%s,", index, direction > 0 ? "~" : "");
-            else if (!strcmp(type, "axis"))
-                snprintf(binding, sizeof binding, "%s:%ca%d,", sdl, direction < 0 ? '-' : '+', index);
-            else
-                continue;
-            if (strlen(mapping) + strlen(binding) < sizeof mapping)
-                strcat(mapping, binding);
+#ifdef RR_TITLE_OPTIONS
+    if ((event->type == SDL_JOYBUTTONDOWN || event->type == SDL_JOYBUTTONUP) && title_pad &&
+        event->jbutton.which == SDL_JoystickInstanceID(title_pad)) {
+        bool down = event->type == SDL_JOYBUTTONDOWN;
+        if (event->jbutton.button == 10) {
+            chord_start[0] = down;
+            if (down)
+                start_ticks = 10;
         }
+        if (event->jbutton.button == 9) {
+            chord_select[0] = down;
+            if (down && coin_edges < 8)
+                coin_edges++;
+        }
+        if (chord_start[0] && chord_select[0])
+            return false;
     }
-    fclose(fp);
-}
-static bool input_button(SDL_GameController *pad, SDL_GameControllerButton button)
-{
-    return SDL_GameControllerGetButton(pad, button) != 0;
+#endif
+    return true;
 }
 static bool input_poll(void)
 {
@@ -221,32 +128,32 @@ static bool input_poll(void)
     input_down = keys[SDL_SCANCODE_A];
     int direction = keys[SDL_SCANCODE_RIGHT] - keys[SDL_SCANCODE_LEFT];
     input_wheel = 0;
-    for (int i = 0; i < 16; i++)
-        if (controllers[i]) {
-            SDL_GameController *pad = controllers[i];
-            bool start = input_button(pad, SDL_CONTROLLER_BUTTON_START),
-                 select = input_button(pad, SDL_CONTROLLER_BUTTON_BACK);
-            if (start && select)
-                return false; /* do not inject either action */
-            input_coin |= select;
-            input_gas |= start || input_button(pad, SDL_CONTROLLER_BUTTON_A) ||
-                         input_button(pad, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER);
-            input_brake |=
-                input_button(pad, SDL_CONTROLLER_BUTTON_B) || input_button(pad, SDL_CONTROLLER_BUTTON_LEFTSHOULDER);
-            input_view |= input_button(pad, SDL_CONTROLLER_BUTTON_X);
-            input_up |= input_button(pad, SDL_CONTROLLER_BUTTON_DPAD_UP);
-            input_down |= input_button(pad, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
-            direction += input_button(pad, SDL_CONTROLLER_BUTTON_DPAD_RIGHT) -
-                         input_button(pad, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
-            int axis = SDL_GameControllerGetAxis(pad, SDL_CONTROLLER_AXIS_LEFTX);
-            if (axis < -32767)
-                axis = -32767;
-            const int deadzone = 4096;
-            axis =
-                abs(axis) <= deadzone ? 0 : (axis > 0 ? axis - deadzone : axis + deadzone) * 32767 / (32767 - deadzone);
-            if (abs(axis) > abs(input_wheel))
-                input_wheel = axis;
-        }
+#ifdef RR_TITLE_OPTIONS
+    ti_sample sample;
+    ti_controls controls;
+    if (!rr_title_sample(title_pad, &sample)) {
+        fprintf(stderr, "[TITLE-ERROR] CONTROLLER_DISCONNECTED operation=game input file=%s\n", TITLE_DEVICE);
+        failed = true;
+        return false;
+    }
+    ti_poll(&title_profile, &sample, &controls);
+    if (controls.exit)
+        return false;
+    input_coin |= controls.coin;
+    input_gas |= controls.gas || controls.start;
+    input_brake |= controls.brake;
+    input_up |= controls.up;
+    input_down |= controls.down;
+    input_view |= controls.view;
+    input_wheel = controls.wheel;
+    if (controls.overlay && !overlay_held)
+        rr_overlay_toggle();
+    overlay_held = controls.overlay;
+    if (ti_hold_update(&return_hold, controls.x, true, SDL_GetTicks64())) {
+        return_requested = true;
+        return false;
+    }
+#endif
     if (direction)
         input_wheel = direction > 0 ? 32767 : -32767;
     return true;
@@ -298,7 +205,7 @@ bool rr_gles3_interactive(void)
     return interactive;
 }
 
-static bool failed, audio_enabled, deferred_record_exit;
+static bool audio_enabled, deferred_record_exit;
 static const char *thread_csv;
 bool rr_gles3_full_telemetry(void)
 {
@@ -348,69 +255,30 @@ void rr_gles3_scene_tick(bool walk, unsigned direct)
     (void)direct;
 }
 
-static void scan_controllers(void)
-{
-    for (int i = 0; i < 16; i++) {
-        if (raw_joysticks[i] && !SDL_JoystickGetAttached(raw_joysticks[i])) {
-            SDL_JoystickClose(raw_joysticks[i]);
-            raw_joysticks[i] = NULL;
-        }
-        if (controllers[i] && !SDL_GameControllerGetAttached(controllers[i])) {
-            SDL_GameControllerClose(controllers[i]);
-            controllers[i] = NULL;
-            chord_start[i] = chord_select[i] = false;
-        }
-    }
-    for (int device = 0; device < SDL_NumJoysticks(); device++) {
-        input_map_device(device);
-        if (!SDL_IsGameController(device)) {
-            fprintf(stderr,
-                    "[GLES3-INPUT] unmapped joystick: %s (START+SELECT needs an SDL mapping)\n",
-                    SDL_JoystickNameForIndex(device));
-            SDL_JoystickID raw_id = SDL_JoystickGetDeviceInstanceID(device);
-            int slot = -1;
-            bool present = false;
-            for (int i = 0; i < 16; i++) {
-                if (!raw_joysticks[i])
-                    slot = i;
-                else if (SDL_JoystickInstanceID(raw_joysticks[i]) == raw_id)
-                    present = true;
-            }
-            if (!present && slot >= 0)
-                raw_joysticks[slot] = SDL_JoystickOpen(device);
-            continue;
-        }
-        SDL_JoystickID id = SDL_JoystickGetDeviceInstanceID(device);
-        int slot = -1;
-        bool present = false;
-        for (int i = 0; i < 16; i++) {
-            if (!controllers[i])
-                slot = i;
-            else if (SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i])) == id)
-                present = true;
-        }
-        if (!present && slot >= 0) {
-            controllers[slot] = SDL_GameControllerOpen(device);
-            if (controllers[slot]) {
-                SDL_Joystick *js = SDL_GameControllerGetJoystick(controllers[slot]);
-                char guid[33];
-                SDL_JoystickGetGUIDString(SDL_JoystickGetGUID(js), guid, sizeof guid);
-                fprintf(stderr,
-                        "[INPUT] controller=%s GUID=%s instance=%d axes=%d buttons=%d hats=%d\n",
-                        SDL_GameControllerName(controllers[slot]),
-                        guid,
-                        SDL_JoystickInstanceID(js),
-                        SDL_JoystickNumAxes(js),
-                        SDL_JoystickNumButtons(js),
-                        SDL_JoystickNumHats(js));
-            } else
-                fprintf(stderr, "[GLES3-INPUT] controller open: %s\n", SDL_GetError());
-        }
-    }
-}
 static bool input_exit(void)
 {
     save_emit();
+#ifdef RR_TITLE_OPTIONS
+    if (return_requested) {
+        fflush(stderr);
+        fprintf(stderr, "[SAVE-FLUSH] return-title\n");
+        fflush(stderr);
+        struct pollfd p = {.fd = save_ack, .events = POLLIN};
+        char ack[64] = {0};
+        int ready;
+        do {
+            ready = poll(&p, 1, 5000);
+        } while (ready < 0 && errno == EINTR);
+        ssize_t n = ready > 0 ? read(save_ack, ack, sizeof ack - 1) : -1;
+        if (n <= 0 || strcmp(ack, "OK return-title\n")) {
+            fprintf(stderr, "[TITLE-ERROR] SAVE_ACK operation=return to title file=rr_eeprom.nv\n");
+            failed = true;
+            return_requested = false;
+        } else
+            fprintf(stderr, "[RETURN-TITLE] save acknowledged before worker shutdown\n");
+        return false;
+    }
+#endif
     if (rr_input_recording()) {
         deferred_record_exit = true;
         return true;
@@ -425,8 +293,7 @@ static bool pump_input(void)
     while (SDL_PollEvent(&event)) {
         if (!input_event(&event))
             return input_exit();
-        if ((event.type == SDL_KEYDOWN && !event.key.repeat && event.key.keysym.scancode == SDL_SCANCODE_F3) ||
-            (event.type == SDL_CONTROLLERBUTTONDOWN && event.cbutton.button == SDL_CONTROLLER_BUTTON_Y))
+        if (event.type == SDL_KEYDOWN && !event.key.repeat && event.key.keysym.scancode == SDL_SCANCODE_F3)
             rr_input_record_marker();
         if (input_log && (event.type == SDL_JOYBUTTONDOWN || event.type == SDL_JOYBUTTONUP))
             fprintf(stderr,
@@ -445,16 +312,9 @@ static bool pump_input(void)
                 stderr, "[INPUT] joystick=%d hat=%u value=%u\n", event.jhat.which, event.jhat.hat, event.jhat.value);
         if (event.type == SDL_QUIT || (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE))
             return input_exit();
-        if (event.type == SDL_CONTROLLERDEVICEADDED || event.type == SDL_CONTROLLERDEVICEREMOVED ||
-            event.type == SDL_JOYDEVICEADDED || event.type == SDL_JOYDEVICEREMOVED)
-            scan_controllers();
     }
     if (interactive && !input_poll())
         return input_exit();
-    for (int i = 0; i < 16; i++)
-        if (controllers[i] && SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_START) &&
-            SDL_GameControllerGetButton(controllers[i], SDL_CONTROLLER_BUTTON_BACK))
-            return input_exit();
     return true;
 }
 bool rr_gles3_pump(void)
@@ -500,18 +360,63 @@ bool rr_gles3_options(int *argc, char **argv)
     rr_presentation_configure(true, false, thread_csv, false);
     return true;
 }
+bool rr_gles3_mode(bool diagnostics)
+{
+    if (!interactive) {
+        if (getenv("ENG_GLES3_SESSION") || getenv("ENG_GLES3_SAVE_PATH") || getenv("ENG_GLES3_CONTROLLER_PATH") ||
+            getenv("ENG_GLES3_SAVE_ACK_FD") || es_input || controller_db) {
+            fprintf(stderr, "[TITLE-ERROR] MODE_ISOLATION: personal session in noninteractive mode\n");
+            return false;
+        }
+        return true;
+    }
+#ifndef RR_TITLE_OPTIONS
+    (void)diagnostics;
+    fprintf(stderr, "[TITLE-ERROR] MODE_ISOLATION: interactive product only\n");
+    return false;
+#else
+    const char *session = getenv("ENG_GLES3_SESSION"), *save = getenv("ENG_GLES3_SAVE_PATH"),
+               *seed = getenv("ENG_GLES3_INITIAL_EEPROM"), *ack = getenv("ENG_GLES3_SAVE_ACK_FD");
+    if (diagnostics || getenv("ENG_GLES3_FACTORY_EEPROM") || !session || strcmp(session, "1") || !save || !seed ||
+        strcmp(save, seed) || !getenv("ENG_GLES3_CONTROLLER_PATH") || !getenv("ENG_GLES3_DEFAULT_INPUT") || !ack ||
+        es_input || controller_db) {
+        fprintf(stderr, "[TITLE-ERROR] MODE_ISOLATION: interactive session configuration\n");
+        return false;
+    }
+    char *end;
+    errno = 0;
+    long fd = strtol(ack, &end, 10);
+    if (errno || !*ack || *end || fd < 3 || fd > 65535 || fcntl((int)fd, F_GETFD) < 0) {
+        fprintf(stderr, "[TITLE-ERROR] SAVE_ACK: invalid supervisor channel\n");
+        return false;
+    }
+    save_ack = (int)fd;
+    return true;
+#endif
+}
+int rr_gles3_exit_code(void)
+{
+    if (failed)
+        return 2;
+#ifdef RR_TITLE_OPTIONS
+    if (return_requested)
+        return TITLE_RETURN_CODE;
+#endif
+    return 0;
+}
 bool rr_gles3_open(void)
 {
-    if (!save_open(getenv("ENG_GLES3_SESSION") && interactive))
-        return false;
+    save_begin(false);
     bool mali = false;
     for (int i = 0; i < SDL_GetNumVideoDrivers(); i++)
         if (!strcmp(SDL_GetVideoDriver(i), "mali"))
             mali = true;
     if (!getenv("SDL_VIDEODRIVER") && mali)
         SDL_setenv("SDL_VIDEODRIVER", "mali", 0);
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER))
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK)) {
+        fprintf(stderr, "[TITLE-ERROR] SDL_INIT operation=initialize file=SDL: %s\n", SDL_GetError());
         return false;
+    }
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
@@ -521,22 +426,48 @@ bool rr_gles3_open(void)
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
     window = SDL_CreateWindow("Rave Racer GLES3", 0, 0, 640, 480, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
-    if (!window)
+    if (!window) {
+        fprintf(stderr, "[TITLE-ERROR] SDL_WINDOW operation=create 640x480 window file=SDL: %s\n", SDL_GetError());
         return false;
+    }
     atexit(rr_gles3_close);
     context = SDL_GL_CreateContext(window);
-    if (!context)
+    if (!context) {
+        fprintf(stderr, "[TITLE-ERROR] GL_CONTEXT operation=create GLES3 context file=SDL: %s\n", SDL_GetError());
         return false;
+    }
     fprintf(stderr, "[GLES3-GL] %s; %s\n", glGetString(GL_RENDERER), glGetString(GL_VERSION));
-    if (SDL_GL_SetSwapInterval(1) && !getenv("ENG_GLES3_HOST"))
+    if (SDL_GL_SetSwapInterval(1) && !getenv("ENG_GLES3_HOST")) {
+        fprintf(stderr, "[TITLE-ERROR] VSYNC operation=set swap interval file=SDL: %s\n", SDL_GetError());
         return false;
+    }
+#ifdef RR_TITLE_OPTIONS
+    if (interactive) {
+        const char *save = getenv("ENG_GLES3_SAVE_PATH"), *override = getenv("ENG_GLES3_CONTROLLER_PATH"),
+                   *defaults = getenv("ENG_GLES3_DEFAULT_INPUT");
+        int menu = rr_title_run(
+            window, &title_pad, save, override, defaults, &title_profile, g_rr.rom, RR_ROM_SIZE, g_rr.eeprom);
+        if (menu != 1) {
+            rr_gles3_close();
+            exit(menu);
+        }
+        save_begin(true);
+        coin_edges = start_ticks = 0;
+        memset(chord_start, 0, sizeof chord_start);
+        memset(chord_select, 0, sizeof chord_select);
+        return_hold = (ti_hold){0};
+        overlay_held = false;
+        g_hw.inputs = g_rr_game->inputs_idle;
+        g_hw.steer = 0x800;
+        g_hw.gas = g_hw.brake = 0;
+        SDL_SetWindowTitle(window, "Rave Racer GLES3");
+        fprintf(stderr, "[TITLE] handoff simulation_ticks=0\n");
+    }
+#endif
     if (!rr_video_layers_open() || !rr_renderer_open())
-        return false;
-    if (controller_db && SDL_GameControllerAddMappingsFromFile(controller_db) < 0)
         return false;
     if (audio_enabled && !rr_audio_output_open())
         return false;
-    scan_controllers();
     if (!rr_presentation_start(window, context, 0, 0, 0, 1))
         return false;
     return true;
@@ -576,12 +507,12 @@ void rr_gles3_close(void)
     rr_renderer_close();
     rr_overlay_close();
     rr_video_layers_close();
-    for (int i = 0; i < 16; i++) {
-        if (controllers[i])
-            SDL_GameControllerClose(controllers[i]);
-        if (raw_joysticks[i])
-            SDL_JoystickClose(raw_joysticks[i]);
+#ifdef RR_TITLE_OPTIONS
+    if (title_pad) {
+        SDL_JoystickClose(title_pad);
+        title_pad = NULL;
     }
+#endif
     if (context) {
         SDL_GL_DeleteContext(context);
         context = NULL;

@@ -63,11 +63,26 @@ foreach(target rr_gles3 rr_gles3_validation rr_gles3_sound_oracle rr_gles3_setup
   target_compile_definitions(${target} PRIVATE GLES3_VALIDATION)
  endif()
 endforeach()
-target_sources(rr_gles3 PRIVATE src/operator_settings.c)
+target_sources(rr_gles3 PRIVATE src/operator_settings.c src/title_input.c src/title_state.c src/title_draw.c src/title.c)
+target_compile_definitions(rr_gles3 PRIVATE RR_TITLE_OPTIONS)
 
 # Test-only EEPROM capture: the same lifted setup core, without changing its
 # seed/reset rules or adding an export hook to the product.
 if(NOT CMAKE_CROSSCOMPILING)
+ add_library(title_open_audit SHARED tests/title_open_audit.c)
+ target_link_libraries(title_open_audit PRIVATE dl)
+ set_target_properties(title_open_audit PROPERTIES PREFIX "")
+ add_executable(test_title_runtime src/live.c src/gles.c src/layers.c src/async_play.c
+  ${GENERATED}/snd_driver.c src/operator_settings.c src/title_input.c src/title_state.c src/title_draw.c src/title.c
+  tests/title_runtime_driver.c)
+ target_compile_definitions(test_title_runtime PRIVATE RR_TITLE_OPTIONS)
+ target_link_libraries(test_title_runtime PRIVATE gles3_core gles3_generated dl)
+ target_link_options(test_title_runtime PRIVATE -Wl,--wrap=fopen -Wl,--wrap=fopen64)
+ target_compile_options(test_title_runtime PRIVATE -O2 -Wall -Wextra)
+ add_executable(test_title tests/test_title.c src/title_input.c src/title_state.c src/title_draw.c src/operator_settings.c)
+ target_include_directories(test_title PRIVATE src ${RR_ROOT}/include)
+ target_link_libraries(test_title PRIVATE PkgConfig::SDL2 ${GLES_LIBRARY})
+ target_compile_options(test_title PRIVATE -O2 -UNDEBUG -Wall -Wextra)
  add_executable(rr_operator_oracle src/live.c src/gles.c src/layers.c src/async_play.c
   ${GENERATED}/snd_driver.c tests/operator_oracle_export.c)
  target_link_libraries(rr_operator_oracle PRIVATE gles3_setup_core gles3_generated)

@@ -99,7 +99,7 @@ static void headless_platform_help(void)
     fprintf(stderr,
             "Usage: rr_gles3 ROM_DIR [--frames N] [--interactive] [--audio on|off] [--overlay off|on]\n"
             " [--replay-input FILE | --record-input FILE] [--input-checkpoints FILE] [--thread-profile FILE]\n"
-            " [--profile-simulation] [--simulation-profile-from N] [--es-input FILE] [--controller-db FILE]\n"
+            " [--profile-simulation] [--simulation-profile-from N]\n"
             " Quit: START+SELECT, Escape, or frame limit.\n");
 }
 #include "rr_headless.inc"
@@ -158,7 +158,7 @@ void rr_tick(void)
         rr_headless_summary();
         rr_audio_close();
         rr_gles3_close();
-        exit(rr_gles3_failed() ? 2 : 0);
+        exit(rr_gles3_exit_code());
     }
     rr_sim_resume(frame + 1);
     for (int c = 0; c < n_test_coins; c++) { /* scripted inputs for headless captures */

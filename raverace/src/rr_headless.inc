@@ -237,6 +237,10 @@ static int rr_headless_main(int argc, char **argv)
         }
         audio_check_first = 1;
     }
+#ifdef RR_GLES3
+    if(!rr_gles3_mode(input_record_path || input_replay_path || checkpoint_path || replay_timing_path ||
+                       audio_check_first || activity_first || n_test_coins || test_gas>=0 || n_steer)) return 2;
+#endif
     /* Isolate this test from desktop debug/network/config environment. */
     extern char **environ;
     for (char **e = environ; *e;) {
@@ -276,6 +280,9 @@ static int rr_headless_main(int argc, char **argv)
             fclose(f);
         if (!ok) {
             fprintf(stderr, "[HEADLESS] missing/invalid EEPROM seed: %s\n", seed);
+#ifdef RR_GLES3
+            if(headless_platform_interactive())fprintf(stderr,"[TITLE-ERROR] SIZE operation=read EEPROM file=%s\n",seed);
+#endif
             return 2;
         }
     }

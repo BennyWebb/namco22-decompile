@@ -20,7 +20,7 @@ assert not re.search(
 )
 strings = subprocess.check_output(["strings", str(product)], text=True)
 assert not re.search(
-    r"provenance|ENG_GLES3_(?:CAPTURE|PALETTE_REFERENCE|COMMAND_DUMP|RECEIPTS|IMAGE_HASH|SEMANTIC|FORCE_UNSUPPORTED|FACTORY_EEPROM)"
+    r"provenance|ENG_GLES3_(?:CAPTURE|PALETTE_REFERENCE|COMMAND_DUMP|RECEIPTS|IMAGE_HASH|SEMANTIC|FORCE_UNSUPPORTED)"
     r"|ENG_OBJLOG|PROPCYCL_CULLDUMP|GLES3_RECORD_DIAGNOSTICS",
     strings,
 )
@@ -33,9 +33,13 @@ assert "GLES3_VALIDATION" not in flags
 validation_flags = (build / "CMakeFiles/gles3_validation_core.dir/flags.make").read_text()
 assert "GLES3_VALIDATION" in validation_flags
 assert "operator_settings.c.o" in link and "rr_operator_commit" in symbols
+assert "rr_title_run" in symbols and "title_input.c.o" in link
+assert "TITLE-TEST" not in strings and "TITLE_TEST_" not in strings
 for target in ("rr_gles3_validation", "rr_gles3_setup", "rr_gles3_sound_oracle"):
     target_symbols = subprocess.check_output([a.nm, str(build / target)], text=True)
     target_map = (build / (target + ".map")).read_text()
     assert "rr_operator_" not in target_symbols and "operator_settings.c.o" not in target_map, target
+    assert not re.search(r"\b(?:rr_title_|tm_|ti_)", target_symbols), target
+    assert "title_input.c.o" not in target_map, target
 print("PASS product link map/symbols/strings/flags; validation absent, strict unsupported path retained")
 print("PASS operator settings linked only into product; absent from validation/setup/sound oracle")

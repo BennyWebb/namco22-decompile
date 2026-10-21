@@ -16,7 +16,16 @@ import calibration
 import clocks
 from first_launch import SetupError, digest, ensure_cache, stage
 from telemetry import Collector, Rolling
-from transport import child_guard, monitor
+from transport import child_guard, monitor, persist_eeprom
+
+RETURN_TO_TITLE = 42
+
+
+def game_guard():
+    child_guard()
+    os.sched_setscheduler(0, os.SCHED_OTHER, os.sched_param(0))
+    os.setpriority(os.PRIO_PROCESS, 0, 0)
+
 
 APP = Path(__file__).resolve().parent.parent
 
@@ -59,15 +68,16 @@ class Summary:
         self.stream = Rolling(logs / "play.log", limit=65536)
         self.unmatched = 0
         self.save_writes = 0
+        self.title_error = None
 
     def line(self, kind, line):
+        if kind == "stderr" and line.startswith("[TITLE-ERROR] "):
+            self.title_error = line.removeprefix("[TITLE-ERROR] ").strip()
         if kind == "stderr" and line.startswith("[SAVE-EEPROM] "):
             data = bytes.fromhex(line.split()[1])
             if len(data) != 8192:
                 raise SetupError("Save write failed: invalid EEPROM size.")
-            temporary = self.nv.with_suffix(".tmp")
-            temporary.write_bytes(data)
-            temporary.replace(self.nv)
+            persist_eeprom(self.nv, data)
             self.save_writes += 1
             line = "[SAVE-EEPROM] saved sha256=" + hashlib.sha256(data).hexdigest() + "\n"
         self.stream.write(line.encode())
@@ -130,7 +140,6 @@ def run(app=APP, *, full=False, frames=0):
         env = environment()
         env.update(
             ENG_GLES3_ASSETS=str(cache),
-            ENG_GLES3_SAVE_PATH=str(nv),
             ENG_GLES3_SUMMARY_PATH=str(logs / "latest-summary.txt"),
         )
         if not nv.exists():
@@ -147,7 +156,13 @@ def run(app=APP, *, full=False, frames=0):
             raise SetupError(
                 "EEPROM damaged. Restore your personal save backup.\nTo reset, move saves/rr_eeprom.nv aside and relaunch."
             )
-        env.update(ENG_GLES3_SESSION="1", ENG_GLES3_INITIAL_EEPROM=str(nv))
+        env.update(
+            ENG_GLES3_SESSION="1",
+            ENG_GLES3_SAVE_PATH=str(nv),
+            ENG_GLES3_INITIAL_EEPROM=str(nv),
+            ENG_GLES3_DEFAULT_INPUT=str(app / "launcher/controller-input.cfg"),
+            ENG_GLES3_CONTROLLER_PATH=str(app / "saves/controller-input.cfg"),
+        )
         cmd = [
             str(app / "bin/rr_gles3"),
             str(app / "roms"),
@@ -160,49 +175,59 @@ def run(app=APP, *, full=False, frames=0):
             "on",
             "--overlay",
             "off",
-            "--es-input",
-            str(
-                app / "saves/controller-input.cfg"
-                if (app / "saves/controller-input.cfg").exists()
-                else app / "launcher/controller-input.cfg"
-            ),
         ]
         if frames:
             cmd += ["--frames", str(frames)]
-        readfd, writefd = os.pipe()
-        if full:
-            sessions = logs / "sessions"
-            sessions.mkdir(exist_ok=True)
-            run_dir = sessions / (time.strftime("%Y%m%d-%H%M%S") + "-" + str(os.getpid()))
-            run_dir.mkdir()
-            collector = Collector(run_dir, nv)
-            env["LD_PRELOAD"] = str(app / "bin/session-io.so")
-            cmd += [
-                "--thread-profile",
-                f"/proc/self/fd/{writefd}",
-                "--profile-simulation",
-                "--simulation-profile-from",
-                "1",
-            ]
-        else:
-            collector = Summary(logs, nv)
-        child = subprocess.Popen(
-            cmd,
-            cwd=app / "saves",
-            preexec_fn=child_guard,
-            env=env,
-            pass_fds=(writefd,) if full else (),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        os.close(writefd)
-        state.update(game=child.pid, game_start=clocks.identity(child.pid))
-        clocks.atomic(journal, state)
-        clocks.low_priority()
-        try:
-            result = monitor(child, readfd, collector)
-        finally:
-            os.close(readfd)
+        returns = 0
+        while True:
+            child_cmd = list(cmd)
+            readfd, writefd = os.pipe()
+            ackread, ackwrite = os.pipe()
+            env["ENG_GLES3_SAVE_ACK_FD"] = str(ackread)
+            if full:
+                sessions = logs / "sessions"
+                sessions.mkdir(exist_ok=True)
+                run_dir = sessions / (time.strftime("%Y%m%d-%H%M%S") + "-" + str(os.getpid()) + "-" + str(returns))
+                run_dir.mkdir()
+                collector = Collector(run_dir, nv)
+                env["LD_PRELOAD"] = str(app / "bin/session-io.so")
+                child_cmd += [
+                    "--thread-profile",
+                    f"/proc/self/fd/{writefd}",
+                    "--profile-simulation",
+                    "--simulation-profile-from",
+                    "1",
+                ]
+            else:
+                collector = Summary(logs, nv)
+            child = subprocess.Popen(
+                child_cmd,
+                cwd=app / "saves",
+                preexec_fn=game_guard,
+                env=env,
+                pass_fds=(ackread, writefd) if full else (ackread,),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            os.close(writefd)
+            os.close(ackread)
+            state.update(game=child.pid, game_start=clocks.identity(child.pid))
+            clocks.atomic(journal, state)
+            clocks.low_priority()
+            try:
+                result = monitor(child, readfd, collector, ack=ackwrite)
+            finally:
+                os.close(readfd)
+                os.close(ackwrite)
+            if result != RETURN_TO_TITLE:
+                break
+            if full:
+                collector.finish(result, [], dict(timings, return_to_title=True))
+            else:
+                collector.stream.close()
+            collector = None
+            returns += 1
+            timings["returns_to_title"] = returns
     finally:
         if child and child.poll() is None:
             child.terminate()
@@ -237,6 +262,8 @@ def run(app=APP, *, full=False, frames=0):
         else:
             raise SetupError("Clock restoration failed. Restart the handheld.")
     if result:
+        if collector and getattr(collector, "title_error", None):
+            raise SetupError(collector.title_error)
         raise SetupError(
             f"Game stopped (exit {result}).\nSee logs/play.log or logs/latest-summary.txt.\nNo substitute renderer or sound driver was used."
         )
