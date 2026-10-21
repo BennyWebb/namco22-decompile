@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Host release-layout and strict ROM/error tests (no device required)."""
+"""Host package-layout and strict ROM/error tests (no device required)."""
 
 import argparse
 import hashlib
@@ -55,7 +55,7 @@ def checks(package):
         assert "rave-gles2" not in launcher
         assert archive.read("Rave Racer.sh").startswith(b"#!/bin/sh")
         assert "rave-racer/bin/rr_gles3_setup" in names
-    print("PASS release layout, empty user-data folders, hash manifest, missing/wrong/correct ROM checks")
+    print("PASS package layout, empty user-data folders, hash manifest, missing/wrong/correct ROM checks")
 
 
 if __name__ == "__main__":

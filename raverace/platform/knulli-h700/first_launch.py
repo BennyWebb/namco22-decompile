@@ -1,4 +1,4 @@
-"""Strict release ROM verification and crash-safe whole-ROM compilation."""
+"""Strict ROM verification and crash-safe whole-ROM compilation."""
 
 import hashlib
 import json

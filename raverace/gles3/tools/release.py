@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build a redistributable, ROM-free, single-folder Knulli release ZIP."""
+"""Package a local source build for personal Knulli installation.
+
+No public binary package is provided.
+See docs/INSTALL.md for the package and source content disclosure.
+"""
 
 import argparse
 import hashlib

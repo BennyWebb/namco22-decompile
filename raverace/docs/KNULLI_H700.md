@@ -1,9 +1,10 @@
 # Knulli H700 build and operation
 
-For the self-contained release and clean-device setup, follow [INSTALL.md](INSTALL.md).
-The asset-kit commands below are developer validation tools, not release packaging.
+For a local source build and clean-device setup, follow [INSTALL.md](INSTALL.md).
+The asset-kit commands below are developer validation tools, not installation packaging.
 
-Build from `raverace/`. User ROMs are required; no ROMs or asset payloads ship in Git.
+Build from `raverace/`. User ROMs are required; see [INSTALL.md](INSTALL.md)
+for the package and source content disclosure.
 Host dependencies: GCC, CMake, Python3/NumPy, SDL2, GLES3/EGL, zlib and OpenSSL.
 
 ```sh
@@ -23,11 +24,11 @@ The first app launch decodes pens and meshes from the user's original ROMs into
 The layout is generated from the whole ROM catalogue; recordings never build assets.
 
 For installation, updates, controls, logs and uninstall, use [INSTALL.md](INSTALL.md).
-The release contains one Ports entry and a self-contained `ports/rave-racer/`
+The locally built package contains one Ports entry and a self-contained `ports/rave-racer/`
 folder; ROMs, generated cache, EEPROM, mapping and logs all stay inside it.
 Normal play uses summary-only logging. Full telemetry is explicit.
-The old deploy.py/flat-package workflow is developer history, not the release
-installation procedure. No ROM-derived asset kit belongs in a release ZIP.
+The old deploy.py/flat-package workflow is developer history, not the current
+installation procedure. No ROM-derived asset kit belongs in an installation ZIP.
 
 The full host regression suite needs only a fresh clone and the ROMs (plus the
 host build dependencies above):

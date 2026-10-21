@@ -11,4 +11,4 @@ See docs/CLEANUP_REPORT.md for validation and review status. No deployment/push
 is implied by the cleanup branch. Changes require user review before installation.
 
 Fresh-install package and approved device wipe: docs/FRESH_INSTALL_REPORT.md.
-Release command: gles3/tools/release.py; never include generated asset kits.
+Local packaging command: gles3/tools/release.py; never include generated asset kits.
