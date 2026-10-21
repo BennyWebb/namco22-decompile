@@ -1,6 +1,7 @@
 """Bounded GLES3-only state, pacing and failure summaries."""
 
 import pathlib, json, math, re, csv, collections, array, time, hashlib, os, gzip
+from transport import persist_eeprom
 
 T = 1 / json.loads(pathlib.Path(__file__).with_name("device-profile.json").read_text())["panel_hz"]
 SETTLED_TICK = 180
@@ -133,6 +134,7 @@ class Collector:
         self.io = []
         self.smoke_chord = False
         self.unsupported = None
+        self.title_error = None
 
     def group(self, key):
         if key not in self.groups:
@@ -147,15 +149,12 @@ class Collector:
         self.logs["problems"].write((json.dumps(obj) + "\n").encode())
 
     def line(self, kind, line):
+        if kind == "stderr" and line.startswith("[TITLE-ERROR] "):
+            self.title_error = line.removeprefix("[TITLE-ERROR] ").strip()
         if kind == "stderr" and line.startswith("[SAVE-EEPROM] "):
             data = bytes.fromhex(line.split(" ", 1)[1].strip())
             assert len(data) == 8192
-            temp = self.save.with_suffix(".new")
-            with temp.open("wb") as f:
-                f.write(data)
-                f.flush()
-                os.fsync(f.fileno())
-            os.replace(temp, self.save)
+            persist_eeprom(self.save, data)
             self.save_writes += 1
             line = "[SAVE-EEPROM] persisted bytes=8192 sha256=" + hashlib.sha256(data).hexdigest() + "\n"
         self.logs[kind].write(line.encode(errors="replace"))

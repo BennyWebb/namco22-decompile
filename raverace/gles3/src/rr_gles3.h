@@ -9,6 +9,8 @@ const geo_quad *rr_gles3_quads(int *count);
 void rr_gles3_background(float rgb[3]);
 bool rr_gles3_options(int *argc, char **argv);
 bool rr_gles3_open(void);
+bool rr_gles3_mode(bool diagnostics);
+int rr_gles3_exit_code(void);
 bool rr_gles3_interactive(void);
 bool rr_gles3_full_telemetry(void);
 bool rr_gles3_record_exit_pending(void);

@@ -61,7 +61,7 @@ Next, the game's own TEST/SERVICE adjustment runs automatically for 1,600 ticks
 with centred steering and released pedals. This creates a calibrated EEPROM
 in `saves/rr_eeprom.nv`; no stored EEPROM image is supplied. The initial
 SHA256 must be `81e19e9ce2fca04dbbd487b12e85cc473e30e61f2797c703743c9b86373721c7`.
-Interactive play starts only after that check passes. Do not press controls
+The native title screen opens only after that check passes. Do not press controls
 while the automatic adjustment screens are visible.
 
 Later launches verify the package, ROMs and existing asset cache, and reuse your
@@ -71,16 +71,52 @@ renderer. To rebuild it deliberately, exit and delete the contents of `cache/`.
 
 ## Controls and logging
 
-The RG40XX H built-in mapping is included. SELECT inserts a coin, START starts,
-B or R1 accelerates, A or L1 brakes, and the left stick or D-pad left/right
-steers. D-pad up/down shifts gears; Y changes view and X toggles the overlay. **START+SELECT together exits to EmulationStation.**
-The CPU runs at 1,512 MHz during the session; original CPU and GPU governors
-are restored on exit, including recovery by an independent watchdog.
+The native title screen is the interactive starting point. Choose **Game** for
+solo/time-trial difficulty (A easiest, H hardest), speed units, attract sound and
+free play; **Car appearance** offers eight numbered appearances using the names
+in your program ROM. Changes are saved when you choose **START ARCADE**, then
+the game boots into its own attract, transmission and course screens. No coin
+or start input is automated. Volume remains as stored in your EEPROM.
+Game/Car edits report **EXTRA_MODE** if that operator mode is enabled;
+START ARCADE is still available. Unsaved changes can be discarded before boot.
 
-To customize mapping, copy `launcher/controller-input.cfg` to
-`saves/controller-input.cfg` and edit the EmulationStation-style input IDs.
-Keep the device GUID and name. Your saved copy overrides the included mapping.
-External controllers need an appropriate mapping for their own device.
+The built-in RG40XX H controls are:
+
+| Physical control | Raw ID | In game |
+|---|---:|---|
+| B / R2 | 4 / 14 | Accelerate |
+| A / L2 | 3 / 13 | Brake |
+| R1 / L1 | 8 / 7 | Shift up / down |
+| Left stick / D-pad left/right | Axis 0 / hat 0 | Steer |
+| D-pad up/down | Hat 0 | No gear shift |
+| Y | 5 | Change view |
+| R3 (right-stick click) | 15 | Toggle performance overlay; keyboard F3 also works |
+| SELECT | 9 | Insert coin; always fixed |
+| START | 10 | Start |
+| Hold X for 1 second | 6 | Flush saves and return to the title; a tap does nothing |
+| START+SELECT | 10+9 | Exit to EmulationStation, from any screen |
+
+On the title, D-pad navigates, A confirms, B goes back and START returns to the
+root (or starts from the root). Holding X on the title does nothing. **Controls**
+can rebind accelerate/brake primary and secondary buttons, shifts, view, overlay,
+and the steering axis/sign. In capture mode any non-reserved button, including
+B, binds; START cancels capture. START, SELECT and X cannot be assigned to an
+action. Coin remains SELECT and cannot be rebound. Menu controls stay fixed.
+Choose **Apply controls**, or save them with START ARCADE. **Reset to default
+controls** asks for confirmation and writes the packaged layout; it deletes
+nothing. Release all controls before game handoff.
+
+Bindings are stored in `saves/controller-input.cfg` in the packaged
+EmulationStation-style format, preserving the device GUID, name and unused
+rows. A malformed profile, wrong controller identity or disconnect is an error;
+it never switches to a different mapping. External pads are not supported.
+Replay, recording, validation and calibration do not open the title or personal
+settings. Returning with X restarts only the child game under the same launcher
+session; it does not repeat preparation or calibration.
+
+The CPU runs at 1,512 MHz throughout the title and game under the existing
+launcher lock and watchdog. Original CPU and GPU governors are restored when
+the session exits, including independent watchdog recovery.
 
 Normal play records a small bounded `logs/play.log` (64 KiB plus one rotation)
 and a launch summary; it does not collect per-picture profiles or sample
