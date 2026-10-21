@@ -101,3 +101,5 @@ add_library(rr_asset_codec SHARED assets/stream_codec.c)
 set_target_properties(rr_asset_codec PROPERTIES PREFIX "" OUTPUT_NAME "rr_asset_codec")
 target_link_libraries(rr_asset_codec PRIVATE ${CRYPTO_LIBRARY})
 target_compile_options(rr_asset_codec PRIVATE -O2 -Wall -Wextra)
+add_test(NAME session_child_guard
+ COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_child_guard.py)

@@ -49,12 +49,13 @@ def stage(app, text):
     temporary.replace(target)
 
 
-def verify_cache(target, receipt):
+def verify_cache(target, receipt, poll=lambda: None):
     identities = json.loads(receipt.read_text())
     actual = {str(p.relative_to(target)) for p in target.rglob("*") if p.is_file() and p != receipt}
     if actual != set(identities):
         raise ValueError("cache file list changed")
     for name, value in identities.items():
+        poll()
         p = target / name
         if p.stat().st_size != value["bytes"] or digest(p) != value["sha256"]:
             raise ValueError(name)
@@ -81,7 +82,7 @@ def ensure_cache(app, log, poll=lambda: None):
     if target.exists():
         try:
             stage(app, "Verifying asset cache: 0%")
-            verify_cache(target, receipt)
+            verify_cache(target, receipt, poll)
         except (OSError, ValueError, KeyError) as error:
             raise SetupError(f"Asset cache damaged: {target.name}\nDelete cache contents and launch again.") from error
         stage(app, "Verifying asset cache: 100%")
@@ -124,19 +125,21 @@ def ensure_cache(app, log, poll=lambda: None):
                 child.kill()
                 child.wait()
     stage(app, "Verifying completed build: 0%")
-    manifest = {
-        str(p.relative_to(temporary)): dict(bytes=p.stat().st_size, sha256=digest(p))
-        for p in temporary.rglob("*")
-        if p.is_file()
-    }
+    manifest = {}
+    for p in temporary.rglob("*"):
+        if p.is_file():
+            poll()
+            manifest[str(p.relative_to(temporary))] = dict(bytes=p.stat().st_size, sha256=digest(p))
     (temporary / "complete.json").write_text(json.dumps(manifest, sort_keys=True) + "\n")
-    verify_cache(temporary, temporary / "complete.json")
+    verify_cache(temporary, temporary / "complete.json", poll)
     # Flush file data and the directory before publishing this generation.
     for p in temporary.rglob("*"):
         if p.is_file():
+            poll()
             with p.open("rb") as f:
                 os.fsync(f.fileno())
     os.sync()
+    poll()
     temporary.rename(target)
     os.sync()
     stage(app, "Asset build complete: 100%")

@@ -47,6 +47,22 @@ with (app / "logs/interrupted.log").open("w") as log:
         raise AssertionError("interruption did not occur")
 assert not any(p.name.endswith(".json") for p in (app / "cache").iterdir())
 assert all(p.name.endswith(".building") for p in (app / "cache").iterdir())
+
+
+def interrupt_verification():
+    if "Verifying completed build" in (app / "logs/setup-stage.txt").read_text():
+        raise SetupError("fixture verification cancellation")
+
+
+with (app / "logs/interrupted-verification.log").open("w") as log:
+    try:
+        ensure_cache(app, log, interrupt_verification)
+    except SetupError as error:
+        assert "fixture verification cancellation" in str(error)
+    else:
+        raise AssertionError("verification interruption did not occur")
+assert all(p.name.endswith(".building") for p in (app / "cache").iterdir())
+
 with (app / "logs/setup.log").open("w") as log:
     cache, built, seconds = ensure_cache(app, log)
 assert built and not list((app / "cache").glob("*.building"))

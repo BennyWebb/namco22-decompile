@@ -30,7 +30,7 @@ def environment():
 
 def screen(app, kind, message):
     # The message helper owns the display only during setup/error reporting.
-    return subprocess.Popen([str(app / "bin/rr_message"), kind, message], env=environment())
+    return subprocess.Popen([str(app / "bin/rr_message"), kind, message], env=environment(), preexec_fn=child_guard)
 
 
 def close_screen(child):
