@@ -10,6 +10,7 @@ void rr_gles3_background(float rgb[3]);
 bool rr_gles3_options(int *argc, char **argv);
 bool rr_gles3_open(void);
 bool rr_gles3_interactive(void);
+bool rr_gles3_full_telemetry(void);
 bool rr_gles3_record_exit_pending(void);
 uint32_t rr_gles3_profile_from(void);
 void rr_gles3_apply_input(void);

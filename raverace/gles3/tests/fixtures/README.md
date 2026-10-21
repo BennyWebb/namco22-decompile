@@ -81,3 +81,9 @@ reference/fixture gates remain exact; calibrated record/replay, CTest (5/5) and
 product symbol audit pass. Hand-written build sources produced zero warnings.
 Only controller text, safe metadata and hash manifests are added; the working-tree
 payload/size scan finds no EEPROM, ROM payload or file over 1 MiB. No deployment.
+
+`asset-compiler.sha256` records every product compiler output, including the
+local asset-kit metadata. The NumPy host oracle and bounded-memory C/Python
+compiler must produce the same complete file set and SHA256s. Timing is logged
+outside the content-addressed files (`sizing.json` uses zero for its historical
+packing_seconds field). No payload from those files is stored here.

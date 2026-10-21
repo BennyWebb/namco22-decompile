@@ -64,6 +64,9 @@ def run(case, binary, *, sound=False):
         cmd += ["--replay-input", str(q)]
         env["ENG_GLES3_INITIAL_EEPROM"] = str(q) + ".eeprom"
     if sound:
+        if mode == "full-race":
+            # Coverage receipts are diagnostics: request them explicitly even in the PCM gate.
+            cmd += ["--thread-profile", str(d / "thread.csv")]
         cmd += ["--audio-checksum-from", "1"]
         env["ENG_SOUND_REFERENCE"] = str(d / "audio.jsonl")
     else:

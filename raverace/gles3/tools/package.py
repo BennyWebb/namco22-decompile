@@ -20,7 +20,7 @@ for name, target in [
 ]:
     shutil.copyfile(a.build / "gles3" / name, out / target)
     (out / target).chmod(0o755)
-for name in ["session.py", "clocks.py", "watchdog.py", "telemetry.py", "device-profile.json"]:
+for name in ["session.py", "clocks.py", "watchdog.py", "telemetry.py", "transport.py", "device-profile.json"]:
     shutil.copyfile(root / "platform/knulli-h700" / name, out / name)
 shutil.copyfile(root / "gles3/assets/runtime_assets.py", out / "runtime_assets.py")
 shutil.copytree(a.kit, out / "asset-kit")

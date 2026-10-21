@@ -27,8 +27,13 @@ WRAM and C352 inactive-voice fast paths preserve their general-path results.
 
 The whole-ROM compiler owns deterministic pen deduplication, overlap merging and
 page packing. The checked-in files are compiler/shader source, never texels, XYZ,
-layout witnesses or baked packets. Locally generated metadata and a small C
-first-launch decoder reconstruct identical R8UI pages/meshes from user ROMs.
+layout witnesses or baked packets. The host NumPy compiler is the output oracle. The release uses system Python
+plus `assets/stream_codec.c`: bounded pen rows, SHA256 deduplication with exact
+collision comparisons, deterministic C merging/packing, and streamed pages and
+meshes. Both compilers share `finish.py` for metadata. Every output file's hash
+matches; the historical timing field is zero, with wall time logged separately.
+No layout, material table or generated asset kit is distributed. Temporary
+`.building` generations are verified and flushed before publication.
 Dynamic pages use bounded allocation, exact-key material caching and immutable
 slot-prefix reuse; palette changes do not invalidate pen pages.
 
@@ -63,3 +68,12 @@ provenance/palette capture, command dumps/receipts/image hashes, fixed capture t
 object/cull dumps, batching diagnostics and the forced-unsupported fixture.
 Strict unsupported exit86 remains in the product. tests/audit_product.py checks
 both link maps and symbols/strings/compile flags against the validation executable.
+
+The portable release stores all game-owned files under `ports/rave-racer/`.
+Normal mode logs summaries; per-picture renderer diagnostics require an explicit
+thread-profile request, which the launcher's `--telemetry full` option supplies.
+The diagnostic gate preserves all per-picture cache-counter resets. Quiet/full
+state and sampled pixels are tested for exact equality.
+A separate strict `rr_gles3_setup` executable runs the ROM's TEST/SERVICE
+calibration from blank EEPROM and verifies its hash before interactive play.
+It does not link validation shaders or the sound interpreter.

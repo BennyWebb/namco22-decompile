@@ -268,7 +268,7 @@ void rr_tick(void)
         }
     }
     if (frame >= max_frames) {
-#ifdef GLES3_VALIDATION
+#if defined(GLES3_VALIDATION) || defined(GLES3_EEPROM_SETUP)
         const char *factory_output = getenv("ENG_GLES3_FACTORY_EEPROM");
         if (factory_output) {
             FILE *f = fopen(factory_output, "wx");
